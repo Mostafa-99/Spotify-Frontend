@@ -1,25 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components'
+import SpotifyButton from './Components/Button/spotify_button'
+import Background_image from './Images/bk.jpg'
+import {Link,Route,Router,NavLink,BrowserRouter} from 'react-router-dom'
+
+var main={
+  backgroundImage: "url(" + Background_image + ")",
+  width: "100%",
+  height: "840px"
+};
+
+var mybutton={
+  position:"absolute",
+  marginTop:"60%"
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <myBody>
+    <BrowserRouter>
+    
+    <section style={ main }>
+    <SpotifyButton style={mybutton} value='Get Spotify free'></SpotifyButton>
+    </section>
+    
+    
+    </BrowserRouter>
+    </myBody>
+
   );
 }
 

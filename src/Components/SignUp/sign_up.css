@@ -1,0 +1,124 @@
+#logo {
+    align-self: center;
+    width: 200px;
+    margin: 2% 40% 1% 30%;
+}
+.centerbox {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+form p {
+    font-size: 12px;
+    text-align: center;
+}
+
+form a {
+    color: #1DB954;
+}
+
+form a:hover {
+    text-decoration: none;
+    color: #1ED760;
+}
+
+
+
+#fbsignup,#fbsignup2 {
+    background-color: #3B5998;
+    width: 400px;
+    border-color: #3B5998;
+}
+#fbsignup{
+    margin: -30px 0 0 0;
+    height:50px;
+}
+
+#fbsignup2 {
+    margin: -45px 0 0 0;
+}
+#fbsignup,#fbsignup2:hover {
+    background-color: rgb(60, 102, 190);
+    border-color: rgb(60, 102, 190);
+}
+
+form h6 {
+    font-size: 17px;
+    font-weight: bold;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+}
+
+form h4 {
+    font-size: 10px;
+}
+
+form h5 {
+    font-size: 12px;
+    color: gray;
+    text-align: left;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+}
+
+#applesignup {
+    color: white;
+    width: 400px;
+    background-color: black;
+    border-color: black;
+    margin: 2% 0;
+}
+#applesignup:hover {
+    background-color: rgb(42, 42, 42);
+    border-color:rgb(42, 42, 42);
+
+}
+
+#login {
+    margin: -30px 0 0 0%;
+    width: 200px;
+    position: absolute;
+    display: inline;
+}
+
+#signupnow {
+    color: gray;
+    width: 400px;
+    background-color: transparent;
+    border-color: black;
+    margin: 10px 0 2% 0;
+    height: 50px;
+}
+#signupnow:hover {
+    color: white;
+    background-color: rgb(80, 79, 79);
+    border-color: rgb(80, 79, 79);
+  
+}
+
+#rememberme {
+    margin: 0 0 0 2px;
+    text-align: left;
+    width:150px;
+    padding-right:0 ;
+    
+}
+
+label {
+    font-size: 16px;
+    color: gray;
+    padding: 0 5px ;
+}
+
+#signup{
+width:200px;
+margin-bottom:20px;
+}
+
+input[type=number]{
+
+    margin-left:35px;
+    height:25px;
+    width: 100px;
+    margin-right:30px;
+} 
+
