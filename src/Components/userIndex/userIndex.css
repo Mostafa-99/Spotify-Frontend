@@ -1,0 +1,367 @@
+
+
+body {
+    margin: 0;
+  font-family: Circular, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #222326;
+  font-weight: 400;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  
+  .index-body {
+    width: 100%;
+    height: 100%;
+    color: #FFF;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    overflow-x: hidden;
+  
+  }
+  
+  section{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  /*Index Page After Login*/
+  .heroMain{
+        background: linear-gradient(to bottom, #c8bb50 0%, #d1bd4f 25%, #d2be4f 50%, #e6c050 75%, #f4bf60 100%);
+        overflow: hidden;
+    }
+  
+  .heroHomeGradient
+  {
+    background: radial-gradient(ellipse at center, #f6cb6c 0%, #f3c65d 0%, #f2ae54 100%);
+    margin-top: 0px;
+    height: 800px;
+  }
+  .heroMain .heroHomeGradient{
+    height: 100%;
+  }
+  
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+   .HeroBg{
+  
+      min-height: 640px;
+     background-image: url(https://www.scdn.co/i/premium/premium-hero-dancing-man.png);
+     background-repeat: no-repeat;
+          background-position-x: 0%;
+          background-position-y: 0%;
+      background-position: right 3px top -55px;
+      background-repeat: no-repeat;
+  
+  }
+  
+  .row{
+      display:flex;
+      flex-wrap: wrap;
+      margin-left: -15px;
+      margin-right: -15px;    
+      box-align: center;
+      align-items: center;
+      -webkit-box-align: center;
+  }
+  
+  .heroMain .hero-home-content
+  {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top:0px;
+  
+  }
+  .col-md-offset-1 {
+  
+    margin-left: 8.33333333%;
+  
+  }
+  .col-md-10 {
+  
+    width: 83.33333333%;
+    
+  }
+  
+  
+  .whitePart{
+    color: #FFF;
+    margin-left: 0px;
+    text-align: center;
+    margin-left: 0px;
+    width: 100%;
+    height:100%;
+    margin-top: 30px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  
+  }
+  
+  .display-2 {
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: bold;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    font-family:  Helvetica, Arial, sans-serif;
+    letter-spacing: -3.2px;
+    line-height: 92px;
+    margin-bottom: 20px;
+    margin-right: 0px;
+    margin-top: 40px;
+    text-align: center;
+  
+  }
+  
+  
+    button {
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      width: 15vw;
+      height: auto;
+      cursor: grabbing;
+      font-family: 'Open Sans', sans-serif;
+      transition: all 0.2s ease 0s;
+      border: 3px solid #1DB954;
+      color: white;
+      background-color: #1DB954;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1;
+      border-radius: 500px;
+      padding: 20px 20px 20px;
+      margin-bottom: 0;
+      font-weight: 700;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      text-transform: uppercase;
+  }
+  .lead{
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    font-family:  Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25.2px;
+    margin-bottom: 24px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 9px;
+    text-align: center;
+  
+  }
+  button:hover {
+      background: #1ED760;
+      border-color: #1ED760;
+  }
+  
+  button:active {
+      border-color: #1ED760;
+      background: #1ED760;
+  }
+  
+  button:focus {
+      outline: none;
+  }
+  
+  /* cardComponent */
+  
+  @media only screen and (min-width: 1200px){
+  .portfolio-items-wrapper{
+    display: flex ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  } 
+  
+  .portfolio-items-wrapper .portfolio-item-wrapper{
+    position: relative;
+    margin: 10px;
+  }
+  }
+  @media only screen and (max-width: 1200px) {
+  .portfolio-items-wrapper {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  .portfolio-items-wrapper .portfolio-item-wrapper{
+    display: inline-block;
+    position: relative;
+    margin: 10px;
+  }
+  }
+  .img-background{
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .img-background img{
+    width: 360px;
+    height: 360px;
+  }
+  .image-text-wrapper{
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  
+  }
+  
+  .image-text-wrapper .subtitle , a,#buttonOutline{
+    font-weight:600;
+    color: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
+  .image-text-wrapper:hover .playlistInfo{
+    font-weight: 900;
+    color : white;
+    transition: 1s;
+  }
+  .image-text-wrapper:hover #artist{
+    color: rgb(145, 148, 150);
+    transition: 1s;
+  }
+   
+  .img-background:hover img{
+    transition:1s;
+    filter: brightness(20%);
+  }
+  #buttonOutline{
+    border: transparent;
+    color: transparent;
+    display: none;
+    
+  }
+  .image-text-wrapper:hover #buttonOutline{
+    color: #1db954;
+    font-weight: 900;
+    background-color: transparent;
+    border-color: transparent;
+    display: inline-block;
+    
+  } 
+  #buttonOutline:active:focus:checked{
+    color: #1db954;
+    font-weight: 900;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    border: none !important; 
+    outline: none !important;
+    box-shadow: none !important;
+    outline-offset: -4px;
+  }
+  
+  .lowerSection section{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  }
+  /*Text*/
+  .h1{
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    position: relative;
+    top:30%;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    font-family:  Helvetica, Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -0.96px;
+    line-height: 57.6px;
+    margin-bottom: 12px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 24px;
+    text-align: center;
+    }
+  .h1, h2 {
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+  #rowLower{
+    flex-direction: column;
+    margin-top: 50px;
+  }
+  #launchButton {
+    font-weight: 700;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-size: 14px;
+    transition-duration: .3s;
+    border-width: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: normal;
+    color: #616467;
+    box-shadow: 0 0 0 2px #616467 inset;
+    background-color: transparent;
+    margin-bottom: 70px;
+  }
+  
+  #launchButton:hover {  
+      color: #FFF;
+      background-color: #616467;
+      text-decoration: none;
+  }
+  #title{
+  cursor: pointer;
+  font-family:  Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.48px;
+  line-height: 41.6px;
+  list-style-type: none;
+  margin-bottom: 8px;
+  text-align: center;
+  }
+  
+  #artist{
+  cursor: pointer;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 19.8px;
+  list-style-type: none;
+  margin-bottom: 18px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 9px;
+  text-align: center;
+  }
