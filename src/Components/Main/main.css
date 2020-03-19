@@ -1,0 +1,10 @@
+#main-section {
+    background: linear-gradient(#F037A5 -60%, #FAE62D 140%);
+    width: 100%;
+    height: 840px;
+};
+#main-section .bgimg{
+    background: url(/i/home/hero-burst.svg) no-repeat;
+    height:100%;
+    
+}

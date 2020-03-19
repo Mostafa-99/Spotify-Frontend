@@ -9,24 +9,24 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 const sign_up = () => {
     return (
         <div>
-        <div class="centerbox">
+        <div className="centerbox">
         <img id="logo" src={spotify_black_logo} />
         <hr></hr>
-           <form class="text-center border border-light p-5" action="#!">
+           <form className="text-center border border-light p-5" action="#!">
                 <button id="fbsignup">SIGN UP WITH FACEBOOK</button>
                 <h6>or</h6>
               
             <hr/>
             <h6>Sign up with your email address</h6>
-            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="Email"></input>
-            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="Confirm email"></input>
-            <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock"></input>
+            <input type="email" id="defaultRegisterFormEmail" className="form-control mb-4" placeholder="Email"></input>
+            <input type="email" id="defaultRegisterFormEmail" className="form-control mb-4" placeholder="Confirm email"></input>
+            <input type="password" id="defaultRegisterFormPassword" className="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock"></input>
             <br></br>
-            <input type="text" id="defaultRegisterFormUsername" class="form-control" placeholder="What should we call you?"/>
+            <input type="text" id="defaultRegisterFormUsername" className="form-control" placeholder="What should we call you?"/>
             <br></br>
             <h5>Date of Birth </h5>
-            <div class="row">
-                <input type="number" id="register-dob-day " name="signup_form[dob_day] " required="required " max="31 " maxlength="2 " min="1 " pattern="[0-9]* " placeholder="Day " class="dob " data-msg-required="Please enter a valid day of the
+            <div className="row">
+                <input type="number" id="register-dob-day " name="signup_form[dob_day] " required="required " max="31 " maxlength="2 " min="1 " pattern="[0-9]* " placeholder="Day " className="dob " data-msg-required="Please enter a valid day of the
                     month. " data-msg-number="Please enter a valid day of the month. " data-msg-min="Please enter a valid day of the month. " data-msg-max="Please enter a valid day of the month. " data-msg-maxlength="Please enter a valid day of the month. "/>
 
 <div id="register-dob-month ">
@@ -47,18 +47,18 @@ const sign_up = () => {
                 </select>
 
             </div>
-            <input type="number" id="register-dob-year " name="signup_form[dob_year] " required="required " max="2010 " maxlength="4 " min="1920 " pattern="[0-9]* " placeholder="Year " class="dob " data-msg-required="Please enter a valid year." data-msg-number="Please enter a valid year" data-msg-min="Please enter a valid year. " data-msg-max="Please enter a valid year. " data-msg-maxlength="Please enter a valid year. "/>
+            <input type="number" id="register-dob-year " name="signup_form[dob_year] " required="required " max="2010 " maxlength="4 " min="1920 " pattern="[0-9]* " placeholder="Year " className="dob " data-msg-required="Please enter a valid year." data-msg-number="Please enter a valid year" data-msg-min="Please enter a valid year. " data-msg-max="Please enter a valid year. " data-msg-maxlength="Please enter a valid year. "/>
             </div>
             <br></br>
   
             
-            <label class="radio-inline ">
+            <label className="radio-inline ">
             <input type="radio" name="gender" value="male" id="defaultRegisterFormGender" checked/>Male</label>  
-            <label class="radio-inline ">
+            <label className="radio-inline ">
             <input type="radio" name="gender" value="female" id="defaultRegisterFormGender"/>Female</label> 
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultUnchecked"/>
-                <label class="custom-control-label" for="defaultUnchecked"><p>Share my registration data with Spotify for marketing purposes.</p></label>
+            <div className="custom-control custom-checkbox">
+                <input type="checkbox" className="custom-control-input" id="defaultUnchecked"/>
+                <label className="custom-control-label" for="defaultUnchecked"><p>Share my registration data with Spotify for marketing purposes.</p></label>
             </div>
             <br></br>
 

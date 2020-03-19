@@ -108,31 +108,26 @@ const desktop_footer = () => {
         
             <MyDesktopFooter>
  
-                    <div class="row"> 
-                    <img class="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
-                            <div class="col1 min">
-                                <h5 class="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
+                    <div className="row"> 
+                    <img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
+                            <div className="col1 min">
+                                <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
                                     <li><a href="#!">About</a> </li>
-                                    <li><a href="#!">Jobs</a></li>
-                                    <li><a href="#!">For the Record</a></li>
                                 </ul>
                             </div>
                         
-                            <div class="col2">
-                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
+                            <div className="col2">
+                            <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
                                 <li><a href="#!">For Artists</a></li>
-                                <li><a href="#!">Developers</a></li>
-                                <li><a href="#!">Brands</a></li>
-                                <li><a href="#!">Inverstors</a></li>
-                                <li><a href="#!">Vendors</a></li>
+                               
                             </ul>
                             </div>
 
 
-                            <div class="col3">
-                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
+                            <div className="col3">
+                            <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
                                 <li><a href="#!">Help</a> </li>
                                 <li><a href="#!">Web Player</a></li>
@@ -140,10 +135,10 @@ const desktop_footer = () => {
                             </ul>
                             </div>
 
-                            <div class="col4">  
+                            <div className="col4">  
                             <MDBContainer>
                                  <MDBBtn social="fb">
-                                 <i class="fab fa-facebook-f white-text mr-4"> </i>
+                                 <i className="fab fa-facebook-f white-text mr-4"> </i>
                                       
                                  </MDBBtn>
                             </MDBContainer>     
@@ -155,12 +150,12 @@ const desktop_footer = () => {
                     <div id="mini_footer">
                         
                     <ul>
-                            <li class="list-inline-item left"><a href="#!">Legal</a></li>
-                            <li class="list-inline-item left"><a href="#!">Privacy Center</a></li>
-                            <li class="list-inline-item left"><a href="#!">Privacy Policy</a></li>
-                            <li class="list-inline-item left"><a href="#!">Cookies</a></li>
-                            <li class="list-inline-item left"><a href="#!">About Ads</a></li>
-                            <li class="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
+                            <li className="list-inline-item left"><a href="#!">Legal</a></li>
+                            <li className="list-inline-item left"><a href="#!">Privacy Center</a></li>
+                            <li className="list-inline-item left"><a href="#!">Privacy Policy</a></li>
+                            <li className="list-inline-item left"><a href="#!">Cookies</a></li>
+                            <li className="list-inline-item left"><a href="#!">About Ads</a></li>
+                            <li className="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
                     </ul>
                     
                     </div>

@@ -12,7 +12,7 @@ background-color:rgb(0,0,0,0.6);
 position:fixed;
 height:11vh;
 width:100%;
-
+z-index:1;
 .links{
     
     font-size: calc(7px + .8vw);
@@ -49,14 +49,14 @@ const desktop_navbar = () => {
     return (
         <MyDesktopNavbar>
        <BrowserRouter>
-            <img class="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
-            <div class="right">
+            <img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
+            <div className="right">
             <ul className="nav-links" >
                 <li>
                     <Link to="/" className="links">Premium</Link>
                 </li>
                 <li>
-                    <Link to="/" className="links">Help</Link>
+                    <Link to="/help" className="links">Help</Link>
                 </li>
                 <li>
                     <Link to="/" className="links">Download</Link>
@@ -65,11 +65,11 @@ const desktop_navbar = () => {
                     <Link to="/" className="links">|</Link>
                 </li>
                 <li>
-                    <Link  to="../SignUp" className="links">Signup</Link>
+                    <Link  to="/signup" className="links">Signup</Link>
                 </li>
                 
                 <li>
-                    <Link to="/" className="links">Login</Link>
+                    <Link to="/login" className="links">Login</Link>
                 </li>
                 
             </ul>

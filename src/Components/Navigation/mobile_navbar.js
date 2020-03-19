@@ -39,35 +39,35 @@ const mobile_navbar = () => {
     return (
         <MyMobileNavbar>
 
-            <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-                <a class="navbar-brand" href="#"><img class="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
+            <nav className="navbar navbar-expand-lg navbar-dark primary-color">
+                <a className="navbar-brand" href="#"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
                     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="basicExampleNav">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="#">Home
-                         <span class="sr-only">(current)</span>
+                <div className="collapse navbar-collapse" id="basicExampleNav">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item active ">
+                            <a className="nav-link" href="#">Home
+                         <span className="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Premium</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Premium</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Help</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Help</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Download</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Download</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sign up</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Sign up</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Log in</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Log in</a>
                         </li>
 
                     </ul>

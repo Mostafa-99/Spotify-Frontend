@@ -1,30 +1,16 @@
+/*import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import $ from 'jquery';
+//import './helpPage.css';
+//const helpPage=require('./HelpPage');
+import './HelpPage'
+import HelpPage from './HelpPage';
 
-import SignUp from './Components/SignUp/sign_up.js'
-import LogIn from './Components/Login/log_in.js'
-import Navbar from './Components/Navigation/navbar.js'
-import Footer from './Components/Footer/footer.js'
-import HelpPage from './Components/HelpPage/HelpPage.js'
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import './Components/HelpPage/help';
+const page=<HelpPage/>;
 
 
 
 
-//ReactDOM.render(<Navbar />, document.getElementById('mynav'));
-ReactDOM.render(<App />, document.getElementById('mybody'));
-//ReactDOM.render(<Footer />, document.getElementById('myfooter'));
-
-
-serviceWorker.unregister();
-
-
-/////////////////////////////////////////////////////////////////
-//Scroll Button function
 $('.scroll-button').on('click', function(event) {
     if (this.hash !== '') {
       event.preventDefault();
@@ -39,13 +25,15 @@ $('.scroll-button').on('click', function(event) {
       );
     }
   });
-/*
-  //Event listener function  
+
   const track=document.querySelector('.carousel-img');
   const imgs=Array.from(track.children);
+
   const slides=document.querySelector('.carousel-inner');
+
   const dotNav=document.querySelector('.carousel-indicators');
   const dots=Array.from(dotNav.children);
+
   const moveToslide = (track,currentSlide,targetSlide) =>{
     currentSlide.classList.remove('active');
     targetSlide.classList.add('active');
@@ -63,6 +51,25 @@ $('.scroll-button').on('click', function(event) {
 
        moveToslide(track,currentSlide,targetSlide);
   }
+
   dotNav.addEventListener('onchange',changeImg);
+
   dotNav.addEventListener('click',changeImg);
-  slides.addEventListener('onchange',changeImg);*/
+  slides.addEventListener('onchange',changeImg);
+  
+
+  
+
+*/
+
+  /*$(document).ready(function() {
+  // Set iframe attributes when the show instance method is called
+  $("#videoModal").on("show.bs.modal", function(event) {
+    let button = $(event.relatedTarget); // Button that triggered the modal
+    let url = button.data("video");      // Extract url from data-video attribute
+
+    $(this).find("iframe").attr({
+        src: url,
+        allow : "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    });
+  });*/
