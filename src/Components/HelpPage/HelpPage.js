@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, withRouter,Link } from "react-router-dom";
-
+import Footer from '../Footer/footer.js'
+import Navbar from '../Navigation/navbar.js'
 import './helpPage.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 //import $ from 'jquery';
@@ -10,7 +11,7 @@ function HelpPage() {
   
   return (
     <div>
-      
+      <Navbar/>
       <div id="body">
         <section id="navigation-section">
           <div className="nav-section-container ">   
@@ -163,7 +164,7 @@ function HelpPage() {
           </div>
         </div>
       </div>
-
+      <Footer/>
     </div>
   
   );

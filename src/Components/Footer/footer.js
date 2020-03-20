@@ -3,7 +3,6 @@ import DesktopFooter from './desktop_footer'
 import MobileFooter from './mobile_footer'
 
 
-
 class footer extends Component {
     constructor(props) {
         super(props);

@@ -8,6 +8,8 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 const MyMobileFooter = styled.footer`
 background:black;
 height:100%;
+padding-bottom: 10px;
+margin-bottom: -10px;
 
 .col1
 {

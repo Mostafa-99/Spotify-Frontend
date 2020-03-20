@@ -11,6 +11,8 @@ const MyDesktopFooter=styled.footer`
 justify-content:space-evenly;
 background:black;
 height:100%;
+padding-bottom: 10px;
+margin-bottom: -10px;
 
 .col1
 {

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import '../SignUp/sign_up.css'
 import spotify_black_logo from '../../Images/spotify_logo_black.png'
-//import '@fortawesome/react-fontawesome'
-//import '@fortawesome/free-solid-svg-icons'
-//import '@fortawesome/fontawesome-svg-core'
 
 class log_in extends Component {
 
@@ -13,7 +10,7 @@ class log_in extends Component {
             <img id="logo" src={spotify_black_logo} />
             <hr/>
             <h6>To continue, log in to Spotify.</h6>
-            <form className="text-center border border-light p-5" action="#!">
+            <form className="text-center p-5" action="#!">
             <button id="fbsignup2"><i className="fab fa-facebook fa-lg white-text mr-md-2 mr-3 fa-1x"> </i>CONTINUE WITH FACEBOOK</button>
             <button id="applesignup"><i className="fab fa-apple fa-lg white-text mr-md-2 mr-3 fa-1x"> </i>CONTINUE WITH APPLE</button>
             <h6>or</h6>
@@ -33,9 +30,9 @@ class log_in extends Component {
             <h6>Don't have an account?</h6>
             <button id="signupnow" type="submit">SIGN UP FOR SPOTIFY</button>
             <hr/>
-        If you click "Log in with Facebook" and are not a Spotify user, you will be registered and you agree to Spotify's
+       <p> If you click "Log in with Facebook" and are not a Spotify user, you will be registered and you agree to Spotify's
             <a href="# " target="_blank ">Terms and Conditions</a> and
-            <a href="# " target="_blank "> Privacy Policy</a>.
+            <a href="# " target="_blank "> Privacy Policy</a>.</p>
         </form>      
         
         </div>

@@ -32,7 +32,6 @@ function App() {
   return (
 
     <Router>
-      {/* <Navbar /> */}
       <Switch>
         <Route path="/" exact component={IndexPage}/>
         <Route path="/help" exact component={HelpPage}/>
@@ -42,7 +41,6 @@ function App() {
         <Route path="/editprofile" component={EditProfile}/>
         <Route path="/notificationsettings" component={NotificationsSettings}/>
       </Switch>
-      {/* <Footer /> */}
     </Router>   
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Link,Route,Router,NavLink, BrowserRouter} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 //navbar not fixed anymore
 const MyDesktopNavbar=styled.nav`
@@ -13,13 +13,17 @@ background-color:rgb(0,0,0);
 height:11vh;
 width:100%;
 z-index:1;
-.links{
+.links,.links0{
     
     font-size: calc(7px + .8vw);
     text-decoration:none;
     color:white;
     padding:10px;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+}
+.links0
+{
+    cursor:default;
 }
 
 .nav-links{
@@ -42,13 +46,14 @@ z-index:1;
     width:132px;
     position: absolute;
     left: 12%;
+    margin-top:-20px;
 }
 
 `
 const desktop_navbar = () => {
     return (
         <MyDesktopNavbar>
-            <img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
+           <Link to="/"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
             <div className="right">
             <ul className="nav-links" >
                 <li>
@@ -61,7 +66,7 @@ const desktop_navbar = () => {
                     <Link to="/" className="links">Download</Link>
                 </li>
                 <li>
-                    <Link to="/" className="links">|</Link>
+                    <Link to="/" className="links0">|</Link>
                 </li>
                 <li>
                     <Link  to="/signup" className="links">Signup</Link>

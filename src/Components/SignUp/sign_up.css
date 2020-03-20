@@ -119,6 +119,16 @@ input[type=number]{
     margin-left:35px;
     height:25px;
     width: 100px;
-    margin-right:30px;
-} 
+    margin-right:25px;
+    border:none;
+}
 
+select
+{
+    border:none;
+}
+
+form
+{
+    border:none;
+}
