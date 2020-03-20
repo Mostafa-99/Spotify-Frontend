@@ -111,6 +111,11 @@ const mobile_footer = () => {
                                 <li><a href="#!">Free Mobile App</a></li>
                             </ul>
                             </div>
+                            <div class="col4">  
+                                 <a href="https://instagram.com/spotify"><i class="fab fa-2x fa-instagram white-text pr-4"> </i></a>
+                                 <a href="https://twitter.com/spotify"><i class="fab fa-2x fa-twitter white-text pr-4"> </i></a>
+                                 <a href="https://facebook.com/spotify"><i class="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
+                            </div>
                    
                     
                     

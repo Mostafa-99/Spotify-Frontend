@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../SignUp/sign_up.css'
 import spotify_black_logo from '../../Images/spotify_logo_black.png'
 import '@fortawesome/react-fontawesome'
 import '@fortawesome/free-solid-svg-icons'
 import '@fortawesome/fontawesome-svg-core'
 
-const log_in = () => {
+class log_in extends Component {
+
+    render(){
     return (
             <div class="centerbox">
             <img id="logo" src={spotify_black_logo} />
@@ -38,6 +40,8 @@ const log_in = () => {
         
         </div>
     );
-};
+}
+
+}
 
 export default log_in;

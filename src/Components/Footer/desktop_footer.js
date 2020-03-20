@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 
 const MyDesktopFooter=styled.footer`
 justify-content:space-evenly;
@@ -28,8 +31,12 @@ height:100%;
 }
 .col4
 {
-    margin-top:6%;
-    margin-left:6%;
+
+    margin-top:7%;
+    margin-left:calc(14vw + 00px);
+}
+i{
+    padding:5px 15px ;
 }
 
 h5
@@ -100,6 +107,7 @@ a:hover{
 .max {
   margin-left: calc(50vw + 200px);
 }
+
 `
 
 
@@ -141,12 +149,9 @@ const desktop_footer = () => {
                             </div>
 
                             <div class="col4">  
-                            <MDBContainer>
-                                 <MDBBtn social="fb">
-                                 <i class="fab fa-facebook-f white-text mr-4"> </i>
-                                      
-                                 </MDBBtn>
-                            </MDBContainer>     
+                                 <a href="https://instagram.com/spotify"><i class="fab fa-2x fa-instagram white-text pr-4"> </i></a>
+                                 <a href="https://twitter.com/spotify"><i class="fab fa-2x fa-twitter white-text pr-4"> </i></a>
+                                 <a href="https://facebook.com/spotify"><i class="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
                             </div>
 
                     </div>

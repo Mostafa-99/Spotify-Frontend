@@ -3,7 +3,7 @@ button{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    width: 12vw;
+    width: 200px;
     cursor: grabbing;
     font-family: 'Open Sans', sans-serif;
     transition: all 0.2s ease 0s;

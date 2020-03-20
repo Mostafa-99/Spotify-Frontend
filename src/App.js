@@ -19,12 +19,11 @@ function App() {
   return (
     <myBody>
     <BrowserRouter>
-    
+
     <section style={ main }>
     <SpotifyButton style={mybutton} value='Get Spotify free'></SpotifyButton>
     </section>
-    
-    
+
     </BrowserRouter>
     </myBody>
 
