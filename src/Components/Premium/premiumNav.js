@@ -3,7 +3,7 @@ import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import PremiumCode from './premiumCode.js';
 import Premium from './premium.js';
 
-export class PremiumNav extends Component {
+export class premiumNav extends Component {
     render() {
         return (
             <Router>
@@ -16,4 +16,4 @@ export class PremiumNav extends Component {
     }
 }
 
-export default PremiumNav
+export default premiumNav

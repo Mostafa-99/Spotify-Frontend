@@ -1,12 +1,8 @@
-body{
+#ppmaindiv body{
     margin: 0px;
 }
-@media(min-width: 992px){
-    .bluepart{
-        background-image: url(../../Images/premium_dancer.png);
-    }
-}
-.bluepart{
+
+#ppmaindiv .bluepart{
     height: auto;
     background-color: rgb(80, 155, 245);
     background-repeat: no-repeat;
@@ -20,8 +16,12 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     width: 100%;
 }
-
-.bluecontainer{
+@media(min-width: 992px){
+    #ppmaindiv .bluepart{
+        background-image: url(../Images/premium_dancer.png);
+    }
+}
+#ppmaindiv .bluecontainer{
     padding-top: 110px;
     padding-bottom: 30px;
     margin-left: 50px;
@@ -31,22 +31,22 @@ body{
     text-align: left;
 }
 @media (max-width:600px){
-    .bluecontainer{
+    #ppmaindiv .bluecontainer{
         padding: 0px 0px;
         margin: auto;
     }
 }
 @media (min-width: 768px){
-    .biggerh1{
+    #ppmaindiv .biggerh1{
         font-size: 80px;
     }
 }
 @media (max-width: 767px){
-    .biggerh1{
+    #ppmaindiv .biggerh1{
         font-size: 48px;
     }
 }
-.biggerh1{
+#ppmaindiv .biggerh1{
     line-height: 1.2;
     font-weight: 900;
     max-width: 100%;
@@ -57,16 +57,16 @@ body{
 }
 
 @media (min-width: 768px){
-    .biggerh2{
+    #ppmaindiv .biggerh2{
         font-size: 30px;
     }
 }
 @media (max-width: 767px){
-    .biggerh2{
+    #ppmaindiv .biggerh2{
         font-size: 24px;
     }
 }
-.biggerh2{
+#ppmaindiv .biggerh2{
     line-height: 1.5;
     width: 100%;
     max-width: 100%;
@@ -75,19 +75,19 @@ body{
     padding: 0px;
 }
 
-.secondpart{
+#ppmaindiv .secondpart{
     padding-top: 50px;
     padding-bottom: 50px;
     height: auto;
     text-align: center;
     width: 100%;
 }
-.benefitimage{
+#ppmaindiv .benefitimage{
     width: 142px;
     height:142px;
 }
 
-.imagesdiv{
+#ppmaindiv .imagesdiv{
     width: 100%;
     height: auto;
     display: flex;
@@ -97,41 +97,41 @@ body{
     justify-content: space-around;
 }
 
-.imagediv{
+#ppmaindiv .imagediv{
     padding: 50px 50px;
     width: 20%;
     box-sizing: border-box;
 }
 
 @media screen and (max-width:1200px){
-    .imagediv{
+    #ppmaindiv .imagediv{
         width: 40%;
     }
 }
 @media screen and (max-width:600px){
-    .imagediv{
+    #ppmaindiv .imagediv{
         width: 90%;
     }
     
 }
 
-.imageh2{
+#ppmaindiv .imageh2{
     font-size: 30px;
 }
 
 
 
 @media (min-width: 768px){
-    .smallerh1{
+    #ppmaindiv .smallerh1{
         font-size: 48px;
     }
 }
 @media (max-width: 767px){
-    .smallerh1{
+    #ppmaindiv .smallerh1{
         font-size: 32px;
     }
 }
-.smallerh1{
+#ppmaindiv .smallerh1{
         color: black;
         line-height: 1.2;
         font-weight: 900;
@@ -142,7 +142,7 @@ body{
         padding: 0px;
 }
 
-button{
+#ppmaindiv button{
     cursor: pointer;
     display: inline-block;
     font-size: 14px;
@@ -167,21 +167,21 @@ button{
     padding: 17px 48px;
     margin: 40px 0px;
 }
-button:hover{
+#ppmaindiv button:hover{
     transform: scale(1.05) perspective(1px);
     background-color: rgb(38, 218, 98);
 }
-a{
+#ppmaindiv a{
     color: white;
 }
-p{
+#ppmaindiv p{
     font-size: 12px;
 }
-ul{
+#ppmaindiv ul{
     padding-left: 10px;
 }
 
-li{
+#ppmaindiv li{
     list-style-type: '✓';
     text-indent: 10px;
     font-size: 16px;
@@ -191,12 +191,12 @@ li{
     padding: 0px 10px 0px 0px;
 }
 @media screen and (max-width:600px){
-    .li{
+    #ppmaindiv .li{
         font-size: 20px;
     }
 }
 
-h3{
+#ppmaindiv h3{
     font-size: 24px;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -204,36 +204,36 @@ h3{
     font-family: Arial, Helvetica, sans-serif;
 }
 @media screen and (max-width:600px){
-    .h3{
+    #ppmaindiv .h3{
         font-size: 30px;
     }
 }
 
-h4{
+#ppmaindiv h4{
     font-size: 32px;
     margin-top: 0px;
     margin-bottom: 0px;
     font-family: Arial, Helvetica, sans-serif;
 }
 @media screen and (max-width:600px){
-    .h4{
+    #ppmaindiv .h4{
         font-size: 40px;
     }
 }
 
-.thirdpart{
+#ppmaindiv .thirdpart{
     padding: 80px 10px;
     text-align: center;
     width: 100%;
     height: auto;
 }
 @media(max-width:600px){
-    .thirdpart{
+    #ppmaindiv .thirdpart{
         padding: 0px
     }
 }
 
-.boxdiv{
+#ppmaindiv .boxdiv{
     text-align: left;
     padding: 10px 20px;
     display: inline-block;
@@ -244,30 +244,30 @@ h4{
 }
 
 @media screen and (max-width: 720px){
-    .boxdiv{
+    #ppmaindiv .boxdiv{
         width: 90%;
     }
 }
 
 @media (max-width:600px){
-    .firstbutton{
+    #ppmaindiv .firstbutton{
         width: 90%;
         margin: 10px 0px;
     }
 }
-.offerbutton{
+#ppmaindiv  .offerbutton{
     width: 100%;
     margin: 20px 0px;
 }
-.offerbutton:hover{
+#ppmaindiv .offerbutton:hover{
     transform: scale(1.015) perspective(1px);
     background-color: rgb(38, 218, 98);
 }
-.greyp{
+#ppmaindiv .greyp{
     color: grey;
 }
 @media screen and (max-width:600px){
-    .greyp{
+    #ppmaindiv .greyp{
         font-size: 15px;
     }
 }

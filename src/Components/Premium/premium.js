@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 import './premium.css';
-import benefit1 from '../../Images/benefit-1.png';
-import benefit2 from '../../Images/benefit-2.png';
-import benefit3 from '../../Images/benefit-3.png';
-import benefit4 from '../../Images/benefit-4.png';
+import benefit1 from '../Images/benefit-1.png';
+import benefit2 from '../Images/benefit-2.png';
+import benefit3 from '../Images/benefit-3.png';
+import benefit4 from '../Images/benefit-4.png';
 
 
 export class premium extends Component {
     render() {
         return (
-                <div>
-                    <div id = "section-blue" className="bluepart">
+                <div id="ppmaindiv">
+                    <div className="bluepart">
                         <div className="bluecontainer">
                             <h1 className="biggerh1">Get Premium free for 1 month</h1>
                             <h2 className="biggerh2">Just EGP 49.99/month after. Cancel anytime.</h2>
                             <Link to="/premiumCode">
-                                <button className="firstbutton">GET PREMIUM</button>
+                                <button id="ppfirstbutton" className="firstbutton">GET PREMIUM</button>
                             </Link>
                             <p>
                             Terms and conditions apply.1 month free not available for users who have already tried Premium.
@@ -70,7 +70,7 @@ export class premium extends Component {
                                 <br/>
                                 <hr/>
                                 <Link to="/premiumCode">
-                                    <button className="offerbutton">GET PREMIUM</button>
+                                    <button id="ppsecondbutton" className="offerbutton">GET PREMIUM</button>
                                 </Link>
                             </div>
                         </div>

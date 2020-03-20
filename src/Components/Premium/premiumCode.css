@@ -1,8 +1,8 @@
-.container-fluid{
+#pcpmaindiv .container-fluid{
     padding: 0px;
 }
 
-.blue{
+#pcpmaindiv .blue{
     background-color: rgb(80, 155, 245);
     color: white;
     padding: 100px 20px;
@@ -10,13 +10,13 @@
     text-align: center;
 }
 @media (max-width:700px){
-    .blue{
+    #pcpmaindiv .blue{
         text-align: left;
         padding: 10px 10px;
     }
 }
 
-.checklist{
+#pcpmaindiv .checklist{
     list-style-type: none;
     display: inline;
     padding: 10px;
@@ -24,40 +24,40 @@
     font-family: Arial, Helvetica, sans-serif;
     color: white;
 }
-.checklist::before {
+#pcpmaindiv .checklist::before {
     content: "✓  ";
   }
 @media (max-width:700px){
-    .checklist{
+    #pcpmaindiv .checklist{
         display: list-item;
         padding: 0px;
         font-size: 12px;
     }
 }
 
-.boldheader{
+#pcpmaindiv .boldheader{
     font-size: 56px;
     font-family: Arial, Helvetica, sans-serif;
 }
 @media (max-width:700px){
-    .boldheader{
+    #pcpmaindiv .boldheader{
         font-size: 30px;
     }
 }
 
-.secondpart{
+#pcpmaindiv .secondpart{
     height: auto;
     width: 100%;
     text-align: center;
     padding: 100px 10px;
 }
 @media (max-width:700px){
-    .secondpart{
+    #pcpmaindiv .secondpart{
         padding: 40px 10px;
     }
 }
 
-.boxdiv{
+#pcpmaindiv .boxdiv{
     text-align: left;
     padding: 20px 20px;
     display: inline-block;
@@ -67,8 +67,12 @@
     height: auto;
 }
 @media screen and (max-width: 700px){
-    .boxdiv{
+    #pcpmaindiv .boxdiv{
         width: 90%;
     }
+}
+#pcpsendmailbutton, #pcpcheckcodebutton{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 

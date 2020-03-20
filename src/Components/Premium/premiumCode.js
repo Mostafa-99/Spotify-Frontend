@@ -26,7 +26,7 @@ export class premiumCode extends Component {
         if(this.state.code !== ""){
             axios.post('')
             .then(res => {
-                if(res.status == 204){
+                if(res.status === 204){
                     //console.log(this.state.code);
                     this.showConfirm();
                 }
@@ -44,7 +44,7 @@ export class premiumCode extends Component {
     
     render() {
         return (
-            <div className="container-fluid">
+            <div id="pcpmaindiv" className="container-fluid">
                 <div className="blue">
                     <h1 className="boldheader">Get Premium</h1>
                     <ul className="">
@@ -57,11 +57,11 @@ export class premiumCode extends Component {
                 <div className="secondpart">
                     <div className="boxdiv">
                         <div className="form-group">
-                        <button onClick={this.sendMail} type="button" className="btn btn-success btn-block">GET CODE</button>
+                        <button id="pcpsendmailbutton" onClick={this.sendMail} type="button" className="btn btn-success btn-block">GET CODE</button>
                             <label for="formGroupExampleInput">Subscription code</label>
                             <input value={this.state.code} onChange={this.onChange} type="text" name="code" className="form-control" id="formGroupExampleInput" placeholder="XXXX"/>
                         </div>
-                        <button onClick={this.checkCode} type="button" className="btn btn-success btn-block">START MY SPOTIFY PREMIUM</button>
+                        <button id="pcpcheckcodebutton" onClick={this.checkCode} type="button" className="btn btn-success btn-block">START MY SPOTIFY PREMIUM</button>
                     </div>
                 </div>
             </div>
