@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch, withRouter,Link } from "react-r
 import Footer from '../Footer/footer.js'
 import Navbar from '../Navigation/navbar.js'
 import './helpPage.css';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-//import $ from 'jquery';
-//import './help';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import $ from 'jquery';
+// import './help';
 
 function HelpPage() {
   

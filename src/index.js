@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import $ from 'jquery';
 
-
-import SignUp from './Components/SignUp/sign_up.js'
-import LogIn from './Components/Login/log_in.js'
-import Navbar from './Components/Navigation/navbar.js'
-import Footer from './Components/Footer/footer.js'
-
-import HelpPage from './Components/HelpPage/HelpPage.js'
-import './Components/HelpPage/help';
+// import './index.css';
+// import $ from 'jquery';
+// import SignUp from './Components/SignUp/sign_up.js'
+// import LogIn from './Components/Login/log_in.js'
+// import Navbar from './Components/Navigation/navbar.js'
+// import Footer from './Components/Footer/footer.js'
+// import HelpPage from './Components/HelpPage/HelpPage.js'
+// import './Components/HelpPage/help';
 
 
 

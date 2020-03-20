@@ -1,86 +1,86 @@
-#logo {
+#mysignup #logo {
     align-self: center;
     width: 200px;
     margin: 2% 40% 1% 30%;
 }
-.centerbox {
+#mysignup .centerbox {
     width: 500px;
     margin: 0 auto;
     text-align: center;
 }
 
-form p {
+#mysignup form p {
     font-size: 12px;
     text-align: center;
 }
 
-form a {
+#mysignup form a {
     color: #1DB954;
 }
 
-form a:hover {
+#mysignup form a:hover {
     text-decoration: none;
     color: #1ED760;
 }
 
 
 
-#fbsignup,#fbsignup2 {
+#mysignup #fbsignup,#fbsignup2 {
     background-color: #3B5998;
     width: 400px;
     border-color: #3B5998;
 }
-#fbsignup{
+#mysignup #fbsignup{
     margin: -30px 0 0 0;
     height:50px;
 }
 
-#fbsignup2 {
+#mysignup #fbsignup2 {
     margin: -45px 0 0 0;
 }
-#fbsignup,#fbsignup2:hover {
+#mysignup #fbsignup,#fbsignup2:hover {
     background-color: rgb(60, 102, 190);
     border-color: rgb(60, 102, 190);
 }
 
-form h6 {
+#mysignup form h6 {
     font-size: 17px;
     font-weight: bold;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
 }
 
-form h4 {
+#mysignup form h4 {
     font-size: 10px;
 }
 
-form h5 {
+#mysignup form h5 {
     font-size: 12px;
     color: gray;
     text-align: left;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
 }
 
-#applesignup {
+#mysignup #applesignup {
     color: white;
     width: 400px;
     background-color: black;
     border-color: black;
     margin: 2% 0;
 }
-#applesignup:hover {
+#mysignup #applesignup:hover {
     background-color: rgb(42, 42, 42);
     border-color:rgb(42, 42, 42);
 
 }
 
-#login {
+#mysignup #login {
     margin: -30px 0 0 0%;
     width: 200px;
     position: absolute;
     display: inline;
 }
 
-#signupnow {
+#mysignup #signupnow {
     color: gray;
     width: 400px;
     background-color: transparent;
@@ -88,14 +88,14 @@ form h5 {
     margin: 10px 0 2% 0;
     height: 50px;
 }
-#signupnow:hover {
+#mysignup #signupnow:hover {
     color: white;
     background-color: rgb(80, 79, 79);
     border-color: rgb(80, 79, 79);
   
 }
 
-#rememberme {
+#mysignup #rememberme {
     margin: 0 0 0 2px;
     text-align: left;
     width:150px;
@@ -103,18 +103,18 @@ form h5 {
     
 }
 
-label {
+#mysignup label {
     font-size: 16px;
     color: gray;
     padding: 0 5px ;
 }
 
-#signup{
+#mysignup #signup{
 width:200px;
 margin-bottom:20px;
 }
 
-input[type=number]{
+#mysignup input[type=number]{
 
     margin-left:35px;
     height:25px;
@@ -123,12 +123,12 @@ input[type=number]{
     border:none;
 }
 
-select
+#mysignup select
 {
     border:none;
 }
 
-form
+#mysignup form
 {
     border:none;
 }

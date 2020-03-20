@@ -8,12 +8,12 @@ display:flex;
 flex-flow: row nowrap;
 justify-content:space-evenly;
 align-items:center;
-background-color:rgb(0,0,0);
+background-color:rgba(0,0,0,0.6);
 
 height:11vh;
 width:100%;
 z-index:1;
-.links,.links0{
+#mydesknavbar .links,.links0{
     
     font-size: calc(7px + .8vw);
     text-decoration:none;
@@ -21,12 +21,12 @@ z-index:1;
     padding:10px;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
 }
-.links0
+#mydesknavbar .links0
 {
     cursor:default;
 }
 
-.nav-links{
+#mydesknavbar .nav-links{
     margin-top:-1%;
     display: flex;
     flex-flow:row nowrap;
@@ -38,11 +38,11 @@ z-index:1;
     left: 55%;
 }
 
-.links:hover{
+#mydesknavbar .links:hover{
     color:#1DB954;
 }
 
-.logo{
+#mydesknavbar .logo{
     width:132px;
     position: absolute;
     left: 12%;
@@ -53,6 +53,7 @@ z-index:1;
 const desktop_navbar = () => {
     return (
         <MyDesktopNavbar>
+            <div id="mydesknavbar">
            <Link to="/"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
             <div className="right">
             <ul className="nav-links" >
@@ -77,6 +78,7 @@ const desktop_navbar = () => {
                 </li>
                 
             </ul>
+            </div>
             </div>
         </MyDesktopNavbar>
         

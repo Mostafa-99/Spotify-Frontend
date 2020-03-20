@@ -8,9 +8,9 @@ import './indexPage.css'
 function IndexPage() {
   
   return (
-      <div>
-      <Navbar/>
+      <div>   
       <div id="indexbody">
+      <Navbar/>
         <button id="getspotifyfree">Get Spotify Free</button>
       </div>
       <Footer/>

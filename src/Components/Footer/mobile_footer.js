@@ -11,52 +11,52 @@ height:100%;
 padding-bottom: 10px;
 margin-bottom: -10px;
 
-.col1
+#mobfooter .col1
 {
     margin-top:8%;
     margin-left:8.5%;
     text-align:left;
 }
-.col2,.col3,.col4
+#mobfooter .col2,.col3,.col4
 {
     margin-top:6%;
     margin-left:6%;
 }
 
-.logo{
+#mobfooter .logo{
     width:100px;
     margin-top:2%;
     position: absolute;
     left: 6%;
 }
-h5
+#mobfooter h5
 {
 font-size:12px;
 color:#919496;
 letter-spacing:2px;
 }
-#mini_footer
+#mobfooter #mini_footer
 {
     margin-top:7%;
     margin-left:3%;
     font-size:10px;
 }
 
-#mini_footer a
+#mobfooter #mini_footer a
 { 
     padding:5px;
     color:#919496;
 }
-#mini_footer a:hover
+#mobfooter #mini_footer a:hover
 {
     color:#1DB954;
 }
 
-ul
+#mobfooter ul
 {
   padding:0; 
 }
-li
+#mobfooter li
 {
     list-style:none;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
@@ -65,13 +65,13 @@ li
     padding:10px 2px;
 }
 
-a{
+#mobfooter a{
     text-decoration:none;
     text-transform:none;
     text-align:left;
     color:white;
 }
-a:hover{
+#mobfooter a:hover{
    color:#1DB954;
 }
 
@@ -80,6 +80,7 @@ a:hover{
 const mobile_footer = () => {
     return (
         <MyMobileFooter>
+            <div id="mobfooter">
              <a className="navbar-brand" href="#"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
              <div className="row"> 
                             <div className="col1">
@@ -121,7 +122,7 @@ const mobile_footer = () => {
                    
                     
                     
-                    <div id="mini_footer">
+                    {/* <div id="mini_footer">
                         
                     <ul>
                             <li className="list-inline-item left"><a href="#!">Legal</a></li>
@@ -132,6 +133,7 @@ const mobile_footer = () => {
                             <li className="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
                     </ul>
                     
+                    </div> */}
                     </div>
         </MyMobileFooter>
     );

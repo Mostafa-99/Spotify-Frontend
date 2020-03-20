@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 const spotify_button = ({value,onClick}) => {
         return(
-        <button  onClick={(event: MouseEvent <HTMLButtonElement>)=>onClick(event)}>
+        <button class="myspotifybutton"  onClick={(event: MouseEvent <HTMLButtonElement>)=>onClick(event)}>
         {value}
         </button>
         );

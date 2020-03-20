@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+//import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -14,61 +14,61 @@ height:100%;
 padding-bottom: 10px;
 margin-bottom: -10px;
 
-.col1
+#mydeskfooter .col1
 {
     margin-top:6%;
     margin-left:25%;
     text-align:left;
 }
-.col2
+#mydeskfooter .col2
 {
     margin-top:6%;
     margin-left:6%;
 }
-.col3
+#mydeskfooter .col3
 {
     margin-top:6%;
     margin-left:6%;
 }
-.col4
+#mydeskfooter .col4
 {
 
     margin-top:7%;
     margin-left:calc(14vw + 00px);
 }
-i{
+#mydeskfooter i{
     padding:5px 15px ;
 }
 
-h5
+#mydeskfooter h5
 {
 font-size:12px;
 color:#919496;
 letter-spacing:2px;
 }
-#mini_footer
+#mydeskfooter #mini_footer
 {
     margin-top:7%;
     margin-left:12%;
     font-size:12px;
 }
 
-#mini_footer a
+#mydeskfooter #mini_footer a
 {
     
     padding:5px;
     color:#919496;
 }
-#mini_footer a:hover
+#mydeskfooter #mini_footer a:hover
 {
     color:#1DB954;
 }
 
-ul
+#mydeskfooter ul
 {
   padding:0; 
 }
-li
+#mydeskfooter li
 {
     list-style:none;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
@@ -77,35 +77,35 @@ li
     padding:10px 2px;
 }
 
-a{
+#mydeskfooter a{
     text-decoration:none;
     text-transform:none;
     text-align:left;
     color:white;
 }
 
-a:hover{
+#mydeskfooter a:hover{
    color:#1DB954;
 }
 
-.logo{
+#mydeskfooter .logo{
     margin-top:5.5%;
     width:132px;
     position: absolute;
     left: 12%;
 }
-.right{
+#mydeskfooter .right{
   position: absolute;
   right: 10%;
 
 }
 
-.min {
+#mydeskfooter .min {
 
   margin-left: calc(15% + 150px);
 }
 
-.max {
+#mydeskfooter .max {
   margin-left: calc(50vw + 200px);
 }
 
@@ -116,7 +116,7 @@ const desktop_footer = () => {
     return (
         
             <MyDesktopFooter>
- 
+ <div id="mydeskfooter">
                     <div className="row"> 
                     <img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
                             <div className="col1 min">
@@ -154,7 +154,7 @@ const desktop_footer = () => {
                     </div>
                     
                     
-                    <div id="mini_footer">
+                    {/* <div id="mini_footer">
                         
                     <ul>
                             <li className="list-inline-item left"><a href="#!">Legal</a></li>
@@ -165,8 +165,8 @@ const desktop_footer = () => {
                             <li className="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
                     </ul>
                     
-                    </div>
-                  
+                    </div> */}
+                  </div>
             </MyDesktopFooter>
         
     );

@@ -7,7 +7,7 @@ class footer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          isDesktop: false //This is where I am having problems
+          isDesktop: false 
         };
     
         this.updatePredicate = this.updatePredicate.bind(this);

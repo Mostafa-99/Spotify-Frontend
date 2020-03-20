@@ -1,7 +1,5 @@
 import React from 'react';
 import '../SignUp/sign_up.css'
-
-import SpotifyButton from '../Button/spotify_button'
 import spotify_black_logo from '../../Images/spotify_logo_black.png'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
@@ -11,12 +9,12 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 
 const sign_up = () => {
     return (
-        <div>
+        <div id="mysignup">
         <div className="centerbox">
         <img id="logo" src={spotify_black_logo} />
         <hr></hr>
            <form id="SignUpForm" class="text-center p-5" action="#!">
-                <button id="fbsignup">SIGN UP WITH FACEBOOK</button>
+                <button id="fbsignup" class="myspotifybutton">SIGN UP WITH FACEBOOK</button>
                 <h6>or</h6>
               
             <hr/>
@@ -63,7 +61,7 @@ const sign_up = () => {
             <p> By clicking on Sign up, you agree to Spotify's <a href="# " target="_blank ">Terms and Conditions</a>.</p>
             <p> To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's
                 <a href="# " target="_blank "> Privacy Policy</a>.</p>
-            <button id="signup" type="submit ">SIGN UP</button>
+            <button class="myspotifybutton" id="signup" type="submit ">SIGN UP</button>
            
             <h6>Already have an account?<a href="# " target="_blank "> Log in</a>.</h6>
             </form>   

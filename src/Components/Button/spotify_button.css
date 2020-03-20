@@ -1,5 +1,5 @@
 
-button{
+.myspotifybutton {
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -14,16 +14,16 @@ button{
     background-color: #1DB954;
     margin: 0 auto;
 }
-button:hover {
+.myspotifybutton :hover {
     background: #1ED760;
     border-color: #1ED760;
 }
 
-button:active {
-    border-color: #1ED760;
-    background: #1ED760;
+.myspotifybutton :active {
+    border-color: .1ED760;
+    background: .1ED760;
 }
 
-button:focus {
+.myspotifybutton :focus {
     outline: none;
 }

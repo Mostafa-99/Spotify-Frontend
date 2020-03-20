@@ -9,15 +9,17 @@ const MyMobileNavbar = styled.nav`
 background:black;
 height:60px;
 
-.logo{
+#mymobnavbar .logo{
     width:90px;
     margin-left: 15%;
 }
-.logo2{
+#mymobnavbar .logo2{
     width:90px;
+    margin-left: -15px;
+    margin-top: calc( -240px + -0.1vw);
 }
 
-.sidebar
+#mymobnavbar .sidebar
 {
     z-index:2;
     width:430px;
@@ -30,7 +32,7 @@ height:60px;
     transition-duration: 450ms;
     
 }
-.active
+#mymobnavbar .active
 {
     background-color: black;
    width:430px;
@@ -42,54 +44,54 @@ height:60px;
    margin-left: 52%;
 }
 
-.sidebar li:hover
+#mymobnavbar .sidebar li:hover
 {
     color: #1DB954;
     cursor: pointer;
 }
 
-.sidebar li,ul
+#mymobnavbar .sidebar li,ul
 { 
     text-align:left;
     list-style: none;
     font-weight:bold;
 }
 
-.sidebar .ul1,.ul0
+#mymobnavbar .sidebar .ul1,.ul0
 { 
     color:rgb(255,255,255);  
-    padding: 5px 0px;
+    padding: 5px 20px;
     font-size:35px;
     text-align: left;
 }
 
-.sidebar .ul0:hover{
+#mymobnavbar .sidebar .ul0:hover{
     color:#ffffff;
     cursor: default;
 }
 
-.sidebar .ul2
+#mymobnavbar .sidebar .ul2
 { 
     color:rgba(255,255,255,0.7);
-    padding: 8px 0px;
+    padding: 8px 20px;
     font-size: 20px;
     letter-spacing:1px;
 }
-.sidebar #ul3
+#mymobnavbar .sidebar #ul3
 { 
     margin-top:230px;
     margin-left:15px;
     padding: 20px 20px;
 }
-#exit{
+#mymobnavbar #exit{
     margin-left:75%;
     margin-top:-700px;
 }
-i{
+#mymobnavbar i{
     cursor: pointer;
 }
 
-.blackbox_active
+#mymobnavbar .blackbox_active
 {
     background-color:rgba(0,0,0,.7);
     z-index:1;
@@ -99,9 +101,13 @@ i{
     padding-bottom: 700px;
     margin-bottom: -700px;
 }
-.navbar{
+#mymobnavbar .navbar{
     padding-bottom: 300px;
     margin-bottom: -300px;
+    
+}
+#mymobnavbar .navbar-dark{
+
 }
 `
 
@@ -124,7 +130,9 @@ class mobile_navbar  extends Component {
       }
       render() {
     return (
-        <MyMobileNavbar>
+        
+        <MyMobileNavbar >
+            <div id="mymobnavbar">
             <nav class="navbar navbar-dark"> 
                 <a class="navbar-brand" href="#"><img class="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
                 <span  class="navbar-toggler-icon" onClick={()=> this.togglesidebar()}></span>
@@ -147,7 +155,9 @@ class mobile_navbar  extends Component {
                </div> 
              </nav>
              <div class="blackbox"></div> 
+             </div>
         </MyMobileNavbar>
+        
     )
 }
 }

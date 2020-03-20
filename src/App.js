@@ -1,31 +1,29 @@
 import React from 'react';
-import styled from 'styled-components'
+
 //import SpotifyButton from './Components/Button/spotify_button'
 //import Main from './Components/Main/Main'
+//import PremiumNav from './Components/Premium/premiumNav'
+//import MainIndex from './Components/userIndex/MainIndex.js'
+//import Profile from './Components/Profile/Profile.js'
 
 import SignUp from './Components/SignUp/sign_up.js'
 import LogIn from './Components/Login/log_in.js'
-import Navbar from './Components/Navigation/navbar.js'
-import Footer from './Components/Footer/footer.js'
-//import Profile from './Components/Profile/Profile.js'
 import AccountSettings from './Components/Profile/AccountSettings.js'
 import EditProfile from './Components/Profile/EditProfile.js'
 import NotificationsSettings from './Components/Profile/NotificationSettings.js';
-//import PremiumNav from './Components/Premium/premiumNav'
-//import MainIndex from './Components/userIndex/MainIndex.js'
-import HelpPage from './Components/HelpPage/HelpPage.js'
-import IndexPage from './Components/IndexPage/IndexPage.js'
 
-import AccountHelp from './Components/AccountHelp/AccountHelp';
-import SpotifyAndFacebook from './Components/AccountHelp/Articles/SpotifyAndFacebook'
-import HowToLogOut from './Components/AccountHelp/Articles/HowToLogOut'
-import CanNotActivatePremiumTrial from './Components/AccountHelp/Articles/CanNotActivatePremiumTrial'
-import ChangeEmailAddress from './Components/AccountHelp/Articles/ChangeEmailAddress'
-import ProfilePicture from './Components/AccountHelp/Articles/ProfilePicture'
+import HelpPage from './Components/HelpPage/HelpPage.js'
+import MainPage from './Components/Main/Main.js'
+
+// import AccountHelp from './Components/AccountHelp/AccountHelp';
+// import SpotifyAndFacebook from './Components/AccountHelp/Articles/SpotifyAndFacebook'
+// import HowToLogOut from './Components/AccountHelp/Articles/HowToLogOut'
+// import CanNotActivatePremiumTrial from './Components/AccountHelp/Articles/CanNotActivatePremiumTrial'
+// import ChangeEmailAddress from './Components/AccountHelp/Articles/ChangeEmailAddress'
+// import ProfilePicture from './Components/AccountHelp/Articles/ProfilePicture'
 
 import {withRouter} from 'react-router';
-
-import {IndexRoute,Link,Route,NavLink,BrowserRouter as Router,Switch} from 'react-router-dom'
+import {Link,Route,NavLink,BrowserRouter as Router,Switch} from 'react-router-dom'
 
 
 function App() {
@@ -33,7 +31,7 @@ function App() {
 
     <Router>
       <Switch>
-        <Route path="/" exact component={IndexPage}/>
+        <Route path="/" exact component={MainPage}/>
         <Route path="/help" exact component={HelpPage}/>
         <Route path="/signup" exact component={SignUp}/>
         <Route path="/login" exact component={LogIn}/>
@@ -56,19 +54,11 @@ export default App;
 <Route path="/how-to-log-out" exact component={HowToLogOut} />
 <Route path="/cannot-activate-trial" exact component={CanNotActivatePremiumTrial} />
 <Route path="/change-email-address" exact component={ChangeEmailAddress} />
-
-
 <Route path="/" exact component={MainIndex}/>
 
-
-     
-
- 
 <Route path="/premium" exact component={PremiumNav}/>
 <Route  exact path="/" component={Main}/>  
-    <HelpPage/>
-    
-    
+    <HelpPage/>     
     </BrowserRouter>
     </myBody>
 */
