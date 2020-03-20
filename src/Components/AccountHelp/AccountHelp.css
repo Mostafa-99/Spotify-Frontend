@@ -4,7 +4,7 @@ body,
     height: 100%;
 }
 *{
-    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+    font-family:  Helvetica, Arial, sans-serif;
 }
 ul{
     list-style: none;
@@ -12,28 +12,28 @@ ul{
 a:hover{
     text-decoration: none;
 }
-#dev-items.container {
+#body-overrides #dev-items.container {
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-gap: 25px;
     padding-right: 0px;
     padding-left:0px;
 }
-.item{
+#body-overrides #department.item{
     grid-row-start: 1;
     grid-row-end: -1;
 }
-#help-topics.help-topics{
+#body-overrides #help-topics.help-topics{
     padding: 80px 0px 20px 0px;
 }
-#account-help.account-help{
+#body-overrides #account-help.account-help{
     border-left: thin solid;
     border-color: #d9dadc;
     padding: 40px 4px 20px 100px;
 }
 
 
-ul.account-help-btn a{
+#body-overrides ul.account-help-btn a{
     color: black;   
     line-height: 20px;
     font-weight: 700;
@@ -41,20 +41,20 @@ ul.account-help-btn a{
     font-size: 18px;
     padding-left: 0;
 }
-ul.account-help-btn a:hover{
+#body-overrides ul.account-help-btn a:hover{
     color: #2d46b9;
 }
-ul.account-help-btn a::before{
+#body-overrides ul.account-help-btn a::before{
     border-left: solid;
     border-color: #2d46b9;
 }
-ul.account-help-btn{
+#body-overrides ul.account-help-btn{
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-#help-arts-links ul.help-art  a{
+#body-overrides #help-arts-links ul.help-art  a{
     padding-left: 0;
     color: #2d46b9;
     font-weight: 700;
@@ -62,16 +62,16 @@ ul.account-help-btn{
     line-height: 17px;
     font-size: 18px;
 }
-#help-arts-links ul.help-art  a:hover{
+#body-overrides #help-arts-links ul.help-art  a:hover{
     color: #2d46b9;
 }
 
-#help-arts-links ul.help-art {
+#body-overrides #help-arts-links ul.help-art {
     list-style-type: none;
     margin: 0px 0px;
     padding: 0;
 }
-ul.help-art li{
+#body-overrides ul.help-art li{
     list-style-type: none;
     margin: 20px 0px 20px 0px;
     padding: 0;
@@ -79,22 +79,42 @@ ul.help-art li{
     line-height: 17px;
     font-size: 18px;
 }
-#help-breadcrumb.breadcrumb{
+#body-overrides #help-arts-links  a{
+    padding-inline-start:0;
+    padding-left: 0;
+    color: #2d46b9;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 17px;
+    font-size: 18px;
+}
+#body-overrides #help-arts-links li{
+    padding-left: 0;
+    margin-left: 0;
+    color: #2d46b9;
+    list-style-type: none;
+    margin: 20px 0px 20px 0px;
+    padding: 0;
+    font-weight: 700;
+    line-height: 17px;
+    font-size: 18px;
+}
+#body-overrides #help-breadcrumb.breadcrumb{
 
     background-color: white;
     padding:0;
 }
-#help-breadcrumb ol.breadcrumb li.breadcrumb-item a{
+#body-overrides #help-breadcrumb ol.breadcrumb li.breadcrumb-item a{
     padding: 0;
     color: #2d46b9;
     font-weight: 700;
     font-size: 16px;
 
 }
-#help-breadcrumb ol.breadcrumb li.breadcrumb-item a:hover{
+#body-overrides #help-breadcrumb ol.breadcrumb li.breadcrumb-item a:hover{
     color: #14215c;
 }
-#help-breadcrumb ol.breadcrumb li.breadcrumb-item.active  {
+#body-overrides #help-breadcrumb ol.breadcrumb li.breadcrumb-item.active  {
     padding: 0;
     color: #222326;
     font-weight: 400;
@@ -103,31 +123,14 @@ ul.help-art li{
     font-size: 16px;
 
 }
-#help-breadcrumb .breadcrumb>li+li:before {
+#body-overrides #help-breadcrumb .breadcrumb>li+li:before {
     content: "/\A0";
     padding: 0 5px;
     color: #919496;
 }
 
-h1{
-    font-size: 48px;
-    font-weight: 780;
-    letter-spacing: -.02em;
-    line-height: 1.2;
-}
 
-h2{
-    color: #aaa;
-    font-weight: 400;
-    font-size: 16px;
-    margin-bottom: 25px;
-    padding-bottom: 1.25rem;
-    letter-spacing: -.015em;
-    line-height: 1.3;
-    margin:.5em 0 .25em;
-}
-
-.ht-header-large{
+#body-overrides .ht-header-large{
     visibility: visible;
     font-size: 34px;
     color: #919496;
@@ -137,11 +140,11 @@ h2{
     margin-bottom: 0px;
     min-width: fit-content;
 }
-.ht-header-small {
+#body-overrides .ht-header-small {
     visibility: hidden;
 }
 
-#help-topics.help-topics div.ht-topics h3.ht-topics-ap{
+#body-overrides #help-topics.help-topics div.ht-topics h3.ht-topics-ap{
     font-weight: 700;
     font-size: 24px;
     letter-spacing: -.01em;
@@ -150,9 +153,20 @@ h2{
     margin-bottom: 13.5px;
 }
 
+#body-overrides .account-help-arts-header {
+    color: #aaa ;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 25px;
+    padding-bottom: 1.25rem;
+    letter-spacing: -.015em;
+    line-height: 1.3;
+    margin:.5em 0 .25em;
+}
+
 @media only screen and (max-width: 992px) {
     /* For mobile phones: */
-    #dev-items.container {
+    #body-overrides #dev-items.container {
        /* display: grid;*/
        display: flex;
        flex-direction: column;
@@ -161,49 +175,48 @@ h2{
         padding-left:0px;
     }
     
-    ul.help-art li{
+    #body-overrides ul.help-art li{
         list-style-type: none;
         margin: 20px 0px 20px 20px;
     }
+    #body-overrides .account-help-arts-header {
+        
+        text-align: left;
+        margin-left: 20px;
+    }
 
-    #help-topics.help-topics{
+    #body-overrides #help-topics.help-topics{
         padding-bottom: 20px;
         padding-top: 0;
-        
     }
     
-    #account-help.account-help{
+    #body-overrides #account-help.account-help{
         border-top: solid;
         border-color: #d9dadc;
-    
         padding:0;
     }
-    ul.account-help-btn{
+    #body-overrides ul.account-help-btn{
         list-style-type: none;
         margin: 0;
         padding: 0;
         margin-left: 20px;
     }
-    h1,h2,h3,li,ul,ol{
-        text-align: left;
-        margin-left: 20px;
-    }
-    #help-breadcrumb.breadcrumb{
+    #body-overrides #help-breadcrumb.breadcrumb{
         float: none;
         clear: both;
-        margin: 40px auto 0 2px;
+        margin: 40px auto 0 20px;
         height: 35px;
         min-width: 280px;
         width: 100%;
         max-width: 280px;
     }
-    .ht-header-large{
+    #body-overrides .ht-header-large{
         visibility: hidden;
         margin-top: 0;
         padding-top: 0;
         
     }
-    .ht-header-small {
+    #body-overrides .ht-header-small {
         visibility: visible;
         font-size: 34px;
         color: #222326;

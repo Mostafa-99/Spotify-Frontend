@@ -1,17 +1,18 @@
 html, 
 body,
 .body {
-    height: 100%;
+    height: 115%;
+
 }
 *{
-    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+    font-family: Helvetica,Arial,sans-serif;
 }
 
 ul{
     list-style: none;
 }
 
-.container {
+#body-overrides #body.main {
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-gap: 25px;
@@ -19,24 +20,24 @@ ul{
     padding-left:0px;
 }
 
-.item{
+#body-overrides #department.item{
     grid-row-start: 1;
     grid-row-end: -1;
 }
 
-.help-topics{
+#body-overrides .help-topics{
     padding: 80px 0px 20px 0px;
 
 }
 
-.account-help{
+#body-overrides .account-help{
     border-left: thin solid;
     border-color: #d9dadc;
 
     padding: 40px 4px 20px 100px;
 }
 
-ul.account-help-btn a{
+#body-overrides ul.account-help-btn a{
     color: black;   
     line-height: 20px;
     font-weight: 700;
@@ -45,20 +46,20 @@ ul.account-help-btn a{
     padding-left: 0;
    
 }
-#bootstrap-overrides ul.account-help-btn a:hover{
+#body-overrides ul.account-help-btn a:hover{
     color: #2d46b9;
 }
-#bootstrap-overrides ul.account-help-btn a::before{
+#body-overrides ul.account-help-btn a::before{
     border-left: solid;
     border-color: #2d46b9;
 }
-ul.account-help-btn{
+#body-overrides ul.account-help-btn{
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-ul.help-art  a{
+#body-overrides ul.help-art  a{
     padding-left: 0;
     color: #2d46b9;
     font-weight: 700;
@@ -66,31 +67,27 @@ ul.help-art  a{
     line-height: 17px;
     font-size: 18px;
 }
-#bootstrap-overrides ul.help-art  a:hover{
+#body-overrides ul.help-art  a:hover{
     color: #2d46b9;
 }
 
-ul.help-art {
+#body-overrides ul.help-art {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-.breadcrumb{
 
-    background-color: white;
-    padding:0;
-}
-#bootstrap-overrides ol.breadcrumb li.breadcrumb-item a{
+#body-overrides ol.breadcrumb li.breadcrumb-item a{
     padding: 0;
     color: #2d46b9;
     font-weight: 700;
     font-size: 16px;
 
 }
-#bootstrap-overrides ol.breadcrumb li.breadcrumb-item a:hover{
+#body-overrides ol.breadcrumb li.breadcrumb-item a:hover{
     color: #14215c;
 }
-#bootstrap-overrides ol.breadcrumb li.breadcrumb-item.active  {
+#body-overrides ol.breadcrumb li.breadcrumb-item.active  {
     padding: 0;
     color: #222326;
     font-weight: 400;
@@ -99,31 +96,13 @@ ul.help-art {
     font-size: 16px;
 
 }
-.breadcrumb>li+li:before {
+#body-overrides #article-breadcrumb.breadcrumb>li+li:before {
     content: "/\A0";
     padding: 0 5px;
     color: #919496;
 }
 
-h1{
-    font-size: 48px;
-    font-weight: 780;
-    letter-spacing: -.02em;
-    line-height: 1.2;
-}
-
-h2{
-    color: #aaa;
-    font-weight: 400;
-    font-size: 16px;
-    margin-bottom: 25px;
-    padding-bottom: 1.25rem;
-    letter-spacing: -.015em;
-    line-height: 1.3;
-    margin:.5em 0 .25em;
-}
-
-.ht-header-large{
+#body-overrides .ht-header-large{
     visibility: visible;
     font-size: 34px;
     color: #919496;
@@ -133,11 +112,11 @@ h2{
     margin-bottom: 0px;
     min-width: fit-content;
 }
-.ht-header-small {
+#body-overrides .ht-header-small {
     visibility: hidden;
 }
 
-div.help-topics div.ht-topics h3.ht-topics-ap{
+#body-overrides div.help-topics div.ht-topics h3.ht-topics-ap{
     font-weight: 700;
     font-size: 24px;
     letter-spacing: -.01em;
@@ -145,47 +124,36 @@ div.help-topics div.ht-topics h3.ht-topics-ap{
     margin-top: 0px;
     margin-bottom: 13.5px;
 }
-ul{
-    list-style: none;
-}
-a:hover{
-    text-decoration: none;
-}
 
-.container .row{
+#body-overrides .container .row{
     display: flex;
     flex-direction: column;
 }
 
-.card,.card-body{
-    border: none;
-    text-align: left;
-    font-size: 15px;
-}
-h5{
+#body-overrides #help-arts-headers h5{
     font-size: 24px;
     letter-spacing: -.01em;
 }
-.instructions h1{
+#body-overrides .instructions h1{
     
     font-weight: 500;
     font-size: 45px;
     line-height: 1.15;
     letter-spacing: -2px;
 }
-.item-header{
+#body-overrides .item-header{
     color: #2d46b9;
     padding: 20px 40px 20px 13px;
     margin: 0;
     margin-left: 0px;
     font-size: 16px;
 }
-.instructions h1{
+#body-overrides .instructions h1{
     margin-top: 20px;
     margin-bottom: 40px;
 }
 
-.collapse-btn{
+#body-overrides .collapse-btn{
     display: flex;
     justify-content:space-between;
     align-items: center;
@@ -196,12 +164,10 @@ h5{
 #before-articles{
     font-size: 15px;
 }
-.rotate-arrow.active{
+#body-overrides .rotate-arrow.active{
     transform: rotate(180deg);
 
 }
-
-
 #article-header-text.help-art li{
     list-style-type: none;
     padding: 0;
@@ -211,55 +177,87 @@ h5{
     line-height: 1.5;
 }
 
+#body-overrides .card-body{
+    border: none;
+    text-align: left;
+    font-size: 15px;
+}
+#body-overrides #article-breadcrumb.breadcrumb{
+
+    background-color: white;
+    padding:0;
+}
+#body-overrides ul.help-art li{
+    list-style-type: none;
+    margin: 20px 0px 20px 0px;
+    padding: 0;
+    font-weight: 400;
+    font-size: 15px;
+}
 @media  (max-width: 992px) {
     /* For mobile phones: */
-    .container {
+    #body-overrides #body.main {
        /* display: grid;*/
        display: flex;
        flex-direction: column;
         grid-gap: 25px;
         padding-right: 0px;
-        padding-left:0px;
+        padding-left:20px;
     }
     
-    .help-topics{
+    #body-overrides .help-topics{
         padding-bottom: 20px;
         padding-top: 0;
         
     }
     
-    .account-help{
+    #body-overrides .account-help{
         border-top: solid;
         border-color: #d9dadc;
-    
+        border-left: none;
         padding:0;
     }
-    ul.account-help-btn{
+    #body-overrides ul.account-help-btn{
         list-style-type: none;
         margin: 0;
         padding: 0;
         margin-left: 20px;
     }
-    h1,h2,h3,li,ul,ol{
+    #body-overrides #help-arts-headers{
         text-align: left;
         margin-left: 20px;
     }
-    .breadcrumb{
+    #body-overrides #headers-inside-articles{
+        text-align: left;
+        margin-left: 20px;
+    }
+    #body-overrides #article-breadcrumb.breadcrumb{
         float: none;
         clear: both;
-        margin: 40px auto 0 2px;
+        margin: 40px auto 0 20px;
         height: 35px;
         min-width: 280px;
         width: 100%;
         max-width: 280px;
     }
-    .ht-header-large{
+    #body-overrides div.help-topics div.ht-topics h3.ht-topics-ap{
+        
+        text-align: left;
+        margin-left: 20px;
+    }
+    #body-overrides .ht-header-large{
         visibility: hidden;
         margin-top: 0;
         padding-top: 0;
         
     }
-    .ht-header-small {
+    #body-overrides #first-header-art{
+        text-align: left;
+        margin-left: 20px;
+    }
+    #body-overrides .ht-header-small {
+        text-align: left;
+        margin-left: 20px;
         visibility: visible;
         font-size: 34px;
         color: #222326;

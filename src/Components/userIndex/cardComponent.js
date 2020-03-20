@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import "./index.css"
+import "./userIndex.css"
 
 class CardComponent extends Component {
 
@@ -31,14 +31,12 @@ class CardComponent extends Component {
 
     render() {
         return (
-            <div className="lowerSection">
+            <div id="lowersection">
              <section>
-                 <div className="container">
+                 <div className="container" id="lowseccontainer">
                      <div className="row" id="rowlower">
-                     <h2 className="h1">Looking for music?</h2>
-                     <br/>
+                     <h2 className="h1spotify" id="rowlowerfont">Looking for music?</h2>
                      <p className="lead" id="userindexlead1">Start listening to the best new releases.</p>
-                    <br/><br/>
                         <a href="https://open.spotify.com/browse" >
                          <button id="launchbutton">Launch Web Player</button>
                          </a>
@@ -53,20 +51,18 @@ class CardComponent extends Component {
                                             <div className="imgbackground" >
                                                 <img src={playList.imageUrl}></img>
                                                 <div className="imagetextwrapper">               
-                                                <div className="subtitle">
-                                                    <div className="playlistinfo">
-                                                        <div id="title"> {playList.title}</div>
-                                                        <div id="artist"> {playList.artist}</div>
-                                                        </div>
-                                                        <a href="https://google.com"> 
-                                                        <button id="buttonoutline">Play  Now</button> 
-                                                        </a>                
-                                                </div>
+                                                    <div className="subtitle">
+                                                        <div className="playlistinfo">
+                                                            <div id="title"> {playList.title}</div>
+                                                            <div id="artist"> {playList.artist}</div>
+                                                            </div>
+                                                            <a href="https://google.com"> 
+                                                            <button id="buttonoutline">Play  Now</button> 
+                                                            </a>                
+                                                    </div>
                                                 </div> 
                                             </div>
-                                        </div>   
-
-                                        ))}
+                                        </div>      ))}
 
                 
                 </div>

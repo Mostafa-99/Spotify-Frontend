@@ -5,14 +5,14 @@ import AccountHelp from '../AccountHelp'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router , Switch,Route} from "react-router-dom";
 import {Link} from 'react-router-dom';
+import Footer from '../../Footer/footer.js'
+import Navbar from '../../Navigation/navbar.js'
 function ChangeEmailAddress(){
     {document.title ="Change email address - Spotify"}
     return(
-        
-    <div>    
-        <head><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link></head>
-        <body id="bootstrap-overrides">
-                <div className="container body" > 
+        <body id="body-overrides">
+                <Navbar/>
+                <div className="main container body" id="body" > 
                     <div className="help-topics item" id="help-topics">
                         <h2 className="ht-header-large">How can we help you?</h2>
                         <h2 className="ht-header-small">Help topics</h2>
@@ -25,13 +25,13 @@ function ChangeEmailAddress(){
                     </div>
                     <div className="account-help item">
                         <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb" id="aricle-breadcrumb">
+                        <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
                             <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
-                            <h1>Change email address</h1>
+                            <h1 id="first-header-art">Change email address</h1>
                             <ol id="before-articles">
                                 <li>Log in to your <a href="">account page</a>.</li>
                                 <li>Click <strong>EDIT PROFILE</strong>.</li>
@@ -42,7 +42,7 @@ function ChangeEmailAddress(){
                             <ul className="help-art" id="article-header-text">
                                 <li >And you're done! A confirmation email will be sent to both the old and new email address detailing the changes.</li>
                             </ul>
-                            <h1>Didn't work?</h1>
+                            <h1 id="first-header-art">Didn't work?</h1>
                             <div className="row container">
                                 <div className="item">
                                     <hr></hr>
@@ -52,7 +52,7 @@ function ChangeEmailAddress(){
                                     </div>
                                     <div className="col">
                                         <div className="collapse multi-collapse" id="multiCollapseExample1">
-                                            <div className="card card-body">
+                                            <div className="card-body">
                                                 <ul className="help-art" id="article-header-text">
                                                     <li >This means your Spotify account was created through Facebook. It’s not possible to change the email address on accounts created this way, but you do have the option to create a new account without Facebook. </li>
                                                 </ul>
@@ -68,7 +68,7 @@ function ChangeEmailAddress(){
                                     </div>
                                         <div className="col">
                                             <div className="collapse multi-collapse" id="multiCollapseExample2">
-                                                <div className="card card-body">
+                                                <div className="card-body">
                                                     <ul className="help-art" id="article-header-text">
                                                         <li >If it’s possible you’ve already used your email address on another account, try using our <a href="">password reset form</a> to get access to that account.</li>
                                                     </ul> 
@@ -81,8 +81,9 @@ function ChangeEmailAddress(){
                         </div>
                     </div>
                 </div>
+                <Footer/>
         </body>
-    </div>    
+       
     )
 }
 export default ChangeEmailAddress

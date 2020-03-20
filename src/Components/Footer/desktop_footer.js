@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
+import { Link } from 'react-router-dom';
 
 const MyDesktopFooter=styled.footer`
 justify-content:space-evenly;
@@ -117,19 +118,19 @@ const desktop_footer = () => {
         
             <MyDesktopFooter>
  <div id="mydeskfooter">
-                    <div className="row"> 
+                    <div className="row col-lg-12"> 
                     <img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
                             <div className="col1 min">
                                 <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
-                                    <li><a href="#!">About</a> </li>
+                                    <li><a href="https://www.spotify.com/eg-en/about-us/contact/">About</a> </li>
                                 </ul>
                             </div>
                         
                             <div className="col2">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
-                                <li><a href="#!">For Artists</a></li>
+                                <li><a href="https://artists.spotify.com/">For Artists</a></li>
                                
                             </ul>
                             </div>
@@ -138,16 +139,17 @@ const desktop_footer = () => {
                             <div className="col3">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
-                                <li><a href="#!">Help</a> </li>
-                                <li><a href="#!">Web Player</a></li>
-                                <li><a href="#!">Free Mobile App</a></li>
+                               <Link to="/help"> <li><a>Help</a> </li></Link>
+                                <li><a href="https://open.spotify.com/">Web Player</a></li>
+                                {/*<li><a href="#!">Free Mobile App</a></li>*/}
+                                
                             </ul>
                             </div>
 
-                            <div class="col4">  
-                                 <a href="https://instagram.com/spotify"><i class="fab fa-2x fa-instagram white-text pr-4"> </i></a>
-                                 <a href="https://twitter.com/spotify"><i class="fab fa-2x fa-twitter white-text pr-4"> </i></a>
-                                 <a href="https://facebook.com/spotify"><i class="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
+                            <div className="col4">  
+                                 <a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a>
+                                 <a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a>
+                                 <a href="https://facebook.com/spotify"><i className="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
 
                             </div>
 

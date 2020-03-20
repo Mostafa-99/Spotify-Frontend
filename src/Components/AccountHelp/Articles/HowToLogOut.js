@@ -5,13 +5,14 @@ import AccountHelp from '../AccountHelp'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router , Switch,Route} from "react-router-dom";
 import {Link} from 'react-router-dom';
+import Footer from '../../Footer/footer.js'
+import Navbar from '../../Navigation/navbar.js'
 function HowToLogOut(){
     {document.title ="How to log out - Spotify"}
     return(
-        
-    <div>    
-        <div id="bootstrap-overrides">
-                <div className="container body" > 
+        <body id="body-overrides">
+                <Navbar/>
+                <div className="main container body" id="body" > 
                     <div className="help-topics item" id="help-topics">
                         <h2 className="ht-header-large">How can we help you?</h2>
                         <h2 className="ht-header-small">Help topics</h2>
@@ -24,13 +25,13 @@ function HowToLogOut(){
                     </div>
                     <div className="account-help item">
                         <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb" id="aricle-breadcrumb">
+                        <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
                             <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
-                            <h1>How to log out</h1>
+                            <h1 id="first-header-art">How to log out</h1>
                             <ul className="help-art" id="article-header-text">
                                 <li >Looking for the exit? Pick your device below for how to log out of the app.</li>
                                 <li ><strong>Note:</strong> You can also be logged in on spotify.com. To log out here, click <strong>Profile</strong> in the top right of this page, then <strong>Log out</strong>.</li>
@@ -44,7 +45,7 @@ function HowToLogOut(){
                                     </div>
                                     <div className="col">
                                         <div className="collapse multi-collapse" id="multiCollapseExample1">
-                                            <div className="card card-body">
+                                            <div className="card-body">
                                                 <ol>
                                                     <li>Click in the top-right corner of the app.</li>
                                                     <li>Select <strong>Log Out</strong>.</li>
@@ -61,7 +62,7 @@ function HowToLogOut(){
                                     </div>
                                         <div className="col">
                                             <div className="collapse multi-collapse" id="multiCollapseExample2">
-                                                <div className="card card-body">
+                                                <div className="card-body">
                                                     <ol>
                                                         <li>Click your profile at the bottom of the menu on the left.</li>
                                                         <li>Select <strong>LOG OUT</strong>.</li>
@@ -78,7 +79,7 @@ function HowToLogOut(){
                                     </div>
                                         <div className="col">
                                             <div className="collapse multi-collapse" id="multiCollapseExample3">
-                                                <div className="card card-body">
+                                                <div className="card-body">
                                                     <ol>
                                                         <li>Tap Home.</li>
                                                         <li>Tap Settings.</li>
@@ -91,7 +92,7 @@ function HowToLogOut(){
                                     <hr></hr>
                                 </div>
                                 <br></br>
-                                <h5><strong>Log out everywhere</strong></h5>
+                                <h5 id="headers-inside-articles"><strong>Log out everywhere</strong></h5>
                                 <ul className="help-art" id="article-header-text">
                                     <li >Here’s how to log out of all web browsers, computers, tablets, and mobile devices at once:</li>
                                 </ul>
@@ -107,8 +108,9 @@ function HowToLogOut(){
                         </div>
                     </div>
                 </div>
-        </div>
-    </div>    
+                <Footer/>
+        </body>
+       
     )
 }
 export default HowToLogOut

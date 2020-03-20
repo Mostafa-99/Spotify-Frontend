@@ -8,6 +8,8 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 
 
 const sign_up = () => {
+    {document.title ="Sign up - Spotify"}
+
     return (
         <div id="mysignup">
         <div className="centerbox">

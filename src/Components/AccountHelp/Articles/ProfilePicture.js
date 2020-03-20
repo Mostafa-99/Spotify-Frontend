@@ -5,14 +5,15 @@ import AccountHelp from '../AccountHelp'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router , Switch,Route} from "react-router-dom";
 import {Link} from 'react-router-dom';
+import Footer from '../../Footer/footer.js'
+import Navbar from '../../Navigation/navbar.js'
 function ProfilePicture(){
     {document.title ="Profile picture - Spotify"}
     return(
-        
-    <div>    
-        <div id="bootstrap-overrides">
-                <div className="container body" > 
-                    <div className="help-topics item" id="help-topics">
+         <body id="body-overrides">
+                <Navbar/>
+                <div className="main container body" id="body" > 
+                    <div className="help-topics item sections" id="help-topics department">
                         <h2 className="ht-header-large">How can we help you?</h2>
                         <h2 className="ht-header-small">Help topics</h2>
                         <div className="ht-topics">
@@ -22,22 +23,22 @@ function ProfilePicture(){
                             </ul>
                         </div>
                     </div>
-                    <div className="account-help item">
+                    <div className="account-help item sections">
                         <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb" id="aricle-breadcrumb">
+                        <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
                             <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
-                            <h1>Profile picture</h1>
+                            <h1 id="first-header-art">Profile picture</h1>
                             <ul className="help-art" id="article-header-text">
-                                <li ><p>Set the scene for your <Link to="/accountoverview"><a>profile</a></Link>in the app.</p></li>
+                                <li ><p>Set the scene for your <a href="">profile</a> in the app.</p></li>
                                 <li ><strong>Note:</strong> Make sure your picture doesn’t violate any copyright, trademark, or personal image rights.</li>
                                 <li>Check out our playlist image guidelines.</li>
                             </ul>
                             <div className="row container">
-                                <div className="item">
+                                <div className="item sections">
                                     <hr></hr>
                                     <div className="collapse-btn item-header" type="button" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                         <h3 className="item-header">Mobile and tablet</h3>
@@ -45,7 +46,7 @@ function ProfilePicture(){
                                     </div>
                                     <div className="col">
                                         <div className="collapse multi-collapse" id="multiCollapseExample1">
-                                            <div className="card card-body">
+                                            <div className="card-body">
                                                 <ol>
                                                     <li>Tap <strong>Home</strong>, then <strong>Settings</strong>.</li>
                                                     <li>Tap View profile.</li>
@@ -62,7 +63,7 @@ function ProfilePicture(){
                                         </div>
                                     </div>
                                 </div>
-                                <div className="item">
+                                <div className="item sections">
                                     <hr></hr>
                                     <div className="collapse-btn item-header" type="button"  data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
                                         <h3 className="item-header">Desktop</h3>   
@@ -70,7 +71,7 @@ function ProfilePicture(){
                                     </div>
                                         <div className="col">
                                             <div className="collapse multi-collapse" id="multiCollapseExample2">
-                                                <div className="card card-body">
+                                                <div className="card-body">
                                                     <ol>
                                                         <li>Click your username in the top-right corner of the desktop app.</li>
                                                         <li>Hover over your profile picture and click Change.</li>
@@ -90,8 +91,8 @@ function ProfilePicture(){
                         </div>
                     </div>
                 </div>
-        </div>
-    </div>    
+                <Footer/>
+        </body>  
     )
 }
 export default ProfilePicture

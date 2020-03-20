@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Profile.css';
 
 function AccountOverview(props) {
+
     return(
         <div id="account-overview" className="col-lg-9 content-accountoverview">
 			    	<h1 className="overview">Account overview</h1>
@@ -38,7 +39,7 @@ function AccountOverview(props) {
 							<p className="playp f">Free</p>
 						</div>
 					</div>
-					<button className="btn btn-outline-secondary account-overview-buttons">JOIN PREMIUM</button>
+				<Link to="/premiumcode"><button className="btn btn-outline-secondary account-overview-buttons">JOIN PREMIUM</button></Link>
 		</div>
     
     )

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './premiumCode.css';
-
+import Footer from '../Footer/footer.js'
+import Navbar from '../Navigation/navbar.js'
 export class premiumCode extends Component {
     state={
         code: ''
@@ -43,8 +44,12 @@ export class premiumCode extends Component {
     onChange = (e) => this.setState({ code: e.target.value });
     
     render() {
+        {document.title ="Spotify"}
+
         return (
             <div id="pcpmaindiv" className="container-fluid">
+            <Navbar/>
+                
                 <div className="blue">
                     <h1 className="boldheader">Get Premium</h1>
                     <ul className="">
@@ -64,6 +69,7 @@ export class premiumCode extends Component {
                         <button id="pcpcheckcodebutton" onClick={this.checkCode} type="button" className="btn btn-success btn-block">START MY SPOTIFY PREMIUM</button>
                     </div>
                 </div>
+            <Footer/>
             </div>
         )
     }

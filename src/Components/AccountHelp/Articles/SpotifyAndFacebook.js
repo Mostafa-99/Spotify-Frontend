@@ -5,14 +5,14 @@ import AccountHelp from '../AccountHelp'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router , Switch,Route} from "react-router-dom";
 import {Link} from 'react-router-dom';
+import Footer from '../../Footer/footer.js'
+import Navbar from '../../Navigation/navbar.js'
 function SpotifyAndFacebook(){
     {document.title ="Spotify and Facebook - Spotify"}
     return(
-        
-    <div>    
-        <head><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link></head>
-        <body id="bootstrap-overrides">
-                <div className="container body" > 
+    <body id="body-overrides">
+                <Navbar/>
+                <div className="main container body" id="body" > 
                     <div className="help-topics item" id="help-topics">
                         <h2 className="ht-header-large">How can we help you?</h2>
                         <h2 className="ht-header-small">Help topics</h2>
@@ -25,13 +25,13 @@ function SpotifyAndFacebook(){
                     </div>
                     <div className="account-help item">
                         <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb" id="aricle-breadcrumb">
+                        <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
                             <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
-                            <h1>Spotify and Facebook</h1>
+                            <h1 id="first-header-art">Spotify and Facebook</h1>
                             <ul className="help-art" id="article-header-text">
                                 <li >Using Spotify with Facebook lets you log in with your Facebook details, display your Facebook</li>
                                 <li >name/picture, and easily find your friends on Spotify.</li>
@@ -45,7 +45,7 @@ function SpotifyAndFacebook(){
                                     </div>
                                     <div className="col">
                                         <div className="collapse multi-collapse" id="multiCollapseExample1">
-                                            <div className="card card-body">
+                                            <div className="card-body">
                                                 <ul className="help-art" id="article-header-text">
                                                     <li ><strong>Note:</strong> If you signed up for your Spotify account with Facebook, it’s automatically connected to Facebook.</li>
                                                     <li >If you signed up for Spotify with an email address and password, connect to Facebook with these steps:</li>
@@ -71,7 +71,7 @@ function SpotifyAndFacebook(){
                                     </div>
                                         <div className="col">
                                             <div className="collapse multi-collapse" id="multiCollapseExample2">
-                                                <div className="card card-body">
+                                                <div className="card-body">
                                                     <ul className="help-art" id="article-header-text">
                                                         <li >If your Spotify account is connected to Facebook, you can choose <strong>LOG IN WITH FACEBOOK</strong> or <strong>CONTINUE WITH FACEBOOK</strong>. </li>
                                                         <li ><strong>Tip:</strong> Make sure you log into the correct Facebook account on the device.</li>
@@ -98,7 +98,7 @@ function SpotifyAndFacebook(){
                                     </div>
                                         <div className="col">
                                             <div className="collapse multi-collapse" id="multiCollapseExample3">
-                                                <div className="card card-body">
+                                                <div className="card-body">
                                                     <ul className="help-art" id="article-header-text">
                                                         <li >Create a Spotify password to access an account connected to a deactivated Facebook account: </li>
                                                     </ul>
@@ -117,8 +117,9 @@ function SpotifyAndFacebook(){
                         </div>
                     </div>
                 </div>
+                <Footer/>
         </body>
-    </div>    
+     
     )
 }
 export default SpotifyAndFacebook

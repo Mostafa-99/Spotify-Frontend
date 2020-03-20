@@ -8,9 +8,9 @@ display:flex;
 flex-flow: row nowrap;
 justify-content:space-evenly;
 align-items:center;
-background-color:rgba(0,0,0,0.6);
+background-color:rgba(0,0,0);
 
-height:11vh;
+height:80px;
 width:100%;
 z-index:1;
 #mydesknavbar .links,.links0{
@@ -54,17 +54,17 @@ const desktop_navbar = () => {
     return (
         <MyDesktopNavbar>
             <div id="mydesknavbar">
-           <Link to="/"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
+           <Link to="/main"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
             <div className="right">
             <ul className="nav-links" >
                 <li>
-                    <Link to="/" className="links">Premium</Link>
+                    <Link to="/premium" className="links">Premium</Link>
                 </li>
                 <li>
                     <Link to="/help" className="links">Help</Link>
                 </li>
                 <li>
-                    <Link to="/" className="links">Download</Link>
+                    <a href="https://www.spotify.com/eg-en/download/windows/" className="links">Download</a>
                 </li>
                 <li>
                     <Link to="/" className="links0">|</Link>

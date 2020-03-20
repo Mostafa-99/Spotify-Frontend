@@ -5,6 +5,8 @@ import '../Button/spotify_button.css'
 class log_in extends Component {
 
     render(){
+    {document.title ="Login - Spotify"}
+    
     return (
         <div id="mysignup">
             <div className="centerbox">

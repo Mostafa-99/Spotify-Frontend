@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
@@ -81,15 +82,15 @@ const mobile_footer = () => {
     return (
         <MyMobileFooter>
             <div id="mobfooter">
-             <a className="navbar-brand" href="#"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
+             <Link to="/"><a className="navbar-brand"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a></Link>
              <div className="row"> 
                             <div className="col1">
                                 
                                 <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
-                                    <li><a href="#!">About</a> </li>
-                                    <li><a href="#!">Jobs</a></li>
-                                    <li><a href="#!">For the Record</a></li>
+                                    <li><a>About</a> </li>
+                                    {/* <li><a >Jobs</a></li>
+                                    <li><a >For the Record</a></li> */}
                                 </ul>
                             </div>
                             </div>
@@ -97,11 +98,11 @@ const mobile_footer = () => {
                             <div className="col2">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
-                                <li><a href="#!">For Artists</a></li>
-                                <li><a href="#!">Developers</a></li>
-                                <li><a href="#!">Brands</a></li>
-                                <li><a href="#!">Inverstors</a></li>
-                                <li><a href="#!">Vendors</a></li>
+                                <li><a>For Artists</a></li>
+                                {/* <li><a >Developers</a></li>
+                                <li><a >Brands</a></li>
+                                <li><a >Inverstors</a></li>
+                                <li><a >Vendors</a></li> */}
                             </ul>
                             </div>
 
@@ -109,15 +110,15 @@ const mobile_footer = () => {
                             <div className="col3">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
-                                <li><a href="#!">Help</a> </li>
-                                <li><a href="#!">Web Player</a></li>
-                                <li><a href="#!">Free Mobile App</a></li>
+                                <Link to="/help"><li><a >Help</a> </li></Link>
+                                <li><a >Web Player</a></li>
+                                <li><a>Free Mobile App</a></li>
                             </ul>
                             </div>
-                            <div class="col4">  
-                                 <a href="https://instagram.com/spotify"><i class="fab fa-2x fa-instagram white-text pr-4"> </i></a>
-                                 <a href="https://twitter.com/spotify"><i class="fab fa-2x fa-twitter white-text pr-4"> </i></a>
-                                 <a href="https://facebook.com/spotify"><i class="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
+                            <div className="col4">  
+                                 <a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a>
+                                 <a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a>
+                                 <a href="https://facebook.com/spotify"><i className="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
                             </div>
                    
                     

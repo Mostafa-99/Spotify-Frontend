@@ -1,7 +1,7 @@
-#pcpmaindiv .container-fluid{
+
+#pcpmaindiv{
     padding: 0px;
 }
-
 #pcpmaindiv .blue{
     background-color: rgb(80, 155, 245);
     color: white;
