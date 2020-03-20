@@ -10,8 +10,7 @@ function CanNotActivatePremiumTrial(){
     return(
         
     <div>    
-        <head><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link></head>
-        <body id="bootstrap-overrides">
+        <div id="bootstrap-overrides">
                 <div className="container body" > 
                     <div className="help-topics item" id="help-topics">
                         <h2 className="ht-header-large">How can we help you?</h2>
@@ -26,7 +25,7 @@ function CanNotActivatePremiumTrial(){
                     <div className="account-help item">
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="aricle-breadcrumb">
-                            <li className="breadcrumb-item"><a>Home</a></li>
+                            <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
                             <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
                         </ol>
                         </nav>
@@ -39,7 +38,7 @@ function CanNotActivatePremiumTrial(){
                         </div>
                     </div>
                 </div>
-        </body>
+        </div>
     </div>    
     )
 }

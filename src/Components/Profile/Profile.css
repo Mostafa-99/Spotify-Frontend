@@ -2,12 +2,11 @@
 	margin: 0;
 	padding: 0;
   border: border-box;
-  text-align: left;
-  
 }
 .Profile {
     background-image: linear-gradient(#212c39, #121e3d 50%, #000); 
     background-repeat: no-repeat;
+
 }
 
 #profile-account-heading .float-right {

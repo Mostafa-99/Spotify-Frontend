@@ -4,6 +4,8 @@ import SideBar from './SideBar';
 import AccountOverview from './AccountOverview';
 import AccountHeading from './AccountHeading';
 import axios from 'axios'
+import './Profile.css';
+
 class AccountSettings extends Component {
     constructor(){
         super()

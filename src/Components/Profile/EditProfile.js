@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SideBar from './SideBar';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
+import './Profile.css';
+
 class EditProfile extends Component {
     constructor() {
         super()

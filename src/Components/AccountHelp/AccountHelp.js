@@ -24,7 +24,7 @@ function AccountHelp(){
                 <div className="account-help item" id="account-help">
                     <nav aria-label="breadcrumb">
                     <ol className="breadcrumb" id="help-breadcrumb">
-                        <li className="breadcrumb-item"><a href="#">Home</a></li>
+                        <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
                         <li className="breadcrumb-item active" aria-current="page">Account Help</li>
                     </ol>
                     </nav>

@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import "./index.css"
+import "./userIndex.css"
 
 class CardComponent extends Component {
 

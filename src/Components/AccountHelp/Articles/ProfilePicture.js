@@ -10,8 +10,7 @@ function ProfilePicture(){
     return(
         
     <div>    
-        <head><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link></head>
-        <body id="bootstrap-overrides">
+        <div id="bootstrap-overrides">
                 <div className="container body" > 
                     <div className="help-topics item" id="help-topics">
                         <h2 className="ht-header-large">How can we help you?</h2>
@@ -26,14 +25,14 @@ function ProfilePicture(){
                     <div className="account-help item">
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="aricle-breadcrumb">
-                            <li className="breadcrumb-item"><a>Home</a></li>
+                            <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
                             <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
                             <h1>Profile picture</h1>
                             <ul className="help-art" id="article-header-text">
-                                <li ><p>Set the scene for your <a href="">profile</a> in the app.</p></li>
+                                <li ><p>Set the scene for your <Link to="/accountoverview"><a>profile</a></Link>in the app.</p></li>
                                 <li ><strong>Note:</strong> Make sure your picture doesn’t violate any copyright, trademark, or personal image rights.</li>
                                 <li>Check out our playlist image guidelines.</li>
                             </ul>
@@ -91,7 +90,7 @@ function ProfilePicture(){
                         </div>
                     </div>
                 </div>
-        </body>
+        </div>
     </div>    
     )
 }

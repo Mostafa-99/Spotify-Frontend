@@ -8,13 +8,13 @@ class Profile extends Component {
   render()
   {
     return (
-      <Router>
+     
         <div className="Profile">
             <Route path="/accountoverview" component={AccountSettings}/>
             <Route path="/editprofile" component={EditProfile}/>
             <Route path="/notificationsettings" component={NotificationsSettings}/>
         </div>
-      </Router>
+     
     );
   }
 }

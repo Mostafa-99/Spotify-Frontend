@@ -26,7 +26,7 @@ function ChangeEmailAddress(){
                     <div className="account-help item">
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="aricle-breadcrumb">
-                            <li className="breadcrumb-item"><a>Home</a></li>
+                            <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
                             <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
                         </ol>
                         </nav>

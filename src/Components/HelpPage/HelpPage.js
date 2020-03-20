@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, withRouter,Link } from "react-router-dom";
 
 import './helpPage.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,7 +17,9 @@ function HelpPage() {
             <div>
               <h3>Account & Payment</h3>
               <ul>
-                <li><a href="#">Account  Help</a></li>
+               <Link to="/account_help">
+                <li><a>Account  Help</a></li>
+               </Link> 
               </ul>
             </div>
             <div>

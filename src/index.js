@@ -25,7 +25,7 @@ serviceWorker.unregister();
 
 /////////////////////////////////////////////////////////////////
 //Scroll Button function
-$('.scroll-button').on('click', function(event) {
+/*$('.scroll-button').on('click', function(event) {
     if (this.hash !== '') {
       event.preventDefault();
   
@@ -38,7 +38,7 @@ $('.scroll-button').on('click', function(event) {
         800
       );
     }
-  });
+  });*/
 /*
   //Event listener function  
   const track=document.querySelector('.carousel-img');
