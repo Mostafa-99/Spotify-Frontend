@@ -9,7 +9,6 @@ const MyMobileNavbar = styled.nav`
 background:black;
 height:60px;
 
-
 .logo{
     width:90px;
     margin-left: 15%;
@@ -104,16 +103,8 @@ i{
     padding-bottom: 300px;
     margin-bottom: -300px;
 }
-
-
-
-
-
 `
-// function togglesidebar()
-// {
-//     document.getElementById("sidebar").classList.toggle('active');
-// }
+
 var on_off=false;
 class mobile_navbar  extends Component {
     

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
@@ -116,31 +115,26 @@ const desktop_footer = () => {
         
             <MyDesktopFooter>
  
-                    <div class="row"> 
-                    <img class="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
-                            <div class="col1 min">
-                                <h5 class="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
+                    <div className="row"> 
+                    <img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
+                            <div className="col1 min">
+                                <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
                                     <li><a href="#!">About</a> </li>
-                                    <li><a href="#!">Jobs</a></li>
-                                    <li><a href="#!">For the Record</a></li>
                                 </ul>
                             </div>
                         
-                            <div class="col2">
-                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
+                            <div className="col2">
+                            <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
                                 <li><a href="#!">For Artists</a></li>
-                                <li><a href="#!">Developers</a></li>
-                                <li><a href="#!">Brands</a></li>
-                                <li><a href="#!">Inverstors</a></li>
-                                <li><a href="#!">Vendors</a></li>
+                               
                             </ul>
                             </div>
 
 
-                            <div class="col3">
-                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
+                            <div className="col3">
+                            <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
                                 <li><a href="#!">Help</a> </li>
                                 <li><a href="#!">Web Player</a></li>
@@ -152,6 +146,7 @@ const desktop_footer = () => {
                                  <a href="https://instagram.com/spotify"><i class="fab fa-2x fa-instagram white-text pr-4"> </i></a>
                                  <a href="https://twitter.com/spotify"><i class="fab fa-2x fa-twitter white-text pr-4"> </i></a>
                                  <a href="https://facebook.com/spotify"><i class="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
+
                             </div>
 
                     </div>
@@ -160,12 +155,12 @@ const desktop_footer = () => {
                     <div id="mini_footer">
                         
                     <ul>
-                            <li class="list-inline-item left"><a href="#!">Legal</a></li>
-                            <li class="list-inline-item left"><a href="#!">Privacy Center</a></li>
-                            <li class="list-inline-item left"><a href="#!">Privacy Policy</a></li>
-                            <li class="list-inline-item left"><a href="#!">Cookies</a></li>
-                            <li class="list-inline-item left"><a href="#!">About Ads</a></li>
-                            <li class="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
+                            <li className="list-inline-item left"><a href="#!">Legal</a></li>
+                            <li className="list-inline-item left"><a href="#!">Privacy Center</a></li>
+                            <li className="list-inline-item left"><a href="#!">Privacy Policy</a></li>
+                            <li className="list-inline-item left"><a href="#!">Cookies</a></li>
+                            <li className="list-inline-item left"><a href="#!">About Ads</a></li>
+                            <li className="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
                     </ul>
                     
                     </div>

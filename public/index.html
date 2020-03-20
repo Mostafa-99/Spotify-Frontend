@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color:black">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -9,16 +9,46 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-   
+    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-   
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossOrigin="anonymous"/>    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link> -->
+    
     <title>Spotify</title>
   </head>
   <body id="mybody">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <!-- <div id="mynav"></div> -->
-    <!-- <div id="mybody"></div> -->
-    <!-- <div id="myfooter"></div> -->
+
+    <script>
+      $(document).ready(function() {
+        // Set iframe attributes when the show instance method is called
+        $("#videoModal").on("show.bs.modal", function(event) {
+          let button = $(event.relatedTarget); // Button that triggered the modal
+          let url = button.data("video");      // Extract url from data-video attribute
+      
+          $(this).find("iframe").attr({
+              src: url,
+              allow : "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          });
+        });
+      
+        // Remove iframe attributes when the modal has finished being hidden from the user
+        $("#videoModal").on("hidden.bs.modal", function() {
+          $("#videoModal iframe").removeAttr("src allow");
+        });
+      });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossOrigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossOrigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossOrigin="anonymous"></script>
+    <script src="../src/Components/HelpPage/help.js"></script>
+
   </body>
 </html>

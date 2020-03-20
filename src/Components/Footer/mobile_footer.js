@@ -78,11 +78,11 @@ a:hover{
 const mobile_footer = () => {
     return (
         <MyMobileFooter>
-             <a class="navbar-brand" href="#"><img class="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
-             <div class="row"> 
-                            <div class="col1">
+             <a className="navbar-brand" href="#"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
+             <div className="row"> 
+                            <div className="col1">
                                 
-                                <h5 class="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
+                                <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
                                     <li><a href="#!">About</a> </li>
                                     <li><a href="#!">Jobs</a></li>
@@ -91,8 +91,8 @@ const mobile_footer = () => {
                             </div>
                             </div>
                         
-                            <div class="col2">
-                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
+                            <div className="col2">
+                            <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
                                 <li><a href="#!">For Artists</a></li>
                                 <li><a href="#!">Developers</a></li>
@@ -103,8 +103,8 @@ const mobile_footer = () => {
                             </div>
 
 
-                            <div class="col3">
-                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
+                            <div className="col3">
+                            <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
                                 <li><a href="#!">Help</a> </li>
                                 <li><a href="#!">Web Player</a></li>
@@ -122,12 +122,12 @@ const mobile_footer = () => {
                     <div id="mini_footer">
                         
                     <ul>
-                            <li class="list-inline-item left"><a href="#!">Legal</a></li>
-                            <li class="list-inline-item left"><a href="#!">Privacy Center</a></li>
-                            <li class="list-inline-item left"><a href="#!">Privacy Policy</a></li>
-                            <li class="list-inline-item left"><a href="#!">Cookies</a></li>
-                            <li class="list-inline-item left"><a href="#!">About Ads</a></li>
-                            <li class="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
+                            <li className="list-inline-item left"><a href="#!">Legal</a></li>
+                            <li className="list-inline-item left"><a href="#!">Privacy Center</a></li>
+                            <li className="list-inline-item left"><a href="#!">Privacy Policy</a></li>
+                            <li className="list-inline-item left"><a href="#!">Cookies</a></li>
+                            <li className="list-inline-item left"><a href="#!">About Ads</a></li>
+                            <li className="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
                     </ul>
                     
                     </div>
