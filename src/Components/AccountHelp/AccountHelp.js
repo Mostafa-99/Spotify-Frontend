@@ -28,7 +28,7 @@ function AccountHelp(){
                         <li className="breadcrumb-item active" id="typing" aria-current="page">Account Help</li>
                     </ol>
                     </nav>
-                    <div >
+                    <div className="container">
                     <h1 id="help-arts-headers">Account Help</h1>
                     <h2 className="account-help-arts-header"id="help-arts-headers ">ARTICLES</h2>
                     <ul className="help-art-account-help" id="help-arts-links">

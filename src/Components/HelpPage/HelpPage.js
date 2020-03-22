@@ -26,14 +26,30 @@ scrollBtn = () =>{
 */
 class HelpPage extends Component {
   
-
+  scrollBtn =()=>{
+    $('.scroll-button').on('click', function(event) {
+      if (this.hash !== '') {
+        event.preventDefault();
+    
+        const hash = this.hash;
+    
+        $('html, body').animate(
+          {
+            scrollTop: $(hash).offset().top
+          },
+          800
+        );
+      }
+    });
+  }
   carouselEvents = () =>{
-  const track=document.querySelector('.carousel-img');
-  const imgs=Array.from(track.children);
-
-  const slides=document.querySelector('.carousel-inner');
-
-  const dotNav=document.querySelector('.carousel-indicators');
+    
+    const track=document.querySelector('.carousel-img');
+    const imgs=Array.from(track.children);
+    
+    const slides=document.querySelector('.carousel-inner');
+    
+    const dotNav=document.querySelector('.carousel-indicators');
   const dots=Array.from(dotNav.children);
 
   const moveToslide = (track,currentSlide,targetSlide) =>{
@@ -57,7 +73,7 @@ class HelpPage extends Component {
   dotNav.addEventListener('onchange',changeImg);
 
   dotNav.addEventListener('click',changeImg);
-  slides.addEventListener('onchange',changeImg);
+  //slides.addEventListener('onchange',changeImg);
   }
 
   modalVideos=()=>{
@@ -79,13 +95,27 @@ class HelpPage extends Component {
       });
     });
   }
+  componentDidMount (){
+    window.onload = function() {
+      if(!window.location.hash) {
+          window.location = window.location + '#loaded';
+          window.location.reload();
+      }
+  }
+}
+LoadOnce=()=> 
+{ 
+window.location.reload(); 
+}
   render(){
     {document.title ="Support - Spotify"}
-
-  return (
+    
+    return (
     <div>
       <Navbar/>
-      <div id="body help-page">
+      <div id="body help-page" onLoad=" LoadOnce()" >
+
+       
         <section id="navigation-section">
           <div className="nav-section-container ">   
             <div>
@@ -105,7 +135,7 @@ class HelpPage extends Component {
           </div>
         </section>
 
-        <div className="container btn-container">
+        <div className="container btn-container" onClick={()=> this.scrollBtn()}>
           <a className="scroll-button " href="#videos-section">
             <i className='fas fa-angle-double-down'></i>
           </a>
@@ -135,7 +165,7 @@ class HelpPage extends Component {
               </div>
             
               <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel"> 
-                <ol className="carousel-indicators" onClick={()=> this.carouselEvents()}>
+                <ol className="carousel-indicators" onClick={()=> this.carouselEvents()} onChange={()=> this.carouselEvents()}>
                   <li data-target="#carouselExampleIndicators"  data-slide-to="0" className="active" ></li>
                   <li data-target="#carouselExampleIndicators"  data-slide-to="1" ></li>
                   <li data-target="#carouselExampleIndicators"  data-slide-to="2" ></li>
@@ -203,7 +233,7 @@ class HelpPage extends Component {
         </div>   
         </section>
         
-        <div className="container btn-container">
+        <div className="container btn-container" onClick={()=> this.scrollBtn()}>
           <a className="scroll-button " href="#notspotify-section">
             <i className='fas fa-angle-double-down' ></i>
           </a>

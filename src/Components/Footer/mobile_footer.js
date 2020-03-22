@@ -75,7 +75,9 @@ letter-spacing:2px;
 #mobfooter a:hover{
    color:#1DB954;
 }
-
+#mobfooter .row{
+    width:100%;
+}
 `
 
 const mobile_footer = () => {

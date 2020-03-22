@@ -119,7 +119,8 @@ const desktop_footer = () => {
             <MyDesktopFooter>
  <div id="mydeskfooter">
                     <div className="row col-lg-12"> 
-                    <img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/>
+                    <Link to="/main"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
+
                             <div className="col1 min">
                                 <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
