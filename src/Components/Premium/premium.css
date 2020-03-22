@@ -43,7 +43,7 @@
 }
 @media (max-width: 767px){
     #ppmaindiv .biggerh1{
-        font-size: 48px;
+        font-size: 40px;
     }
 }
 #ppmaindiv .biggerh1{
@@ -54,6 +54,7 @@
     display: inline-block;
     margin: 0px;
     padding: 0px;
+    margin-top: 20px;
 }
 
 @media (min-width: 768px){
@@ -123,7 +124,7 @@
 
 @media (min-width: 768px){
     #ppmaindiv .smallerh1{
-        font-size: 48px;
+        font-size: 40px;
     }
 }
 @media (max-width: 767px){
@@ -176,6 +177,8 @@
 }
 #ppmaindiv p{
     font-size: 12px;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
 }
 #ppmaindiv ul{
     padding-left: 10px;

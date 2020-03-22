@@ -44,7 +44,9 @@ height:60px;
    margin-top: -1000px;
    padding-bottom: 500px;
    margin-bottom: -500px;
-   margin-left: 52%;
+   margin-left: 10%;
+   z-index:2;
+
 }
 
 #mymobnavbar .sidebar li:hover
@@ -104,14 +106,7 @@ height:60px;
     padding-bottom: 700px;
     margin-bottom: -700px;
 }
-#mymobnavbar .navbar{
-    padding-bottom: 300px;
-    margin-bottom: -300px;
-    
-}
-#mymobnavbar .navbar-dark{
 
-}
 `
 
 class mobile_navbar  extends Component {
@@ -136,7 +131,7 @@ class mobile_navbar  extends Component {
         <MyMobileNavbar >
             <div id="mymobnavbar">
             <nav className="navbar navbar-dark"> 
-                <a className="navbar-brand" href="#"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
+                <Link to="/main" className="navbar-brand"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
                 <span  className="navbar-toggler-icon" onClick={()=> this.togglesidebar()}></span>
                 <div className="sidebar">
                 <span id="exit"  onClick={()=> this.togglesidebar()}><i className="fas fa-times"></i></span>
