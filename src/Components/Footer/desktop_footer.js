@@ -141,7 +141,7 @@ const desktop_footer = () => {
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
                                <Link to="/help"> <li><a>Help</a> </li></Link>
-                                <li><a href="https://open.spotify.com/">Web Player</a></li>
+                               <Link to="/Home"> <li><a>Web Player</a> </li></Link>
                                 {/*<li><a href="#!">Free Mobile App</a></li>*/}
                                 
                             </ul>

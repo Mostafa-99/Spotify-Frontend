@@ -1,0 +1,61 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: border-box;
+}
+
+
+.navbar-arrows{
+	margin: 0;
+	padding-left: 0;
+}
+
+.root-navbar{
+	padding: 0;
+	margin: 0;
+	background-color:#121212;
+}
+
+#Upgrade-button{
+	line-height: 18px;
+	width: 16px;
+	font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease 0s;
+    border: 3px solid #fff;
+    color: white;
+    margin: 10px auto 10px auto;
+    border-radius: 500px;
+    padding: 8px 34px;
+    font-weight: 700;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+	font-weight: 700;
+	border: 1px solid transparent;
+	transition-duration: .3s;
+	border-width: 0;
+	text-transform: uppercase;
+	white-space: normal;
+	color: #fff;
+	box-shadow: 0 0 0 2px #fff inset;
+	background-color: transparent;
+	transition: all 33ms cubic-bezier(.3,0,0,1);
+	letter-spacing: 1.76px;
+	will-change: transform;
+  }
+  
+#Upgrade-button:hover {  
+	transform: scale(1.06);
+	color: #FFF;
+	text-decoration: none;
+  }
+
+
+  #root-navbar{
+	overflow: hidden;
+}

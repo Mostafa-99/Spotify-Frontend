@@ -23,6 +23,11 @@ import HowToLogOut from './Components/AccountHelp/Articles/HowToLogOut'
 import CanNotActivatePremiumTrial from './Components/AccountHelp/Articles/CanNotActivatePremiumTrial'
 import ChangeEmailAddress from './Components/AccountHelp/Articles/ChangeEmailAddress'
 import ProfilePicture from './Components/AccountHelp/Articles/ProfilePicture'
+
+import Home from './Components/WebPlayer/Bodies/Home/Home'
+import Search from './Components/WebPlayer/Bodies/Search/Search'
+
+
 import {withRouter} from 'react-router';
 import {Link,Route,NavLink,BrowserRouter as Router,Switch} from 'react-router-dom'
 
@@ -50,6 +55,8 @@ function App() {
         <Route path="/cannot-activate-trial" exact component={CanNotActivatePremiumTrial} />
         <Route path="/change-email-address" exact component={ChangeEmailAddress} />
 
+        <Route path="/Home" exact component={Home} />
+        <Route path="/Search" exact component={Search} />
       </Switch>
     </Router>   
   );

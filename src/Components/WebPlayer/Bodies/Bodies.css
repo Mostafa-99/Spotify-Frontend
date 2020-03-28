@@ -1,0 +1,38 @@
+html,
+.webplayer-body{
+    height: 100%;
+
+}
+.webplayer-sidebar-body{
+    min-height: 100%;
+    background-color:#040404;
+}
+*{  
+    border: border-box;
+	margin: 0;
+    padding: 0;
+}
+
+#webplayer-layout{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    vertical-align: baseline;
+    max-width: 100%;
+}
+#webplayer-layout .webplayer-sidebar-body .col-lg-2 {
+    padding: 0;
+    margin: 0;
+}
+
+#webplayer-layout.webplayer-body-and-navbar{
+    background-color: #282828;
+    padding: 0;
+}
+
+#webplayer-layout .colums-no-padding{
+   padding: 0 ;
+   margin: 0 ;
+}
