@@ -47,10 +47,7 @@
     margin-top: 4px;
     overflow: hidden;
 }
-#webplayer-home .active{
-    display: block;
-    z-index: 2;
-}
+
 #webplayer-home .play-btn, #webplayer-home .pause-btn {
     position: absolute;
     outline: none;
@@ -64,12 +61,18 @@
     background-color:rgb(29, 185, 84)!important;
     border-color: rgb(29, 185, 84) !important;
 }
+#webplayer-home .card:hover .active-play{
+    display: block;
+}
+#webplayer-home .active-pause{
+    display: block;
+}
 #webplayer-home .fa-play {
     color: white;
 }
-#webplayer-home .card:hover .play-btn {
+/*#webplayer-home .card:hover .play-button {
     display: block;
-}
+}*/
 #webplayer-home .play-btn:hover, #webplayer-home .pause-btn:hover {
     transform: scale(1.1);
 }

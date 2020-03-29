@@ -16,6 +16,8 @@ class Home extends Component {
             popularAlbums:[],
             artists:[]
         }
+        this.togglePlayPause=this.togglePlayPause.bind(this)
+
     }
 
     componentDidMount() {
@@ -74,27 +76,12 @@ class Home extends Component {
                 })
             })                                            
     }
-    toggle = () => {
-        console.log('enterd')
-        const pauseButton=document.querySelector('.pause-btn');
-        const playButton=document.querySelector('.play-btn');
-        console.log(playButton);
-        console.log(pauseButton);
-
-        if(playButton.classList.contains('active'))        
-        {
-            playButton.classList.toggle('active');
-            pauseButton.classList.toggle('active');
-            console.log('if')
-        }
-        else
-        {
-            playButton.classList.toggle('active');
-            pauseButton.classList.toggle('active');
-            console.log('else')
-        }
-        console.log(playButton);
-        console.log(pauseButton);
+    togglePlayPause(id) {
+        const cardButtons=document.getElementById(id);
+        const playButton = cardButtons.querySelector('.play-btn');
+        const pauseButton = cardButtons.querySelector('.pause-btn');
+        playButton.classList.toggle('active-play');
+        pauseButton.classList.toggle('active-pause');
     }
     render()
     {
@@ -119,7 +106,10 @@ class Home extends Component {
                                     <div className="card-body">
                                         <h5 className="card-title">{playList.title}</h5>
                                         <p className="card-text">{playList.description}</p>
-                                        <button className="btn btn-primary play-btn"><i className="fa fa-play"></i></button>
+                                        <div id={playList.id}>
+                                            <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,15 +119,18 @@ class Home extends Component {
                 </div>
                 <div className="popular-playlists-section">
                     <h2 className="section-title popular-playlists">Popular Playlists</h2>
-                    <div class="card-group">
+                    <div className="card-group">
                         {this.state.popularPlayLists.map( playList => (
                             <div>
-                                <div class="card">
-                                    <img src={playList.imageUrl} class="card-img-top" alt="..."></img>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{playList.title}</h5>
-                                        <p class="card-text">{playList.description}</p>
-                                        <button className="btn btn-primary play-btn"><i className="fa fa-play"></i></button>
+                                <div className="card">
+                                    <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{playList.title}</h5>
+                                        <p className="card-text">{playList.description}</p>
+                                        <div id={playList.id}>
+                                            <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -147,15 +140,18 @@ class Home extends Component {
                 </div>
                 <div className="workout-playlists-section">
                     <h2 className="section-title workout-playlists">Workout Playlists</h2>
-                    <div class="card-group">
+                    <div className="card-group">
                         {this.state.workOut.map( playList => (
                             <div>
-                                <div class="card">
-                                    <img src={playList.imageUrl} class="card-img-top" alt="..."></img>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{playList.title}</h5>
-                                        <p class="card-text">{playList.description}</p>
-                                        <button className="btn btn-primary play-btn"><i className="fa fa-play"></i></button>
+                                <div className="card">
+                                    <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{playList.title}</h5>
+                                        <p className="card-text">{playList.description}</p>
+                                        <div id={playList.id}>
+                                            <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
                                     </div>
                                 </div>
                             </div>
@@ -165,14 +161,17 @@ class Home extends Component {
                 </div>
                 <div className="popular-albums-section">
                     <h2 className="section-title popular-albums">Popular Albums</h2>
-                    <div class="card-group">
+                    <div className="card-group">
                         {this.state.popularAlbums.map( album => (
                             <div>
-                                <div class="card">
-                                    <img src={album.imageUrl[0]} class="card-img-top" alt="..."></img>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{album.title}</h5>
-                                        <button className="btn btn-primary play-btn"><i className="fa fa-play"></i></button>
+                                <div className="card">
+                                    <img src={album.imageUrl[0]} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{album.title}</h5>
+                                        <div id={album.id}>
+                                            <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
+                                            <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
                                     </div>
                                 </div>
                             </div>
@@ -185,13 +184,15 @@ class Home extends Component {
                     <div className="card-group">
                         {this.state.artists.map( artist => (
                             <div>
-                                <div class="card">
+                                <div className="card">
                                     <img src={artist.imageUrl[0].url} className="card-img-top rounded-circle" alt="..."></img>
-                                    <div class="card-body">
+                                    <div className="card-body">
                                         <h5 className="card-title">{artist.name}</h5>
                                         <p className="card-text">{artist.type}</p>
-                                        <button className="btn btn-primary play-btn" onClick={()=> this.toggle()}><i className="fa fa-play"></i></button>
-                                        <button className="btn btn-primary pause-btn active" onClick={()=> this.toggle()}><i className="fa fa-pause"></i></button>
+                                        <div id={artist.id}>
+                                            <button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-play"></i></button>
+                                            <button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-pause"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
