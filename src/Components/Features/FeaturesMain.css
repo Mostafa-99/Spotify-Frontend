@@ -1,0 +1,43 @@
+#FeaturesNav{
+    text-align: left;
+    padding: 10px 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 20%;
+}
+@media(max-width: 770px){
+    #FeaturesNav{
+        padding: 10px 10px;
+    }
+}
+
+.featuresheading{
+    font-size: 45px;
+    font-weight: 700;
+    font-family: inherit;
+    padding: 20px 0px;
+}
+
+
+@media(max-width: 660px){
+    #LikedSongsGIF{
+        width: 100%;
+        height: auto;
+    }
+}
+
+.FeaturesInlinePics{
+    padding: 10px;
+}
+@media(max-width: 660px){
+    .FeaturesInlinePics{
+        width: 100%;
+        height: auto;
+    }
+}
+
+.FP-collapse-button{
+    font-size: 15px;
+    color: darkblue;
+}
