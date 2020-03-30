@@ -13,16 +13,14 @@ export class FeaturesNav extends Component {
     render() {
         return (
             <Router>
-                <div id="FeaturesNav">
-                    <Switch>
-                        <Route path="/" exact component={FeaturesMain}/>
-                        <Route path="/SearchFeature" exact component={SearchFeature}/>
-                        <Route path="/YourLibraryFeature" exact component={YourLibraryFeature}/>
-                        <Route path="/ShufflePlayFeature" exact component={ShufflePlayFeature}/>
-                        <Route path="/ArtistProfilesFeature" exact component={ArtistProfilesFeature}/>
-                        <Route path="/VideosFeature" exact component={VideosFeature}/>
-                    </Switch>
-                </div>
+                <Switch>
+                    <Route path="/" exact component={FeaturesMain}/>
+                    <Route path="/SearchFeature" exact component={SearchFeature}/>
+                    <Route path="/YourLibraryFeature" exact component={YourLibraryFeature}/>
+                    <Route path="/ShufflePlayFeature" exact component={ShufflePlayFeature}/>
+                    <Route path="/ArtistProfilesFeature" exact component={ArtistProfilesFeature}/>
+                    <Route path="/VideosFeature" exact component={VideosFeature}/>
+                </Switch>
             </Router>
         )
     }

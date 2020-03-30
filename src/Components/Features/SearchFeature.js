@@ -4,14 +4,14 @@ import {Link} from 'react-router-dom';
 export class SearchFeature extends Component {
     render() {
         return (
-            <div>
+            <div id="features-nav">
                 <div>
                     <h6>
                         Home / <Link to="/">Features</Link>
                     </h6>
                 </div>
                 <div>
-                    <h1 className="featuresheading">Search</h1>
+                    <h1 className="features-heading">Search</h1>
                     <p>Find what you’re looking for with Search, including:</p>
                     <ul>
                         <li>Songs</li>

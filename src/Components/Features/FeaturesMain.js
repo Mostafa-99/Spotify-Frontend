@@ -5,12 +5,12 @@ import {Link} from 'react-router-dom';
 export class FeaturesMain extends Component {
     render() {
         return (
-                <div>
+                <div id="features-nav">
                     <div>
                         Home / Features
                     </div>
                     <div>
-                        <h1 className="featuresheading">Features</h1>
+                        <h1 className="features-heading">Features</h1>
                         <Link to="/SearchFeature">
                             <h4>Search</h4>
                         </Link>

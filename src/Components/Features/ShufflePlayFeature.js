@@ -7,26 +7,26 @@ import Icon_shuffle_only from '../../Images/icon_shuffle_only.png';
 export class ShufflePlayFeature extends Component {
     render() {
         return (
-            <div>
+            <div id="features-nav">
                 <div>
                     <h6>
                         Home / <Link to="/">Features</Link>
                     </h6>
                 </div>
                 <div>
-                    <h1 className="featuresheading">Shuffle play</h1>
+                    <h1 className="features-heading">Shuffle play</h1>
                     <p>Mix up what plays next with Shuffle. Great for long playlists, switching up your listening, or 
                         when you just don’t feel like following orders.</p>
                     <p>You can turn shuffle on for any playlist, album, or artist profile.</p>
                     <hr/>
 
-                    <h6 type="button" className="FP-collapse-button" data-toggle="collapse" data-target="#ShufflePlayFeature1">
+                    <h6 id="shuffle-play-feature1-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#shuffle-play-feature1">
                         Desktop and web player
                     </h6>
-                    <div id="ShufflePlayFeature1" class="collapse">
+                    <div id="shuffle-play-feature1" class="collapse">
                         <br/>
                         <ol>
-                            <li>Click Shuffle <img src={Icon_shuffle}/> in the Now Playing bar at the bottom.</li>
+                            <li>Click Shuffle <img src={Icon_shuffle} alt=""/> in the Now Playing bar at the bottom.</li>
                             <li>
                                 The order of songs due to play is now mixed.
                                 <p><b>Tip:</b> Want to see how it’s changed? Check out the <b>Play Queue.</b></p>
@@ -36,20 +36,20 @@ export class ShufflePlayFeature extends Component {
                     </div>
                     <hr/>
 
-                    <h6 type="button" className="FP-collapse-button" data-toggle="collapse" data-target="#ShufflePlayFeature2">
+                    <h6 id="shuffle-play-feature2-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#shuffle-play-feature2">
                         Mobile and tablet
                     </h6>
-                    <div id="ShufflePlayFeature2" class="collapse">
+                    <div id="shuffle-play-feature2" class="collapse">
                         <br/>
                         <p>Android: Tap <b>SHUFFLE PLAY.</b></p>
-                        <p>iOS: Tap <img src={Icon_shuffle_play}/></p>
+                        <p>iOS: Tap <img src={Icon_shuffle_play} alt=""/></p>
                         <p><b>Premium subscribers</b> can also control shuffle from the Now Playing bar:</p>
                         <ol>
                             <li>
                                 Tap the Now Playing bar at the bottom of the screen (above the menu).
                                 <p><b>Note:</b> On iPad, tap the album artwork in the side menu.</p>
                             </li>
-                            <li>Tap Shuffle <img src={Icon_shuffle}/> to turn it on.</li>
+                            <li>Tap Shuffle <img src={Icon_shuffle} alt=""/> to turn it on.</li>
                             <li>
                                 The order of songs due to play is now mixed.
                                 <p><b>Tip:</b> Want to see how it’s changed? Check out the <b>Play Queue.</b></p>
@@ -72,7 +72,7 @@ export class ShufflePlayFeature extends Component {
                     <br/>
                     <p>
                         If you’re using the free service, you can listen to any playlist via shuffle, 
-                        or select any track on playlists without the Shuffle icon <img src={Icon_shuffle_only}/>.
+                        or select any track on playlists without the Shuffle icon <img src={Icon_shuffle_only} alt=""/>.
                     </p>
                     <br/>
                 </div>

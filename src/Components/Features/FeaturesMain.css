@@ -1,4 +1,4 @@
-#FeaturesNav{
+#features-nav{
     text-align: left;
     padding: 10px 100px;
     padding-top: 10px;
@@ -7,12 +7,12 @@
     padding-right: 20%;
 }
 @media(max-width: 770px){
-    #FeaturesNav{
+    #features-nav{
         padding: 10px 10px;
     }
 }
 
-.featuresheading{
+#features-nav .features-heading{
     font-size: 45px;
     font-weight: 700;
     font-family: inherit;
@@ -21,23 +21,23 @@
 
 
 @media(max-width: 660px){
-    #LikedSongsGIF{
+    #features-nav #liked-songs-gif{
         width: 100%;
         height: auto;
     }
 }
 
-.FeaturesInlinePics{
+#features-nav .features-inline-pics{
     padding: 10px;
 }
 @media(max-width: 660px){
-    .FeaturesInlinePics{
+    #features-nav .features-inline-pics{
         width: 100%;
         height: auto;
     }
 }
 
-.FP-collapse-button{
+#features-nav .fp-collapse-button{
     font-size: 15px;
     color: darkblue;
 }

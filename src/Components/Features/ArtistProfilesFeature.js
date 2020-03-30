@@ -8,14 +8,14 @@ import Iphone_artist_profiles from '../../Images/iphone_artist_profiles.png';
 export class ArtistProfilesFeature extends Component {
     render() {
         return (
-            <div>
+            <div id="features-nav">
                 <div>
                     <h6>
                         Home / <Link to="/">Features</Link>
                     </h6>
                 </div>
                 <div>
-                    <h1 className="featuresheading">Artist profiles</h1>
+                    <h1 className="features-heading">Artist profiles</h1>
                     <p>
                         Artist profiles are where you’ll find all releases 
                         available by a particular artist, plus everything you need to know about them.
@@ -62,15 +62,15 @@ export class ArtistProfilesFeature extends Component {
                         <Link to="/SearchFeature">Search</Link> for an artist, or right-click a song or album and select Go to Artist. 
                         Scroll down or click the tabs at the top to explore.
                     </p>
-                    <img className="FeaturesInlinePics" src={Desktop_artist_profile_new}/>
+                    <img className="features-inline-pics" src={Desktop_artist_profile_new} alt=""/>
 
                     <h3>Mobile and tablet</h3>
                     <br/>
                     <p>
-                        <Link to="/SearchFeature">Search</Link> for an artist, or tap <img src={Icon_options_iphone}/> (iOS) / <img src={Icon_options_android}/> (Android) 
+                        <Link to="/SearchFeature">Search</Link> for an artist, or tap <img src={Icon_options_iphone} alt=""/> (iOS) / <img src={Icon_options_android} alt=""/> (Android) 
                         on a song or album and select Go to Artist. Scroll down to explore.
                     </p>
-                    <img className="FeaturesInlinePics" src={Iphone_artist_profiles}/>
+                    <img className="features-inline-pics" src={Iphone_artist_profiles} alt=""/>
                     <br/>
                     <hr/>
 

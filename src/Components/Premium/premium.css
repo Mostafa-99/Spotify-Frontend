@@ -1,8 +1,8 @@
-#ppmaindiv body{
+#pp-main-div body{
     margin: 0px;
 }
 
-#ppmaindiv .bluepart{
+#pp-main-div .blue-part{
     height: auto;
     background-color: rgb(80, 155, 245);
     background-repeat: no-repeat;
@@ -18,12 +18,12 @@
     padding: 0px 10px;
 }
 @media(min-width: 992px){
-    #ppmaindiv .bluepart{
+    #pp-main-div .blue-part{
         background-image: url(../../Images/premium_dancer.png);
         padding: 0px 100px;
     }
 }
-#ppmaindiv .bluecontainer{
+#pp-main-div .blue-container{
     padding-top: 110px;
     padding-bottom: 30px;
     margin-left: 50px;
@@ -33,22 +33,22 @@
     text-align: left;
 }
 @media (max-width:600px){
-    #ppmaindiv .bluecontainer{
+    #pp-main-div .blue-container{
         padding: 0px 0px;
         margin: auto;
     }
 }
 @media (min-width: 768px){
-    #ppmaindiv .biggerh1{
+    #pp-main-div .bigger-h1{
         font-size: 80px;
     }
 }
 @media (max-width: 767px){
-    #ppmaindiv .biggerh1{
+    #pp-main-div .bigger-h1{
         font-size: 40px;
     }
 }
-#ppmaindiv .biggerh1{
+#pp-main-div .bigger-h1{
     line-height: 1.2;
     font-weight: 900;
     max-width: 100%;
@@ -60,16 +60,16 @@
 }
 
 @media (min-width: 768px){
-    #ppmaindiv .biggerh2{
+    #pp-main-div .bigger-h2{
         font-size: 30px;
     }
 }
 @media (max-width: 767px){
-    #ppmaindiv .biggerh2{
+    #pp-main-div .bigger-h2{
         font-size: 24px;
     }
 }
-#ppmaindiv .biggerh2{
+#pp-main-div .bigger-h2{
     line-height: 1.5;
     width: 100%;
     max-width: 100%;
@@ -78,19 +78,19 @@
     padding: 0px;
 }
 
-#ppmaindiv .secondpart{
+#pp-main-div .second-part{
     padding-top: 50px;
     padding-bottom: 50px;
     height: auto;
     text-align: center;
     width: 100%;
 }
-#ppmaindiv .benefitimage{
+#pp-main-div .benefit-image{
     width: 142px;
     height:142px;
 }
 
-#ppmaindiv .imagesdiv{
+#pp-main-div .images-div{
     width: 100%;
     height: auto;
     display: flex;
@@ -100,41 +100,41 @@
     justify-content: space-around;
 }
 
-#ppmaindiv .imagediv{
+#pp-main-div .image-div{
     padding: 50px 50px;
     width: 20%;
     box-sizing: border-box;
 }
 
 @media screen and (max-width:1200px){
-    #ppmaindiv .imagediv{
+    #pp-main-div .image-div{
         width: 40%;
     }
 }
 @media screen and (max-width:600px){
-    #ppmaindiv .imagediv{
+    #pp-main-div .image-div{
         width: 90%;
     }
     
 }
 
-#ppmaindiv .imageh2{
+#pp-main-div .image-h2{
     font-size: 30px;
 }
 
 
 
 @media (min-width: 768px){
-    #ppmaindiv .smallerh1{
+    #pp-main-div .smaller-h1{
         font-size: 40px;
     }
 }
 @media (max-width: 767px){
-    #ppmaindiv .smallerh1{
+    #pp-main-div .smaller-h1{
         font-size: 32px;
     }
 }
-#ppmaindiv .smallerh1{
+#pp-main-div .smaller-h1{
         color: black;
         line-height: 1.2;
         font-weight: 900;
@@ -145,7 +145,7 @@
         padding: 0px;
 }
 
-#ppmaindiv button{
+#pp-main-div button{
     cursor: pointer;
     display: inline-block;
     font-size: 14px;
@@ -170,23 +170,23 @@
     padding: 17px 48px;
     margin: 40px 0px;
 }
-#ppmaindiv button:hover{
+#pp-main-div button:hover{
     transform: scale(1.05) perspective(1px);
     background-color: rgb(38, 218, 98);
 }
-#ppmaindiv a{
+#pp-main-div a{
     color: white;
 }
-#ppmaindiv p{
+#pp-main-div p{
     font-size: 12px;
     padding-bottom: 1rem;
     padding-top: 1rem;
 }
-#ppmaindiv ul{
+#pp-main-div ul{
     padding-left: 10px;
 }
 
-#ppmaindiv li{
+#pp-main-div li{
     list-style-type: '✓';
     text-indent: 10px;
     font-size: 16px;
@@ -196,12 +196,12 @@
     padding: 0px 10px 0px 0px;
 }
 @media screen and (max-width:600px){
-    #ppmaindiv .li{
+    #pp-main-div .li{
         font-size: 20px;
     }
 }
 
-#ppmaindiv h3{
+#pp-main-div h3{
     font-size: 24px;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -209,36 +209,36 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 @media screen and (max-width:600px){
-    #ppmaindiv .h3{
+    #pp-main-div .h3{
         font-size: 30px;
     }
 }
 
-#ppmaindiv h4{
+#pp-main-div h4{
     font-size: 32px;
     margin-top: 0px;
     margin-bottom: 0px;
     font-family: Arial, Helvetica, sans-serif;
 }
 @media screen and (max-width:600px){
-    #ppmaindiv .h4{
+    #pp-main-div .h4{
         font-size: 40px;
     }
 }
 
-#ppmaindiv .thirdpart{
+#pp-main-div .third-part{
     padding: 80px 10px;
     text-align: center;
     width: 100%;
     height: auto;
 }
 @media(max-width:600px){
-    #ppmaindiv .thirdpart{
+    #pp-main-div .third-part{
         padding: 0px
     }
 }
 
-#ppmaindiv .boxdiv{
+#pp-main-div .box-div{
     text-align: left;
     padding: 10px 20px;
     display: inline-block;
@@ -249,30 +249,30 @@
 }
 
 @media screen and (max-width: 720px){
-    #ppmaindiv .boxdiv{
+    #pp-main-div .box-div{
         width: 90%;
     }
 }
 
 @media (max-width:600px){
-    #ppmaindiv .firstbutton{
+    #pp-main-div .first-button{
         width: 90%;
         margin: 10px 0px;
     }
 }
-#ppmaindiv  .offerbutton{
+#pp-main-div  .offer-button{
     width: 100%;
     margin: 20px 0px;
 }
-#ppmaindiv .offerbutton:hover{
+#pp-main-div .offer-button:hover{
     transform: scale(1.015) perspective(1px);
     background-color: rgb(38, 218, 98);
 }
-#ppmaindiv .greyp{
+#pp-main-div .grey-p{
     color: grey;
 }
 @media screen and (max-width:600px){
-    #ppmaindiv .greyp{
+    #pp-main-div .grey-p{
         font-size: 15px;
     }
 }

@@ -52,11 +52,11 @@ export class premiumCode extends Component {
         {document.title ="Spotify"}
 
         return (
-            <div id="pcpmaindiv" className="container-fluid">
+            <div id="pcp-main-div" className="container-fluid">
             <Navbar/>
                 
                 <div className="blue">
-                    <h1 className="boldheader">Get Premium</h1>
+                    <h1 className="bold-header">Get Premium</h1>
                     <ul className="">
                         <li  className="checklist">Listen without the distraction of ads</li>
                         <li  className="checklist">Play music with no phone service</li>
@@ -64,14 +64,14 @@ export class premiumCode extends Component {
                     </ul>
                 </div>
 
-                <div className="secondpart">
-                    <div className="boxdiv">
+                <div className="second-part">
+                    <div className="box-div">
                         <div className="form-group">
-                        <button id="pcpsendmailbutton" onClick={this.sendMail} type="button" className="btn btn-success btn-block">GET CODE</button>
+                        <button id="pcp-send-mail-button" onClick={this.sendMail} type="button" className="btn btn-success btn-block">GET CODE</button>
                             <label htmlFor="formGroupExampleInput">Subscription code</label>
                             <input value={this.state.code} onChange={this.onChange} type="text" name="code" className="form-control" id="formGroupExampleInput" placeholder="XXXX"/>
                         </div>
-                        <button id="pcpcheckcodebutton" onClick={this.checkCode} type="button" className="btn btn-success btn-block">START MY SPOTIFY PREMIUM</button>
+                        <button id="pcp-check-code-button" onClick={this.checkCode} type="button" className="btn btn-success btn-block">START MY SPOTIFY PREMIUM</button>
                     </div>
                 </div>
             <Footer/>
