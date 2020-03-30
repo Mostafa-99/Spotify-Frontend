@@ -3,41 +3,46 @@ import axios from 'axios';
 import './premiumCode.css';
 import Footer from '../Footer/footer.js'
 import Navbar from '../Navigation/navbar.js'
+
 export class premiumCode extends Component {
     state={
         code: ''
     }
 
-    showReject() {
-        alert("The subscription code is invalid.");
-    }
- 
-    showConfirm() {
-        alert("Congratulations! You are PREMIUM now.");
-    }
-
-    sendMail = () =>{
-        /*axios.post('')
+    sendMail = () => {
+        axios.post('')
             .then(res => {
-
-            })*/
+                if(res.status===204){
+                    alert("An email has been sent");
+                }
+                else{
+                    alert("Please try again");
+                }
+            })
+            .catch(error => {
+                alert(error.response.data.message);
+            })
     }
 
     checkCode = () => {
         if(this.state.code !== ""){
-            axios.post('')
+            let code=this.state.code;
+            console.log(code);
+            axios.post('http://localhost:3000/subscriptionCodes/',{code})
             .then(res => {
-                if(res.status === 204){
-                    //console.log(this.state.code);
-                    this.showConfirm();
+                if(res.status===204){
+                    alert("Congratulations! You are PREMIUM now.");
                 }
                 else{
-                    this.showReject();
+                    alert("The subscription code is invalid.");
                 }
+            })
+            .catch(error => {
+                alert(error.response.data.message);
             })
         }
         else{
-            this.showReject();
+            alert("please enter code!")
         }
     }
 
@@ -63,7 +68,7 @@ export class premiumCode extends Component {
                     <div className="boxdiv">
                         <div className="form-group">
                         <button id="pcpsendmailbutton" onClick={this.sendMail} type="button" className="btn btn-success btn-block">GET CODE</button>
-                            <label for="formGroupExampleInput">Subscription code</label>
+                            <label htmlFor="formGroupExampleInput">Subscription code</label>
                             <input value={this.state.code} onChange={this.onChange} type="text" name="code" className="form-control" id="formGroupExampleInput" placeholder="XXXX"/>
                         </div>
                         <button id="pcpcheckcodebutton" onClick={this.checkCode} type="button" className="btn btn-success btn-block">START MY SPOTIFY PREMIUM</button>

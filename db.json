@@ -30,5 +30,15 @@
         "playlistUpdates": true
       }
     }
+  ],
+  "subscriptionCodes": [
+    {
+      "id": 1,
+      "code": "111"
+    },
+    {
+      "id": 2,
+      "code": "222"
+    }
   ]
 }

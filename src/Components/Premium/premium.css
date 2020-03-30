@@ -15,10 +15,12 @@
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     width: 100%;
+    padding: 0px 10px;
 }
 @media(min-width: 992px){
     #ppmaindiv .bluepart{
         background-image: url(../../Images/premium_dancer.png);
+        padding: 0px 100px;
     }
 }
 #ppmaindiv .bluecontainer{
