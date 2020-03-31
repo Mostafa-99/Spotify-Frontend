@@ -89,7 +89,7 @@ class Home extends Component {
         
         <div id='webplayer-layout'className="container webplayer col-12">
             <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/></head>
-            <div className="row webplayer-body">
+            <div className="row webplayer-body m-0">
                 <nav className="col-lg-2 webplayer-sidebar-body colums-no-padding">
                     <SideBar/>
                 </nav>

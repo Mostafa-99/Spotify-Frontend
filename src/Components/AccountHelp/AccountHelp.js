@@ -8,7 +8,7 @@ import Navbar from '../Navigation/navbar.js'
 function AccountHelp(){
     {document.title ="Account Help - Spotify"}
     return(       
-        <body id="body-overrides">
+        <div id="body-overrides">
             <Navbar/>
             <div className="container body" id="dev-items"> 
                 <div className="help-topics item" id="help-topics department">
@@ -24,7 +24,7 @@ function AccountHelp(){
                 <div className="account-help item" id="account-help department">
                     <nav aria-label="breadcrumb">
                     <ol className="breadcrumb" id="help-breadcrumb">
-                        <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
+                        <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
                         <li className="breadcrumb-item active" id="typing" aria-current="page">Account Help</li>
                     </ol>
                     </nav>
@@ -52,7 +52,7 @@ function AccountHelp(){
                 </div>
             </div>
             <Footer/>
-        </body>
+        </div>
     )
 }
 export default AccountHelp

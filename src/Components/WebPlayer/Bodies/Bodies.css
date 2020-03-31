@@ -1,7 +1,7 @@
 html,
 .webplayer-body{
     height: 100%;
-
+    width: 100%;
 }
 .webplayer-sidebar-body{
     min-height: 100%;
@@ -20,7 +20,6 @@ html,
     margin: 0;
     border: 0;
     vertical-align: baseline;
-    max-width: 100%;
 }
 #webplayer-layout .webplayer-sidebar-body .col-lg-2 {
     padding: 0;
@@ -28,7 +27,7 @@ html,
 }
 
 #webplayer-layout.webplayer-body-and-navbar{
-    background-color: #282828;
+    
     padding: 0;
 }
 

@@ -10,7 +10,7 @@ import Navbar from '../../Navigation/navbar.js'
 function ProfilePicture(){
     {document.title ="Profile picture - Spotify"}
     return(
-         <body id="body-overrides">
+         <div id="body-overrides">
                 <Navbar/>
                 <div className="main container body" id="body" > 
                     <div className="help-topics item sections" id="help-topics department">
@@ -26,8 +26,8 @@ function ProfilePicture(){
                     <div className="account-help item sections">
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="article-breadcrumb">
-                            <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
-                            <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
+                            <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/account_help/" > Account Help    </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
@@ -92,7 +92,7 @@ function ProfilePicture(){
                     </div>
                 </div>
                 <Footer/>
-        </body>  
+        </div>  
     )
 }
 export default ProfilePicture

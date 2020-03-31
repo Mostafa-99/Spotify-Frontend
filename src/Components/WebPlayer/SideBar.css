@@ -20,11 +20,11 @@
     margin-inline-end: 0px;
     color: #b3b3b3;
 }
-#webplayer-sidebar .sidebar-listitem:hover{
+#webplayer-sidebar .sidebar-list-item:hover{
     color: #fff;
 }
 
-#webplayer-sidebar .sidebar-listitem{
+#webplayer-sidebar .sidebar-list-item{
     text-decoration: none;
     margin-left: 16px;
     padding-right: 1px;
@@ -39,11 +39,11 @@
     -moz-transition:.3s;
     -webkit-transition:.3s;
     transition:.3s ease-in-out;
-    padding: 0 16px;
+    padding: 10px 16px 0 16px;
     margin-bottom: 10px;
     height: 40px;
 }
-#webplayer-sidebar .sidebar-listitem-home{
+#webplayer-sidebar .sidebar-list-item-home{
     margin-left: 16px;
     margin-right: -1px;
     margin-bottom: 10px;
@@ -63,11 +63,11 @@
     margin-inline-end: 0px;
     color: #b3b3b3;
 }
-#webplayer-sidebar .sidebar-listitem-header:hover{
+#webplayer-sidebar .sidebar-list-item-header:hover{
     color: none;
 }
 
-#webplayer-sidebar .sidebar-listitem-header{
+#webplayer-sidebar .sidebar-list-item-header{
     text-decoration: none;
     margin-left: 16px;
     padding-right: 1px;

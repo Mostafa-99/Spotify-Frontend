@@ -10,7 +10,7 @@ import Navbar from '../../Navigation/navbar.js'
 function CanNotActivatePremiumTrial(){
     {document.title ="Can't activate Premium trial - Spotify"}
     return(
-    <body id="body-overrides">
+    <div id="body-overrides">
                 <Navbar/>
                 <div className="main container body" id="body"  > 
                     <div className="help-topics item sections" id="help-topics">
@@ -26,8 +26,8 @@ function CanNotActivatePremiumTrial(){
                     <div className="account-help item sections">
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="article-breadcrumb">
-                            <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
-                            <li className="breadcrumb-item">    <Link to="/account_help/" > <a >Account Help</a>    </Link> </li>
+                            <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/account_help/" > Account Help   </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
@@ -40,7 +40,7 @@ function CanNotActivatePremiumTrial(){
                     </div>
                 </div>
                 <Footer/>
-        </body>  
+        </div>  
     )
 }
 export default CanNotActivatePremiumTrial
