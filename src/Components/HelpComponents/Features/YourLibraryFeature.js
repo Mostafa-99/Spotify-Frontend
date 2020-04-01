@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import Icon_heart from '../../Images/icon_heart.png';
-import Icon_library from '../../Images/icon_library.png';
-import Icon_options_android from '../../Images/icon_options_android.png';
-import Icon_options_iphone from '../../Images/icon_options_iphone.png';
-import Liked_Songs_Location_GIF from '../../Images/NYL_TWITTER_01_LikedSongs.gif';
+import Icon_heart from '../../../Images/icon_heart.png';
+import Icon_library from '../../../Images/icon_library.png';
+import Icon_options_android from '../../../Images/icon_options_android.png';
+import Icon_options_iphone from '../../../Images/icon_options_iphone.png';
+import Liked_Songs_Location_GIF from '../../../Images/NYL_TWITTER_01_LikedSongs.gif';
+import './FeaturesMain.css';
 
+import SideBar from '../SideBar/SideBar'
 export class YourLibraryFeature extends Component {
     render() {
         return (
+        <div className="container body" id="dev-items"> 
+            <SideBar/>
             <div id="features-nav">
                 <div>
                     <h6>
@@ -99,6 +103,7 @@ export class YourLibraryFeature extends Component {
                     <br/>
                 </div>
             </div>
+        </div>
         )
     }
 }

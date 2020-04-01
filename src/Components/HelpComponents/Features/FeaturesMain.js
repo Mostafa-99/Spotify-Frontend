@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
-
+import SideBar from '../SideBar/SideBar'
+import './FeaturesMain.css';
 
 export class FeaturesMain extends Component {
     render() {
         return (
+            <div className="container body" id="dev-items"> 
+                <SideBar/>
                 <div id="features-nav">
                     <div>
                         Home / Features
@@ -28,6 +31,7 @@ export class FeaturesMain extends Component {
                         </Link>
                     </div>
                 </div>
+            </div>
         )
     }
 }

@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import Icon_shuffle from '../../Images/icon_shuffle.png';
-import Icon_shuffle_play from '../../Images/icon_shuffle_play.png';
-import Icon_shuffle_only from '../../Images/icon_shuffle_only.png';
+import Icon_shuffle from '../../../Images/icon_shuffle.png';
+import Icon_shuffle_play from '../../../Images/icon_shuffle_play.png';
+import Icon_shuffle_only from '../../../Images/icon_shuffle_only.png';
+import './FeaturesMain.css';
 
+import SideBar from '../SideBar/SideBar'
 export class ShufflePlayFeature extends Component {
     render() {
-        return (
+        return (   
+        <div className="container body" id="dev-items"> 
+            <SideBar/>
             <div id="features-nav">
                 <div>
                     <h6>
@@ -76,6 +80,7 @@ export class ShufflePlayFeature extends Component {
                     </p>
                     <br/>
                 </div>
+            </div>
             </div>
         )
     }

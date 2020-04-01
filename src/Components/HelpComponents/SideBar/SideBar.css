@@ -1,0 +1,83 @@
+html,#body-overrides #dev-items{
+    height: 110vh;
+}
+
+#sidebar-body .ht-header-large{
+    visibility: visible;
+    font-size: 34px;
+    color: #919496;
+    font-weight: 500;
+    line-height: 1;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    min-width: fit-content;
+}
+#sidebar-body .ht-header-small {
+    visibility: hidden;
+}
+
+#sidebar-body .ht-topics h3.ht-topics-ap{
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -.01em;
+    line-height: 1.4;
+    margin-top: 0px;
+    margin-bottom: 13.5px;
+}
+#sidebar-body.sidebar-body{
+    grid-row-start: 1;
+    grid-row-end: -1;
+}
+#sidebar-body.sidebar-body{
+    padding: 80px 0px 20px 0px;
+}
+
+
+#sidebar-body ul.account-help-btn a{
+    color: black;   
+    line-height: 20px;
+    font-weight: 700;
+    color: #2d46b9;
+    font-size: 18px;
+    padding-left: 0;
+}
+#sidebar-body ul.account-help-btn a:hover{
+    color: #2d46b9;
+}
+#sidebar-body ul.account-help-btn a::before{
+    border-left: solid;
+    border-color: #2d46b9;
+}
+#sidebar-body ul.account-help-btn{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+@media only screen and (max-width: 992px) {
+
+    #sidebar-body #help-topics.help-topics{
+        padding-bottom: 20px;
+        padding-top: 0;
+    }
+
+    #sidebar-body .ht-header-large{
+        visibility: hidden;
+        margin-top: 0;
+        padding-top: 0;
+        
+    }
+    #sidebar-body .ht-header-small {
+        visibility: visible;
+        font-size: 34px;
+        color: #222326;
+        font-weight: 500;
+        line-height: 1;
+        margin-top: 0px;
+        margin-bottom: 10px;
+        min-width: fit-content;
+    }
+    #sidebar-body.sidebar-body{
+        padding: 80px 0px 20px 20px;
+    }
+}
+    

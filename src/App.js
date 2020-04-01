@@ -17,12 +17,19 @@ import MainPage from './Components/Main/Main.js'
 import PremiumCode from './Components/Premium/premiumCode.js';
 import Premium from './Components/Premium/premium.js';
 
-import AccountHelp from './Components/AccountHelp/AccountHelp';
-import SpotifyAndFacebook from './Components/AccountHelp/Articles/SpotifyAndFacebook'
-import HowToLogOut from './Components/AccountHelp/Articles/HowToLogOut'
-import CanNotActivatePremiumTrial from './Components/AccountHelp/Articles/CanNotActivatePremiumTrial'
-import ChangeEmailAddress from './Components/AccountHelp/Articles/ChangeEmailAddress'
-import ProfilePicture from './Components/AccountHelp/Articles/ProfilePicture'
+import AccountHelp from './Components/HelpComponents/AccountHelp/AccountHelp'
+import SpotifyAndFacebook from './Components/HelpComponents/AccountHelp/Articles/SpotifyAndFacebook'
+import HowToLogOut from './Components/HelpComponents/AccountHelp/Articles/HowToLogOut'
+import CanNotActivatePremiumTrial from './Components/HelpComponents/AccountHelp/Articles/CanNotActivatePremiumTrial'
+import ChangeEmailAddress from './Components/HelpComponents/AccountHelp/Articles/ChangeEmailAddress'
+import ProfilePicture from './Components/HelpComponents/AccountHelp/Articles/ProfilePicture'
+
+import FeaturesMain from './Components/HelpComponents/Features/FeaturesMain'
+import SearchFeature from './Components/HelpComponents/Features/SearchFeature.js';
+import YourLibraryFeature from './Components/HelpComponents/Features/YourLibraryFeature.js';
+import ShufflePlayFeature from './Components/HelpComponents/Features/ShufflePlayFeature.js';
+import ArtistProfilesFeature from './Components/HelpComponents/Features/ArtistProfilesFeature.js';
+import VideosFeature from './Components/HelpComponents/Features/VideosFeature.js';
 
 import Home from './Components/WebPlayer/Bodies/Home/Home'
 import Search from './Components/WebPlayer/Bodies/Search/Search'
@@ -47,12 +54,19 @@ function App() {
         <Route path="/main" exact component={MainIndex}/>
         <Route path="/" exact component={MainPage}/>
 
-        <Route path="/account_help" exact component={AccountHelp} />
+        <Route path="/account-help" exact component={AccountHelp} />
         <Route path="/profile-picture" exact component={ProfilePicture} />
         <Route path="/using-spotify-with-facebook" exact component={SpotifyAndFacebook} />
         <Route path="/how-to-log-out" exact component={HowToLogOut} />
         <Route path="/cannot-activate-trial" exact component={CanNotActivatePremiumTrial} />
         <Route path="/change-email-address" exact component={ChangeEmailAddress} />
+
+        <Route path="/features-main" exact component={FeaturesMain}/>
+        <Route path="/SearchFeature" exact component={SearchFeature}/>
+        <Route path="/YourLibraryFeature" exact component={YourLibraryFeature}/>
+        <Route path="/ShufflePlayFeature" exact component={ShufflePlayFeature}/>
+        <Route path="/ArtistProfilesFeature" exact component={ArtistProfilesFeature}/>
+        <Route path="/VideosFeature" exact component={VideosFeature}/>
 
         <Route path="/Home" exact component={Home} />
         <Route path="/Search" exact component={Search} />
