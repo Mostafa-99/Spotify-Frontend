@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import './FeaturesMain.css';
 
+import SideBar from '../SideBar/SideBar'
 export class SearchFeature extends Component {
     render() {
         return (
+        <div className="container body" id="dev-items"> 
+            <SideBar/>
             <div id="features-nav">
                 <div>
                     <h6>
@@ -24,6 +28,7 @@ export class SearchFeature extends Component {
                          moods, charts, and new releases. Find Radio and Concerts here too. </p>
                     <hr/>
                 </div>
+            </div>
             </div>
         )
     }

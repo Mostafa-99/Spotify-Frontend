@@ -1,5 +1,5 @@
 html,#body-overrides {
-    height: 115%;
+    height: 110vh;
 }
 *{
     font-family:  Helvetica, Arial, sans-serif;
@@ -21,9 +21,7 @@ a:hover{
     grid-row-start: 1;
     grid-row-end: -1;
 }
-#body-overrides #help-topics.help-topics{
-    padding: 80px 0px 20px 0px;
-}
+
 #body-overrides #account-help.account-help{
     border-left: thin solid;
     border-color: #d9dadc;
@@ -128,29 +126,6 @@ a:hover{
 }
 
 
-#body-overrides .ht-header-large{
-    visibility: visible;
-    font-size: 34px;
-    color: #919496;
-    font-weight: 500;
-    line-height: 1;
-    margin-top: 25px;
-    margin-bottom: 0px;
-    min-width: fit-content;
-}
-#body-overrides .ht-header-small {
-    visibility: hidden;
-}
-
-#body-overrides #help-topics.help-topics div.ht-topics h3.ht-topics-ap{
-    font-weight: 700;
-    font-size: 24px;
-    letter-spacing: -.01em;
-    line-height: 1.4;
-    margin-top: 0px;
-    margin-bottom: 13.5px;
-}
-
 #body-overrides .account-help-arts-header {
     color: #aaa ;
     font-weight: 400;
@@ -183,10 +158,7 @@ a:hover{
         margin-left: 20px;
     }
 
-    #body-overrides #help-topics.help-topics{
-        padding-bottom: 20px;
-        padding-top: 0;
-    }
+    
     
     #body-overrides #account-help.account-help{
         border-top: solid;
@@ -208,20 +180,10 @@ a:hover{
         width: 100%;
         max-width: 280px;
     }
-    #body-overrides .ht-header-large{
-        visibility: hidden;
-        margin-top: 0;
-        padding-top: 0;
-        
-    }
-    #body-overrides .ht-header-small {
-        visibility: visible;
-        font-size: 34px;
-        color: #222326;
-        font-weight: 500;
-        line-height: 1;
-        margin-top: 0px;
-        margin-bottom: 10px;
-        min-width: fit-content;
-    }
 }
+
+
+
+
+
+

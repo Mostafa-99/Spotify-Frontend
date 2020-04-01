@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import './FeaturesMain.css';
 
+import SideBar from '../SideBar/SideBar'
 export class VideosFeature extends Component {
     render() {
         return (
+        <div className="container body" id="dev-items"> 
+            <SideBar/>
             <div id="features-nav">
                 <div>
                     <h6>
@@ -42,6 +46,7 @@ export class VideosFeature extends Component {
                     </div>
                     <hr/>
                 </div>
+            </div>
             </div>
         )
     }
