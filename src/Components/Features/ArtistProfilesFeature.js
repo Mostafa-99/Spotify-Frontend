@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import Icon_options_android from '../../../Images/icon_options_android.png';
-import Icon_options_iphone from '../../../Images/icon_options_iphone.png';
-import Desktop_artist_profile_new from '../../../Images/desktop_artist_profile_new.png';
-import Iphone_artist_profiles from '../../../Images/iphone_artist_profiles.png';
-import './FeaturesMain.css';
-
-import SideBar from '../SideBar/SideBar'
+import Icon_options_android from '../../Images/icon_options_android.png';
+import Icon_options_iphone from '../../Images/icon_options_iphone.png';
+import Desktop_artist_profile_new from '../../Images/desktop_artist_profile_new.png';
+import Iphone_artist_profiles from '../../Images/iphone_artist_profiles.png';
 
 export class ArtistProfilesFeature extends Component {
     render() {
         return (
-        <div className="container body" id="dev-items"> 
-            <SideBar/>
             <div id="features-nav">
                 <div>
                     <h6>
@@ -80,7 +75,6 @@ export class ArtistProfilesFeature extends Component {
                     <hr/>
 
                 </div>
-            </div>
             </div>
         )
     }

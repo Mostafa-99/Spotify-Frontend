@@ -3,16 +3,24 @@ import ReactDOM from 'react-dom';
 import './AccountHelp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-import SideBar from '../SideBar/SideBar'
-import Footer from '../../Footer/footer.js'
-import Navbar from '../../Navigation/navbar.js'
+import Footer from '../Footer/footer.js'
+import Navbar from '../Navigation/navbar.js'
 function AccountHelp(){
     {document.title ="Account Help - Spotify"}
     return(       
         <div id="body-overrides">
             <Navbar/>
             <div className="container body" id="dev-items"> 
-                <SideBar/>
+                <div className="help-topics item" id="help-topics department">
+                    <h2 className="ht-header-large"id="help-arts-headers">How can we help you?</h2>
+                    <h2 className="ht-header-small"id="help-arts-headers">Help topics</h2>
+                    <div className="ht-topics">
+                    <h3 className="ht-topics-ap" id="help-arts-headers">Account & Payment</h3>
+                    <ul className="account-help-btn">
+                        <Link to="/account_help/" ><li>Account Help</li> </Link>
+                    </ul>
+                    </div>
+                </div>
                 <div className="account-help item" id="account-help department">
                     <nav aria-label="breadcrumb">
                     <ol className="breadcrumb" id="help-breadcrumb">

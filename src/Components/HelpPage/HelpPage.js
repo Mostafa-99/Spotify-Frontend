@@ -121,7 +121,7 @@ window.location.reload();
             <div>
               <h3>Account & Payment</h3>
               <ul>
-               <Link to="/account-help">
+               <Link to="/account_help">
                 <li className="a">Account  Help</li>
                </Link> 
               </ul>
