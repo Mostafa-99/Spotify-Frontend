@@ -14,10 +14,7 @@ class Home extends Component {
             popularPlayLists:[],
             workOut:[],
             popularAlbums:[],
-            artists:[],
-            nowPlaying:{
-                id:-1
-            }
+            artists:[]
         }
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
@@ -79,39 +76,12 @@ class Home extends Component {
                 })
             })                                            
     }
-    togglePlayPause(sid) {
-        if(this.state.nowPlaying.id==-1)
-        {
-            const cardButtons=document.getElementById(sid);
-            const playButton = cardButtons.querySelector('.play-btn');
-            const pauseButton = cardButtons.querySelector('.pause-btn');
-            playButton.classList.toggle('active-play');
-            pauseButton.classList.toggle('active-pause');
-            this.setState({nowPlaying: {id: sid}})
-        }
-        else if(this.state.nowPlaying.id==sid)
-        {
-            const cardButtons=document.getElementById(sid);
-            const playButton = cardButtons.querySelector('.play-btn');
-            const pauseButton = cardButtons.querySelector('.pause-btn');
-            playButton.classList.toggle('active-play');
-            pauseButton.classList.toggle('active-pause');
-            this.setState({nowPlaying: {id: -1}})
-        }
-        else
-        {
-            const nowPlayingSong=document.getElementById(this.state.nowPlaying.id);
-            const playButtonPrev = nowPlayingSong.querySelector('.play-btn');
-            const pauseButtonPrev = nowPlayingSong.querySelector('.pause-btn');
-            playButtonPrev.classList.toggle('active-play');
-            pauseButtonPrev.classList.toggle('active-pause');
-            const cardButtons=document.getElementById(sid);
-            const playButton = cardButtons.querySelector('.play-btn');
-            const pauseButton = cardButtons.querySelector('.pause-btn');
-            playButton.classList.toggle('active-play');
-            pauseButton.classList.toggle('active-pause');
-            this.setState({nowPlaying: {id: sid}})
-        }
+    togglePlayPause(id) {
+        const cardButtons=document.getElementById(id);
+        const playButton = cardButtons.querySelector('.play-btn');
+        const pauseButton = cardButtons.querySelector('.pause-btn');
+        playButton.classList.toggle('active-play');
+        pauseButton.classList.toggle('active-pause');
     }
     render()
     {
@@ -119,7 +89,7 @@ class Home extends Component {
         
         <div id='webplayer-layout'className="container webplayer col-12">
             <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/></head>
-            <div className="row webplayer-body">
+            <div className="row webplayer-body m-0">
                 <nav className="col-lg-2 webplayer-sidebar-body colums-no-padding">
                     <SideBar/>
                 </nav>
