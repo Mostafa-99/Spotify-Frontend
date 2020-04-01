@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import DesktopFooter from './desktop_footer'
-import MobileFooter from './mobile_footer'
+import DesktopFooter from './DesktopFooter'
+import MobileFooter from './MobileFooter'
 
 
-class footer extends Component {
+class Footer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,4 +40,4 @@ class footer extends Component {
       }
 }
 
-export default footer;
+export default Footer;

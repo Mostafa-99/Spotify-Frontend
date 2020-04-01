@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter,Link } from "react-router-dom";
-import Footer from '../Footer/footer.js'
-import Navbar from '../Navigation/navbar.js'
+import { withRouter,Link } from "react-router-dom";
+import Footer from '../Footer/Footer.js'
+import Navbar from '../Navigation/Navbar.js'
 import './helpPage.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import $ from 'jquery';
 // import './help';
+
 
 function HelpPage() {
   
@@ -19,14 +20,14 @@ function HelpPage() {
               <h3>Account & Payment</h3>
               <ul>
                <Link to="/account_help">
-                <li><a>Account  Help</a></li>
+                <li><a href="#!">Account  Help</a></li>
                </Link> 
               </ul>
             </div>
             <div>
               <h3>Using Spotify</h3>
               <ul>
-                <li><a href="#">Features</a></li>
+                <li><a href="#!">Features</a></li>
               </ul>
             </div>  
           </div>
@@ -144,7 +145,7 @@ function HelpPage() {
                 Chromecast, sound system, car, TV, and PlayStation integration;
                 sharing and creating playlists with your friends... All of this is ready for you.
               </p>
-              <a className="btn btn-primary" href="#" role="button">Get Spotify</a> 
+              <a className="btn btn-primary" href="#!" role="button">Get Spotify</a> 
             </div>
           </div>
         </section>  

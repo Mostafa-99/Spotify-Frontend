@@ -1,9 +1,10 @@
 
-.myspotifybutton {
+.my-spotify-button{
     text-align: center;
     text-decoration: none;
     display: inline-block;
     width: 200px;
+    height:45px;
     cursor: grabbing;
     font-family: 'Open Sans', sans-serif;
     transition: all 0.2s ease 0s;
@@ -14,16 +15,16 @@
     background-color: #1DB954;
     margin: 0 auto;
 }
-.myspotifybutton :hover {
+.my-spotify-button:hover{
     background: #1ED760;
     border-color: #1ED760;
 }
 
-.myspotifybutton :active {
+.my-spotify-button:active {
     border-color: .1ED760;
     background: .1ED760;
 }
 
-.myspotifybutton :focus {
+.my-spotify-button:focus{
     outline: none;
 }

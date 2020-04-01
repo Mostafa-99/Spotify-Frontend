@@ -6,14 +6,14 @@ import React from 'react';
 //import MainIndex from './Components/userIndex/MainIndex.js'
 //import Profile from './Components/Profile/Profile.js'
 
-import SignUp from './Components/SignUp/sign_up.js'
-import LogIn from './Components/Login/log_in.js'
-import AccountSettings from './Components/Profile/AccountSettings.js'
-import EditProfile from './Components/Profile/EditProfile.js'
+import SignUp from './Components/SignUp/SignUp.js';
+import LogIn from './Components/Login/LogIn.js';
+import AccountSettings from './Components/Profile/AccountSettings.js';
+import EditProfile from './Components/Profile/EditProfile.js';
 import NotificationsSettings from './Components/Profile/NotificationSettings.js';
 
-import HelpPage from './Components/HelpPage/HelpPage.js'
-import MainPage from './Components/Main/Main.js'
+import HelpPage from './Components/HelpPage/HelpPage.js';
+import MainPage from './Components/Main/Main.js';
 
 // import AccountHelp from './Components/AccountHelp/AccountHelp';
 // import SpotifyAndFacebook from './Components/AccountHelp/Articles/SpotifyAndFacebook'
@@ -22,8 +22,8 @@ import MainPage from './Components/Main/Main.js'
 // import ChangeEmailAddress from './Components/AccountHelp/Articles/ChangeEmailAddress'
 // import ProfilePicture from './Components/AccountHelp/Articles/ProfilePicture'
 
-import {withRouter} from 'react-router';
-import {Link,Route,NavLink,BrowserRouter as Router,Switch} from 'react-router-dom'
+//import {withRouter} from 'react-router';
+import {Route,BrowserRouter as Router,Switch} from 'react-router-dom';
 
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
         <Route path="/notificationsettings" component={NotificationsSettings}/>
       </Switch>
     </Router>   
+    
   );
 }
 

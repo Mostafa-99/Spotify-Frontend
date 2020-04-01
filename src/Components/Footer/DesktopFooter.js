@@ -1,62 +1,74 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'jquery/dist/jquery.min.js'
-import 'bootstrap/dist/js/bootstrap.min.js'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 
-const MyMobileFooter = styled.footer`
+const MyDesktopFooter=styled.footer`
+justify-content:space-evenly;
 background:black;
 height:100%;
 padding-bottom: 10px;
 margin-bottom: -10px;
 
-#mobfooter .col1
+#my-desk-footer .my-col-1
 {
-    margin-top:8%;
-    margin-left:8.5%;
+    margin-top:6%;
+    margin-left:25%;
     text-align:left;
 }
-#mobfooter .col2,.col3,.col4
+#my-desk-footer .my-col-2
 {
     margin-top:6%;
     margin-left:6%;
 }
-
-#mobfooter .logo{
-    width:100px;
-    margin-top:2%;
-    position: absolute;
-    left: 6%;
+#my-desk-footer .my-col-3
+{
+    margin-top:6%;
+    margin-left:6%;
 }
-#mobfooter h5
+#my-desk-footer .my-col-4
+{
+
+    margin-top:7%;
+    margin-left:calc(14vw + 00px);
+}
+#my-desk-footer i{
+    padding:5px 15px ;
+}
+
+#my-desk-footer h5
 {
 font-size:12px;
 color:#919496;
 letter-spacing:2px;
 }
-#mobfooter #mini_footer
+#my-desk-footer #mini-footer
 {
     margin-top:7%;
-    margin-left:3%;
-    font-size:10px;
+    margin-left:12%;
+    font-size:12px;
 }
 
-#mobfooter #mini_footer a
-{ 
+#my-desk-footer #mini-footer a
+{
+    
     padding:5px;
     color:#919496;
 }
-#mobfooter #mini_footer a:hover
+#my-desk-footer #mini-footer a:hover
 {
     color:#1DB954;
 }
 
-#mobfooter ul
+#my-desk-footer ul
 {
   padding:0; 
 }
-#mobfooter li
+#my-desk-footer li
 {
     list-style:none;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
@@ -65,65 +77,83 @@ letter-spacing:2px;
     padding:10px 2px;
 }
 
-#mobfooter a{
+#my-desk-footer a{
     text-decoration:none;
     text-transform:none;
     text-align:left;
     color:white;
 }
-#mobfooter a:hover{
+
+#my-desk-footer a:hover{
    color:#1DB954;
+}
+
+#my-desk-footer .logo{
+    margin-top:5.5%;
+    width:132px;
+    position: absolute;
+    left: 12%;
+}
+#my-desk-footer .right{
+  position: absolute;
+  right: 10%;
+
+}
+
+#my-desk-footer .min {
+
+  margin-left: calc(15% + 150px);
+}
+
+#my-desk-footer .max {
+  margin-left: calc(50vw + 200px);
 }
 
 `
 
-const mobile_footer = () => {
+
+const DesktopFooter = () => {
     return (
-        <MyMobileFooter>
-            <div id="mobfooter">
-             <a className="navbar-brand" href="#"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a>
-             <div className="row"> 
-                            <div className="col1">
-                                
+        
+            <MyDesktopFooter>
+ <div id="my-desk-footer">
+                    <div className="row"> 
+                   <Link to="/"> <img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
+                            <div className="my-col-1 min">
                                 <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
                                     <li><a href="#!">About</a> </li>
-                                    <li><a href="#!">Jobs</a></li>
-                                    <li><a href="#!">For the Record</a></li>
                                 </ul>
                             </div>
-                            </div>
                         
-                            <div className="col2">
+                            <div className="my-col-2">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
                                 <li><a href="#!">For Artists</a></li>
-                                <li><a href="#!">Developers</a></li>
-                                <li><a href="#!">Brands</a></li>
-                                <li><a href="#!">Inverstors</a></li>
-                                <li><a href="#!">Vendors</a></li>
+                               
                             </ul>
                             </div>
 
 
-                            <div className="col3">
+                            <div className="my-col-3">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
-                                <li><a href="#!">Help</a> </li>
+                            <Link to="/help" ><li>Help</li></Link>
                                 <li><a href="#!">Web Player</a></li>
                                 <li><a href="#!">Free Mobile App</a></li>
                             </ul>
                             </div>
-                            <div class="col4">  
-                                 <a href="https://instagram.com/spotify"><i class="fab fa-2x fa-instagram white-text pr-4"> </i></a>
-                                 <a href="https://twitter.com/spotify"><i class="fab fa-2x fa-twitter white-text pr-4"> </i></a>
-                                 <a href="https://facebook.com/spotify"><i class="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
+
+                            <div className="my-col-4">  
+                                 <a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a>
+                                 <a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a>
+                                 <a href="https://facebook.com/spotify"><i className="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
                             </div>
-                   
+
+                    </div>
                     
                     
-                    {/* <div id="mini_footer">
-                        
+                    {/* <div id="mini-footer"> 
                     <ul>
                             <li className="list-inline-item left"><a href="#!">Legal</a></li>
                             <li className="list-inline-item left"><a href="#!">Privacy Center</a></li>
@@ -132,11 +162,11 @@ const mobile_footer = () => {
                             <li className="list-inline-item left"><a href="#!">About Ads</a></li>
                             <li className="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
                     </ul>
-                    
                     </div> */}
-                    </div>
-        </MyMobileFooter>
+                  </div>
+            </MyDesktopFooter>
+        
     );
 };
 
-export default mobile_footer;
+export default DesktopFooter;

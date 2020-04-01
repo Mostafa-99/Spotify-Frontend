@@ -10,10 +10,10 @@ justify-content:space-evenly;
 align-items:center;
 background-color:rgba(0,0,0,0.6);
 
-height:11vh;
+height:70px;
 width:100%;
 z-index:1;
-#mydesknavbar .links,.links0{
+#my-desk-navbar .links,.links-0{
     
     font-size: calc(7px + .8vw);
     text-decoration:none;
@@ -21,12 +21,12 @@ z-index:1;
     padding:10px;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
 }
-#mydesknavbar .links0
+#my-desk-navbar .links-0
 {
     cursor:default;
 }
 
-#mydesknavbar .nav-links{
+#my-desk-navbar .nav-links{
     margin-top:-1%;
     display: flex;
     flex-flow:row nowrap;
@@ -38,11 +38,11 @@ z-index:1;
     left: 55%;
 }
 
-#mydesknavbar .links:hover{
+#my-desk-navbar .links:hover{
     color:#1DB954;
 }
 
-#mydesknavbar .logo{
+#my-desk-navbar .logo{
     width:132px;
     position: absolute;
     left: 12%;
@@ -50,24 +50,24 @@ z-index:1;
 }
 
 `
-const desktop_navbar = () => {
+const DesktopNavbar = () => {
     return (
         <MyDesktopNavbar>
-            <div id="mydesknavbar">
+            <div id="my-desk-navbar">
            <Link to="/"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
             <div className="right">
             <ul className="nav-links" >
                 <li>
-                    <Link to="/" className="links">Premium</Link>
+                    <Link to="/premium" className="links">Premium</Link>
                 </li>
                 <li>
                     <Link to="/help" className="links">Help</Link>
                 </li>
                 <li>
-                    <Link to="/" className="links">Download</Link>
+                    <a href="https://www.spotify.com/eg-en/download/windows/" className="links">Download</a>
                 </li>
                 <li>
-                    <Link to="/" className="links0">|</Link>
+                    <Link to="/" className="links-0">|</Link>
                 </li>
                 <li>
                     <Link  to="/signup" className="links">Signup</Link>
@@ -85,4 +85,4 @@ const desktop_navbar = () => {
     );
 }
 
-export default desktop_navbar
+export default DesktopNavbar

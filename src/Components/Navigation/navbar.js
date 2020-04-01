@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import DesktopNavbar from './desktop_navbar'
-import MobileNavbar from './mobile_navbar'
+import DesktopNavbar from './DesktopNavbar'
+import MobileNavbar from './MobileNavbar'
 
-class navbar extends Component {
+
+class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          isDesktop: false 
+          isDesktop: true 
         };
     
         this.updatePredicate = this.updatePredicate.bind(this);
       }
       componentDidMount() {
+        this.setState(()=> ({}))
         this.updatePredicate();
         window.addEventListener("resize", this.updatePredicate);
       }
@@ -25,7 +27,7 @@ class navbar extends Component {
       }
     
       render() {
-        const isDesktop = this.state.isDesktop;
+       const isDesktop = this.state.isDesktop;
     
         return (
           <div>
@@ -39,4 +41,4 @@ class navbar extends Component {
       }
 }
 
-export default navbar
+export default Navbar
