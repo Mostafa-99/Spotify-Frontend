@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './premiumCode.css';
-import Footer from '../Footer/footer.js'
-import Navbar from '../Navigation/navbar.js'
+import Footer from '../Footer/Footer.js'
+import Navbar from '../Navigation/Navbar.js'
 
 export class premiumCode extends Component {
     state={

@@ -5,8 +5,8 @@ import AccountHelp from '../AccountHelp'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router , Switch,Route} from "react-router-dom";
 import {Link} from 'react-router-dom';
-import Footer from '../../../Footer/footer.js'
-import Navbar from '../../../Navigation/navbar.js'
+import Footer from '../../../Footer/Footer.js'
+import Navbar from '../../../Navigation/Navbar.js'
 import SideBar from '../../SideBar/SideBar'
 function ChangeEmailAddress(){
     {document.title ="Change email address - Spotify"}

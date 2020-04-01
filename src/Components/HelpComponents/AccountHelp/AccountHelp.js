@@ -4,8 +4,8 @@ import './AccountHelp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import SideBar from '../SideBar/SideBar'
-import Footer from '../../Footer/footer.js'
-import Navbar from '../../Navigation/navbar.js'
+import Footer from '../../Footer/Footer.js'
+import Navbar from '../../Navigation/Navbar.js'
 function AccountHelp(){
     {document.title ="Account Help - Spotify"}
     return(       

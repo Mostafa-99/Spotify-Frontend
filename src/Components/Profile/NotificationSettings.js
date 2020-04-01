@@ -3,8 +3,8 @@ import SideBar from './SideBar'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
-import Footer from '../Footer/footer.js'
-import Navbar from '../Navigation/navbar.js'
+import Footer from '../Footer/Footer.js'
+import Navbar from '../Navigation/Navbar.js'
 
 class NotificationsSettings extends Component {
     constructor() {

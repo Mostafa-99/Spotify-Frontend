@@ -5,8 +5,8 @@ import benefit1 from '../../Images/benefit-1.png';
 import benefit2 from '../../Images/benefit-2.png';
 import benefit3 from '../../Images/benefit-3.png';
 import benefit4 from '../../Images/benefit-4.png';
-import Footer from '../Footer/footer.js'
-import Navbar from '../Navigation/navbar.js'
+import Footer from '../Footer/Footer.js'
+import Navbar from '../Navigation/Navbar.js'
 
 export class premium extends Component {
     render() {

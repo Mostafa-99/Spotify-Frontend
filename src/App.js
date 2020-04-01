@@ -1,6 +1,5 @@
 import React from 'react';
 
-import SpotifyButton from './Components/Button/spotify_button'
 import Main from './Components/Main/Main'
 import PremiumNav from './Components/Premium/premiumNav'
 import MainIndex from './Components/userIndex/MainIndex.js'

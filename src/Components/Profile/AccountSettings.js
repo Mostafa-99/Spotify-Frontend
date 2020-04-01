@@ -5,8 +5,8 @@ import AccountOverview from './AccountOverview';
 import AccountHeading from './AccountHeading';
 import axios from 'axios'
 import './Profile.css';
-import Footer from '../Footer/footer.js'
-import Navbar from '../Navigation/navbar.js'
+import Footer from '../Footer/Footer.js'
+import Navbar from '../Navigation/Navbar.js'
 class AccountSettings extends Component {
     constructor(){
         super()
