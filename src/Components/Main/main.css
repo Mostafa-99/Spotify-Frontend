@@ -26,5 +26,12 @@
 
 #main-section button{
     text-align:center;
-    margin:2% 20% 2% 40%;
+    margin-top: 30px;
+}
+#main-section Link{
+    width:100% ;
+    text-align: center;
+}
+#main-section .container{
+text-align: center;
 }

@@ -3,7 +3,7 @@
 	padding: 0;
   border: border-box;
 }
-.Profile {
+.bg-dark-clr {
     background-image: linear-gradient(#212c39, #121e3d 50%, #000); 
     background-repeat: no-repeat;
 
@@ -146,12 +146,14 @@
   margin:25px;
   padding: 14px 42px;
   border-radius: 100px;
+  color: #757575 !important;
+  border-color: #757575 !important;
 }
 #account-overview .account-overview-buttons:hover {
   transform: scale(1.1);
   background-color: inherit;
-  border-color: inherit;
-  color: inherit;
+  border-color: #000 !important;
+  color: #000 !important;
 }
 #edit-profile .edit-section, #notifications-settings .notification-section {
   background: #F8F8F8;

@@ -5,7 +5,8 @@ import AccountOverview from './AccountOverview';
 import AccountHeading from './AccountHeading';
 import axios from 'axios'
 import './Profile.css';
-
+import Footer from '../Footer/footer.js'
+import Navbar from '../Navigation/navbar.js'
 class AccountSettings extends Component {
     constructor(){
         super()
@@ -23,8 +24,11 @@ class AccountSettings extends Component {
 
     render()
     {
+        {document.title ="Account overview - Spotify"}
+
         return(
-            <div>
+            <div className="bg-dark-clr">
+                <Navbar/>
                 <AccountHeading />
                 <div className="container settings">
                     <div className="row">
@@ -32,6 +36,7 @@ class AccountSettings extends Component {
                         <AccountOverview info={this.state.user}/>
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

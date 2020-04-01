@@ -3,35 +3,27 @@ import ReactDOM from 'react-dom';
 import './AccountHelp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-
+import SideBar from '../SideBar/SideBar'
+import Footer from '../../Footer/footer.js'
+import Navbar from '../../Navigation/navbar.js'
 function AccountHelp(){
     {document.title ="Account Help - Spotify"}
-    return( 
-        
-            
-        <body id="bootstrap-overrides">
+    return(       
+        <div id="body-overrides">
+            <Navbar/>
             <div className="container body" id="dev-items"> 
-                <div className="help-topics item" id="help-topics">
-                    <h2 className="ht-header-large">How can we help you?</h2>
-                    <h2 className="ht-header-small">Help topics</h2>
-                    <div className="ht-topics">
-                    <h3 className="ht-topics-ap">Account & Payment</h3>
-                    <ul className="account-help-btn">
-                        <Link to="/account_help/" ><li>Account Help</li> </Link>
-                    </ul>
-                    </div>
-                </div>
-                <div className="account-help item" id="account-help">
+                <SideBar/>
+                <div className="account-help item" id="account-help department">
                     <nav aria-label="breadcrumb">
                     <ol className="breadcrumb" id="help-breadcrumb">
-                        <li className="breadcrumb-item"><Link to="/help"><a>Home</a></Link> </li>
-                        <li className="breadcrumb-item active" aria-current="page">Account Help</li>
+                        <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                        <li className="breadcrumb-item active" id="typing" aria-current="page">Account Help</li>
                     </ol>
                     </nav>
-                    <div >
-                    <h1>Account Help</h1>
-                    <h2>ARTICLES</h2>
-                    <ul className="help-art" id="help-arts-links">
+                    <div className="container">
+                    <h1 id="help-arts-headers">Account Help</h1>
+                    <h2 className="account-help-arts-header"id="help-arts-headers ">ARTICLES</h2>
+                    <ul className="help-art-account-help" id="help-arts-links">
                     <Link to="/profile-picture" >
                         <li className="inside-links">Profile picture</li>
                     </Link>
@@ -51,7 +43,8 @@ function AccountHelp(){
                     </div>
                 </div>
             </div>
-        </body>
+            <Footer/>
+        </div>
     )
 }
 export default AccountHelp

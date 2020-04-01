@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
+import { Link } from 'react-router-dom';
 
 const MyDesktopFooter=styled.footer`
 justify-content:space-evenly;
@@ -122,14 +123,14 @@ const DesktopFooter = () => {
                             <div className="my-col-1 min">
                                 <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
-                                    <li><a href="#!">About</a> </li>
+                                    <li><a href="https://www.spotify.com/eg-en/about-us/contact/">About</a> </li>
                                 </ul>
                             </div>
                         
                             <div className="my-col-2">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
-                                <li><a href="#!">For Artists</a></li>
+                                <li><a href="https://artists.spotify.com/">For Artists</a></li>
                                
                             </ul>
                             </div>
@@ -139,8 +140,8 @@ const DesktopFooter = () => {
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
                             <Link to="/help" ><li>Help</li></Link>
-                                <li><a href="#!">Web Player</a></li>
-                                <li><a href="#!">Free Mobile App</a></li>
+                            <Link to="/Home"> <li>Web Player</li></Link>
+                                {/* <li><a href="#!">Free Mobile App</a></li> */}
                             </ul>
                             </div>
 

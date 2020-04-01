@@ -75,7 +75,9 @@ letter-spacing:2px;
 #my-mob-footer a:hover{
    color:#1DB954;
 }
-
+#mobfooter .row{
+    width:100%;
+}
 `
 
 const MobileFooter = () => {
@@ -83,6 +85,7 @@ const MobileFooter = () => {
         <MyMobileFooter>
             <div id="my-mob-footer">
              <Link to="/"><a href="#!" className="navbar-brand"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a></Link>
+
              <div className="row"> 
                             <div className="my-col-1">
                                 
@@ -99,6 +102,7 @@ const MobileFooter = () => {
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
                                 <li><a href="#!">For Artists</a></li>
+
                                 {/* <li><a >Developers</a></li>
                                 <li><a >Brands</a></li>
                                 <li><a >Inverstors</a></li>
@@ -111,7 +115,7 @@ const MobileFooter = () => {
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
                                 <Link to="/help"><li>Help </li></Link>
-                                <li><a href="#!" >Web Player</a></li>
+                                <Link to="/Home"><li>Web Player</li></Link>
                                 <li><a href="#!">Free Mobile App</a></li>
                             </ul>
                             </div>

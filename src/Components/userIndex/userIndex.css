@@ -8,24 +8,14 @@
 
 /*Top Cover Css*/
 
-.index-body {
-  width: 100%;
-  height: 100%;
-  color: #FFF;
-  position: relative;
-  padding-left: 0;
-  padding-right: 0;
-  height: auto;
-  overflow-x: hidden;
 
-}
 
+/*Index Page After Login*/
 #userindexsection{
   width: 100%;
   height: auto;
   overflow: hidden;
 }
-/*Index Page After Login*/
 .heromain{
       background: linear-gradient(to bottom, #c8bb50 0%, #d1bd4f 25%, #d2be4f 50%, #e6c050 75%, #f4bf60 100%);
       overflow: hidden;
@@ -76,32 +66,20 @@
   margin-top:0px;
 
 }
-.col-md-offset-1 {
 
-  margin-left: 8.33333333%;
-
-}
-.col-md-10 {
-
-  width: 83.33333333%;
-  
-}
-
-
-.whitepart{
+#herotext{
   color: #FFF;
   margin-left: 0px;
   text-align: center;
-  margin-left: 0px;
   width: 100%;
   height:100%;
-  margin-top: 30px;
   padding-top: 60px;
   padding-bottom: 60px;
-
+  padding-left: 100px;
 }
 
-.display-2 {
+#d2overrides{
+
   font-weight: 900;
   margin-left: 0px;
   display: flex;
@@ -120,27 +98,64 @@
 }
 @media only screen and (min-width:768px)
 {
-  .display-2{
+  #d2overrides{
     font-size: 64px;
   }
+  #herotext{
+    padding: 0;
+    padding-left: 100px;
+  }
+  #userindexrow1{
+    padding-bottom: 80px;
+    padding-top: 80px;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    top: 100px;
+    right:20px;
+  }
+  
 }
 @media only screen and (min-width:992px)
 {
-  .display-2{
+  #d2overrides{
     font-size:80px;
   }
 }
-@media only screen and (max-width:768px)
+@media only screen and (max-width:500px)
 {
-  .display-2{
+#herotext{
+  padding:15px;
+  position: relative;
+  right: 0;
+  top:150px;
+}
+#lowseccontainer{
+  margin-left: 0px;
+}
+#d2overrides{
+  font-size: 42px;
+}
+}
+
+@media only screen and (max-width:768px) and (min-width:500px)
+{
+  #lowseccontainer{
+    margin-left: 20px;
+  }
+
+  #d2overrides{
     font-size: 40px;
   }
+#herotext{
+  position: absolute;
+  top: 300px;
+  left:-40px;
+}
+#lowseccontainer {
+  margin-left: 80px;
+}
 } 
-
-
-
-
-
 
 #userindexb1,#launchbutton{
     text-align: center;
@@ -195,38 +210,10 @@
 }
 
 /* cardComponent */
-
-@media only screen and (min-width: 1200px){
-.itemswrapper{
-  display: flex ;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-} 
-
-.itemswrapper .itemwrapper{
-  position: relative;
-  margin: 10px;
-}
-#title{
-  font-size: 32px;
-}
-}
-@media only screen and (max-width: 1200px) {
-.itemswrapper {
-  overflow: auto;
-  white-space: nowrap;
-}
-.itemswrapper .itemwrapper{
-  display: inline-block;
-  position: relative;
-  margin: 10px;
-  width: fit-content;
-}
-#title{
-font-size: 20px ;
-}
-
+/* General styles used for All screens */
+#buttonoutline{
+  border: transparent;
+  color: transparent;
 }
 .imgbackground{
   height: 100%;
@@ -237,32 +224,12 @@ font-size: 20px ;
 }
 
 .imgbackground img{
-  width: 360px;
-  height: 360px;
-}
-.imagetextwrapper{
-  position: absolute;
-  top:0;
-  right:0;
-  left:0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 1em;
-  padding-right: 1em;
-  width: 100%;
-  align-items: center;
-  height: 100%;
-  text-align: center;
-
+  max-width: 360px;
+  max-height: 360px;
+  height: auto;
+  width: auto; 
 }
 
-.imagetextwrapper .subtitle , a,#buttonoutline{
-  font-weight:600;
-  color: transparent;
-  cursor: pointer;
-  text-transform: uppercase;
-}
  .subtitle{
   position: absolute;
   right: 0;
@@ -271,52 +238,146 @@ font-size: 20px ;
   display: block;
 }
 
-.imagetextwrapper:hover .playlistinfo{
-  font-weight: 900;
-  color : white;
-  transition: 1s;
-}
-.imagetextwrapper:hover #artist{
-  color: rgb(145, 148, 150);
-  transition: 1s;
-}
- 
-.imgbackground:hover img{
-  transition:1s;
-  filter: brightness(20%);
-}
-#buttonoutline{
-  border: transparent;
-  color: transparent;
-  display: none;
-  
-}
-.imagetextwrapper:hover #buttonoutline{
-  color: #1db954;
-  font-weight: 900;
-  background-color: transparent;
-  border-color: transparent;
-  display: inline-block;
-  
-} 
-#buttonoutline:active:focus:checked{
-  color: #1db954;
-  font-weight: 900;
-  background-color: transparent !important;
-  border-color: transparent !important;
-  border: none !important; 
-  outline: none !important;
-  box-shadow: none !important;
-  outline-offset: -4px;
-}
-
-.lowersection section{
+#lowersection section{
 position: relative;
 width: 100%;
 overflow: hidden;
+padding-bottom: 80px;
 }
+
+@media only screen and (min-width: 1200px){
+  /* For Default screen size */
+    .itemswrapper{
+    display: flex ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  } 
+  
+  .itemswrapper .itemwrapper{
+    position: relative;
+    margin: 10px;
+  }
+  #title{
+    font-size: 32px;
+  }
+ 
+  .imagetextwrapper:hover .playlistinfo{
+    font-weight: 900;
+    color : white;
+    transition: 1s;
+  }
+  .imagetextwrapper:hover #artist{
+    color: rgb(145, 148, 150);
+    transition: 1s;
+  }
+   
+  .imgbackground:hover img{
+    transition:1s;
+    filter: brightness(20%);
+  }
+  
+  #buttonoutline{
+    display: none;
+  }
+  .imagetextwrapper:hover #buttonoutline{
+    color: #1db954;
+    font-weight: 900;
+    background-color: transparent;
+    border-color: transparent;
+    display: inline-block;
+    
+  } 
+  #buttonoutline:active:focus:checked{
+    color: #1db954;
+    font-weight: 900;
+    background-color: transparent;
+    border-color: transparent ;
+    border: none; 
+    outline: none ;
+    box-shadow: none ;
+    outline-offset: -4px;
+  }
+  .imagetextwrapper{
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
+  
+  .imagetextwrapper .subtitle ,.playlistinfo a,#buttonoutline{
+    font-weight:600;
+    color: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  }
+  @media only screen and (max-width: 1200px) {
+  /*To Keep text under the picture in smaller windows*/
+  .itemswrapper {
+    overflow-x: auto;
+    display: flex;
+    white-space: nowrap;
+    height: 450px;
+  }
+  .itemswrapper .itemwrapper{
+    display: flex;
+    flex-wrap: nowrap;
+    height: fit-content;
+    position: relative;
+    margin: 10px;
+    width: fit-content;
+  }
+  .imagetextwrapper{
+    display: block;
+    padding: 0.5em;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    align-items: center;
+    height: fit-content;
+    text-align: center;
+  }
+  .imagetextwrapper .playlistinfo{
+    font-weight: 900;
+    color : white;
+  }
+  .imagetextwrapper #artist{
+    color: rgb(145, 148, 150);
+  }
+  .imagetextwrapper #title{
+   color:  #919496;
+  }
+  #buttonoutline{
+    color: #1db954;
+    font-weight: 900;
+    background-color: transparent;
+    border-color: transparent ;
+    border: none; 
+    outline: none ;
+    box-shadow: none ;
+    outline-offset: -4px;
+  }
+  .imgbackground img{
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  }
+  
 /*Text*/
-.h1{
+.h1spotify{
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -335,7 +396,7 @@ overflow: hidden;
   margin-top: 24px;
   text-align: center;
   }
-.h1, h2 {
+#rowlowerfont {
   margin-top: 24px;
   margin-bottom: 12px;
 }
