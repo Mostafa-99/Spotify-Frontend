@@ -142,7 +142,7 @@ class NotificationsSettings extends Component {
                                         </tbody>
                                     </table>
                                     <div className="buttons">
-                                        <Link to="/accountoverview" className="cancel-button">CANCEL</Link>
+                                        <Link to="/account-overview" className="cancel-button">CANCEL</Link>
                                         <button className="btn-sm btn btn-success save-button" onClick={this.saveNotificationsHandle}>SAVE</button>
                                     </div>
                                 </div>

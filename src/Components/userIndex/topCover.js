@@ -1,5 +1,6 @@
 import React from 'react';
 import './userIndex.css';
+import { Link } from 'react-router-dom';
 
 
 function TopCover() {
@@ -13,9 +14,9 @@ function TopCover() {
                         <div className="col-xs-12 col-md-10  col-md-offset-1">
                              <h1 className="display-2" id="d2overrides">Go Premium. Be happy.</h1>
                         <div className="row" id="userindexrow2">
-                            <a href="/eg-en/purchase/panel/">
+                           <Link to="/premium-code">
                             <button id="userindexb1"> Start Free Trial </button>
-                            </a>
+                            </Link>
                         </div>
                         </div>
                         </div>

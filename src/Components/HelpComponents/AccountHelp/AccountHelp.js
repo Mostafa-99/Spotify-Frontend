@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from 'react-dom';
 import './AccountHelp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';

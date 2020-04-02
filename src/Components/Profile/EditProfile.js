@@ -88,7 +88,7 @@ class EditProfile extends Component {
                                 <input ref="phone" className="phone-text-box" defaultValue={this.state.user.pno}></input>
                             </div>
                             <div className="buttons">
-                                <Link to="/accountoverview" className="cancel-button">CANCEL</Link>
+                                <Link to="/account-overview" className="cancel-button">CANCEL</Link>
                                 <button onClick={()=>{this.editProfileHandle(this.state.id,this.refs.phone.value,this.refs.country.value)}}className="btn-sm btn btn-success save-profile-button">SAVE PROFILE</button>
                             </div>
                         </div>

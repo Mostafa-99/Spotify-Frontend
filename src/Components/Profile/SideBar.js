@@ -10,9 +10,9 @@ function SideBar(props) {
             <div>
                     <img  src={props.img} className="rounded-circle" alt="Profile" ></img>
 					<ul className="sidelist">
-                        <Link to="/accountoverview"><li className="list first"><span className="fa fa-home icon"></span> Account overview </li></Link>
-                        <Link to="/editprofile" ><li className="list"><i className="fa fa-pencil icon"></i>  Edit profile</li></Link>
-						<Link to="/notificationsettings" ><li className="list"><i className="fa fa-bell-o icon"></i>Notifications settings</li></Link>
+                        <Link to="/account-overview"><li className="list first"><span className="fa fa-home icon"></span> Account overview </li></Link>
+                        <Link to="/edit-profile" ><li className="list"><i className="fa fa-pencil icon"></i>  Edit profile</li></Link>
+						<Link to="/notification-settings" ><li className="list"><i className="fa fa-bell-o icon"></i>Notifications settings</li></Link>
 					</ul>
 			    </div>
         </div>        

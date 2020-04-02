@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import "./userIndex.css"
+import { Link } from "react-router-dom"
 
 class CardComponent extends Component {
 
@@ -37,9 +38,9 @@ class CardComponent extends Component {
                      <div className="row" id="rowlower">
                      <h2 className="h1spotify" id="rowlowerfont">Looking for music?</h2>
                      <p className="lead" id="userindexlead1">Start listening to the best new releases.</p>
-                        <a href="https://open.spotify.com/browse" >
+                        <Link to="/home">
                          <button id="launchbutton">Launch Web Player</button>
-                         </a>
+                        </Link>
                      </div>
 
                      <div className="row" id="userindexrow3">
@@ -56,9 +57,9 @@ class CardComponent extends Component {
                                                             <div id="title"> {playList.title}</div>
                                                             <div id="artist"> {playList.artist}</div>
                                                             </div>
-                                                            <a href="https://google.com"> 
+                                                           <Link to="/home"> 
                                                             <button id="buttonoutline">Play  Now</button> 
-                                                            </a>                
+                                                            </Link>                
                                                     </div>
                                                 </div> 
                                             </div>

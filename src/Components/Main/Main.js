@@ -1,7 +1,7 @@
 import React from 'react';
 import './main.css'
-import Footer from '../Footer/Footer.js';
-import Navbar from '../Navigation/Navbar.js';
+import Footer from '../Footer/Footer';
+import Navbar from '../Navigation/Navbar';
 import '../Button/spotify_button.css'
 import { Link } from 'react-router-dom';
 

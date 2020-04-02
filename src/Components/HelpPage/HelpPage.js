@@ -1,10 +1,9 @@
 
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter,Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import Footer from '../Footer/Footer.js'
 import Navbar from '../Navigation/Navbar.js'
 import './helpPage.css';
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 /*
 
@@ -118,7 +117,7 @@ window.location.reload();
     return (
     <div>
       <Navbar/>
-      <div id="body help-page" onLoad=" LoadOnce()" >
+      <div id="body help-page">
 
        
         <section id="navigation-section">
@@ -137,7 +136,7 @@ window.location.reload();
               <h3>Using Spotify</h3>
               <ul>
 
-              <Link to="/accountoverview"><li className="a">Features</li></Link>
+              <Link to="/account-overview"><li className="a">Features</li></Link>
               </ul>
             </div>  
           </div>
@@ -289,5 +288,5 @@ window.location.reload();
 
 
 
-export default  withRouter(HelpPage);
+export default HelpPage;
 

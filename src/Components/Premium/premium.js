@@ -10,8 +10,8 @@ import Navbar from '../Navigation/Navbar.js'
 
 export class premium extends Component {
     render() {
+        
         {document.title ="Spotify"}
-
         return (
                 <div id="pp-main-div">
                     <Navbar/>
@@ -19,7 +19,7 @@ export class premium extends Component {
                         <div className="blue-container">
                             <h1 className="bigger-h1">Get Premium free for 1 month</h1>
                             <h2 className="bigger-h2">Just EGP 49.99/month after. Cancel anytime.</h2>
-                            <Link to="/premiumcode">
+                            <Link to="/premium-code">
                                 <button id="pp-first-button" className="first-button">GET PREMIUM</button>
                             </Link>
                             <p>
@@ -73,7 +73,7 @@ export class premium extends Component {
                                 </ul>
                                 <br/>
                                 <hr/>
-                                <Link to="/premiumcode">
+                                <Link to="/premium-code">
                                     <button id="pp-second-button" className="offer-button">GET PREMIUM</button>
                                 </Link>
                             </div>
