@@ -39,11 +39,14 @@ class SignUp extends Component {
             //let statusNow = JSON.parse(JSON.stringify(response.status));
             if (response.status === 'connected') {
                 //this.setState({status: response.status});
+                localStorage.setItem("id", response.authResponse.userID);
+                localStorage.setItem("token", response.authResponse.accessToken);
                 alert("YES");
               } else {
                 alert("NO");
               }
               console.log(response);
+              console.log(localStorage);
           }, {scope: 'public_profile,email'});
        
     }
@@ -204,21 +207,21 @@ class SignUp extends Component {
         <div className="center-box">
         <img id="logo" src={spotify_black_logo} alt=""/>
         <hr></hr>
-           <form class="text-center p-5" action="">
-                <button type="button" id="fb-sign-up" class="my-spotify-button" onClick={this.fbSignUpHandler}>SIGN UP WITH FACEBOOK</button>
+           <form className="text-center p-5" action="">
+                <button type="button" id="fb-sign-up" className="my-spotify-button" onClick={this.fbSignUpHandler}>SIGN UP WITH FACEBOOK</button>
                 <h6>or</h6>
               
             <hr/>
             <h6>Sign up with your email address</h6>
-            <input type="email" data-type="email" onChange={this.inputChangeHandler} id="sign-up-form-email" class="form-control mb-4" placeholder="Email" data-err="Enter Correct Email" required></input>
-            <input type="email" data-type="email_again" onChange={this.inputChangeHandler} id="sign-up-form-email-confirm" class="form-control mb-4" placeholder="Confirm email" data-err="Enter Correct Confirm Email" required></input>
-            <input type="password" data-type="psw" onChange={this.inputChangeHandler} id="sign-up-form-password" class="form-control" placeholder="Password" maxlength="30" minlength="8" data-err="Enter Correct Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required></input>
+            <input type="email" data-type="email" onChange={this.inputChangeHandler} id="sign-up-form-email" className="form-control mb-4" placeholder="Email" data-err="Enter Correct Email" required></input>
+            <input type="email" data-type="email_again" onChange={this.inputChangeHandler} id="sign-up-form-email-confirm" className="form-control mb-4" placeholder="Confirm email" data-err="Enter Correct Confirm Email" required></input>
+            <input type="password" data-type="psw" onChange={this.inputChangeHandler} id="sign-up-form-password" className="form-control" placeholder="Password" maxLength="30" minLength="8" data-err="Enter Correct Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required></input>
             <br></br>
-            <input  type="text" data-type="username" onChange={this.inputChangeHandler} id="sign-up-form-username" class="form-control" placeholder="What should we call you?" data-err="Enter Correct Username" required/>
+            <input  type="text" data-type="username" onChange={this.inputChangeHandler} id="sign-up-form-username" className="form-control" placeholder="What should we call you?" data-err="Enter Correct Username" required/>
             <br></br>
             <h5>Date of Birth </h5>
-            <div class="row">
-                <input type="number" id="sign-up-form-day" name="signup_form[dob_day]" onChange={this.inputChangeHandler}  required="required" max="31" maxlength="2" min="1" pattern="[0-9]*" placeholder="Day" class="dob " data-err="Please enter a valid day of the month"></input>
+            <div className="row">
+                <input type="number" id="sign-up-form-day" name="signup_form[dob_day]" onChange={this.inputChangeHandler}  required="required" max="31" maxLength="2" min="1" pattern="[0-9]*" placeholder="Day" className="dob " data-err="Please enter a valid day of the month"></input>
                 <select id="sign-up-form-month"  name="signup_form[dob_month]"  onChange={this.inputChangeHandler} required data-err="Please enter your birth month.">
                     <option value="" >Month</option>
                     <option value="01 ">January</option>
@@ -234,27 +237,27 @@ class SignUp extends Component {
                     <option value="11 ">November</option>
                     <option value="12 ">December</option>
                 </select>
-                <input type="number" id="sign-up-form-year" name="signup_form[dob_year]" onChange={this.inputChangeHandler} required max="2010" maxlength="4" min="1950" pattern="[0-9]*" placeholder="Year" class="dob" data-err="Please enter a valid year." data-msg-number="Please enter a valid year" data-msg-min="Please enter a valid year." data-msg-max="Please enter a valid year. " data-msg-maxlength="Please enter a valid year. "/>
+                <input type="number" id="sign-up-form-year" name="signup_form[dob_year]" onChange={this.inputChangeHandler} required max="2010" maxLength="4" min="1950" pattern="[0-9]*" placeholder="Year" className="dob" data-err="Please enter a valid year." data-msg-number="Please enter a valid year" data-msg-min="Please enter a valid year." data-msg-max="Please enter a valid year. " data-msg-maxlength="Please enter a valid year. "/>
             </div>
 
             <br></br>
   
-            <label class="radio-inline">
+            <label className="radio-inline">
             <input type="radio" name="gender" data-type="gender" onChange={this.inputChangeHandler} id="gender-male" value="male" required/>Male</label>  
-            <label class="radio-inline">
+            <label className="radio-inline">
             <input type="radio" name="gender" data-type="gender" onChange={this.inputChangeHandler} id="gender-female" value="female" required />Female</label> 
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="sign-up-form-news"/>
-                <label class="custom-control-label" for="sign-up-form-news"><p>Share my registration data with Spotify for marketing purposes.</p></label>
+            <div className="custom-control custom-checkbox">
+                <input type="checkbox" className="custom-control-input" id="sign-up-form-news"/>
+                <label className="custom-control-label" htmlFor="sign-up-form-news"><p>Share my registration data with Spotify for marketing purposes.</p></label>
             </div>
             <br></br>
 
             <p> By clicking on Sign up, you agree to Spotify's <a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions</a>.</p>
             <p> To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's
                 <a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy</a>.</p>
-            <button class="my-spotify-button" id="sign-up" type="submit" onClick={this.signUpHandler}>SIGN UP</button>
+            <button className="my-spotify-button" id="sign-up" type="submit" onClick={this.signUpHandler}>SIGN UP</button>
            
-            <h6>Already have an account? <Link to="../Login"><a href=" " target="_blank "> Log in</a></Link>.</h6>
+            <h6>Already have an account? <Link to="../Login">Log in</Link>.</h6>
             </form>   
         </div>
         </div>

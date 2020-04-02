@@ -82,7 +82,9 @@ letter-spacing:2px;
     text-transform:none;
     text-align:left;
     color:white;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
 }
+
 
 #my-desk-footer a:hover{
    color:#1DB954;

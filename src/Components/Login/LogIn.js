@@ -4,13 +4,9 @@ import spotify_black_logo from '../../Images/spotify_logo_black.png';
 import '../Button/spotify_button.css';
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
-import firebase from 'firebase';
 //import { buildQueries } from '@testing-library/react';
 
-firebase.initializeApp({
-    apiKey:"AIzaSyBQxjnak8nq_Jx9B5CfuReDP9hVwKwB_1Q",
-    authDomain:"spotify-sw.firebaseapp.com"
-})
+
 
 class LogIn extends Component {
     
@@ -36,41 +32,20 @@ class LogIn extends Component {
     fbLogin = event=> {
         event.preventDefault();
         
-        // var provider = new firebase.auth.FacebookAuthProvider();
-        // provider.addScope('public_profile');
-        // firebase.auth().signInWithPopup(provider).then(function(result) {
-        //     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        //     this.setState({ token: result.credential.accessToken })
-        //     // The signed-in user info.
-        //     var user = result.user;
-        //     // ...
-        //   }).catch(function(error) {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     // The email of the user's account used.
-        //     var email = error.email;
-        //     // The firebase.auth.AuthCredential type that was used.
-        //     var credential = error.credential;
-        //     // ...
-        //   });
-
         window.FB.login(function(response) {
             //let statusNow = JSON.parse(JSON.stringify(response.status));
             if (response.status === 'connected') {
-               // this.setState({status: response.status});
+                this.setState({status: response.status})
                 alert("YES");
               } else {
                 alert("NO");
               }
               console.log(response);
-          }, {scope: 'public_profile,email'});
-       
+          }.bind(this), {scope: 'public_profile,email'});
     }
 
     fbLogOut = event=> {
         event.preventDefault();
-        //firebase.auth().signOut();
         window.FB.logout(function(response) {
               console.log(response);
           });
@@ -79,16 +54,10 @@ class LogIn extends Component {
     componentDidMount =()=>{
         
         this.setState(()=> ({}))
-        firebase.auth().onAuthStateChanged(user => {
-            if(user!=null)
-            {
-            user.getIdToken().then(accesstoken =>{
-                
-                this.setState({ token: accesstoken })
-            })
-            }
-            this.setState({ isLoggedIn: !!user })
-          }) 
+        
+          let show=localStorage.getItem("isLoggedIn");
+          if(show)
+          this.setState({status:"connected"})
     }
 
     componentDidUpdate(){
@@ -106,6 +75,7 @@ class LogIn extends Component {
     }
 
     handleLogin = event=> {   
+        event.preventDefault();
         const user={email:this.state.email,password:this.state.password}
         const email = user.email;
         const psw = user.password;
@@ -114,8 +84,16 @@ class LogIn extends Component {
         if(is_email_valid && is_psw_valid)
         {
             axios.post('https://jsonplaceholder.typicode.com/users',{user})   
-            .then(res => {console.log(res.data);alert("yes data")}).catch(() =>{
-                alert("no data");});
+            .then(res => {
+                console.log(res.data);
+                localStorage.setItem("isLoggedIn", res.success);
+                localStorage.setItem("token", res.token);
+                this.setState({status: 'connected'});
+                alert("yes data")}).catch(
+                    err =>{
+                alert(err.status + ": "+ err.message);
+                this.setState({status: 'invalid'});
+            });
         }
         
     }
@@ -143,17 +121,14 @@ class LogIn extends Component {
             }) 
     }
 
-    render(){
-    let invalidMessage=null    
-        
+    render(){    
     return (
         
         <div id="my-sign-up">
             {this.state.status==="connected" ?
             <div>
-            <h1>Logged in</h1>
             <button onClick={this.fbLogOut}>Sign Out</button>
-            {/* <Redirect to="/profile"/> */}
+            <Redirect to="/Home"/>
             </div>
             :
             <div className="center-box">
@@ -173,8 +148,8 @@ class LogIn extends Component {
              
             <form className="text-center p-5" action="">
             
-            <button id="fb-sign-up-2" type="button" class="my-spotify-button" onClick={this.fbLogin}><i className="fab fa-facebook fa-lg white-text mr-md-2 mr-3 fa-1x"> </i>CONTINUE WITH FACEBOOK</button>
-            {/* <button id="applesignup" type="button" class="myspotifybutton"><i className="fab fa-apple fa-lg white-text mr-md-2 mr-3 fa-1x"> </i>CONTINUE WITH APPLE</button> */}
+            <button id="fb-sign-up-2" type="button" className="my-spotify-button" onClick={this.fbLogin}><i className="fab fa-facebook fa-lg white-text mr-md-2 mr-3 fa-1x"> </i>CONTINUE WITH FACEBOOK</button>
+            {/* <button id="applesignup" type="button" className="myspotifybutton"><i className="fab fa-apple fa-lg white-text mr-md-2 mr-3 fa-1x"> </i>CONTINUE WITH APPLE</button> */}
             <h6>or</h6>
             <hr/>
 
@@ -183,7 +158,7 @@ class LogIn extends Component {
             <br/>
             <div className="custom-control custom-checkbox" id="remember-me">
                 <input type="checkbox" className="custom-control-input" id="defaultUnchecked"/>
-                <label className="custom-control-label" for="defaultUnchecked">Remember me</label>
+                <label className="custom-control-label" htmlFor="defaultUnchecked">Remember me</label>
             </div>
 
             <button id="login" type="submit" className="my-spotify-button" onClick={this.handleLogin}>LOG IN</button>
@@ -199,8 +174,7 @@ class LogIn extends Component {
         </form>      
         
         </div>
-            }
-            
+            }   
         </div>
     );
 }

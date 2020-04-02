@@ -71,6 +71,7 @@ letter-spacing:2px;
     text-transform:none;
     text-align:left;
     color:white;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
 }
 #my-mob-footer a:hover{
    color:#1DB954;
@@ -84,7 +85,7 @@ const MobileFooter = () => {
     return (
         <MyMobileFooter>
             <div id="my-mob-footer">
-             <Link to="/"><a href="#!" className="navbar-brand"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a></Link>
+             <Link to="/" className="navbar-brand"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"></img></Link>
 
              <div className="row"> 
                             <div className="my-col-1">
@@ -116,7 +117,7 @@ const MobileFooter = () => {
                             <ul>
                                 <Link to="/help"><li>Help </li></Link>
                                 <Link to="/Home"><li>Web Player</li></Link>
-                                <li><a href="#!">Free Mobile App</a></li>
+                                {/* <li><a href="#!">Free Mobile App</a></li> */}
                             </ul>
                             </div>
                             <div className="my-col-4">  

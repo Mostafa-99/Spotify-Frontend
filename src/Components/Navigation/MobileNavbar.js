@@ -138,30 +138,30 @@ class MobileNavbar  extends Component {
       render() {
     return (
         
-        <MyMobileNavbar >
+        <MyMobileNavbar>
             <div id="my-mob-navbar">
-                <Link to="/"> <a href="#!" class="navbar-brand"><img class="logo" src={spotify_white_logo} alt="Spotify Logo White" /></a></Link>
-                <span class="" onClick={()=> this.togglesidebar()}></span>
-                <span id="enter" onClick={()=> this.togglesidebar()}><i class="fas fa-2x fa-align-justify white-text"></i></span>
-                <div class="sidebar">
+                <Link to="/" className="navbar-brand"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></Link>
+                <span className="" onClick={()=> this.togglesidebar()}></span>
+                <span id="enter" onClick={()=> this.togglesidebar()}><i className="fas fa-2x fa-align-justify white-text"></i></span>
+                <div className="sidebar">
                     <br></br>
-                <span id="exit"  onClick={()=> this.togglesidebar()}><i class="fas fa-times"></i></span>
-                <div class="collapse navbar-collapse" id="basicExampleNav">'</div>
+                <span id="exit"  onClick={()=> this.togglesidebar()}><i className="fas fa-times"></i></span>
+                <div className="collapse navbar-collapse" id="basicExampleNav">'</div>
                 <ul>
-                    <Link  to="/premium"><li class="ul1">Premium</li></Link>
-                    <Link to="/help"><li class="ul1">Help</li></Link>
-                    <li><a class="ul1" href="https://www.spotify.com/eg-en/download/windows/">Download</a></li>    
-                    <li class="ul0">_</li>    
+                    <Link  to="/premium"><li className="ul1">Premium</li></Link>
+                    <Link to="/help"><li className="ul1">Help</li></Link>
+                    <li><a className="ul1" href="https://www.spotify.com/eg-en/download/windows/">Download</a></li>    
+                    <li className="ul0">_</li>    
                 </ul>
                 <ul> 
-                    <Link to="/signup"><li class="ul2">Sign up</li></Link>
-                   <Link to="/login"> <li class="ul2">Log in</li></Link>
+                    <Link to="/signup"><li className="ul2">Sign up</li></Link>
+                   <Link to="/login"> <li className="ul2">Log in</li></Link>
                 </ul>
                 <ul id="ul3">
-                <Link to="/"><img class="logo-2" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
+                <Link to="/"><img className="logo-2" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
                 </ul>
                </div> 
-             <div class="black-box"></div> 
+             <div className="black-box"></div> 
              </div>
         </MyMobileNavbar>
         
