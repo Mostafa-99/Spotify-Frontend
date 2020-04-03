@@ -1,8 +1,10 @@
 import React, { Fragment, useState, Component } from "react";
 import axios from "axios";
-import SideBar from "../../Profile/SideBar";
+import "../SideBar/ArtistSidebar";
 import "../UploadFile/uploadfile.css";
 import "../../WebPlayer/WebplayerHome.css";
+import ArtistSidebar from "../SideBar/ArtistSidebar";
+import { Link } from "react-router-dom";
 
 class Albums extends Component {
   constructor() {
@@ -27,12 +29,15 @@ class Albums extends Component {
     return (
       <div className="artist-body" id="webplayer-home">
         <div className="full-page container albums-page">
-          <SideBar />
+          <ArtistSidebar />
           <div className="albums-section">
-            <h2 className="section-title albums">Albums</h2>
+            <div className="header-button-container">
+              <h2 className="section-title albums">Albums</h2>
+              <Link to="/artist/create-album"><button className="btn-primary-outline add-album">Add Album</button></Link>
+            </div>
             <div className="card-group">
               {this.state.artistAlbums.map(album => (
-                <div>
+                <Link to="/artist/album-page">
                   <div className="card">
                     <img
                       src={album.imageUrl[0]}
@@ -44,7 +49,7 @@ class Albums extends Component {
                       <p className="card-text">{album.description}</p>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

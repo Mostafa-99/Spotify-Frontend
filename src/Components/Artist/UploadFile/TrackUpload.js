@@ -4,6 +4,7 @@ import Message from "./Message";
 import SideBar from "../../Profile/SideBar";
 import "../UploadFile/uploadfile.css";
 import Progress from "./Progress";
+import ArtistSidebar from '../SideBar/ArtistSidebar'
 const TrackUpload = () => {
     const [file, setFile] = useState("");
     const [fileName, setFilename] = useState("Choose Track");
@@ -53,7 +54,7 @@ const TrackUpload = () => {
         <div className="artist-body">
             <div className="full-page container upload-page">
                 <Fragment>
-                    <SideBar />
+                    <ArtistSidebar />
                     <form className="container" onSubmit={onSubmit}>
                         {message ? <Message msg={message} /> : null}
                         <div className="custom-file mb-4 ">

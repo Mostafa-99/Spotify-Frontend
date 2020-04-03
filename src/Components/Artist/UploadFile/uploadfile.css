@@ -7,7 +7,7 @@
     flex-direction: row;
     background: #222326;
     height: 90vh;
-    
+    padding: 0;
 }
 .artist-body form{
     display: flex;
@@ -22,6 +22,28 @@
 }
 .artist-body .btn-primary-outline:hover{
     color: #FFF;
-    background-color: rgb(26, 131, 26) !important;
+    background-color: rgb(76, 151, 76) !important;
+}
+.artist-body .albums-section{
+    width: 100%;
+}
+.artist-body .section-title{
+    margin-top: 30px;
+}
+.artist-body .add-album{
+    margin:25px;
+    padding: 14px 42px;
+    border-radius: 100px;
+    color: white;
+    border: 0;
+}
+.artist-body .add-album:hover{
+    transform: scale(1.1);
+}
+.artist-body .header-button-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 

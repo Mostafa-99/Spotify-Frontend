@@ -32,6 +32,7 @@ import MainSelector from './Components/Main/MainSelector'
 import Albums from './Components/Artist/Albums/Albums'
 import CreateAlbum from './Components/Artist/UploadFile/CreateAlbum'
 import TrackUpload from './Components/Artist/UploadFile/TrackUpload'
+import AlbumPage from './Components/Artist/Albums/AlbumPage'
 
 import Home from './Components/WebPlayer/Bodies/Home/Home'
 import Search from './Components/WebPlayer/Bodies/Search/Search'
@@ -73,6 +74,7 @@ function App() {
         <Route path="/artist" exact component={Albums}/>
         <Route path="/artist/track-upload" exact component={TrackUpload}/>
         <Route path="/artist/create-album" exact component={CreateAlbum}/>
+        <Route path="/artist/album-page" exact component={AlbumPage}/>
 
         <Route path="/Home" exact component={Home} />
         <Route path="/Search" exact component={Search} />

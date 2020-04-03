@@ -3,6 +3,7 @@ import axios from "axios";
 import Message from "./Message";
 import SideBar from "../../Profile/SideBar";
 import "../UploadFile/uploadfile.css";
+import ArtistSidebar from '../SideBar/ArtistSidebar'
 import Progress from "./Progress";
 const CreateAlbum = () => {
   
@@ -58,7 +59,7 @@ const CreateAlbum = () => {
     <div className="artist-body">
       <div className="full-page container upload-page">
         <Fragment>
-          <SideBar />
+          <ArtistSidebar />
           <form className="container" onSubmit={onSubmit}>
             {message ? <Message msg={message} /> : null}
             <div class="form-group">
