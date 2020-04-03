@@ -10,7 +10,6 @@ import AccountSettings from './Components/Profile/AccountSettings.js'
 import EditProfile from './Components/Profile/EditProfile.js'
 import NotificationsSettings from './Components/Profile/NotificationSettings.js';
 
-import MainPage from './Components/Main/Main.js'
 import PremiumCode from './Components/Premium/premiumCode.js';
 import Premium from './Components/Premium/premium.js';
 
@@ -85,13 +84,3 @@ function App() {
 
 export default App;
 
-/*<myBody>
-<BrowserRouter>
-
-<Route path="/" exact component={MainIndex}/>
-
-<Route  exact path="/" component={Main}/>  
-    <HelpPage/>     
-    </BrowserRouter>
-    </myBody>
-*/

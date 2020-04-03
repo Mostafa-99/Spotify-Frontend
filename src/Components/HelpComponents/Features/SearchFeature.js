@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './FeaturesMain.css';
-
+import Footer from '../../Footer/Footer.js'
+import Navbar from '../../Navigation/Navbar.js'
 import SideBar from '../SideBar/SideBar'
 export class SearchFeature extends Component {
     render() {
         return (
+            <div>
+            <Navbar/>
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
-                <div>
-                    <h6>
-                        Home / <Link to="/">Features</Link>
-                    </h6>
-                </div>
+            <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb" id="help-breadcrumb">
+                        <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                        <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
+                    </ol>
+            </nav>
                 <div>
                     <h1 className="features-heading">Search</h1>
                     <p>Find what you’re looking for with Search, including:</p>
-                    <ul>
+                    <ul className="features-list">
                         <li>Songs</li>
                         <li>Albums</li>
                         <li>Artists</li>
@@ -29,6 +33,8 @@ export class SearchFeature extends Component {
                     <hr/>
                 </div>
             </div>
+            </div>
+            <Footer/>
             </div>
         )
     }

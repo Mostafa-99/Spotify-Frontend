@@ -2,35 +2,48 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 import SideBar from '../SideBar/SideBar'
 import './FeaturesMain.css';
+import Footer from '../../Footer/Footer.js'
+import Navbar from '../../Navigation/Navbar.js'
 
 export class FeaturesMain extends Component {
     render() {
         return (
+            <div id="features-main"> 
+                <Navbar/>
+           
             <div className="container body" id="dev-items"> 
                 <SideBar/>
                 <div id="features-nav">
-                    <div>
-                        Home / Features
-                    </div>
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb" id="help-breadcrumb">
+                        <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                        <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
+                    </ol>
+                </nav>
                     <div>
                         <h1 className="features-heading">Features</h1>
-                        <Link to="/SearchFeature">
-                            <h4>Search</h4>
+                        <ul>
+
+                        <Link to="/search-feature"> 
+                            <li>Search</li>
                         </Link>
-                        <Link to="/YourLibraryFeature">
-                            <h4>Your Library</h4>
+                        <Link to="/your-library-feature">
+                            <li>Your Library</li>
                         </Link>
-                        <Link to="/ShufflePlayFeature">
-                            <h4>Shuffle play</h4>
+                        <Link to="/shuffle-play-feature">
+                            <li>Shuffle play</li>
                         </Link>
-                        <Link to="/ArtistProfilesFeature">
-                            <h4>Artist profiles</h4>
+                        <Link to="/artist-profiles-feature">
+                            <li>Artist profiles</li>
                         </Link>
-                        <Link to="/VideosFeature">
-                            <h4>Videos</h4>
+                        <Link to="/videos-feature">
+                            <li>Videos</li>
                         </Link>
+                        </ul>
                     </div>
                 </div>
+                </div>
+                <Footer/>
             </div>
         )
     }

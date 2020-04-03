@@ -5,29 +5,7 @@ import Footer from '../Footer/Footer.js'
 import Navbar from '../Navigation/Navbar.js'
 import './helpPage.css';
 import $ from 'jquery';
-/*
 
-
-
-function HelpPage() {
-
-scrollBtn = () =>{
-    ('.scroll-button').on('click', function(event) {
-      if (this.hash !== '') {
-        event.preventDefault();
-    
-        const hash = this.hash;
-    
-        $('html, body').animate(
-          {
-            scrollTop: $(hash).offset().top
-          },
-          800
-        );
-      }
-    });
-  }
-*/
 class HelpPage extends Component {
   
   scrollBtn =()=>{
@@ -66,7 +44,6 @@ class HelpPage extends Component {
        if(!targetDot) return;
 
        const currentSlide =track.querySelector('.active');
-      // const currentDot=dotNav.querySelector('.active');
        const targetIndex=dots.findIndex(dot => dot===targetDot);
 
        const targetSlide=imgs[targetIndex];
@@ -77,7 +54,6 @@ class HelpPage extends Component {
   dotNav.addEventListener('onchange',changeImg);
 
   dotNav.addEventListener('click',changeImg);
-  //slides.addEventListener('onchange',changeImg);
   }
 
   modalVideos=()=>{
@@ -136,7 +112,7 @@ window.location.reload();
               <h3>Using Spotify</h3>
               <ul>
 
-              <Link to="/account-overview"><li className="a">Features</li></Link>
+              <Link to="/features-main"><li className="a">Features</li></Link>
               </ul>
             </div>  
           </div>

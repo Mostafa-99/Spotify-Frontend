@@ -4,19 +4,24 @@ import Icon_shuffle from '../../../Images/icon_shuffle.png';
 import Icon_shuffle_play from '../../../Images/icon_shuffle_play.png';
 import Icon_shuffle_only from '../../../Images/icon_shuffle_only.png';
 import './FeaturesMain.css';
-
+import Footer from '../../Footer/Footer.js'
+import Navbar from '../../Navigation/Navbar.js'
 import SideBar from '../SideBar/SideBar'
 export class ShufflePlayFeature extends Component {
     render() {
         return (   
+        <div>
+
+            <Navbar/>
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
-                <div>
-                    <h6>
-                        Home / <Link to="/">Features</Link>
-                    </h6>
-                </div>
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb" id="help-breadcrumb">
+                        <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                        <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
+                    </ol>
+                </nav>
                 <div>
                     <h1 className="features-heading">Shuffle play</h1>
                     <p>Mix up what plays next with Shuffle. Great for long playlists, switching up your listening, or 
@@ -25,7 +30,7 @@ export class ShufflePlayFeature extends Component {
                     <hr/>
 
                     <h6 id="shuffle-play-feature1-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#shuffle-play-feature1">
-                        Desktop and web player
+                        Desktop and web player<i className="material-icons rotate-arrow">keyboard_arrow_down</i>
                     </h6>
                     <div id="shuffle-play-feature1" class="collapse">
                         <br/>
@@ -41,7 +46,7 @@ export class ShufflePlayFeature extends Component {
                     <hr/>
 
                     <h6 id="shuffle-play-feature2-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#shuffle-play-feature2">
-                        Mobile and tablet
+                        Mobile and tablet<i className="material-icons rotate-arrow">keyboard_arrow_down</i>
                     </h6>
                     <div id="shuffle-play-feature2" class="collapse">
                         <br/>
@@ -82,6 +87,8 @@ export class ShufflePlayFeature extends Component {
                 </div>
             </div>
             </div>
+            <Footer/>
+        </div>
         )
     }
 }

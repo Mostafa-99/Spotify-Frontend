@@ -11,7 +11,13 @@ function SideBar(){
                     <div className="ht-topics">
                         <h3 className="ht-topics-ap" id="help-arts-headers">Account & Payment</h3>
                         <ul className="account-help-btn">
-                            <Link to="/account-help/" ><li>Account Help</li> </Link>
+                            <Link to="/account-help" ><li>Account Help</li> </Link>
+                        </ul>
+                    </div>
+                    <div className="ht-topics mt-5">
+                        <h3 className="ht-topics-ap" id="help-arts-headers">Using Spotify</h3>
+                        <ul className="account-help-btn">
+                            <Link to="/features-main" ><li>Features</li> </Link>
                         </ul>
                     </div>
                 </div>

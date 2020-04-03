@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './FeaturesMain.css';
-
+import Footer from '../../Footer/Footer.js'
+import Navbar from '../../Navigation/Navbar.js'
 import SideBar from '../SideBar/SideBar'
 export class VideosFeature extends Component {
     render() {
         return (
+            <div>
+                <Navbar/>
+           
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
-                <div>
-                    <h6>
-                        Home / <Link to="/">Features</Link>
-                    </h6>
-                </div>
+                 <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb" id="help-breadcrumb">
+                        <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                        <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
+                    </ol>
+                </nav>
                 <div>
                     <h1 className="features-heading">Videos</h1>
                     <p>
@@ -24,7 +29,7 @@ export class VideosFeature extends Component {
                     <h2>FAQ</h2>
                     <hr/>
                     <h6 id="videos-feature1-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#videos-feature1">
-                        Desktop and web player
+                       How much data do videos use?<i className="material-icons rotate-arrow">keyboard_arrow_down</i>
                     </h6>
                     <div id="videos-feature1" class="collapse">
                         <br/>
@@ -36,7 +41,7 @@ export class VideosFeature extends Component {
                     <hr/>
 
                     <h6 id="videos-feature2-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#videos-feature2">
-                        Desktop and web player
+                        Can I download videos to watch offline?<i className="material-icons rotate-arrow">keyboard_arrow_down</i>
                     </h6>
                     <div id="videos-feature2" class="collapse">
                         <br/>
@@ -47,6 +52,8 @@ export class VideosFeature extends Component {
                     <hr/>
                 </div>
             </div>
+            </div>
+                <Footer/>
             </div>
         )
     }
