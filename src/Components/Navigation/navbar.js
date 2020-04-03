@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DesktopNavbar from './DesktopNavbar'
 import MobileNavbar from './MobileNavbar'
-
+/* */
 
 class Navbar extends Component {
     constructor(props) {
