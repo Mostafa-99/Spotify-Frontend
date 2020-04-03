@@ -4,11 +4,6 @@
   border: border-box;
 }
 
-
-#webplayer-sidebar{
-    position: fixed;
-}
-
 #webplayer-sidebar #sidebar-logo.sidebar-logo {
     width:132px;
     /*position: absolute;*/
@@ -114,4 +109,3 @@
     height: 0;
 margin: 0 24px 30px 15px;
 }
-
