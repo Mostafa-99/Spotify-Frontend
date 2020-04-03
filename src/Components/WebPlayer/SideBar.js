@@ -31,9 +31,21 @@ function SideBar() {
                 </div>
                 <div className="row-3 ">
                     <div className="col-2 sidebar-section">
-                        <div id='sidebar-list-header' className='sidebar-list-item-header'>PLAYLISTS</div>
+                        <div id='sidebar-list-header' className='sidebar-list-item-header '>PLAYLISTS</div>
                         <ul className='sidebar-list'>
-                            <CreatePlaylist/>
+
+                            {/* remove from here */}
+                            <button type="button" id="create-playlist" data-toggle="modal" data-target="#static-back-drop">
+                                <li className='sidebar-list-item '>
+                                <i className='fas fa-plus-square' ></i>
+                                <span className='list-item-text'>Create Playlist</span></li>
+                            </button>
+                            {/* until here */}
+                            
+                            {/* uncomment the next line */}
+                            {/* <CreatePlaylist/> */}
+
+
                             <div to="/search"className='text-decoration-none'><li className='sidebar-list-item '><span className="glyphicon glyphicon-heart-empty"></span ><span className='list-item-text'>Liked Songs</span></li></div>
                         </ul>
                     </div>
