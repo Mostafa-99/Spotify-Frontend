@@ -83,7 +83,7 @@ class HomeNavBar extends Component {
                         <i id="root-navbar-arrows"className="material-icons btn " >keyboard_arrow_left</i>
                         <i id="root-navbar-arrows"className="material-icons btn" >keyboard_arrow_right</i>
                     </div>
-                    <div className="col-2">
+                    <div id="navbar-upgrade-button-col" className="col-2">
                         <Link to="/premium"><button id="navbar-upgrade-button">Upgrade</button></Link>
                     </div>
                     <div className="col-2 " id="navbar-profile-section" >
