@@ -5,6 +5,7 @@ import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import axios from 'axios'
 
 const MyMobileNavbar = styled.nav`
 background:black;
@@ -99,6 +100,13 @@ height:60px;
     margin-top:15px;
 
 }
+#my-mob-navbar .profile-pic{
+
+    float:right;   
+    margin-right:15px;
+    margin-top:17px;
+
+}
 #my-mob-navbar .disappear {
     display:none;
 }
@@ -121,6 +129,65 @@ height:60px;
 //var on_off=false;
 class MobileNavbar  extends Component {
     
+    constructor() {
+        super()
+        
+    this.state ={
+        user:{},
+        status: 'not connected',
+        loginType:''
+    }
+    }
+
+    componentDidMount =()=>{
+        
+        this.setState(()=> ({}))
+        console.log(localStorage)
+          let show=localStorage.getItem("isLoggedIn");
+          if(show==="true")
+          {
+            let type=localStorage.getItem("loginType");
+            this.setState({status:"connected"})
+            this.setState({loginType: type})
+            axios.get('http://localhost:3000/users/1/')
+            .then(res => {
+              this.setState({user: res.data})
+            })
+          }
+          else
+          {
+            this.setState({status:"not connected"})
+          }
+          console.log(this.state)
+    }
+
+    componentDidUpdate=()=>{
+        console.log(localStorage)
+        
+    }
+
+    logOut= () => {
+        
+        if(this.state.loginType==="fb")
+        {
+            window.FB.logout(function(response) {
+            console.log(response);
+          });
+
+        }
+        if(this.state.loginType==="email")
+        {
+          
+        }
+
+            this.setState({status:"not connected"})
+            this.setState({loginType: ''})
+            localStorage.setItem("userID", '');
+            localStorage.setItem("isLoggedIn", "false");
+            localStorage.setItem("token", '');
+            localStorage.setItem("loginType", "");
+    }
+
     togglesidebar = () => {
         document.querySelector(".sidebar").classList.toggle("active");
         // on_off=!on_off;
@@ -136,13 +203,22 @@ class MobileNavbar  extends Component {
         }
       }
       render() {
+        const logInOrNot = this.state.status;
     return (
         
         <MyMobileNavbar>
             <div id="my-mob-navbar">
                 <Link to="/" className="navbar-brand"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></Link>
                 <span className="" onClick={()=> this.togglesidebar()}></span>
+
                 <span id="enter" onClick={()=> this.togglesidebar()}><i className="fas fa-2x fa-align-justify white-text"></i></span>
+                {logInOrNot==="connected" ?(
+                <span className="profile-pic" ><img src={this.state.user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
+                )
+                :
+                (
+                    <span></span>
+                )}
                 <div className="sidebar">
                     <br></br>
                 <span id="exit"  onClick={()=> this.togglesidebar()}><i className="fas fa-times"></i></span>
@@ -153,10 +229,19 @@ class MobileNavbar  extends Component {
                     <li><a className="ul1" href="https://www.spotify.com/eg-en/download/windows/">Download</a></li>    
                     <li className="ul0">_</li>    
                 </ul>
+                {logInOrNot==="connected" ?(
+                    <ul> 
+                    <Link to="/accountoverview"><li className="ul2">Account</li></Link>
+                    <li className="ul2" onClick={()=> this.logOut()}>Log out</li>
+                </ul>
+                )
+                :
+                (
                 <ul> 
                     <Link to="/signup"><li className="ul2">Sign up</li></Link>
                    <Link to="/login"> <li className="ul2">Log in</li></Link>
                 </ul>
+                )}
                 <ul id="ul3">
                 <Link to="/"><img className="logo-2" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
                 </ul>

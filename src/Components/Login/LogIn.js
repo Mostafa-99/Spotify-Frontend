@@ -36,8 +36,18 @@ class LogIn extends Component {
             //let statusNow = JSON.parse(JSON.stringify(response.status));
             if (response.status === 'connected') {
                 this.setState({status: response.status})
+                localStorage.setItem("loginType", "fb");
+                localStorage.setItem("isLoggedIn", 'true');
+                localStorage.setItem("token", response.authResponse.accessToken);
+                localStorage.setItem("userID", response.authResponse.userID);
+                console.log(localStorage);
+                window.location.reload(false);
                 alert("YES");
               } else {
+                localStorage.setItem("loginType", "");
+                localStorage.setItem("isLoggedIn", 'false');
+                localStorage.setItem("token", '');
+                localStorage.setItem("userID", '');
                 alert("NO");
               }
               console.log(response);
@@ -52,12 +62,18 @@ class LogIn extends Component {
     }   
 
     componentDidMount =()=>{
-        
+        console.log(localStorage);
         this.setState(()=> ({}))
         
           let show=localStorage.getItem("isLoggedIn");
-          if(show)
+          
+          if(show==="true")
           this.setState({status:"connected"})
+            else  
+          this.setState({status:"not connected"})
+       
+        //this.setState({status:"not connected"})
+        console.log(this.state.status)
     }
 
     componentDidUpdate(){
@@ -77,18 +93,39 @@ class LogIn extends Component {
     handleLogin = event=> {   
         event.preventDefault();
         const user={email:this.state.email,password:this.state.password}
-        const email = user.email;
-        const psw = user.password;
-        const is_email_valid = this.validateEmail(email);
-        const is_psw_valid = this.validatePassword(psw);
+        const memail = user.email;
+        const mpsw = user.password;
+        const is_email_valid = this.validateEmail(memail);
+        const is_psw_valid = this.validatePassword(mpsw);
         if(is_email_valid && is_psw_valid)
         {
-            axios.post('https://jsonplaceholder.typicode.com/users',{user})   
+            axios.post('http://localhost:3000/users/',
+            {
+            email:memail,
+            password:mpsw
+            }
+            )   
             .then(res => {
-                console.log(res.data);
-                localStorage.setItem("isLoggedIn", res.success);
-                localStorage.setItem("token", res.token);
-                this.setState({status: 'connected'});
+                if(res.status===200) // Successful
+                {
+                    if(res.success===true)
+                    {
+                    localStorage.setItem("isLoggedIn",'true');
+                    localStorage.setItem("token",res.token);
+                    localStorage.setItem("loginType", "email");
+                    this.setState({status: 'connected'});
+                    window.location.reload(false);
+                    }
+                    
+                }
+                if(res.status===304) // Unsuccessful
+                {
+                    localStorage.setItem("isLoggedIn",'false');
+                    localStorage.setItem("token",'');
+                    localStorage.setItem("loginType", "");
+                    
+                }
+                
                 alert("yes data")}).catch(
                     err =>{
                 alert(err.status + ": "+ err.message);
@@ -121,16 +158,18 @@ class LogIn extends Component {
             }) 
     }
 
-    render(){    
+    render(){  
+        const logInOrNot = this.state.status;  
     return (
         
         <div id="my-sign-up">
-            {this.state.status==="connected" ?
+            {logInOrNot==="connected" ? (
             <div>
-            <button onClick={this.fbLogOut}>Sign Out</button>
             <Redirect to="/Home"/>
             </div>
+            )
             :
+            (
             <div className="center-box">
             <img id="logo" src={spotify_black_logo} alt=""/>
             <hr/>
@@ -168,12 +207,13 @@ class LogIn extends Component {
             <h6>Don't have an account?</h6>
             <Link to="../SignUp"><button type="button" className="my-spotify-button" id="sign-up-now">SIGN UP FOR SPOTIFY</button></Link>
             <hr/>
-       <p> If you click "Log in with Facebook" and are not a Spotify user, you will be registered and you agree to Spotify's
+            <p> If you click "Log in with Facebook" and are not a Spotify user, you will be registered and you agree to Spotify's
             <a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions</a> and
             <a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy</a>.</p>
-        </form>      
+            </form>      
         
-        </div>
+            </div>
+            )
             }   
         </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../SignUp/sign_up.css'
 import spotify_black_logo from '../../Images/spotify_logo_black.png'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 
 
 class SignUp extends Component {
@@ -15,7 +15,7 @@ class SignUp extends Component {
             email:'',
             password:'',
             username:'',
-            gender:false, //0 male , 1 female
+            gender:'',
             day:'',
             month:'',
             year:''
@@ -38,11 +38,18 @@ class SignUp extends Component {
         window.FB.login(function(response) {
             //let statusNow = JSON.parse(JSON.stringify(response.status));
             if (response.status === 'connected') {
-                //this.setState({status: response.status});
-                localStorage.setItem("id", response.authResponse.userID);
+                this.setState({status: response.status})
+                localStorage.setItem("userID", response.authResponse.userID);
+                localStorage.setItem("isLoggedIn", 'true');
                 localStorage.setItem("token", response.authResponse.accessToken);
+                localStorage.setItem("loginType", "fb");
+                window.location.reload(false);
                 alert("YES");
               } else {
+                localStorage.setItem("userID", '');
+                localStorage.setItem("isLoggedIn", 'false');
+                localStorage.setItem("token", '');
+                localStorage.setItem("loginType", "");
                 alert("NO");
               }
               console.log(response);
@@ -81,24 +88,53 @@ class SignUp extends Component {
     signUpHandler = event=> {
     
         //event.preventDefault();
-        const user={email:this.state.email,password:this.state.password,gender:this.state.gender}
-        const checkemail = user.email;
-        const checkpsw = user.password;
-        const checkgender = user.gender;
-        const is_email_valid = this.validateEmail(checkemail);
-        const is_psw_valid = this.validatePassword(checkpsw);
-        const is_gender_valid = this.validateGender(checkgender);
-
-        if(is_email_valid && is_psw_valid && is_gender_valid)
+        let sendDate=this.state.day+" "+this.state.month+this.state.year;
+        
+        if(this.state.user.email!=='' && this.state.user.password!=='' && this.state.user.gender!=='' && this.state.user.username!=='' && this.state.user.day!=='' && this.state.user.month!=='' && this.state.user.year!=='')
         {
-           if(checkemail===this.state.emailrecheck)
-           {
-            axios.post('https://jsonplaceholder.typicode.com/users',{user})   
-            .then(res => {console.log(res.data);alert("yes data")}).catch(() =>{ 
-                
-                alert("no data");});
-           }
+            if(this.state.user.email!==this.state.emailrecheck)
+        {
+            alert("Email and confirm Mail do not match!")
+            return;
         }
+            axios.post('http://localhost:3000/users/',
+            {   
+                name:this.state.username,
+                email:this.state.email,
+                dateOfBirth:sendDate,
+                password:this.state.password,
+                gender:this.state.gender,
+                
+            })   
+            .then(res => {
+                console.log(res.data);
+                if(res.status===200) // Successful
+                {
+                    if(res.success===true)
+                    {
+                    localStorage.setItem("isLoggedIn",'true');
+                    localStorage.setItem("token",res.token);
+                    localStorage.setItem("loginType", "email");
+                    window.location.reload(false);
+
+                    }
+
+                
+                }
+                if(res.status===304) // Unsuccessful
+                {
+                    localStorage.setItem("isLoggedIn",'false');
+                    localStorage.setItem("token",'');
+                    localStorage.setItem("loginType", "");
+                   
+                }
+                alert("yes data")})
+            .catch(() =>{ 
+                
+                alert("Server error sign up again");});
+        }
+        
+         
     }
 
     inputChangeHandler(evt) {
@@ -145,13 +181,13 @@ class SignUp extends Component {
         {
             if (value===1)
             {
-                this.setState({gender:true});
-                userCopy['gender'] = true;
+                this.setState({gender:'Female'});
+                userCopy['gender'] = 'Female';
             }
             else
             {
-                this.setState({gender:false});
-                userCopy['gender'] = false;
+                this.setState({gender:'Male'});
+                userCopy['gender'] = 'Male';
             }
         }
 
@@ -163,14 +199,14 @@ class SignUp extends Component {
 
         if(elem.id==="sign-up-form-month")
         {
-            this.setState({month: value});
-            userCopy['month'] = value;
+            this.setState({month:value});
+            userCopy['month'] =value;
         }
 
         if(elem.id==="sign-up-form-year")
         {
-            this.setState({year: value});
-            userCopy['year'] = value;
+            this.setState({year:value});
+            userCopy['year'] =value;
         }
 
         this.setState({
@@ -195,6 +231,17 @@ class SignUp extends Component {
         }
     }
 
+    componentDidMount =()=>{
+        
+        this.setState(()=> ({}))
+        
+          let show=localStorage.getItem("isLoggedIn");
+          if(show==="true")
+          this.setState({status:"connected"})
+            else  
+          this.setState({status:"not connected"})
+    }
+
     componentDidUpdate(){
         
         console.log(this.state)
@@ -204,9 +251,14 @@ class SignUp extends Component {
     render(){
     return (
         <div id="my-sign-up">
-        <div className="center-box">
-        <img id="logo" src={spotify_black_logo} alt=""/>
-        <hr></hr>
+            {this.state.status==="connected" ?
+            <div>
+                <Redirect to="/Home"/>
+            </div>
+            :
+         <div className="center-box">
+            <img id="logo" src={spotify_black_logo} alt=""/>
+            <hr></hr>
            <form className="text-center p-5" action="">
                 <button type="button" id="fb-sign-up" className="my-spotify-button" onClick={this.fbSignUpHandler}>SIGN UP WITH FACEBOOK</button>
                 <h6>or</h6>
@@ -255,11 +307,12 @@ class SignUp extends Component {
             <p> By clicking on Sign up, you agree to Spotify's <a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions</a>.</p>
             <p> To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's
                 <a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy</a>.</p>
-            <button className="my-spotify-button" id="sign-up" type="submit" onClick={this.signUpHandler}>SIGN UP</button>
+            <button className="my-spotify-button" id="sign-up" type="button" onClick={this.signUpHandler}>SIGN UP</button>
            
             <h6>Already have an account? <Link to="../Login">Log in</Link>.</h6>
             </form>   
-        </div>
+            </div>
+            } 
         </div>
         
         );

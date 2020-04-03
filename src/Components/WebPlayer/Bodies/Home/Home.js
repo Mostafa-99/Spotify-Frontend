@@ -85,6 +85,7 @@ class Home extends Component {
     }
     render()
     {
+        console.log(localStorage);
     return(
         
         <div id='webplayer-layout'className="container webplayer col-12">

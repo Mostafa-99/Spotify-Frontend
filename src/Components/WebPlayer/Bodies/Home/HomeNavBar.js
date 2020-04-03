@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
+import { Route } from 'react-router';
 import '../NavBars.css';
 import axios from 'axios'
 
@@ -7,14 +8,47 @@ class HomeNavBar extends Component {
     constructor(){
         super()
         this.state={
-            user:{}
+            user:{},
+            loginType:'',
+            status:''
         }
     }
     componentDidMount(){
+        this.setState(()=> ({}))
+        
+        let show=localStorage.getItem("isLoggedIn");
+        if(show==="true")
+        this.setState({status:"connected"})
+          else  
+        this.setState({status:"not connected"})
+        
         axios.get('http://localhost:3000/users/1/')
             .then(res => {
               this.setState({user: res.data})
             })
+            console.log(this.status)
+    }
+
+    logOut= () => {
+        
+        if(this.state.loginType==="fb")
+        {
+            window.FB.logout(function(response) {
+            console.log(response);
+          });
+
+        }
+        if(this.state.loginType==="email")
+        {
+          
+        }
+
+            this.setState({status:"not connected"})
+            this.setState({loginType: ''})
+            localStorage.setItem("userID", '');
+            localStorage.setItem("isLoggedIn", "false");
+            localStorage.setItem("token", '');
+            localStorage.setItem("loginType", "");
     }
 
     toggleNavbarProfile=()=> {
@@ -26,14 +60,23 @@ class HomeNavBar extends Component {
 
       render()
       {
+        const logInOrNot = localStorage.getItem("isLoggedIn");
+        console.log(logInOrNot); 
     return(
+        
         <div id='root-navbar' className='root-navbar'>
+            
+                
             <head>
                 <title>Google Icons</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
             </head>
-
+            {logInOrNot==="false" ? (
+            <div>
+            <Redirect to="/"/>
+            </div>)
+            :(
             <div id="root-navbar-container" className="container m-0 ">
                 <div className="row">
                     <div id="navbar-arrows"className="col-8 navbar-arrows">
@@ -52,14 +95,16 @@ class HomeNavBar extends Component {
                             <div id="navbar-profile-button-list"className="dropdown-menu p-0" aria-labelledby="dropdownMenuLink">
                                 <Link to="/accountoverview"id="navbar-profile-button-list-item"className="dropdown-item"  target="_blank" >Account</Link>
                                 <a id="navbar-profile-button-list-item-hr" className="dropdown-item m-0 p-0" href="#"></a>
-                                <a id="navbar-profile-button-list-item"className="dropdown-item" href="#">Log out</a>
+                                <span onClick={()=> this.logOut()}> <a id="navbar-profile-button-list-item"className="dropdown-item" href="#">Log out</a></span>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div> 
+            )}
         </div>
-    )	
+    );	
 }
 }
 export default HomeNavBar;
