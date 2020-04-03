@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DesktopFooter from './DesktopFooter'
 import MobileFooter from './MobileFooter'
-
+/* */
 
 class Footer extends Component {
     constructor(props) {
