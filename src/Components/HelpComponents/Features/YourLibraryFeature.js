@@ -8,17 +8,24 @@ import Liked_Songs_Location_GIF from '../../../Images/NYL_TWITTER_01_LikedSongs.
 import './FeaturesMain.css';
 
 import SideBar from '../SideBar/SideBar'
+import Navbar from '../../Navigation/Navbar.js'
+import Footer from '../../Footer/Footer.js'
+
 export class YourLibraryFeature extends Component {
     render() {
         return (
+        <div id="your-library">
+
+          <Navbar/>  
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
-                <div>
-                    <h6>
-                        Home / <Link to="/">Features</Link>
-                    </h6>
-                </div>
+                <nav aria-label="breadcrumb">
+                        <ol className="breadcrumb" id="help-breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                            <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
+                        </ol>
+                </nav>
                 <div>
                     <h1 className="features-heading">Your Library</h1>
                     <p>When you like <img src={Icon_heart} alt="Icon_heart"/> a song, playlist, album, or follow 
@@ -28,7 +35,7 @@ export class YourLibraryFeature extends Component {
                     <hr/>
 
                     <h6 id="your-library-feature1-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#your-library-feature1">
-                        Desktop and web player
+                        Desktop and web player<i className="material-icons rotate-arrow">keyboard_arrow_down</i>
                     </h6>
                     <div id="your-library-feature1" class="collapse">
                         <br/>
@@ -47,7 +54,7 @@ export class YourLibraryFeature extends Component {
                     <hr/>
 
                     <h6 id="your-library-feature2-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#your-library-feature2">
-                        Mobile and tablet
+                        Mobile and tablet<i className="material-icons rotate-arrow">keyboard_arrow_down</i>
                     </h6>
                     <div id="your-library-feature2" class="collapse">
                         <br/>
@@ -69,7 +76,7 @@ export class YourLibraryFeature extends Component {
                     <hr/>
 
                     <h6 id="your-library-feature3-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#your-library-feature3">
-                        Where are the songs I liked?
+                        Where are the songs I liked?<i className="material-icons rotate-arrow">keyboard_arrow_down</i>
                     </h6>
                     <div id="your-library-feature3" class="collapse">
                         <br/>
@@ -86,7 +93,7 @@ export class YourLibraryFeature extends Component {
                     <hr/>
 
                     <h6 id="your-library-feature4-button" type="button" className="fp-collapse-button" data-toggle="collapse" data-target="#your-library-feature4">
-                        Where is an album or artist I liked?
+                        Where is an album or artist I liked?<i className="material-icons rotate-arrow">keyboard_arrow_down</i>
                     </h6>
                     <div id="your-library-feature4" class="collapse">
                         <br/>
@@ -103,6 +110,8 @@ export class YourLibraryFeature extends Component {
                     <br/>
                 </div>
             </div>
+        </div>
+        <Footer/>
         </div>
         )
     }

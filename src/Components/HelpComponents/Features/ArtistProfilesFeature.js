@@ -5,20 +5,25 @@ import Icon_options_iphone from '../../../Images/icon_options_iphone.png';
 import Desktop_artist_profile_new from '../../../Images/desktop_artist_profile_new.png';
 import Iphone_artist_profiles from '../../../Images/iphone_artist_profiles.png';
 import './FeaturesMain.css';
-
+import Footer from '../../Footer/Footer.js'
+import Navbar from '../../Navigation/Navbar.js'
 import SideBar from '../SideBar/SideBar'
 
 export class ArtistProfilesFeature extends Component {
     render() {
         return (
+        <div>
+            <Navbar/>
+           
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
-                <div>
-                    <h6>
-                        Home / <Link to="/">Features</Link>
-                    </h6>
-                </div>
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb" id="help-breadcrumb">
+                        <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                        <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
+                    </ol>
+                </nav>
                 <div>
                     <h1 className="features-heading">Artist profiles</h1>
                     <p>
@@ -82,6 +87,8 @@ export class ArtistProfilesFeature extends Component {
                 </div>
             </div>
             </div>
+            <Footer/>
+        </div>
         )
     }
 }

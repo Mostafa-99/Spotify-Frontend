@@ -27,7 +27,7 @@ function AccountOverview(props) {
 						  </tr>
 					    </table>
 			    	</div>
-                    <Link to="/editprofile"><button className="btn btn-outline-secondary account-overview-buttons">EDIT PROFILE</button></Link>
+                    <Link to="/edit-profile"><button className="btn btn-outline-secondary account-overview-buttons">EDIT PROFILE</button></Link>
 					<div className="plan">
 						<h3 className="yourplan">Your plan</h3>
 						<br></br>
@@ -39,7 +39,7 @@ function AccountOverview(props) {
 							<p className="playp f">Free</p>
 						</div>
 					</div>
-				<Link to="/premiumcode"><button className="btn btn-outline-secondary account-overview-buttons">JOIN PREMIUM</button></Link>
+				<Link to="/premium-code"><button className="btn btn-outline-secondary account-overview-buttons">JOIN PREMIUM</button></Link>
 		</div>
     
     )

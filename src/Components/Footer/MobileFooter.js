@@ -92,7 +92,7 @@ const MobileFooter = () => {
                                 
                                 <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
                                 <ul>
-                                    <li><a href="#!">About</a> </li>
+                                    <li><a href="https://www.spotify.com/eg-en/about-us/contact/">About</a> </li>
                                     {/* <li><a >Jobs</a></li>
                                     <li><a >For the Record</a></li> */}
                                 </ul>
@@ -102,7 +102,7 @@ const MobileFooter = () => {
                             <div className="my-col-2">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
-                                <li><a href="#!">For Artists</a></li>
+                                <Link to="/artist"><li>For Artists</li></Link>
 
                                 {/* <li><a >Developers</a></li>
                                 <li><a >Brands</a></li>
@@ -116,7 +116,7 @@ const MobileFooter = () => {
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
                                 <Link to="/help"><li>Help </li></Link>
-                                <Link to="/Home"><li>Web Player</li></Link>
+                                <Link to="/home"><li>Web Player</li></Link>
                                 {/* <li><a href="#!">Free Mobile App</a></li> */}
                             </ul>
                             </div>

@@ -1,9 +1,6 @@
 import React from 'react';
 
-import Main from './Components/Main/Main'
-import PremiumNav from './Components/Premium/premiumNav'
 import MainIndex from './Components/userIndex/MainIndex.js'
-import Profile from './Components/Profile/Profile.js'
 
 import SignUp from './Components/SignUp/SignUp.js';
 import LogIn from './Components/Login/LogIn.js';
@@ -13,7 +10,6 @@ import AccountSettings from './Components/Profile/AccountSettings.js'
 import EditProfile from './Components/Profile/EditProfile.js'
 import NotificationsSettings from './Components/Profile/NotificationSettings.js';
 
-import MainPage from './Components/Main/Main.js'
 import PremiumCode from './Components/Premium/premiumCode.js';
 import Premium from './Components/Premium/premium.js';
 
@@ -31,6 +27,12 @@ import ShufflePlayFeature from './Components/HelpComponents/Features/ShufflePlay
 import ArtistProfilesFeature from './Components/HelpComponents/Features/ArtistProfilesFeature.js';
 import VideosFeature from './Components/HelpComponents/Features/VideosFeature.js';
 
+import MainSelector from './Components/Main/MainSelector' 
+
+import Albums from './Components/Artist/Albums/Albums'
+import CreateAlbum from './Components/Artist/UploadFile/CreateAlbum'
+import TrackUpload from './Components/Artist/UploadFile/TrackUpload'
+import AlbumPage from './Components/Artist/Albums/AlbumPage'
 
 import Home from './Components/WebPlayer/Bodies/Home/Home'
 import Search from './Components/WebPlayer/Bodies/Search/Search'
@@ -45,15 +47,15 @@ function App() {
     <Router>
       <Switch>
         <Route path="/help" exact component={HelpPage}/>
-        <Route path="/accountoverview" component={AccountSettings}/>
-        <Route path="/editprofile" component={EditProfile}/>
-        <Route path="/notificationsettings" component={NotificationsSettings}/>
+        <Route path="/account-overview" component={AccountSettings}/>
+        <Route path="/edit-profile" component={EditProfile}/>
+        <Route path="/notification-settings" component={NotificationsSettings}/>
         <Route path="/signup" exact component={SignUp}/>
         <Route path="/login" exact component={LogIn}/>
         <Route path="/premium" exact component={Premium}/>
-        <Route path="/premiumcode" exact component={PremiumCode}/>
+        <Route path="/premium-code" exact component={PremiumCode}/>
         <Route path="/main" exact component={MainIndex}/>
-        <Route path="/" exact component={MainPage}/>
+        <Route path="/" exact component={MainSelector}/>
 
         <Route path="/account-help" exact component={AccountHelp} />
         <Route path="/profile-picture" exact component={ProfilePicture} />
@@ -63,11 +65,16 @@ function App() {
         <Route path="/change-email-address" exact component={ChangeEmailAddress} />
 
         <Route path="/features-main" exact component={FeaturesMain}/>
-        <Route path="/SearchFeature" exact component={SearchFeature}/>
-        <Route path="/YourLibraryFeature" exact component={YourLibraryFeature}/>
-        <Route path="/ShufflePlayFeature" exact component={ShufflePlayFeature}/>
-        <Route path="/ArtistProfilesFeature" exact component={ArtistProfilesFeature}/>
-        <Route path="/VideosFeature" exact component={VideosFeature}/>
+        <Route path="/search-feature" exact component={SearchFeature}/>
+        <Route path="/your-library-feature" exact component={YourLibraryFeature}/>
+        <Route path="/shuffle-play-feature" exact component={ShufflePlayFeature}/>
+        <Route path="/artist-profiles-feature" exact component={ArtistProfilesFeature}/>
+        <Route path="/videos-feature" exact component={VideosFeature}/>
+
+        <Route path="/artist" exact component={Albums}/>
+        <Route path="/artist/track-upload" exact component={TrackUpload}/>
+        <Route path="/artist/create-album" exact component={CreateAlbum}/>
+        <Route path="/artist/album-page" exact component={AlbumPage}/>
 
         <Route path="/Home" exact component={Home} />
         <Route path="/Search" exact component={Search} />
@@ -79,13 +86,3 @@ function App() {
 
 export default App;
 
-/*<myBody>
-<BrowserRouter>
-
-<Route path="/" exact component={MainIndex}/>
-
-<Route  exact path="/" component={Main}/>  
-    <HelpPage/>     
-    </BrowserRouter>
-    </myBody>
-*/

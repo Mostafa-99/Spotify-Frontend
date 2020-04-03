@@ -11,8 +11,7 @@ const MyDesktopFooter=styled.footer`
 justify-content:space-evenly;
 background:black;
 height:100%;
-padding-bottom: 10px;
-margin-bottom: -10px;
+
 
 #my-desk-footer .my-col-1
 {
@@ -110,7 +109,9 @@ letter-spacing:2px;
 #my-desk-footer .max {
   margin-left: calc(50vw + 200px);
 }
-
+#my-desk-footer .row{
+    width:100%;
+}
 `
 
 
@@ -131,7 +132,7 @@ const DesktopFooter = () => {
                             <div className="my-col-2">
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Communities</h5>
                             <ul >
-                                <li><a href="https://artists.spotify.com/">For Artists</a></li>
+                            <Link to="/artist"><li>For Artists</li></Link>
                                
                             </ul>
                             </div>
@@ -141,7 +142,7 @@ const DesktopFooter = () => {
                             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Useful Links</h5>
                             <ul>
                             <Link to="/help" ><li>Help</li></Link>
-                            <Link to="/Home"> <li>Web Player</li></Link>
+                            <Link to="/home"> <li>Web Player</li></Link>
                                 {/* <li><a href="#!">Free Mobile App</a></li> */}
                             </ul>
                             </div>

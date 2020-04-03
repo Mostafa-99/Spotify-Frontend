@@ -93,7 +93,7 @@ class HomeNavBar extends Component {
                                 <span className='navbar-profile-button-name'><h2>{this.state.user.name}</h2></span>
                             </a>
                             <div id="navbar-profile-button-list"className="dropdown-menu p-0" aria-labelledby="dropdownMenuLink">
-                                <Link to="/accountoverview"id="navbar-profile-button-list-item"className="dropdown-item"  target="_blank" >Account</Link>
+                                <Link to="/account-overview"id="navbar-profile-button-list-item"className="dropdown-item"  target="_blank" >Account</Link>
                                 <a id="navbar-profile-button-list-item-hr" className="dropdown-item m-0 p-0" href="#"></a>
                                 <span onClick={()=> this.logOut()}> <a id="navbar-profile-button-list-item"className="dropdown-item" href="#">Log out</a></span>
                             </div>
