@@ -1,0 +1,159 @@
+#cancel-create-btn,#create-playlist,#modal-close-btn{
+    background-color: transparent;
+    outline: 0;
+
+}
+#modal-close-btn,#create-playlist{
+    border: none;
+}
+#modal-close-btn{
+    margin-top: -30px;
+}
+#playlist-modal {
+   padding: 0;
+   margin: 0;
+   position: fixed;
+   max-width: 100%;
+   max-height: 100%;
+   top: 30%;
+   left: 0%;
+ }
+   #modal-content-create{
+     background-color:transparent;
+     border: black;
+   }
+   #modal-body-create{
+    background-color:#3f3f3f;
+    display: flex;
+    flex-direction: column;
+    flex-grow: inherit;
+    min-height: 150px;
+    align-content: center;
+   }
+    body.modal-open {
+        height: 100vh;
+        overflow-y: hidden;
+      }
+  #modal-body-container{
+    position: relative;
+    left: 20%;
+    }
+      #playlist-name-input::placeholder{
+      font-family: Circular, Helvetica, Arial, sans-serif;
+      font-size: 38px;
+      letter-spacing: -.005em;
+      font-weight: var(--glue-font-weight-black);
+      color:#282828;
+      margin: 0;
+      padding-right: 0;
+      padding-left: 0;
+      }
+  
+   #playlist-name-input{
+    color: white;
+    background-color:#3f3f3f;
+    font-size: 38px;
+    border: none;
+    font-family: Circular, Helvetica, Arial, sans-serif;
+    outline: none;
+    width: max-content;
+    box-shadow: none;
+    text-shadow: none;
+    }
+    #modal-close-btn{
+     color:white;
+     position: fixed;
+     width: 40px;
+     height: 40px;
+     max-width: 100%;
+     max-height: 100%;
+     font-size: 30px;
+     outline: 0;
+ }
+ #modal-title{
+   font-family: Circular, Helvetica, Arial, sans-serif;
+   font-size: 48px;
+   line-height: 56px;
+   letter-spacing: -.005em;
+   font-weight: var(--glue-font-weight-black);
+   color:white;
+   text-align: center;
+ }
+ #modal-body-text{
+     font-family: Circular, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 56px;
+    letter-spacing: -.005em;
+    font-weight: var(--glue-font-weight-black);
+    color:white;
+ }
+ 
+ #playlist-modal-header {
+   border-bottom: 0 none;
+ }
+ #text-abv-modal{
+   max-width: 100%;
+   max-height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+ 
+ #playlist-modal-footer {
+    border-top: 0 none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 28px 0;
+    background-color: transparent;
+    
+ }
+
+
+ #create-playlist-btn{
+    display: inline-block;
+    transition: all 0.2s ease 0s;
+    border: 2px solid #1DB954;
+    color: white;
+    background-color: #1DB954;
+    font-size: 12px;
+    line-height: 18px;
+    border-radius: 500px;
+    font-weight: 700;
+    outline: 0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 8px 34px;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 1.76px;
+    margin: 20px;
+}
+#cancel-create-btn:hover,#create-playlist-btn:hover {
+outline: 0;
+transform: scale(1.08);
+}
+#cancel-create-btn {
+    background-color: transparent;
+    border: 2px solid #fff;
+    font-size: 12px;
+    outline: 0;
+    line-height: 18px;
+    transition: all 0.2s ease 0s;
+    font-weight: 700;
+    letter-spacing: 1.76px;
+    text-transform: uppercase;
+    border-radius: 500px;
+    color: #fff;
+    white-space: nowrap;
+    padding: 8px 34px;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+  }
+#horizontal-divider{
+  margin: 8px var(--left-sidebar-padding-right) 8px var(--left-sidebar-padding-left);
+  border-color: #282828;}

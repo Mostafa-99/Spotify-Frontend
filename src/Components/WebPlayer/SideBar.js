@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './SideBar.css'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
+import CreatePlaylist from './CreatePlaylist'
+import MyPlaylists from './MyPlaylists'
 function SideBar() {
     return(
     <div>
@@ -31,7 +33,7 @@ function SideBar() {
                     <div className="col-2 sidebar-section">
                         <div id='sidebar-list-header' className='sidebar-list-item-header'>PLAYLISTS</div>
                         <ul className='sidebar-list'>
-                            <Link to="/home"className='text-decoration-none'><li className='sidebar-list-item '><i className='fas fa-plus-square' ></i><span className='list-item-text'>Create Playlist</span></li></Link>
+                            <CreatePlaylist/>
                             <div to="/search"className='text-decoration-none'><li className='sidebar-list-item '><span className="glyphicon glyphicon-heart-empty"></span ><span className='list-item-text'>Liked Songs</span></li></div>
                         </ul>
                     </div>
@@ -39,7 +41,8 @@ function SideBar() {
                 <div className="row-3 ">
                     <div className="col-2 sidebar-section sidebar-list-item ">
                         <ul className='sidebar-list'>
-                            <li className='sidebar-list-item'>our created playlists</li>
+                        <hr class="Rootlist__divider" id="horizontal-divider"/>
+                            <MyPlaylists/>
                         </ul>
                     </div>
                 </div>
@@ -49,3 +52,5 @@ function SideBar() {
     )
 }
 export default SideBar;
+
+
