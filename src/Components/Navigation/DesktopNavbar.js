@@ -96,7 +96,6 @@ class DesktopNavbar extends Component {
     componentDidMount =()=>{
         
         this.setState(()=> ({}))
-        console.log(localStorage)
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
           {
@@ -112,11 +111,21 @@ class DesktopNavbar extends Component {
           {
             this.setState({status:"not connected"})
           }
-          console.log(this.state)
     }
 
     componentDidUpdate=()=>{
-        console.log(localStorage)
+
+        let show=localStorage.getItem("isLoggedIn");
+          if(show==="true")
+          {
+            let type=localStorage.getItem("loginType");
+            this.setState({status:"connected"})
+            this.setState({loginType: type})
+            axios.get('http://localhost:3000/users/1/')
+            .then(res => {
+              this.setState({user: res.data})
+            })
+          }
         
     }
 
@@ -169,7 +178,7 @@ class DesktopNavbar extends Component {
                    
                 <div className="col-2 right" id="navbar-profile-section" >
                         <div className="dropdown">
-                            <a className="btn dropdown-toggle neg-margin links" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <a className="btn dropdown-toggle neg-margin links" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             <span ><img src={this.state.user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
                             <span className="links">Profile</span>
                                

@@ -4,8 +4,13 @@
     margin: 2% 40% 1% 30%;
 }
 
-#my-sign-up .center-box {
+#my-sign-up .center-box-2 {
     width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+#my-sign-up .center-box {
+    width: 400px;
     margin: 0 auto;
     text-align: center;
 }
@@ -164,13 +169,4 @@ margin-bottom:20px;
 #my-sign-up form .fb-login-button
 {
     margin-top: -500px;
-}
-
-#my-sign-up #fb-root
-{
-    width:450px;
-    height:250px;
-position: absolute;
-margin-top: -45px;
-display: block;
 }

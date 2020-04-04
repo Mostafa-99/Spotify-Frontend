@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import 'react-contexify/dist/ReactContexify.min.css';
+//import 'react-contexify/dist/ReactContexify.min.css';
 import './SideBar.css';
 import './createplaylist.css'
 

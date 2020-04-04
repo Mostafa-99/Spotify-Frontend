@@ -5,8 +5,7 @@ import benefit1 from '../../Images/benefit-1.png';
 import benefit2 from '../../Images/benefit-2.png';
 import benefit3 from '../../Images/benefit-3.png';
 import benefit4 from '../../Images/benefit-4.png';
-import Footer from '../Footer/Footer.js'
-import Navbar from '../Navigation/Navbar.js'
+
 
 export class premium extends Component {
     render() {
@@ -14,7 +13,7 @@ export class premium extends Component {
         {document.title ="Spotify"}
         return (
                 <div id="pp-main-div">
-                    <Navbar/>
+                    
                     <div className="blue-part">
                         <div className="blue-container">
                             <h1 className="bigger-h1">Get Premium free for 1 month</h1>
@@ -83,7 +82,7 @@ export class premium extends Component {
                         <br/>
                         <p className="grey-p">Terms and conditions apply.</p>
                     </div>
-                    <Footer/>
+                   
                 </div>
         )
     }

@@ -259,11 +259,19 @@ class SignUp extends Component {
          <div className="center-box">
             <img id="logo" src={spotify_black_logo} alt=""/>
             <hr></hr>
-           <form className="text-center p-5" action="">
+           <form className="text-center " action="">
                 <button type="button" id="fb-sign-up" className="my-spotify-button" onClick={this.fbSignUpHandler}>SIGN UP WITH FACEBOOK</button>
                 <h6>or</h6>
               
             <hr/>
+            {this.state.status==="invalid"?
+            <div id="invalid-message">
+            Email or username already taken.
+            </div>
+            :
+            <div>
+            </div>
+            }
             <h6>Sign up with your email address</h6>
             <input type="email" data-type="email" onChange={this.inputChangeHandler} id="sign-up-form-email" className="form-control mb-4" placeholder="Email" data-err="Enter Correct Email" required></input>
             <input type="email" data-type="email_again" onChange={this.inputChangeHandler} id="sign-up-form-email-confirm" className="form-control mb-4" placeholder="Confirm email" data-err="Enter Correct Confirm Email" required></input>
@@ -307,9 +315,10 @@ class SignUp extends Component {
             <p> By clicking on Sign up, you agree to Spotify's <a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions</a>.</p>
             <p> To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's
                 <a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy</a>.</p>
-            <button className="my-spotify-button" id="sign-up" type="button" onClick={this.signUpHandler}>SIGN UP</button>
+            <button className="my-spotify-button" id="sign-up" type="submit" onClick={this.signUpHandler}>SIGN UP</button>
            
-            <h6>Already have an account? <Link to="../Login">Log in</Link>.</h6>
+            <h6>Already have an account? <Link to="/login">Log in</Link>.</h6>
+            <br></br>
             </form>   
             </div>
             } 

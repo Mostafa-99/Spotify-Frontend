@@ -29,6 +29,7 @@ function SideBar() {
                         </ul>
                     </div>
                 </div>
+                
                 <div className="row-3 ">
                     <div className="col-2 sidebar-section">
                         <div id='sidebar-list-header' className='sidebar-list-item-header'>PLAYLISTS</div>

@@ -142,7 +142,6 @@ class MobileNavbar  extends Component {
     componentDidMount =()=>{
         
         this.setState(()=> ({}))
-        console.log(localStorage)
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
           {
@@ -158,12 +157,22 @@ class MobileNavbar  extends Component {
           {
             this.setState({status:"not connected"})
           }
-          console.log(this.state)
+     
     }
 
     componentDidUpdate=()=>{
-        console.log(localStorage)
-        
+
+          let show=localStorage.getItem("isLoggedIn");
+          if(show==="true")
+          {
+            let type=localStorage.getItem("loginType");
+            this.setState({status:"connected"})
+            this.setState({loginType: type})
+            axios.get('http://localhost:3000/users/1/')
+            .then(res => {
+              this.setState({user: res.data})
+            })
+          }
     }
 
     logOut= () => {

@@ -1,8 +1,6 @@
 
 import React, { Component } from 'react';
 import {Link } from "react-router-dom";
-import Footer from '../Footer/Footer.js'
-import Navbar from '../Navigation/Navbar.js'
 import './helpPage.css';
 import $ from 'jquery';
 
@@ -92,7 +90,7 @@ window.location.reload();
     
     return (
     <div>
-      <Navbar/>
+      
       <div id="body help-page">
 
        
@@ -254,7 +252,7 @@ window.location.reload();
           </div>
         </div>
       </div>
-      <Footer/>
+     
     </div>
   
   ); 

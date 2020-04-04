@@ -39,12 +39,16 @@ import Search from './Components/WebPlayer/Bodies/Search/Search'
 
 //import {withRouter} from 'react-router';
 import {Route,BrowserRouter as Router,Switch} from 'react-router-dom';
-
+import Navbar from './Components/Navigation/Navbar.js';
+import Footer from './Components/Footer/Footer.js';
+import PasswordReset from './Components/PasswordReset/PasswordReset.js' 
 
 function App() {
-  return (
 
+  return (
+    
     <Router>
+      <Navbar/>
       <Switch>
         <Route path="/help" exact component={HelpPage}/>
         <Route path="/account-overview" component={AccountSettings}/>
@@ -52,6 +56,7 @@ function App() {
         <Route path="/notification-settings" component={NotificationsSettings}/>
         <Route path="/signup" exact component={SignUp}/>
         <Route path="/login" exact component={LogIn}/>
+        <Route path="/password-reset" exact component={PasswordReset}/>
         <Route path="/premium" exact component={Premium}/>
         <Route path="/premium-code" exact component={PremiumCode}/>
         <Route path="/main" exact component={MainIndex}/>
@@ -79,6 +84,7 @@ function App() {
         <Route path="/Home" exact component={Home} />
         <Route path="/Search" exact component={Search} />
       </Switch>
+      <Footer/>
     </Router>   
     
   );

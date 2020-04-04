@@ -41,7 +41,9 @@ class LogIn extends Component {
                 localStorage.setItem("token", response.authResponse.accessToken);
                 localStorage.setItem("userID", response.authResponse.userID);
                 console.log(localStorage);
+                console.log(response);
                 window.location.reload(false);
+                this.props.history.push('/Home')
                 alert("YES");
               } else {
                 localStorage.setItem("loginType", "");
@@ -91,7 +93,7 @@ class LogIn extends Component {
     }
 
     handleLogin = event=> {   
-        event.preventDefault();
+        //event.preventDefault();
         const user={email:this.state.email,password:this.state.password}
         const memail = user.email;
         const mpsw = user.password;
@@ -170,7 +172,7 @@ class LogIn extends Component {
             )
             :
             (
-            <div className="center-box">
+            <div className="center-box-2">
             <img id="logo" src={spotify_black_logo} alt=""/>
             <hr/>
             <h6>To continue, log in to Spotify.</h6>
@@ -193,7 +195,7 @@ class LogIn extends Component {
             <hr/>
 
             <input required type="email" id="form-email" onChange={this.handleEmailChange} className="form-control mb-4" placeholder="Email address"/>
-            <input required type="password" id="form-password" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" />
+            <input required type="password" id="form-password" maxLength="30" minLength="8" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" />
             <br/>
             <div className="custom-control custom-checkbox" id="remember-me">
                 <input type="checkbox" className="custom-control-input" id="defaultUnchecked"/>
@@ -202,10 +204,10 @@ class LogIn extends Component {
 
             <button id="login" type="submit" className="my-spotify-button" onClick={this.handleLogin}>LOG IN</button>
             <br/>
-            <a href=" " target="_blank ">Forgot your password?</a>
+            <Link to="/password-reset">Forgot your password?</Link>
             <hr/><br/>
             <h6>Don't have an account?</h6>
-            <Link to="../SignUp"><button type="button" className="my-spotify-button" id="sign-up-now">SIGN UP FOR SPOTIFY</button></Link>
+            <Link to="/signup"><button type="button" className="my-spotify-button" id="sign-up-now">SIGN UP FOR SPOTIFY</button></Link>
             <hr/>
             <p> If you click "Log in with Facebook" and are not a Spotify user, you will be registered and you agree to Spotify's
             <a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions</a> and
