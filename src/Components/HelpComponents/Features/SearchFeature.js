@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './FeaturesMain.css';
-import Footer from '../../Footer/Footer.js'
-import Navbar from '../../Navigation/Navbar.js'
 import SideBar from '../SideBar/SideBar'
 export class SearchFeature extends Component {
     render() {
         return (
             <div>
-            <Navbar/>
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
@@ -34,7 +31,6 @@ export class SearchFeature extends Component {
                 </div>
             </div>
             </div>
-            <Footer/>
             </div>
         )
     }

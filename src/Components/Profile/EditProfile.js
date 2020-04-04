@@ -4,8 +4,6 @@ import SideBar from './SideBar';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
-import Footer from '../Footer/Footer.js'
-import Navbar from '../Navigation/Navbar.js'
 class EditProfile extends Component {
     constructor() {
         super()
@@ -48,8 +46,6 @@ class EditProfile extends Component {
     return(
         <div className="bg-dark-clr">
             
-        
-			<Navbar/>
         <div id="edit-profile"className="container editProfile">
             <div className="row">
                 <SideBar img={this.state.user.image}/>
@@ -96,7 +92,6 @@ class EditProfile extends Component {
                 </div>
             </div>
         </div>
-            <Footer/>
         </div>
     )
     }

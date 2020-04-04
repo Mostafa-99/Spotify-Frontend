@@ -5,8 +5,7 @@ import AccountOverview from './AccountOverview';
 import AccountHeading from './AccountHeading';
 import axios from 'axios'
 import './Profile.css';
-import Footer from '../Footer/Footer.js'
-import Navbar from '../Navigation/Navbar.js'
+
 class AccountSettings extends Component {
     constructor(){
         super()
@@ -28,7 +27,7 @@ class AccountSettings extends Component {
 
         return(
             <div className="bg-dark-clr">
-                <Navbar/>
+
                 <AccountHeading />
                 <div className="container settings">
                     <div className="row">
@@ -36,7 +35,7 @@ class AccountSettings extends Component {
                         <AccountOverview info={this.state.user}/>
                     </div>
                 </div>
-                <Footer/>
+
             </div>
         )
     }

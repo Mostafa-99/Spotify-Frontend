@@ -8,15 +8,11 @@ import Liked_Songs_Location_GIF from '../../../Images/NYL_TWITTER_01_LikedSongs.
 import './FeaturesMain.css';
 
 import SideBar from '../SideBar/SideBar'
-import Navbar from '../../Navigation/Navbar.js'
-import Footer from '../../Footer/Footer.js'
 
 export class YourLibraryFeature extends Component {
     render() {
         return (
         <div id="your-library">
-
-          <Navbar/>  
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
@@ -111,7 +107,6 @@ export class YourLibraryFeature extends Component {
                 </div>
             </div>
         </div>
-        <Footer/>
         </div>
         )
     }

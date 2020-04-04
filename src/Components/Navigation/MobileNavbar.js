@@ -163,7 +163,7 @@ class MobileNavbar  extends Component {
     componentDidUpdate=()=>{
 
           let show=localStorage.getItem("isLoggedIn");
-          if(show==="true")
+          if(show==="true" && this.state.status==="not connected")
           {
             let type=localStorage.getItem("loginType");
             this.setState({status:"connected"})
@@ -195,6 +195,7 @@ class MobileNavbar  extends Component {
             localStorage.setItem("isLoggedIn", "false");
             localStorage.setItem("token", '');
             localStorage.setItem("loginType", "");
+            this.togglesidebar();
     }
 
     togglesidebar = () => {
@@ -233,22 +234,22 @@ class MobileNavbar  extends Component {
                 <span id="exit"  onClick={()=> this.togglesidebar()}><i className="fas fa-times"></i></span>
                 <div className="collapse navbar-collapse" id="basicExampleNav">'</div>
                 <ul>
-                    <Link  to="/premium"><li className="ul1">Premium</li></Link>
-                    <Link to="/help"><li className="ul1">Help</li></Link>
-                    <li><a className="ul1" href="https://www.spotify.com/eg-en/download/windows/">Download</a></li>    
+                    <Link  to="/premium"><li className="ul1"  onClick={()=> this.togglesidebar()}>Premium</li></Link>
+                    <Link to="/help"><li className="ul1"  onClick={()=> this.togglesidebar()}>Help</li></Link>
+                    <li onClick={()=> this.togglesidebar()}><a className="ul1" href="https://www.spotify.com/eg-en/download/windows/" >Download</a></li>    
                     <li className="ul0">_</li>    
                 </ul>
                 {logInOrNot==="connected" ?(
                     <ul> 
-                    <Link to="/accountoverview"><li className="ul2">Account</li></Link>
+                    <Link to="/account-overview"><li className="ul2"  onClick={()=> this.togglesidebar()}>Account</li></Link>
                     <li className="ul2" onClick={()=> this.logOut()}>Log out</li>
                 </ul>
                 )
                 :
                 (
                 <ul> 
-                    <Link to="/signup"><li className="ul2">Sign up</li></Link>
-                   <Link to="/login"> <li className="ul2">Log in</li></Link>
+                    <Link to="/signup" ><li className="ul2"  onClick={()=> this.togglesidebar()}>Sign up</li></Link>
+                   <Link to="/login"> <li className="ul2"  onClick={()=> this.togglesidebar()}>Log in</li></Link>
                 </ul>
                 )}
                 <ul id="ul3">

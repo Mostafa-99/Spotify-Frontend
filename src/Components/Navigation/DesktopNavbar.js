@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import '../WebPlayer/Bodies/NavBars.css';
 import axios from 'axios'
@@ -85,16 +85,17 @@ class DesktopNavbar extends Component {
 
     constructor() {
         super()
-        
+
     this.state ={
         user:{},
         status: 'not connected',
         loginType:''
     }
+
     }
 
     componentDidMount =()=>{
-        
+
         this.setState(()=> ({}))
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
@@ -116,7 +117,7 @@ class DesktopNavbar extends Component {
     componentDidUpdate=()=>{
 
         let show=localStorage.getItem("isLoggedIn");
-          if(show==="true")
+          if(show==="true" && this.state.status==="not connected")
           {
             let type=localStorage.getItem("loginType");
             this.setState({status:"connected"})
@@ -142,7 +143,7 @@ class DesktopNavbar extends Component {
         {
           
         }
-
+               
             this.setState({status:"not connected"})
             this.setState({loginType: ''})
             localStorage.setItem("userID", '');
@@ -165,7 +166,7 @@ class DesktopNavbar extends Component {
                     <Link to="/premium" className="links">Premium</Link>
                 </li>
                 <li>
-                    <Link to="/help" className="links">Help</Link>
+                    <Link to="/help" className="links" >Help</Link>
                 </li>
                 <li>
                     <a href="https://www.spotify.com/eg-en/download/windows/" className="links">Download</a>

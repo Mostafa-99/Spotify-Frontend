@@ -2,14 +2,11 @@ import React from "react"
 import './Articles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-import Footer from '../../../Footer/Footer.js'
-import Navbar from '../../../Navigation/Navbar.js'
 import SideBar from '../../SideBar/SideBar'
 function ProfilePicture(){
     {document.title ="Profile picture - Spotify"}
     return(
          <div id="body-overrides">
-                <Navbar/>
                 <div className="container body" id="dev-items"> 
                     <SideBar/>
                     <div className="account-help item sections">
@@ -80,7 +77,6 @@ function ProfilePicture(){
                         </div>
                     </div>
                 </div>
-                <Footer/>
         </div>  
     )
 }

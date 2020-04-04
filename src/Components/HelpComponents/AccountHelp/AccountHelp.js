@@ -3,13 +3,10 @@ import './AccountHelp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import SideBar from '../SideBar/SideBar'
-import Footer from '../../Footer/Footer.js'
-import Navbar from '../../Navigation/Navbar.js'
 function AccountHelp(){
     {document.title ="Account Help - Spotify"}
     return(       
         <div id="body-overrides">
-            <Navbar/>
             <div className="container body" id="dev-items"> 
                 <SideBar/>
                 <div className="account-help item" id="account-help department">
@@ -42,7 +39,6 @@ function AccountHelp(){
                     </div>
                 </div>
             </div>
-            <Footer/>
         </div>
     )
 }

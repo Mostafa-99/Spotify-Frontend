@@ -2,14 +2,12 @@ import React from "react"
 import './Articles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-import Footer from '../../../Footer/Footer.js'
-import Navbar from '../../../Navigation/Navbar.js'
 import SideBar from '../../SideBar/SideBar'
 function HowToLogOut(){
     {document.title ="How to log out - Spotify"}
     return(
         <div id="body-overrides">
-                <Navbar/>
+
                 <div className="container body" id="dev-items"> 
                     <SideBar/>
                     <div className="account-help item">
@@ -97,7 +95,6 @@ function HowToLogOut(){
                         </div>
                     </div>
                 </div>
-                <Footer/>
         </div>
        
     )

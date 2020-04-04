@@ -4,15 +4,12 @@ import Icon_shuffle from '../../../Images/icon_shuffle.png';
 import Icon_shuffle_play from '../../../Images/icon_shuffle_play.png';
 import Icon_shuffle_only from '../../../Images/icon_shuffle_only.png';
 import './FeaturesMain.css';
-import Footer from '../../Footer/Footer.js'
-import Navbar from '../../Navigation/Navbar.js'
 import SideBar from '../SideBar/SideBar'
 export class ShufflePlayFeature extends Component {
     render() {
         return (   
         <div>
 
-            <Navbar/>
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
@@ -87,7 +84,6 @@ export class ShufflePlayFeature extends Component {
                 </div>
             </div>
             </div>
-            <Footer/>
         </div>
         )
     }
