@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-//import 'react-contexify/dist/ReactContexify.min.css';
 import './SideBar.css';
 import './createplaylist.css'
 
@@ -22,7 +21,7 @@ class CreatePlaylist extends Component {
 
      
     render() {
-        return ( <div>
+        return ( <div id="create-playlist-button-section">
 
                 <button type="button" id="create-playlist" data-toggle="modal" data-target="#static-back-drop">
                    <li className='sidebar-list-item '>

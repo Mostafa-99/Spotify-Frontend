@@ -13,7 +13,7 @@ export class premium extends Component {
         {document.title ="Spotify"}
         return (
                 <div id="pp-main-div">
-                    
+
                     <div className="blue-part">
                         <div className="blue-container">
                             <h1 className="bigger-h1">Get Premium free for 1 month</h1>
@@ -82,8 +82,10 @@ export class premium extends Component {
                         <br/>
                         <p className="grey-p">Terms and conditions apply.</p>
                     </div>
+
                    
-                </div>
+
+                    </div>
         )
     }
 }

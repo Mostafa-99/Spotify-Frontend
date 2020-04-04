@@ -123,7 +123,7 @@ class Home extends Component {
                 <nav className="col-lg-2 webplayer-sidebar-body colums-no-padding">
                     <SideBar/>
                 </nav>
-                <div className="col-lg-10 webplayer-body-and-navbar colums-no-padding">
+                <div className="col-lg-10 col-sm-12 webplayer-body-and-navbar colums-no-padding">
                     <HomeNavBar/>
                     <div id="webplayer-home">
                 <div className="made-for-you-section">

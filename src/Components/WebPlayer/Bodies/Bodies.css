@@ -2,6 +2,7 @@ html,
 .webplayer-body{
     height: 100%;
     width: 100%;
+    z-index: 0;
 }
 .webplayer-sidebar-body{
     min-height: 100%;
@@ -11,6 +12,10 @@ html,
     border: border-box;
 	margin: 0;
     padding: 0;
+}
+#webplayer-home{
+    isolation: isolate;
+    padding-top: 90px;
 }
 
 #webplayer-layout{
@@ -34,4 +39,10 @@ html,
 #webplayer-layout .colums-no-padding{
    padding: 0 ;
    margin: 0 ;
+}
+
+@media only screen and (max-width: 992px) {
+    .webplayer-sidebar-body{
+        display: none;
+    }
 }

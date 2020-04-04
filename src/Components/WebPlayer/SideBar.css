@@ -3,6 +3,12 @@
 	padding: 0;
   border: border-box;
 }
+/*:not(#create-playlist-button-section)*/
+#webplayer-sidebar{
+    position: fixed;
+    z-index: 0;
+}
+
 
 #webplayer-sidebar #sidebar-logo.sidebar-logo {
     width:132px;

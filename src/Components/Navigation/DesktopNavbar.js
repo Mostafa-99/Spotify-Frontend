@@ -184,7 +184,7 @@ class DesktopNavbar extends Component {
                                
                             </a>
                             <div id="navbar-profile-button-list"className="dropdown-menu pt-2 pr-5 pl-3 white my-margins" aria-labelledby="dropdownMenuLink">
-                                <Link to="/accountoverview"id="navbar-profile-button-list-item"className="dropdown-item p-0" >Account</Link>
+                                <Link to="/account-overview"id="navbar-profile-button-list-item"className="dropdown-item p-0" >Account</Link>
                                <span onClick={()=> this.logOut()}> <a id="navbar-profile-button-list-item" className="dropdown-item p-0" href="#">Log out</a></span>
                             </div>
                         </div>

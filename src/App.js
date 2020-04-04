@@ -37,6 +37,8 @@ import AlbumPage from './Components/Artist/Albums/AlbumPage'
 import Home from './Components/WebPlayer/Bodies/Home/Home'
 import Search from './Components/WebPlayer/Bodies/Search/Search'
 
+import AlbumWebPlayer from './Components/WebPlayer/AlbumWebPlayer/AlbumWebPlayer.js'
+
 //import {withRouter} from 'react-router';
 import {Route,BrowserRouter as Router,Switch} from 'react-router-dom';
 import Navbar from './Components/Navigation/Navbar.js';
@@ -83,6 +85,8 @@ function App() {
 
         <Route path="/Home" exact component={Home} />
         <Route path="/Search" exact component={Search} />
+
+        <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
       </Switch>
       <Footer/>
     </Router>   
