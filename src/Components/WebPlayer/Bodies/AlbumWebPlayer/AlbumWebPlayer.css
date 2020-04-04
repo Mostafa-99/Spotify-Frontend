@@ -130,14 +130,10 @@
     text-align: right;
 }
 #album-webplayer-main-div .fa-heart{
-    border-radius: 1px;
-    border-color: white;
-    color: transparent;
     font-size: 24px;
 }
-#album-webplayer-main-div .fa-heart:active{
+#album-webplayer-main-div .fas{
     color: rgb(38, 218, 98);
-    border-color: rgb(38, 218, 98);
 }
 #album-webplayer-main-div .album-dots-div{
     width: 50%;

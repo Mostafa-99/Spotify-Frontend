@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import HomeNavBar from './../Bodies/Home/HomeNavBar.js'
-import SideBar from '../SideBar.js'
+import HomeNavBar from './../Home/HomeNavBar.js'
+import SideBar from './../../SideBar.js'
 import TracksList from './TracksList.js'
-import Album_Image from './../../../Images/albumImage.jpg'
+import Album_Image from './../../../../Images/albumImage.jpg'
 
 import './AlbumWebPlayer.css'
 
@@ -13,7 +13,9 @@ export class AlbumWebPlayer extends Component {
         "id":"",
         "artists":[],
         "image":"",
-        "tracks":[]
+        "tracks":[],
+        "is_liked":Boolean,
+        "playing_song_id":""
     }
 
     componentDidMount(){
@@ -22,8 +24,9 @@ export class AlbumWebPlayer extends Component {
    }
 
    getAlbumDetails(){
-        axios.get('http://localhost:3000/album/')
+        axios.get('http://localhost:3000/album/1')
         .then(res => {
+            /*if returns array
             res.data.map((album)=>(
                 this.setState({image:album.images}),
                 this.setState({name:album.name}),
@@ -31,6 +34,15 @@ export class AlbumWebPlayer extends Component {
                     (artist)=>(this.setState({artists:artist.name}))
                 )
             ))
+            */
+
+           //if object
+            this.setState({
+                image:res.data.images,
+                name:res.data.name,
+                is_liked:false //get from backend
+            })
+            res.data.artists.map((artist)=>(this.setState({artists:artist.name})))
         }
         )
         .catch(error => {
@@ -39,16 +51,40 @@ export class AlbumWebPlayer extends Component {
    }
 
    getAlbumTracks(){
-    axios.get('http://localhost:3000/album_tracks/')
+    axios.get('http://localhost:3000/album_tracks/1')
            .then(res => 
+                /*if returns array
                 res.data.map((album_tracks)=>(
                     this.setState({tracks:album_tracks.items}))
                 )
+                */
+
+                //if object
+                this.setState({tracks:res.data.items})
            )
            .catch(error => {
                alert(error.response.data.message);
            })
-   }
+    }
+
+    likeButtonPressed=()=>{
+        this.setState(prevState =>({
+            is_liked:!prevState.is_liked
+        }))
+    }
+
+    setPlayingSondId=(id)=>{
+        if(this.state.playing_song_id===id){
+            this.setState({
+                playing_song_id:""
+            })
+        }
+        else{
+            this.setState({
+                playing_song_id:id
+            })
+        }
+    }
 
     render() {
         return (
@@ -76,7 +112,7 @@ export class AlbumWebPlayer extends Component {
                                     </div>
                                     <div className="row album-options-div">
                                         <div className="album-heart-div">
-                                            <i className="fa fa-heart"title="Save to Your Library"></i>
+                                            <i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}></i>
                                         </div>
                                         <div className="album-dots-div dropdown show" >
                                             <p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...</p>
@@ -94,7 +130,7 @@ export class AlbumWebPlayer extends Component {
                         </div>
                         <div className="tracks-list-div">
                             <hr className="appear-on-small-screens"/>
-                            <TracksList tracks={this.state.tracks}/>
+                            <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,12 @@
     height: 65px;
     padding: 10px 5px;
 }
+#track-row-div .playing-song{
+    color: rgb(38, 218, 98);
+}
+#track-row-div .not-playing-song{
+    color:white;
+}
 #track-row-div:hover{
     width:100%;
     height: 65px;
@@ -13,6 +19,26 @@
 }
 #track-row-div:active .track-icon::before{
     content: "\f04b";
+}
+#track-row-div .track-icon::before{
+    font-family: "Font Awesome 5 Free";
+   content: "\f001";
+   padding-right: 3px;
+   font-weight: 900;
+   font-style: normal;
+}
+#track-row-div:hover .track-icon-playing::before{
+    content: "\f04c";
+}
+#track-row-div:active .track-icon-playing::before{
+    content: "\f04c";
+}
+#track-row-div .track-icon-playing::before{
+    font-family: "Font Awesome 5 Free";
+   content: "\f028";
+   padding-right: 3px;
+   font-weight: 900;
+   font-style: normal;
 }
 #track-row-div:hover .track-options::before{
     content: "...";
@@ -42,16 +68,13 @@
     font-size: 16px;
     line-height: 22px;
     letter-spacing: .015em;
-    color: white;
     margin: 0px;
 }
 #track-row-div .track-artist{
     margin: 0px;
-}
-#track-row-div .track-icon::before{
-    content: "\f156";
-    font-size: 16px;
+    color: grey;
 }
 #track-row-div .track-options{
     cursor: pointer;
+    color: white;
 }

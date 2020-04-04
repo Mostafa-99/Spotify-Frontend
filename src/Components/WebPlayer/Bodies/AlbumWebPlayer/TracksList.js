@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export class TracksList extends Component {
     render() {
         return this.props.tracks.map((track) => (
-            <Track track={track}/>
+            <Track track={track} playing_song_id={this.props.playing_song_id} setPlayingSondId={this.props.setPlayingSondId}/>
         ));
     }
 }
