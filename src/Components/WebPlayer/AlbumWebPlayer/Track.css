@@ -1,0 +1,57 @@
+#track-row-div{
+    width:100%;
+    height: 65px;
+    padding: 10px 5px;
+}
+#track-row-div:hover{
+    width:100%;
+    height: 65px;
+    background-color: rgba(128, 128, 128, 0.2);
+}
+#track-row-div:hover .track-icon::before{
+    content: "\f04b";
+}
+#track-row-div:active .track-icon::before{
+    content: "\f04b";
+}
+#track-row-div:hover .track-options::before{
+    content: "...";
+    font-weight: 1000;
+}
+#track-row-div:active .track-options::before{
+    content: "...";
+    font-weight: 1000;
+}
+
+
+#track-row-div .track-symbol-div{
+    width:7%;
+    text-align: center;
+}
+#track-row-div .track-name-div{
+    width:70%;
+    text-align: left;
+}
+#track-row-div .track-options-div{
+    width:10%;
+}
+#track-row-div .track-duration-div{
+    width:10%;
+}
+#track-row-div .track-name{
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: .015em;
+    color: white;
+    margin: 0px;
+}
+#track-row-div .track-artist{
+    margin: 0px;
+}
+#track-row-div .track-icon::before{
+    content: "\f156";
+    font-size: 16px;
+}
+#track-row-div .track-options{
+    cursor: pointer;
+}
