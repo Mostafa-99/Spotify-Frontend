@@ -31,7 +31,7 @@ z-index:1;
 }
 
 #my-desk-navbar .nav-links{
-    margin-top:-1%;
+    margin-top:-1.7%;
     display: flex;
     flex-flow:row nowrap;
     list-style:none;
@@ -78,6 +78,11 @@ z-index:1;
 #my-desk-navbar .right{
     margin-left:50px;
     
+}
+
+#my-desk-navbar .index-fixed{
+    background-color:rgba(0,0,0.0.7);
+    position:fixed;
 }
 
 `
@@ -156,7 +161,7 @@ class DesktopNavbar extends Component {
     render(){
         const logInOrNot = this.state.status; 
     return (
-        <MyDesktopNavbar>
+        <MyDesktopNavbar >
 
             <div id="my-desk-navbar">
            <Link to="/"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
