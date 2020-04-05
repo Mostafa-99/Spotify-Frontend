@@ -89,7 +89,7 @@
 }
 
 
-#dev-items.container {
+#dev-items .container{
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-gap: 25px;
@@ -114,6 +114,6 @@
     }
 }
 
-#features-nav ol,ul{
+#features-nav ol,#features-nav ul{
     padding: 10px 20px;
 }
