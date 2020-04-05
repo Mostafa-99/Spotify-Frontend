@@ -18,7 +18,7 @@ class CardComponent extends Component {
 // to get 6  most popular descendingly  
 // Remove Comments when integrating 
     componentDidMount() {
-            axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/tracks?_limit=6" )
+            axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/track?_limit=6 " )
             .then(res => {
               /*if(res.status===200)
               { */
@@ -76,7 +76,8 @@ class CardComponent extends Component {
                                                             <button id="button-outline">Play  Now</button> 
                                                             </link>    
                                                                      */}
-                                                            <button id="button-outline">Play  Now</button> 
+                                                                     <a href="google.com">
+                                                            <button id="button-outline">Play  Now</button></a> 
                                                     </div>
                                                 </div> 
                                             </div>
