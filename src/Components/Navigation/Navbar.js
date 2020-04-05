@@ -5,7 +5,8 @@ import MobileNavbar from './MobileNavbar'
 const exclusionArray = [
   '/login',
   '/signup',
-  '/Home'
+  '/home',
+  '/artist-webplayer'
 ]
 
 class Navbar extends Component {

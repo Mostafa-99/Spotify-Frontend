@@ -6,7 +6,7 @@ import CreatePlaylist from './CreatePlaylist'
 import MyPlaylists from './MyPlaylists'
 function SideBar() {
     return(
-    <div>
+    <div id="webplayer-sidebar-outer-container">
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>

@@ -5,8 +5,9 @@ import MobileFooter from './MobileFooter'
 const exclusionArray = [
   '/login',
   '/signup',
-  '/Home',
-  '/password-reset'
+  '/home',
+  '/password-reset',
+  '/artist-webplayer'
 ]
 
 class Footer extends Component {

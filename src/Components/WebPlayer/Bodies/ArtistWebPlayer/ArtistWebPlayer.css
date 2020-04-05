@@ -1,0 +1,98 @@
+#artist-webplayer{
+    background-color: #121212;
+}
+
+#artist-webplayer{
+    isolation: isolate;
+    padding-top: 90px;
+}
+#webplayer-layout,#about-section,#related-artists-section,#artist-overview-section{
+    height: 100vh;
+}
+#artist-webplayer .section-title{
+    padding: 0 32px;
+    margin-bottom: 18px;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: .015em;
+    font-weight: var(--glue-font-weight-black);
+    color: #fff;
+    text-transform: none;
+    margin-bottom: 1em;
+}
+#artist-webplayer .section-body{
+    width: 75%;
+    padding:0 32px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: .015em;
+    font-weight: var(--glue-font-weight-normal);
+    color: #b3b3b3;
+    text-transform: none;
+    margin-bottom: 1em;
+}
+#artist-webplayer .card {
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+    height: 250px;
+    background-color: rgb(40, 40, 40);
+    border-radius: 10px;
+    margin: 10px;
+}
+#artist-webplayer .card-group{
+    padding: 20px;
+}
+#artist-webplayer .card-body {
+   padding: 10px 0;
+   text-align: left;
+}
+#artist-webplayer .rounded-circle{
+    height: 110px;
+    width: 110px;
+}
+#artist-webplayer .card-title {
+    color:white;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+}
+#artist-webplayer .card-text {
+    font-size: 12px;
+    line-height: 18px;
+    height: 70px;
+    color: #b3b3b3;
+    padding: 0;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+#artist-webplayer .play-btn, #artist-webplayer .pause-btn {
+    position: absolute;
+    outline: none;
+    display:none;
+    text-align: center;
+    top:190px;
+    right:20px;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background-color:rgb(29, 185, 84)!important;
+    border-color: rgb(29, 185, 84) !important;
+}
+#artist-webplayer .card:hover .active-play{
+    display: block;
+}
+#artist-webplayer .active-pause{
+    display: block;
+}
+#artist-webplayer .fa-play {
+    color: white;
+}
+#artist-webplayer .play-btn:hover, #artist-webplayer .pause-btn:hover {
+    transform: scale(1.1);
+}
+#artist-webplayer.hide{
+    display: none;
+}

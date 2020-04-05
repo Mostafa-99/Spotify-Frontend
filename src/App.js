@@ -35,6 +35,7 @@ import TrackUpload from './Components/Artist/UploadFile/TrackUpload'
 import AlbumPage from './Components/Artist/Albums/AlbumPage'
 
 import Home from './Components/WebPlayer/Bodies/Home/Home'
+import ArtistWebPlayer from './Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayer'
 import Search from './Components/WebPlayer/Bodies/Search/Search'
 
 import AlbumWebPlayer from './Components/WebPlayer/AlbumWebPlayer/AlbumWebPlayer.js'
@@ -83,8 +84,9 @@ function App() {
         <Route path="/artist/create-album" exact component={CreateAlbum}/>
         <Route path="/artist/album-page" exact component={AlbumPage}/>
 
-        <Route path="/Home" exact component={Home} />
-        <Route path="/Search" exact component={Search} />
+        <Route path="/home" exact component={Home} />
+        <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
+        <Route path="/search" exact component={Search} />
 
         <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
       </Switch>

@@ -13,10 +13,6 @@ html,
 	margin: 0;
     padding: 0;
 }
-#webplayer-home{
-    isolation: isolate;
-    padding-top: 90px;
-}
 
 #webplayer-layout{
     height: 100%;

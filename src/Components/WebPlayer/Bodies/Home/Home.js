@@ -26,9 +26,8 @@ class Home extends Component {
             .then(res => {
                 this.setState({
                     madeForYou: res.data.map( playList => ({
-                        id:playList.id,
+                        id: playList.id,
                         title:playList.name,
-                        imageUrl:playList.images,
                         description: playList.description
                     }))
                 })
