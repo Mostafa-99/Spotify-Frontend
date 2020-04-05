@@ -7,6 +7,7 @@ import axios from 'axios'
 //navbar not fixed anymore
 const MyDesktopNavbar=styled.nav`
 display:flex;
+
 flex-flow: row nowrap;
 justify-content:space-evenly;
 align-items:center;
@@ -78,6 +79,11 @@ z-index:1;
 #my-desk-navbar .right{
     margin-left:50px;
     
+}
+
+#my-desk-navbar .index-fixed{
+    background-color:rgba(0,0,0.0.7);
+    position:fixed;
 }
 
 `
@@ -156,7 +162,7 @@ class DesktopNavbar extends Component {
     render(){
         const logInOrNot = this.state.status; 
     return (
-        <MyDesktopNavbar>
+        <MyDesktopNavbar >
 
             <div id="my-desk-navbar">
            <Link to="/"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>

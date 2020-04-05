@@ -45,12 +45,18 @@ import Navbar from './Components/Navigation/Navbar.js';
 import Footer from './Components/Footer/Footer.js';
 import PasswordReset from './Components/PasswordReset/PasswordReset.js' 
 
+import UpgradeArtist from './Components/Artist/UpgradeArtist/UpgradeArtist'
+import ArtistSelector from './Components/Artist/ArtistSelector'
+import ProfileContextProvider from './Context/ProfileContext';
 function App() {
 
   return (
     
     <Router>
       <Navbar/>
+     <ProfileContextProvider>
+
+    
       <Switch>
         <Route path="/help" exact component={HelpPage}/>
         <Route path="/account-overview" component={AccountSettings}/>
@@ -78,16 +84,18 @@ function App() {
         <Route path="/artist-profiles-feature" exact component={ArtistProfilesFeature}/>
         <Route path="/videos-feature" exact component={VideosFeature}/>
 
-        <Route path="/artist" exact component={Albums}/>
+       {/* <Route path="/artist" exact component={Albums}/>
+        <Route path="/upgrade-to-artist" exact component={UpgradeArtist}/>*/}
+
+        <Route path="/artist" exact component={ArtistSelector}/>
         <Route path="/artist/track-upload" exact component={TrackUpload}/>
         <Route path="/artist/create-album" exact component={CreateAlbum}/>
         <Route path="/artist/album-page" exact component={AlbumPage}/>
-
-        <Route path="/Home" exact component={Home} />
-        <Route path="/Search" exact component={Search} />
+        <Route path="/home" exact component={Home} />
 
         <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
       </Switch>
+      </ProfileContextProvider>
       <Footer/>
     </Router>   
     

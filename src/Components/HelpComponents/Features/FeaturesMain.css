@@ -101,7 +101,7 @@
 
 @media only screen and (max-width: 992px) {
     /* For mobile phones: */
-    #dev-items.container {
+    #dev-items.container{
        /* display: grid;*/
        display: flex;
        flex-direction: column;
