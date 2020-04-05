@@ -122,8 +122,9 @@ class DesktopNavbar extends Component {
             let type=localStorage.getItem("loginType");
             this.setState({status:"connected"})
             this.setState({loginType: type})
-            axios.get('http://localhost:3000/users/1/')
+            axios.get('http://localhost:3000/users/1')
             .then(res => {
+
               this.setState({user: res.data})
             })
           }

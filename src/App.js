@@ -38,7 +38,7 @@ import Home from './Components/WebPlayer/Bodies/Home/Home'
 import ArtistWebPlayer from './Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayer'
 import Search from './Components/WebPlayer/Bodies/Search/Search'
 
-import AlbumWebPlayer from './Components/WebPlayer/AlbumWebPlayer/AlbumWebPlayer.js'
+import AlbumWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer.js'
 
 //import {withRouter} from 'react-router';
 import {Route,BrowserRouter as Router,Switch} from 'react-router-dom';

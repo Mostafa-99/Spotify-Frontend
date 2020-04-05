@@ -4,7 +4,7 @@ import CardComponent from './cardComponent';
 import TopCover from './topCover';
 export class MainIndex extends Component {
     render() {
-        {document.title ="Music for everyone - Spotify"}
+        document.title ="Music for everyone - Spotify"
 
         return (
                 <div>

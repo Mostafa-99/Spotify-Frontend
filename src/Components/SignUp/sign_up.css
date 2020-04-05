@@ -1,7 +1,8 @@
 #my-sign-up #logo {
     align-self: center;
     width: 200px;
-    margin: 2% 40% 1% 30%;
+    margin: 25px auto 0 auto;
+    display:block;
 }
 
 #my-sign-up .center-box-2 {
@@ -107,8 +108,7 @@
 }
 
 #my-sign-up #login {
-    margin: -30px 0 0 0%;
-    width: 200px;
+    margin: -30px 0 0 40px;
     position: absolute;
     display: inline;
 }
@@ -143,7 +143,7 @@
 }
 
 #my-sign-up #sign-up{
-width:200px;
+width:300px;
 margin-bottom:20px;
 }
 
@@ -169,4 +169,81 @@ margin-bottom:20px;
 #my-sign-up form .fb-login-button
 {
     margin-top: -500px;
+}
+
+#my-sign-up .divider{
+border-top: 1px solid #d9dadc;
+    display: block;
+    line-height: 1px;
+    margin: 25px 0;
+    position: relative;
+    text-align: center;
+}
+
+#my-sign-up hr{
+    border-top: 1px solid #d9dadc;
+    display: block;
+    line-height: 1px;
+    margin: 25px 0;
+    position: relative;
+    text-align: center;
+}
+
+#my-sign-up .divider-title{
+background: #fff;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+}
+
+#my-sign-up .my-font{
+    
+        font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+    }
+
+
+
+@media screen and (max-width: 470px)
+{
+    #my-sign-up .center-box {
+        width: 300px;
+    }
+
+    #my-sign-up .center-box-2 {
+        width: 350px;
+    }
+
+    #my-sign-up #logo{
+        width: 150px;    
+    }
+
+    #my-sign-up #fb-sign-up-2{
+        width: 300px; 
+        font-size:14px;
+    }
+    #my-sign-up #fb-sign-up,#fb-sign-up-2{
+        width: 300px; 
+    }
+
+    #my-sign-up input[type=number]{
+        margin-left:35px;
+        width: 55px;
+        margin-right:20px;
+
+    }
+
+    #my-sign-up #sign-up-now {
+        width:300px;
+    }
+    #my-sign-up #login {
+        display:block;
+        margin: 20px auto 20px auto;
+        width:250px;
+        position: relative;
+    }
+
+
+    
 }

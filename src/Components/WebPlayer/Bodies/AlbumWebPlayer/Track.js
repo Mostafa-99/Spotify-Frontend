@@ -10,34 +10,39 @@ export class Track extends Component {
         "name":"",
         "duration_ms":0,
         "minutes":0,
-        "seconds":0
+        "seconds":0,
+        "is_playing":Boolean
     }
 
     componentDidMount(){
         this.props.track.artists.map((artist)=>(
             this.setState({artists:artist.name})
         ));
-        this.setState({duration_ms:this.props.track.duration_ms});
-        this.setState({preview_url:this.props.track.preview_url});
-        this.setState({id:this.props.track.id});
-        this.setState({id:this.props.track.id});
-        this.setState({name:this.props.track.name});
+        this.setState({
+            duration_ms:this.props.track.duration_ms,
+            preview_url:this.props.track.preview_url,
+            id:this.props.track.id,
+            name:this.props.track.name
+        });
         this.millisToMinutesAndSeconds(this.props.track.duration_ms);
     }
 
     millisToMinutesAndSeconds(millis) {
         var minutes = Math.floor(millis / 60000);
         var seconds = ((millis % 60000) / 1000).toFixed(0);
-        this.setState({minutes:minutes});
-        this.setState({seconds:seconds});
+        this.setState({
+            minutes:minutes,
+            seconds:seconds
+        });
     }
 
     render() {
         return (
             <div id="track-row-div" className="container-fluid">
-                <div className="row">
+                <div className={(this.props.playing_song_id===this.props.track.id?"row playing-song":"row not-playing-song")}>
                     <div className="track-symbol-div">
-                        <p className="track-icon"></p>
+                        <i className={(this.props.playing_song_id===this.props.track.id?"track-icon-playing":"track-icon")} 
+                        onClick={this.props.setPlayingSondId.bind(this, this.state.id)}></i>
                     </div>
                     <div className="track-name-div">
                         <p className="track-name">{this.state.name}</p>

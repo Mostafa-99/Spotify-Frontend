@@ -20,10 +20,6 @@ class LogIn extends Component {
             password:''
                },
         rememberme:false,
-        accessToken: '',
-        expiresIn:'',
-        signedRequest:'',
-        userID:' ',
         status: 'not connected'
     }
 
@@ -33,8 +29,41 @@ class LogIn extends Component {
         event.preventDefault();
         
         window.FB.login(function(response) {
-            //let statusNow = JSON.parse(JSON.stringify(response.status));
             if (response.status === 'connected') {
+                                // let fbtoken=response.authResponse.accessToken;
+                                // let fbuserID=response.authResponse.userID;
+                                //     axios.post('http://localhost:3000/loginWithFacebook/',
+                                // {
+                                // "access token":fbtoken,
+                                // "facebook id":fbuserID
+                                // }
+                                // )   
+                                // .then(res => {
+                                //     if(res.status===200) // Successful
+                                //     {
+                                        
+                                //         if(res.success===true || res.success==="true")
+                                //         {
+                                //             localStorage.setItem("isLoggedIn",'true');
+                                //             localStorage.setItem("token",res.token);
+                                //             localStorage.setItem("loginType", "fb");
+                                //             this.setState({status: 'connected'});
+                                //             window.location.reload(false);
+                                //         }
+                                        
+                                //     }
+                                //     if(res.status===304) // Unsuccessful
+                                //     {
+                                //         if(this.state.status!=="invalid")
+                                //         this.setState({status: 'invalid'});
+                                //     }
+                                    
+                                //    }).catch(
+                                //         err =>{
+                                //     alert(err.status + ": "+ err.message);
+                                //     this.setState({status: 'invalid'});
+                                // });
+
                 this.setState({status: response.status})
                 localStorage.setItem("loginType", "fb");
                 localStorage.setItem("isLoggedIn", 'true');
@@ -43,25 +72,16 @@ class LogIn extends Component {
                 console.log(localStorage);
                 console.log(response);
                 window.location.reload(false);
-                this.props.history.push('/Home')
-                alert("YES");
+                
               } else {
                 localStorage.setItem("loginType", "");
                 localStorage.setItem("isLoggedIn", 'false');
                 localStorage.setItem("token", '');
-                localStorage.setItem("userID", '');
-                alert("NO");
+                localStorage.setItem("userID", '');              
               }
               console.log(response);
           }.bind(this), {scope: 'public_profile,email'});
-    }
-
-    fbLogOut = event=> {
-        event.preventDefault();
-        window.FB.logout(function(response) {
-              console.log(response);
-          });
-    }   
+    } 
 
     componentDidMount =()=>{
         console.log(localStorage);
@@ -74,14 +94,7 @@ class LogIn extends Component {
             else  
           this.setState({status:"not connected"})
        
-        //this.setState({status:"not connected"})
         console.log(this.state.status)
-    }
-
-    componentDidUpdate(){
-        
-        console.log(this.state)
-
     }
 
     validateEmail(email) {
@@ -101,10 +114,10 @@ class LogIn extends Component {
         const is_psw_valid = this.validatePassword(mpsw);
         if(is_email_valid && is_psw_valid)
         {
-            axios.post('http://localhost:3000/users/',
+            axios.post('http://localhost:3000/signIn/',
             {
-            email:memail,
-            password:mpsw
+            "email":memail,
+            "password":mpsw
             }
             )   
             .then(res => {
@@ -112,23 +125,20 @@ class LogIn extends Component {
                 {
                     if(res.success===true)
                     {
-                    localStorage.setItem("isLoggedIn",'true');
-                    localStorage.setItem("token",res.token);
-                    localStorage.setItem("loginType", "email");
-                    this.setState({status: 'connected'});
-                    window.location.reload(false);
-                    }
-                    
+                        localStorage.setItem("isLoggedIn",'true');
+                        localStorage.setItem("token",res.token);
+                        localStorage.setItem("loginType", "email");
+                        this.setState({status: 'connected'});
+                        window.location.reload(false);
+                    }  
                 }
                 if(res.status===304) // Unsuccessful
                 {
-                    localStorage.setItem("isLoggedIn",'false');
-                    localStorage.setItem("token",'');
-                    localStorage.setItem("loginType", "");
-                    
+                   if(this.state.status!=="invalid")
+                    this.setState({status: 'invalid'});
                 }
                 
-                alert("yes data")}).catch(
+                }).catch(
                     err =>{
                 alert(err.status + ": "+ err.message);
                 this.setState({status: 'invalid'});
@@ -167,15 +177,17 @@ class LogIn extends Component {
         <div id="my-sign-up">
             {logInOrNot==="connected" ? (
             <div>
-            <Redirect to="/Home"/>
+            <Redirect to="/home"/>
             </div>
             )
             :
             (
+                <div>
+                <img id="logo" src={spotify_black_logo} alt=""/>
+                    <hr/>
             <div className="center-box-2">
-            <img id="logo" src={spotify_black_logo} alt=""/>
-            <hr/>
-            <h6>To continue, log in to Spotify.</h6>
+            
+            <h6 className="my-font">To continue, log in to Spotify.</h6>
 
             {this.state.status==="invalid"?
             <div id="invalid-message">
@@ -187,12 +199,16 @@ class LogIn extends Component {
             </div>
             }
              
-            <form className="text-center p-5" action="">
+            <form className="text-center p-2" action="">
             
             <button id="fb-sign-up-2" type="button" className="my-spotify-button" onClick={this.fbLogin}><i className="fab fa-facebook fa-lg white-text mr-md-2 mr-3 fa-1x"> </i>CONTINUE WITH FACEBOOK</button>
             {/* <button id="applesignup" type="button" className="myspotifybutton"><i className="fab fa-apple fa-lg white-text mr-md-2 mr-3 fa-1x"> </i>CONTINUE WITH APPLE</button> */}
-            <h6>or</h6>
-            <hr/>
+                <div className="col-xs-12">
+                    <div className="divider">
+                    <strong className="divider-title ng-binding">or</strong>
+                    </div>
+                </div>
+           
 
             <input required type="email" id="form-email" onChange={this.handleEmailChange} className="form-control mb-4" placeholder="Email address"/>
             <input required type="password" id="form-password" maxLength="30" minLength="8" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" />
@@ -214,6 +230,7 @@ class LogIn extends Component {
             <a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy</a>.</p>
             </form>      
         
+            </div>
             </div>
             )
             }   

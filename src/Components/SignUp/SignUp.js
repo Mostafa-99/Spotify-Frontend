@@ -20,41 +20,69 @@ class SignUp extends Component {
             month:'',
             year:''
                },
-        rememberme:false,
         emailrecheck:'',
-        accessToken: '',
-        expiresIn:'',
-        signedRequest:'',
-        userID:' ',
         status: 'not connected'
     }
-
         this.inputChangeHandler = this.inputChangeHandler.bind(this);
 
     }
 
     fbSignUpHandler = event=> {
         event.preventDefault();
+        
         window.FB.login(function(response) {
-            //let statusNow = JSON.parse(JSON.stringify(response.status));
             if (response.status === 'connected') {
+                                // let fbtoken=response.authResponse.accessToken;
+                                // let fbuserID=response.authResponse.userID;
+                                //     axios.post('http://localhost:3000/loginWithFacebook/',
+                                // {
+                                // "access token":fbtoken,
+                                // "facebook id":fbuserID
+                                // }
+                                // )   
+                                // .then(res => {
+                                //     if(res.status===200) // Successful
+                                //     {
+                                        
+                                //         if(res.success===true || res.success==="true")
+                                //         {
+                                //             localStorage.setItem("isLoggedIn",'true');
+                                //             localStorage.setItem("token",res.token);
+                                //             localStorage.setItem("loginType", "fb");
+                                //             this.setState({status: 'connected'});
+                                //             window.location.reload(false);
+                                //         }
+                                        
+                                //     }
+                                //     if(res.status===304) // Unsuccessful
+                                //     {
+                                //         if(this.state.status!=="invalid")
+                                //         this.setState({status: 'invalid'});
+                                //     }
+                                    
+                                //    }).catch(
+                                //         err =>{
+                                //     alert(err.status + ": "+ err.message);
+                                //     this.setState({status: 'invalid'});
+                                // });
+
                 this.setState({status: response.status})
-                localStorage.setItem("userID", response.authResponse.userID);
+                localStorage.setItem("loginType", "fb");
                 localStorage.setItem("isLoggedIn", 'true');
                 localStorage.setItem("token", response.authResponse.accessToken);
-                localStorage.setItem("loginType", "fb");
+                localStorage.setItem("userID", response.authResponse.userID);
+                console.log(localStorage);
+                console.log(response);
                 window.location.reload(false);
-                alert("YES");
+                
               } else {
-                localStorage.setItem("userID", '');
+                localStorage.setItem("loginType", "");
                 localStorage.setItem("isLoggedIn", 'false');
                 localStorage.setItem("token", '');
-                localStorage.setItem("loginType", "");
-                alert("NO");
+                localStorage.setItem("userID", '');              
               }
               console.log(response);
-              console.log(localStorage);
-          }, {scope: 'public_profile,email'});
+          }.bind(this), {scope: 'public_profile,email'});
        
     }
 
@@ -88,7 +116,7 @@ class SignUp extends Component {
     signUpHandler = event=> {
     
         //event.preventDefault();
-        let sendDate=this.state.day+" "+this.state.month+this.state.year;
+        let sendDate=this.state.year+"-"+this.state.month+"-"+this.state.day;
         
         if(this.state.user.email!=='' && this.state.user.password!=='' && this.state.user.gender!=='' && this.state.user.username!=='' && this.state.user.day!=='' && this.state.user.month!=='' && this.state.user.year!=='')
         {
@@ -97,49 +125,42 @@ class SignUp extends Component {
             alert("Email and confirm Mail do not match!")
             return;
         }
-            axios.post('http://localhost:3000/users/',
+            axios.post('http://localhost:3000/signUp/',
             {   
-                name:this.state.username,
-                email:this.state.email,
-                dateOfBirth:sendDate,
-                password:this.state.password,
-                gender:this.state.gender,
-                
+                "email":this.state.user.email,
+                "password":this.state.user.password,
+                "name":this.state.user.username,
+                "gender":this.state.gender,
+                "dateOfBirth":sendDate,   
             })   
             .then(res => {
                 console.log(res.data);
                 if(res.status===200) // Successful
                 {
-                    if(res.success===true)
+                    if(res.success===true || res.success==="true")
                     {
-                    localStorage.setItem("isLoggedIn",'true');
-                    localStorage.setItem("token",res.token);
-                    localStorage.setItem("loginType", "email");
-                    window.location.reload(false);
-
+                        localStorage.setItem("isLoggedIn",'true');
+                        localStorage.setItem("token",res.token);
+                        localStorage.setItem("loginType", "email");
+                        window.location.reload(false);
                     }
-
-                
                 }
                 if(res.status===304) // Unsuccessful
                 {
                     localStorage.setItem("isLoggedIn",'false');
                     localStorage.setItem("token",'');
                     localStorage.setItem("loginType", "");
-                   
+                    alert("Server error sign up again")
                 }
-                alert("yes data")})
+               })
             .catch(() =>{ 
                 
                 alert("Server error sign up again");});
         }
-        
-         
     }
 
     inputChangeHandler(evt) {
         if (!evt || !evt.target) return;
-
 
         const elem = evt.target;
         if (!elem.id) return;
@@ -253,17 +274,20 @@ class SignUp extends Component {
         <div id="my-sign-up">
             {this.state.status==="connected" ?
             <div>
-                <Redirect to="/Home"/>
+                <Redirect to="/home"/>
             </div>
             :
+            <div>
+                <img id="logo" src={spotify_black_logo} alt=""/>
+                <hr></hr>
          <div className="center-box">
-            <img id="logo" src={spotify_black_logo} alt=""/>
-            <hr></hr>
-           <form className="text-center " action="">
+           <form className="text-center" action="">
                 <button type="button" id="fb-sign-up" className="my-spotify-button" onClick={this.fbSignUpHandler}>SIGN UP WITH FACEBOOK</button>
-                <h6>or</h6>
-              
-            <hr/>
+                <div className="col-xs-12">
+                    <div className="divider">
+                    <strong className="divider-title ng-binding">or</strong>
+                    </div>
+                </div>
             {this.state.status==="invalid"?
             <div id="invalid-message">
             Email or username already taken.
@@ -321,8 +345,10 @@ class SignUp extends Component {
             <br></br>
             </form>   
             </div>
+            </div>
             } 
         </div>
+        
         
         );
     }

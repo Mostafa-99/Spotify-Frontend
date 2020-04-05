@@ -123,6 +123,21 @@ height:60px;
     padding-bottom: 1700px;
     margin-bottom: -1700px;
 }
+@media screen and (max-width: 470px)
+{
+
+    #my-mob-navbar .sidebar
+{
+   max-width:100%;
+    
+}
+
+#my-mob-navbar .sidebar #ul3
+{ 
+    margin-top:32%;
+}
+
+}
 
 `
 
