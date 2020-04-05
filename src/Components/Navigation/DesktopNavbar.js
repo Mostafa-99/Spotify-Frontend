@@ -7,6 +7,7 @@ import axios from 'axios'
 //navbar not fixed anymore
 const MyDesktopNavbar=styled.nav`
 display:flex;
+
 flex-flow: row nowrap;
 justify-content:space-evenly;
 align-items:center;
@@ -31,7 +32,7 @@ z-index:1;
 }
 
 #my-desk-navbar .nav-links{
-    margin-top:-1.7%;
+    margin-top:-1%;
     display: flex;
     flex-flow:row nowrap;
     list-style:none;
