@@ -17,7 +17,7 @@ export class ArtistProfilesFeature extends Component {
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb" id="help-breadcrumb">
                         <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                        <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
+                        <li className="breadcrumb-item"><Link to="/features-main">Features</Link></li>
                     </ol>
                 </nav>
                 <div>
