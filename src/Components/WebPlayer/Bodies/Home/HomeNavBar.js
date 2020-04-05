@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import { Link,Redirect } from 'react-router-dom';
+ import RecentActivity from './RecentActivity';
 import { Route } from 'react-router';
 import '../NavBars.css';
 import axios from 'axios'
@@ -73,7 +74,7 @@ class HomeNavBar extends Component {
             </head>
             <div id="root-navbar-container" className="container m-0 ">
                 <div className="row">
-                    <div id="navbar-arrows"className="col-8 navbar-arrows">
+                    <div id="navbar-arrows"className="col-6 navbar-arrows">
                         <i id="root-navbar-arrows"className="material-icons btn " >keyboard_arrow_left</i>
                         <i id="root-navbar-arrows"className="material-icons btn" >keyboard_arrow_right</i>
                     </div>
@@ -89,7 +90,8 @@ class HomeNavBar extends Component {
                     </div>
                     )
                 }
-                    
+                    <div className="col-2"><RecentActivity/>
+                    </div> 
             {logInOrNot==="true" ? (
                
                 <div className="col-2 " id="navbar-profile-section" >
