@@ -89,7 +89,7 @@
 }
 
 
-#dev-items .container{
+#dev-items.container{
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-gap: 25px;

@@ -13,7 +13,6 @@
     "better-docs": "^1.4.7",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
-    "jsdoc": "^3.6.3",
     "mdbreact": "^4.25.5",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
@@ -30,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.3"
   }
 }

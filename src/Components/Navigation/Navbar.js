@@ -6,7 +6,8 @@ const exclusionArray = [
   '/login',
   '/signup',
   '/home',
-  '/Home'
+  '/Home',
+  '/webplayer/album'
 ]
 
 class Navbar extends Component {

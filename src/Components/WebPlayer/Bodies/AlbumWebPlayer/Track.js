@@ -42,7 +42,7 @@ export class Track extends Component {
                 <div className={(this.props.playing_song_id===this.props.track.id?"row playing-song":"row not-playing-song")}>
                     <div className="track-symbol-div">
                         <i className={(this.props.playing_song_id===this.props.track.id?"track-icon-playing":"track-icon")} 
-                        onClick={this.props.setPlayingSondId.bind(this, this.state.id)}></i>
+                        onClick={this.props.setPlayingSondId.bind(this, this.state.id,this.state.preview_url)}></i>
                     </div>
                     <div className="track-name-div">
                         <p className="track-name">{this.state.name}</p>
