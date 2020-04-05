@@ -5,6 +5,7 @@ import MobileFooter from './MobileFooter'
 const exclusionArray = [
   '/login',
   '/signup',
+  '/home',
   '/Home',
   '/password-reset'
 ]

@@ -22,7 +22,7 @@ function SideBar() {
             <div className="container webplayer-sidebar-container">
                 <div className="row-6">
                     <div className="col-2 sidebar-section">
-                        <Link to="/Home"><img id='sidebar-logo' className="sidebar-logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
+                        <Link to="/home"><img id='sidebar-logo' className="sidebar-logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
                         <ul className='sidebar-list'>
                             <Link to="/home" className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-home'><span className="glyphicon glyphicon-home"></span><span className='list-item-text'>Home</span></li></Link>
                             <div to="/search"className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-search'><span className="glyphicon glyphicon-search"></span><span className='list-item-text'>Search</span></li></div>

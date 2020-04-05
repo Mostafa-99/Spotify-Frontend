@@ -5,6 +5,7 @@ import MobileNavbar from './MobileNavbar'
 const exclusionArray = [
   '/login',
   '/signup',
+  '/home',
   '/Home'
 ]
 
