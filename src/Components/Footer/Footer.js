@@ -44,7 +44,7 @@ class Footer extends Component {
       }
     
       updatePredicate() {
-        this.setState({ isDesktop: window.innerWidth > 800 });
+        this.setState({ isDesktop: window.outerWidth > 800 });
       }
 
       updateVisibility() {

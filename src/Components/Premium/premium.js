@@ -6,7 +6,10 @@ import benefit2 from '../../Images/benefit-2.png';
 import benefit3 from '../../Images/benefit-3.png';
 import benefit4 from '../../Images/benefit-4.png';
 
-
+/**
+ * Show advantages of being premium user
+ * @extends Component
+ */
 export class premium extends Component {
     render() {
         

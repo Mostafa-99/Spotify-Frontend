@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './premiumCode.css';
 
+/**
+ * Checks subscription code to become a premium user
+ * @extends Component
+ */
 export class premiumCode extends Component {
     state={
         code: ''
     }
 
+    /**
+     * sends subscription code to the user's email
+     */
     sendMail = () => {
         axios.post('')
             .then(res => {
@@ -22,6 +29,9 @@ export class premiumCode extends Component {
             })
     }
 
+    /**
+     * checks if the code written by user is valid
+     */
     checkCode = () => {
         if(this.state.code !== ""){
             let code=this.state.code;
@@ -44,6 +54,9 @@ export class premiumCode extends Component {
         }
     }
 
+    /**
+     * any change is done in input textbox is assigned to code in state
+     */
     onChange = (e) => this.setState({ code: e.target.value });
     
     render() {

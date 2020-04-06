@@ -20,6 +20,8 @@ class LogIn extends Component {
             password:''
                },
         rememberme:false,
+        emptypass:false,
+        emptyemail:false,
         status: 'not connected'
     }
 
@@ -149,6 +151,8 @@ class LogIn extends Component {
 
     handlePasswordChange = event=> {
         event.preventDefault();
+        if(this.state.emptypass===true)
+        this.setState({emptypass: false});
         var newpass=event.target.value;
         this.setState({password: event.target.value});
         let userCopy = JSON.parse(JSON.stringify(this.state.user))
@@ -161,6 +165,8 @@ class LogIn extends Component {
 
     handleEmailChange = event=> {
         event.preventDefault();
+        if(this.state.emptyemail===true)
+        this.setState({emptyemail: false});
         var newemail=event.target.value;
         this.setState({email: event.target.value});
         let userCopy = JSON.parse(JSON.stringify(this.state.user))
@@ -192,7 +198,6 @@ class LogIn extends Component {
             {this.state.status==="invalid"?
             <div id="invalid-message">
             Invalid email or password.
-           
             </div>
             :
             <div>
@@ -210,8 +215,28 @@ class LogIn extends Component {
                 </div>
            
 
-            <input required type="email" id="form-email" onChange={this.handleEmailChange} className="form-control mb-4" placeholder="Email address"/>
+            <input required type="email" id="form-email" onChange={this.handleEmailChange} className="form-control" placeholder="Email address"/>
+
+            {this.state.emptyemail===true?
+            <div id="empty-email" className="error-message">
+            Please enter your Spotify email address.
+            </div>
+            :
+            <div>
+            </div>
+            }
+
             <input required type="password" id="form-password" maxLength="30" minLength="8" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" />
+
+            {this.state.emptypass===true?
+            <div id="empty-pass" className="error-message">
+            Please enter your password.
+            </div>
+            :
+            <div>
+            </div>
+            }
+
             <br/>
             <div className="custom-control custom-checkbox" id="remember-me">
                 <input type="checkbox" className="custom-control-input" id="defaultUnchecked"/>

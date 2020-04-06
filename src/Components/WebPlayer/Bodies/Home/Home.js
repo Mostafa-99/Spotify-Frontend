@@ -89,7 +89,7 @@ class Home extends Component {
     }
     
         togglePlayPause(sid) {
-            if(this.state.nowPlaying.id==-1)
+            if(this.state.nowPlaying.id===-1)
             {
                 const cardButtons=document.getElementById(sid);
                 const playButton = cardButtons.querySelector('.play-btn');
@@ -98,7 +98,7 @@ class Home extends Component {
                 pauseButton.classList.toggle('active-pause');
                 this.setState({nowPlaying: {id: sid}})
             }
-            else if(this.state.nowPlaying.id==sid)
+            else if(this.state.nowPlaying.id===sid)
             {
                 const cardButtons=document.getElementById(sid);
                 const playButton = cardButtons.querySelector('.play-btn');

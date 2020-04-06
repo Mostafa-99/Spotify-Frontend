@@ -11,16 +11,23 @@ class SignUp extends Component {
         super()
         
     this.state ={
-        user:{
-            email:'',
-            password:'',
-            username:'',
-            gender:'',
-            day:'',
-            month:'',
-            year:''
-               },
+        email:'',
+        password:'',
+        username:'',
+        gender:'',
+        day:'',
+        month:'',
+        year:'',
         emailrecheck:'',
+        emptypass:false,
+        emptyemail:false,
+        emptyname:false,
+        dayerror:false,
+        montherror:false,
+        yearerror:false,
+        gendererror:false,
+        emptyconfirmemail:false,
+        emailnotequal:false,
         status: 'not connected'
     }
         this.inputChangeHandler = this.inputChangeHandler.bind(this);
@@ -87,14 +94,25 @@ class SignUp extends Component {
     }
 
     validateEmail(email) {
+        if(this.state.emptyemail===true)
+            this.setState({emptyemail: false});
+        if(this.state.emailnotequal===true)
+            this.setState({emailnotequal: false});
+        this.setState({email: ""});    
         return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
     validatePassword(psw) {
+        if(this.state.emptypass===true)
+         this.setState({emptypass: false});
+         this.setState({password: ""});    
         return psw && psw.length >= 8
     }
 
     validateGender(gender) {
+        if(this.state.gendererror===true)
+         this.setState({gendererror: false});
+        this.setState({gender: ""});    
         // 0 = male
         // 1 = female
         // null/undefined = otherwise
@@ -106,30 +124,54 @@ class SignUp extends Component {
     }
 
     validateUsername(name) {
+        if(this.state.emptyname===true)
+         this.setState({emptyname: false});
+         this.setState({username: ""}); 
         return name && name.match(/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/);
+           
     }
 
     validateEmailAgain(email_again) {
-        return this.state["email"] === email_again;
+        if(this.state.emptyconfirmemail===true)
+            this.setState({emptyconfirmemail: false});
+        if(this.state.emailnotequal===true)
+            this.setState({emailnotequal: false});
+        this.setState({emailrecheck: ""});    
+        return email_again && email_again.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
     signUpHandler = event=> {
     
         //event.preventDefault();
         let sendDate=this.state.year+"-"+this.state.month+"-"+this.state.day;
-        
-        if(this.state.user.email!=='' && this.state.user.password!=='' && this.state.user.gender!=='' && this.state.user.username!=='' && this.state.user.day!=='' && this.state.user.month!=='' && this.state.user.year!=='')
+        if(this.state.email==="" && this.state.emptyemail===false)
+            this.setState({emptyemail: true});
+        if(this.state.password==="" && this.state.emptypass===false)
+            this.setState({emptypass: true});
+        if(this.state.emailrecheck==="" && this.state.emptyconfirmemail===false)
+            this.setState({emptyconfirmemail: true});
+        if(this.state.email!==this.state.emailrecheck && this.state.emailnotequal===false)
+            this.setState({emailnotequal: true});
+        if(this.state.username==="" && this.state.emptyname===false)
+            this.setState({emptyname: true});
+       
+        if(this.state.day==="" || parseInt(this.state.day, 10)<=0 || parseInt(this.state.day, 10)>31 && this.state.dayerror===false)
+            this.setState({dayerror: true});
+        if(this.state.month==="" || parseInt(this.state.month, 10)<=0 || parseInt(this.state.month, 10)>12 && this.state.montherror===false)
+            this.setState({montherror: true});
+        if(this.state.year==="" || parseInt(this.state.year, 10)<=1949 || parseInt(this.state.year, 10)>2010 && this.state.yearerror===false)
+            this.setState({yearerror: true});
+        if(this.state.gender==="" && this.state.gendererror===false)
+            this.setState({gendererror: true});
+            console.log(sendDate)
+
+        if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='')
         {
-            if(this.state.user.email!==this.state.emailrecheck)
-        {
-            alert("Email and confirm Mail do not match!")
-            return;
-        }
             axios.post('http://localhost:3000/signUp/',
             {   
-                "email":this.state.user.email,
-                "password":this.state.user.password,
-                "name":this.state.user.username,
+                "email":this.state.email,
+                "password":this.state.password,
+                "name":this.state.username,
                 "gender":this.state.gender,
                 "dateOfBirth":sendDate,   
             })   
@@ -174,23 +216,20 @@ class SignUp extends Component {
         const is_valid = this.validateValue(value, type);
         if(!is_valid) return;
 
-        let userCopy = JSON.parse(JSON.stringify(this.state.user))
+        
         if(type==="psw")
         {
             this.setState({password: value});
-            userCopy['password'] = value;
         }
 
         if(elem.id==="sign-up-form-username")
         {
             this.setState({username: value});
-            userCopy['username'] = value;
         }
 
         if(type==="email")
         {
             this.setState({email: value});
-            userCopy['email'] = value;
         }
 
         if(type==="email_again")
@@ -203,36 +242,34 @@ class SignUp extends Component {
             if (value===1)
             {
                 this.setState({gender:'Female'});
-                userCopy['gender'] = 'Female';
             }
             else
             {
                 this.setState({gender:'Male'});
-                userCopy['gender'] = 'Male';
             }
         }
 
         if(elem.id==="sign-up-form-day")
         {
             this.setState({day:value});
-            userCopy['day'] = value;
+            if(this.state.dayerror===true)
+                this.setState({dayerror: false});
         }
 
         if(elem.id==="sign-up-form-month")
         {
             this.setState({month:value});
-            userCopy['month'] =value;
+            if(this.state.montherror===true)
+                this.setState({montherror: false});
         }
 
         if(elem.id==="sign-up-form-year")
         {
             this.setState({year:value});
-            userCopy['year'] =value;
+            if(this.state.yearerror===true)
+                this.setState({yearerror: false});
         }
 
-        this.setState({
-             user:userCopy 
-            })
     }
 
     validateValue(val, type) {
@@ -240,7 +277,7 @@ class SignUp extends Component {
             case "email":
                 return this.validateEmail(val);
             case "email_again":
-                return this.validateEmail(val);
+                return this.validateEmailAgain(val);
             case "psw":
                 return this.validatePassword(val);
             case "gender":
@@ -296,40 +333,121 @@ class SignUp extends Component {
             <div>
             </div>
             }
+
             <h6>Sign up with your email address</h6>
-            <input type="email" data-type="email" onChange={this.inputChangeHandler} id="sign-up-form-email" className="form-control mb-4" placeholder="Email" data-err="Enter Correct Email" required></input>
-            <input type="email" data-type="email_again" onChange={this.inputChangeHandler} id="sign-up-form-email-confirm" className="form-control mb-4" placeholder="Confirm email" data-err="Enter Correct Confirm Email" required></input>
-            <input type="password" data-type="psw" onChange={this.inputChangeHandler} id="sign-up-form-password" className="form-control" placeholder="Password" maxLength="30" minLength="8" data-err="Enter Correct Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required></input>
-            <br></br>
-            <input  type="text" data-type="username" onChange={this.inputChangeHandler} id="sign-up-form-username" className="form-control" placeholder="What should we call you?" data-err="Enter Correct Username" required/>
-            <br></br>
+            <input type="email" data-type="email" onChange={this.inputChangeHandler} id="sign-up-form-email" className="form-control mb-3" placeholder="Email" data-err="Enter Correct Email" required></input>
+            {this.state.emptyemail===true?
+            <div id="empty-email" className="error-message">
+            Please enter your email address.
+            </div>
+            :
+            <div>
+            </div>
+            }
+
+            <input type="email" data-type="email_again" onChange={this.inputChangeHandler} id="sign-up-form-email-confirm" className="form-control mb-3" placeholder="Confirm email" data-err="Enter Correct Confirm Email" required></input>
+            {this.state.emptyconfirmemail===true?
+            <div id="empty-confirm-email" className="error-message">
+            Please enter your email address.
+            </div>
+            :
+            <div>
+            </div>
+            }
+
+            {this.state.emailnotequal===true?
+            <div id="match-confirm-email" className="error-message">
+            Please confirm matching your email addresses.
+            </div>
+            :
+            <div>
+            </div>
+            }
+
+            <input type="password" data-type="psw" onChange={this.inputChangeHandler} id="sign-up-form-password" className="form-control mb-3" placeholder="Password" maxLength="30" minLength="8" data-err="Enter Correct Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required></input>
+            {this.state.emptypass===true?
+            <div id="empty-pass" className="error-message">
+            Please enter a valid password (Minimum Length 8).
+            </div>
+            :
+            <div>
+            </div>
+            }
+
+            <input  type="text" data-type="username" onChange={this.inputChangeHandler} id="sign-up-form-username" className="form-control mb-3" placeholder="What should we call you?" data-err="Enter Correct Username" required/>
+            {this.state.emptyname===true?
+            <div id="empty-name" className="error-message">
+                What should we call you?
+            </div>
+            :
+            <div>
+            </div>
+            }
+
+            
             <h5>Date of Birth </h5>
             <div className="row">
                 <input type="number" id="sign-up-form-day" name="signup_form[dob_day]" onChange={this.inputChangeHandler}  required="required" max="31" maxLength="2" min="1" pattern="[0-9]*" placeholder="Day" className="dob " data-err="Please enter a valid day of the month"></input>
                 <select id="sign-up-form-month"  name="signup_form[dob_month]"  onChange={this.inputChangeHandler} required data-err="Please enter your birth month.">
                     <option value="" >Month</option>
-                    <option value="01 ">January</option>
-                    <option value="02 ">February</option>
-                    <option value="03 ">March</option>
-                    <option value="04 ">April</option>
-                    <option value="05 ">May</option>
-                    <option value="06 ">June</option>
-                    <option value="07 ">July</option>
-                    <option value="08 ">August</option>
-                    <option value="09 ">September</option>
-                    <option value="10 ">October</option>
-                    <option value="11 ">November</option>
-                    <option value="12 ">December</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
                 </select>
                 <input type="number" id="sign-up-form-year" name="signup_form[dob_year]" onChange={this.inputChangeHandler} required max="2010" maxLength="4" min="1950" pattern="[0-9]*" placeholder="Year" className="dob" data-err="Please enter a valid year." data-msg-number="Please enter a valid year" data-msg-min="Please enter a valid year." data-msg-max="Please enter a valid year. " data-msg-maxlength="Please enter a valid year. "/>
             </div>
 
             <br></br>
+            {this.state.dayerror===true?
+            <div id="day-error" className="error-message">
+                Please enter a valid day of the month.
+            </div>
+            :
+            <div>
+            </div>
+            }
+
+            {this.state.montherror===true?
+            <div id="month-error" className="error-message">
+                Please enter your birth month.
+            </div>
+            :
+            <div>
+            </div>
+            }
+
+            {this.state.yearerror===true?
+            <div id="year-error" className="error-message">
+                Please enter a valid year.
+            </div>
+            :
+            <div>
+            </div>
+            }
   
             <label className="radio-inline">
             <input type="radio" name="gender" data-type="gender" onChange={this.inputChangeHandler} id="gender-male" value="male" required/>Male</label>  
             <label className="radio-inline">
-            <input type="radio" name="gender" data-type="gender" onChange={this.inputChangeHandler} id="gender-female" value="female" required />Female</label> 
+            <input type="radio" name="gender" data-type="gender" onChange={this.inputChangeHandler} id="gender-female" value="female" required />Female</label>
+
+            {this.state.gendererror===true?
+            <div id="gender-error" className="error-message">
+                Please indicate your gender.
+            </div>
+            :
+            <div>
+            </div>
+            }
+
             <div className="custom-control custom-checkbox">
                 <input type="checkbox" className="custom-control-input" id="sign-up-form-news"/>
                 <label className="custom-control-label" htmlFor="sign-up-form-news"><p>Share my registration data with Spotify for marketing purposes.</p></label>

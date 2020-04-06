@@ -49,13 +49,20 @@ class Navbar extends Component {
       }
     
       updatePredicate() {
-        this.setState({ isDesktop: window.innerWidth > 900 });
+        this.setState({ isDesktop: window.outerWidth > 900 });
       }
 
       updateVisibility() {
 
-        this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0});
-     
+        this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0})
+        if(window.location.pathname.match());
+        {
+          //console.log(window.location.pathname);
+          if(document.querySelector("#my-desk-navbar")!==null)
+            document.querySelector("#my-desk-navbar").classList.add("index-fixed");
+        }
+          
+        
       }
     
       

@@ -24,11 +24,11 @@ height:60px;
 #my-mob-navbar .sidebar
 {
     z-index:2;
-    width:calc (330px+2vw);
+    width: calc(330px+2vw);
     max-width:240px;
     height: 120%;
     margin-top:-50px;
-    margin-left: 400%;
+    margin-left: 200%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: white;
     background-color: black;
