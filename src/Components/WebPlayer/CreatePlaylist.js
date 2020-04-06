@@ -65,7 +65,7 @@ class CreatePlaylist extends Component {
 
            <button  type="button" data-dismiss="modal" id="cancel-create-btn">cancel</button>
            {/* <button id="create-playlist-btn" onClick={this.handleclick} >Create </button> */}
-           <button id="create-playlist-btn" data-dismiss="modal" >Create </button>
+           <button id="create-playlist-btn" disabled>Create </button>
       </div>
 
       
