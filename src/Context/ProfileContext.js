@@ -5,10 +5,10 @@ export const ProfileContext= createContext();
 class ProfileContextProvider extends Component {
     
     state={
-        userType:'artist'
+        userType:'artistm'
     }
     
-
+   
     render(){
         return(
 
