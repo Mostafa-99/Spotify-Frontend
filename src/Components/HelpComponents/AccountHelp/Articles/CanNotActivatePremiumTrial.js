@@ -13,7 +13,7 @@ function CanNotActivatePremiumTrial(){
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                            <li className="breadcrumb-item">    <Link to="/account-help/" > Account Help   </Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/account-help" > Account Help   </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">

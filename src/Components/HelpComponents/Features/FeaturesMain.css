@@ -117,3 +117,10 @@
 #features-nav ol,#features-nav ul{
     padding: 10px 20px;
 }
+
+
+#features-nav .breadcrumb{
+
+    background-color: white;
+    padding:0;
+}

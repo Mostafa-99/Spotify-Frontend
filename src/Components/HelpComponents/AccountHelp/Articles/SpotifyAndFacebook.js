@@ -14,7 +14,7 @@ function SpotifyAndFacebook(){
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                            <li className="breadcrumb-item">    <Link to="/account-help/" > Account Help   </Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/account-help" > Account Help   </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
@@ -68,7 +68,7 @@ function SpotifyAndFacebook(){
                                                         <li >Create a Spotify password to log in without Facebook: </li>
                                                     </ul>
                                                     <ol>
-                                                        <li>Go to our <a href="" >password reset form.</a> </li>
+                                                        <li>Go to our password reset form. </li>
                                                         <li>Enter the email address registered to your Facebook account.</li>
                                                         <li>Continue through the steps to create a password for the account.</li>
                                                         <li>You can now log in by entering your Facebook email address and the new password in the default log in fields.</li>
@@ -90,7 +90,7 @@ function SpotifyAndFacebook(){
                                                         <li >Create a Spotify password to access an account connected to a deactivated Facebook account: </li>
                                                     </ul>
                                                     <ol>
-                                                        <li>Go to our <a href="" >password reset form</a>.</li>
+                                                        <li>Go to our password reset form.</li>
                                                         <li>Enter the email address registered to your Facebook account.</li>
                                                         <li>Continue through the steps to create a password for the account.</li>
                                                         <li>You can now log in by entering your Facebook email address and the new password in the default log in fields.</li>

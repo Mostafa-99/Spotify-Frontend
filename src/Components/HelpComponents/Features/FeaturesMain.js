@@ -10,12 +10,12 @@ export class FeaturesMain extends Component {
             <div className="container body" id="dev-items"> 
                 <SideBar/>
                 <div id="features-nav">
-                <nav aria-label="breadcrumb">
+                    <nav aria-label="breadcrumb">
                     <ol className="breadcrumb" id="help-breadcrumb">
                         <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                        <li className="breadcrumb-item" id="typing" aria-current="page">Features</li>
+                        <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
                     </ol>
-                </nav>
+                    </nav>
                     <div>
                         <h1 className="features-heading">Features</h1>
                         <ul>
