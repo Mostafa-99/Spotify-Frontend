@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import '../SignUp/sign_up.css'
 import spotify_black_logo from '../../Images/spotify_logo_black.png'
+import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
 
 
 class SignUp extends Component {
-    
+    static contextType=ConfigContext;
     constructor() {
         super()
         
@@ -41,7 +42,7 @@ class SignUp extends Component {
             if (response.status === 'connected') {
                                 // let fbtoken=response.authResponse.accessToken;
                                 // let fbuserID=response.authResponse.userID;
-                                //     axios.post('http://localhost:3000/loginWithFacebook/',
+                                //     axios.post(ConfigContext.state.baseURL+'loginWithFacebook',
                                 // {
                                 // "access token":fbtoken,
                                 // "facebook id":fbuserID
@@ -50,7 +51,7 @@ class SignUp extends Component {
                                 // .then(res => {
                                 //     if(res.status===200) // Successful
                                 //     {
-                                        
+
                                 //         if(res.success===true || res.success==="true")
                                 //         {
                                 //             localStorage.setItem("isLoggedIn",'true');
@@ -61,7 +62,7 @@ class SignUp extends Component {
                                 //         }
                                         
                                 //     }
-                                //     if(res.status===304) // Unsuccessful
+                                //     else // Unsuccessful
                                 //     {
                                 //         if(this.state.status!=="invalid")
                                 //         this.setState({status: 'invalid'});
@@ -83,10 +84,10 @@ class SignUp extends Component {
                 window.location.reload(false);
                 
               } else {
-                localStorage.setItem("loginType", "");
-                localStorage.setItem("isLoggedIn", 'false');
-                localStorage.setItem("token", '');
-                localStorage.setItem("userID", '');              
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");              
               }
               console.log(response);
           }.bind(this), {scope: 'public_profile,email'});
@@ -155,11 +156,11 @@ class SignUp extends Component {
         if(this.state.username==="" && this.state.emptyname===false)
             this.setState({emptyname: true});
        
-        if(this.state.day==="" || parseInt(this.state.day, 10)<=0 || parseInt(this.state.day, 10)>31 && this.state.dayerror===false)
+        if((this.state.day==="" || parseInt(this.state.day, 10)<=0 || parseInt(this.state.day, 10)>31) && this.state.dayerror===false)
             this.setState({dayerror: true});
-        if(this.state.month==="" || parseInt(this.state.month, 10)<=0 || parseInt(this.state.month, 10)>12 && this.state.montherror===false)
+        if((this.state.month==="" || parseInt(this.state.month, 10)<=0 || parseInt(this.state.month, 10)>12) && this.state.montherror===false)
             this.setState({montherror: true});
-        if(this.state.year==="" || parseInt(this.state.year, 10)<=1949 || parseInt(this.state.year, 10)>2010 && this.state.yearerror===false)
+        if((this.state.year==="" || parseInt(this.state.year, 10)<=1949 || parseInt(this.state.year, 10)>2010) && this.state.yearerror===false)
             this.setState({yearerror: true});
         if(this.state.gender==="" && this.state.gendererror===false)
             this.setState({gendererror: true});
@@ -167,7 +168,7 @@ class SignUp extends Component {
 
         if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='')
         {
-            axios.post('http://localhost:3000/signUp/',
+            axios.post('http://138.91.114.14/signUp',
             {   
                 "email":this.state.email,
                 "password":this.state.password,
@@ -176,7 +177,7 @@ class SignUp extends Component {
                 "dateOfBirth":sendDate,   
             })   
             .then(res => {
-                console.log(res.data);
+                console.log(res);
                 if(res.status===200) // Successful
                 {
                     if(res.success===true || res.success==="true")
@@ -187,16 +188,15 @@ class SignUp extends Component {
                         window.location.reload(false);
                     }
                 }
-                if(res.status===304) // Unsuccessful
+                else // Unsuccessful
                 {
-                    localStorage.setItem("isLoggedIn",'false');
-                    localStorage.setItem("token",'');
-                    localStorage.setItem("loginType", "");
-                    alert("Server error sign up again")
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("loginType");
+                    alert(res.message);
                 }
                })
             .catch(() =>{ 
-                
                 alert("Server error sign up again");});
         }
     }
@@ -457,7 +457,7 @@ class SignUp extends Component {
             <p> By clicking on Sign up, you agree to Spotify's <a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions</a>.</p>
             <p> To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's
                 <a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy</a>.</p>
-            <button className="my-spotify-button" id="sign-up" type="submit" onClick={this.signUpHandler}>SIGN UP</button>
+            <button className="my-spotify-button" id="sign-up" type="button" onClick={this.signUpHandler}>SIGN UP</button>
            
             <h6>Already have an account? <Link to="/login">Log in</Link>.</h6>
             <br></br>

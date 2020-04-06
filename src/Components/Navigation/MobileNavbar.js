@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
+import {ConfigContext} from '../../Context/ConfigContext'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
