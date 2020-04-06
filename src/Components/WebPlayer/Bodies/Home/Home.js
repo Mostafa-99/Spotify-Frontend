@@ -4,6 +4,7 @@ import SideBar from '../../SideBar'
 import '../Bodies.css';
 import '../../WebplayerHome.css'
 import axios from 'axios'
+import {Link} from 'react-router-dom';
 class Home extends Component {
     constructor(){
         super()
@@ -15,7 +16,9 @@ class Home extends Component {
             artists:[],
             nowPlaying:{
                 id:-1
-            }
+            },
+            seeAll:[],
+            seeAllHeader:""
         }
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
@@ -112,6 +115,17 @@ class Home extends Component {
                 this.setState({nowPlaying: {id: sid}})
             }
     }
+    seeAll(header,newState)
+    {
+        this.setState(prevState => ({
+            seeAll: newState,
+            seeAllHeader: header
+        }))
+        const seeAllSection = document.querySelector('.see-all-section');
+        const homePageSection = document.querySelector('.home-page-section');
+        seeAllSection.classList.toggle('hide');
+        homePageSection.classList.toggle('hide');
+    }
     render()
     {
         console.log(localStorage);
@@ -126,110 +140,150 @@ class Home extends Component {
                 <div className="col-lg-10 webplayer-body-and-navbar colums-no-padding">
                     <HomeNavBar/>
                     <div id="webplayer-home">
-                <div className="made-for-you-section">
-                    <h2 className="section-title made-for-you">Made For You</h2>
-                    <div className="card-group">
-                        {this.state.madeForYou.map( playList => (
-                            <div>
-                                <div className="card">
-                                    <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{playList.title}</h5>
-                                        <p className="card-text">{playList.description}</p>
-                                        <div id={playList.id}>
-                                            <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
-                                            <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                        <div className="see-all-section hide">
+                            <div className="see-all-section">
+                                <h2 className="section-title see-all">{this.state.seeAllHeader}</h2>
+                                    <div className="card-group">
+                                        {this.state.seeAll.map( playList => (
+                                            <div>
+                                                <div className="card">
+                                                    <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                                                    <div className="card-body">
+                                                        <h5 className="card-title">{playList.title}</h5>
+                                                        <p className="card-text">{playList.description}</p>
+                                                        <div id={playList.id}>
+                                                            <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
+                                                            <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                        )}
+                                    </div>
+                            </div>
+                        </div>
+                        <div className="home-page-section">
+                            <div className="made-for-you-section">
+                                <div className="title-and-view-all">
+                                    <h2 className="section-title made-for-you">Made For You</h2>
+                                    <a className="view-all" onClick={()=> this.seeAll("Made For You",this.state.madeForYou)}>View all Results</a>
+                                </div>
+                                <div className="card-group">
+                                    {this.state.madeForYou.map( playList => (
+                                        <div>
+                                            <div className="card">
+                                                <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">{playList.title}</h5>
+                                                    <p className="card-text">{playList.description}</p>
+                                                    <div id={playList.id}>
+                                                        <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
+                                                        <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                    )}
+                                </div>
+                            </div>
+                            <div className="popular-playlists-section">
+                                <div className="title-and-view-all">
+                                    <h2 className="section-title popular-playlists">Popular Playlists</h2>
+                                    <a className="view-all" onClick={()=> this.seeAll("Popular Playlists",this.state.popularPlayLists)}>View all Results</a>
+                                </div>    
+                                <div className="card-group">
+                                    {this.state.popularPlayLists.map( playList => (
+                                        <div>
+                                            <div className="card">
+                                                <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">{playList.title}</h5>
+                                                    <p className="card-text">{playList.description}</p>
+                                                    <div id={playList.id}>
+                                                        <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
+                                                        <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                    )}
+                                </div>
+                            </div>
+                            <div className="workout-playlists-section">
+                                <div className="title-and-view-all">
+                                    <h2 className="section-title workout-playlists">Workout Playlists</h2>
+                                    <a className="view-all" onClick={()=> this.seeAll("Workout Playlists",this.state.workOut)}>View all Results</a>
+                                </div>
+                                <div className="card-group">
+                                    {this.state.workOut.slice(0,9).map( playList => (
+                                        <div>
+                                            <div className="card">
+                                                <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">{playList.title}</h5>
+                                                    <p className="card-text">{playList.description}</p>
+                                                    <div id={playList.id}>
+                                                        <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
+                                                        <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                    )}
+                                </div>
+                            </div>
+                            <div className="popular-albums-section">
+                                <div className="title-and-view-all">
+                                    <h2 className="section-title popular-albums">Popular Albums</h2>
+                                    <a className="view-all" onClick={()=> this.seeAll("Popular Albums",this.state.popularAlbums)}>View all Results</a>
+                                </div>
+                                <div className="card-group">
+                                    {this.state.popularAlbums.map( album => (
+                                        <div>
+                                            <div className="card">
+                                                <img src={album.imageUrl[0]} className="card-img-top" alt="..."></img>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">{album.title}</h5>
+                                                    <div id={album.id}>
+                                                        <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
+                                                        <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                    )}
+                                </div>
+                            </div>
+                            <div className="popular-albums-section">
+                            <div className="title-and-view-all">
+                                <h2 className="section-title popular-albums">Popular Artists</h2>
+                                <a className="view-all" onClick={()=> this.seeAll("Popular Arists",this.state.artists)}>View all Results</a>
+                            </div>
+                            <div className="card-group">
+                                {this.state.artists.map( artist => (
+                                    <div>
+                                        <div className="card">
+                                            <img src={artist.imageUrl[0].url} className="card-img-top rounded-circle" alt="..."></img>
+                                            <div className="card-body">
+                                                <h5 className="card-title">{artist.name}</h5>
+                                                <p className="card-text">{artist.type}</p>
+                                                <div id={artist.id}>
+                                                    <button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-play"></i></button>
+                                                    <button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-pause"></i></button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                )
+                                )}
                             </div>
-                        )
-                        )}
-                    </div>
-                </div>
-                <div className="popular-playlists-section">
-                    <h2 className="section-title popular-playlists">Popular Playlists</h2>
-                    <div className="card-group">
-                        {this.state.popularPlayLists.map( playList => (
-                            <div>
-                                <div className="card">
-                                    <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{playList.title}</h5>
-                                        <p className="card-text">{playList.description}</p>
-                                        <div id={playList.id}>
-                                            <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
-                                            <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                        )}
-                    </div>
-                </div>
-                <div className="workout-playlists-section">
-                    <h2 className="section-title workout-playlists">Workout Playlists</h2>
-                    <div className="card-group">
-                        {this.state.workOut.map( playList => (
-                            <div>
-                                <div className="card">
-                                    <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{playList.title}</h5>
-                                        <p className="card-text">{playList.description}</p>
-                                        <div id={playList.id}>
-                                            <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
-                                            <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
-                                        </div>    
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                        )}
-                    </div>
-                </div>
-                <div className="popular-albums-section">
-                    <h2 className="section-title popular-albums">Popular Albums</h2>
-                    <div className="card-group">
-                        {this.state.popularAlbums.map( album => (
-                            <div>
-                                <div className="card">
-                                    <img src={album.imageUrl[0]} className="card-img-top" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{album.title}</h5>
-                                        <div id={album.id}>
-                                            <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
-                                            <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
-                                        </div>    
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                        )}
-                    </div>
-                </div>
-                <div className="popular-albums-section">
-                    <h2 className="section-title popular-albums">Popular Artists</h2>
-                    <div className="card-group">
-                        {this.state.artists.map( artist => (
-                            <div>
-                                <div className="card">
-                                    <img src={artist.imageUrl[0].url} className="card-img-top rounded-circle" alt="..."></img>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{artist.name}</h5>
-                                        <p className="card-text">{artist.type}</p>
-                                        <div id={artist.id}>
-                                            <button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-play"></i></button>
-                                            <button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-pause"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                        )}
-                    </div>
                 </div>                                                                         
+                        </div>
             </div>
                 </div>
             </div>
