@@ -1,13 +1,41 @@
 import React, {createContext, Component} from 'react'
+import {ConfigContext} from '../Context/ConfigContext'
+import axios from 'axios'
 
 export const ProfileContext= createContext();
 
 class ProfileContextProvider extends Component {
-    
+    static contextType=ConfigContext;
     state={
-        userType:'artist'
+        userType:'artist',
+        user: {},
+        status:"connected"
     }
-    
+
+    componentDidMount =()=>{
+        
+          let show=localStorage.getItem("isLoggedIn");
+          if(show==="true")
+          {
+            axios.get(ConfigContext.state.baseURL+'/users/1/')
+            .then(res => {
+              this.setState({user: res.data})
+            })
+          } 
+    }
+
+    componentDidUpdate=()=>{
+
+          let show=localStorage.getItem("isLoggedIn");
+          if(show==="true" && this.state.status==="not connected")
+          {
+            this.setState({status:"connected"})
+            axios.get(ConfigContext.state.baseURL+'/users/1/')
+            .then(res => {
+              this.setState({user: res.data})
+            })
+          }
+    }
 
     render(){
         return(
@@ -16,7 +44,6 @@ class ProfileContextProvider extends Component {
                 {this.props.children}
             </ProfileContext.Provider>
         ); 
-
         
     }
 

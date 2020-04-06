@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../SignUp/sign_up.css';
 import spotify_black_logo from '../../Images/spotify_logo_black.png';
 import '../Button/spotify_button.css';
+import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
 //import { buildQueries } from '@testing-library/react';
@@ -9,7 +10,7 @@ import {Link,Redirect} from 'react-router-dom'
 
 
 class LogIn extends Component {
-    
+    static contextType=ConfigContext;
     
     constructor() {
         super()
@@ -34,7 +35,7 @@ class LogIn extends Component {
             if (response.status === 'connected') {
                                 // let fbtoken=response.authResponse.accessToken;
                                 // let fbuserID=response.authResponse.userID;
-                                //     axios.post('http://localhost:3000/loginWithFacebook/',
+                                //     axios.post(ConfigContext.state.baseURL+'/loginWithFacebook/',
                                 // {
                                 // "access token":fbtoken,
                                 // "facebook id":fbuserID
@@ -76,10 +77,10 @@ class LogIn extends Component {
                 window.location.reload(false);
                 
               } else {
-                localStorage.setItem("loginType", "");
-                localStorage.setItem("isLoggedIn", 'false');
-                localStorage.setItem("token", '');
-                localStorage.setItem("userID", '');              
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");              
               }
               console.log(response);
           }.bind(this), {scope: 'public_profile,email'});
@@ -116,7 +117,7 @@ class LogIn extends Component {
         const is_psw_valid = this.validatePassword(mpsw);
         if(is_email_valid && is_psw_valid)
         {
-            axios.post('http://localhost:3000/signIn/',
+            axios.post(ConfigContext.state.baseURL+'/signIn',
             {
             "email":memail,
             "password":mpsw
@@ -134,10 +135,11 @@ class LogIn extends Component {
                         window.location.reload(false);
                     }  
                 }
-                if(res.status===304) // Unsuccessful
+                if(res.status===401) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")
                     this.setState({status: 'invalid'});
+                    
                 }
                 
                 }).catch(

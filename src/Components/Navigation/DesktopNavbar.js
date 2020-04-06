@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {Link,useHistory} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import '../WebPlayer/Bodies/NavBars.css';
+import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 //navbar not fixed anymore
 const MyDesktopNavbar=styled.nav`
