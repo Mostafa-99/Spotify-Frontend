@@ -98,18 +98,21 @@ class SignUp extends Component {
             this.setState({emptyemail: false});
         if(this.state.emailnotequal===true)
             this.setState({emailnotequal: false});
+        this.setState({email: ""});    
         return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
     validatePassword(psw) {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
+         this.setState({password: ""});    
         return psw && psw.length >= 8
     }
 
     validateGender(gender) {
         if(this.state.gendererror===true)
          this.setState({gendererror: false});
+        this.setState({gender: ""});    
         // 0 = male
         // 1 = female
         // null/undefined = otherwise
@@ -123,7 +126,9 @@ class SignUp extends Component {
     validateUsername(name) {
         if(this.state.emptyname===true)
          this.setState({emptyname: false});
+         this.setState({username: ""}); 
         return name && name.match(/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/);
+           
     }
 
     validateEmailAgain(email_again) {
@@ -131,6 +136,7 @@ class SignUp extends Component {
             this.setState({emptyconfirmemail: false});
         if(this.state.emailnotequal===true)
             this.setState({emailnotequal: false});
+        this.setState({emailrecheck: ""});    
         return email_again && email_again.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
