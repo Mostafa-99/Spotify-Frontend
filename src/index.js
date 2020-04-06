@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter} from 'react-router-dom';
 
 // import './index.css';
 // import $ from 'jquery';
@@ -12,7 +13,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 
-ReactDOM.render(<App/>, document.getElementById('mybody'));
+ReactDOM.render(<BrowserRouter><App/></BrowserRouter>, document.getElementById('mybody'));
 
 
 

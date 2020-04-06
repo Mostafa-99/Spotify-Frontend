@@ -11,6 +11,7 @@ class ProfileContextProvider extends Component {
 
     render(){
         return(
+
             <ProfileContext.Provider value={{...this.state}}>
                 {this.props.children}
             </ProfileContext.Provider>

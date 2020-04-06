@@ -110,7 +110,6 @@
       "id": "2J3QTJz"
     }
   ],
-
   "subscriptionCodes": [
     {
       "id": 1,
@@ -137,10 +136,9 @@
       "id": 6
     }
   ],
-
-  "album_tracks":[
+  "album_tracks": [
     {
-      "id":"1",
+      "id": "1",
       "href": "https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks?offset=5&limit=10&market=ES",
       "items": [
         {
@@ -571,8 +569,7 @@
       "total": 18
     }
   ],
-
-  "album":[
+  "album": [
     {
       "albumType": "\"compilation\"",
       "artists": [
