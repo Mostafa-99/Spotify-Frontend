@@ -9,12 +9,12 @@ export class SearchFeature extends Component {
                 <div className="container body" id="dev-items"> 
                     <SideBar/>
                     <div id="features-nav">
-                        <nav aria-label="breadcrumb">
-                                <ol className="breadcrumb" id="help-breadcrumb">
-                                    <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                                    <li className="breadcrumb-item"><Link to="/features-main">Features</Link></li>
-                                </ol>
-                        </nav>
+                    <nav aria-label="breadcrumb">
+                        <ol className="breadcrumb" id="article-breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/features-main" > Features  </Link> </li>
+                        </ol>
+                    </nav>
                         <div>
                             <h1 className="features-heading">Search</h1>
                             <p>Find what you’re looking for with Search, including:</p>

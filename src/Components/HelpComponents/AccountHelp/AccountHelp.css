@@ -1,5 +1,5 @@
 html,#body-overrides {
-    height: 110vh;
+    height: auto;
 }
 *{
     font-family:  Helvetica, Arial, sans-serif;
@@ -16,6 +16,9 @@ a:hover{
     grid-gap: 25px;
     padding-right: 0px;
     padding-left:0px;
+    
+    height: auto;
+    min-height: 600px;
 }
 #body-overrides #department.item{
     grid-row-start: 1;

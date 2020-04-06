@@ -1,5 +1,5 @@
 #body-overrides {
-    height: 110vh;
+    height: auto;
 
 }
 *{
@@ -16,6 +16,8 @@ ul{
     grid-gap: 25px;
     padding-right: 0px;
     padding-left:0px;
+    height: auto;
+    min-height: 600px;
 }
 
 #body-overrides #department.item{

@@ -37,9 +37,8 @@ class Home extends Component {
             .then(res => {
                 this.setState({
                     madeForYou: res.data.map( playList => ({
-                        id:playList.id,
+                        id: playList.id,
                         title:playList.name,
-                        imageUrl:playList.images,
                         description: playList.description
                     }))
                 })
@@ -126,6 +125,7 @@ class Home extends Component {
     render()
     {
         console.log(localStorage);
+        {document.title ="Spotify - Home"}
     return(
         
         <div id='webplayer-layout'className="container webplayer col-12">
@@ -215,7 +215,7 @@ class Home extends Component {
                             </div>
                         </div>
                     )
-                    )}
+                    )}  
                 </div>
             </div>
             <div className="popular-albums-section">

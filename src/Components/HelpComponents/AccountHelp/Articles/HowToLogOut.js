@@ -14,7 +14,7 @@ function HowToLogOut(){
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                            <li className="breadcrumb-item">    <Link to="/account-help/" > Account Help   </Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/account-help" > Account Help   </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
@@ -84,7 +84,7 @@ function HowToLogOut(){
                                     <li >Here’s how to log out of all web browsers, computers, tablets, and mobile devices at once:</li>
                                 </ul>
                                 <ol id="after-articles">
-                                    <li>Log in to your<a href="" > account page</a>.</li>
+                                    <li>Log in to your<Link to="/account-overview"> account page</Link>.</li>
                                     <li>Click <strong>SIGN OUT EVERYWHERE</strong>.</li>
                                 </ol> 
                                 <ul className="help-art" id="article-header-text">

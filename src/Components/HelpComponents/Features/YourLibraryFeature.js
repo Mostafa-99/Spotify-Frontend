@@ -16,12 +16,12 @@ export class YourLibraryFeature extends Component {
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
-                <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb" id="help-breadcrumb">
+            <nav aria-label="breadcrumb">
+                        <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                            <li className="breadcrumb-item"><Link to="/features-main">Features</Link></li>
+                            <li className="breadcrumb-item">    <Link to="/features-main" > Features  </Link> </li>
                         </ol>
-                </nav>
+                    </nav>
                 <div>
                     <h1 className="features-heading">Your Library</h1>
                     <p>When you like <img src={Icon_heart} alt="Icon_heart"/> a song, playlist, album, or follow 

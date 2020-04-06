@@ -6,6 +6,7 @@ import CreatePlaylist from './CreatePlaylist'
 import MyPlaylists from './MyPlaylists'
 
 function SideBar() {
+    const logInOrNot = localStorage.getItem("isLoggedIn");
     return(
     <div>
         <head>
@@ -30,6 +31,8 @@ function SideBar() {
                         </ul>
                     </div>
                 </div>
+                {logInOrNot==="true" ? (
+                    <div>
                 <div className="row-3 ">
                     <div className="col-2 sidebar-section">
                         <div id='sidebar-list-header' className='sidebar-list-item-header'>PLAYLISTS</div>
@@ -54,6 +57,8 @@ function SideBar() {
                         </ul>
                     </div>
                 </div>
+                </div>
+                ):(<div> </div>)}
                 
             </div>
         </nav>    
@@ -61,5 +66,3 @@ function SideBar() {
     )
 }
 export default SideBar;
-
-

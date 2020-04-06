@@ -6,9 +6,9 @@ const exclusionArray = [
   '/login',
   '/signup',
   '/home',
-  '/Home',
   '/password-reset',
-  '/webplayer/album'
+  '/artist-webplayer',
+  '/Home'
 ]
 
 class Footer extends Component {

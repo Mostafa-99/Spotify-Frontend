@@ -35,6 +35,7 @@ import TrackUpload from './Components/Artist/UploadFile/TrackUpload'
 import AlbumPage from './Components/Artist/Albums/AlbumPage'
 
 import Home from './Components/WebPlayer/Bodies/Home/Home'
+import ArtistWebPlayer from './Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayer'
 import Search from './Components/WebPlayer/Bodies/Search/Search'
 
 import AlbumWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer.js'
@@ -81,7 +82,8 @@ function App() {
         <Route path="/videos-feature" exact component={VideosFeature}/>
         <Route path="/home" exact component={Home} />
         <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
-       
+        <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
+
         {/*Protected pages */}
         <ProtectedRoute path="/edit-profile" component={EditProfile}/>
         <ProtectedRoute path="/notification-settings" component={NotificationsSettings}/>
@@ -93,8 +95,6 @@ function App() {
         <ProtectedRoute path="/artist/album-page" exact component={AlbumPage}/>
 
 
-
-    
        
       </Switch>
       </ProfileContextProvider>
