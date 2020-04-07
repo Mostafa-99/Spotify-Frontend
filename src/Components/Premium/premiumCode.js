@@ -19,7 +19,7 @@ export class premiumCode extends Component {
      */
     sendMail = () => {
         console.log(localStorage);
-        axios.post(this.context.baseURL+'/me/premium',
+        axios.post(this.context.baseURL+'/me/premium',{},
                 {
                 headers:
                     {
