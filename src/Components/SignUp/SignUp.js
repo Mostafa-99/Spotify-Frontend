@@ -29,7 +29,8 @@ class SignUp extends Component {
         gendererror:false,
         emptyconfirmemail:false,
         emailnotequal:false,
-        status: 'not connected'
+        status: 'not connected',
+        invalid:false
     }
         this.inputChangeHandler = this.inputChangeHandler.bind(this);
 
@@ -173,6 +174,7 @@ class SignUp extends Component {
                 }
                 else // Unsuccessful
                 {
+                    this.setState({invalid: true});
                     if(res.status===400)
                     {
                     if(this.state.status!=="invalid")
@@ -183,10 +185,11 @@ class SignUp extends Component {
                     
                 }
                }).catch(err => {
-                if(err.status===400)
+                if(err.response.status===400 || err.response.status===401)
                 {
-                if(this.state.status!=="invalid")
-                    this.setState({status: 'invalid'});
+                    if(this.state.status!=="invalid")
+                        this.setState({status: 'invalid'});
+                    this.setState({invalid: true});
                 }
                 else
                 alert(err)
@@ -313,7 +316,7 @@ class SignUp extends Component {
                     <strong className="divider-title ng-binding">or</strong>
                     </div>
                 </div>
-            {this.state.status==="invalid"?
+            {this.state.invalid===true?
             <div id="invalid-message">
             Email already taken.
             </div>

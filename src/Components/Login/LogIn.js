@@ -23,7 +23,8 @@ class LogIn extends Component {
         rememberme:false,
         emptypass:false,
         emptyemail:false,
-        status: 'not connected'
+        status: 'not connected',
+        invalid:false
     }
 
     }
@@ -56,6 +57,7 @@ class LogIn extends Component {
                     }
                     else // Unsuccessful
                     {
+                        
                             alert(res.data.message)
                     }   
                     }).catch(err =>{
@@ -125,24 +127,26 @@ class LogIn extends Component {
                         localStorage.setItem("loginType", "email");
                         this.setState({status: 'connected'});
                        // window.location.reload(false);
-                    }  
+                    }
                 }
                 else
                 {
-                if(res.status===401) // Unsuccessful
-                {
-                   if(this.state.status!=="invalid")
-                    this.setState({status: 'invalid'});
-                }else
-                alert(res.data.message)
+                //if(res.status===401) // Unsuccessful
+               // {
+                    this.setState({invalid: true});
+                //}else
+                    alert(res.data.message)
 
                  }
                 }).catch(err =>{
 console.log(err)
-                    if(err.status===401) // Unsuccessful
+console.log(err.response)
+                    if(err.response.status===401 || err.response.status===400) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")
                     this.setState({status: 'invalid'});
+
+                    this.setState({invalid: true});
                 }else
                 alert(err)
                 })
@@ -195,13 +199,17 @@ console.log(err)
             
             <h6 className="my-font">To continue, log in to Spotify.</h6>
 
-            {this.state.status==="invalid"?
+            {this.state.invalid===true ?
+            (
             <div id="invalid-message">
             Invalid email or password.
             </div>
+            )
             :
+            (
             <div>
             </div>
+            )
             }
              
             <form className="text-center p-2" action="">
