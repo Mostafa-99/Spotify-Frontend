@@ -15,6 +15,10 @@ export class AlbumWebPlayer extends Component {
 
     audio=new Audio();
     state={
+        /**
+         * ID of the album
+         * @type {Object}
+         */
         myId:{},//id of current album
         /**
          * Name of the album
@@ -30,7 +34,7 @@ export class AlbumWebPlayer extends Component {
          * Array of artists' names
          * @type {Array<String>}
          */
-        "artists":[],
+        "artists":"",
         /**
          * Image url of the album
          * @type {String}
@@ -61,36 +65,27 @@ export class AlbumWebPlayer extends Component {
 
         this.getAlbumDetails();
         this.getAlbumTracks();
-   }
+    }
 
-   /**
+    /**
     * Gets album's name,image url and get if the user likes the album
     */
-   getAlbumDetails(){
+    getAlbumDetails(){
        //http://localhost:3000/albums/1
-        axios.get('http://localhost:3000/albums/'+this.state.album_id,{headers:{authorization:localStorage.getItem("token")}})
+        axios.get('http://we871.mocklab.io/albums/'+this.state.myId,{
+            headers:{
+                'Content-Type':'application/json',
+                'authorization':localStorage.getItem("token")
+            }
+        })
         .then(res => {
-            if(res.status===200){  
-                /*if returns array
-                res.data.map((album)=>(
-                    this.setState({
-                    album_image_url:album.images,
-                    album_name:album.name,
-                    is_liked:false //get from backend
-                })
-                    album.artists.map(
-                        (artist)=>(this.setState({artists:artist.name}))
-                    )
-                ))
-                */
-
-                //if object
+            if(res.status===200){
                 this.setState({
-                    album_image_url:res.data.images,
-                    album_name:res.data.name,
+                    album_image_url:res.data.album.images,
+                    album_name:res.data.album.name,
+                    artists:res.data.album.artists.name,
                     is_liked:false //get from backend
                 })
-                res.data.artists.map((artist)=>(this.setState({artists:artist.name})))
             }
             else if(res.status===401){
                 localStorage.removeItem("loginType");
@@ -105,38 +100,36 @@ export class AlbumWebPlayer extends Component {
         .catch(error => {
             alert(error.response.data.message);
         })
-   }
+    }
 
-   /**
+    /**
     * Get album's tracks with their details in an array of objects
     */
-   getAlbumTracks(){
-    //'http://localhost:3000/album_tracks/1'
-    axios.get('http://localhost:3000/albums/'+this.state.album_id+'/tracks',{headers:{authorization:localStorage.getItem("token")}})
-           .then(res => {
-               if(res.status===200){
-                    /*if returns array
-                    res.data.map((album_tracks)=>(
-                        this.setState({tracks:album_tracks.items}))
-                    )
-                    */
-
-                    //if object
-                    this.setState({tracks:res.data.items})
-                }
-                else if(res.status===401){
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert("error");
-                }
-            })
-           .catch(error => {
-               alert(error.response.data.message);
-           })
+    getAlbumTracks(){
+        //'http://localhost:3000/album_tracks/1'
+        axios.get('http://we871.mocklab.io/albums/'+this.state.myId+'/tracks',{
+            headers:{
+                'Content-Type':'application/json',
+                'authorization':localStorage.getItem("token")
+            }
+        })
+        .then(res => {
+            if(res.status===200){
+                this.setState({tracks:res.data.tracksArray})
+            }
+            else if(res.status===401){
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
+            }
+            else{
+                alert("error");
+            }
+        })
+        .catch(error => {
+           alert(error.response.data.message);
+        })
     }
 
     /**
