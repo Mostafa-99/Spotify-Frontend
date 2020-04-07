@@ -168,6 +168,7 @@ class SignUp extends Component {
 
         if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='')
         {
+            console.log(this.context.baseURL)
             axios.post('http://138.91.114.14/signUp',
             {   
                 "email":this.state.email,
@@ -180,11 +181,12 @@ class SignUp extends Component {
                 console.log(res);
                 if(res.status===200) // Successful
                 {
-                    if(res.success===true || res.success==="true")
+                    if(res.data.success===true || res.data.success==="true")
                     {
                         localStorage.setItem("isLoggedIn",'true');
-                        localStorage.setItem("token",res.token);
+                        localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
+                        this.setState("connected");
                         window.location.reload(false);
                     }
                 }
