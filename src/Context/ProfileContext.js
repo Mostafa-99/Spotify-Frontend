@@ -8,7 +8,9 @@ class ProfileContextProvider extends Component {
     static contextType=ConfigContext;
     state={
         userType:'artist',
-        user: {},
+        user: {
+            "image":'https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
+        },
         status:"connected"
     }
 
