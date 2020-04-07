@@ -10,19 +10,27 @@ class Albums extends Component {
   constructor() {
     super();
     this.state = {
-      artistAlbums: []
+      artistAlbums: [],
     };
   }
 
   componentDidMount() {
-    axios.get("http://www.mocky.io/v2/5e74bc56300000d331a5f62f").then(res => {
-      this.setState({
-        artistAlbums: res.data.map(album => ({
-          id: album.id,
-          title: album.name,
-          imageUrl: album.images
-        }))
-      });
+    axios.get("http://www.mocky.io/v2/5e74bc56300000d331a5f62f").then((res) => {
+      if (res.status === 200) {
+        this.setState({
+          artistAlbums: res.data.map((album) => ({
+            id: album.id,
+            title: album.name,
+            imageUrl: album.images,
+          })),
+        });
+      } else if (res.status === 401) {
+        localStorage.removeItem("loginType");
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userID");
+        alert("Your session has ended");
+      }
     });
   }
   render() {
@@ -33,10 +41,14 @@ class Albums extends Component {
           <div className="albums-section">
             <div className="header-button-container">
               <h2 className="section-title albums">Albums</h2>
-              <Link to="/artist/create-album"><button className="btn-primary-outline add-album">Add Album</button></Link>
+              <Link to="/artist/create-album">
+                <button className="btn-primary-outline add-album">
+                  Add Album
+                </button>
+              </Link>
             </div>
             <div className="card-group">
-              {this.state.artistAlbums.map(album => (
+              {this.state.artistAlbums.map((album) => (
                 <Link to="/artist/album-page">
                   <div className="card">
                     <img

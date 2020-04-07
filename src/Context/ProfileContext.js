@@ -40,7 +40,6 @@ class ProfileContextProvider extends Component {
           if(show==="true" && this.state.status==="not connected")
           {
             this.setState({status:"connected"})
-
             axios.get(this.context.baseURL+'/users/1/')
             .then(res => {
               this.setState({user: res.data})

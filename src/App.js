@@ -49,8 +49,9 @@ import PasswordReset from './Components/PasswordReset/PasswordReset.js'
 import UpgradeArtist from './Components/Artist/UpgradeArtist/UpgradeArtist'
 import ArtistSelector from './Components/Artist/ArtistSelector'
 import ProfileContextProvider from './Context/ProfileContext';
+import ConfigContextProvider from './Context/ConfigContext'
 import {ProtectedRoute} from './ProtectedRoute/ProtectedRoute'
-import ConfigContextProvider from './Context/ConfigContext.js';
+
 function App() {
 
   return (
@@ -59,8 +60,6 @@ function App() {
       <ConfigContextProvider>
       <ProfileContextProvider>
       <Navbar/>
-      
-     
 
     
       <Switch>
@@ -100,9 +99,11 @@ function App() {
 
 
        
+        <Route path="*" exact component={()=>"404 NOT FOUND"} />
       </Switch>
-      </ProfileContextProvider>
       <Footer/>
+
+      </ProfileContextProvider>
       </ConfigContextProvider>
     </Router>   
     
