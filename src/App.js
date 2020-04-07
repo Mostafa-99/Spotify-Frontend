@@ -101,8 +101,8 @@ function App() {
        
         <Route path="*" exact component={()=>"404 NOT FOUND"} />
       </Switch>
+      
       <Footer/>
-
       </ProfileContextProvider>
       </ConfigContextProvider>
     </Router>   

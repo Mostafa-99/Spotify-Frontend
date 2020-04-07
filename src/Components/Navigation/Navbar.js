@@ -55,12 +55,12 @@ class Navbar extends Component {
       updateVisibility() {
 
         this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0})
-        if(window.location.pathname.match());
-        {
-          //console.log(window.location.pathname);
-          if(document.querySelector("#my-desk-navbar")!==null)
-            document.querySelector("#my-desk-navbar").classList.add("index-fixed");
-        }
+        // if(window.location.pathname.match());
+        // {
+        //   //console.log(window.location.pathname);
+        //   if(document.querySelector("#my-desk-navbar")!==null)
+        //     document.querySelector("#my-desk-navbar").classList.add("index-fixed");
+        // }
           
         
       }
@@ -72,7 +72,7 @@ class Navbar extends Component {
         if(isVisible)
         {
           return (
-              
+           
             <div>
                 
                 {isDesktop?(
@@ -82,7 +82,8 @@ class Navbar extends Component {
                       )}
 
             </div>
-          );
+        )
+          
         }
         else
         return null

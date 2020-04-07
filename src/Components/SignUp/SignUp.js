@@ -58,7 +58,7 @@ class SignUp extends Component {
                                     localStorage.setItem("loginType", "fb");
                                     localStorage.setItem("userID", response.authResponse.userID);
                                     this.setState({status: 'connected'});
-                                    window.location.reload(false);
+                                   // window.location.reload(false);
                                 }
                             }
                             else // Unsuccessful
@@ -131,7 +131,7 @@ class SignUp extends Component {
 
     signUpHandler = event=> {
     
-        //event.preventDefault();
+        event.preventDefault();
         let sendDate=this.state.year+"-"+this.state.month+"-"+this.state.day;
         if(this.state.email==="" && this.state.emptyemail===false)
             this.setState({emptyemail: true});
@@ -171,7 +171,8 @@ class SignUp extends Component {
                         localStorage.setItem("isLoggedIn",'true');
                         localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
-                        window.location.reload(false);
+                        this.setState({status: 'connected'});
+                        //window.location.reload(false);
                     }
                 }
                 else // Unsuccessful
@@ -443,7 +444,7 @@ class SignUp extends Component {
             <p> By clicking on Sign up, you agree to Spotify's <a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions</a>.</p>
             <p> To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's
                 <a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy</a>.</p>
-            <button className="my-spotify-button" id="sign-up" type="submit" onClick={this.signUpHandler}>SIGN UP</button>
+            <button className="my-spotify-button" id="sign-up" type="button" onClick={this.signUpHandler}>SIGN UP</button>
            
             <h6>Already have an account? <Link to="/login">Log in</Link>.</h6>
             <br></br>

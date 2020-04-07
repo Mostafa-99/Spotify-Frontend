@@ -223,7 +223,7 @@ class DesktopNavbar extends Component {
             // }} </ProfileContext.Consumer>
 
             // )}</ConfigContext.Consumer>
-        );
+        )
     }
 }
 

@@ -46,8 +46,8 @@ class PasswordReset extends Component {
                     this.setState({status: 'invalid-email'});    
                 }
          }
-         this.setState({email: ''});
-         document.querySelector('#form-email').val('');
+         //this.setState({email: ''});
+         //document.querySelector('#form-email').val('');
     }
 
     componentDidMount =()=>{
