@@ -4,7 +4,8 @@ import SideBar from '../../SideBar'
 import '../Bodies.css';
 import '../../WebplayerHome.css'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
 import  './PlaylistContextMenu.css';
 import { theme, animation } from 'react-contexify';
 import { Menu, Item} from 'react-contexify';
@@ -15,14 +16,24 @@ class Home extends Component {
     constructor(){
         super()
         this.state = {
-            madeForYou:[],
+            recentlyPlayed:[],
             popularPlayLists:[],
-            workOut:[],
+            mostRecentPlayLists:[],
             popularAlbums:[],
+            mostRecentAlbums:[],
+            catagories:[],
+            firstCategory:[],
+            secondCategory:[],
+            workOut:[],
+            madeForYou:[],
             artists:[],
             nowPlaying:{
                 id:-1
-            }
+            },
+            seeAll:[],
+            seeAllHeader:"",
+            
+            
         }
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
@@ -33,17 +44,310 @@ class Home extends Component {
         window.addEventListener('contextmenu',(event) =>{
             event.preventDefault() })
 
+        //browse catagories
+        axios.get("http://138.91.114.14/api/browse/categories", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 2
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    console.log("categories",res)
+                    this.setState({
+                        catagories: res.data.data.map( category => ({
+                            id: category.id,
+                            name:category.name,
+                        })
+                        )
+                    })
+                    
+                    axios.get("http://138.91.114.14/api/browse/categories/"+this.state.catagories[0].id+"/playlists", {
+                        headers: {
+                            'authorization': "Bearer "+localStorage.getItem("token"),
+                            //category id as path??
+                        },
+                        params: {
+                            limit: 9
+                        }
+                    })
+                    .then(res => {
+                        if(res.status === 200)
+                        {
+                            console.log("category1",res)
+                            this.setState({
+                                firstCategory: res.data.data.map( playList => ({
+                                    id:playList.id,
+                                    title:playList.name,
+                                    description: playList.description,
+                                    imageUrl:playList.images
+                                })),
+                            })
+                        }
+                        else if(res.status === 401)
+                        {
+                            localStorage.removeItem("loginType");
+                            localStorage.removeItem("isLoggedIn");
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userID");
+                        }
+                    }) 
+                    axios.get("http://138.91.114.14/api/browse/categories/"+this.state.catagories[1].id+"/playlists", {
+                        headers: {
+                            'authorization': "Bearer "+localStorage.getItem("token"),
+                            //category id as path??
+                        },
+                        params: {
+                            limit: 9
+                        }
+                    })
+                    .then(res => {
+                        if(res.status === 200)
+                        {
+                            console.log("category2",res)
+                            this.setState({
+                                secondCategory: res.data.data.map( playList => ({
+                                    id:playList.id,
+                                    title:playList.name,
+                                    description: playList.description,
+                                    imageUrl:playList.images
+                                }))
+                            })
+                        }
+                        else if(res.status === 401)
+                        {
+                            localStorage.removeItem("loginType");
+                            localStorage.removeItem("isLoggedIn");
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userID");
+                        }
+                    }) 
+                }
+                else if(res.data.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            })
+
+         //artists   
+         axios.get("http://138.91.114.14/api/artists", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            }
+            /*params: {
+                limit: 9 //3wzen n3rf btrg3 kam artist
+            }*/
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    console.log("artists",res)
+                    this.setState({
+                        artists: res.data.data.map( artist => ({
+                            id:artist.id,
+                            name:artist.name,
+                            imageUrl:artist.images,
+                            type:artist.type
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            })
+
+        //recently played
+        axios.get("http://138.91.114.14/api/me/player/recentlyPlayed", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    console.log("recently played",res)
+                    this.setState({
+                        recentlyPlayed: res.data.data.map( playList => ({
+                            title:playList.context.name,
+                            imageUrl:playList.context.image,
+                        })
+                        )
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            })
+
+        //popular albums
+        axios.get("http://138.91.114.14/api/albums/top",{
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9,
+                sort: "-popularity"
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    console.log("popular albums",res)
+                    this.setState({
+                        popularAlbums: res.data.data.albums.map( album => ({
+                            id:album.id,
+                            title:album.name,
+                            imageUrl:album.images
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            }) 
+
+        //most recent albums
+        axios.get("http://138.91.114.14/api/albums/top",{
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9,
+                sort: "-releaseDate"
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    console.log("most recent albums",res);
+                    this.setState({
+                        mostRecentAlbums: res.data.data.albums.map( album => ({
+                            id:album.id,
+                            title:album.name,
+                            imageUrl:album.images
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            }) 
+
+        //popular playlists
+        axios.get("http://138.91.114.14/api/playlists/top", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9,
+                sort: "-popularity"
+            }
+        })
+            .then(res => {
+                console.log("popular pl",res)
+                if(res.status === 200)
+                {
+                    this.setState({
+                        popularPlayLists: res.data.data.playlist.map( playList => ({
+                            id:playList.id,
+                            title:playList.name,
+                            imageUrl:playList.images,
+                            description: playList.description
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    console.log("fail")
+
+                }
+            })
+
+        //most recent playlists
+        axios.get("http://138.91.114.14/api/playlists/top", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9,
+                sort: "-releaseDate"
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    console.log("most recent pl",res);
+                    this.setState({
+                        mostRecentPlayLists: res.data.data.playlist.map( playList => ({
+                            id:playList.id,
+                            title:playList.name,
+                            imageUrl:playList.images,
+                            description: playList.description
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            }) 
+
         axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")
             .then(res => {
                 this.setState({
                     madeForYou: res.data.map( playList => ({
                         id: playList.id,
+                        imageUrl:playList.images,
                         title:playList.name,
                         imageUrl:playList.images,
                         description: playList.description
                     }))
                 })
             })        
+
+        axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")
+            .then(res => {
+                this.setState({
+                    madeForYou: res.data.map( playList => ({
+                        id: playList.id,
+                        imageUrl:playList.images,
+                        title:playList.name,
+                        description: playList.description
+                    }))
+                })
+            })            
         axios.get("http://www.mocky.io/v2/5e749724300000d431a5f4c6")
             .then(res => {
                 this.setState({

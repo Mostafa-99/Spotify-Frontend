@@ -18,11 +18,13 @@ export class premiumCode extends Component {
      * sends subscription code to the user's email
      */
     sendMail = () => {
-        console.log(localStorage.getItem("token"));
-        axios.post(this.context.baseURL+'/me/premium',{
-            headers:{
-                "Authorization":localStorage.getItem("token")
-                }})
+        console.log(localStorage);
+        axios.post(this.context.baseURL+'/me/premium',
+                {
+                    headers:{'authorization':"Bearer "+localStorage.getItem("token")
+                    }
+                    
+                })
             .then(res => {
                 if(res.status===204){
                     alert("An email has been sent");
@@ -37,8 +39,8 @@ export class premiumCode extends Component {
                     alert("Please try again");
                 }
             })
-            .catch(error => {
-                alert(error.response.data.message);
+            .catch(res => {
+                alert(res);
             })
     }
 
@@ -48,8 +50,17 @@ export class premiumCode extends Component {
     checkCode = () => {
         if(this.state.code !== ""){
             let code=this.state.code;
+            console.log(localStorage);
+
             //'http://localhost:3000/subscriptionCodes/',{code}
-            axios.post(this.context.baseURL+'/me/upgrade/'+code,{headers:{Authorization:localStorage.getItem("token")}})
+            axios.post(this.context.baseURL+'/me/upgrade/'+{code},
+              {
+                    headers:{
+                     'authorization':"Bearer "+localStorage.getItem("token")               
+                     }
+                   
+                }
+            )
             .then(res => {
                 if(res.status===204){
                     alert("Congratulations! You are PREMIUM now.");
@@ -65,7 +76,7 @@ export class premiumCode extends Component {
                 }
             })
             .catch(error => {
-                alert(error.response.data.message);
+                console.log(error);
             })
         }
         else{
