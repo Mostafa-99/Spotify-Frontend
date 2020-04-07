@@ -36,10 +36,14 @@ class CardComponent extends Component {
           componentDidMount() {
                 const AuthStr=localStorage.getItem('token');
                 console.log(this.context.baseURL+"/playlists/top");
-                console.log(localStorage.getItem("token"));
+                console.log("authorization:"+localStorage.getItem("token"));
                 axios.get(this.context.baseURL+"/playlists/top",
                 {
-                    headers:{"authorization" :"Bearer "+AuthStr}
+                    header:{"authorization":"Bearer "+AuthStr},
+                    query:{
+                        "limit":6,
+                        "sort":'-popularity&-createdAt'
+                    }
                 }
                  )
                 .then(res => {
@@ -47,11 +51,11 @@ class CardComponent extends Component {
                   { 
                          this.setState({
                             playlists: res.data.map( playlist => ({
-                            id:playlist.id,
-                            title:playlist.name,
-                            artist:playlist.owner[0].name,
-                            imageUrl:playlist.images,
-                            href:playlist.tracks.href
+                            "id":playlist.id,
+                            "title":playlist.name,
+                            "artist":playlist.owner[0].name,
+                            "imageUrl":playlist.images,
+                            "href":playlist.tracks.href
                         }))
                     }) }          
                     else if (res.status===401)
