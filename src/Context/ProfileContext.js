@@ -22,7 +22,7 @@ class ProfileContextProvider extends Component {
               const AuthStr=localStorage.getItem("token");
             axios.get(this.context.baseURL+'/me',
             {
-                headers:{'authorization': "Bearer "+ AuthStr }
+                headers:{'authorization': "Bearer "+ AuthStr, }
             })
             .then(res => {
               this.setState({user: res.data})
