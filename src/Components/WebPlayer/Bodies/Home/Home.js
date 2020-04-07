@@ -58,8 +58,8 @@ class Home extends Component {
                 {
                     console.log("categories",res)
                     this.setState({
-                        catagories: res.data.data.map( category => ({
-                            id: category.id,
+                        catagories: res.data.data.categories.map( category => ({
+                            id: category._id,
                             name:category.name,
                         })
                         )
@@ -79,11 +79,11 @@ class Home extends Component {
                         {
                             console.log("category1",res)
                             this.setState({
-                                firstCategory: res.data.data.map( playList => ({
-                                    id:playList.id,
+                                firstCategory: res.data.data.playlists.map( playList => ({
+                                    id:playList._id,
                                     title:playList.name,
                                     description: playList.description,
-                                    imageUrl:playList.images
+                                    imageUrl:playList.images[0]
                                 })),
                             })
                         }
@@ -109,11 +109,11 @@ class Home extends Component {
                         {
                             console.log("category2",res)
                             this.setState({
-                                secondCategory: res.data.data.map( playList => ({
-                                    id:playList.id,
+                                secondCategory: res.data.data.playlists.map( playList => ({
+                                    id:playList._id,
                                     title:playList.name,
                                     description: playList.description,
-                                    imageUrl:playList.images
+                                    imageUrl:playList.images[0]
                                 }))
                             })
                         }
@@ -180,7 +180,8 @@ class Home extends Component {
                 {
                     console.log("recently played",res)
                     this.setState({
-                        recentlyPlayed: res.data.data.map( playList => ({
+                        recentlyPlayed: res.data.data.items.map( playList => ({
+                            id:playList._id,
                             title:playList.context.name,
                             imageUrl:playList.context.image,
                         })
@@ -212,9 +213,10 @@ class Home extends Component {
                     console.log("popular albums",res)
                     this.setState({
                         popularAlbums: res.data.data.albums.map( album => ({
-                            id:album.id,
+                            id:album._id,
                             title:album.name,
-                            imageUrl:album.images
+                            imageUrl:album.image,
+                            artist:album.artists.name
                         }))
                     })
                 }
@@ -243,9 +245,10 @@ class Home extends Component {
                     console.log("most recent albums",res);
                     this.setState({
                         mostRecentAlbums: res.data.data.albums.map( album => ({
-                            id:album.id,
+                            id:album._id,
                             title:album.name,
-                            imageUrl:album.images
+                            imageUrl:album.image,
+                            artist:album.artists.name
                         }))
                     })
                 }
@@ -274,9 +277,9 @@ class Home extends Component {
                 {
                     this.setState({
                         popularPlayLists: res.data.data.playlist.map( playList => ({
-                            id:playList.id,
+                            id:playList._id,
                             title:playList.name,
-                            imageUrl:playList.images,
+                            imageUrl:playList.images[0],
                             description: playList.description
                         }))
                     })
@@ -308,9 +311,9 @@ class Home extends Component {
                     console.log("most recent pl",res);
                     this.setState({
                         mostRecentPlayLists: res.data.data.playlist.map( playList => ({
-                            id:playList.id,
+                            id:playList._id,
                             title:playList.name,
-                            imageUrl:playList.images,
+                            imageUrl:playList.images[0],
                             description: playList.description
                         }))
                     })
@@ -324,7 +327,7 @@ class Home extends Component {
                 }
             }) 
 
-        axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")
+        /*axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")
             .then(res => {
                 this.setState({
                     madeForYou: res.data.map( playList => ({
@@ -379,7 +382,7 @@ class Home extends Component {
                         imageUrl:album.images
                     }))
                 })
-            })
+            })*/
             axios.get("http://www.mocky.io/v2/5e7f9ddb2f00005a4cbac4bb")
             .then(res => {
                 this.setState({
@@ -390,7 +393,7 @@ class Home extends Component {
                         type:artist.type
                     }))
                 })
-            })                                            
+            })                                           
     }
     
         togglePlayPause(sid) {
@@ -443,9 +446,9 @@ class Home extends Component {
                 <HomeNavBar/>
                 <div id="webplayer-home">
             <div className="made-for-you-section">
-                <h2 className="section-title made-for-you">Made For You</h2>
+                <h2 className="section-title made-for-you">Most Recent Playlists</h2>
                 <div className="card-group">
-                    {this.state.madeForYou.map( playList => (
+                    {this.state.mostRecentPlayLists.map( playList => (
                         <div>
                             <div className="card" id={playList.id}>
                             <MenuProvider id={playList.id} component="span" >
@@ -497,24 +500,24 @@ class Home extends Component {
                 </div>
             </div>
             <div className="workout-playlists-section">
-                <h2 className="section-title workout-playlists">Workout Playlists</h2>
+                <h2 className="section-title workout-playlists">Most react Albums</h2>
                 <div className="card-group">
-                    {this.state.workOut.map( playList => (
+                    {this.state.mostRecentAlbums.map( album => (
                         <div>
-                        <div className="card" id={playList.id}>
-                            <MenuProvider id={playList.id} component="span" >
-                        <Menu id={playList.id} theme={theme.dark} animation={animation.fade}>
+                        <div className="card" id={album.id}>
+                            <MenuProvider id={album.id} component="span" >
+                        <Menu id={album.id} theme={theme.dark} animation={animation.fade}>
                         <Item>Save To Library</Item>
-                        <Item>Copy Playlist Link</Item>
+                        <Item>Copy album Link</Item>
                         <Item>Open in App</Item>
                         </Menu>  
-                                 <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                                 <img src={album.imageUrl} className="card-img-top" alt="..."></img>
                                 <div className="card-body">
-                                    <h5 className="card-title">{playList.title}</h5>
-                                    <p className="card-text">{playList.description}</p>
-                                    <div id={playList.id}>
-                                        <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
-                                        <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                    <h5 className="card-title">{album.title}</h5>
+                                    <p className="card-text">{album.description}</p>
+                                    <div id={album.id}>
+                                        <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
+                                        <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
                                     </div>    
                                 </div></MenuProvider> 
                             </div>
@@ -540,12 +543,79 @@ class Home extends Component {
                                     <Item>Save To Library</Item>
                                     <Item>Copy Playlist Link</Item>
                                     <Item>Open in App</Item>
-                                    </Menu>                                         <img src={album.imageUrl[0]} className="card-img-top" alt="..."></img>
+                                    </Menu>                                         <img src={album.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{album.title}</h5>
+                                        <p className="card-text">{album.description}</p>
                                         <div id={album.id}>
                                             <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
                                             <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
+                                    </div></MenuProvider>  
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                    )}
+                </div>
+            </div>
+            <div className="popular-albums-section">
+                            <h2 className="section-title popular-albums">category1</h2>
+                <div className="card-group">
+                    {this.state.firstCategory.map( playlist => (
+                        <div>
+                            <Link to={{
+                                    pathname:"/webplayer/playlist",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                <div className="card" id={playlist.id}>
+                                <MenuProvider id={playlist.id} component="span" >
+                                    <Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    <Item>Save To Library</Item>
+                                    <Item>Copy Playlist Link</Item>
+                                    <Item>Open in App</Item>
+                                    </Menu>                                         <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{playlist.title}</h5>
+                                        <p className="card-text">{playlist.description}</p>
+                                        <div id={playlist.id}>
+                                            <button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
+                                    </div></MenuProvider>  
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                    )}
+                </div>
+            </div>
+            <div className="popular-albums-section">
+                            <h2 className="section-title popular-albums">category2</h2>
+                <div className="card-group">
+                    {this.state.secondCategory.map( playlist => (
+                        <div>
+                            <Link to={{
+                                    pathname:"/webplayer/playlist",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                <div className="card" id={playlist.id}>
+                                <MenuProvider id={playlist.id} component="span" >
+                                    <Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    <Item>Save To Library</Item>
+                                    <Item>Copy Playlist Link</Item>
+                                    <Item>Open in App</Item>
+                                    </Menu>                                         <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{playlist.title}</h5>
+                                        <p className="card-text">{playlist.description}</p>
+                                        <div id={playlist.id}>
+                                            <button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-pause"></i></button>
                                         </div>    
                                     </div></MenuProvider>  
                                 </div>

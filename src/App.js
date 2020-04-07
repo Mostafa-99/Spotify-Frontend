@@ -94,7 +94,6 @@ function App() {
         <Route path="/home" exact component={Home} />
         <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
         <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
-        <Route path="/" component={NotFound}/>
 
         {/*Protected pages */}
         <ProtectedRoute path="/edit-profile" component={EditProfile}/>
@@ -108,6 +107,7 @@ function App() {
 
 
        
+        <Route path="/" component={NotFound}/>
         <Route path="*" exact component={()=>"404 NOT FOUND"} />
       </Switch>
       

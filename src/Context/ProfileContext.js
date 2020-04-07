@@ -26,18 +26,19 @@ class ProfileContextProvider extends Component {
             })
             .then(res => {
               this.setState({user: res.data})
-              console.log("Response: "+res);
-
+              console.log("Response: "+res.data);
+              
             })
             if(this.state.user!==null)
             {   
                 let usercopy=JSON.parse(JSON.stringify(this.state.user))
-                usercopy['image']=this.user.images[0];
-                if(this.state.usercopy.image==="")
-                {
+                console.log("User: "+this.state.user);
+                //usercopy['image']=this.state.user.images[0];
+                //if(usercopy.image==="")
+                //{
                     usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
                     this.setState({user:usercopy})
-                }
+               // }
             }
           } 
           console.log("Context Saved ON MOUNT User: "+this.state.user);
@@ -62,7 +63,7 @@ class ProfileContextProvider extends Component {
           if(this.state.user!==null)
           {   
               let usercopy=JSON.parse(JSON.stringify(this.state.user))
-              usercopy['image']=this.user.images[0];
+              usercopy['image']=this.user.image[0];
               if(this.state.usercopy.image==="")
               {
                   usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
