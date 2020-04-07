@@ -43,7 +43,8 @@ class ArtistWebPlayer extends Component {
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
         /*' http://we871.mocklab.io/artists/200 */
-        axios.get("/artists/" + this.state.myId,{  /*artist*/
+        /*+ this.state.myId */
+        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f" ,{  /*artist*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -52,6 +53,7 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState(prevState => ({
                     artist: {                   
                         ...prevState.artist,    
@@ -75,7 +77,8 @@ class ArtistWebPlayer extends Component {
         })
             /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
             /* /artists/"+this.state.myId+"/albums */
-        axios.get("/artists/"+this.state.myId+"/albums",{/* albums */
+            // "+this.state.myId+"
+        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/albums",{/* albums */
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -84,6 +87,7 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState({
                         albums: res.data.map( album => ({
                             name:album.name,
@@ -107,7 +111,8 @@ class ArtistWebPlayer extends Component {
 
 
             /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
-        axios.get("/artists/"+this.state.myId+"/created-playlists",{/* playlists*/
+            // "+this.state.myId+"
+        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/created-playlists",{/* playlists*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -116,6 +121,7 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState({
                         playLists: res.data.map( playList => ({
                             id:playList._id,
@@ -139,7 +145,7 @@ class ArtistWebPlayer extends Component {
                 /* http://www.mocky.io/v2/5e87635f3100002a003f44d4*/
                 /* */
                 /**http://we871.mocklab.io/artists/200/relatedArtists */
-        axios.get("/artists/"+this.state.myId+"/related-artists",{/* related artists*/
+        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/related-artists",{/* related artists*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -148,6 +154,7 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState({
                         relatedArtists: res.data.map( relatedArtist => ({
                             id:relatedArtist._id,
@@ -173,7 +180,7 @@ class ArtistWebPlayer extends Component {
         getAlbumTracks(){
            
             /* http://localhost:3000/album_tracks/1*/
-            axios.get("/artists/"+this.state.myId+"/top-tracks",{/* top tracks*/
+            axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/top-tracks",{/* top tracks*/
                 headers:{
                     'authorization': "Bearer "+localStorage.getItem("token"),
                     "id": this.state.myId
@@ -182,6 +189,7 @@ class ArtistWebPlayer extends Component {
                 .then(res => {
                     if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState({tracks:res.data.items})
                 }
                 else if(res.status===401)
@@ -339,7 +347,7 @@ class ArtistWebPlayer extends Component {
                                     ))}
                                 </div>    
                             </div>
-                            {/*not yet implemented by backend 
+                            
 
                             <div className="playlists-sub-section">
 
@@ -360,7 +368,7 @@ class ArtistWebPlayer extends Component {
                                         </div>
                                     ))}
                                 </div>   
-                            </div>*/}
+                            </div>
                         </div>
                         <div id="about-section" className="about-section hide">
                             <h2 className="bio-title">Biography</h2>
