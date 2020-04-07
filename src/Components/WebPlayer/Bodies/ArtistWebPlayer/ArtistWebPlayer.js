@@ -59,9 +59,9 @@ class ArtistWebPlayer extends Component {
                     this.setState(prevState => ({
                     artist: {                   
                         ...prevState.artist,    
-                        id:res.data._id,
-                        name:res.data.name,
-                        bio:res.data.artistInfo.biography      
+                        id:res.data.data._id,
+                        name:res.data.data.name,
+                        bio:res.data.data.artistInfo.biography      
                     }
                 }))
                 }
@@ -90,7 +90,7 @@ class ArtistWebPlayer extends Component {
                 {   
                     console.log(res);
                     this.setState({
-                        albums: res.data.map( album => ({
+                        albums: res.data.data.map( album => ({
                             name:album.name,
                             id:album._id,
                             imageUrl:album.image
@@ -123,7 +123,7 @@ class ArtistWebPlayer extends Component {
                 {   
                     console.log(res);
                     this.setState({
-                        playLists: res.data.map( playList => ({
+                        playLists: res.data.data.map( playList => ({
                             id:playList._id,
                             name:playList.name,
                             imageUrl:playList.images[0]
@@ -156,7 +156,7 @@ class ArtistWebPlayer extends Component {
                 {   
                     console.log(res);
                     this.setState({
-                        relatedArtists: res.data.map( relatedArtist => ({
+                        relatedArtists: res.data.data.map( relatedArtist => ({
                             id:relatedArtist._id,
                             name:relatedArtist.name,
                             imageUrl:relatedArtist.images[0],
