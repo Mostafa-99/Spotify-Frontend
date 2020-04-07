@@ -5,10 +5,12 @@ import '../Bodies.css';
 import './ArtistWebPlayer.css'
 import axios from 'axios'
 import TracksList from './TracksList.js'
+import { Link } from 'react-router-dom';
 class ArtistWebPlayer extends Component {
     constructor(){
         super()
         this.state = {
+            myId:{},
             artist:{},
             albums:[],
             playLists:[],
@@ -31,72 +33,160 @@ class ArtistWebPlayer extends Component {
     }
 
     componentDidMount() {
+        
         this.getAlbumTracks();
-        axios.get('http://www.mocky.io/v2/5e88c77e3100007c00d39aad')/* artist*/
+
+        const{myId}=this.props.location.state;//getting id from parent component
+        this.state.myId=myId;
+
+        /*console.log("amr diab id is : ",this.state.myId);*/
+
+        /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
+        axios.get('/artists/' + this.state.myId,{  /*artist*/
+            headers:{
+                "authorization":localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+                )
             .then(res => {
-                this.setState(prevState => ({
+                if(res.status===200)
+                {   
+                    this.setState(prevState => ({
                     artist: {                   
                         ...prevState.artist,    
                         id:res.data.id,
                         name:res.data.name,
-                        bio:res.data.artistInfo.biography      
+                        bio:res.data.artistInfo      
                     }
+                }))
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
                 
-            }))
         })
                    
-            
-        axios.get("http://www.mocky.io/v2/5e74bc56300000d331a5f62f")/* albums*/
+            /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
+        axios.get("/artists/"+this.state.myId+"/albums",{/* albums*/
+            headers:{
+                "authorization":localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+            )
             .then(res => {
-                this.setState({
-                    albums: res.data.map( album => ({
-                        name:album.name,
-                        id:album.id,
-                        imageUrl:album.images[0]
-                    }))
-                })
-                console.log(this.state.albums)
-            })
-
-        axios.get("http://www.mocky.io/v2/5e749724300000d431a5f4c6")/* playlists*/
-            .then(res => {
-                this.setState({
-                    playLists: res.data.map( playList => ({
-                        id:playList.id,
-                        name:playList.name,
-                        imageUrl:playList.images[0]
-                    }))
-                })
-                console.log(this.state.playLists)
-            })
-
-
-        axios.get("http://www.mocky.io/v2/5e87635f3100002a003f44d4")/* related artists*/
-            .then(res => {
-                this.setState({
-                    relatedArtists: res.data.map( relatedArtist => ({
-                        id:relatedArtist.id,
-                        name:relatedArtist.name,
-                        imageUrl:relatedArtist.images[0],
-                        type:relatedArtist.type
-                    }))
-                })
-                console.log(this.state.relatedArtists)
+                if(res.status===200)
+                {   
+                    this.setState({
+                        albums: res.data.map( album => ({
+                            name:album.name,
+                            id:album.id,
+                            imageUrl:album.images[0]
+                        }))
+                    })
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
                 
+            })
+            /*
+            not yet made by back end but can be tested by mocky just uncomment
+
+        axios.get("http://www.mocky.io/v2/5e749724300000d431a5f4c6")/* playlists
+            .then(res => {
+                if(res.status===200)
+                {   
+                    this.setState({
+                        playLists: res.data.map( playList => ({
+                            id:playList.id,
+                            name:playList.name,
+                            imageUrl:playList.images[0]
+                        }))
+                    })
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
+            })
+*/
+                /* http://www.mocky.io/v2/5e87635f3100002a003f44d4*/
+        axios.get("/artists/"+this.state.myId+"/relatedArtists",{/* related artists*/
+            headers:{
+                "authorization":localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+            )
+            .then(res => {
+                if(res.status===200)
+                {   
+                    this.setState({
+                        relatedArtists: res.data.map( relatedArtist => ({
+                            id:relatedArtist.id,
+                            name:relatedArtist.name,
+                            imageUrl:relatedArtist.images[0],
+                            type:relatedArtist.type
+                        }))
+                    })
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
             })                                              
     }
         
         getAlbumTracks(){
-            axios.get('http://localhost:3000/album_tracks/1')
-                .then(res => 
-                        /*if returns array
-                        res.data.map((album_tracks)=>(
-                            this.setState({tracks:album_tracks.items}))
-                        )
-                        */
-
-                        //if object
-                        this.setState({tracks:res.data.items})
+           
+            /* http://localhost:3000/album_tracks/1*/
+            axios.get("/artists/"+this.state.myId+"/topTracks",{/* top tracks*/
+                headers:{
+                    "authorization":localStorage.getItem("token"),
+                    "id": this.state.myId
+                }}
+                )
+                .then(res => {
+                    if(res.status===200)
+                {   
+                    this.setState({tracks:res.data.items})
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
+                }    
                 )
                 .catch(error => {
                     alert(error.response.data.message);
@@ -185,6 +275,7 @@ class ArtistWebPlayer extends Component {
     }
     render()
     {
+        /*console.log("amr diab id is : ",this.state.myId);*/
         {document.title ="Spotify - "+this.state.artist.name }
     return(
         
@@ -219,21 +310,31 @@ class ArtistWebPlayer extends Component {
                                 <div className="card-group">
                                     {this.state.albums.map( album => (
                                         <div>
-                                        <div className="card" id={album.id}>
-                                            <img src={album.imageUrl} className="card-img-top" alt="..."></img>
-                                                <div className="card-body">
-                                                    <h5 className="card-title">{album.name}</h5>
-                                                    <div id={album.id}>
-                                                        <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
-                                                        <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
-                                                    </div>
-                                                </div> 
-                                            </div>
+                                            <Link to={{
+                                                    pathname:"/webplayer/album",
+                                                    state:{
+                                                    myId :album.id
+                                                    }
+                                                }}>
+                                                <div className="card" id={album.id}>
+                                                    <img src={album.imageUrl} className="card-img-top" alt="..."></img>
+                                                        <div className="card-body">
+                                                            <h5 className="card-title">{album.name}</h5>
+                                                            <div id={album.id}>
+                                                                <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
+                                                                <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
+                                                            </div>
+                                                        </div> 
+                                                </div>
+                                            </Link>
                                         </div>
                                     ))}
                                 </div>    
                             </div>
+                            {/*not yet implemented by backend 
+
                             <div className="playlists-sub-section">
+
                                 <h2 className="section-title playlists">Playlists</h2>
                                 <div className="card-group">
                                     {this.state.playLists.map( playList => (
@@ -251,7 +352,7 @@ class ArtistWebPlayer extends Component {
                                         </div>
                                     ))}
                                 </div>   
-                            </div>
+                            </div>*/}
                         </div>
                         <div id="about-section" className="about-section hide">
                             <h2 className="bio-title">Biography</h2>

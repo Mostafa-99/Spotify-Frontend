@@ -15,6 +15,7 @@ export class AlbumWebPlayer extends Component {
 
     audio=new Audio();
     state={
+        myId:{},//id of current album
         /**
          * Name of the album
          * @type {String}
@@ -53,6 +54,11 @@ export class AlbumWebPlayer extends Component {
     }
 
     componentDidMount(){
+
+        const{myId}=this.props.location.state;//getting id from parent component
+        this.state.myId=myId;
+        console.log("this album id is : ",this.state.myId);//this to how to get current album id to request data from back end (this.state.myId)
+
         this.getAlbumDetails();
         this.getAlbumTracks();
    }

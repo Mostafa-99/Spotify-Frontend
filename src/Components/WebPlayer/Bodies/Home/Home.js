@@ -10,6 +10,7 @@ import { theme, animation } from 'react-contexify';
 import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
     constructor(){
@@ -223,21 +224,28 @@ class Home extends Component {
                 <div className="card-group">
                     {this.state.popularAlbums.map( album => (
                         <div>
-                            <div className="card" id={album.id}>
-                            <MenuProvider id={album.id} component="span" >
-                        <Menu id={album.id} theme={theme.dark} animation={animation.fade}>
-                        <Item>Save To Library</Item>
-                        <Item>Copy Playlist Link</Item>
-                        <Item>Open in App</Item>
-                        </Menu>                                         <img src={album.imageUrl[0]} className="card-img-top" alt="..."></img>
-                                <div className="card-body">
-                                    <h5 className="card-title">{album.title}</h5>
-                                    <div id={album.id}>
-                                        <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
-                                        <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
-                                    </div>    
-                                </div></MenuProvider>  
-                            </div>
+                            <Link to={{
+                                    pathname:"/webplayer/album",
+                                    state:{
+                                    myId :album.id
+                                    }
+                                }}>
+                                <div className="card" id={album.id}>
+                                <MenuProvider id={album.id} component="span" >
+                                    <Menu id={album.id} theme={theme.dark} animation={animation.fade}>
+                                    <Item>Save To Library</Item>
+                                    <Item>Copy Playlist Link</Item>
+                                    <Item>Open in App</Item>
+                                    </Menu>                                         <img src={album.imageUrl[0]} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{album.title}</h5>
+                                        <div id={album.id}>
+                                            <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
+                                            <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
+                                    </div></MenuProvider>  
+                                </div>
+                            </Link>
                         </div>
                     )
                     )}
@@ -248,23 +256,30 @@ class Home extends Component {
                 <div className="card-group">
                     {this.state.artists.map( artist => (
                         <div>
-                        <div className="card" id={artist.id}>
-                            <MenuProvider id={artist.id} component="span" >
-                        <Menu id={artist.id} theme={theme.dark} animation={animation.fade}>
-                        <Item>Save To Library</Item>
-                        <Item>Copy Playlist Link</Item>
-                        <Item>Open in App</Item>
-                        </Menu>                                          
-                        <img src={artist.imageUrl[0].url} className="card-img-top rounded-circle" alt="..."></img>
-                                <div className="card-body">
-                                    <h5 className="card-title">{artist.name}</h5>
-                                    <p className="card-text">{artist.type}</p>
-                                    <div id={artist.id}>
-                                        <button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-play"></i></button>
-                                        <button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-pause"></i></button>
-                                    </div>
-                                </div></MenuProvider> 
-                            </div>
+                            <Link to={{
+                                    pathname:"/artist-webplayer",
+                                    state:{
+                                       myId :artist.id
+                                    }
+                                }}>
+                                <div className="card" id={artist.id}>
+                                    <MenuProvider id={artist.id} component="span" >
+                                <Menu id={artist.id} theme={theme.dark} animation={animation.fade}>
+                                <Item>Save To Library</Item>
+                                <Item>Copy Playlist Link</Item>
+                                <Item>Open in App</Item>
+                                </Menu>                                          
+                                <img src={artist.imageUrl[0].url} className="card-img-top rounded-circle" alt="..."></img>
+                                        <div className="card-body">
+                                            <h5 className="card-title">{artist.name}</h5>
+                                            <p className="card-text">{artist.type}</p>
+                                            <div id={artist.id}>
+                                                <button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-play"></i></button>
+                                                <button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-pause"></i></button>
+                                            </div>
+                                        </div></MenuProvider> 
+                                </div>
+                            </Link>
                         </div>
                     )
                     )}
