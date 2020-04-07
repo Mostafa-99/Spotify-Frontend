@@ -29,7 +29,7 @@ class Albums extends Component {
         if (res.status === 200) {
           console.log("most recent albums", res);
           this.setState({
-          artistAlbums: res.data.data.albums.map((album) => ({
+          artistAlbums: res.data.data.map((album) => ({
               id: album._id,
               title: album.name,
               imageUrl: album.image,
