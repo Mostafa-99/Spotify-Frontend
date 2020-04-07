@@ -8,7 +8,7 @@ import {ConfigContext} from '../../Context/ConfigContext'
  * @extends Component
  */
 export class premiumCode extends Component {
-        static contextType=ConfigContext;
+    static contextType=ConfigContext;
 
     state={
         code: ''
@@ -23,7 +23,7 @@ export class premiumCode extends Component {
                 {
                 headers:
                     {
-                    'authorization':"Bearer "+localStorage.getItem("token"),
+                    'authorization':"Bearer "+localStorage.getItem("token")
                     }
                     
                 })
@@ -56,7 +56,7 @@ export class premiumCode extends Component {
             console.log(localStorage);
 
             //'http://localhost:3000/subscriptionCodes/',{code}
-            axios.post(this.context.baseURL+'/me/upgrade/'+{code},
+            axios.post(this.context.baseURL+'/me/upgrade/{'+code+'}',
               {
                     headers:{
                      'authorization':"Bearer "+localStorage.getItem("token")               
