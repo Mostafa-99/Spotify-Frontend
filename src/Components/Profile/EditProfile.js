@@ -327,11 +327,11 @@ class EditProfile extends Component {
             </div>
         </div>
         </div>
-        )
-    }}
-    </ConfigContext.Consumer>
-    )}</ProfileContext.Consumer>
-        )
+                )
+            }}
+            </ConfigContext.Consumer>
+            )}</ProfileContext.Consumer>
+        );
         
     }
     
