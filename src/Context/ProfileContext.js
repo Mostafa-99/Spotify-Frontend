@@ -28,7 +28,11 @@ class ProfileContextProvider extends Component {
               this.setState({user: res.data})
               console.log("Response: "+res.data);
               
-            })
+            }).catch(err => {
+                alert(err.data.message)
+            }
+  
+            )
             if(this.state.user!==null)
             {   
                 let usercopy=JSON.parse(JSON.stringify(this.state.user))
@@ -60,6 +64,11 @@ class ProfileContextProvider extends Component {
               console.log("Response: "+res);
             this.setState({user: res.data})
           })
+          .catch(err => {
+              alert(err.data.message)
+          }
+
+          )
           if(this.state.user!==null)
           {   
               let usercopy=JSON.parse(JSON.stringify(this.state.user))
