@@ -53,7 +53,7 @@ export class premiumCode extends Component {
             console.log(localStorage);
 
             //'http://localhost:3000/subscriptionCodes/',{code}
-            axios.post(this.context.baseURL+"/me/upgrade/{"+code+"}",{},{
+            axios.post(this.context.baseURL+"/me/upgrade/"+code,{},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
