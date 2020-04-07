@@ -36,27 +36,30 @@ class ArtistWebPlayer extends Component {
         
         this.getAlbumTracks();
 
-        const{myId}=this.props.location.state;//getting id from parent component
-        this.state.myId=myId;
+       /* const{myId}=this.props.location.state;//getting id from parent component
+        this.state.myId=myId; */
 
         /*console.log("amr diab id is : ",this.state.myId);*/
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
-        axios.get('/artists/' + this.state.myId,{  /*artist*/
+        /*' http://we871.mocklab.io/artists/200 */
+        /*+ this.state.myId */
+        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f" ,{  /*artist*/
             headers:{
-                "authorization":localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
             }}
                 )
             .then(res => {
                 if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState(prevState => ({
                     artist: {                   
                         ...prevState.artist,    
-                        id:res.data.id,
+                        id:res.data._id,
                         name:res.data.name,
-                        bio:res.data.artistInfo      
+                        bio:res.data.artistInfo.biography      
                     }
                 }))
                 }
@@ -72,22 +75,24 @@ class ArtistWebPlayer extends Component {
                 }
                 
         })
-                   
             /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
-        axios.get("/artists/"+this.state.myId+"/albums",{/* albums*/
+            /* /artists/"+this.state.myId+"/albums */
+            // "+this.state.myId+"
+        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/albums",{/* albums */
             headers:{
-                "authorization":localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
             }}
             )
             .then(res => {
                 if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState({
                         albums: res.data.map( album => ({
                             name:album.name,
-                            id:album.id,
-                            imageUrl:album.images[0]
+                            id:album._id,
+                            imageUrl:album.image
                         }))
                     })
                 }
@@ -103,16 +108,23 @@ class ArtistWebPlayer extends Component {
                 }
                 
             })
-            /*
-            not yet made by back end but can be tested by mocky just uncomment
 
-        axios.get("http://www.mocky.io/v2/5e749724300000d431a5f4c6")/* playlists
+
+            /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
+            // "+this.state.myId+"
+        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/created-playlists",{/* playlists*/
+            headers:{
+                'authorization': "Bearer "+localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+            )
             .then(res => {
                 if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState({
                         playLists: res.data.map( playList => ({
-                            id:playList.id,
+                            id:playList._id,
                             name:playList.name,
                             imageUrl:playList.images[0]
                         }))
@@ -129,23 +141,26 @@ class ArtistWebPlayer extends Component {
                     alert(res.message);
                 }
             })
-*/
+
                 /* http://www.mocky.io/v2/5e87635f3100002a003f44d4*/
-        axios.get("/artists/"+this.state.myId+"/relatedArtists",{/* related artists*/
+                /* */
+                /**http://we871.mocklab.io/artists/200/relatedArtists */
+        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/related-artists",{/* related artists*/
             headers:{
-                "authorization":localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
             }}
             )
             .then(res => {
                 if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState({
                         relatedArtists: res.data.map( relatedArtist => ({
-                            id:relatedArtist.id,
+                            id:relatedArtist._id,
                             name:relatedArtist.name,
                             imageUrl:relatedArtist.images[0],
-                            type:relatedArtist.type
+                            type:relatedArtist.role
                         }))
                     })
                 }
@@ -165,15 +180,16 @@ class ArtistWebPlayer extends Component {
         getAlbumTracks(){
            
             /* http://localhost:3000/album_tracks/1*/
-            axios.get("/artists/"+this.state.myId+"/topTracks",{/* top tracks*/
+            axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/top-tracks",{/* top tracks*/
                 headers:{
-                    "authorization":localStorage.getItem("token"),
+                    'authorization': "Bearer "+localStorage.getItem("token"),
                     "id": this.state.myId
                 }}
                 )
                 .then(res => {
                     if(res.status===200)
                 {   
+                    console.log(res);
                     this.setState({tracks:res.data.items})
                 }
                 else if(res.status===401)
@@ -331,7 +347,7 @@ class ArtistWebPlayer extends Component {
                                     ))}
                                 </div>    
                             </div>
-                            {/*not yet implemented by backend 
+                            
 
                             <div className="playlists-sub-section">
 
@@ -352,7 +368,7 @@ class ArtistWebPlayer extends Component {
                                         </div>
                                     ))}
                                 </div>   
-                            </div>*/}
+                            </div>
                         </div>
                         <div id="about-section" className="about-section hide">
                             <h2 className="bio-title">Biography</h2>

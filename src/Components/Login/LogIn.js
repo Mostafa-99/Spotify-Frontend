@@ -138,7 +138,7 @@ class LogIn extends Component {
 
                  }
                 }).catch(err =>{
-
+console.log(err)
                     if(err.status===401) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")
