@@ -4,7 +4,7 @@ import HomeNavBar from './../Home/HomeNavBar.js'
 import SideBar from './../../SideBar.js'
 import TracksList from './TracksList.js'
 import Album_Image from './../../../../Images/albumImage.jpg'
-import {ConfigContext} from '../../Context/ConfigContext'
+import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
 
 /**
