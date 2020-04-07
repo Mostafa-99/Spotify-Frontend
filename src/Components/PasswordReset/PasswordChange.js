@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './PasswordReset.css'
 import '../Button/spotify_button.css'
 import '../SignUp/sign_up.css'
+import {Link} from 'react-router-dom'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 
@@ -68,11 +69,7 @@ export default class PasswordChange extends Component {
                     {
                             this.setState({status: 'done'});
                             
-                    }
-                    else // Unsuccessful
-                    {
-                        this.setState({status: 'not-linked-email'});     
-                    }  
+                    } 
                     })
                 //console.log(mytoken);
             }
@@ -87,7 +84,17 @@ export default class PasswordChange extends Component {
     render() {
         return (
             <div id="my-password-reset">
-                <h2>Reset Password</h2>
+                {this.state.status==="done"?
+                (
+                    <div>
+                        <h2>Password updated</h2>
+                        <p>Sweet! Your new password has now been set and you are logged in.<Link to="/login" className="hyper-link">Go to account</Link></p>
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    </div>
+                ):
+                (
+                    <div>
+                        <h2>Reset Password</h2>
                 <label>New password</label>
                 <input  type="password" id="new-password" onChange={this.handlePswChange} className="form-control mb-4"/>
                          {this.state.emptypass?
@@ -120,7 +127,11 @@ export default class PasswordChange extends Component {
 
 
                 <button className="my-spotify-button mb-5" id="reset-psw-send" onClick={this.changePassowrd}>Send</button>
-
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    </div>
+                )
+                }
+                
             </div>
         )
     }
