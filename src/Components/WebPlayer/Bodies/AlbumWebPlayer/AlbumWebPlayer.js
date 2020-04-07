@@ -80,6 +80,8 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
+                console.log("Album details")
+                console.log(res)
                 this.setState({
                     album_image_url:res.data.album.images,
                     album_name:res.data.album.name,
@@ -115,6 +117,8 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
+                console.log("Album details")
+                console.log(res)
                 this.setState({tracks:res.data.tracksArray})
             }
             else if(res.status===401){
