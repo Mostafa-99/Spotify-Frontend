@@ -37,7 +37,7 @@ class ArtistWebPlayer extends Component {
 
     componentDidMount() {
         
-        this.getAlbumTracks();
+        
 
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
@@ -174,7 +174,8 @@ class ArtistWebPlayer extends Component {
                 else{
                     alert(res.message);
                 }
-            })                                              
+            })     
+            this.getAlbumTracks();                                         
     }
         
         getAlbumTracks(){
@@ -190,7 +191,7 @@ class ArtistWebPlayer extends Component {
                     if(res.status===200)
                 {   
                     console.log("top tracks res ",res);
-                    this.setState({tracks:res.data.data.items})
+                    this.setState({tracks:res.data.data})
                 }
                 else if(res.status===401)
                 {

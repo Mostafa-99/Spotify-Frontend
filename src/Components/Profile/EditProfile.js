@@ -140,7 +140,7 @@ class EditProfile extends Component {
             
         <div id="edit-profile"className="container editProfile">
             <div className="row">
-                <SideBar img={this.state.user.image}/>
+                <SideBar img={this.state.user.images[0]}/>
                 <div className="col-lg-9 edit-section">
                     <div className="edit-div">
                         { this.state.successMessage && <div class="alert alert-success">
@@ -164,8 +164,8 @@ class EditProfile extends Component {
                             <label className="labels">Gender</label>
                                 <div className="gender-normal">
                                     <select  ref="gender" required="" className="combo-box gender-combo">
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
                                 <div className="gender-fb hide">
@@ -177,29 +177,29 @@ class EditProfile extends Component {
                                 <div className="birthday-normal">
                                     <div className="birthday-inputs">
                                         <select  ref="month" required=""  className="combo-box month">
-                                            <option value="1">01</option>
-                                            <option value="2">02</option>
-                                            <option value="3">03</option>
-                                            <option value="4">04</option>
-                                            <option value="5">05</option>
-                                            <option value="6">06</option>
-                                            <option value="7">07</option>
-                                            <option value="8">08</option>
-                                            <option value="9">09</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
                                             <option value="10">10</option>
                                             <option value="11">11</option>
                                             <option value="12">12</option>
                                         </select>
                                         <select  ref="day" required="" className="combo-box day">
-                                            <option value="1">01</option>
-                                            <option value="2">02</option>
-                                            <option value="3">03</option>
-                                            <option value="4">04</option>
-                                            <option value="5">05</option>
-                                            <option value="6">06</option>
-                                            <option value="7">07</option>
-                                            <option value="8">08</option>
-                                            <option value="9">09</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
                                             <option value="10">10</option>
                                             <option value="11">11</option>
                                             <option value="12">12</option>
