@@ -26,12 +26,13 @@ class ProfileContextProvider extends Component {
             })
             .then(res => {
               this.setState({user: res.data})
-              console.log("Response: "+res);
-
+              console.log("Response: "+res.data);
+              
             })
             if(this.state.user!==null)
             {   
                 let usercopy=JSON.parse(JSON.stringify(this.state.user))
+                console.log("User: "+this.state.user);
                 //usercopy['image']=this.state.user.images[0];
                 //if(usercopy.image==="")
                 //{
