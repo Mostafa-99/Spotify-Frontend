@@ -10,7 +10,6 @@ import { theme, animation } from 'react-contexify';
 import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
-import { Link } from 'react-router-dom';
 
 class Home extends Component {
     constructor(){

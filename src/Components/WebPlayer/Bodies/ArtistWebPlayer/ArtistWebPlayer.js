@@ -39,10 +39,11 @@ class ArtistWebPlayer extends Component {
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
 
-        /*console.log("amr diab id is : ",this.state.myId);*/
+        console.log("amr diab id is : ",this.state.myId);
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
-        axios.get('/artists/' + this.state.myId,{  /*artist*/
+        /*'/artists/' + this.state.myId */
+        axios.get("http://we871.mocklab.io/artists/200",{  /*artist*/
             headers:{
                 "authorization":localStorage.getItem("token"),
                 "id": this.state.myId
@@ -56,7 +57,7 @@ class ArtistWebPlayer extends Component {
                         ...prevState.artist,    
                         id:res.data.id,
                         name:res.data.name,
-                        bio:res.data.artistInfo      
+                        bio:res.data.artistInfo.biography      
                     }
                 }))
                 }
@@ -74,6 +75,7 @@ class ArtistWebPlayer extends Component {
         })
                    
             /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
+            /* /artists/"+this.state.myId+"/albums */
         axios.get("/artists/"+this.state.myId+"/albums",{/* albums*/
             headers:{
                 "authorization":localStorage.getItem("token"),
@@ -103,10 +105,8 @@ class ArtistWebPlayer extends Component {
                 }
                 
             })
-            /*
-            not yet made by back end but can be tested by mocky just uncomment
-
-        axios.get("http://www.mocky.io/v2/5e749724300000d431a5f4c6")/* playlists
+            /* /artists/"+this.state.myId+"/artist-created-playlists */
+        axios.get("http://www.mocky.io/v2/5e749724300000d431a5f4c6")/* playlists*/
             .then(res => {
                 if(res.status===200)
                 {   
@@ -129,9 +129,10 @@ class ArtistWebPlayer extends Component {
                     alert(res.message);
                 }
             })
-*/
+
                 /* http://www.mocky.io/v2/5e87635f3100002a003f44d4*/
-        axios.get("/artists/"+this.state.myId+"/relatedArtists",{/* related artists*/
+                /* /artists/"+this.state.myId+"/relatedArtists*/
+        axios.get("http://we871.mocklab.io/artists/200/relatedArtists",{/* related artists*/
             headers:{
                 "authorization":localStorage.getItem("token"),
                 "id": this.state.myId
