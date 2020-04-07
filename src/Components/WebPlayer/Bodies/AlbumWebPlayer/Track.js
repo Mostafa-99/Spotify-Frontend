@@ -19,12 +19,12 @@ export class Track extends Component {
             this.setState({artists:artist.name})
         ));
         this.setState({
-            duration_ms:this.props.track.duration_ms,
+            duration_ms:this.props.track.durationMs,
             preview_url:this.props.track.preview_url,
             id:this.props.track.id,
             name:this.props.track.name
         });
-        this.millisToMinutesAndSeconds(this.props.track.duration_ms);
+        this.millisToMinutesAndSeconds(this.props.track.durationMs);
     }
 
     millisToMinutesAndSeconds(millis) {

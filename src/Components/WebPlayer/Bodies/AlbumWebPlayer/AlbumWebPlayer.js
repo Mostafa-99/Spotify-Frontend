@@ -84,7 +84,7 @@ export class AlbumWebPlayer extends Component {
                 console.log("Album details")
                 console.log(res)
                 this.setState({
-                    album_image_url:res.data.data.album.images,
+                    album_image_url:res.data.data.album.image,
                     album_name:res.data.data.album.name,
                     artists:res.data.data.album.artists.name,
                     is_liked:false //get from backend
