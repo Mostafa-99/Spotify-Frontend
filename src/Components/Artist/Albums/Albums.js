@@ -33,7 +33,7 @@ class Albums extends Component {
               id: album._id,
               title: album.name,
               imageUrl: album.image,
-              artist: album.artists.name,
+              artist: album.artists[0].name,
             })),
           });
         } else if (res.status === 401) {
@@ -74,7 +74,7 @@ class Albums extends Component {
                     ></img>
                     <div className="card-body">
                       <h5 className="card-title">{album.title}</h5>
-                      <p className="card-text">{album.description}</p>
+                      <p className="card-text">{album.artist}</p>
                       <div id={album.id}>
                       </div>
                     </div>
