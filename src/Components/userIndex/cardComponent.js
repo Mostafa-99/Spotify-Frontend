@@ -39,7 +39,7 @@ class CardComponent extends Component {
                 console.log(localStorage.getItem("token"));
                 axios.get(this.context.baseURL+"/playlists/top",
                 {
-                    headers:{"Authorization":AuthStr}
+                    headers:{"authorization" :"Bearer "+AuthStr}
                 }
                  )
                 .then(res => {
