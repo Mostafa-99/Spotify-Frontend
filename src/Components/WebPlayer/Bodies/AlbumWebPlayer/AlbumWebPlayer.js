@@ -76,7 +76,7 @@ export class AlbumWebPlayer extends Component {
         axios.get(this.context.baseURL+'/albums/'+this.state.myId,{
             headers:{
                 'Content-Type':'application/json',
-                'authorization':localStorage.getItem("token")
+                'authorization': "Bearer "+ localStorage.getItem("token")
             }
         })
         .then(res => {
@@ -113,7 +113,7 @@ export class AlbumWebPlayer extends Component {
         axios.get(this.context.baseURL+'/albums/'+this.state.myId+'/tracks',{
             headers:{
                 'Content-Type':'application/json',
-                'authorization':localStorage.getItem("token")
+                'authorization': "Bearer "+ localStorage.getItem("token")
             }
         })
         .then(res => {
