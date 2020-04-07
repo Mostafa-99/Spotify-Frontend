@@ -4,8 +4,6 @@ import SideBar from './SideBar';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
-import Footer from '../Footer/Footer.js'
-import Navbar from '../Navigation/Navbar.js'
 import { ConfigContext } from '../../Context/ConfigContext'
 import { ProfileContext } from '../../Context/ProfileContext'
 var today;
@@ -27,20 +25,36 @@ class EditProfile extends Component {
     
     componentDidMount(){
         this.setState(()=> ({ messShow: false}))
-        axios.get('http://localhost:3000/users/1/')
+        axios.get("http://138.91.114.14/api/me", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+        })
             .then(res => {
-                this.setState({user: res.data})
-                today = new Date(this.state.user.dateOfBirth);
-                day = today.getDate();
-                month = today.getMonth()+1; 
-                year = today.getFullYear();
-                console.log(day);
-                console.log(month);
-                console.log(year);
-                document.querySelector('.year').value=year;
-                document.querySelector('.month').value=month;
-                document.querySelector('.day').value=day;
-                document.querySelector('.gender-combo').value=this.state.user.gender;
+                console.log(res)
+                if(res.status===200)
+                {
+                    this.setState({user: res.data.data})
+                    today = new Date(this.state.user.dateOfBirth);
+                    day = today.getDate();
+                    month = today.getMonth()+1; 
+                    year = today.getFullYear();
+                    console.log(day);
+                    console.log(month);
+                    console.log(year);
+                    document.querySelector('.year').value=year;
+                    document.querySelector('.month').value=month;
+                    document.querySelector('.day').value=day;
+                    document.querySelector('.gender-combo').value=this.state.user.gender;
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    console.log("fail")
+                }
             })
         if(this.state.loginType==="fb")
         {
@@ -62,10 +76,10 @@ class EditProfile extends Component {
     }
 
     editProfileHandle(userYear,userMonth,userDay,userGender,userEmail){
-        axios.put('/me', 
+        axios.put('http://138.91.114.14/api/me', 
         {
             "email": userEmail,
-            "name": "string",
+            "name": this.state.user.name,
             "gender": userGender,
             "dateOfBirth": userYear+'-'+userMonth+'-'+userDay
         },
@@ -77,14 +91,15 @@ class EditProfile extends Component {
         }
         )   
         .then(res => {
-            if(res.data.status === 200)
+            console.log(res)
+            if(res.status === 200)
             {
                 this.setState({
                    successMessage: true,
                    failMessage: false
                 })
             }
-            else if(res.data.status === 401)
+            else if(res.status === 401)
             {
                 localStorage.removeItem("loginType");
                 localStorage.removeItem("isLoggedIn");
