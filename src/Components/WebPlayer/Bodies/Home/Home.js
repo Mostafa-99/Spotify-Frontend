@@ -222,7 +222,7 @@ class Home extends Component {
                             id:album._id,
                             title:album.name,
                             imageUrl:album.image,
-                            artist:album.artists.name
+                            artist:album.artists[0].name
                         }))
                     })
                 }
@@ -254,7 +254,7 @@ class Home extends Component {
                             id:album._id,
                             title:album.name,
                             imageUrl:album.image,
-                            artist:album.artists.name
+                            artist:album.artists[0].name
                         }))
                     })
                 }
@@ -521,7 +521,7 @@ class Home extends Component {
                                  <img src={album.imageUrl} className="card-img-top" alt="..."></img>
                                 <div className="card-body">
                                     <h5 className="card-title">{album.title}</h5>
-                                    <p className="card-text">{album.description}</p>
+                                    <p className="card-text">{album.artist}</p>
                                     <div id={album.id}>
                                         <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
                                         <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
@@ -553,7 +553,7 @@ class Home extends Component {
                                     </Menu>                                         <img src={album.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{album.title}</h5>
-                                        <p className="card-text">{album.description}</p>
+                                        <p className="card-text">{album.artist}</p>
                                         <div id={album.id}>
                                             <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
                                             <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
