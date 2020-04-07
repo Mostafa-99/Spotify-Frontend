@@ -141,7 +141,7 @@ class LogIn extends Component {
                 }).catch(err =>{
 console.log(err)
 console.log(err.response)
-                    if(err.status===401) // Unsuccessful
+                    if(err.response.status===401 || err.response.status===400) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")
                     this.setState({status: 'invalid'});

@@ -185,11 +185,11 @@ class SignUp extends Component {
                     
                 }
                }).catch(err => {
-                if(err.status===400)
+                if(err.response.status===400 || err.response.status===401)
                 {
-                if(this.state.status!=="invalid")
-                    this.setState({status: 'invalid'});
-                this.setState({invalid: true});
+                    if(this.state.status!=="invalid")
+                        this.setState({status: 'invalid'});
+                    this.setState({invalid: true});
                 }
                 else
                 alert(err)
