@@ -18,8 +18,11 @@ export class premiumCode extends Component {
      * sends subscription code to the user's email
      */
     sendMail = () => {
-        console.log("authorization:"+localStorage.getItem("token"));
-        axios.post(this.context.baseURL+'/me/premium',{headers:{authorization:localStorage.getItem("token")}})
+        console.log(localStorage.getItem("token"));
+        axios.post(this.context.baseURL+'/me/premium',{
+            headers:{
+                "authorization":localStorage.getItem("token")
+                }})
             .then(res => {
                 if(res.status===204){
                     alert("An email has been sent");

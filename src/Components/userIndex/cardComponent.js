@@ -36,10 +36,10 @@ class CardComponent extends Component {
           componentDidMount() {
                 const AuthStr=localStorage.getItem('token');
                 console.log(this.context.baseURL+"/playlists/top");
-                console.log("authorization:"+localStorage.getItem("token"));
+                console.log(localStorage.getItem("token"));
                 axios.get(this.context.baseURL+"/playlists/top",
                 {
-                    headers:{"authorization":AuthStr}
+                    headers:{"Authorization":AuthStr}
                 }
                  )
                 .then(res => {
