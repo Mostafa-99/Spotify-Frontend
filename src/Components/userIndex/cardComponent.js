@@ -2,9 +2,10 @@ import React, {Component} from "react"
 import "./userIndex.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import {ConfigContext} from '../../Context/ConfigContext'
 
 class CardComponent extends Component {
-
+    static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
@@ -18,7 +19,7 @@ class CardComponent extends Component {
 // URL?_limit=6,-popularity
 // to get 6  most popular descendingly  
 // Remove Comments when integrating 
-  componentDidMount() {
+  /*componentDidMount() {
             axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/track?_limit=6 " )
             .then(res => {
                      this.setState({
@@ -30,11 +31,11 @@ class CardComponent extends Component {
                         href:playlist.tracks.href
                     }))
                 })
-            }) 
+            }) */
         
-       /*   componentDidMount() {
+          componentDidMount() {
                 const AuthStr=localStorage.getItem('token');
-                axios.get("http://138.91.114.14/api/playlists/top",
+                axios.get(this.context.baseURL+"/playlists/top",
                 {
                     headers:{AuthStr},
                     query:{
@@ -65,7 +66,7 @@ class CardComponent extends Component {
                     else{
                         alert("Error.");
                     }
-                }) */
+                }) 
               
     }
 
