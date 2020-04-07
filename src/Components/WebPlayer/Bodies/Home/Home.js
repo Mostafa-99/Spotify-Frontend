@@ -560,7 +560,7 @@ class Home extends Component {
                 </div>
             </div>
             <div className="popular-albums-section">
-                            <h2 className="section-title popular-albums">{this.state.categories[0].name}</h2>
+                            <h2 className="section-title popular-albums">{this.state.catagories[0].name}</h2>
                 <div className="card-group">
                     {this.state.firstCategory.map( playlist => (
                         <div>
@@ -593,7 +593,7 @@ class Home extends Component {
                 </div>
             </div>
             <div className="popular-albums-section">
-                            <h2 className="section-title popular-albums">{this.state.categories[1].name}</h2>
+                            <h2 className="section-title popular-albums">{this.state.catagories[1].name}</h2>
                 <div className="card-group">
                     {this.state.secondCategory.map( playlist => (
                         <div>
