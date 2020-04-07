@@ -8,10 +8,10 @@ export class Track extends Component {
         "preview_url":"",
         "id":"",
         "name":"",
-        "duration_ms":0,
+        "duration_ms":Number,
         "minutes":0,
         "seconds":0,
-        "is_playing":Boolean
+        //"is_playing":Boolean
     }
 
     componentDidMount(){
@@ -19,12 +19,12 @@ export class Track extends Component {
             this.setState({artists:artist.name})
         ));
         this.setState({
-            duration_ms:this.props.track.duration_ms,
-            preview_url:this.props.track.preview_url,
-            id:this.props.track.id,
+            duration_ms:this.props.track.durationMs,
+            preview_url:this.props.track.externalUrls[0],
+            id:this.props.track._id,
             name:this.props.track.name
         });
-        this.millisToMinutesAndSeconds(this.props.track.duration_ms);
+        this.millisToMinutesAndSeconds(this.props.track.durationMs);
     }
 
     millisToMinutesAndSeconds(millis) {

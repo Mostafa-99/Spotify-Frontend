@@ -157,10 +157,9 @@ class Home extends Component {
                     console.log("artists",res)
                     this.setState({
                         artists: res.data.data.map( artist => ({
-                            id:artist.id,
+                            id:artist._id,
                             name:artist.name,
-                            imageUrl:artist.images,
-                            type:artist.type
+                            imageUrl:artist.images[0],
                         }))
                     })
                 }
@@ -389,7 +388,7 @@ class Home extends Component {
                         imageUrl:album.images
                     }))
                 })
-            })*/
+            })
             axios.get("http://www.mocky.io/v2/5e7f9ddb2f00005a4cbac4bb")
             .then(res => {
                 this.setState({
@@ -400,7 +399,7 @@ class Home extends Component {
                         type:artist.type
                     }))
                 })
-            })                              
+            }) */                             
     }
     
         togglePlayPause(sid) {
@@ -439,8 +438,6 @@ class Home extends Component {
     }
     render()
     {
-        const artistname=this.state.artists[0]
-        console.log(localStorage);
         {document.title ="Spotify - Home"}
     return(
         
@@ -664,7 +661,7 @@ class Home extends Component {
                                 <img src={artist.imageUrl[0].url} className="card-img-top rounded-circle" alt="..."></img>
                                         <div className="card-body">
                                             <h5 className="card-title">{artist.name}</h5>
-                                            <p className="card-text">{artist.type}</p>
+                                            <p className="card-text">artist</p>
                                             <div id={artist.id}>
                                                 <button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-play"></i></button>
                                                 <button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-pause"></i></button>
