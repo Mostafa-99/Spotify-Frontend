@@ -51,11 +51,11 @@ class CardComponent extends Component {
                   { 
                          this.setState({
                             playlists: res.data.map( playlist => ({
-                            "id":playlist.id,
-                            "title":playlist.name,
-                            "artist":playlist.owner[0].name,
-                            "imageUrl":playlist.images,
-                            "href":playlist.tracks.href
+                            id:playlist.id,
+                            title:playlist.name,
+                            artist:playlist.owner[0].name,
+                            imageUrl:playlist.images,
+                            href:playlist.tracks.href
                         }))
                     }) }          
                     else if (res.status===401)

@@ -21,7 +21,7 @@ export class premiumCode extends Component {
         console.log(localStorage.getItem("token"));
         axios.post(this.context.baseURL+'/me/premium',{
             headers:{
-                "authorization":"Bearer "+localStorage.getItem("token")
+                "Authorization":"Bearer "+localStorage.getItem("token")
                 }})
             .then(res => {
                 if(res.status===204){
