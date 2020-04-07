@@ -5,8 +5,11 @@ import '../Bodies.css';
 import './ArtistWebPlayer.css'
 import axios from 'axios'
 import TracksList from './TracksList.js'
+
+import {ConfigContext} from '../../../../Context/ConfigContext'
 import { Link } from 'react-router-dom';
 class ArtistWebPlayer extends Component {
+    static contextType=ConfigContext;
     constructor(){
         super()
         this.state = {
