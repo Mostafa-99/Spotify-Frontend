@@ -190,7 +190,7 @@ class ArtistWebPlayer extends Component {
                     if(res.status===200)
                 {   
                     console.log(res);
-                    this.setState({tracks:res.data.items})
+                    this.setState({tracks:res.data.data.items})
                 }
                 else if(res.status===401)
                 {
