@@ -26,6 +26,8 @@ class ProfileContextProvider extends Component {
             })
             .then(res => {
               this.setState({user: res.data})
+              console.log("Response: "+res);
+
             })
             if(this.state.user!==null)
             {   
@@ -38,6 +40,7 @@ class ProfileContextProvider extends Component {
                 }
             }
           } 
+          console.log("Context Saved ON MOUNT User: "+this.state.user);
     }
 
     componentDidUpdate=()=>{
@@ -53,6 +56,7 @@ class ProfileContextProvider extends Component {
               headers:{'authorization': "Bearer "+ AuthStr }
           })
           .then(res => {
+              console.log("Response: "+res);
             this.setState({user: res.data})
           })
           if(this.state.user!==null)
@@ -66,6 +70,7 @@ class ProfileContextProvider extends Component {
               }
           }
           }
+          console.log("Context Saved Update User: "+this.state.user);
 
     }
 
