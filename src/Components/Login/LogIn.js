@@ -125,20 +125,25 @@ class LogIn extends Component {
                         localStorage.setItem("loginType", "email");
                         this.setState({status: 'connected'});
                        // window.location.reload(false);
+                    }
+                    else{
+                        if(this.state.status!=="invalid")
+                        this.setState({status: 'invalid'});
                     }  
                 }
                 else
                 {
-                if(res.status===401) // Unsuccessful
-                {
+                //if(res.status===401) // Unsuccessful
+               // {
                    if(this.state.status!=="invalid")
                     this.setState({status: 'invalid'});
-                }else
-                alert(res.data.message)
+                //}else
+                    alert(res.data.message)
 
                  }
                 }).catch(err =>{
 console.log(err)
+console.log(err.response)
                     if(err.status===401) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")
