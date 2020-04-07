@@ -136,12 +136,6 @@ class EditProfile extends Component {
         {document.title ="Edit profile - Spotify"}
 
     return(
-        <ProfileContext.Consumer>{(profile) => (
-            <ConfigContext.Consumer>{(config) => {
-                const {user}= profile
-                //const {baseURL}= config
-                
-                return(
         <div className="bg-dark-clr">
             
         <div id="edit-profile"className="container editProfile">
@@ -328,10 +322,6 @@ class EditProfile extends Component {
         </div>
         </div>
         )
-    }}
-    </ConfigContext.Consumer>
-    )}</ProfileContext.Consumer>
-    )
     }
 }
 
