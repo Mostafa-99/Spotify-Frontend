@@ -1,0 +1,83 @@
+#my-not-found h1{
+    font-family: Circular, Helvetica, Arial, sans-serif, IosFix;
+font-size: 50px;
+text-align: left;
+margin-left: 10%;
+}
+
+#my-not-found p{
+color:rgb(28, 31, 31);
+    font-size: 20px;
+    text-align: left;
+    margin-left: 10%;
+    }
+
+#my-not-found .home{
+    font-family: Circular, Helvetica, Arial, sans-serif, IosFix;
+        font-size: 35px;
+        text-align: left;
+        margin-left: 10%;
+        }
+
+#my-not-found .home:hover{
+            cursor: pointer;
+            color: white;
+                }
+
+#my-not-found {
+    background-color: pink;
+    }
+
+#my-not-found img{
+    
+    width:500px;
+    margin-left:50%;
+    }
+
+    @media screen and (max-width: 1000px)
+    {
+        #my-not-found h1{
+    
+            font-size: 45px;
+  
+            }
+            #my-not-found p{
+    
+                font-size: 20px;
+      
+                }
+        #my-not-found .home{
+    
+            font-size: 25px;
+  
+            }
+        #my-not-found img{
+            margin: 40px 70px 0 70px;
+                 width:300px;
+                 }
+    }
+    @media screen and (max-width: 470px)
+    {
+    
+        #my-not-found h1{
+    
+            font-size: 35px;
+  
+            }
+            #my-not-found p{
+    
+                font-size: 18px;
+      
+                }
+        #my-not-found .home{
+    
+            font-size: 28px;
+  
+            }
+
+            #my-not-found img{
+           margin: 40px 10% 0 10%;
+                width:150px;
+                }
+    
+    }

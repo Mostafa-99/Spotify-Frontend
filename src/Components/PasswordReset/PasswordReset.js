@@ -80,7 +80,7 @@ class PasswordReset extends Component {
             <div>
                     <p>Enter your Spotify username, or the email address that you used to register. We'll send you an email with your username and a link to reset your password.</p>
                     <label>Email address</label>
-                    <input required type="email" id="form-email" onChange={this.handleEmailChange} className="form-control mb-4"/>
+                    <input  type="email" id="form-email" onChange={this.handleEmailChange} className="form-control mb-4"/>
                         {this.state.status==="empty-email"?
                         <div id="empty-email" className="error-message">
                         This field is required.
