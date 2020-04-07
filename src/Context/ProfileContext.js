@@ -32,12 +32,12 @@ class ProfileContextProvider extends Component {
             if(this.state.user!==null)
             {   
                 let usercopy=JSON.parse(JSON.stringify(this.state.user))
-                usercopy['image']=this.state.user.images[0];
-                if(usercopy.image==="")
-                {
+                //usercopy['image']=this.state.user.images[0];
+                //if(usercopy.image==="")
+                //{
                     usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
                     this.setState({user:usercopy})
-                }
+               // }
             }
           } 
           console.log("Context Saved ON MOUNT User: "+this.state.user);
