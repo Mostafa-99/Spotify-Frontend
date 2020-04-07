@@ -235,7 +235,7 @@ class MobileNavbar  extends Component {
 
                 <span id="enter" onClick={()=> this.togglesidebar()}><i className="fas fa-2x fa-align-justify white-text"></i></span>
                 {logInOrNot==="connected" ?(
-                <span className="profile-pic" ><img src={user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
+                <span className="profile-pic" ><img src={user.image[0]} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
                 )
                 :
                 (
