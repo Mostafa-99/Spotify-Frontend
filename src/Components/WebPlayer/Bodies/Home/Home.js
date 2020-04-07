@@ -32,8 +32,15 @@ class Home extends Component {
             },
             seeAll:[],
             seeAllHeader:"",
-            
-            
+            test:[{
+                "id":"",
+                "name":"test",    
+            },
+            {
+                "id":"",
+                "name":"test2",
+            }
+        ]          
         }
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
@@ -64,7 +71,6 @@ class Home extends Component {
                         })
                         )
                     })
-                    
                     axios.get("http://138.91.114.14/api/browse/categories/"+this.state.catagories[0].id+"/playlists", {
                         headers: {
                             'authorization': "Bearer "+localStorage.getItem("token"),
@@ -86,6 +92,7 @@ class Home extends Component {
                                     imageUrl:playList.images[0]
                                 })),
                             })
+
                         }
                         else if(res.status === 401)
                         {
@@ -393,7 +400,7 @@ class Home extends Component {
                         type:artist.type
                     }))
                 })
-            })                                           
+            })                              
     }
     
         togglePlayPause(sid) {
@@ -432,6 +439,7 @@ class Home extends Component {
     }
     render()
     {
+        const artistname=this.state.artists[0]
         console.log(localStorage);
         {document.title ="Spotify - Home"}
     return(
@@ -439,6 +447,8 @@ class Home extends Component {
         <div id='webplayer-layout'className="container webplayer col-12">
         <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/></head>
         <div className="row webplayer-body m-0">
+        
+
             <nav className="col-lg-2 webplayer-sidebar-body colums-no-padding">
                 <SideBar/>
             </nav>
@@ -560,7 +570,11 @@ class Home extends Component {
                 </div>
             </div>
             <div className="popular-albums-section">
-                            <h2 className="section-title popular-albums">category1</h2>
+                            {this.state.catagories.slice(0,1).map( category => (
+                                <h2 className="section-title popular-albums">
+                                    {category.name}
+                                </h2>  
+                            ))}
                 <div className="card-group">
                     {this.state.firstCategory.map( playlist => (
                         <div>
@@ -593,7 +607,11 @@ class Home extends Component {
                 </div>
             </div>
             <div className="popular-albums-section">
-                            <h2 className="section-title popular-albums">category2</h2>
+            {this.state.catagories.slice(1,2).map( category => (
+                                <h2 className="section-title popular-albums">
+                                    {category.name}
+                                </h2>  
+                            ))}
                 <div className="card-group">
                     {this.state.secondCategory.map( playlist => (
                         <div>
