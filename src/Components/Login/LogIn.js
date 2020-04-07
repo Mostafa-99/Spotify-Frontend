@@ -3,6 +3,7 @@ import '../SignUp/sign_up.css';
 import spotify_black_logo from '../../Images/spotify_logo_black.png';
 import '../Button/spotify_button.css';
 import {ConfigContext} from '../../Context/ConfigContext'
+import {ProfileContext} from '../../Context/ProfileContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
 //import { buildQueries } from '@testing-library/react';
@@ -10,7 +11,8 @@ import {Link,Redirect} from 'react-router-dom'
 
 
 class LogIn extends Component {
-    static contextType=ConfigContext;
+    static Config=ConfigContext;
+    static Profile=ProfileContext;
     
     constructor() {
         super()
@@ -33,61 +35,39 @@ class LogIn extends Component {
         
         window.FB.login(function(response) {
             if (response.status === 'connected') {
-                                // let fbtoken=response.authResponse.accessToken;
-                                // let fbuserID=response.authResponse.userID;
-                                //     axios.post(ConfigContext.state.baseURL+'/loginWithFacebook/',
-                                // {
-                                // "access token":fbtoken,
-                                // "facebook id":fbuserID
-                                // }
-                                // )   
-                                // .then(res => {
-                                //     if(res.status===200) // Successful
-                                //     {
-                                        
-                                //         if(res.success===true || res.success==="true")
-                                //         {
-                                //             localStorage.setItem("isLoggedIn",'true');
-                                //             localStorage.setItem("token",res.token);
-                                //             localStorage.setItem("loginType", "fb");
-                                //             this.setState({status: 'connected'});
-                                //             window.location.reload(false);
-                                //         }
-                                        
-                                //     }
-                                //     if(res.status===304) // Unsuccessful
-                                //     {
-                                //         if(this.state.status!=="invalid")
-                                //         this.setState({status: 'invalid'});
-                                //     }
-                                    
-                                //    }).catch(
-                                //         err =>{
-                                //     alert(err.status + ": "+ err.message);
-                                //     this.setState({status: 'invalid'});
-                                // });
-
-                this.setState({status: response.status})
-                localStorage.setItem("loginType", "fb");
-                localStorage.setItem("isLoggedIn", 'true');
-                localStorage.setItem("token", response.authResponse.accessToken);
-                localStorage.setItem("userID", response.authResponse.userID);
-                console.log(localStorage);
-                console.log(response);
-                window.location.reload(false);
-                
-              } else {
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");              
+                let fbtoken=response.authResponse.accessToken;
+                let fbuserID=response.authResponse.userID;
+                    axios.post(this.context.baseURL+'/loginWithFacebook',
+                {
+                "access token":fbtoken,
+                "facebook id":fbuserID
+                }
+                )   
+                .then(res => {
+                    if(res.status===200) // Successful
+                    {
+                        if(res.data.success===true || res.data.success==="true")
+                        {
+                            localStorage.setItem("isLoggedIn",'true');
+                            localStorage.setItem("token",res.data.token);
+                            localStorage.setItem("loginType", "fb");
+                            localStorage.setItem("userID", response.authResponse.userID);
+                            this.setState({status: 'connected'});
+                            window.location.reload(false);
+                        }
+                    }
+                    else // Unsuccessful
+                    {
+                            alert(res.data.message)
+                    }   
+                    })
+                    window.location.reload(false); 
               }
-              console.log(response);
           }.bind(this), {scope: 'public_profile,email'});
     } 
 
     componentDidMount =()=>{
-        console.log(localStorage);
+
         this.setState(()=> ({}))
         
           let show=localStorage.getItem("isLoggedIn");
@@ -97,7 +77,6 @@ class LogIn extends Component {
             else  
           this.setState({status:"not connected"})
        
-        console.log(this.state.status)
     }
 
     validateEmail(email) {
@@ -117,7 +96,7 @@ class LogIn extends Component {
         const is_psw_valid = this.validatePassword(mpsw);
         if(is_email_valid && is_psw_valid)
         {
-            axios.post(ConfigContext.state.baseURL+'/signIn',
+            axios.post(this.context.baseURL+'/signIn',
             {
             "email":memail,
             "password":mpsw
@@ -126,29 +105,27 @@ class LogIn extends Component {
             .then(res => {
                 if(res.status===200) // Successful
                 {
-                    if(res.success===true)
+                    if(res.data.success===true)
                     {
                         localStorage.setItem("isLoggedIn",'true');
-                        localStorage.setItem("token",res.token);
+                        localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
                         this.setState({status: 'connected'});
                         window.location.reload(false);
                     }  
                 }
+                else
+                {
                 if(res.status===401) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")
                     this.setState({status: 'invalid'});
-                    
-                }
-                
-                }).catch(
-                    err =>{
-                alert(err.status + ": "+ err.message);
-                this.setState({status: 'invalid'});
-            });
-        }
-        
+                }else
+                alert(res.data.message)
+
+                 }
+                })
+        } 
     }
 
     handlePasswordChange = event=> {
@@ -185,7 +162,7 @@ class LogIn extends Component {
         <div id="my-sign-up">
             {logInOrNot==="connected" ? (
             <div>
-            <Redirect to="/home"/>
+            <Redirect to="/"/>
             </div>
             )
             :

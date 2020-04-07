@@ -40,47 +40,36 @@ class SignUp extends Component {
         
         window.FB.login(function(response) {
             if (response.status === 'connected') {
-                                // let fbtoken=response.authResponse.accessToken;
-                                // let fbuserID=response.authResponse.userID;
-                                //     axios.post(ConfigContext.state.baseURL+'loginWithFacebook',
-                                // {
-                                // "access token":fbtoken,
-                                // "facebook id":fbuserID
-                                // }
-                                // )   
-                                // .then(res => {
-                                //     if(res.status===200) // Successful
-                                //     {
-
-                                //         if(res.success===true || res.success==="true")
-                                //         {
-                                //             localStorage.setItem("isLoggedIn",'true');
-                                //             localStorage.setItem("token",res.token);
-                                //             localStorage.setItem("loginType", "fb");
-                                //             this.setState({status: 'connected'});
-                                //             window.location.reload(false);
-                                //         }
-                                        
-                                //     }
-                                //     else // Unsuccessful
-                                //     {
-                                //         if(this.state.status!=="invalid")
-                                //         this.setState({status: 'invalid'});
-                                //     }
-                                    
-                                //    }).catch(
-                                //         err =>{
-                                //     alert(err.status + ": "+ err.message);
-                                //     this.setState({status: 'invalid'});
-                                // });
-
-                this.setState({status: response.status})
-                localStorage.setItem("loginType", "fb");
-                localStorage.setItem("isLoggedIn", 'true');
-                localStorage.setItem("token", response.authResponse.accessToken);
-                localStorage.setItem("userID", response.authResponse.userID);
-                console.log(localStorage);
-                console.log(response);
+                        let fbtoken=response.authResponse.accessToken;
+                        let fbuserID=response.authResponse.userID;
+                            axios.post(this.context.baseURL+'/loginWithFacebook',
+                        {
+                        "access token":fbtoken,
+                        "facebook id":fbuserID
+                        }
+                        )   
+                        .then(res => {
+                            if(res.status===200) // Successful
+                            {
+                                if(res.data.success===true || res.data.success==="true")
+                                {
+                                    localStorage.setItem("isLoggedIn",'true');
+                                    localStorage.setItem("token",res.data.token);
+                                    localStorage.setItem("loginType", "fb");
+                                    localStorage.setItem("userID", response.authResponse.userID);
+                                    this.setState({status: 'connected'});
+                                    window.location.reload(false);
+                                }
+                            }
+                            else // Unsuccessful
+                            {  
+                                localStorage.removeItem("isLoggedIn");
+                                localStorage.removeItem("token");
+                                localStorage.removeItem("loginType");
+                                localStorage.removeItem("userID");
+                                alert(res.data.message)
+                            }   
+                            })
                 window.location.reload(false);
                 
               } else {
@@ -89,7 +78,6 @@ class SignUp extends Component {
                 localStorage.removeItem("token");
                 localStorage.removeItem("userID");              
               }
-              console.log(response);
           }.bind(this), {scope: 'public_profile,email'});
        
     }
@@ -164,11 +152,10 @@ class SignUp extends Component {
             this.setState({yearerror: true});
         if(this.state.gender==="" && this.state.gendererror===false)
             this.setState({gendererror: true});
-            console.log(sendDate)
 
         if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='')
         {
-            axios.post('http://138.91.114.14/signUp',
+            axios.post(this.context.baseURL+'/signUp',
             {   
                 "email":this.state.email,
                 "password":this.state.password,
@@ -177,27 +164,32 @@ class SignUp extends Component {
                 "dateOfBirth":sendDate,   
             })   
             .then(res => {
-                console.log(res);
                 if(res.status===200) // Successful
                 {
-                    if(res.success===true || res.success==="true")
+                    if(res.data.success===true || res.data.success==="true")
                     {
                         localStorage.setItem("isLoggedIn",'true');
-                        localStorage.setItem("token",res.token);
+                        localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
                         window.location.reload(false);
                     }
                 }
                 else // Unsuccessful
                 {
+                    if(res.status===400)
+                    {
+                    if(this.state.status!=="invalid")
+                    this.setState({status: 'invalid'});
+                    }
+                    else
+                    alert(res.data.message)
+                    
                     localStorage.removeItem("isLoggedIn");
                     localStorage.removeItem("token");
                     localStorage.removeItem("loginType");
-                    alert(res.message);
+                    localStorage.removeItem("userID");
                 }
                })
-            .catch(() =>{ 
-                alert("Server error sign up again");});
         }
     }
 
@@ -300,18 +292,12 @@ class SignUp extends Component {
           this.setState({status:"not connected"})
     }
 
-    componentDidUpdate(){
-        
-        console.log(this.state)
-
-    }
-
     render(){
     return (
         <div id="my-sign-up">
             {this.state.status==="connected" ?
             <div>
-                <Redirect to="/home"/>
+                <Redirect to="/"/>
             </div>
             :
             <div>
@@ -327,7 +313,7 @@ class SignUp extends Component {
                 </div>
             {this.state.status==="invalid"?
             <div id="invalid-message">
-            Email or username already taken.
+            Email already taken.
             </div>
             :
             <div>
@@ -457,7 +443,7 @@ class SignUp extends Component {
             <p> By clicking on Sign up, you agree to Spotify's <a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions</a>.</p>
             <p> To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's
                 <a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy</a>.</p>
-            <button className="my-spotify-button" id="sign-up" type="button" onClick={this.signUpHandler}>SIGN UP</button>
+            <button className="my-spotify-button" id="sign-up" type="submit" onClick={this.signUpHandler}>SIGN UP</button>
            
             <h6>Already have an account? <Link to="/login">Log in</Link>.</h6>
             <br></br>

@@ -50,13 +50,17 @@ import UpgradeArtist from './Components/Artist/UpgradeArtist/UpgradeArtist'
 import ArtistSelector from './Components/Artist/ArtistSelector'
 import ProfileContextProvider from './Context/ProfileContext';
 import {ProtectedRoute} from './ProtectedRoute/ProtectedRoute'
+import ConfigContextProvider from './Context/ConfigContext.js';
 function App() {
 
   return (
     
     <Router>
+      <ConfigContextProvider>
+      <ProfileContextProvider>
       <Navbar/>
-     <ProfileContextProvider>
+      
+     
 
     
       <Switch>
@@ -99,6 +103,7 @@ function App() {
       </Switch>
       </ProfileContextProvider>
       <Footer/>
+      </ConfigContextProvider>
     </Router>   
     
   );
