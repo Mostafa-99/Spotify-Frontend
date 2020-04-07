@@ -17,7 +17,7 @@ export class premiumCode extends Component {
     /**
      * sends subscription code to the user's email
      */
-    sendMail = () => {
+    sendMail(){
         console.log(localStorage);
         axios.post(this.context.baseURL+'/me/premium',
                 {
@@ -110,7 +110,7 @@ export class premiumCode extends Component {
                 <div className="second-part">
                     <div className="box-div">
                         <div className="form-group">
-                        <button id="pcp-send-mail-button" onClick={this.sendMail} type="button" className="btn btn-success btn-block">GET CODE</button>
+                        <button id="pcp-send-mail-button" onClick={this.sendMail()} type="button" className="btn btn-success btn-block">GET CODE</button>
                             <label htmlFor="formGroupExampleInput">Subscription code</label>
                             <input value={this.state.code} onChange={this.onChange} type="text" name="code" className="form-control" id="formGroupExampleInput" placeholder="XXXX"/>
                         </div>
