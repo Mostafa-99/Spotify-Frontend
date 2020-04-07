@@ -81,27 +81,3 @@
 #webplayer-home .play-btn:hover, #webplayer-home .pause-btn:hover {
     transform: scale(1.1);
 }
-#webplayer-home .title-and-view-all{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-#webplayer-home .view-all{
-    text-decoration: none;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 700;
-    letter-spacing: 1.76px;
-    text-transform: uppercase;
-    border-right: 10px;
-    background: transparent;
-    color: #b3b3b3;
-    white-space: nowrap;
-    margin: 35px 35px 0 ;
-}
-#webplayer-home .view-all:hover{
-    text-decoration: underline;
-}
-#webplayer-home .hide{
-    display: none;
-}
