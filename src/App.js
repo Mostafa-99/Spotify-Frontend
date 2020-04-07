@@ -51,13 +51,14 @@ import ArtistSelector from './Components/Artist/ArtistSelector'
 import ProfileContextProvider from './Context/ProfileContext';
 import ConfigContextProvider from './Context/ConfigContext'
 import {ProtectedRoute} from './ProtectedRoute/ProtectedRoute'
+
 function App() {
 
   return (
     
     <Router>
       <ConfigContextProvider>
-     <ProfileContextProvider>
+      <ProfileContextProvider>
       <Navbar/>
 
     
@@ -100,6 +101,7 @@ function App() {
        
         <Route path="*" exact component={()=>"404 NOT FOUND"} />
       </Switch>
+      
       <Footer/>
       </ProfileContextProvider>
       </ConfigContextProvider>

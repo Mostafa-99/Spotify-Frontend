@@ -17,10 +17,21 @@ class ProfileContextProvider extends Component {
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
           {
-            axios.get(this.context.baseURL+'/users/1/')
+              console.log(this.context.baseURL)
+            axios.get(this.context.baseURL+'/users/1')
             .then(res => {
               this.setState({user: res.data})
             })
+            if(this.state.user!==null)
+            {
+               
+                if(this.state.user.image==="")
+                {
+                    let usercopy=JSON.parse(JSON.stringify(this.state.user))
+                    usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
+                    this.setState({user:usercopy})
+                }
+            }
           } 
     }
 
@@ -30,11 +41,22 @@ class ProfileContextProvider extends Component {
           if(show==="true" && this.state.status==="not connected")
           {
             this.setState({status:"connected"})
-            axios.get(this.context.baseURL+'/users/1/')
+            axios.get(this.context.baseURL+'/users/1')
             .then(res => {
               this.setState({user: res.data})
             })
+            if(this.state.user!==null)
+            {
+               
+                if(this.state.user.image==="")
+                {
+                    let usercopy=JSON.parse(JSON.stringify(this.state.user))
+                    usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
+                    this.setState({user:usercopy})
+                }
+            }
           }
+
     }
 
     render(){

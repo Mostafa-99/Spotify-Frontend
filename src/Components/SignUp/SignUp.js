@@ -40,56 +40,35 @@ class SignUp extends Component {
         
         window.FB.login(function(response) {
             if (response.status === 'connected') {
-                                // let fbtoken=response.authResponse.accessToken;
-                                // let fbuserID=response.authResponse.userID;
-                                //     axios.post(ConfigContext.state.baseURL+'loginWithFacebook',
-                                // {
-                                // "access token":fbtoken,
-                                // "facebook id":fbuserID
-                                // }
-                                // )   
-                                // .then(res => {
-                                //     if(res.status===200) // Successful
-                                //     {
-
-                                //         if(res.success===true || res.success==="true")
-                                //         {
-                                //             localStorage.setItem("isLoggedIn",'true');
-                                //             localStorage.setItem("token",res.token);
-                                //             localStorage.setItem("loginType", "fb");
-                                //             this.setState({status: 'connected'});
-                                //             window.location.reload(false);
-                                //         }
-                                        
-                                //     }
-                                //     else // Unsuccessful
-                                //     {
-                                //         if(this.state.status!=="invalid")
-                                //         this.setState({status: 'invalid'});
-                                //     }
-                                    
-                                //    }).catch(
-                                //         err =>{
-                                //     alert(err.status + ": "+ err.message);
-                                //     this.setState({status: 'invalid'});
-                                // });
-
-                this.setState({status: response.status})
-                localStorage.setItem("loginType", "fb");
-                localStorage.setItem("isLoggedIn", 'true');
-                localStorage.setItem("token", response.authResponse.accessToken);
-                localStorage.setItem("userID", response.authResponse.userID);
-                console.log(localStorage);
-                console.log(response);
-                window.location.reload(false);
+                        let fbtoken=response.authResponse.accessToken;
+                        let fbuserID=response.authResponse.userID;
+                            axios.post(this.context.baseURL+'/loginWithFacebook',
+                        {
+                        "access token":fbtoken,
+                        "facebook id":fbuserID
+                        }
+                        )   
+                        .then(res => {
+                            if(res.status===200) // Successful
+                            {
+                                if(res.data.success===true || res.data.success==="true")
+                                {
+                                    localStorage.setItem("isLoggedIn",'true');
+                                    localStorage.setItem("token",res.data.token);
+                                    localStorage.setItem("loginType", "fb");
+                                    localStorage.setItem("userID", response.authResponse.userID);
+                                    this.setState({status: 'connected'});
+                                   // window.location.reload(false);
+                                }
+                            }
+                            else // Unsuccessful
+                            {  
+                                alert(res.data.message)
+                            }   
+                            })
+                //window.location.reload(false);
                 
-              } else {
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");              
-              }
-              console.log(response);
+              } 
           }.bind(this), {scope: 'public_profile,email'});
        
     }
@@ -143,7 +122,7 @@ class SignUp extends Component {
 
     signUpHandler = event=> {
     
-        //event.preventDefault();
+        event.preventDefault();
         let sendDate=this.state.year+"-"+this.state.month+"-"+this.state.day;
         if(this.state.email==="" && this.state.emptyemail===false)
             this.setState({emptyemail: true});
@@ -164,12 +143,11 @@ class SignUp extends Component {
             this.setState({yearerror: true});
         if(this.state.gender==="" && this.state.gendererror===false)
             this.setState({gendererror: true});
-            console.log(sendDate)
 
         if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='')
         {
-            console.log(this.context.baseURL)
-            axios.post('http://138.91.114.14/signUp',
+
+            axios.post(this.context.baseURL+'/signUp',
             {   
                 "email":this.state.email,
                 "password":this.state.password,
@@ -178,7 +156,6 @@ class SignUp extends Component {
                 "dateOfBirth":sendDate,   
             })   
             .then(res => {
-                console.log(res);
                 if(res.status===200) // Successful
                 {
                     if(res.data.success===true || res.data.success==="true")
@@ -186,20 +163,23 @@ class SignUp extends Component {
                         localStorage.setItem("isLoggedIn",'true');
                         localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
-                        this.setState("connected");
-                        window.location.reload(false);
+
+                        this.setState({status: 'connected'});
+                        //window.location.reload(false);
                     }
                 }
                 else // Unsuccessful
                 {
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("loginType");
-                    alert(res.message);
+                    if(res.status===400)
+                    {
+                    if(this.state.status!=="invalid")
+                    this.setState({status: 'invalid'});
+                    }
+                    else
+                    alert(res.data.message)
+                    
                 }
                })
-            .catch(() =>{ 
-                alert("Server error sign up again");});
         }
     }
 
@@ -302,18 +282,12 @@ class SignUp extends Component {
           this.setState({status:"not connected"})
     }
 
-    componentDidUpdate(){
-        
-        console.log(this.state)
-
-    }
-
     render(){
     return (
         <div id="my-sign-up">
             {this.state.status==="connected" ?
             <div>
-                <Redirect to="/home"/>
+                <Redirect to="/"/>
             </div>
             :
             <div>
@@ -329,7 +303,7 @@ class SignUp extends Component {
                 </div>
             {this.state.status==="invalid"?
             <div id="invalid-message">
-            Email or username already taken.
+            Email already taken.
             </div>
             :
             <div>

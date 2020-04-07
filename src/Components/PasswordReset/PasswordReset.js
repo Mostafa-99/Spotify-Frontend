@@ -17,11 +17,9 @@ class PasswordReset extends Component {
 
     resetPassowrd = event=> {
         event.preventDefault();
-        console.log(this.state)
-        console.log(this.validateEmail(this.state.email))
         if(this.validateEmail(this.state.email))
         {
-            axios.post(ConfigContext.state.baseURL+'/resetPassword/',
+            axios.post(this.context.baseURL+'/resetPassword',
             {
             "email":this.state.email
             }
@@ -30,17 +28,13 @@ class PasswordReset extends Component {
                 if(res.status===200 || res.status===204) // Successful
                 {
                         this.setState({status: 'done'});
-                        window.location.reload(false);
-
+                        
                 }
                 else // Unsuccessful
                 {
                     this.setState({status: 'not-linked-email'});     
                 }  
-                }).catch(
-                    err =>{
-                alert(err.status + ": "+ err.message);
-            });
+                })
         }
         else{
             if(this.state.email==="")
@@ -52,7 +46,6 @@ class PasswordReset extends Component {
                     this.setState({status: 'invalid-email'});    
                 }
          }
-
     }
 
     componentDidMount =()=>{
@@ -114,7 +107,7 @@ class PasswordReset extends Component {
                         <div>
                         </div>
                         }
-                    <button className="my-spotify-button" onClick={this.resetPassowrd}>Send</button>
+                    <button className="my-spotify-button" id="reset-psw-send" onClick={this.resetPassowrd}>Send</button>
                     <h6>If you still need help, contact <a href="https://support.spotify.com/eg-en/contact-spotify-anonymous/?_gl=1*1v0qp34*_gcl_aw*R0NMLjE1ODM3OTg0NTQuQ2owS0NRancwcGZ6QlJDT0FSSXNBTmkwZzB2SU5vSU14WlJ3ZXpOYmswZ0xPZ0V2dFYzZGVfZGtISFhOdDNCNkdXYXdNRm9QcHl6N1hKRWFBb2hZRUFMd193Y0I.*_gcl_dc*R0NMLjE1ODM3OTg0NTQuQ2owS0NRancwcGZ6QlJDT0FSSXNBTmkwZzB2SU5vSU14WlJ3ZXpOYmswZ0xPZ0V2dFYzZGVfZGtISFhOdDNCNkdXYXdNRm9QcHl6N1hKRWFBb2hZRUFMd193Y0I.&_ga=2.208974481.2098539342.1585700220-1802051146.1581535690&_gac=1.150861252.1583798470.Cj0KCQjw0pfzBRCOARIsANi0g0vINoIMxZRwezNbk0gLOgEvtV3de_dkHHXNt3B6GWawMFoPpyz7XJEaAohYEALw_wcB" target="_blank ">Spotify Support.</a></h6>
         
             </div>

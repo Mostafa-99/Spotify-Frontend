@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
-import {ConfigContext} from '../../Context/ConfigContext'
+import { ConfigContext } from '../../Context/ConfigContext'
+import { ProfileContext } from '../../Context/ProfileContext'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import axios from 'axios'
+
 
 const MyMobileNavbar = styled.nav`
 background:black;
@@ -149,46 +150,35 @@ class MobileNavbar  extends Component {
         super()
         
     this.state ={
-        user:{},
         status: 'not connected',
         loginType:''
     }
     }
 
-    componentDidMount =()=>{
-        
-        this.setState(()=> ({}))
-          let show=localStorage.getItem("isLoggedIn");
-          if(show==="true")
-          {
-            let type=localStorage.getItem("loginType");
-            this.setState({status:"connected"})
-            this.setState({loginType: type})
-            axios.get('http://localhost:3000/users/1/')
-            .then(res => {
-              this.setState({user: res.data})
-            })
-          }
-          else
-          {
-            this.setState({status:"not connected"})
-          }
-     
+    componentDidMount = () => {
+
+        this.setState(() => ({}))
+        let show = localStorage.getItem("isLoggedIn");
+        if (show === "true") {
+            let type = localStorage.getItem("loginType");
+            this.setState({ status: "connected" })
+            this.setState({ loginType: type })
+        }
+        else {
+            this.setState({ status: "not connected" })
+        }
     }
 
-    componentDidUpdate=()=>{
+    componentDidUpdate = () => {
 
-          let show=localStorage.getItem("isLoggedIn");
-          if(show==="true" && this.state.status==="not connected")
-          {
-            let type=localStorage.getItem("loginType");
-            this.setState({status:"connected"})
-            this.setState({loginType: type})
-            axios.get('http://localhost:3000/users/1/')
-            .then(res => {
-              this.setState({user: res.data})
-            })
-          }
+        let show = localStorage.getItem("isLoggedIn");
+        if (show === "true" && this.state.status === "not connected") 
+        {
+            let type = localStorage.getItem("loginType");
+            this.setState({ status: "connected" })
+            this.setState({ loginType: type })
+        }
+
     }
 
     logOut= () => {
@@ -205,12 +195,12 @@ class MobileNavbar  extends Component {
           
         }
 
-            this.setState({status:"not connected"})
-            this.setState({loginType: ''})
-            localStorage.setItem("userID", '');
-            localStorage.setItem("isLoggedIn", "false");
-            localStorage.setItem("token", '');
-            localStorage.setItem("loginType", "");
+            this.setState({ status: "not connected" })
+            this.setState({ loginType: '' })
+            localStorage.removeItem("userID");
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("token");
+            localStorage.removeItem("loginType");
             this.togglesidebar();
     }
 
@@ -230,6 +220,12 @@ class MobileNavbar  extends Component {
       }
       render() {
         const logInOrNot = this.state.status;
+        return (
+            <ProfileContext.Consumer>{(profile) => (
+                <ConfigContext.Consumer>{(config) => {
+                    const {user}= profile
+                    //const {baseURL}= config
+                    
     return (
         
         <MyMobileNavbar>
@@ -239,7 +235,7 @@ class MobileNavbar  extends Component {
 
                 <span id="enter" onClick={()=> this.togglesidebar()}><i className="fas fa-2x fa-align-justify white-text"></i></span>
                 {logInOrNot==="connected" ?(
-                <span className="profile-pic" ><img src={this.state.user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
+                <span className="profile-pic" ><img src={user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
                 )
                 :
                 (
@@ -275,9 +271,13 @@ class MobileNavbar  extends Component {
              <div className="black-box"></div> 
              </div>
         </MyMobileNavbar>
-        
-    )
+     )
+    }}
+    </ConfigContext.Consumer>
+    )}</ProfileContext.Consumer>
+);
 }
 }
+
 
 export default MobileNavbar
