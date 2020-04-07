@@ -151,6 +151,7 @@ class MobileNavbar  extends Component {
         
     this.state ={
         status: 'not connected',
+        usern:{},
         loginType:''
     }
     }
@@ -227,7 +228,7 @@ class MobileNavbar  extends Component {
                     //const {baseURL}= config
                     
     return (
-        
+    
         <MyMobileNavbar>
             <div id="my-mob-navbar">
                 <Link to="/" className="navbar-brand"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></Link>
@@ -235,7 +236,7 @@ class MobileNavbar  extends Component {
 
                 <span id="enter" onClick={()=> this.togglesidebar()}><i className="fas fa-2x fa-align-justify white-text"></i></span>
                 {logInOrNot==="connected" ?(
-                <span className="profile-pic" ><img src={user.images[0]} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
+                <span className="profile-pic" ><img src={user.images} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
                 )
                 :
                 (
