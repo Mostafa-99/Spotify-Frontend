@@ -11,7 +11,7 @@ export class Track extends Component {
         "duration_ms":0,
         "minutes":0,
         "seconds":0,
-        "is_playing":Boolean
+        //is_playing":Boolean
     }
 
     componentDidMount(){

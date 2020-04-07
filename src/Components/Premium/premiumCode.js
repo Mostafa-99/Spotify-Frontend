@@ -15,10 +15,16 @@ export class premiumCode extends Component {
      * sends subscription code to the user's email
      */
     sendMail = () => {
-        axios.post('')
+        axios.post('http://localhost:3000/me/premium',{headers:{authorization:localStorage.getItem("token")}})
             .then(res => {
                 if(res.status===204){
                     alert("An email has been sent");
+                }
+                else if(res.status===401){
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
                 }
                 else{
                     alert("Please try again");
@@ -35,11 +41,17 @@ export class premiumCode extends Component {
     checkCode = () => {
         if(this.state.code !== ""){
             let code=this.state.code;
-            console.log(code);
-            axios.post('http://localhost:3000/subscriptionCodes/',{code})
+            //'http://localhost:3000/subscriptionCodes/',{code}
+            axios.post('http://localhost:3000/me/upgrade/'+code,{headers:{authorization:localStorage.getItem("token")}})
             .then(res => {
                 if(res.status===204){
                     alert("Congratulations! You are PREMIUM now.");
+                }
+                else if(res.status===401){
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
                 }
                 else{
                     alert("The subscription code is invalid.");
