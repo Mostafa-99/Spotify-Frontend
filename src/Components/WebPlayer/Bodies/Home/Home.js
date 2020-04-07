@@ -32,8 +32,15 @@ class Home extends Component {
             },
             seeAll:[],
             seeAllHeader:"",
-            
-            
+            test:[{
+                "id":"",
+                "name":"test",    
+            },
+            {
+                "id":"",
+                "name":"test2",
+            }
+        ]          
         }
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
@@ -64,7 +71,6 @@ class Home extends Component {
                         })
                         )
                     })
-                    
                     axios.get("http://138.91.114.14/api/browse/categories/"+this.state.catagories[0].id+"/playlists", {
                         headers: {
                             'authorization': "Bearer "+localStorage.getItem("token"),
@@ -86,6 +92,7 @@ class Home extends Component {
                                     imageUrl:playList.images[0]
                                 })),
                             })
+
                         }
                         else if(res.status === 401)
                         {
@@ -150,10 +157,9 @@ class Home extends Component {
                     console.log("artists",res)
                     this.setState({
                         artists: res.data.data.map( artist => ({
-                            id:artist.id,
+                            id:artist._id,
                             name:artist.name,
-                            imageUrl:artist.images,
-                            type:artist.type
+                            imageUrl:artist.images[0],
                         }))
                     })
                 }
@@ -382,7 +388,7 @@ class Home extends Component {
                         imageUrl:album.images
                     }))
                 })
-            })*/
+            })
             axios.get("http://www.mocky.io/v2/5e7f9ddb2f00005a4cbac4bb")
             .then(res => {
                 this.setState({
@@ -393,7 +399,7 @@ class Home extends Component {
                         type:artist.type
                     }))
                 })
-            })                                           
+            }) */                             
     }
     
         togglePlayPause(sid) {
@@ -432,13 +438,14 @@ class Home extends Component {
     }
     render()
     {
-        console.log(localStorage);
         {document.title ="Spotify - Home"}
     return(
         
         <div id='webplayer-layout'className="container webplayer col-12">
         <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/></head>
         <div className="row webplayer-body m-0">
+        
+
             <nav className="col-lg-2 webplayer-sidebar-body colums-no-padding">
                 <SideBar/>
             </nav>
@@ -560,7 +567,11 @@ class Home extends Component {
                 </div>
             </div>
             <div className="popular-albums-section">
-                            <h2 className="section-title popular-albums">category1</h2>
+                            {this.state.catagories.slice(0,1).map( category => (
+                                <h2 className="section-title popular-albums">
+                                    {category.name}
+                                </h2>  
+                            ))}
                 <div className="card-group">
                     {this.state.firstCategory.map( playlist => (
                         <div>
@@ -593,7 +604,11 @@ class Home extends Component {
                 </div>
             </div>
             <div className="popular-albums-section">
-                            <h2 className="section-title popular-albums">category2</h2>
+            {this.state.catagories.slice(1,2).map( category => (
+                                <h2 className="section-title popular-albums">
+                                    {category.name}
+                                </h2>  
+                            ))}
                 <div className="card-group">
                     {this.state.secondCategory.map( playlist => (
                         <div>
@@ -646,7 +661,7 @@ class Home extends Component {
                                 <img src={artist.imageUrl[0].url} className="card-img-top rounded-circle" alt="..."></img>
                                         <div className="card-body">
                                             <h5 className="card-title">{artist.name}</h5>
-                                            <p className="card-text">{artist.type}</p>
+                                            <p className="card-text">artist</p>
                                             <div id={artist.id}>
                                                 <button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-play"></i></button>
                                                 <button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-pause"></i></button>

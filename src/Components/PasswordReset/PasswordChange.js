@@ -70,6 +70,9 @@ export default class PasswordChange extends Component {
                             this.setState({status: 'done'});
                             
                     } 
+                    }).catch(err =>{
+
+                        alert(err)
                     })
                 //console.log(mytoken);
             }

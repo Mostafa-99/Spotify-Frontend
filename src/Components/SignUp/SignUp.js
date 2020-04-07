@@ -44,7 +44,7 @@ class SignUp extends Component {
                         let fbuserID=response.authResponse.userID;
                             axios.post(this.context.baseURL+'/loginWithFacebook',
                         {
-                        "access token":fbtoken,
+                        "access_token":fbtoken,
                         "facebook id":fbuserID
                         }
                         )   
@@ -65,6 +65,9 @@ class SignUp extends Component {
                             {  
                                 alert(res.data.message)
                             }   
+                            }).catch(err =>{
+
+                                alert(err)
                             })
                 //window.location.reload(false);
                 
@@ -179,6 +182,15 @@ class SignUp extends Component {
                     alert(res.data.message)
                     
                 }
+               }).catch(err => {
+                if(err.status===400)
+                {
+                if(this.state.status!=="invalid")
+                    this.setState({status: 'invalid'});
+                }
+                else
+                alert(err)
+
                })
         }
     }

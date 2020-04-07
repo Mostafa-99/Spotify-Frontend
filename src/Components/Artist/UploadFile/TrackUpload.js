@@ -21,14 +21,14 @@ const TrackUpload = () => {
     const onSubmit = async e => {
         e.preventDefault();
         const formData = new FormData();
+        formData.append("name", fileName);
         formData.append("trackAudio", file);
         
         console.log(formData.form);
         try {
-            const res = await axios.post("me/albums/", formData, {
+            const res = await axios.post("http://138.91.114.14/api/me/albums/5e8ca99d53ea29db54a3942c", formData, {
                 headers: {
-                    "authorization":localStorage.getItem('token'),
-                    "Content-Type": "multipart/form-data"
+                    "authorization":"Bearer "+localStorage.getItem('token'),
                 },
                 onUploadProgress: progressEvent => {
                     setUploadPercentage(

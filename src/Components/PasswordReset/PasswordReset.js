@@ -35,6 +35,10 @@ class PasswordReset extends Component {
                 {
                     this.setState({status: 'not-linked-email'});     
                 }  
+                }).catch(err =>{
+                    if(err.status===400 || err.status===401)
+                        this.setState({status: 'not-linked-email'});   
+                    alert(err)
                 })
         }
         else{
