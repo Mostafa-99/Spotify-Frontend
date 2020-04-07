@@ -4,7 +4,7 @@ import HomeNavBar from './../Home/HomeNavBar.js'
 import SideBar from './../../SideBar.js'
 import TracksList from './TracksList.js'
 import Album_Image from './../../../../Images/albumImage.jpg'
-
+import {ConfigContext} from '../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
 
 /**
@@ -12,6 +12,7 @@ import './AlbumWebPlayer.css'
  * @extends Component
  */
 export class AlbumWebPlayer extends Component {
+    static contextType=ConfigContext;
 
     audio=new Audio();
     state={
@@ -72,7 +73,7 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumDetails(){
        //http://localhost:3000/albums/1
-        axios.get('http://we871.mocklab.io/albums/'+this.state.myId,{
+        axios.get(this.context.baseURL+'/albums/'+this.state.myId,{
             headers:{
                 'Content-Type':'application/json',
                 'authorization':localStorage.getItem("token")
@@ -109,7 +110,7 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumTracks(){
         //'http://localhost:3000/album_tracks/1'
-        axios.get('http://we871.mocklab.io/albums/'+this.state.myId+'/tracks',{
+        axios.get(this.context.baseURL+'/albums/'+this.state.myId+'/tracks',{
             headers:{
                 'Content-Type':'application/json',
                 'authorization':localStorage.getItem("token")
