@@ -163,6 +163,7 @@ class ArtistWebPlayer extends Component {
                             type:relatedArtist.role
                         }))
                     })
+                    console.log("hereeee",this.state.relatedArtists.imageUrl);
                 }
                 else if(res.status===401)
                 {
