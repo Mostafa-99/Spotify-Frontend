@@ -18,11 +18,10 @@ export class premiumCode extends Component {
      * sends subscription code to the user's email
      */
     sendMail = () => {
-        console.log(localStorage.getItem("token"));
+        console.log(localStorage);
         axios.post(this.context.baseURL+'/me/premium',
                 {
-                    headers:{'authorization':"Bearer "+localStorage.getItem("token"),
-                    'contentType': "application/json"
+                    headers:{'authorization':"Bearer "+localStorage.getItem("token")
                     }
                     
                 })
@@ -51,12 +50,13 @@ export class premiumCode extends Component {
     checkCode = () => {
         if(this.state.code !== ""){
             let code=this.state.code;
+            console.log(localStorage);
+
             //'http://localhost:3000/subscriptionCodes/',{code}
             axios.post(this.context.baseURL+'/me/upgrade/'+{code},
               {
                     headers:{
-                     'authorization':"Bearer "+localStorage.getItem("token"),
-                     'contentType': "application/json"
+                     'authorization':"Bearer "+localStorage.getItem("token")               
                      }
                    
                 }
@@ -76,7 +76,7 @@ export class premiumCode extends Component {
                 }
             })
             .catch(error => {
-                alert(error.response.data.message);
+                console.log(error);
             })
         }
         else{
