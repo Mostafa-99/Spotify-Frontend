@@ -84,9 +84,9 @@ export class AlbumWebPlayer extends Component {
                 console.log("Album details")
                 console.log(res)
                 this.setState({
-                    album_image_url:res.data.album.images,
-                    album_name:res.data.album.name,
-                    artists:res.data.album.artists.name,
+                    album_image_url:res.data.data.album.images,
+                    album_name:res.data.data.album.name,
+                    artists:res.data.data.album.artists.name,
                     is_liked:false //get from backend
                 })
             }
@@ -120,7 +120,7 @@ export class AlbumWebPlayer extends Component {
             if(res.status===200){
                 console.log("Album details")
                 console.log(res)
-                this.setState({tracks:res.data.tracksArray})
+                this.setState({tracks:res.data.data.tracksArray})
             }
             else if(res.status===401){
                 localStorage.removeItem("loginType");
