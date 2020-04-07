@@ -26,7 +26,7 @@ const TrackUpload = () => {
         
         console.log(formData.form);
         try {
-            const res = await axios.post("http://138.91.114.14/api/me/albums/5e8cd05a9d28027e3d165a5d", formData, {
+            const res = await axios.post("http://138.91.114.14/api/me/albums/5e8cd05a9d28027e3d165a5d/tracks", formData, {
                 headers: {
                     "authorization":"Bearer "+localStorage.getItem('token'),
                 },
