@@ -566,7 +566,7 @@
       "total": 18
     }
   ],
-  "album": [
+  "albums": [
     {
       "albumType": "\"compilation\"",
       "artists": [
@@ -611,7 +611,7 @@
       "id": "1",
       "images": "https://i.scdn.co/image/ab67616d0000b2732c5b24ecfa39523a75c993c4",
       "label": "string",
-      "name": "Low roar",
+      "name": "Global Warming",
       "popularity": 13490,
       "releaseDate": "1981-11-5",
       "total_tracks": 0,

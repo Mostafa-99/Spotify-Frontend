@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../SignUp/sign_up.css';
 import spotify_black_logo from '../../Images/spotify_logo_black.png';
 import '../Button/spotify_button.css';
+import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
 //import { buildQueries } from '@testing-library/react';
@@ -9,8 +10,8 @@ import {Link,Redirect} from 'react-router-dom'
 
 
 class LogIn extends Component {
-    
-    
+    static contextType=ConfigContext;
+
     constructor() {
         super()
         
@@ -32,61 +33,39 @@ class LogIn extends Component {
         
         window.FB.login(function(response) {
             if (response.status === 'connected') {
-                                // let fbtoken=response.authResponse.accessToken;
-                                // let fbuserID=response.authResponse.userID;
-                                //     axios.post('http://localhost:3000/loginWithFacebook/',
-                                // {
-                                // "access token":fbtoken,
-                                // "facebook id":fbuserID
-                                // }
-                                // )   
-                                // .then(res => {
-                                //     if(res.status===200) // Successful
-                                //     {
-                                        
-                                //         if(res.success===true || res.success==="true")
-                                //         {
-                                //             localStorage.setItem("isLoggedIn",'true');
-                                //             localStorage.setItem("token",res.token);
-                                //             localStorage.setItem("loginType", "fb");
-                                //             this.setState({status: 'connected'});
-                                //             window.location.reload(false);
-                                //         }
-                                        
-                                //     }
-                                //     if(res.status===304) // Unsuccessful
-                                //     {
-                                //         if(this.state.status!=="invalid")
-                                //         this.setState({status: 'invalid'});
-                                //     }
-                                    
-                                //    }).catch(
-                                //         err =>{
-                                //     alert(err.status + ": "+ err.message);
-                                //     this.setState({status: 'invalid'});
-                                // });
-
-                this.setState({status: response.status})
-                localStorage.setItem("loginType", "fb");
-                localStorage.setItem("isLoggedIn", 'true');
-                localStorage.setItem("token", response.authResponse.accessToken);
-                localStorage.setItem("userID", response.authResponse.userID);
-                console.log(localStorage);
-                console.log(response);
-                window.location.reload(false);
-                
-              } else {
-                localStorage.setItem("loginType", "");
-                localStorage.setItem("isLoggedIn", 'false');
-                localStorage.setItem("token", '');
-                localStorage.setItem("userID", '');              
+                let fbtoken=response.authResponse.accessToken;
+                let fbuserID=response.authResponse.userID;
+                    axios.post(this.context.baseURL+'/loginWithFacebook',
+                {
+                "access token":fbtoken,
+                "facebook id":fbuserID
+                }
+                )   
+                .then(res => {
+                    if(res.status===200) // Successful
+                    {
+                        if(res.data.success===true || res.data.success==="true")
+                        {
+                            localStorage.setItem("isLoggedIn",'true');
+                            localStorage.setItem("token",res.data.token);
+                            localStorage.setItem("loginType", "fb");
+                            localStorage.setItem("userID", response.authResponse.userID);
+                            this.setState({status: 'connected'});
+                            //window.location.reload(false);
+                        }
+                    }
+                    else // Unsuccessful
+                    {
+                            alert(res.data.message)
+                    }   
+                    })
+                    //window.location.reload(false); 
               }
-              console.log(response);
           }.bind(this), {scope: 'public_profile,email'});
     } 
 
     componentDidMount =()=>{
-        console.log(localStorage);
+
         this.setState(()=> ({}))
         
           let show=localStorage.getItem("isLoggedIn");
@@ -96,27 +75,38 @@ class LogIn extends Component {
             else  
           this.setState({status:"not connected"})
        
-        console.log(this.state.status)
     }
 
     validateEmail(email) {
+        if(this.state.emptyemail===true)
+            this.setState({emptyemail: false});
         return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
     validatePassword(psw) {
+        if(this.state.emptypass===true)
+         this.setState({emptypass: false});
+
         return psw && psw.length >= 6
     }
 
     handleLogin = event=> {   
-        //event.preventDefault();
+        event.preventDefault();
         const user={email:this.state.email,password:this.state.password}
         const memail = user.email;
         const mpsw = user.password;
         const is_email_valid = this.validateEmail(memail);
         const is_psw_valid = this.validatePassword(mpsw);
+
+        if((this.state.user.email==="" && this.state.emptyemail===false) || !is_email_valid)
+            this.setState({emptyemail: true});
+        if((this.state.user.password==="" && this.state.emptypass===false) || !is_psw_valid)
+            this.setState({emptypass: true});
+
         if(is_email_valid && is_psw_valid)
         {
-            axios.post('http://localhost:3000/signIn/',
+            console.log(this.context.baseURL+'/signIn');
+            axios.post(this.context.baseURL+'/signIn',
             {
             "email":memail,
             "password":mpsw
@@ -125,28 +115,27 @@ class LogIn extends Component {
             .then(res => {
                 if(res.status===200) // Successful
                 {
-                    if(res.success===true)
+                    if(res.data.success===true)
                     {
                         localStorage.setItem("isLoggedIn",'true');
-                        localStorage.setItem("token",res.token);
+                        localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
                         this.setState({status: 'connected'});
-                        window.location.reload(false);
+                       // window.location.reload(false);
                     }  
                 }
-                if(res.status===304) // Unsuccessful
+                else
+                {
+                if(res.status===401) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")
                     this.setState({status: 'invalid'});
-                }
-                
-                }).catch(
-                    err =>{
-                alert(err.status + ": "+ err.message);
-                this.setState({status: 'invalid'});
-            });
-        }
-        
+                }else
+                alert(res.data.message)
+
+                 }
+                })
+        } 
     }
 
     handlePasswordChange = event=> {
@@ -183,7 +172,7 @@ class LogIn extends Component {
         <div id="my-sign-up">
             {logInOrNot==="connected" ? (
             <div>
-            <Redirect to="/home"/>
+            <Redirect to="/"/>
             </div>
             )
             :
@@ -219,7 +208,7 @@ class LogIn extends Component {
 
             {this.state.emptyemail===true?
             <div id="empty-email" className="error-message">
-            Please enter your Spotify email address.
+            Please enter a valid Spotify email address.
             </div>
             :
             <div>
@@ -230,7 +219,7 @@ class LogIn extends Component {
 
             {this.state.emptypass===true?
             <div id="empty-pass" className="error-message">
-            Please enter your password.
+            Please enter a valid password. (Minimum Length=8)
             </div>
             :
             <div>
@@ -243,7 +232,7 @@ class LogIn extends Component {
                 <label className="custom-control-label" htmlFor="defaultUnchecked">Remember me</label>
             </div>
 
-            <button id="login" type="submit" className="my-spotify-button" onClick={this.handleLogin}>LOG IN</button>
+            <button id="login" type="button" className="my-spotify-button" onClick={this.handleLogin}>LOG IN</button>
             <br/>
             <Link to="/password-reset">Forgot your password?</Link>
             <hr/><br/>

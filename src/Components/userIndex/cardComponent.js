@@ -1,9 +1,11 @@
 import React, {Component} from "react"
 import "./userIndex.css"
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+import {ConfigContext} from '../../Context/ConfigContext'
 
 class CardComponent extends Component {
-
+    static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
@@ -17,11 +19,9 @@ class CardComponent extends Component {
 // URL?_limit=6,-popularity
 // to get 6  most popular descendingly  
 // Remove Comments when integrating 
-    componentDidMount() {
+  /*componentDidMount() {
             axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/track?_limit=6 " )
             .then(res => {
-              /*if(res.status===200)
-              { */
                      this.setState({
                     playlists: res.data.map( playlist => ({
                         id:playlist.id,
@@ -31,29 +31,61 @@ class CardComponent extends Component {
                         href:playlist.tracks.href
                     }))
                 })
-            })
-           /* }
-                else{
-                    alert("Error.");
-                }
-            }) 
-            .catch(error => {
-                alert(error.response.data.message);
             }) */
+        
+          componentDidMount() {
+                const AuthStr=localStorage.getItem('token');
+                console.log(this.context.baseURL+"/playlists/top");
+                console.log("authorization:"+localStorage.getItem("token"));
+                axios.get(this.context.baseURL+"/playlists/top",
+                {
+                    headers:{'authorization':"Bearer "+AuthStr},
+                    query:{
+                        limit:6,
+                        sort:'-popularity&-createdAt'
+                    }
+                    }
+                 )
+                .then(res => {
+                  if(res.status===200)
+                  { 
+                      console.log(res);
+                         this.setState({
+                            playlists: res.data.data.playlist.map( playlist => ({
+                            id:playlist.id,
+                            title:playlist.name,
+                            artist:playlist.owner[0].name,
+                            imageUrl:playlist.images,
+                            href:playlist.tracks.href
+                        }))
+                    }) }          
+                    else if (res.status===401)
+                    {
+                        localStorage.removeItem("loginType");
+                        localStorage.removeItem("isLoggedIn");
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("userId");   
+                    }
+                    else{
+                        alert("Error.");
+                    }
+                }).catch(res=>{
+                    console.log(res);
+                } )
+              
     }
 
     render() {
         return (
-            <div id="lowersection">
+            <div id="lower-section">
              <section>
                  <div className="container" id="low-sec-container">
                      <div className="row" id="row-lower">
                      <h2 className="h1-spotify" id="row-lower-font ">Looking for music?</h2>
                      <p className="lead" id="user-index-lead-1">Start listening to the best new releases.</p>
-                        <a href="https://open.spotify.com/browse" >
-                         <button id="launch-button">Launch Web Player</button>
-                         </a>
-                        
+                        <Link to="/home">
+                       <button id="launch-button">Launch Web Player</button>
+                         </Link>
                      </div>
 
                      <div className="row" id="userindexrow3">
@@ -92,6 +124,7 @@ class CardComponent extends Component {
               )
     }
 }
+
 export default CardComponent
 
 

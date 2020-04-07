@@ -227,3 +227,10 @@
     text-transform: none;
     padding-left: 30px;
 }
+
+
+@media only screen and (max-width: 992px) {
+    #artist-buttons{
+        display: none;
+    }
+}

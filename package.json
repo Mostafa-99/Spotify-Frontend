@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/compat-data": "7.8.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.9",
@@ -16,7 +17,7 @@
     "mdbreact": "^4.25.5",
     "mocha": "^7.1.1",
     "react": "^16.13.0",
-    "react-bootstrap": "^1.0.0-beta.17",
+    "react-bootstrap": "^1.0.0",
     "react-contexify": "^4.1.1",
     "react-contextify": "^0.1.0",
     "react-dom": "^16.13.0",
