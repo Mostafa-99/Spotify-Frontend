@@ -45,45 +45,71 @@ class Home extends Component {
             event.preventDefault() })
 
         //browse catagories
-        axios.get("/browse/categories", {
+        axios.get("http://138.91.114.14/api/browse/categories", {
             headers: {
-                "authorization": localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
             },
             params: {
                 limit: 2
             }
         })
             .then(res => {
-                if(res.data.status === 200)
+                if(res.status === 200)
                 {
+                    console.log("categories",res)
                     this.setState({
-                        catagories: res.data.map( category => ({
+                        catagories: res.data.data.map( category => ({
                             id: category.id,
                             name:category.name,
                         })
                         )
                     })
                     
-                    axios.get("/browse/categories/"+this.state.catagories/*[i]*/.id+"/playlists", {
+                    axios.get("http://138.91.114.14/api/browse/categories/"+this.state.catagories[0].id+"/playlists", {
                         headers: {
-                            "authorization": localStorage.getItem("token"),
+                            'authorization': "Bearer "+localStorage.getItem("token"),
                             //category id as path??
                         },
                         params: {
-                            limit: 2
+                            limit: 9
                         }
                     })
                     .then(res => {
-                        if(res.data.status === 200)
+                        if(res.status === 200)
                         {
+                            console.log("category1",res)
                             this.setState({
-                                firstCategory: res.data.map( playList => ({
+                                firstCategory: res.data.data.map( playList => ({
                                     id:playList.id,
                                     title:playList.name,
                                     description: playList.description,
                                     imageUrl:playList.images
                                 })),
-                                secondCategory: res.data.map( playList => ({
+                            })
+                        }
+                        else if(res.status === 401)
+                        {
+                            localStorage.removeItem("loginType");
+                            localStorage.removeItem("isLoggedIn");
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userID");
+                        }
+                    }) 
+                    axios.get("http://138.91.114.14/api/browse/categories/"+this.state.catagories[1].id+"/playlists", {
+                        headers: {
+                            'authorization': "Bearer "+localStorage.getItem("token"),
+                            //category id as path??
+                        },
+                        params: {
+                            limit: 9
+                        }
+                    })
+                    .then(res => {
+                        if(res.status === 200)
+                        {
+                            console.log("category2",res)
+                            this.setState({
+                                secondCategory: res.data.data.map( playList => ({
                                     id:playList.id,
                                     title:playList.name,
                                     description: playList.description,
@@ -91,7 +117,7 @@ class Home extends Component {
                                 }))
                             })
                         }
-                        else if(res.data.status === 401)
+                        else if(res.status === 401)
                         {
                             localStorage.removeItem("loginType");
                             localStorage.removeItem("isLoggedIn");
@@ -110,19 +136,20 @@ class Home extends Component {
             })
 
          //artists   
-         axios.get("/artists", {
+         axios.get("http://138.91.114.14/api/artists", {
             headers: {
-                "authorization": localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
             }
             /*params: {
                 limit: 9 //3wzen n3rf btrg3 kam artist
             }*/
         })
             .then(res => {
-                if(res.data.status === 200)
+                if(res.status === 200)
                 {
+                    console.log("artists",res)
                     this.setState({
-                        artists: res.data.map( artist => ({
+                        artists: res.data.data.map( artist => ({
                             id:artist.id,
                             name:artist.name,
                             imageUrl:artist.images,
@@ -130,7 +157,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.data.status === 401)
+                else if(res.status === 401)
                 {
                     localStorage.removeItem("loginType");
                     localStorage.removeItem("isLoggedIn");
@@ -140,26 +167,27 @@ class Home extends Component {
             })
 
         //recently played
-        axios.get("/me/player/recentlyPlayed", {
+        axios.get("http://138.91.114.14/api/me/player/recentlyPlayed", {
             headers: {
-                "authorization": localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
             },
             params: {
                 limit: 9
             }
         })
             .then(res => {
-                if(res.data.status === 200)
+                if(res.status === 200)
                 {
+                    console.log("recently played",res)
                     this.setState({
-                        recentlyPlayed: res.data.map( playList => ({
+                        recentlyPlayed: res.data.data.map( playList => ({
                             title:playList.context.name,
                             imageUrl:playList.context.image,
                         })
                         )
                     })
                 }
-                else if(res.data.status === 401)
+                else if(res.status === 401)
                 {
                     localStorage.removeItem("loginType");
                     localStorage.removeItem("isLoggedIn");
@@ -169,9 +197,9 @@ class Home extends Component {
             })
 
         //popular albums
-        axios.get("/albums/top",{
+        axios.get("http://138.91.114.14/api/albums/top",{
             headers: {
-                "authorization": localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
             },
             params: {
                 limit: 9,
@@ -179,17 +207,18 @@ class Home extends Component {
             }
         })
             .then(res => {
-                if(res.data.status === 200)
+                if(res.status === 200)
                 {
+                    console.log("popular albums",res)
                     this.setState({
-                        popularAlbums: res.data.map( album => ({
+                        popularAlbums: res.data.data.albums.map( album => ({
                             id:album.id,
                             title:album.name,
                             imageUrl:album.images
                         }))
                     })
                 }
-                else if(res.data.status === 401)
+                else if(res.status === 401)
                 {
                     localStorage.removeItem("loginType");
                     localStorage.removeItem("isLoggedIn");
@@ -199,9 +228,9 @@ class Home extends Component {
             }) 
 
         //most recent albums
-        axios.get("/albums/top",{
+        axios.get("http://138.91.114.14/api/albums/top",{
             headers: {
-                "authorization": localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
             },
             params: {
                 limit: 9,
@@ -209,17 +238,18 @@ class Home extends Component {
             }
         })
             .then(res => {
-                if(res.data.status === 200)
+                if(res.status === 200)
                 {
+                    console.log("most recent albums",res);
                     this.setState({
-                        mostRecentAlbums: res.data.map( album => ({
+                        mostRecentAlbums: res.data.data.albums.map( album => ({
                             id:album.id,
                             title:album.name,
                             imageUrl:album.images
                         }))
                     })
                 }
-                else if(res.data.status === 401)
+                else if(res.status === 401)
                 {
                     localStorage.removeItem("loginType");
                     localStorage.removeItem("isLoggedIn");
@@ -250,7 +280,6 @@ class Home extends Component {
                             description: playList.description
                         }))
                     })
-                    console.log(this.state.popularPlayLists)
                 }
                 else if(res.status === 401)
                 {
@@ -264,7 +293,7 @@ class Home extends Component {
             })
 
         //most recent playlists
-        axios.get("/playlists/top", {
+        axios.get("http://138.91.114.14/api/playlists/top", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
