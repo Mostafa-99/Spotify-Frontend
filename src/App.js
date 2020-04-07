@@ -14,6 +14,7 @@ import HelpPage from './Components/HelpPage/HelpPage.js'
 import AccountSettings from './Components/Profile/AccountSettings.js'
 import EditProfile from './Components/Profile/EditProfile.js'
 import NotificationsSettings from './Components/Profile/NotificationSettings.js';
+import ChangePasswrod from './Components/Profile/ChangePassword';
 
 import PremiumCode from './Components/Premium/premiumCode.js';
 import Premium from './Components/Premium/premium.js';
@@ -67,6 +68,10 @@ function App() {
       <Switch>
         {/*Public pages */}
         <Route path="/help" exact component={HelpPage}/>
+        <Route path="/account-overview" component={AccountSettings}/>
+        <Route path="/edit-profile" component={EditProfile}/>
+        <Route path="/notification-settings" component={NotificationsSettings}/>
+        <Route path="/change-password" component={ChangePasswrod}/>
         <Route path="/signup" exact component={SignUp}/>
         <Route path="/login" exact component={LogIn}/>
         <Route path="/premium" exact component={Premium}/>

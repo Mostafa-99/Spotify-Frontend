@@ -146,6 +146,7 @@ class SignUp extends Component {
 
         if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='')
         {
+
             axios.post(this.context.baseURL+'/signUp',
             {   
                 "email":this.state.email,
@@ -162,6 +163,7 @@ class SignUp extends Component {
                         localStorage.setItem("isLoggedIn",'true');
                         localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
+
                         this.setState({status: 'connected'});
                         //window.location.reload(false);
                     }

@@ -2,9 +2,10 @@ import React, {Component} from "react"
 import "./userIndex.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import {ConfigContext} from '../../Context/ConfigContext'
 
 class CardComponent extends Component {
-
+    static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
@@ -18,7 +19,7 @@ class CardComponent extends Component {
 // URL?_limit=6,-popularity
 // to get 6  most popular descendingly  
 // Remove Comments when integrating 
-  componentDidMount() {
+  /*componentDidMount() {
             axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/track?_limit=6 " )
             .then(res => {
                      this.setState({
@@ -30,24 +31,27 @@ class CardComponent extends Component {
                         href:playlist.tracks.href
                     }))
                 })
-            }) 
+            }) */
         
-       /*   componentDidMount() {
+          componentDidMount() {
                 const AuthStr=localStorage.getItem('token');
-                axios.get("http://138.91.114.14/api/playlists/top",
+                console.log(this.context.baseURL+"/playlists/top");
+                console.log("authorization:"+localStorage.getItem("token"));
+                axios.get(this.context.baseURL+"/playlists/top",
                 {
-                    headers:{AuthStr},
+                    headers:{'authorization':"Bearer "+AuthStr},
                     query:{
                         limit:6,
                         sort:'-popularity&-createdAt'
                     }
-                }
+                    }
                  )
                 .then(res => {
                   if(res.status===200)
                   { 
+                      console.log(res);
                          this.setState({
-                            playlists: res.data.map( playlist => ({
+                            playlists: res.data.data.playlist.map( playlist => ({
                             id:playlist.id,
                             title:playlist.name,
                             artist:playlist.owner[0].name,
@@ -65,7 +69,9 @@ class CardComponent extends Component {
                     else{
                         alert("Error.");
                     }
-                }) */
+                }).catch(res=>{
+                    console.log(res);
+                } )
               
     }
 

@@ -36,7 +36,6 @@ height:60px;
     background-color: black;
     transition-duration: 650ms;
     display:none;
-    
 }
 #my-mob-navbar .active
 {

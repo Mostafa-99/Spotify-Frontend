@@ -15,6 +15,8 @@ class Albums extends Component {
   }
 
   componentDidMount() {
+    console.log("errrrrrr");
+    {/*/me/albums */}
     axios.get("http://www.mocky.io/v2/5e74bc56300000d331a5f62f").then((res) => {
       if (res.status === 200) {
         this.setState({

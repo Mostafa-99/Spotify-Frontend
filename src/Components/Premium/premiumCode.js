@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './premiumCode.css';
+import {ConfigContext} from '../../Context/ConfigContext'
 
 /**
  * Checks subscription code to become a premium user
  * @extends Component
  */
 export class premiumCode extends Component {
+        static contextType=ConfigContext;
+
     state={
         code: ''
     }
@@ -15,7 +18,13 @@ export class premiumCode extends Component {
      * sends subscription code to the user's email
      */
     sendMail = () => {
-        axios.post('http://localhost:3000/me/premium',{headers:{authorization:localStorage.getItem("token")}})
+        console.log(localStorage);
+        axios.post(this.context.baseURL+'/me/premium',
+                {
+                    headers:{'authorization':"Bearer "+localStorage.getItem("token")
+                    }
+                    
+                })
             .then(res => {
                 if(res.status===204){
                     alert("An email has been sent");
@@ -30,8 +39,8 @@ export class premiumCode extends Component {
                     alert("Please try again");
                 }
             })
-            .catch(error => {
-                alert(error.response.data.message);
+            .catch(res => {
+                alert(res);
             })
     }
 
@@ -41,8 +50,17 @@ export class premiumCode extends Component {
     checkCode = () => {
         if(this.state.code !== ""){
             let code=this.state.code;
+            console.log(localStorage);
+
             //'http://localhost:3000/subscriptionCodes/',{code}
-            axios.post('http://localhost:3000/me/upgrade/'+code,{headers:{authorization:localStorage.getItem("token")}})
+            axios.post(this.context.baseURL+'/me/upgrade/'+{code},
+              {
+                    headers:{
+                     'authorization':"Bearer "+localStorage.getItem("token")               
+                     }
+                   
+                }
+            )
             .then(res => {
                 if(res.status===204){
                     alert("Congratulations! You are PREMIUM now.");
@@ -58,7 +76,7 @@ export class premiumCode extends Component {
                 }
             })
             .catch(error => {
-                alert(error.response.data.message);
+                console.log(error);
             })
         }
         else{
