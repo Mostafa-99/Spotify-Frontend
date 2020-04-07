@@ -4,7 +4,7 @@ import SideBar from '../../SideBar'
 import '../Bodies.css';
 import '../../WebplayerHome.css'
 import axios from 'axios'
-
+import {Link} from 'react-router-dom'
 import  './PlaylistContextMenu.css';
 import { theme, animation } from 'react-contexify';
 import { Menu, Item} from 'react-contexify';
@@ -40,6 +40,7 @@ class Home extends Component {
                     madeForYou: res.data.map( playList => ({
                         id: playList.id,
                         title:playList.name,
+                        imageUrl:playList.images,
                         description: playList.description
                     }))
                 })

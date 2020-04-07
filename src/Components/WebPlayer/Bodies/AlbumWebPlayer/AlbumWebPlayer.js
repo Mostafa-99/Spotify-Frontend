@@ -67,27 +67,41 @@ export class AlbumWebPlayer extends Component {
     * Gets album's name,image url and get if the user likes the album
     */
    getAlbumDetails(){
-        axios.get('http://localhost:3000/album/1')
+       //http://localhost:3000/albums/1
+        axios.get('http://localhost:3000/albums/'+this.state.album_id,{headers:{authorization:localStorage.getItem("token")}})
         .then(res => {
-            /*if returns array
-            res.data.map((album)=>(
-                this.setState({album_image_url:album.images}),
-                this.setState({album_name:album.name}),
-                album.artists.map(
-                    (artist)=>(this.setState({artists:artist.name}))
-                )
-            ))
-            */
+            if(res.status===200){  
+                /*if returns array
+                res.data.map((album)=>(
+                    this.setState({
+                    album_image_url:album.images,
+                    album_name:album.name,
+                    is_liked:false //get from backend
+                })
+                    album.artists.map(
+                        (artist)=>(this.setState({artists:artist.name}))
+                    )
+                ))
+                */
 
-           //if object
-            this.setState({
-                album_image_url:res.data.images,
-                album_name:res.data.name,
-                is_liked:false //get from backend
-            })
-            res.data.artists.map((artist)=>(this.setState({artists:artist.name})))
-        }
-        )
+                //if object
+                this.setState({
+                    album_image_url:res.data.images,
+                    album_name:res.data.name,
+                    is_liked:false //get from backend
+                })
+                res.data.artists.map((artist)=>(this.setState({artists:artist.name})))
+            }
+            else if(res.status===401){
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
+            }
+            else{
+                alert("error");
+            }
+        })
         .catch(error => {
             alert(error.response.data.message);
         })
@@ -97,17 +111,29 @@ export class AlbumWebPlayer extends Component {
     * Get album's tracks with their details in an array of objects
     */
    getAlbumTracks(){
-    axios.get('http://localhost:3000/album_tracks/1')
-           .then(res => 
-                /*if returns array
-                res.data.map((album_tracks)=>(
-                    this.setState({tracks:album_tracks.items}))
-                )
-                */
+    //'http://localhost:3000/album_tracks/1'
+    axios.get('http://localhost:3000/albums/'+this.state.album_id+'/tracks',{headers:{authorization:localStorage.getItem("token")}})
+           .then(res => {
+               if(res.status===200){
+                    /*if returns array
+                    res.data.map((album_tracks)=>(
+                        this.setState({tracks:album_tracks.items}))
+                    )
+                    */
 
-                //if object
-                this.setState({tracks:res.data.items})
-           )
+                    //if object
+                    this.setState({tracks:res.data.items})
+                }
+                else if(res.status===401){
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert("error");
+                }
+            })
            .catch(error => {
                alert(error.response.data.message);
            })
@@ -117,6 +143,7 @@ export class AlbumWebPlayer extends Component {
      * toggles is_liked and sends request to backend to update
      */
     likeButtonPressed=()=>{
+        //send request to like
         this.setState(prevState =>({
             is_liked:!prevState.is_liked
         }))

@@ -49,62 +49,66 @@ import PasswordReset from './Components/PasswordReset/PasswordReset.js'
 import UpgradeArtist from './Components/Artist/UpgradeArtist/UpgradeArtist'
 import ArtistSelector from './Components/Artist/ArtistSelector'
 import ProfileContextProvider from './Context/ProfileContext';
+import ConfigContextProvider from './Context/ConfigContext'
+import {ProtectedRoute} from './ProtectedRoute/ProtectedRoute'
+
 function App() {
 
   return (
     
     <Router>
+      <ConfigContextProvider>
+      <ProfileContextProvider>
       <Navbar/>
-     <ProfileContextProvider>
 
     
       <Switch>
+        {/*Public pages */}
         <Route path="/help" exact component={HelpPage}/>
-        <Route path="/account-overview" component={AccountSettings}/>
-        <Route path="/edit-profile" component={EditProfile}/>
-        <Route path="/notification-settings" component={NotificationsSettings}/>
         <Route path="/signup" exact component={SignUp}/>
         <Route path="/login" exact component={LogIn}/>
-        <Route path="/password-reset" exact component={PasswordReset}/>
         <Route path="/premium" exact component={Premium}/>
-        <Route path="/premium-code" exact component={PremiumCode}/>
-        <Route path="/main" exact component={MainIndex}/>
+        <Route path="/password-reset" exact component={PasswordReset}/>
         <Route path="/" exact component={MainSelector}/>
-
         <Route path="/account-help" exact component={AccountHelp} />
         <Route path="/profile-picture" exact component={ProfilePicture} />
         <Route path="/using-spotify-with-facebook" exact component={SpotifyAndFacebook} />
         <Route path="/how-to-log-out" exact component={HowToLogOut} />
         <Route path="/cannot-activate-trial" exact component={CanNotActivatePremiumTrial} />
         <Route path="/change-email-address" exact component={ChangeEmailAddress} />
-
+       
         <Route path="/features-main" exact component={FeaturesMain}/>
         <Route path="/search-feature" exact component={SearchFeature}/>
         <Route path="/your-library-feature" exact component={YourLibraryFeature}/>
         <Route path="/shuffle-play-feature" exact component={ShufflePlayFeature}/>
         <Route path="/artist-profiles-feature" exact component={ArtistProfilesFeature}/>
         <Route path="/videos-feature" exact component={VideosFeature}/>
-
-       {/* <Route path="/artist" exact component={Albums}/>
-        <Route path="/upgrade-to-artist" exact component={UpgradeArtist}/>*/}
-
-        <Route path="/artist" exact component={ArtistSelector}/>
-        <Route path="/artist/track-upload" exact component={TrackUpload}/>
-        <Route path="/artist/create-album" exact component={CreateAlbum}/>
-        <Route path="/artist/album-page" exact component={AlbumPage}/>
-
         <Route path="/home" exact component={Home} />
-        <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
-        <Route path="/search" exact component={Search} />
-
         <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
+        <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
+
+        {/*Protected pages */}
+        <ProtectedRoute path="/edit-profile" component={EditProfile}/>
+        <ProtectedRoute path="/notification-settings" component={NotificationsSettings}/>
+        <ProtectedRoute path="/premium-code" exact component={PremiumCode}/>
+        <ProtectedRoute path="/account-overview" component={AccountSettings}/>
+        <ProtectedRoute path="/artist" exact component={ArtistSelector}/>
+        <ProtectedRoute path="/artist/track-upload" exact component={TrackUpload}/>
+        <ProtectedRoute path="/artist/create-album" exact component={CreateAlbum}/>
+        <ProtectedRoute path="/artist/album-page" exact component={AlbumPage}/>
+
+
+       
+        <Route path="*" exact component={()=>"404 NOT FOUND"} />
       </Switch>
-      </ProfileContextProvider>
       <Footer/>
+
+      </ProfileContextProvider>
+      </ConfigContextProvider>
     </Router>   
     
   );
 }
 
-export default App;
+export default  App;
 
