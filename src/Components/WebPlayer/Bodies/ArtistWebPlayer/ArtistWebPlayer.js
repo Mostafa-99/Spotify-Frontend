@@ -189,8 +189,8 @@ class ArtistWebPlayer extends Component {
                 .then(res => {
                     if(res.status===200)
                 {   
-                    console.log(res);
-                    this.setState({tracks:res.data.items})
+                    console.log("top tracks res ",res);
+                    this.setState({tracks:res.data.data.items})
                 }
                 else if(res.status===401)
                 {

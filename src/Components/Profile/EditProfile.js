@@ -4,8 +4,6 @@ import SideBar from './SideBar';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
-import Footer from '../Footer/Footer.js'
-import Navbar from '../Navigation/Navbar.js'
 import { ConfigContext } from '../../Context/ConfigContext'
 import { ProfileContext } from '../../Context/ProfileContext'
 var today;

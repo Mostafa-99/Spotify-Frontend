@@ -8,10 +8,8 @@ class ProfileContextProvider extends Component {
     static contextType=ConfigContext;
     state={
         userType:'artist',
-        user: {
-            "image":'https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
-        },
-        status:"connected"
+        user: {},
+        status:"not connected"
     }
 
     componentDidMount =()=>{
@@ -35,6 +33,7 @@ class ProfileContextProvider extends Component {
             }
   
             )
+            console.log("User: "+this.state.user);
             if(this.state.user!==null)
             {   
                 let usercopy=JSON.parse(JSON.stringify(this.state.user))
@@ -56,8 +55,10 @@ class ProfileContextProvider extends Component {
     componentDidUpdate=()=>{
 
           let show=localStorage.getItem("isLoggedIn");
+          console.log("User1: "+this.state.user);
           if(show==="true" && this.state.status==="not connected")
           {
+            console.log("User2: "+this.state.user);
             this.setState({status:"connected"})
             console.log(this.context.baseURL)
           axios.get(this.context.baseURL+'/me',{
@@ -67,13 +68,18 @@ class ProfileContextProvider extends Component {
         })
           .then(res => {
               console.log("Response: "+res);
+              console.log("Response data: "+res.data);
             this.setState({user: res.data})
+            console.log("User3: "+this.state.user);
           })
           .catch(err => {
-              alert(err)
+            console.log("Error: "+err);
+            console.log("Error Response data: "+err.response);
+            console.log("User4: "+this.state.user);
           }
 
           )
+          console.log("User5: "+this.state.user);
           if(this.state.user!==null)
           {   
               let usercopy=JSON.parse(JSON.stringify(this.state.user))
@@ -81,7 +87,7 @@ class ProfileContextProvider extends Component {
               //usercopy['image']=this.user.image[0];
              // if(this.state.usercopy.image==="")
               //{
-                console.log("User: "+this.state.user);
+                console.log("User6: "+this.state.user);
                 console.log("User: "+this.state.user[0]);
                   usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
                   this.setState({user:usercopy})
@@ -89,7 +95,7 @@ class ProfileContextProvider extends Component {
              // }
           }
           }
-          console.log("Context Saved Update User: "+this.state.user);
+          console.log("User8: "+this.state.user);
 
     }
 
