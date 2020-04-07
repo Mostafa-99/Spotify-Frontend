@@ -73,7 +73,7 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumDetails(){
        //http://localhost:3000/albums/1
-        axios.get(this.context.baseURL+"/albums/5e8cd05a9d28027e3d165a5e",{
+        axios.get(this.context.baseURL+"/albums/5e8cd05a9d28027e3d165a5f",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -86,9 +86,13 @@ export class AlbumWebPlayer extends Component {
                 this.setState({
                     album_image_url:res.data.data.album.image,
                     album_name:res.data.data.album.name,
-                    artists:res.data.data.album.artists.name,
                     is_liked:false //get from backend
                 })
+                res.data.data.album.artists.map((artist)=>(
+                    this.setState({
+                        artists:artist.name
+                    })
+                ))
             }
             else if(res.status===401){
                 localStorage.removeItem("loginType");
@@ -110,7 +114,7 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumTracks(){
         //'http://localhost:3000/album_tracks/1'
-        axios.get(this.context.baseURL+"/albums/5e8cd05a9d28027e3d165a5e/tracks",{
+        axios.get(this.context.baseURL+"/albums/5e8cd05a9d28027e3d165a5f/tracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
