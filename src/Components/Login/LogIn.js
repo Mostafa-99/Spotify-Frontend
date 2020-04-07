@@ -60,7 +60,7 @@ class LogIn extends Component {
                     }   
                     }).catch(err =>{
 
-                        alert(err.data.message)
+                        alert(err)
                     })
                     //window.location.reload(false); 
               }
@@ -144,7 +144,7 @@ class LogIn extends Component {
                    if(this.state.status!=="invalid")
                     this.setState({status: 'invalid'});
                 }else
-                alert(err.data.message)
+                alert(err)
                 })
         } 
     }
