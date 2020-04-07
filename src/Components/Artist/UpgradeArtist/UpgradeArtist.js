@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./UpgradeArtist.css";
+import { ConfigContext } from '../../../Context/ConfigContext'
+
 class UpgradeArtist extends Component {
+  static contextType=ConfigContext;
+
   state = {
     code: "",
   };
 
   sendMail = () => {
     axios
-      .post("/me/meArtist", {
+      .post(this.context.baseURL+"/me/meArtist",{} ,{
         headers: {
           "authorization":"Bearer "+localStorage.getItem("token"),
         },
@@ -30,7 +34,7 @@ class UpgradeArtist extends Component {
       let code = this.state.code;
       axios
         .post(
-          "/me/upgrade/"+{code},
+          this.context.baseURL+"/me/upgrade/"+{code},{},
           {
             headers: {
               "authorization":"Bearer "+localStorage.getItem("token"),

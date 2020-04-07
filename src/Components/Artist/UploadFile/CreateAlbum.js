@@ -1,11 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import axios from "axios";
 import Message from "./Message";
 import SideBar from "../../Profile/SideBar";
 import "../UploadFile/uploadfile.css";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import Progress from "./Progress";
+import {ConfigContext} from '../../../Context/ConfigContext'
+
 const CreateAlbum = () => {
+  const url = useContext(ConfigContext);
+  console.log(url.baseURL);
   const [albumName, setAlbumName] = useState("Album name");
   const [albumType, setAlbumType] = useState("Album type");
   const [albumGenre, setAlbumGenre] = useState("Album genre");
@@ -53,8 +57,9 @@ const CreateAlbum = () => {
     formData.append("image", img);
 
     try {
+      console.log(this.context.baseURL);
       const res = await axios.post(
-        "http://138.91.114.14/api/me/albums",
+        url.baseURL+"/me/albums",
         formData,
         {
           headers: {
