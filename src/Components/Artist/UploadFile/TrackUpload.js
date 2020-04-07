@@ -8,6 +8,8 @@ import ArtistSidebar from '../SideBar/ArtistSidebar'
 const TrackUpload = () => {
     const [file, setFile] = useState("");
     const [fileName, setFilename] = useState("Choose Track");
+    const [trackName, setTrackName] = useState("Track Name");
+    
     const [uploadedFile, setUploadedFile] = useState({});
     const [message, setMessage] = useState("");
     const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -17,16 +19,19 @@ const TrackUpload = () => {
         setFilename(e.target.files[0].name);
         // console.log(e.target.files[0]);
     };
-
+    const onChangeTrackName = (e) => {
+        setTrackName(e.target.value);
+         console.log(e.target.value);
+      };
     const onSubmit = async e => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append("name", fileName);
+        formData.append("name", trackName);
         formData.append("trackAudio", file);
         console.log(formData);
         console.log(file);
-        console.log(fileName);
-        console.log(formData.form);
+        console.log(trackName);
+//console.log(formData.form);
         try {
             const res = await axios.post("http://138.91.114.14/api/me/albums/5e8cd05a9d28027e3d165a5d/tracks", formData, {
                 headers: {
@@ -68,6 +73,15 @@ const TrackUpload = () => {
                     <ArtistSidebar />
                     <form className="container" onSubmit={onSubmit}>
                         {message ? <Message msg={message} /> : null}
+                        <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="label"
+                placeholder="Track Name"
+                onChange={onChangeTrackName}
+              />
+            </div>
                         <div className="custom-file mb-4 ">
                             <input
                                 type="file"
