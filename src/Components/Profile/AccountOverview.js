@@ -21,10 +21,6 @@ function AccountOverview(props) {
 							<td>{props.info.dateOfBirth}</td>
 
 						  </tr>
-						  <tr>
-						    <th>Country</th>
-							<td>{props.info.country}</td>
-						  </tr>
 					    </table>
 			    	</div>
                     <Link to="/edit-profile"><button className="btn btn-outline-secondary account-overview-buttons">EDIT PROFILE</button></Link>

@@ -3,8 +3,7 @@ import SideBar from './SideBar'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
-import Footer from '../Footer/Footer.js'
-import Navbar from '../Navigation/Navbar.js'
+
 
 class NotificationsSettings extends Component {
     constructor() {
@@ -76,7 +75,6 @@ class NotificationsSettings extends Component {
 
         return(
             <div className="bg-dark-clr">
-                <Navbar/>
             <div id="notifications-settings">
                 <head>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
@@ -151,7 +149,6 @@ class NotificationsSettings extends Component {
                     </div>
                 </div>
             </div>
-            <Footer/>
             </div>
         )
     }

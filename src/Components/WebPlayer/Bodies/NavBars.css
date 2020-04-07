@@ -11,9 +11,10 @@
 }
 
 .root-navbar{
-	padding: 0;
-	margin: 0;
 	background-color:#121212;
+	position: fixed;
+	z-index: 2;
+	width: 100%;
 }
 #root-navbar-container{
 	width: 100%;
@@ -183,3 +184,85 @@
 	top: 0;
 	width: 100%;
   }
+
+  #navbar-login-button{
+	line-height: 18px;
+	width: 16px;
+	font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease 0s;
+    border: 3px solid #fff;
+    color: white;
+    margin: 10px auto 10px auto;
+    border-radius: 500px;
+    padding: 8px 34px;
+    font-weight: 700;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+	font-weight: 700;
+	border: 1px solid transparent;
+	transition-duration: .3s;
+	border-width: 0;
+	text-transform: uppercase;
+	white-space: normal;
+	color: black;
+	box-shadow: 0 0 0 2px #fff inset;
+	background-color: white;
+	transition: all 33ms cubic-bezier(.3,0,0,1);
+	letter-spacing: 1.76px;
+	will-change: transform;
+  }
+
+  #navbar-signup-button{
+	line-height: 18px;
+	width: 16px;
+	font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease 0s;
+    color: white;
+    margin: 10px auto 10px auto;
+    border-radius: 500px;
+    padding: 8px 34px;
+    font-weight: 700;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+	font-weight: 700;
+	border: 1px solid transparent;
+	transition-duration: .3s;
+	border-width: 0;
+	text-transform: uppercase;
+	white-space: normal;
+	color: #fff;
+	box-shadow: 0 0 0 2px transparent inset;
+	background-color: transparent;
+	transition: all 33ms cubic-bezier(.3,0,0,1);
+	letter-spacing: 1.76px;
+	will-change: transform;
+  }
+
+  #navbar-login-button:hover {  
+	transform: scale(1.06);
+	text-decoration: none;
+  }
+
+  #navbar-signup-button:hover {  
+	transform: scale(1.06);
+	text-decoration: none;
+  }
+
+@media only screen and (max-width: 992px) {
+    #navbar-upgrade-button-col{
+        display: none;
+    }
+}
+

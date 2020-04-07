@@ -2,27 +2,24 @@ import React from "react"
 import './Articles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-import Footer from '../../../Footer/Footer.js'
-import Navbar from '../../../Navigation/Navbar.js'
 import SideBar from '../../SideBar/SideBar'
 function ProfilePicture(){
     {document.title ="Profile picture - Spotify"}
     return(
          <div id="body-overrides">
-                <Navbar/>
                 <div className="container body" id="dev-items"> 
                     <SideBar/>
                     <div className="account-help item sections">
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                            <li className="breadcrumb-item">    <Link to="/account-help/" > Account Help    </Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/account-help" > Account Help    </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
                             <h1 id="first-header-art">Profile picture</h1>
                             <ul className="help-art" id="article-header-text">
-                                <li ><p>Set the scene for your <a href="">profile</a> in the app.</p></li>
+                                <li ><p>Set the scene for your <Link to="/account-overview">profile</Link> in the app.</p></li>
                                 <li ><strong>Note:</strong> Make sure your picture doesn’t violate any copyright, trademark, or personal image rights.</li>
                                 <li>Check out our playlist image guidelines.</li>
                             </ul>
@@ -80,7 +77,6 @@ function ProfilePicture(){
                         </div>
                     </div>
                 </div>
-                <Footer/>
         </div>  
     )
 }

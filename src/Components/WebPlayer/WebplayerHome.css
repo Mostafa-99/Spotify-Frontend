@@ -1,6 +1,11 @@
 #webplayer-home{
     background-color: #121212;
 }
+
+#webplayer-home{
+    isolation: isolate;
+    padding-top: 90px;
+}
 #webplayer-home .section-title{
     font-size: 28px;
     line-height: 1.6;

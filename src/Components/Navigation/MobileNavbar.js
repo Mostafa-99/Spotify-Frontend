@@ -24,11 +24,11 @@ height:60px;
 #my-mob-navbar .sidebar
 {
     z-index:2;
-    width:calc (330px+2vw);
+    width: calc(330px+2vw);
     max-width:240px;
     height: 120%;
     margin-top:-50px;
-    margin-left: 400%;
+    margin-left: 200%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: white;
     background-color: black;
@@ -123,6 +123,21 @@ height:60px;
     padding-bottom: 1700px;
     margin-bottom: -1700px;
 }
+@media screen and (max-width: 470px)
+{
+
+    #my-mob-navbar .sidebar
+{
+   max-width:100%;
+    
+}
+
+#my-mob-navbar .sidebar #ul3
+{ 
+    margin-top:32%;
+}
+
+}
 
 `
 
@@ -142,7 +157,6 @@ class MobileNavbar  extends Component {
     componentDidMount =()=>{
         
         this.setState(()=> ({}))
-        console.log(localStorage)
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
           {
@@ -158,12 +172,22 @@ class MobileNavbar  extends Component {
           {
             this.setState({status:"not connected"})
           }
-          console.log(this.state)
+     
     }
 
     componentDidUpdate=()=>{
-        console.log(localStorage)
-        
+
+          let show=localStorage.getItem("isLoggedIn");
+          if(show==="true" && this.state.status==="not connected")
+          {
+            let type=localStorage.getItem("loginType");
+            this.setState({status:"connected"})
+            this.setState({loginType: type})
+            axios.get('http://localhost:3000/users/1/')
+            .then(res => {
+              this.setState({user: res.data})
+            })
+          }
     }
 
     logOut= () => {
@@ -186,6 +210,7 @@ class MobileNavbar  extends Component {
             localStorage.setItem("isLoggedIn", "false");
             localStorage.setItem("token", '');
             localStorage.setItem("loginType", "");
+            this.togglesidebar();
     }
 
     togglesidebar = () => {
@@ -224,22 +249,22 @@ class MobileNavbar  extends Component {
                 <span id="exit"  onClick={()=> this.togglesidebar()}><i className="fas fa-times"></i></span>
                 <div className="collapse navbar-collapse" id="basicExampleNav">'</div>
                 <ul>
-                    <Link  to="/premium"><li className="ul1">Premium</li></Link>
-                    <Link to="/help"><li className="ul1">Help</li></Link>
-                    <li><a className="ul1" href="https://www.spotify.com/eg-en/download/windows/">Download</a></li>    
+                    <Link  to="/premium"><li className="ul1"  onClick={()=> this.togglesidebar()}>Premium</li></Link>
+                    <Link to="/help"><li className="ul1"  onClick={()=> this.togglesidebar()}>Help</li></Link>
+                    <li onClick={()=> this.togglesidebar()}><a className="ul1" href="https://www.spotify.com/eg-en/download/windows/" >Download</a></li>    
                     <li className="ul0">_</li>    
                 </ul>
                 {logInOrNot==="connected" ?(
                     <ul> 
-                    <Link to="/accountoverview"><li className="ul2">Account</li></Link>
+                    <Link to="/account-overview"><li className="ul2"  onClick={()=> this.togglesidebar()}>Account</li></Link>
                     <li className="ul2" onClick={()=> this.logOut()}>Log out</li>
                 </ul>
                 )
                 :
                 (
                 <ul> 
-                    <Link to="/signup"><li className="ul2">Sign up</li></Link>
-                   <Link to="/login"> <li className="ul2">Log in</li></Link>
+                    <Link to="/signup" ><li className="ul2"  onClick={()=> this.togglesidebar()}>Sign up</li></Link>
+                   <Link to="/login"> <li className="ul2"  onClick={()=> this.togglesidebar()}>Log in</li></Link>
                 </ul>
                 )}
                 <ul id="ul3">

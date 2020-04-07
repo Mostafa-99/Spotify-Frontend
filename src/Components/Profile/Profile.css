@@ -183,7 +183,7 @@
   color: #222326;
   padding: 10px 0 10px 5px;
 }
-#edit-profile .combo-box ,#edit-profile .phone-text-box ,#change-password .new-password-text-box ,#change-password .repeat-password-text-box{
+#edit-profile .combo-box , #edit-profile .email-text-box ,#change-password .new-password-text-box ,#change-password .repeat-password-text-box , #change-password .current-password-text-box{
   width:100%;
   padding: 6px 12px;
   font-size: 16px;
@@ -238,6 +238,10 @@ a:hover {
 
 #edit-profile .birthday-inputs{
   display: flex;
+}
+
+#edit-profile .hide, #profile-sidebar .hide{
+  display: none;
 }
 
 #notifications-settings .table td, #notifications-settings .table th {

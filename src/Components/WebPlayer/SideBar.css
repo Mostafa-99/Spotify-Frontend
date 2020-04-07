@@ -4,6 +4,12 @@
   border: border-box;
 }
 
+
+#webplayer-sidebar:not(#create-modal)
+{
+position: fixed;
+z-index: 0;
+}
 #webplayer-sidebar #sidebar-logo.sidebar-logo {
     width:132px;
     /*position: absolute;*/

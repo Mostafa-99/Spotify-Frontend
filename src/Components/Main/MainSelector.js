@@ -6,7 +6,7 @@ class MainSelector extends Component {
     render() {
         return (
             <div>
-            {localStorage.getItem("isLoggedIn")=="true" ?(
+            {localStorage.getItem("isLoggedIn")==="true" ?(
                 <MainIndex/>
             )  : (
                 <Main/>

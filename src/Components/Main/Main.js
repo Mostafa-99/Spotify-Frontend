@@ -1,7 +1,6 @@
 import React from 'react';
 import './main.css'
-import Footer from '../Footer/Footer';
-import Navbar from '../Navigation/Navbar';
+
 import '../Button/spotify_button.css'
 import { Link } from 'react-router-dom';
 
@@ -13,7 +12,6 @@ function Main() {
     <div>
       
     <section id="main-section">
-    <Navbar id="main-navbar"/>
         <div className="bg-img">
             <div className="container">
                 <h1>Music for everyone.</h1>
@@ -24,7 +22,6 @@ function Main() {
         </div> 
         
     </section>
-    <Footer/>   
     </div>
    
   );

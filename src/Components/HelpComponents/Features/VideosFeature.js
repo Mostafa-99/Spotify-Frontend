@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './FeaturesMain.css';
-import Footer from '../../Footer/Footer.js'
-import Navbar from '../../Navigation/Navbar.js'
 import SideBar from '../SideBar/SideBar'
 export class VideosFeature extends Component {
     render() {
         return (
             <div>
-                <Navbar/>
-           
         <div className="container body" id="dev-items"> 
             <SideBar/>
             <div id="features-nav">
-                 <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb" id="help-breadcrumb">
-                        <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                        <li className="breadcrumb-item active" id="typing" aria-current="page">Features</li>
-                    </ol>
-                </nav>
+                <nav aria-label="breadcrumb">
+                        <ol className="breadcrumb" id="article-breadcrumb">
+                            <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/features-main" > Features  </Link> </li>
+                        </ol>
+                    </nav>
                 <div>
                     <h1 className="features-heading">Videos</h1>
                     <p>
@@ -53,7 +49,6 @@ export class VideosFeature extends Component {
                 </div>
             </div>
             </div>
-                <Footer/>
             </div>
         )
     }

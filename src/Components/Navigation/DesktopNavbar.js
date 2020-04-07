@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import '../WebPlayer/Bodies/NavBars.css';
 import axios from 'axios'
 //navbar not fixed anymore
 const MyDesktopNavbar=styled.nav`
 display:flex;
+
 flex-flow: row nowrap;
 justify-content:space-evenly;
 align-items:center;
@@ -80,23 +81,28 @@ z-index:1;
     
 }
 
+#my-desk-navbar .index-fixed{
+    background-color:rgba(0,0,0.0.7);
+    position:fixed;
+}
+
 `
 class DesktopNavbar extends Component {
 
     constructor() {
         super()
-        
+
     this.state ={
         user:{},
         status: 'not connected',
         loginType:''
     }
+
     }
 
     componentDidMount =()=>{
-        
+
         this.setState(()=> ({}))
-        console.log(localStorage)
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
           {
@@ -112,11 +118,22 @@ class DesktopNavbar extends Component {
           {
             this.setState({status:"not connected"})
           }
-          console.log(this.state)
     }
 
     componentDidUpdate=()=>{
-        console.log(localStorage)
+
+        let show=localStorage.getItem("isLoggedIn");
+          if(show==="true" && this.state.status==="not connected")
+          {
+            let type=localStorage.getItem("loginType");
+            this.setState({status:"connected"})
+            this.setState({loginType: type})
+            axios.get('http://localhost:3000/users/1')
+            .then(res => {
+
+              this.setState({user: res.data})
+            })
+          }
         
     }
 
@@ -133,7 +150,7 @@ class DesktopNavbar extends Component {
         {
           
         }
-
+               
             this.setState({status:"not connected"})
             this.setState({loginType: ''})
             localStorage.setItem("userID", '');
@@ -145,7 +162,7 @@ class DesktopNavbar extends Component {
     render(){
         const logInOrNot = this.state.status; 
     return (
-        <MyDesktopNavbar>
+        <MyDesktopNavbar >
 
             <div id="my-desk-navbar">
            <Link to="/"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
@@ -156,7 +173,7 @@ class DesktopNavbar extends Component {
                     <Link to="/premium" className="links">Premium</Link>
                 </li>
                 <li>
-                    <Link to="/help" className="links">Help</Link>
+                    <Link to="/help" className="links" >Help</Link>
                 </li>
                 <li>
                     <a href="https://www.spotify.com/eg-en/download/windows/" className="links">Download</a>
@@ -169,7 +186,7 @@ class DesktopNavbar extends Component {
                    
                 <div className="col-2 right" id="navbar-profile-section" >
                         <div className="dropdown">
-                            <a className="btn dropdown-toggle neg-margin links" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <a className="btn dropdown-toggle neg-margin links" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             <span ><img src={this.state.user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
                             <span className="links">Profile</span>
                                

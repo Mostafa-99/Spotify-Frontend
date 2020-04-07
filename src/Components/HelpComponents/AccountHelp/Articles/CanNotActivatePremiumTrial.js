@@ -2,21 +2,18 @@ import React from "react"
 import './Articles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-import Footer from '../../../Footer/Footer'
-import Navbar from '../../../Navigation/Navbar.js'
 import SideBar from '../../SideBar/SideBar'
 function CanNotActivatePremiumTrial(){
     {document.title ="Can't activate Premium trial - Spotify"}
     return(
     <div id="body-overrides">
-                <Navbar/>
                 <div className="container body" id="dev-items"> 
                     <SideBar/>
                     <div className="account-help item sections">
                         <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" id="article-breadcrumb">
                             <li className="breadcrumb-item"><Link to="/help">Home</Link> </li>
-                            <li className="breadcrumb-item">    <Link to="/account-help/" > Account Help   </Link> </li>
+                            <li className="breadcrumb-item">    <Link to="/account-help" > Account Help   </Link> </li>
                         </ol>
                         </nav>
                         <div className="instructions">
@@ -28,7 +25,6 @@ function CanNotActivatePremiumTrial(){
                         </div>
                     </div>
                 </div>
-                <Footer/>
         </div>  
     )
 }

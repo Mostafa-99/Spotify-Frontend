@@ -2,21 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter} from 'react-router-dom';
 
 // import './index.css';
 // import $ from 'jquery';
 // import SignUp from './Components/SignUp/sign_up.js'
 // import LogIn from './Components/Login/log_in.js'
-// import Navbar from './Components/Navigation/navbar.js'
-// import Footer from './Components/Footer/footer.js'
 // import HelpPage from './Components/HelpPage/HelpPage.js'
 // import './Components/HelpPage/help';
 
 
 
-//ReactDOM.render(<Navbar />, document.getElementById('mynav'));
-ReactDOM.render(<App/>, document.getElementById('mybody'));
-//ReactDOM.render(<Footer />, document.getElementById('myfooter'));
+ReactDOM.render(<BrowserRouter><App/></BrowserRouter>, document.getElementById('mybody'));
+
 
 
 serviceWorker.unregister();

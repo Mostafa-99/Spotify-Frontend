@@ -4,7 +4,9 @@ import './SideBar.css'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import CreatePlaylist from './CreatePlaylist'
 import MyPlaylists from './MyPlaylists'
+
 function SideBar() {
+    const logInOrNot = localStorage.getItem("isLoggedIn");
     return(
     <div>
         <head>
@@ -16,12 +18,12 @@ function SideBar() {
             <meta name="viewport" content="width=900, initial-scale=1, shrink-to-fit=no"></meta>
         </head>
 
-
+        <CreatePlaylist/>
         <nav id='webplayer-sidebar' className='webplayer-sidebar'>
             <div className="container webplayer-sidebar-container">
                 <div className="row-6">
                     <div className="col-2 sidebar-section">
-                        <Link to="/Home"><img id='sidebar-logo' className="sidebar-logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
+                        <Link to="/home"><img id='sidebar-logo' className="sidebar-logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
                         <ul className='sidebar-list'>
                             <Link to="/home" className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-home'><span className="glyphicon glyphicon-home"></span><span className='list-item-text'>Home</span></li></Link>
                             <div to="/search"className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-search'><span className="glyphicon glyphicon-search"></span><span className='list-item-text'>Search</span></li></div>
@@ -29,11 +31,19 @@ function SideBar() {
                         </ul>
                     </div>
                 </div>
+                {logInOrNot==="true" ? (
+                    <div>
                 <div className="row-3 ">
                     <div className="col-2 sidebar-section">
                         <div id='sidebar-list-header' className='sidebar-list-item-header'>PLAYLISTS</div>
                         <ul className='sidebar-list'>
-                            <CreatePlaylist/>
+                            <div id="create-modal">
+                  <button type="button" id="create-playlist" data-toggle="modal" data-target="#static-back-drop">
+                   <li className='sidebar-list-item '>
+                   <i className='fas fa-plus-square' ></i>
+                   <span className='list-item-text'>Create Playlist</span></li>
+                </button> 
+                            </div>
                             <div to="/search"className='text-decoration-none'><li className='sidebar-list-item '><span className="glyphicon glyphicon-heart-empty"></span ><span className='list-item-text'>Liked Songs</span></li></div>
                         </ul>
                     </div>
@@ -42,15 +52,17 @@ function SideBar() {
                     <div className="col-2 sidebar-section sidebar-list-item ">
                         <ul className='sidebar-list'>
                         <hr class="Rootlist__divider" id="horizontal-divider"/>
-                            <MyPlaylists/>
+                             <MyPlaylists/> 
+                           
                         </ul>
                     </div>
                 </div>
+                </div>
+                ):(<div> </div>)}
+                
             </div>
         </nav>    
     </div>     
     )
 }
 export default SideBar;
-
-
