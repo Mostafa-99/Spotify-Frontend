@@ -37,10 +37,10 @@ class CardComponent extends Component {
                 const AuthStr=localStorage.getItem('token');
                 axios.get(this.context.baseURL+"/playlists/top",
                 {
-                    headers:{AuthStr},
+                    headers:{"authorization":AuthStr},
                     query:{
-                        limit:6,
-                        sort:'-popularity&-createdAt'
+                        "limit":6,
+                        "sort":'-popularity&-createdAt'
                     }
                 }
                  )
