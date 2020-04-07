@@ -173,7 +173,7 @@ class SignUp extends Component {
                     if(res.status===400)
                     {
                     if(this.state.status!=="invalid")
-                    this.setState({status: 'invalid'});
+                        this.setState({status: 'invalid'});
                     }
                     else
                     alert(res.data.message)
@@ -278,7 +278,7 @@ class SignUp extends Component {
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
           this.setState({status:"connected"})
-            else  
+            else
           this.setState({status:"not connected"})
     }
 

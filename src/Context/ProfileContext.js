@@ -17,22 +17,30 @@ class ProfileContextProvider extends Component {
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
           {
+              
               console.log(this.context.baseURL)
-            axios.get(this.context.baseURL+'/users/1')
+              const AuthStr=localStorage.getItem("token");
+            axios.get(this.context.baseURL+'/me',
+            {
+                headers:{'authorization': "Bearer "+ AuthStr }
+            })
             .then(res => {
               this.setState({user: res.data})
+              console.log("Response: "+res);
+
             })
             if(this.state.user!==null)
-            {
-               
-                if(this.state.user.image==="")
+            {   
+                let usercopy=JSON.parse(JSON.stringify(this.state.user))
+                usercopy['image']=this.user.images[0];
+                if(this.state.usercopy.image==="")
                 {
-                    let usercopy=JSON.parse(JSON.stringify(this.state.user))
                     usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
                     this.setState({user:usercopy})
                 }
             }
           } 
+          console.log("Context Saved ON MOUNT User: "+this.state.user);
     }
 
     componentDidUpdate=()=>{
@@ -41,21 +49,28 @@ class ProfileContextProvider extends Component {
           if(show==="true" && this.state.status==="not connected")
           {
             this.setState({status:"connected"})
-            axios.get(this.context.baseURL+'/users/1')
-            .then(res => {
-              this.setState({user: res.data})
-            })
-            if(this.state.user!==null)
-            {
-               
-                if(this.state.user.image==="")
-                {
-                    let usercopy=JSON.parse(JSON.stringify(this.state.user))
-                    usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
-                    this.setState({user:usercopy})
-                }
-            }
+            console.log(this.context.baseURL)
+            const AuthStr=localStorage.getItem("token");
+          axios.get(this.context.baseURL+'/me',
+          {
+              headers:{'authorization': "Bearer "+ AuthStr }
+          })
+          .then(res => {
+              console.log("Response: "+res);
+            this.setState({user: res.data})
+          })
+          if(this.state.user!==null)
+          {   
+              let usercopy=JSON.parse(JSON.stringify(this.state.user))
+              usercopy['image']=this.user.images[0];
+              if(this.state.usercopy.image==="")
+              {
+                  usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
+                  this.setState({user:usercopy})
+              }
           }
+          }
+          console.log("Context Saved Update User: "+this.state.user);
 
     }
 
