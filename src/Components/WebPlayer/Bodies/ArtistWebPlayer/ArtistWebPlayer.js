@@ -36,8 +36,8 @@ class ArtistWebPlayer extends Component {
         
         this.getAlbumTracks();
 
-        const{myId}=this.props.location.state;//getting id from parent component
-        this.state.myId=myId;
+       /* const{myId}=this.props.location.state;//getting id from parent component
+        this.state.myId=myId; */
 
         /*console.log("amr diab id is : ",this.state.myId);*/
 
