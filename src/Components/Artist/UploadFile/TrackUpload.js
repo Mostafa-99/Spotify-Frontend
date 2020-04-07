@@ -28,7 +28,7 @@ const TrackUpload = () => {
         try {
             const res = await axios.post("http://138.91.114.14/api/me/albums/5e8ca99d53ea29db54a3942c", formData, {
                 headers: {
-                    "authorization":localStorage.getItem('token'),
+                    "authorization":"Bearer "+localStorage.getItem('token'),
                 },
                 onUploadProgress: progressEvent => {
                     setUploadPercentage(

@@ -10,7 +10,7 @@ class UpgradeArtist extends Component {
     axios
       .post("/me/meArtist", {
         headers: {
-          "authorization": localStorage.getItem("token"),
+          "authorization":"Bearer "+localStorage.getItem("token"),
         },
       })
       .then((res) => {
@@ -33,7 +33,7 @@ class UpgradeArtist extends Component {
           "/me/upgrade/"+{code},
           {
             headers: {
-              "authorization": localStorage.getItem("token"),
+              "authorization":"Bearer "+localStorage.getItem("token"),
             },
           }
         )

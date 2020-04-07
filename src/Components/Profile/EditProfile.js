@@ -6,6 +6,8 @@ import {Link} from 'react-router-dom';
 import './Profile.css';
 import Footer from '../Footer/Footer.js'
 import Navbar from '../Navigation/Navbar.js'
+import { ConfigContext } from '../../Context/ConfigContext'
+import { ProfileContext } from '../../Context/ProfileContext'
 var today;
 var day;
 var month;
@@ -119,6 +121,12 @@ class EditProfile extends Component {
         {document.title ="Edit profile - Spotify"}
 
     return(
+        <ProfileContext.Consumer>{(profile) => (
+            <ConfigContext.Consumer>{(config) => {
+                const {user}= profile
+                //const {baseURL}= config
+                
+                return(
         <div className="bg-dark-clr">
             
         <div id="edit-profile"className="container editProfile">
@@ -304,6 +312,10 @@ class EditProfile extends Component {
             </div>
         </div>
         </div>
+        )
+    }}
+    </ConfigContext.Consumer>
+    )}</ProfileContext.Consumer>
     )
     }
 }

@@ -20,7 +20,7 @@ class Albums extends Component {
     axios.get("http://138.91.114.14/api/me/albums",
     {
       headers: {
-        authorization: localStorage.getItem("token"),
+        'authorization':"Bearer "+localStorage.getItem("token"),
       },
     }).then((res) => {
       console.log("My albums: "+res);
