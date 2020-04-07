@@ -62,7 +62,7 @@ class ProfileContextProvider extends Component {
           if(this.state.user!==null)
           {   
               let usercopy=JSON.parse(JSON.stringify(this.state.user))
-              usercopy['image']=this.user.images[0];
+              usercopy['image']=this.user.image[0];
               if(this.state.usercopy.image==="")
               {
                   usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'

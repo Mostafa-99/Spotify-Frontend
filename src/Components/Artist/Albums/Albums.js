@@ -51,7 +51,11 @@ class Albums extends Component {
             </div>
             <div className="card-group">
               {this.state.artistAlbums.map((album) => (
-                <Link to="/artist/album-page">
+                <Link to={{
+                pathname:"/artist/album-page",
+                state:{ myId :this.state.artistAlbums.id}
+                 }                   
+                }  >
                   <div className="card">
                     <img
                       src={album.imageUrl[0]}

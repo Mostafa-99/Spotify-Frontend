@@ -8,6 +8,7 @@ import AlbumWebPlayer from '../../WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer
 import { Link } from "react-router-dom";
 
 class AlbumPage extends Component {
+  
   render() {
     return (
       <div className="artist-body">
