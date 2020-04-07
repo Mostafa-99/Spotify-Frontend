@@ -17,10 +17,16 @@ class Albums extends Component {
   componentDidMount() {
     console.log("errrrrrr");
     {/*/me/albums */}
-    axios.get("http://www.mocky.io/v2/5e74bc56300000d331a5f62f").then((res) => {
+    axios.get("http://138.91.114.14/api/me/albums",
+    {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    }).then((res) => {
+      console.log("My albums: "+res);
       if (res.status === 200) {
         this.setState({
-          artistAlbums: res.data.map((album) => ({
+          artistAlbums: res.data.data.map((album) => ({
             id: album.id,
             title: album.name,
             imageUrl: album.images,

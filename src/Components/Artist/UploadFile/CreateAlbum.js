@@ -45,20 +45,20 @@ const CreateAlbum = () => {
     // console.log(albumType);
     // console.log(img);
     const formData = new FormData();
-
+   const genre=[];
+   genre[0]=albumGenre;
     formData.append("name", albumName);
     formData.append("albumType", albumType);
-    formData.append("genre", albumGenre);
+    formData.append("genre", genre);
     formData.append("image", img);
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/meArtist/albums",
+        "http://138.91.114.14/api/me/albums",
         formData,
         {
           headers: {
             authorization: localStorage.getItem("token"),
-            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -106,7 +106,7 @@ const CreateAlbum = () => {
               <input
                 type="text"
                 class="form-control"
-                placeholder="Album type"
+                placeholder="Genre"
                 onChange={onChangeAlbumGenre}
               />
             </div>
