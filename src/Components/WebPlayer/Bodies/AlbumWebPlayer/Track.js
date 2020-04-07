@@ -8,7 +8,7 @@ export class Track extends Component {
         "preview_url":"",
         "id":"",
         "name":"",
-        "duration_ms":0,
+        "duration_ms":Number,
         "minutes":0,
         "seconds":0,
         //is_playing":Boolean
@@ -19,12 +19,12 @@ export class Track extends Component {
             this.setState({artists:artist.name})
         ));
         this.setState({
-            duration_ms:this.props.track.duration_ms,
+            duration_ms:this.props.track.durationMs,
             preview_url:this.props.track.preview_url,
-            id:this.props.track.id,
+            id:this.props.track._id,
             name:this.props.track.name
         });
-        this.millisToMinutesAndSeconds(this.props.track.duration_ms);
+        this.millisToMinutesAndSeconds(this.props.track.durationMs);
     }
 
     millisToMinutesAndSeconds(millis) {
@@ -39,9 +39,9 @@ export class Track extends Component {
     render() {
         return (
             <div id="track-row-div" className="container-fluid">
-                <div className={(this.props.playing_song_id===this.props.track.id?"row playing-song":"row not-playing-song")}>
+                <div className={(this.props.playing_song_id===this.props.track._id?"row playing-song":"row not-playing-song")}>
                     <div className="track-symbol-div">
-                        <i className={(this.props.playing_song_id===this.props.track.id?"track-icon-playing":"track-icon")} 
+                        <i className={(this.props.playing_song_id===this.props.track._id?"track-icon-playing":"track-icon")} 
                         onClick={this.props.setPlayingSondId.bind(this, this.state.id,this.state.preview_url)}></i>
                     </div>
                     <div className="track-name-div">
