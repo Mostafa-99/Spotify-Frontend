@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import { Link, useHistory } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import '../WebPlayer/Bodies/NavBars.css';
 import { ConfigContext } from '../../Context/ConfigContext'
 import { ProfileContext } from '../../Context/ProfileContext'
-import axios from 'axios'
+
 //navbar not fixed anymore
 const MyDesktopNavbar = styled.nav`
 display:flex;
@@ -95,7 +95,6 @@ class DesktopNavbar extends Component {
         super()
 
         this.state = {
-            user: {},
             status: 'not connected',
             loginType: ''
         }
@@ -110,11 +109,6 @@ class DesktopNavbar extends Component {
             let type = localStorage.getItem("loginType");
             this.setState({ status: "connected" })
             this.setState({ loginType: type })
-            // axios.get('http://localhost:3000/users/1/')
-            // .then(res => {
-            //   this.setState({user: res.data})
-            // })
-            //  this.setState({user:ProfileContext.user.data})
         }
         else {
             this.setState({ status: "not connected" })
@@ -124,15 +118,11 @@ class DesktopNavbar extends Component {
     componentDidUpdate = () => {
 
         let show = localStorage.getItem("isLoggedIn");
-        if (show === "true" && this.state.status === "not connected") {
+        if (show === "true" && this.state.status === "not connected") 
+        {
             let type = localStorage.getItem("loginType");
             this.setState({ status: "connected" })
             this.setState({ loginType: type })
-            // axios.get('http://localhost:3000/users/1')
-            // .then(res => {
-            //   this.setState({user: res.data})
-            // })
-            this.setState({ user: ConfigContext.user.data })
         }
 
     }
@@ -151,20 +141,21 @@ class DesktopNavbar extends Component {
 
         this.setState({ status: "not connected" })
         this.setState({ loginType: '' })
-        localStorage.setItem("userID", '');
-        localStorage.setItem("isLoggedIn", "false");
-        localStorage.setItem("token", '');
-        localStorage.setItem("loginType", "");
+        localStorage.removeItem("userID");
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
+        localStorage.removeItem("loginType");
     }
 
     render() {
         const logInOrNot = this.state.status;
         return (
-            // <ConfigContext.Consumer>{(config) => (
-            //     <ProfileContext.Consumer>{(profile) => {
-            //         const {user,status}= profile
-            //         const {baseURL}= config
-            //         return(
+            <ProfileContext.Consumer>{(profile) => (
+                <ConfigContext.Consumer>{(config) => {
+                    const {user}= profile
+                    //const {baseURL}= config
+                    
+                    return(
                     <MyDesktopNavbar>
                         <div id="my-desk-navbar">
                             <Link to="/"><img className="logo" src={spotify_white_logo} alt="Spotify Logo White" /></Link>
@@ -189,7 +180,7 @@ class DesktopNavbar extends Component {
                                             <div className="col-2 right" id="navbar-profile-section" >
                                                 <div className="dropdown">
                                                     <a className="btn dropdown-toggle neg-margin links" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                                        <span ><img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png" id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
+                                                        <span ><img src={user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
                                                         <span className="links">Profile</span>
 
                                                     </a>
@@ -219,11 +210,11 @@ class DesktopNavbar extends Component {
                             </div>
                         </div>
                     </MyDesktopNavbar>
-            //         )
-            // }} </ProfileContext.Consumer>
-
-            // )}</ConfigContext.Consumer>
-        )
+                    )
+            }}
+            </ConfigContext.Consumer>
+            )}</ProfileContext.Consumer>
+        );
     }
 }
 

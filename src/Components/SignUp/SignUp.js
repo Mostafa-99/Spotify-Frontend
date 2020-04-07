@@ -63,21 +63,12 @@ class SignUp extends Component {
                             }
                             else // Unsuccessful
                             {  
-                                localStorage.removeItem("isLoggedIn");
-                                localStorage.removeItem("token");
-                                localStorage.removeItem("loginType");
-                                localStorage.removeItem("userID");
                                 alert(res.data.message)
                             }   
                             })
-                window.location.reload(false);
+                //window.location.reload(false);
                 
-              } else {
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");              
-              }
+              } 
           }.bind(this), {scope: 'public_profile,email'});
        
     }
@@ -185,10 +176,6 @@ class SignUp extends Component {
                     else
                     alert(res.data.message)
                     
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("userID");
                 }
                })
         }

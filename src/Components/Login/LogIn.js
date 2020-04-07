@@ -51,7 +51,7 @@ class LogIn extends Component {
                             localStorage.setItem("loginType", "fb");
                             localStorage.setItem("userID", response.authResponse.userID);
                             this.setState({status: 'connected'});
-                            window.location.reload(false);
+                            //window.location.reload(false);
                         }
                     }
                     else // Unsuccessful
@@ -59,7 +59,7 @@ class LogIn extends Component {
                             alert(res.data.message)
                     }   
                     })
-                    window.location.reload(false); 
+                    //window.location.reload(false); 
               }
           }.bind(this), {scope: 'public_profile,email'});
     } 

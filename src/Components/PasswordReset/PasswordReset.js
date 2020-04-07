@@ -28,7 +28,7 @@ class PasswordReset extends Component {
                 if(res.status===200 || res.status===204) // Successful
                 {
                         this.setState({status: 'done'});
-                        window.location.reload(false);
+                        
                 }
                 else // Unsuccessful
                 {
@@ -46,8 +46,6 @@ class PasswordReset extends Component {
                     this.setState({status: 'invalid-email'});    
                 }
          }
-         //this.setState({email: ''});
-         //document.querySelector('#form-email').val('');
     }
 
     componentDidMount =()=>{

@@ -17,7 +17,8 @@ class ProfileContextProvider extends Component {
           let show=localStorage.getItem("isLoggedIn");
           if(show==="true")
           {
-            axios.get(this.context.baseURL+'/users/1/')
+              console.log(this.context.baseURL)
+            axios.get(this.context.baseURL+'/users/1')
             .then(res => {
               this.setState({user: res.data})
             })
@@ -40,7 +41,7 @@ class ProfileContextProvider extends Component {
           if(show==="true" && this.state.status==="not connected")
           {
             this.setState({status:"connected"})
-            axios.get(this.context.baseURL+'/users/1/')
+            axios.get(this.context.baseURL+'/users/1')
             .then(res => {
               this.setState({user: res.data})
             })
