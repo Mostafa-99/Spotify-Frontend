@@ -21,7 +21,9 @@ export class premiumCode extends Component {
         console.log(localStorage);
         axios.post(this.context.baseURL+'/me/premium',
                 {
-                    headers:{'authorization':"Bearer "+localStorage.getItem("token")
+                headers:
+                    {
+                    'authorization':"Bearer "+localStorage.getItem("token"),
                     }
                     
                 })
@@ -40,7 +42,8 @@ export class premiumCode extends Component {
                 }
             })
             .catch(res => {
-                alert(res);
+                console.log(res);
+                
             })
     }
 
