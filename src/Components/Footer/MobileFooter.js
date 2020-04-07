@@ -76,7 +76,7 @@ letter-spacing:2px;
 #my-mob-footer a:hover{
    color:#1DB954;
 }
-#mobfooter .row{
+#my-mob-footer .row{
     width:100%;
 }
 `

@@ -21,12 +21,13 @@ const TrackUpload = () => {
     const onSubmit = async e => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append("file", file);
-        formData.append("file2", file);
+        formData.append("trackAudio", file);
+        
         console.log(formData.form);
         try {
-            const res = await axios.post("http://localhost:3000/upload", formData, {
+            const res = await axios.post("me/albums/", formData, {
                 headers: {
+                    "authorization":localStorage.getItem('token'),
                     "Content-Type": "multipart/form-data"
                 },
                 onUploadProgress: progressEvent => {
@@ -45,7 +46,14 @@ const TrackUpload = () => {
         } catch (err) {
             if (err.response.status === 500) {
                 setMessage("There was a problem with the server");
-            } else {
+            }else if(err.response.status === 401) {
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
+                alert("Your session has ended");
+            }
+            else {
                 setMessage(err.response.data.msg);
             }
         }

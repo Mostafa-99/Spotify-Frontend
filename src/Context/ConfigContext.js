@@ -5,7 +5,7 @@ export const ConfigContext= createContext();
 class ConfigContextProvider extends Component {
     
     state={
-        baseURL:'http://localhost:3004'
+        baseURL:'http://localhost/3000'
     }
     
 
