@@ -39,16 +39,13 @@ class CardComponent extends Component {
                 console.log("authorization:"+localStorage.getItem("token"));
                 axios.get(this.context.baseURL+"/playlists/top",
                 {
-                    headers:{'authorization':"Bearer "+AuthStr},
-                    query:{
-                        "limit":6,
-                        "sort":'-popularity&-createdAt'
-                    }
+                    headers:{'authorization':"Bearer "+AuthStr}
                 }
                  )
                 .then(res => {
                   if(res.status===200)
                   { 
+                      console.log(res);
                          this.setState({
                             playlists: res.data.map( playlist => ({
                             id:playlist.id,
