@@ -8,7 +8,7 @@ import {ConfigContext} from '../../Context/ConfigContext'
  * @extends Component
  */
 export class premiumCode extends Component {
-        static contextType=ConfigContext;
+    static contextType=ConfigContext;
 
     state={
         code: ''
@@ -17,16 +17,13 @@ export class premiumCode extends Component {
     /**
      * sends subscription code to the user's email
      */
-    sendMail = () => {
+    sendMail=()=>{
         console.log(localStorage);
-        axios.post(this.context.baseURL+'/me/premium',{},
-                {
-                headers:
-                    {
-                    'authorization':"Bearer "+localStorage.getItem("token"),
-                    }
-                    
-                })
+        axios.post(this.context.baseURL+"/me/premium",{},{
+            headers:{
+                'authorization': "Bearer "+ localStorage.getItem("token"),
+            }
+        })
             .then(res => {
                 if(res.status===204){
                     alert("An email has been sent");
@@ -56,14 +53,11 @@ export class premiumCode extends Component {
             console.log(localStorage);
 
             //'http://localhost:3000/subscriptionCodes/',{code}
-            axios.post(this.context.baseURL+'/me/upgrade/'+{code},
-              {
-                    headers:{
-                     'authorization':"Bearer "+localStorage.getItem("token")               
-                     }
-                   
+            axios.post(this.context.baseURL+"/me/upgrade/"+code,{},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
-            )
+            })
             .then(res => {
                 if(res.status===204){
                     alert("Congratulations! You are PREMIUM now.");
