@@ -36,15 +36,14 @@ class ArtistWebPlayer extends Component {
         
         this.getAlbumTracks();
 
-       /* const{myId}=this.props.location.state;//getting id from parent component
-        this.state.myId=myId; */
+        const{myId}=this.props.location.state;//getting id from parent component
+        this.state.myId=myId;
 
-        /*console.log("amr diab id is : ",this.state.myId);*/
+        console.log("amr diab id is : ",this.state.myId);
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
         /*' http://we871.mocklab.io/artists/200 */
-        /*+ this.state.myId */
-        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f" ,{  /*artist*/
+        axios.get(this.context.baseURL+"/artists/" + this.state.myId,{  /*artist*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -77,8 +76,7 @@ class ArtistWebPlayer extends Component {
         })
             /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
             /* /artists/"+this.state.myId+"/albums */
-            // "+this.state.myId+"
-        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/albums",{/* albums */
+        axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/albums",{/* albums */
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -111,8 +109,7 @@ class ArtistWebPlayer extends Component {
 
 
             /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
-            // "+this.state.myId+"
-        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/created-playlists",{/* playlists*/
+        axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/created-playlists",{/* playlists*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -145,7 +142,7 @@ class ArtistWebPlayer extends Component {
                 /* http://www.mocky.io/v2/5e87635f3100002a003f44d4*/
                 /* */
                 /**http://we871.mocklab.io/artists/200/relatedArtists */
-        axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/related-artists",{/* related artists*/
+        axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/related-artists",{/* related artists*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -180,7 +177,7 @@ class ArtistWebPlayer extends Component {
         getAlbumTracks(){
            
             /* http://localhost:3000/album_tracks/1*/
-            axios.get(this.context.baseURL+"/artists/5e8cd05612fb247de895f04f/top-tracks",{/* top tracks*/
+            axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/top-tracks",{/* top tracks*/
                 headers:{
                     'authorization': "Bearer "+localStorage.getItem("token"),
                     "id": this.state.myId
