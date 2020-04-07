@@ -20,7 +20,7 @@ export class premiumCode extends Component {
     sendMail = () => {
         console.log(localStorage.getItem("token"));
         axios.post(this.context.baseURL+'/me/premium',
-                 {
+                {
                     headers:{'authorization':"Bearer "+localStorage.getItem("token")}
                 })
             .then(res => {
@@ -37,8 +37,8 @@ export class premiumCode extends Component {
                     alert("Please try again");
                 }
             })
-            .catch(error => {
-                alert(error.response.data.message);
+            .catch(res => {
+                alert(res);
             })
     }
 
