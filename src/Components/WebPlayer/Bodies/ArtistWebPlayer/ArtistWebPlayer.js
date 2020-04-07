@@ -380,7 +380,7 @@ class ArtistWebPlayer extends Component {
                                 {this.state.relatedArtists.map( artist => (
                                     <div>
                                         <div className="card">
-                                            <img src={artist.imageUrl.url} className="card-img-top rounded-circle" alt="..."></img>
+                                            <img src={artist.imageUrl} className="card-img-top rounded-circle" alt="..."></img>
                                             <div className="card-body">
                                                 <h5 className="card-title">{artist.name}</h5>
                                                 <p className="card-text">{artist.type}</p>
