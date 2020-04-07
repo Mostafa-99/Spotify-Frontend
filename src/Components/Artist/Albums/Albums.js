@@ -10,36 +10,39 @@ class Albums extends Component {
   constructor() {
     super();
     this.state = {
-      artistAlbums: [],
+     artistAlbums: [],
     };
   }
 
   componentDidMount() {
     console.log("errrrrrr");
-    {/*/me/albums */}
-    axios.get("http://138.91.114.14/api/me/albums",
     {
-      headers: {
-        authorization: localStorage.getItem("token"),
-      },
-    }).then((res) => {
-      console.log("My albums: "+res);
-      if (res.status === 200) {
-        this.setState({
-          artistAlbums: res.data.data.map((album) => ({
-            id: album.id,
-            title: album.name,
-            imageUrl: album.images,
-          })),
-        });
-      } else if (res.status === 401) {
-        localStorage.removeItem("loginType");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userID");
-        alert("Your session has ended");
-      }
-    });
+      /*/me/albums */
+    }
+    axios
+      .get("http://138.91.114.14/api/me/albums", {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("most recent albums", res);
+          this.setState({
+          artistAlbums: res.data.data.albums.map((album) => ({
+              id: album._id,
+              title: album.name,
+              imageUrl: album.image,
+              artist: album.artists.name,
+            })),
+          });
+        } else if (res.status === 401) {
+          localStorage.removeItem("loginType");
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("token");
+          localStorage.removeItem("userID");
+        }
+      });
   }
   render() {
     return (
@@ -57,20 +60,23 @@ class Albums extends Component {
             </div>
             <div className="card-group">
               {this.state.artistAlbums.map((album) => (
-                <Link to={{
-                pathname:"/artist/album-page",
-                state:{ myId :this.state.artistAlbums.id}
-                 }                   
-                }  >
+                <Link
+                  to={{
+                    pathname: "/artist/album-page",
+                    state: { myId: this.state.artistAlbums.id },
+                  }}
+                >
                   <div className="card">
                     <img
-                      src={album.imageUrl[0]}
+                      src={album.imageUrl}
                       className="card-img-top"
                       alt="..."
                     ></img>
                     <div className="card-body">
                       <h5 className="card-title">{album.title}</h5>
                       <p className="card-text">{album.description}</p>
+                      <div id={album.id}>
+                      </div>
                     </div>
                   </div>
                 </Link>

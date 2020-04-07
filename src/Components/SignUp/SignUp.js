@@ -67,7 +67,7 @@ class SignUp extends Component {
                             }   
                             }).catch(err =>{
 
-                                alert(err.data.message)
+                                alert(err)
                             })
                 //window.location.reload(false);
                 
@@ -189,7 +189,7 @@ class SignUp extends Component {
                     this.setState({status: 'invalid'});
                 }
                 else
-                alert(err.data.message)
+                alert(err)
 
                })
         }

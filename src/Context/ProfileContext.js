@@ -19,17 +19,17 @@ class ProfileContextProvider extends Component {
           {
               
               console.log(this.context.baseURL)
-              const AuthStr=localStorage.getItem("token");
-            axios.get(this.context.baseURL+'/me',
-            {
-                headers:{'authorization': "Bearer "+ AuthStr, }
+            axios.get(this.context.baseURL+'/me',{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
             })
             .then(res => {
               this.setState({user: res.data})
               console.log("Response: "+res.data);
               
             }).catch(err => {
-                alert(err.data.message)
+                alert(err)
             }
   
             )
@@ -58,17 +58,17 @@ class ProfileContextProvider extends Component {
           {
             this.setState({status:"connected"})
             console.log(this.context.baseURL)
-            const AuthStr=localStorage.getItem("token");
-          axios.get(this.context.baseURL+'/me',
-          {
-              headers:{'authorization': "Bearer "+ AuthStr }
-          })
+          axios.get(this.context.baseURL+'/me',{
+            headers:{
+                'authorization': "Bearer "+ localStorage.getItem("token"),
+            }
+        })
           .then(res => {
               console.log("Response: "+res);
             this.setState({user: res.data})
           })
           .catch(err => {
-              alert(err.data.message)
+              alert(err)
           }
 
           )
