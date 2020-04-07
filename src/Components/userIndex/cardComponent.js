@@ -47,7 +47,7 @@ class CardComponent extends Component {
                   { 
                       console.log(res);
                          this.setState({
-                            playlists: res.data.data.map( playlist => ({
+                            playlists: res.data.data.playlist.map( playlist => ({
                             id:playlist.id,
                             title:playlist.name,
                             artist:playlist.owner[0].name,
