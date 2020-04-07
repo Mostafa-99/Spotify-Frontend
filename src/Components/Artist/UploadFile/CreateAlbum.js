@@ -58,7 +58,7 @@ const CreateAlbum = () => {
         formData,
         {
           headers: {
-            authorization: localStorage.getItem("token"),
+            'authorization':"Bearer "+localStorage.getItem("token"),
           },
         }
       );
