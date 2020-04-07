@@ -21,7 +21,9 @@ export class premiumCode extends Component {
         console.log(localStorage.getItem("token"));
         axios.post(this.context.baseURL+'/me/premium',
                 {
-                    headers:{'authorization':"Bearer "+localStorage.getItem("token")}
+                    headers:{'authorization':"Bearer "+localStorage.getItem("token")},
+                    contentType: "application/json"
+
                 })
             .then(res => {
                 if(res.status===204){
@@ -51,7 +53,8 @@ export class premiumCode extends Component {
             //'http://localhost:3000/subscriptionCodes/',{code}
             axios.post(this.context.baseURL+'/me/upgrade/'+{code},
               {
-                    headers:{'authorization':"Bearer "+localStorage.getItem("token")}
+                    headers:{'authorization':"Bearer "+localStorage.getItem("token")},
+                    contentType: "application/json"
                 }
             )
             .then(res => {
