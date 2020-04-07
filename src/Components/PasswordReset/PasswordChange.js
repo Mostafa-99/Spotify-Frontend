@@ -55,7 +55,26 @@ export default class PasswordChange extends Component {
         {
             if(this.state.password===this.state.confirmpassword)
             {
-                //axios.post(window.l)
+                const mytoken=window.location.pathname.replace('resetPassword/',"")
+                console.log(this.context.baseURL+'/resetPassword'+mytoken);
+                axios.post(this.context.baseURL+'/resetPassword'+mytoken,
+                {
+                "newPassword":this.state.password,
+                "passwordConfirmation": this.state.confirmpassword
+                }
+                )   
+                .then(res => {
+                    if(res.status===200 || res.status===204) // Successful
+                    {
+                            this.setState({status: 'done'});
+                            
+                    }
+                    else // Unsuccessful
+                    {
+                        this.setState({status: 'not-linked-email'});     
+                    }  
+                    })
+                //console.log(mytoken);
             }
             else
             {
