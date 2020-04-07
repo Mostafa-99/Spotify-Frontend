@@ -19,6 +19,7 @@ class PasswordReset extends Component {
         event.preventDefault();
         if(this.validateEmail(this.state.email))
         {
+            console.log(this.state.email);
             axios.post(this.context.baseURL+'/resetPassword',
             {
             "email":this.state.email
@@ -28,7 +29,7 @@ class PasswordReset extends Component {
                 if(res.status===200 || res.status===204) // Successful
                 {
                         this.setState({status: 'done'});
-                        window.location.reload(false);
+                        
                 }
                 else // Unsuccessful
                 {
@@ -46,8 +47,6 @@ class PasswordReset extends Component {
                     this.setState({status: 'invalid-email'});    
                 }
          }
-         this.setState({email: ''});
-         document.querySelector('#form-email').val('');
     }
 
     componentDidMount =()=>{
@@ -81,7 +80,7 @@ class PasswordReset extends Component {
             <div>
                     <p>Enter your Spotify username, or the email address that you used to register. We'll send you an email with your username and a link to reset your password.</p>
                     <label>Email address</label>
-                    <input required type="email" id="form-email" onChange={this.handleEmailChange} className="form-control mb-4"/>
+                    <input  type="email" id="form-email" onChange={this.handleEmailChange} className="form-control mb-4"/>
                         {this.state.status==="empty-email"?
                         <div id="empty-email" className="error-message">
                         This field is required.

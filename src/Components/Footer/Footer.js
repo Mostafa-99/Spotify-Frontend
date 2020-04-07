@@ -7,8 +7,11 @@ const exclusionArray = [
   '/signup',
   '/home',
   '/password-reset',
+  '/resetPassword',
   '/artist-webplayer',
-  '/Home',
+  '/webplayer/album',
+  '/artist/album-page',
+
   '/webplayer/album'
 ]
 

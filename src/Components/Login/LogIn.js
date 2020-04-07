@@ -3,7 +3,6 @@ import '../SignUp/sign_up.css';
 import spotify_black_logo from '../../Images/spotify_logo_black.png';
 import '../Button/spotify_button.css';
 import {ConfigContext} from '../../Context/ConfigContext'
-import {ProfileContext} from '../../Context/ProfileContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
 //import { buildQueries } from '@testing-library/react';
@@ -11,9 +10,8 @@ import {Link,Redirect} from 'react-router-dom'
 
 
 class LogIn extends Component {
-    static Config=ConfigContext;
-    static Profile=ProfileContext;
-    
+    static contextType=ConfigContext;
+
     constructor() {
         super()
         
@@ -53,7 +51,7 @@ class LogIn extends Component {
                             localStorage.setItem("loginType", "fb");
                             localStorage.setItem("userID", response.authResponse.userID);
                             this.setState({status: 'connected'});
-                            window.location.reload(false);
+                            //window.location.reload(false);
                         }
                     }
                     else // Unsuccessful
@@ -61,7 +59,7 @@ class LogIn extends Component {
                             alert(res.data.message)
                     }   
                     })
-                    window.location.reload(false); 
+                    //window.location.reload(false); 
               }
           }.bind(this), {scope: 'public_profile,email'});
     } 
@@ -80,22 +78,34 @@ class LogIn extends Component {
     }
 
     validateEmail(email) {
+        if(this.state.emptyemail===true)
+            this.setState({emptyemail: false});
         return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
     validatePassword(psw) {
+        if(this.state.emptypass===true)
+         this.setState({emptypass: false});
+
         return psw && psw.length >= 6
     }
 
     handleLogin = event=> {   
-        //event.preventDefault();
+        event.preventDefault();
         const user={email:this.state.email,password:this.state.password}
         const memail = user.email;
         const mpsw = user.password;
         const is_email_valid = this.validateEmail(memail);
         const is_psw_valid = this.validatePassword(mpsw);
+
+        if((this.state.user.email==="" && this.state.emptyemail===false) || !is_email_valid)
+            this.setState({emptyemail: true});
+        if((this.state.user.password==="" && this.state.emptypass===false) || !is_psw_valid)
+            this.setState({emptypass: true});
+
         if(is_email_valid && is_psw_valid)
         {
+            console.log(this.context.baseURL+'/signIn');
             axios.post(this.context.baseURL+'/signIn',
             {
             "email":memail,
@@ -111,7 +121,7 @@ class LogIn extends Component {
                         localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
                         this.setState({status: 'connected'});
-                        window.location.reload(false);
+                       // window.location.reload(false);
                     }  
                 }
                 else
@@ -198,7 +208,7 @@ class LogIn extends Component {
 
             {this.state.emptyemail===true?
             <div id="empty-email" className="error-message">
-            Please enter your Spotify email address.
+            Please enter a valid Spotify email address.
             </div>
             :
             <div>
@@ -209,7 +219,7 @@ class LogIn extends Component {
 
             {this.state.emptypass===true?
             <div id="empty-pass" className="error-message">
-            Please enter your password.
+            Please enter a valid password. (Minimum Length=8)
             </div>
             :
             <div>
@@ -222,7 +232,7 @@ class LogIn extends Component {
                 <label className="custom-control-label" htmlFor="defaultUnchecked">Remember me</label>
             </div>
 
-            <button id="login" type="submit" className="my-spotify-button" onClick={this.handleLogin}>LOG IN</button>
+            <button id="login" type="button" className="my-spotify-button" onClick={this.handleLogin}>LOG IN</button>
             <br/>
             <Link to="/password-reset">Forgot your password?</Link>
             <hr/><br/>

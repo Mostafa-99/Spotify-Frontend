@@ -4,11 +4,17 @@ import MainIndex from './Components/userIndex/MainIndex.js'
 
 import SignUp from './Components/SignUp/SignUp.js';
 import LogIn from './Components/Login/LogIn.js';
+import Navbar from './Components/Navigation/Navbar.js';
+import Footer from './Components/Footer/Footer.js';
+import PasswordReset from './Components/PasswordReset/PasswordReset.js'
+import PasswordChange from './Components/PasswordReset/PasswordChange.js'
+import NotFound from './Components/NotFound/NotFound.js'
 
 import HelpPage from './Components/HelpPage/HelpPage.js'
 import AccountSettings from './Components/Profile/AccountSettings.js'
 import EditProfile from './Components/Profile/EditProfile.js'
 import NotificationsSettings from './Components/Profile/NotificationSettings.js';
+import ChangePasswrod from './Components/Profile/ChangePassword';
 
 import PremiumCode from './Components/Premium/premiumCode.js';
 import Premium from './Components/Premium/premium.js';
@@ -42,9 +48,6 @@ import AlbumWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/AlbumWe
 
 //import {withRouter} from 'react-router';
 import {Route,BrowserRouter as Router,Switch} from 'react-router-dom';
-import Navbar from './Components/Navigation/Navbar.js';
-import Footer from './Components/Footer/Footer.js';
-import PasswordReset from './Components/PasswordReset/PasswordReset.js' 
 
 import UpgradeArtist from './Components/Artist/UpgradeArtist/UpgradeArtist'
 import ArtistSelector from './Components/Artist/ArtistSelector'
@@ -65,10 +68,15 @@ function App() {
       <Switch>
         {/*Public pages */}
         <Route path="/help" exact component={HelpPage}/>
+        <Route path="/account-overview" component={AccountSettings}/>
+        <Route path="/edit-profile" component={EditProfile}/>
+        <Route path="/notification-settings" component={NotificationsSettings}/>
+        <Route path="/change-password" component={ChangePasswrod}/>
         <Route path="/signup" exact component={SignUp}/>
         <Route path="/login" exact component={LogIn}/>
         <Route path="/premium" exact component={Premium}/>
         <Route path="/password-reset" exact component={PasswordReset}/>
+        <Route path="/resetPassword" component={PasswordChange}/>
         <Route path="/" exact component={MainSelector}/>
         <Route path="/account-help" exact component={AccountHelp} />
         <Route path="/profile-picture" exact component={ProfilePicture} />
@@ -86,6 +94,7 @@ function App() {
         <Route path="/home" exact component={Home} />
         <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
         <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
+        <Route path="/" component={NotFound}/>
 
         {/*Protected pages */}
         <ProtectedRoute path="/edit-profile" component={EditProfile}/>
@@ -101,8 +110,8 @@ function App() {
        
         <Route path="*" exact component={()=>"404 NOT FOUND"} />
       </Switch>
+      
       <Footer/>
-
       </ProfileContextProvider>
       </ConfigContextProvider>
     </Router>   
