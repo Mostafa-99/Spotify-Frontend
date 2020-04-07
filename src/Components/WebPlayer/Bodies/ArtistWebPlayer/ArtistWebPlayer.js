@@ -39,13 +39,13 @@ class ArtistWebPlayer extends Component {
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
 
-        console.log("amr diab id is : ",this.state.myId);
+        /*console.log("amr diab id is : ",this.state.myId);*/
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
         /*' http://we871.mocklab.io/artists/200 */
         axios.get("/artists/" + this.state.myId,{  /*artist*/
             headers:{
-                "authorization":localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
             }}
                 )
@@ -73,12 +73,11 @@ class ArtistWebPlayer extends Component {
                 }
                 
         })
-                   
             /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
             /* /artists/"+this.state.myId+"/albums */
-        axios.get("/artists/"+this.state.myId+"/albums",{/* albums*/
+        axios.get("/artists/"+this.state.myId+"/albums",{/* albums */
             headers:{
-                "authorization":localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
             }}
             )
@@ -89,7 +88,7 @@ class ArtistWebPlayer extends Component {
                         albums: res.data.map( album => ({
                             name:album.name,
                             id:album._id,
-                            imageUrl:album.images[0]
+                            imageUrl:album.image
                         }))
                     })
                 }
@@ -105,8 +104,15 @@ class ArtistWebPlayer extends Component {
                 }
                 
             })
+
+
             /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
-        axios.get("/artists/"+this.state.myId+"/created-playlists")/* playlists*/
+        axios.get("/artists/"+this.state.myId+"/created-playlists",{/* playlists*/
+            headers:{
+                'authorization': "Bearer "+localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+            )
             .then(res => {
                 if(res.status===200)
                 {   
@@ -135,7 +141,7 @@ class ArtistWebPlayer extends Component {
                 /**http://we871.mocklab.io/artists/200/relatedArtists */
         axios.get("/artists/"+this.state.myId+"/related-artists",{/* related artists*/
             headers:{
-                "authorization":localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
             }}
             )
@@ -169,7 +175,7 @@ class ArtistWebPlayer extends Component {
             /* http://localhost:3000/album_tracks/1*/
             axios.get("/artists/"+this.state.myId+"/top-tracks",{/* top tracks*/
                 headers:{
-                    "authorization":localStorage.getItem("token"),
+                    'authorization': "Bearer "+localStorage.getItem("token"),
                     "id": this.state.myId
                 }}
                 )
