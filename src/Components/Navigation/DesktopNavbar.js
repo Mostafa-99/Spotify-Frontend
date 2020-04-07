@@ -154,7 +154,9 @@ class DesktopNavbar extends Component {
                 <ConfigContext.Consumer>{(config) => {
                     const {user}= profile
                     //const {baseURL}= config
-                    
+                    console.log(user)
+                    console.log(user.images)
+                    console.log(user.images[0])
                     return(
                     <MyDesktopNavbar>
                         <div id="my-desk-navbar">
@@ -180,7 +182,7 @@ class DesktopNavbar extends Component {
                                             <div className="col-2 right" id="navbar-profile-section" >
                                                 <div className="dropdown">
                                                     <a className="btn dropdown-toggle neg-margin links" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                                        <span ><img src={user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
+                                                        <span ><img src={user.images[0]} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
                                                         <span className="links">Profile</span>
 
                                                     </a>

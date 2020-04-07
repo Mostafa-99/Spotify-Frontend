@@ -9,9 +9,6 @@ class ProfileContextProvider extends Component {
     state={
         userType:'artist',
         user: {},
-        user1: {},
-        User2: {},
-        name1:'',
         status:"not connected"
     }
 
@@ -25,22 +22,7 @@ class ProfileContextProvider extends Component {
           {
               console.log(this.context.baseURL+" "+ localStorage.getItem("token"))
 
-             //GET 1 
-            axios.get(this.context.baseURL+'/me',{headers:{'authorization': "Bearer "+ localStorage.getItem("token"),}
-            }).then(res => {
-                if(res.status===200)
-                {
-                    this.setState({user: res.data})
-                    this.setState({name1:res.data.name})
-                    console.log(this.state.name1)
-                }
-                else
-                alert(res.status)
-            console.log(res.data)}).catch(err => {
-                alert(err.response)
-            })
-
-             //GET 2 
+             //GET 
             axios.get(this.context.baseURL+'/me',{headers:{'authorization': "Bearer "+ localStorage.getItem("token"),}
             }).then(res => {
                 if(res.status===200)
@@ -53,7 +35,6 @@ class ProfileContextProvider extends Component {
                 alert(err.response)
             })
 
-            
             // if(this.state.user!==null)
             // {   
             //     let usercopy=JSON.parse(JSON.stringify(this.state.user))
@@ -79,33 +60,18 @@ class ProfileContextProvider extends Component {
           {
             console.log(this.context.baseURL+" "+ localStorage.getItem("token"))
 
-             //GET 1 
+              //GET 2 tmaaaaaam
             axios.get(this.context.baseURL+'/me',{headers:{'authorization': "Bearer "+ localStorage.getItem("token"),}
-            }).then(res => {
-                if(res.status===200)
-                {
-                    this.setState({user: res.data})
-                    this.setState({name1:res.data.name})
-                    console.log(this.state.name1)
-                }
-                else
+                }).then(res => {
+                    if(res.status===200)
+                    {
+                        this.setState({user: res.data})
+                        console.log(this.state.user)
+                    }else
                 alert(res.status)
             console.log(res.data)}).catch(err => {
-                alert(err.response)
-            })
-
-             //GET 2 
-            axios.get(this.context.baseURL+'/me',{headers:{'authorization': "Bearer "+ localStorage.getItem("token"),}
-            }).then(res => {
-                if(res.status===200)
-                {
-                    this.setState({user: res.data})
-                    console.log(this.state.user)
-                }else
-            alert(res.status)
-        console.log(res.data)}).catch(err => {
-                alert(err.response)
-            })
+                    alert(err.response)
+                })
 
             this.setState({status:'connected'})
             // if(this.state.user!==null)
