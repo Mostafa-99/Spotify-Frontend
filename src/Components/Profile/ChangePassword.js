@@ -10,21 +10,41 @@ class ChangePassword extends Component {
     constructor() {
         super()
         this.state = {
-          user:{},
+          user:{
+              image:"",
+          },
           successMessage: false,
           failMessgae: false
         }
     }
 
     componentDidMount(){
-        axios.get('http://localhost:3000/users/1/')
+        axios.get("http://138.91.114.14/api/me", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+        })
             .then(res => {
-              this.setState({user: res.data})
+                console.log(res)
+                if(res.status===200)
+                {
+                    this.setState(prevState => (
+                        {
+                        user: {                   
+                            ...prevState.user,    
+                            image: res.data.images    
+                        }
+                    }))
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    console.log("fail")
+                }
             })
-        this.setState(()=> ({ 
-            successMessage: false,
-            failMessage: false,
-        }))
     }
     changePasswordHandle(currentPassword,newPassword,repeatPassword){
         if(newPassword===repeatPassword)
@@ -35,7 +55,7 @@ class ChangePassword extends Component {
             },
             {
                 headers: {
-                    "authorization": localStorage.getItem("token")
+                    'authorization': "Bearer "+localStorage.getItem("token"),
             }
         }
         )   
@@ -62,26 +82,8 @@ class ChangePassword extends Component {
             }
 
         })
-        console.log(localStorage.getItem("loginType"))
-            /*console.log('if')
-            this.setState(prevState => ({
-                user: {                   
-                    ...prevState.user,    
-                    password: newPassword,
-                },
-                successMessage: true,
-                failMessage: false
-            }))*/
-        }
-        else
-        {
-            console.log('else')
-            this.setState(() => ({
-                failMessage: true,
-                successMessage: false,
-            }))
-        }
-    };
+    }
+    }
 
     render()
     {
