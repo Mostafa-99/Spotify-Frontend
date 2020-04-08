@@ -5,12 +5,12 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
 import { ConfigContext } from '../../Context/ConfigContext'
-import { ProfileContext } from '../../Context/ProfileContext'
 var today;
 var day;
 var month;
 var year;
 class EditProfile extends Component {
+    static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
@@ -30,8 +30,7 @@ class EditProfile extends Component {
     }
     
     componentDidMount(){
-        this.setState(()=> ({ messShow: false}))
-        axios.get("http://138.91.114.14/api/me", {
+        axios.get(this.context.baseURL+"/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
@@ -95,7 +94,7 @@ class EditProfile extends Component {
 
     editProfileHandle(userYear,userMonth,userDay,userGender,userEmail){
         console.log(userYear,userMonth,userDay,userGender,userEmail)
-        axios.put('http://138.91.114.14/api/me', 
+        axios.put(this.context.baseURL+'/me', 
         {
             "email": userEmail,
             "name": this.state.user.name,
