@@ -104,7 +104,7 @@ class EditProfile extends Component {
         },
         {
             headers: {
-                "authorization": localStorage.getItem("token"),
+                'authorization': "Bearer "+localStorage.getItem("token"),
                 "contentType": "application/json"
             }
         }
