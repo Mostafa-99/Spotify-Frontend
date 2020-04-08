@@ -58,7 +58,7 @@ const CreateAlbum = () => {
 
     try {
       //console.log(this.context.baseURL);
-      const res = await axios.post("http://138.91.114.14/api/me/albums",
+      const res = await axios.post(url.baseURL+"/me/albums",
         formData,
         {
           headers: {
