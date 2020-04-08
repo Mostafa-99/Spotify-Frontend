@@ -92,8 +92,12 @@ class HomeNavBar extends Component {
                                 </div>
                                 )
                             }
+                             {logInOrNot==="true"?(
                                 <div className="col-2"><RecentActivity/>
                                 </div> 
+
+                             ):<div></div>}  
+                            
                         {logInOrNot==="true" ? (
                         
                             <div className="col-2 " id="navbar-profile-section" >

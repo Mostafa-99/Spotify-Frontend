@@ -454,12 +454,12 @@ class Home extends Component {
                                     }
                                 }}>
                                 <div className="card" id={playList.id}>
-                                <MenuProvider id={playList.id} component="span" >
+                             {/*   <MenuProvider id={playList.id} component="span" >
                             <Menu id={playList.id} theme={theme.dark} animation={animation.fade}>
                             <Item>Save To Library</Item>
                             <Item>Copy Playlist Link</Item>
                             <Item>Open in App</Item>
-                            </Menu>
+                            </Menu>*/}
 
                                     <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
@@ -469,7 +469,7 @@ class Home extends Component {
                                             <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
                                             <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
                                         </div>
-                                    </div> </MenuProvider> 
+                                    </div>{/**</MenuProvider>  */} 
                                 </div>
                                 </Link>
                         </div>
@@ -489,12 +489,13 @@ class Home extends Component {
                                     }
                                 }}>
                             <div className="card" id={playList.id}>
-                                <MenuProvider id={playList.id} >
+                               
+                               {/* <MenuProvider id={playList.id} >
                             <Menu id={playList.id} theme={theme.dark} animation={animation.fade}>
                             <Item>Save To Library</Item>
                             <Item>Copy Playlist Link</Item>
                             <Item>Open in App</Item>
-                            </Menu>                                        <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                            </Menu>       */}                                 <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{playList.title}</h5>
                                         <p className="card-text">{playList.description}</p>
@@ -502,7 +503,7 @@ class Home extends Component {
                                             <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
                                             <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
                                         </div>
-                                    </div> </MenuProvider> 
+                                    </div> 
                                 </div>
                                 </Link>
                         </div>
@@ -522,12 +523,12 @@ class Home extends Component {
                                     }
                                 }}>
                             <div className="card" id={album.id}>
-                                <MenuProvider id={album.id} component="span" >
+                               {/**  <MenuProvider id={album.id} component="span" >
                             <Menu id={album.id} theme={theme.dark} animation={animation.fade}>
                             <Item>Save To Library</Item>
                             <Item>Copy album Link</Item>
                             <Item>Open in App</Item>
-                            </Menu>  
+                            </Menu>  */}
                                     <img src={album.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{album.title}</h5>
@@ -536,7 +537,7 @@ class Home extends Component {
                                             <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
                                             <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
                                         </div>    
-                                    </div></MenuProvider> 
+                                    </div> 
                                 </div>
                                 </Link>
                         </div>
@@ -556,12 +557,12 @@ class Home extends Component {
                                     }
                                 }}>
                                 <div className="card" id={album.id}>
-                                <MenuProvider id={album.id} component="span" >
+                                {/*<MenuProvider id={album.id} component="span" >
                                     <Menu id={album.id} theme={theme.dark} animation={animation.fade}>
                                     <Item>Save To Library</Item>
                                     <Item>Copy Playlist Link</Item>
                                     <Item>Open in App</Item>
-                                    </Menu>                                         <img src={album.imageUrl} className="card-img-top" alt="..."></img>
+                                    </Menu>   */}                                      <img src={album.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{album.title}</h5>
                                         <p className="card-text">{album.artist}</p>
@@ -569,7 +570,7 @@ class Home extends Component {
                                             <button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-play"></i></button>
                                             <button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}><i className="fa fa-pause"></i></button>
                                         </div>    
-                                    </div></MenuProvider>  
+                                    </div>  
                                 </div>
                             </Link>
                         </div>
@@ -593,12 +594,12 @@ class Home extends Component {
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
-                                <MenuProvider id={playlist.id} component="span" >
+                             {/**    <MenuProvider id={playlist.id} component="span" >
                                     <Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
                                     <Item>Save To Library</Item>
                                     <Item>Copy Playlist Link</Item>
                                     <Item>Open in App</Item>
-                                    </Menu>                                         <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    </Menu> */}                                        <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{playlist.title}</h5>
                                         <p className="card-text">{playlist.description}</p>
@@ -606,7 +607,7 @@ class Home extends Component {
                                             <button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-play"></i></button>
                                             <button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-pause"></i></button>
                                         </div>    
-                                    </div></MenuProvider>  
+                                    </div> 
                                 </div>
                             </Link>
                         </div>
@@ -630,12 +631,12 @@ class Home extends Component {
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
-                                <MenuProvider id={playlist.id} component="span" >
+                            {/**    <MenuProvider id={playlist.id} component="span" >
                                     <Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
                                     <Item>Save To Library</Item>
                                     <Item>Copy Playlist Link</Item>
                                     <Item>Open in App</Item>
-                                    </Menu>                                         <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    </Menu>*/}                                          <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{playlist.title}</h5>
                                         <p className="card-text">{playlist.description}</p>
@@ -643,7 +644,7 @@ class Home extends Component {
                                             <button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-play"></i></button>
                                             <button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-pause"></i></button>
                                         </div>    
-                                    </div></MenuProvider>  
+                                    </div> 
                                 </div>
                             </Link>
                         </div>
@@ -663,12 +664,12 @@ class Home extends Component {
                                     }
                                 }}>
                                 <div className="card" id={artist.id}>
-                                    <MenuProvider id={artist.id} component="span" >
+                            {/**       <MenuProvider id={artist.id} component="span" >
                                 <Menu id={artist.id} theme={theme.dark} animation={animation.fade}>
                                 <Item>Save To Library</Item>
                                 <Item>Copy Playlist Link</Item>
                                 <Item>Open in App</Item>
-                                </Menu>                                          
+                                </Menu>  */}                                          
                                 <img src={artist.imageUrl} className="card-img-top rounded-circle" alt="..."></img>
                                         <div className="card-body">
                                             <h5 className="card-title">{artist.name}</h5>
@@ -677,7 +678,7 @@ class Home extends Component {
                                                 <button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-play"></i></button>
                                                 <button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}><i className="fa fa-pause"></i></button>
                                             </div>
-                                        </div></MenuProvider> 
+                                        </div>
                                 </div>
                             </Link>
                         </div>
