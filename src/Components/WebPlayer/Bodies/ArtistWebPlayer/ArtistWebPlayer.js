@@ -36,7 +36,7 @@ class ArtistWebPlayer extends Component {
     }
 
     componentDidMount() {
-        
+
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
 
@@ -343,16 +343,23 @@ class ArtistWebPlayer extends Component {
                                 <div className="card-group">
                                     {this.state.playLists.map( playList => (
                                         <div>
-                                        <div className="card" id={playList.id}>
-                                            <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
-                                                <div className="card-body">
-                                                    <h5 className="card-title">{playList.name}</h5>
-                                                    <div id={playList .id}>
-                                                        <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
-                                                        <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
-                                                    </div>
-                                                </div> 
-                                            </div>
+                                             <Link to={{
+                                                    pathname:"/playlist-webplayer",
+                                                    state:{
+                                                    myId :playList.id
+                                                    }
+                                                }}>
+                                            <div className="card" id={playList.id}>
+                                                <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                                                    <div className="card-body">
+                                                        <h5 className="card-title">{playList.name}</h5>
+                                                        <div id={playList .id}>
+                                                            <button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-play"></i></button>
+                                                            <button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}><i className="fa fa-pause"></i></button>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                                </Link>
                                         </div>
                                     ))}
                                 </div>   
