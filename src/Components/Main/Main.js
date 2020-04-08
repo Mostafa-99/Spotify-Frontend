@@ -1,7 +1,7 @@
 import React from 'react';
 import './main.css'
 
-import '../Button/spotify_button.css'
+import '../Button/SpotifyButton.css'
 import { Link } from 'react-router-dom';
 
 function Main() {

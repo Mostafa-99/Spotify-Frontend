@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../SignUp/sign_up.css';
+import '../Authentication/SignUp.css';
 import spotify_black_logo from '../../Images/spotify_logo_black.png';
-import '../Button/spotify_button.css';
+import '../Button/SpotifyButton.css';
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'

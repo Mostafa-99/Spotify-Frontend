@@ -2,8 +2,8 @@ import React from 'react';
 
 import MainIndex from './Components/userIndex/MainIndex.js'
 
-import SignUp from './Components/SignUp/SignUp.js';
-import LogIn from './Components/Login/LogIn.js';
+import SignUp from './Components/Authentication/SignUp.js';
+import LogIn from './Components/Authentication/LogIn.js';
 import Navbar from './Components/Navigation/Navbar.js';
 import Footer from './Components/Footer/Footer.js';
 import PasswordReset from './Components/PasswordReset/PasswordReset.js'
