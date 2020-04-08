@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./UpgradeArtist.css";
+import { ConfigContext } from '../../../Context/ConfigContext'
+
 class UpgradeArtist extends Component {
+  static contextType=ConfigContext;
+
   state = {
     code: "",
   };
 
   sendMail = () => {
     axios
-      .post("/me/meArtist", {
+      .post(this.context.baseURL+"/me/Artist",{} ,{
         headers: {
           "authorization":"Bearer "+localStorage.getItem("token"),
         },
@@ -20,8 +24,17 @@ class UpgradeArtist extends Component {
           alert("Please try again");
         }
       })
-      .catch((error) => {
-        alert(error.response.data.message);
+      .catch((res) => {
+        if (res.status === 401) {
+          localStorage.removeItem("loginType");
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("token");
+          localStorage.removeItem("userID");
+        }
+        else{
+          console.log(res);
+          alert(res.message);
+        }
       });
   };
 
@@ -30,7 +43,7 @@ class UpgradeArtist extends Component {
       let code = this.state.code;
       axios
         .post(
-          "/me/upgrade/"+{code},
+          this.context.baseURL+"/me/upgrade/"+code,{},
           {
             headers: {
               "authorization":"Bearer "+localStorage.getItem("token"),

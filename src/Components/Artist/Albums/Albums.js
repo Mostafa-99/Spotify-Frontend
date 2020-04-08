@@ -5,8 +5,10 @@ import "../UploadFile/uploadfile.css";
 import "../../WebPlayer/WebplayerHome.css";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { Link } from "react-router-dom";
-
+import { ConfigContext } from '../../../Context/ConfigContext'
 class Albums extends Component {
+  static contextType=ConfigContext;
+
   constructor() {
     super();
     this.state = {
@@ -15,12 +17,11 @@ class Albums extends Component {
   }
 
   componentDidMount() {
-    console.log("errrrrrr");
     {
       /*/me/albums */
     }
     axios
-      .get("http://138.91.114.14/api/me/albums", {
+      .get(this.context.baseURL+"/me/albums", {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -36,18 +37,25 @@ class Albums extends Component {
               artist: album.artists[0].name,
             })),
           });
-        } else if (res.status === 401) {
+        } 
+      }) .catch((res)=>{
+        if (res.status === 401) {
           localStorage.removeItem("loginType");
           localStorage.removeItem("isLoggedIn");
           localStorage.removeItem("token");
           localStorage.removeItem("userID");
         }
-      });
+        else{
+          alert(res.message);
+        }
+      })
+
+      
   }
   render() {
     return (
       <div className="artist-body" id="webplayer-home">
-        <div className="full-page container albums-page">
+        <div className="full-page container albums-page artist-albums-page">
           <ArtistSidebar />
           <div className="albums-section">
             <div className="header-button-container">

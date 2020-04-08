@@ -135,12 +135,18 @@ class EditProfile extends Component {
     {
         {document.title ="Edit profile - Spotify"}
 
-    return(
+    return(                                                  
+        <ProfileContext.Consumer>{(profile) => (
+            <ConfigContext.Consumer>{(config) => {
+                const {user}= profile
+                //const {baseURL}= config
+                
+                return(
         <div className="bg-dark-clr">
             
         <div id="edit-profile"className="container editProfile">
             <div className="row">
-                <SideBar img={this.state.user.images[0]}/>
+                <SideBar img={user.images}/>
                 <div className="col-lg-9 edit-section">
                     <div className="edit-div">
                         { this.state.successMessage && <div class="alert alert-success">
@@ -154,10 +160,10 @@ class EditProfile extends Component {
                             <div className="email-info">
                                 <label className="labels">Email</label>
                                 <div className="email-fb hide">
-                                    <p className="user-info">{this.state.user.email}</p>
+                                    <p className="user-info">{user.email}</p>
                                 </div>
                                 <div className="email-normal">
-                                    <input ref="email" className="email-text-box" defaultValue={this.state.user.email}></input>
+                                    <input ref="email" className="email-text-box" defaultValue={user.email}></input>
                                 </div>
                             </div>
                             <div className="gender-info">
@@ -169,7 +175,7 @@ class EditProfile extends Component {
                                     </select>
                                 </div>
                                 <div className="gender-fb hide">
-                                    <p className="user-info">{this.state.user.gender}</p>
+                                    <p className="user-info">{user.gender}</p>
                                 </div>
                             </div>
                             <div className="birthday-info">
@@ -308,7 +314,7 @@ class EditProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="birthday-fb hide"> 
-                                    <p className="user-info">{this.state.user.dateOfBirth}</p>    
+                                    <p className="user-info">{user.dateOfBirth}</p>    
                                 </div>
                             </div>
                             <div className="buttons">
@@ -321,8 +327,14 @@ class EditProfile extends Component {
             </div>
         </div>
         </div>
-        )
+                )
+            }}
+            </ConfigContext.Consumer>
+            )}</ProfileContext.Consumer>
+        );
+        
     }
+    
 }
 
 export default EditProfile;
