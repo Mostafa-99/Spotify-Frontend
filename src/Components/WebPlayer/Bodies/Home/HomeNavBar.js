@@ -30,7 +30,6 @@ class HomeNavBar extends Component {
             .then(res => {
               this.setState({user: res.data})
             })
-            console.log(this.status)
     }
 
     logOut= () => {
@@ -38,7 +37,6 @@ class HomeNavBar extends Component {
         if(this.state.loginType==="fb")
         {
             window.FB.logout(function(response) {
-            console.log(response);
           });
           
         }
@@ -57,7 +55,6 @@ class HomeNavBar extends Component {
 
     toggleNavbarProfile=()=> {
         const element = document.getElementById("dropdownMenuLink");
-        console.log(element);
         element.classList.toggle("toggle-background-color");
       }
       
@@ -72,8 +69,6 @@ class HomeNavBar extends Component {
                 return(
                     
                     <div id='root-navbar' className='root-navbar'>
-                        
-                            
                         <head>
                             <title>Google Icons</title>
                             <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
