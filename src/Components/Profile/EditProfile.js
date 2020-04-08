@@ -38,7 +38,6 @@ class EditProfile extends Component {
                         {
                         user: {                   
                             ...prevState.user,    
-                            id: res.data.data._id,
                             name: res.data.data.name,
                             dateOfBirth: res.data.data.dateOfBirth,
                             email: res.data.data.email,
