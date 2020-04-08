@@ -82,10 +82,10 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
-                console.log("Album details")
+                console.log("Album details here")
                 console.log(res)
                 this.setState({
-                    album_image_url:res.data.data.album.image,
+                    album_image_url:res.data.data.plalist.images[0],
                     album_name:res.data.data.album.name,
                     is_liked:false //get from backend
                 })
@@ -105,9 +105,10 @@ export class AlbumWebPlayer extends Component {
                 alert("error");
             }
         })
+        /*
         .catch(error => {
             alert(error.response.data.message);
-        })
+        })*/
     }
 
     /**
@@ -138,9 +139,10 @@ export class AlbumWebPlayer extends Component {
                 alert("error");
             }
         })
+        /*
         .catch(error => {
            alert(error.response.data.message);
-        })
+        })*/
     }
 
     /**

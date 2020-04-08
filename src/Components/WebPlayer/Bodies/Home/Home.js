@@ -634,7 +634,7 @@ class Home extends Component {
                     {this.state.secondCategory.map( playlist => (
                         <div>
                             <Link to={{
-                                    pathname:"/webplayer/playlist",
+                                    pathname:"/playlist-webplayer",
                                     state:{
                                     myId :playlist.id
                                     }
