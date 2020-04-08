@@ -507,7 +507,7 @@ class Home extends Component {
                 </div>
             </div>
             <div className="workout-playlists-section">
-                <h2 className="section-title workout-playlists">Most react Albums</h2>
+                <h2 className="section-title workout-playlists">Most recent Albums</h2>
                 <div className="card-group">
                     {this.state.mostRecentAlbums.map( album => (
                         <div>
