@@ -29,7 +29,6 @@ class ArtistWebPlayerNavBar extends Component {
             .then(res => {
               this.setState({user: res.data})
             })
-            console.log(this.status)
     }
 
     logOut= () => {
@@ -37,7 +36,6 @@ class ArtistWebPlayerNavBar extends Component {
         if(this.state.loginType==="fb")
         {
             window.FB.logout(function(response) {
-            console.log(response);
           });
           
         }
@@ -56,7 +54,6 @@ class ArtistWebPlayerNavBar extends Component {
 
     toggleNavbarProfile=()=> {
         const element = document.getElementById("dropdownMenuLink");
-        console.log(element);
         element.classList.toggle("toggle-background-color");
       }
       
@@ -68,13 +65,9 @@ class ArtistWebPlayerNavBar extends Component {
             <ProfileContext.Consumer>{(profile) => (
                 <ConfigContext.Consumer>{(config) => {
                     const {user}= profile
-                            
-                            
                         return(
                             
                             <div id='root-navbar' className='root-navbar'>
-                                
-                                    
                                 <head>
                                     <title>Google Icons</title>
                                     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
