@@ -85,8 +85,8 @@ export class AlbumWebPlayer extends Component {
                 console.log("Album details here")
                 console.log(res)
                 this.setState({
-                    album_image_url:res.data.data.plalist.images[0],
-                    album_name:res.data.data.album.name,
+                    album_image_url:res.data.data.playlist.images[0],
+                    album_name:res.data.data.playlist.name,
                     is_liked:false //get from backend
                 })
                 res.data.data.album.artists.map((artist)=>(
