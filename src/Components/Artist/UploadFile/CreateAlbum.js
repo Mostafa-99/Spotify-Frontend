@@ -57,9 +57,8 @@ const CreateAlbum = () => {
     formData.append("image", img);
 
     try {
-      console.log(this.context.baseURL);
-      const res = await axios.post(
-        url.baseURL+"/me/albums",
+      //console.log(this.context.baseURL);
+      const res = await axios.post(url.baseURL+"/me/albums",
         formData,
         {
           headers: {

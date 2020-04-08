@@ -45,6 +45,7 @@ import ArtistWebPlayer from './Components/WebPlayer/Bodies/ArtistWebPlayer/Artis
 import Search from './Components/WebPlayer/Bodies/Search/Search'
 
 import AlbumWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer.js'
+import PlaylistWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/PlaylistWebPlayer.js'
 
 //import {withRouter} from 'react-router';
 import {Route,BrowserRouter as Router,Switch} from 'react-router-dom';
@@ -94,6 +95,7 @@ function App() {
         <Route path="/home" exact component={Home} />
         <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
         <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
+        <Route path="/playlist-webplayer" exact component={PlaylistWebPlayer} />
 
         {/*Protected pages */}
         <ProtectedRoute path="/edit-profile" component={EditProfile}/>
