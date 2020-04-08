@@ -1,11 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState,useContext } from "react";
 import axios from "axios";
 import Message from "./Message";
 import SideBar from "../../Profile/SideBar";
 import "../UploadFile/uploadfile.css";
 import Progress from "./Progress";
 import ArtistSidebar from '../SideBar/ArtistSidebar'
+import {ConfigContext} from '../../../Context/ConfigContext'
+
 const TrackUpload = () => {
+    const url = useContext(ConfigContext);
     const [file, setFile] = useState("");
     const [fileName, setFilename] = useState("Choose Track");
     const [trackName, setTrackName] = useState("Track Name");
@@ -33,7 +36,7 @@ const TrackUpload = () => {
         console.log(trackName);
 //console.log(formData.form);
         try {
-            const res = await axios.post("http://138.91.114.14/api/me/albums/5e8cd05a9d28027e3d165a5d/tracks", formData, {
+            const res = await axios.post(url.baseURL+"/me/albums/5e8cd05a9d28027e3d165a5d/tracks", formData, {
                 headers: {
                     'authorization':"Bearer "+localStorage.getItem("token"),
 
