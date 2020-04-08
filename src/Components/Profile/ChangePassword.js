@@ -74,15 +74,12 @@ class ChangePassword extends Component {
                 localStorage.removeItem("token");
                 localStorage.removeItem("userID");
             }
-            else{
-                this.setState({
-                    successMessage: false,
-                    failMessage: true
-                })
-            }
-
         }) 
-    }
+        .catch(res => {this.setState({
+            failMessage: true,
+            successMessage: false
+        })})
+        }
     else{
         this.setState({
             successMessage: false,
