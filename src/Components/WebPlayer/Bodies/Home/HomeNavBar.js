@@ -5,8 +5,8 @@ import { Route } from 'react-router';
 import '../NavBars.css';
 import axios from 'axios'
 
-import { ConfigContext } from '../../Context/ConfigContext'
-import { ProfileContext } from '../../Context/ProfileContext'
+import { ConfigContext } from '../../../../Context/ConfigContext'
+import { ProfileContext } from '../../../../Context/ProfileContext'
 
 class HomeNavBar extends Component {
     constructor(){
