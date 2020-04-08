@@ -68,10 +68,10 @@ class Albums extends Component {
             </div>
             <div className="card-group">
               {this.state.artistAlbums.map((album) => (
-                <Link
+              <Link
                   to={{
                     pathname: "/webplayer/album",
-                    state: { myId: this.state.artistAlbums._id },
+                    state: { myId:album.id },
                   }}
                 >
                   <div className="card">
