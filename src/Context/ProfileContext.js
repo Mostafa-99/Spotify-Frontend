@@ -16,11 +16,11 @@ class ProfileContextProvider extends Component {
         
         
           let show=localStorage.getItem("isLoggedIn");
-          console.log(this.context.baseURL+" "+ localStorage.getItem("isLoggedIn"))
+          
 
           if(show==="true")
           {
-              console.log(this.context.baseURL+" "+ localStorage.getItem("token"))
+              
 
              //GET 
             axios.get(this.context.baseURL+'/me',{headers:{'authorization': "Bearer "+ localStorage.getItem("token"),}
@@ -55,10 +55,9 @@ class ProfileContextProvider extends Component {
     componentDidUpdate=()=>{
 
           let show=localStorage.getItem("isLoggedIn");
-          console.log("User1: "+this.state.user);
+          
           if(show==="true" && this.state.status==="not connected")
           {
-            console.log(this.context.baseURL+" "+ localStorage.getItem("token"))
 
               //GET 2 tmaaaaaam
             axios.get(this.context.baseURL+'/me',{headers:{'authorization': "Bearer "+ localStorage.getItem("token"),}

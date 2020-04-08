@@ -154,9 +154,8 @@ class DesktopNavbar extends Component {
                 <ConfigContext.Consumer>{(config) => {
                     const {user}= profile
                     //const {baseURL}= config
-                    console.log(user)
-                    console.log(user.images)
-                   // console.log(user.images[0])
+                    //console.log(user)
+                    //console.log(user.images)
                     return(
                     <MyDesktopNavbar>
                         <div id="my-desk-navbar">

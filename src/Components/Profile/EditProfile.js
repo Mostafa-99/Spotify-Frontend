@@ -146,7 +146,7 @@ class EditProfile extends Component {
             
         <div id="edit-profile"className="container editProfile">
             <div className="row">
-                <SideBar img={user.images[0]}/>
+                <SideBar img={user.images}/>
                 <div className="col-lg-9 edit-section">
                     <div className="edit-div">
                         { this.state.successMessage && <div class="alert alert-success">
@@ -327,11 +327,11 @@ class EditProfile extends Component {
             </div>
         </div>
         </div>
-        )
-    }}
-    </ConfigContext.Consumer>
-    )}</ProfileContext.Consumer>
-        )
+                )
+            }}
+            </ConfigContext.Consumer>
+            )}</ProfileContext.Consumer>
+        );
         
     }
     
