@@ -94,6 +94,7 @@ class EditProfile extends Component {
     }
 
     editProfileHandle(userYear,userMonth,userDay,userGender,userEmail){
+        console.log(userYear,userMonth,userDay,userGender,userEmail)
         axios.put('http://138.91.114.14/api/me', 
         {
             "email": userEmail,
@@ -113,6 +114,12 @@ class EditProfile extends Component {
             if(res.status === 200)
             {
                 this.setState({
+                    user: {                   
+                        ...prevState.user,    
+                        dateOfBirth: userYear+'-'+userMonth+'-'+userDay,
+                        gender: userGender,
+                        email: userEmail
+                    },
                    successMessage: true,
                    failMessage: false
                 })
@@ -126,28 +133,14 @@ class EditProfile extends Component {
             }
             else 
             {
+                console.log("fail")
                 this.setState({
                     failMessage: true,
                     successMessage: false
                 })
             }
         })
-
-        this.setState(prevState => ({
-          user: {                   
-              ...prevState.user,    
-              dateOfBirth: userYear+'-'+userMonth+'-'+userDay,
-              gender: userGender,
-              email: userEmail
-          },
-      }))
     };
-
-    componentDidUpdate(){
-        axios.put('http://localhost:3000/users/'+this.state.user.id+'/', this.state.user)   
-        .then(res => {console.log(res.data)})
-        console.log(this.state)
-    }
 
     render()
     {
@@ -195,15 +188,15 @@ class EditProfile extends Component {
                                 <div className="birthday-normal">
                                     <div className="birthday-inputs">
                                         <select  ref="month" required=""  className="combo-box month">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                            <option value="6">06</option>
+                                            <option value="7">07</option>
+                                            <option value="8">08</option>
+                                            <option value="9">09</option>
                                             <option value="10">10</option>
                                             <option value="11">11</option>
                                             <option value="12">12</option>
