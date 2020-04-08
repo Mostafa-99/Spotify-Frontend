@@ -24,8 +24,16 @@ class UpgradeArtist extends Component {
           alert("Please try again");
         }
       })
-      .catch((error) => {
-        alert(error.response.data.message);
+      .catch((res) => {
+        if (res.status === 401) {
+          localStorage.removeItem("loginType");
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("token");
+          localStorage.removeItem("userID");
+        }
+        else{
+          alert(res.message);
+        }
       });
   };
 

@@ -17,7 +17,6 @@ class Albums extends Component {
   }
 
   componentDidMount() {
-    console.log("errrrrrr");
     {
       /*/me/albums */
     }
@@ -38,18 +37,25 @@ class Albums extends Component {
               artist: album.artists[0].name,
             })),
           });
-        } else if (res.status === 401) {
+        } 
+      }) .catch((res)=>{
+        if (res.status === 401) {
           localStorage.removeItem("loginType");
           localStorage.removeItem("isLoggedIn");
           localStorage.removeItem("token");
           localStorage.removeItem("userID");
         }
-      });
+        else{
+          alert(res.message);
+        }
+      })
+
+      
   }
   render() {
     return (
       <div className="artist-body" id="webplayer-home">
-        <div className="full-page container albums-page">
+        <div className="full-page container albums-page" style="height:auto">
           <ArtistSidebar />
           <div className="albums-section">
             <div className="header-button-container">

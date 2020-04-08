@@ -8,7 +8,7 @@ class MainSelector extends Component {
     render() {
         return (
             <div>
-            {this.context.userType==="artist" ?(
+            {this.context.user.role==="artist" ?(
                 <Albums/>
             )  : (
                 <UpgradeArtist/>
