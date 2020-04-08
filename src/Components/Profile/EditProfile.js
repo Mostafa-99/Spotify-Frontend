@@ -34,17 +34,19 @@ class EditProfile extends Component {
                 console.log(res)
                 if(res.status===200)
                 {
-                    this.setState({
-                        user: res.data.data.map( info => ({
-                            id: info._id,
-                            name:info.name,
-                            dateOfBirth:info.dateOfBirth,
-                            image:info.images[0],
-                            email:info.email,
-                            gender:info.gender
-                        })
-                        )
-                    })
+                    this.setState(prevState => (
+                        {
+                        user: {                   
+                            ...prevState.user,    
+                            id: res.data.data._id,
+                            name: res.data.data.name,
+                            dateOfBirth: res.data.data.dateOfBirth,
+                            email: res.data.data.email,
+                            gender: res.data.data.gender,
+                            image: res.data.data.images    
+                        }
+                    }))
+                       
 
                     today = new Date(this.state.user.dateOfBirth);
                     day = today.getDate();
