@@ -37,12 +37,8 @@ class ArtistWebPlayer extends Component {
 
     componentDidMount() {
         
-        
-
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
-
-        console.log("amr diab id is : ",this.state.myId);
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
         /*' http://we871.mocklab.io/artists/200 */
@@ -55,7 +51,6 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
-                    console.log(res);
                     this.setState(prevState => ({
                     artist: {                   
                         ...prevState.artist,    
@@ -77,6 +72,7 @@ class ArtistWebPlayer extends Component {
                 }
                 
         })
+
             /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
             /* /artists/"+this.state.myId+"/albums */
         axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/albums",{/* albums */
@@ -88,7 +84,6 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
-                    console.log(res);
                     this.setState({
                         albums: res.data.data.map( album => ({
                             name:album.name,
@@ -110,7 +105,6 @@ class ArtistWebPlayer extends Component {
                 
             })
 
-
             /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
         axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/created-playlists",{/* playlists*/
             headers:{
@@ -121,7 +115,6 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
-                    console.log(res);
                     this.setState({
                         playLists: res.data.data.map( playList => ({
                             id:playList._id,
@@ -154,7 +147,6 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
-                    console.log(res);
                     this.setState({
                         relatedArtists: res.data.data.map( relatedArtist => ({
                             id:relatedArtist._id,
@@ -163,7 +155,6 @@ class ArtistWebPlayer extends Component {
                             type:relatedArtist.role
                         }))
                     })
-                    console.log("hereeee",this.state.relatedArtists.imageUrl);
                 }
                 else if(res.status===401)
                 {
@@ -180,7 +171,6 @@ class ArtistWebPlayer extends Component {
     }
         
         getAlbumTracks(){
-           
             /* http://localhost:3000/album_tracks/1*/
             axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/top-tracks",{/* top tracks*/
                 headers:{
@@ -191,7 +181,6 @@ class ArtistWebPlayer extends Component {
                 .then(res => {
                     if(res.status===200)
                 {   
-                    console.log("top tracks res ",res);
                     this.setState({tracks:res.data.data})
                 }
                 else if(res.status===401)
@@ -349,10 +338,7 @@ class ArtistWebPlayer extends Component {
                                     ))}
                                 </div>    
                             </div>
-                            
-
                             <div className="playlists-sub-section">
-
                                 <h2 className="section-title playlists">Playlists</h2>
                                 <div className="card-group">
                                     {this.state.playLists.map( playList => (
@@ -405,9 +391,8 @@ class ArtistWebPlayer extends Component {
                     {/*<ProgressBar/>*/}
                 </div>
             </div>
-            
         </div>
     )
-                        }
+    }
 }
 export default ArtistWebPlayer;
