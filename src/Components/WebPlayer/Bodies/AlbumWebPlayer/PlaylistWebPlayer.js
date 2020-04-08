@@ -89,11 +89,6 @@ export class AlbumWebPlayer extends Component {
                     album_name:res.data.data.playlist.name,
                     is_liked:false //get from backend
                 })
-                res.data.data.album.artists.map((artist)=>(
-                    this.setState({
-                        artists:artist.name
-                    })
-                ))
             }
             else if(res.status===401){
                 localStorage.removeItem("loginType");
@@ -203,7 +198,6 @@ export class AlbumWebPlayer extends Component {
                             <div className="album-below-image-div">
                                 <div className="album-title-div">
                                     <h1 className="album-title">{this.state.album_name}</h1>
-                                    <p className="album-artist">{this.state.artists}</p>
                                 </div>
                                 <div className="row album-buttons-div">
                                     <div className="album-play-button-div">
