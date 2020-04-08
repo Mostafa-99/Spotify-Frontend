@@ -15,10 +15,11 @@ height:100%;
 padding-bottom: 10px;
 margin-bottom: -10px;
 
+
 #my-mob-footer .my-col-1
 {
-    margin-top:10%;
-    margin-left:8.5%;
+    margin-top:12%;
+    margin-left:8.2%;
     
 }
 #my-mob-footer .my-col-2,.my-col-3,.my-col-4
@@ -46,6 +47,10 @@ letter-spacing:2px;
  width:25px;
  margin-left:8px;
  margin-top:7.5px;
+}
+
+#my-mob-footer i{
+    padding:10px 10px 5px 13px ;
 }
 
 #my-mob-footer #mini-footer
@@ -102,6 +107,17 @@ letter-spacing:2px;
   margin-right:10px;
   cursor:pointer;
 }
+@media screen and (max-width: 470px)
+{
+    #my-mob-footer .my-col-1
+{
+    margin-top:15%;
+    margin-left:10%;
+    
+}
+
+}
+
 `
 
 const MobileFooter = () => {
@@ -144,9 +160,9 @@ const MobileFooter = () => {
                             </ul>
                             </div>
                             <div className="my-col-4">  
-                            <span className="dot"><a href="https://instagram.com/spotify"><img className="invert" src={in_logo} alt="in"></img></a></span>
-                            <span className="dot"><a href="https://twitter.com/spotify"><img className="invert" src={tw_logo} alt="tw"></img></a></span>
-                            <span className="dot"><a href="https://facebook.com/spotify"><img className="invert" src={fb_logo} alt="fb"></img></a></span>
+                            <span className="dot"><a href="https://instagram.com/spotify"><i className="fab fa-instagram"></i></a></span>
+                            <span className="dot"><a href="https://twitter.com/spotify"><i className="fab fa-twitter"></i></a></span>
+                            <span className="dot"><a href="https://facebook.com/spotify"><i className="fab fa-facebook-f"></i></a></span>
                                  {/* <span className="dot"><a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a></span>
                                  <span className="dot"><a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a></span>
                                  <span className="dot"><a href="https://facebook.com/spotify"><i className="fab fa-2x fa-facebook-f white-text pr-4"> </i></a></span> */}

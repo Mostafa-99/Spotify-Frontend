@@ -38,7 +38,7 @@ height:100%;
     margin: 100px auto;
 }
 #my-desk-footer i{
-    padding:5px 15px ;
+    padding:10px 10px 5px 13px ;
 }
 
 #my-desk-footer h5
@@ -168,9 +168,9 @@ const DesktopFooter = () => {
                             </div>
 
                             <div className="my-col-4"> 
-                            <span className="dot"><a href="https://instagram.com/spotify"><img className="invert" src={in_logo} alt="in"></img></a></span>
-                            <span className="dot"><a href="https://twitter.com/spotify"><img className="invert" src={tw_logo} alt="tw"></img></a></span>
-                            <span className="dot"><a href="https://facebook.com/spotify"><img className="invert" src={fb_logo} alt="fb"></img></a></span>
+                            <span className="dot"><a href="https://instagram.com/spotify"><i className="fab fa-instagram fa-2x"></i></a></span>
+                            <span className="dot"><a href="https://twitter.com/spotify"><i className="fab fa-twitter fa-2x"></i></a></span>
+                            <span className="dot"><a href="https://facebook.com/spotify"><i className="fab fa-facebook-f fa-2x"></i></a></span>
 
                             {/* <span className="dot"><a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a></span>
                             <span className="dot"><a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a></span>

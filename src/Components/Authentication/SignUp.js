@@ -148,7 +148,7 @@ class SignUp extends Component {
         if(this.state.gender==="" && this.state.gendererror===false)
             this.setState({gendererror: true});
 
-        if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='')
+        if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='' && (this.state.email===this.state.emailrecheck))
         {
 
             axios.post(this.context.baseURL+'/signUp',
@@ -185,15 +185,7 @@ class SignUp extends Component {
                     
                 }
                }).catch(err => {
-                if(err.response.status===400 || err.response.status===401)
-                {
-                    if(this.state.status!=="invalid")
-                        this.setState({status: 'invalid'});
-                    this.setState({invalid: true});
-                }
-                else
                 alert(err)
-
                })
         }
     }

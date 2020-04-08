@@ -33,7 +33,7 @@ class ProfileContextProvider extends Component {
             alert(res.status)
         //console.log(res.data)
     }).catch(err => {
-                alert(err.response)
+                alert(err)
             })
 
             // if(this.state.user!==null)
@@ -71,7 +71,7 @@ class ProfileContextProvider extends Component {
                 alert(res.status)
             //console.log(res.data)
         }).catch(err => {
-                    alert(err.response)
+                    alert(err)
                 })
 
             this.setState({status:'connected'})
