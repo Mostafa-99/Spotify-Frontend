@@ -44,11 +44,11 @@ class EditProfile extends Component {
                         {
                         user: {                   
                             ...prevState.user,    
-                            name: res.data.data.name,
-                            dateOfBirth: res.data.data.dateOfBirth,
-                            email: res.data.data.email,
-                            gender: res.data.data.gender,
-                            image: res.data.data.images    
+                            name: res.data.name,
+                            dateOfBirth: res.data.dateOfBirth,
+                            email: res.data.email,
+                            gender: res.data.gender,
+                            image: res.data.images    
                         }
                     }))
                        
