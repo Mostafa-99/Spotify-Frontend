@@ -11,8 +11,9 @@ const exclusionArray = [
   '/artist-webplayer',
   '/webplayer/album',
   '/artist/album-page',
+  '/webplayer/album',
+  '/playlist-webplayer'
 
-  '/webplayer/album'
 ]
 
 class Footer extends Component {

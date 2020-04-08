@@ -132,15 +132,11 @@ class EditProfile extends Component {
                 localStorage.removeItem("token");
                 localStorage.removeItem("userID");
             }
-            else 
-            {
-                console.log("fail")
-                this.setState({
-                    failMessage: true,
-                    successMessage: false
-                })
-            }
         })
+        .catch(res => {this.setState({
+            failMessage: true,
+            successMessage: false
+        })})
     };
 
     render()
