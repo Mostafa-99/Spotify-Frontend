@@ -106,7 +106,7 @@ class NotificationsSettings extends Component {
     }
 
     saveNotificationsHandle(){
-        axios.put('http://138.91.114.14/api/me', 
+        axios.put('http://138.91.114.14/api/me/notifications', 
         this.state.Notifications,
         {
             headers: {

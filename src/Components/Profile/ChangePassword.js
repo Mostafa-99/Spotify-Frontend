@@ -49,7 +49,7 @@ class ChangePassword extends Component {
     changePasswordHandle(currentPassword,newPassword,repeatPassword){
         if(newPassword===repeatPassword)
         {
-            axios.put('/me/changePassword',{
+            axios.put('http://138.91.114.14/api/me/changePassword',{
                 "newPassword": newPassword,
                 "passwordConfirmation": currentPassword
             },
@@ -81,6 +81,12 @@ class ChangePassword extends Component {
                 })
             }
 
+        }) 
+    }
+    else{
+        this.setState({
+            successMessage: false,
+            failMessage: true
         })
     }
     }
