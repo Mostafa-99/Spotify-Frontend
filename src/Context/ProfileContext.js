@@ -28,10 +28,11 @@ class ProfileContextProvider extends Component {
                 if(res.status===200)
                 {
                     this.setState({user: res.data})
-                    console.log(this.state.user)
+                    //console.log(this.state.user)
                 }else
             alert(res.status)
-        console.log(res.data)}).catch(err => {
+        //console.log(res.data)
+    }).catch(err => {
                 alert(err.response)
             })
 
@@ -65,10 +66,11 @@ class ProfileContextProvider extends Component {
                     if(res.status===200)
                     {
                         this.setState({user: res.data})
-                        console.log(this.state.user)
+                       // console.log(this.state.user)
                     }else
                 alert(res.status)
-            console.log(res.data)}).catch(err => {
+            //console.log(res.data)
+        }).catch(err => {
                     alert(err.response)
                 })
 

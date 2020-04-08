@@ -4,12 +4,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 
-// import './index.css';
-// import $ from 'jquery';
-// import SignUp from './Components/SignUp/sign_up.js'
-// import LogIn from './Components/Login/log_in.js'
-// import HelpPage from './Components/HelpPage/HelpPage.js'
-// import './Components/HelpPage/help';
 
 
 

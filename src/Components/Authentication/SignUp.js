@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../SignUp/sign_up.css'
+import './SignUp.css'
 import spotify_black_logo from '../../Images/spotify_logo_black.png'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'

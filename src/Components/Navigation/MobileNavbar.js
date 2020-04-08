@@ -187,7 +187,7 @@ class MobileNavbar  extends Component {
         if(this.state.loginType==="fb")
         {
             window.FB.logout(function(response) {
-            console.log(response);
+            //console.log(response);
           });
 
         }

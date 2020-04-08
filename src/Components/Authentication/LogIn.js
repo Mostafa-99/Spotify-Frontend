@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../SignUp/sign_up.css';
+import '../Authentication/SignUp.css';
 import spotify_black_logo from '../../Images/spotify_logo_black.png';
-import '../Button/spotify_button.css';
+import '../Button/SpotifyButton.css';
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
@@ -110,7 +110,7 @@ class LogIn extends Component {
 
         if(is_email_valid && is_psw_valid)
         {
-            console.log(this.context.baseURL+'/signIn');
+            //console.log(this.context.baseURL+'/signIn');
             axios.post(this.context.baseURL+'/signIn',
             {
             "email":memail,
@@ -139,8 +139,8 @@ class LogIn extends Component {
 
                  }
                 }).catch(err =>{
-console.log(err)
-console.log(err.response)
+//console.log(err)
+//console.log(err.response)
                     if(err.response.status===401 || err.response.status===400) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")

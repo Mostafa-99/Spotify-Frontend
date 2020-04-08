@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './PasswordReset.css'
-import '../Button/spotify_button.css'
-import '../SignUp/sign_up.css'
+import '../Button/SpotifyButton.css'
+import '../Authentication/SignUp.css'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 
@@ -19,7 +19,7 @@ class PasswordReset extends Component {
         event.preventDefault();
         if(this.validateEmail(this.state.email))
         {
-            console.log(this.state.email);
+            //console.log(this.state.email);
             axios.post(this.context.baseURL+'/resetPassword',
             {
             "email":this.state.email
