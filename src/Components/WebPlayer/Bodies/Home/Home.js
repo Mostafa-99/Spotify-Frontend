@@ -460,7 +460,7 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playList.id
                                     }
                                 }}>
                                 <div className="card" id={playList.id}>
@@ -495,7 +495,7 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playList.id
                                     }
                                 }}>
                             <div className="card" id={playList.id}>
