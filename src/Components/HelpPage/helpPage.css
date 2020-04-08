@@ -115,6 +115,7 @@ z-index: 1;
 #videos-slides-imgs .carousel-item .btn{
     border: #000 3px solid;
     color: #000;
+    background-color: #FFF !important;
     border-radius: 20px;
     font-size: 14px;
     font-weight: 700;
@@ -125,7 +126,7 @@ z-index: 1;
 }
 #videos-slides-imgs .carousel-item .btn:hover {
     color: #FFF; 
-    background-color: #000;
+    background-color: #000 !important;
 
 }
 #videos-slides-imgs .carousel-item .btn:hover i{color: #FFF;}

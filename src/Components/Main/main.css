@@ -1,14 +1,13 @@
 #main-section {
     background: linear-gradient(#F037A5 -60%, #FAE62D 140%);
     width: 100%;
-    height:calc( 500px + 20vw);
+    height:calc( 800px + 10vw);
     overflow-x: hidden;
     overflow-y: hidden;
 };
 #main-section .bgimg{
     background: url(/i/home/hero-burst.svg) no-repeat;
 }
-
 
 #main-section h1{
     margin-top: calc( 170px + 2vw);

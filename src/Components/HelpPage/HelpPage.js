@@ -1,29 +1,9 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter,Link } from "react-router-dom";
-import Footer from '../Footer/footer.js'
-import Navbar from '../Navigation/navbar.js'
-import './helpPage.css';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery';
-/*
 
-scrollBtn = () =>{
-    ('.scroll-button').on('click', function(event) {
-      if (this.hash !== '') {
-        event.preventDefault();
-    
-        const hash = this.hash;
-    
-        $('html, body').animate(
-          {
-            scrollTop: $(hash).offset().top
-          },
-          800
-        );
-      }
-    });
-  }
-*/
+import React, { Component } from 'react';
+import {Link } from "react-router-dom";
+import './helpPage.css';
+import $ from 'jquery';
+
 class HelpPage extends Component {
   
   scrollBtn =()=>{
@@ -62,7 +42,6 @@ class HelpPage extends Component {
        if(!targetDot) return;
 
        const currentSlide =track.querySelector('.active');
-      // const currentDot=dotNav.querySelector('.active');
        const targetIndex=dots.findIndex(dot => dot===targetDot);
 
        const targetSlide=imgs[targetIndex];
@@ -73,7 +52,6 @@ class HelpPage extends Component {
   dotNav.addEventListener('onchange',changeImg);
 
   dotNav.addEventListener('click',changeImg);
-  //slides.addEventListener('onchange',changeImg);
   }
 
   modalVideos=()=>{
@@ -112,8 +90,8 @@ window.location.reload();
     
     return (
     <div>
-      <Navbar/>
-      <div id="body help-page" onLoad=" LoadOnce()" >
+      
+      <div id="body help-page">
 
        
         <section id="navigation-section">
@@ -121,15 +99,18 @@ window.location.reload();
             <div>
               <h3>Account & Payment</h3>
               <ul>
-               <Link to="/account_help">
+
+               <Link to="/account-help">
                 <li className="a">Account  Help</li>
+
                </Link> 
               </ul>
             </div>
             <div>
               <h3>Using Spotify</h3>
               <ul>
-              <Link to="/accountoverview"><li className="a">Features</li></Link>
+
+              <Link to="/features-main"><li className="a">Features</li></Link>
               </ul>
             </div>  
           </div>
@@ -249,7 +230,9 @@ window.location.reload();
                 Chromecast, sound system, car, TV, and PlayStation integration;
                 sharing and creating playlists with your friends... All of this is ready for you.
               </p>
+
              <Link to="/" className="a btn btn-primary" role="button">Get Spotify</Link> 
+
             </div>
           </div>
         </section>  
@@ -269,7 +252,7 @@ window.location.reload();
           </div>
         </div>
       </div>
-      <Footer/>
+     
     </div>
   
   ); 
@@ -279,5 +262,5 @@ window.location.reload();
 
 
 
-export default  withRouter(HelpPage);
+export default HelpPage;
 

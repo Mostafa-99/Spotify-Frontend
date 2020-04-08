@@ -1,0 +1,236 @@
+#artist-webplayer{
+    background-color: #121212;
+
+    isolation: isolate;
+    padding-top: 90px;
+}
+#artist-webplayer a{
+    color: #fff;
+    text-decoration: none;
+}
+/*
+#artist-webplayer a:hover{
+    color: #fff;
+    text-decoration: none;
+}*/
+#artist-webplayer .background-grey {
+    background-color: #333333;
+    color: #fff;
+}
+#webplayer-layout,#about-section,#related-artists-section,#artist-overview-section{
+    
+    height: auto;
+    min-height: 110vh;
+}
+
+#artist-webplayer .section-title{
+    font-size: 28px;
+    line-height: 1.6;
+    font-weight: 600;
+    letter-spacing: -.36px;
+    display: inline;
+    white-space: nowrap;
+    color: #fff;
+    padding-left: 30px;
+}
+#artist-webplayer .bio-title{
+    padding: 0 32px;
+    margin-bottom: 18px;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: .015em;
+    font-weight: var(--glue-font-weight-black);
+    color: #fff;
+    text-transform: none;
+    margin-bottom: 1em;
+}
+#artist-webplayer .section-body{
+    width: 75%;
+    padding:0 32px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: .015em;
+    font-weight: var(--glue-font-weight-normal);
+    color: #b3b3b3;
+    text-transform: none;
+    margin-bottom: 1em;
+}
+#artist-webplayer .card {
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+    height: 250px;
+    background-color: rgb(40, 40, 40);
+    border-radius: 10px;
+    margin: 10px;
+}
+#artist-webplayer .card-group{
+    padding: 20px;
+}
+#artist-webplayer .card-body {
+   padding: 10px 0;
+   text-align: left;
+}
+#artist-webplayer .rounded-circle{
+    height: 110px;
+    width: 110px;
+}
+#artist-webplayer .card-title {
+    color:white;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+}
+#artist-webplayer .card-text {
+    font-size: 12px;
+    line-height: 18px;
+    height: 70px;
+    color: #b3b3b3;
+    padding: 0;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+#artist-webplayer .play-btn, #artist-webplayer .pause-btn {
+    position: absolute;
+    outline: none;
+    display:none;
+    text-align: center;
+    top:190px;
+    right:20px;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background-color:rgb(29, 185, 84)!important;
+    border-color: rgb(29, 185, 84) !important;
+}
+#artist-webplayer .card:hover .active-play{
+    display: block;
+}
+#artist-webplayer .active-pause{
+    display: block;
+}
+#artist-webplayer .fa-play {
+    color: white;
+}
+#artist-webplayer .play-btn:hover, #artist-webplayer .pause-btn:hover {
+    transform: scale(1.1);
+}
+#artist-webplayer.hide{
+    display: none;
+}
+#artist-buttons{
+    display: inline-block;
+    margin: 0 0 20px;
+   
+}
+#artist-menu-button{
+    background-color: none;
+    color: #fff;
+}
+#artist-menu-button#dropdownMenuButton{
+    background-color: none;
+    color: #fff;
+}
+#artist-follow-button{
+	line-height: 18px;
+	width: 16px;
+	font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 40%;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease 0s;
+    border: 3px solid #fff;
+    color: white;
+    margin: 10px 0 10px 0;
+    border-radius: 500px;
+    padding: 8px 34px;
+    font-weight: 700;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+	font-weight: 700;
+	border: 1px solid transparent;
+	transition-duration: .3s;
+	border-width: 0;
+	text-transform: uppercase;
+	white-space: normal;
+	color: #fff;
+	box-shadow: 0 0 0 2px #fff inset;
+	background-color: transparent;
+	transition: all 33ms cubic-bezier(.3,0,0,1);
+	letter-spacing: 1.76px;
+	will-change: transform;
+  }
+  
+#artist-follow-button:hover {  
+	transform: scale(1.06);
+	color: #FFF;
+	text-decoration: none;
+  }
+
+#artist-follow-button:focus {
+    outline: none;
+}
+#artist-sections-nav{
+    padding-left: 30px;
+    margin:16px 0 30px;
+}
+
+
+#artist-play-button{
+    padding: 8px 34px;
+    line-height: 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 40%;
+    cursor: grabbing;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease 0s;
+    border:none;
+    color: white;
+    background-color: #1DB954;
+    font-size: 12px;
+    border-radius: 500px;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin:10px 15px 10px 10px ;
+}
+#artist-play-button:hover {
+    background: #1ED760;
+    border-color: #1ED760;
+    transform: scale(1.06);
+}
+
+#artist-play-button:active {
+    border-color: #1ED760;
+    background: #1ED760;
+}
+
+#artist-play-button:focus {
+    outline: none;
+}
+
+#artist-heading-name{
+    font-size: 72px;
+    line-height: 82px;
+    letter-spacing: -.005em;
+    font-weight: var(--glue-font-weight-black);
+    color: #fff;
+    text-transform: none;
+    padding-left: 30px;
+}
+
+
+@media only screen and (max-width: 992px) {
+    #artist-buttons{
+        display: none;
+    }
+}

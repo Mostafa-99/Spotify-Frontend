@@ -1,0 +1,86 @@
+#webplayer-home{
+    background-color: #121212;
+}
+
+#webplayer-home{
+    isolation: isolate;
+    padding-top: 90px;
+}
+#webplayer-home .section-title{
+    font-size: 28px;
+    line-height: 1.6;
+    font-weight: 600;
+    letter-spacing: -.36px;
+    display: inline;
+    white-space: nowrap;
+    color: #fff;
+    padding-left: 30px;
+}
+#webplayer-home .card {
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+    height: 250px;
+    background-color: rgb(40, 40, 40);
+    border-radius: 10px;
+    margin: 10px;
+}
+#webplayer-home .card-group{
+    padding: 20px;
+}
+#webplayer-home .card-body {
+   padding: 10px 0;
+   text-align: left;
+}
+#webplayer-home .rounded-circle{
+    height: 110px;
+    width: 110px;
+}
+#webplayer-home .card-title {
+    color:white;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+}
+#webplayer-home .card-text {
+    font-size: 12px;
+    line-height: 18px;
+    height: 70px;
+    color: #b3b3b3;
+    padding: 0;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+#webplayer-home .play-btn, #webplayer-home .pause-btn {
+    position: absolute;
+    outline: none;
+    display:none;
+    text-align: center;
+    top:190px;
+    right:20px;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background-color:rgb(29, 185, 84)!important;
+    border-color: rgb(29, 185, 84) !important;
+}
+#webplayer-home .card:hover .active-play{
+    display: block;
+}
+#webplayer-home .active-pause{
+    display: block;
+}
+#webplayer-home .fa-play {
+    color: white;
+}
+/*#webplayer-home .card:hover .play-button {
+    display: block;
+}*/
+#webplayer-home .play-btn:hover, #webplayer-home .pause-btn:hover {
+    transform: scale(1.1);
+}
+#webplayer-home .artist-albums-page{
+    height: auto;
+}

@@ -7,12 +7,12 @@ import NotificationsSettings from './NotificationSettings';
 class Profile extends Component {
   render()
   {
+          
     return (
-     
         <div className="Profile">
-            <Route path="/accountoverview" component={AccountSettings}/>
-            <Route path="/editprofile" component={EditProfile}/>
-            <Route path="/notificationsettings" component={NotificationsSettings}/>
+            <Route path="/account-overview" component={AccountSettings}/>
+            <Route path="/edit-profile" component={EditProfile}/>
+            <Route path="/notification-settings" component={NotificationsSettings}/>
         </div>
      
     );

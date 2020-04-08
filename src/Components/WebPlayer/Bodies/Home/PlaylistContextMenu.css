@@ -1,0 +1,15 @@
+
+  .react-contexify__item:not(.react-contexify__item--disabled) > .react-contexify__item__content{
+    font-size: 14px;
+line-height: 20px;
+letter-spacing: .015em;
+font-weight: var(--glue-font-weight-normal);
+color: #b3b3b3;
+text-transform: none;
+font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+ }
+
+ .react-contexify__item:not(.react-contexify__item--disabled):hover > .react-contexify__item__content {
+    color: #fff !important;
+    background-color: #3f3f3f !important; 
+}

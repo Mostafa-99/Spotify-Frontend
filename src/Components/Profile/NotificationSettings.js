@@ -3,28 +3,69 @@ import SideBar from './SideBar'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
-import Footer from '../Footer/footer.js'
-import Navbar from '../Navigation/navbar.js'
+
 
 class NotificationsSettings extends Component {
     constructor() {
         super()
         this.state = {
-          user:{},
+          user:{
+              image:"",
+          },
           Notifications:{},
-          messshow: false
+          successMessage: false,
+          failMessage: false
         }
         this.notificationTypeHandle=this.notificationTypeHandle.bind(this)
         this.saveNotificationsHandle=this.saveNotificationsHandle.bind(this)
     }
 
     componentDidMount(){
-        axios.get('http://localhost:3000/users/1/')
+        axios.get("http://138.91.114.14/api/me", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+        })
             .then(res => {
-              this.setState({
-                  user: res.data,
-                  Notifications: res.data.notifications
-                })
+                console.log(res)
+                if(res.status===200)
+                {
+                    this.setState(prevState => (
+                        {
+                        user: {                   
+                            ...prevState.user,    
+                            image: res.data.images    
+                        }
+                    }))
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    console.log("fail")
+                }
+            })
+        axios.get("http://138.91.114.14/api/me/notifications", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+        })
+            .then(res => {
+                console.log(res)
+                if(res.status===200)
+                {
+                    this.setState({Notifications:res.data})
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    console.log("fail")
+                }
             })
     }
 
@@ -65,9 +106,41 @@ class NotificationsSettings extends Component {
     }
 
     saveNotificationsHandle(){
-        axios.patch('http://localhost:3000/users/'+this.state.user.id+'/', {notifications: this.state.Notifications}) //must be put request
-        .then(res => {console.log(res.data)})
-        this.setState(()=> ({ messshow: true}))
+        axios.put('http://138.91.114.14/api/me/notifications', 
+        this.state.Notifications,
+        {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            }
+        }
+        )   
+        .then(res => {
+            console.log(res)
+            if(res.status === 200)
+            {
+                this.setState(
+                   {
+                   successMessage: true,
+                   failMessage: false
+                   }
+                )
+            }
+            else if(res.status === 401)
+            {
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
+            }
+            else 
+            {
+                console.log("fail")
+                this.setState({
+                    failMessage: true,
+                    successMessage: false
+                })
+            }
+        })
     }
 
     render()
@@ -76,7 +149,6 @@ class NotificationsSettings extends Component {
 
         return(
             <div className="bg-dark-clr">
-                <Navbar/>
             <div id="notifications-settings">
                 <head>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
@@ -90,11 +162,12 @@ class NotificationsSettings extends Component {
                                     <h1 className="page-header">Notification settings</h1>
                                 </div>
                                 <div className="notification-info">
-                                    { 
-                                        this.state.messshow && <div class="alert alert-success">
-                                        <p>Notifications Saved</p>
-                                        </div> 
-                                    }
+                                { this.state.successMessage && <div class="alert alert-success">
+                                    <p>Notifications changed</p>
+                                    </div> }
+                                    { this.state.failMessage && <div class="alert alert-danger">
+                                    <p>Error</p>
+                                    </div> }
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -142,7 +215,7 @@ class NotificationsSettings extends Component {
                                         </tbody>
                                     </table>
                                     <div className="buttons">
-                                        <Link to="/accountoverview" className="cancel-button">CANCEL</Link>
+                                        <Link to="/account-overview" className="cancel-button">CANCEL</Link>
                                         <button className="btn-sm btn btn-success save-button" onClick={this.saveNotificationsHandle}>SAVE</button>
                                     </div>
                                 </div>
@@ -151,7 +224,6 @@ class NotificationsSettings extends Component {
                     </div>
                 </div>
             </div>
-            <Footer/>
             </div>
         )
     }

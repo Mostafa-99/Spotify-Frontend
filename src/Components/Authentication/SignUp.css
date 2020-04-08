@@ -1,0 +1,262 @@
+#my-sign-up #logo {
+    align-self: center;
+    width: 200px;
+    margin: 25px auto 0 auto;
+    display:block;
+}
+
+#my-sign-up .center-box-2 {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+#my-sign-up .center-box {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#my-sign-up form p {
+    font-size: 12px;
+    text-align: center;
+}
+
+#my-sign-up form a {
+    color: #1DB954;
+}
+
+#my-sign-up form a:hover {
+    text-decoration: none;
+    color: #1ED760;
+}
+
+#my-sign-up #invalid-message {
+    padding:10px;
+    background-color: #e22134;
+    color:white;
+    width: 400px;
+    margin: 15px auto;
+    text-align:center;
+    font-size:12px;
+    font-weight: lighter;
+    font-family: arial;
+}
+
+#my-sign-up #fb-sign-up-2,#fb-sign-up{
+    background-color: #3B5998;
+    width: 400px;
+    border-color: #3B5998;
+    border: 3px solid #3B5998;
+    height:40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: grabbing;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease 0s;
+    border-radius: 50px;
+    padding: 4px 0px;
+    
+    color: white;
+    margin: 0 auto;
+    margin: 5px 0 0 0;
+}
+
+#my-sign-up #fb-sign-up{
+    
+    height:50px;
+}
+
+#my-sign-up .p-5{
+    margin: -50px 0 0 0 ;
+}
+
+#my-sign-up #fb-sign-up-2:hover,#fb-sign-up:hover {
+    background-color: rgb(60, 102, 190);
+    border-color: rgb(60, 102, 190);
+}
+
+#my-sign-up form h6 {
+    font-size: 17px;
+    font-weight: bold;
+
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+}
+
+#my-sign-up form h4 {
+    font-size: 10px;
+}
+
+#my-sign-up form h5 {
+    font-size: 12px;
+    color: gray;
+    text-align: left;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+}
+
+#my-sign-up #apple-sign-up {
+    color: white;
+    width: 400px;
+    background-color: black;
+    border-color: black;
+    margin: 2% 0;
+}
+#my-sign-up #apple-sign-up:hover {
+    background-color: rgb(42, 42, 42);
+    border-color:rgb(42, 42, 42);
+
+}
+
+#my-sign-up #login {
+    margin: -30px 0 0 32px;
+    position: absolute;
+    display: inline;
+}
+
+#my-sign-up #sign-up-now {
+    color: gray;
+    width: 400px;
+    background-color: transparent;
+    border-color: black;
+    margin: 10px 0 2% 0;
+    height: 50px;
+}
+#my-sign-up #sign-up-now:hover {
+    color: white;
+    background-color: rgb(80, 79, 79);
+    border-color: rgb(80, 79, 79);
+  
+}
+
+#my-sign-up #remember-me {
+    margin: 0 0 0 2px;
+    text-align: left;
+    width:150px;
+    padding-right:0 ;
+    
+}
+
+#my-sign-up label {
+    font-size: 16px;
+    color: gray;
+    padding: 0 5px ;
+}
+
+#my-sign-up #sign-up{
+width:300px;
+margin-bottom:20px;
+}
+#my-sign-up input{
+    margin: 10px auto;
+}
+
+#my-sign-up input[type=number]{
+
+    margin-left:35px;
+    height:25px;
+    width: 100px;
+    margin-right:25px;
+    border:none;
+}
+
+#my-sign-up select
+{
+    border:none;
+}
+
+#my-sign-up form
+{
+    border:none;
+}
+
+#my-sign-up form .fb-login-button
+{
+    margin-top: -500px;
+}
+
+#my-sign-up .divider{
+border-top: 1px solid #d9dadc;
+    display: block;
+    line-height: 1px;
+    margin: 25px 0;
+    position: relative;
+    text-align: center;
+}
+
+#my-sign-up hr{
+    border-top: 1px solid #d9dadc;
+    display: block;
+    line-height: 1px;
+    margin: 25px 0;
+    position: relative;
+    text-align: center;
+}
+
+#my-sign-up .divider-title{
+background: #fff;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+}
+
+#my-sign-up .error-message{
+    color:red;
+    text-align:left;
+    margin: 10px 0 10px 10px;
+}
+
+#my-sign-up .my-font{
+    
+        font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+    }
+
+
+
+@media screen and (max-width: 470px)
+{
+    #my-sign-up .center-box {
+        width: 300px;
+    }
+
+    #my-sign-up #invalid-message{
+        width: 300px;
+    }
+
+    #my-sign-up .center-box-2 {
+        width: 320px;
+    }
+
+    #my-sign-up #logo{
+        width: 150px;    
+    }
+
+    #my-sign-up #fb-sign-up-2{
+        width: 300px; 
+        font-size:14px;
+    }
+    #my-sign-up #fb-sign-up,#fb-sign-up-2{
+        width: 300px; 
+    }
+
+    #my-sign-up input[type=number]{
+        margin-left:35px;
+        width: 55px;
+        margin-right:20px;
+
+    }
+
+    #my-sign-up #sign-up-now {
+        width:300px;
+    }
+    #my-sign-up #login {
+        display:block;
+        margin: 20px auto 20px auto;
+        width:250px;
+        position: relative;
+    }
+
+
+    
+}

@@ -1,0 +1,182 @@
+#album-main-row{
+    height: 100%;
+}
+#album-bar-webplayer-main-div .col-lg-2{
+    padding: 0px;
+    background-color:black;
+}
+#album-bar-webplayer-main-div .col-lg-10{
+    padding: 0px;
+    height: 100%;
+}
+
+#album-webplayer-main-div{
+    padding: 50px;
+    background-color: rgb(21, 21, 21);
+    color: grey;
+    height: 100%;
+    min-width: 700px;
+    min-height: 1000px;
+}
+
+#album-webplayer-main-div .appear-on-small-screens{
+    width:100%;
+    border-color: grey;
+}
+@media (min-width:1200px){
+    #album-webplayer-main-div .appear-on-small-screens{
+        display: none;
+    }
+}
+
+#album-webplayer-main-div .album-details-div{
+    width: 25%;
+    padding: 10px 30px;
+    justify-content: center;
+    display: inline;
+}
+@media (max-width:1200px){
+    #album-webplayer-main-div .album-details-div{
+        width: 100%;
+        display: contents;
+    }
+}
+
+#album-webplayer-main-div .album-image-div{
+    width:100%;
+    height: auto;
+}
+@media (max-width:1200px){
+    #album-webplayer-main-div .album-image-div{
+        width: 175px;
+    }
+}
+#album-webplayer-main-div .album-image{
+    width:100%;
+    height: 200px;
+}
+@media (max-width:1200px){
+    #album-webplayer-main-div .album-image{
+        width: 175px;
+        height: 175px;
+    }
+}
+
+#album-webplayer-main-div .album-below-image-div{
+    width: 100%;
+    text-align: center;
+    padding: 30px 0px;
+}
+@media (max-width:1200px){
+    #album-webplayer-main-div .album-below-image-div{
+        width: auto;
+        text-align: left;
+        padding: 0px 30px;
+    }
+}
+
+#album-webplayer-main-div .tracks-list-div{
+    width: 75%;
+    padding: 10px;
+}
+@media (max-width:1200px){
+    #album-webplayer-main-div .tracks-list-div{
+        width: 100%;
+    }
+}
+
+#album-webplayer-main-div .album-title{
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 36px;
+    letter-spacing: -.005em;
+    font-weight: 700;
+    color: #fff;
+}
+#album-webplayer-main-div .album-artist{
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+    padding-bottom: 3px;
+}
+#album-webplayer-main-div .album-buttons-div{
+    width: 100%;
+    margin: 0px;
+}
+
+#album-webplayer-main-div .album-play-button-div{
+    width: 100%;
+    padding: 10px;
+}
+@media (max-width:1200px){
+    #album-webplayer-main-div .album-play-button-div{
+        width: 150px;
+    }
+}
+#album-webplayer-main-div .album-options-div{
+    width: 100%;
+    padding: 10px;
+    margin: 0px;
+}
+@media (max-width:1200px){
+    #album-webplayer-main-div .album-options-div{
+        width: 150px;
+
+    }
+}
+
+#album-webplayer-main-div .album-heart-div{
+    width: 50%;
+    padding: 10px;
+    text-align: right;
+}
+#album-webplayer-main-div .fa-heart{
+    font-size: 24px;
+}
+#album-webplayer-main-div .fas{
+    color: rgb(38, 218, 98);
+}
+#album-webplayer-main-div .album-dots-div{
+    width: 50%;
+    padding: 5px;
+    text-align: left;
+}
+#album-webplayer-main-div .album-dots{
+    font-size: 24px;
+    font-weight: 1000;
+    cursor: default;
+}
+
+#album-webplayer-main-div .btn-success{
+    border-radius: 500px;
+    background-color: #1db954;
+    cursor: pointer;
+    width: 60%;
+    padding: 8px;
+}
+@media (max-width:1200px){
+    #album-webplayer-main-div .btn-success{
+        width: 100%;
+    }
+}
+#album-webplayer-main-div .btn-success:hover{
+    transform: scale(1.05) perspective(1px);
+    background-color: rgb(38, 218, 98);
+}
+#album-webplayer-main-div .btn-success::before{
+    content: "PLAY";
+}
+#album-webplayer-main-div .btn-success:active .btn-success::before{
+    content: "PAUSE";
+}
+
+#album-webplayer-main-div .dropdown-menu{
+    background-color: rgb(65, 62, 62);
+}
+#album-webplayer-main-div .dropdown-item{
+    color: rgb(180, 180, 180);
+}
+#album-webplayer-main-div .dropdown-item:hover{
+    background-color: rgb(49, 49, 48);
+    color: white;
+}

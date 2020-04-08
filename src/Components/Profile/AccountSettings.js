@@ -5,20 +5,48 @@ import AccountOverview from './AccountOverview';
 import AccountHeading from './AccountHeading';
 import axios from 'axios'
 import './Profile.css';
-import Footer from '../Footer/footer.js'
-import Navbar from '../Navigation/navbar.js'
+import { ConfigContext } from '../../Context/ConfigContext'
 class AccountSettings extends Component {
+    static contextType=ConfigContext;
     constructor(){
         super()
         this.state = {
-            user:{}
+            user:{
+                dateOfBirth:"",
+                email:"",
+                image:"",
+            },
         }
     }
 
     componentDidMount(){
-        axios.get('http://localhost:3000/users/1/')
+        axios.get(this.context.baseURL+"/me", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+        })
             .then(res => {
-              this.setState({user: res.data})
+                console.log(res)
+                if(res.status===200)
+                {
+                    this.setState(prevState => (
+                        {
+                        user: {                   
+                            ...prevState.user,    
+                            dateOfBirth: res.data.dateOfBirth,
+                            email: res.data.email,
+                            image: res.data.images    
+                        }
+                    }))
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    console.log("fail")
+                }
             })
     }
 
@@ -28,7 +56,7 @@ class AccountSettings extends Component {
 
         return(
             <div className="bg-dark-clr">
-                <Navbar/>
+
                 <AccountHeading />
                 <div className="container settings">
                     <div className="row">
@@ -36,7 +64,7 @@ class AccountSettings extends Component {
                         <AccountOverview info={this.state.user}/>
                     </div>
                 </div>
-                <Footer/>
+
             </div>
         )
     }

@@ -69,6 +69,9 @@
 #profile-sidebar .first {
   border-top: 1px solid grey;
 }
+#profile-sidebar .disabled{
+  cursor: default;
+}
 #account-overview {
 	background-color: #fff;
   color: black;
@@ -155,14 +158,14 @@
   border-color: #000 !important;
   color: #000 !important;
 }
-#edit-profile .edit-section, #notifications-settings .notification-section {
+#edit-profile .edit-section, #notifications-settings .notification-section, #change-password .password-section {
   background: #F8F8F8;
   padding:0;
 }
-#edit-profile .edit-div, #notifications-settings .notification-div {
+#edit-profile .edit-div, #notifications-settings .notification-div, #change-password .password-div {
   padding: 40px;
 }
-#notifications-settings .page-header ,#edit-profile .page-header {
+#notifications-settings .page-header ,#edit-profile .page-header , #change-password .page-header {
   font-size: 26px;
     margin: .5em 0;
     color: #1DB954;
@@ -171,30 +174,31 @@
     border-bottom: 1px solid#EFEFEF;
 }
 
-#edit-profile .edit-info, #notifications-settings .notification-info {
+#edit-profile .edit-info, #notifications-settings .notification-info, #change-password .password-info {
   padding:40px;
   background-color: #FFF;
 }
-#edit-profile .labels {
+#edit-profile .labels,#change-password .labels {
   color: #919496;
+  margin: 8px 0;
 }
 #edit-profile .user-info {
   color: #222326;
-  padding: 15px 0;
+  padding: 10px 0 10px 5px;
 }
-#edit-profile .combo-box , .phone-text-box {
+#edit-profile .combo-box , #edit-profile .email-text-box ,#change-password .new-password-text-box ,#change-password .repeat-password-text-box , #change-password .current-password-text-box{
   width:100%;
   padding: 6px 12px;
   font-size: 16px;
   line-height: 1.5;
-  margin: 15px 0;
+  margin: 15px 5px;
 }
-#edit-profile .buttons , #notifications-settings .buttons{
+#edit-profile .buttons , #notifications-settings .buttons, #change-password .buttons{
   border-top: 1px solid#EFEFEF;
   display: flex;
   justify-content: flex-end;
 }
-#edit-profile .save-profile-button , #notifications-settings .save-button {
+#edit-profile .save-profile-button , #notifications-settings .save-button, #change-password .set-new-password-button {
   font-size: 12px;
   line-height: 1;
   border-radius: 500px;
@@ -211,7 +215,7 @@ a:hover {
   color: inherit;
 }
 
-#edit-profile .cancel-button , #notifications-settings .cancel-button {
+#edit-profile .cancel-button , #notifications-settings .cancel-button , #change-password .cancel-button{
   margin: 32px 45px 0 0;
   letter-spacing: 2px;
   font-weight: 700;
@@ -221,11 +225,11 @@ a:hover {
   border-radius: 500px;
   color: black!important;
 }
-#edit-profile .cancel-button:hover, #notifications-settings .cancel-button:hover {
+#edit-profile .cancel-button:hover, #notifications-settings .cancel-button:hover , #change-password .cancel-button:hover{
   cursor: pointer;
 }
 
-#edit-profile .alert-success , #notifications-settings .alert-success{
+#edit-profile .alert-success , #notifications-settings .alert-success , #change-password .alert-success {
   border-width: 0;
   font-size: 12px;
   padding: 14px 14px 2px 14px;
@@ -233,6 +237,14 @@ a:hover {
   font-weight: 400;
   background-color: #1ED760;
   color: #FFF;
+}
+
+#edit-profile .birthday-inputs{
+  display: flex;
+}
+
+#edit-profile .hide, #profile-sidebar .hide{
+  display: none;
 }
 
 #notifications-settings .table td, #notifications-settings .table th {
