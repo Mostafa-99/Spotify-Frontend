@@ -51,7 +51,7 @@ class Navbar extends Component {
       }
     
       updatePredicate() {
-        this.setState({ isDesktop: window.outerWidth > 900 });
+        this.setState({ isDesktop: window.outerWidth > 1000 });
       }
 
       updateVisibility() {

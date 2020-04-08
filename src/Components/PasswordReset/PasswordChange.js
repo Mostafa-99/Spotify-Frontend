@@ -91,7 +91,7 @@ export default class PasswordChange extends Component {
                 (
                     <div>
                         <h2>Password updated</h2>
-                        <p>Sweet! Your new password has now been set and you are logged in.<Link to="/login" className="hyper-link">Go to account</Link></p>
+                        <p>Sweet! Your new password has now been set and now you can log in.<Link to="/login" className="hyper-link">Go to account</Link></p>
                         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     </div>
                 ):

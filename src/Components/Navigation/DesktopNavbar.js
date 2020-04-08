@@ -20,7 +20,7 @@ z-index:1;
 
 #my-desk-navbar .links,.links-0{
     
-    font-size: calc(7px + .8vw);
+    font-size: 17px;
     text-decoration:none;
     color:white;
     padding:10px;

@@ -51,7 +51,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    cursor: grabbing;
+    cursor:pointer;
     font-family: 'Open Sans', sans-serif;
     transition: all 0.2s ease 0s;
     border-radius: 50px;
