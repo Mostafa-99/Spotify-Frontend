@@ -57,7 +57,7 @@ const CreateAlbum = () => {
     formData.append("image", img);
 
     try {
-      console.log(this.context.baseURL);
+      //console.log(this.context.baseURL);
       const res = await axios.post("http://138.91.114.14/api/me/albums",
         formData,
         {
