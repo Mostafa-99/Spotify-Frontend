@@ -14,7 +14,13 @@ class EditProfile extends Component {
     constructor() {
         super()
         this.state = {
-          user:{},
+          user:{
+              name:"",
+              dateOfBirth:"",
+              email:"",
+              gender:"",
+              image:"",
+          },
           successMessage: false,
           failMessgae: false,
           token: localStorage.getItem("token"),
@@ -34,7 +40,19 @@ class EditProfile extends Component {
                 console.log(res)
                 if(res.status===200)
                 {
-                    this.setState({user: res.data.data})
+                    this.setState(prevState => (
+                        {
+                        user: {                   
+                            ...prevState.user,    
+                            name: res.data.name,
+                            dateOfBirth: res.data.dateOfBirth,
+                            email: res.data.email,
+                            gender: res.data.gender,
+                            image: res.data.images    
+                        }
+                    }))
+                       
+
                     today = new Date(this.state.user.dateOfBirth);
                     day = today.getDate();
                     month = today.getMonth()+1; 
@@ -76,6 +94,7 @@ class EditProfile extends Component {
     }
 
     editProfileHandle(userYear,userMonth,userDay,userGender,userEmail){
+        console.log(userYear,userMonth,userDay,userGender,userEmail)
         axios.put('http://138.91.114.14/api/me', 
         {
             "email": userEmail,
@@ -94,10 +113,17 @@ class EditProfile extends Component {
             console.log(res)
             if(res.status === 200)
             {
-                this.setState({
+                this.setState(prevState => (
+                    {
+                    user: {                   
+                        ...prevState.user,    
+                        dateOfBirth: userYear+'-'+userMonth+'-'+userDay,
+                        gender: userGender,
+                        email: userEmail
+                    },
                    successMessage: true,
                    failMessage: false
-                })
+                }))
             }
             else if(res.status === 401)
             {
@@ -108,45 +134,25 @@ class EditProfile extends Component {
             }
             else 
             {
+                console.log("fail")
                 this.setState({
                     failMessage: true,
                     successMessage: false
                 })
             }
         })
-
-        this.setState(prevState => ({
-          user: {                   
-              ...prevState.user,    
-              dateOfBirth: userYear+'-'+userMonth+'-'+userDay,
-              gender: userGender,
-              email: userEmail
-          },
-      }))
     };
-
-    componentDidUpdate(){
-        axios.put('http://localhost:3000/users/'+this.state.user.id+'/', this.state.user)   
-        .then(res => {console.log(res.data)})
-        console.log(this.state)
-    }
 
     render()
     {
         {document.title ="Edit profile - Spotify"}
 
     return(                                                  
-        <ProfileContext.Consumer>{(profile) => (
-            <ConfigContext.Consumer>{(config) => {
-                const {user}= profile
-                //const {baseURL}= config
-                
-                return(
         <div className="bg-dark-clr">
-            
+         {console.log(this.state.user)}   
         <div id="edit-profile"className="container editProfile">
             <div className="row">
-                <SideBar img={user.images}/>
+                <SideBar img={this.state.user.image}/>
                 <div className="col-lg-9 edit-section">
                     <div className="edit-div">
                         { this.state.successMessage && <div class="alert alert-success">
@@ -160,10 +166,10 @@ class EditProfile extends Component {
                             <div className="email-info">
                                 <label className="labels">Email</label>
                                 <div className="email-fb hide">
-                                    <p className="user-info">{user.email}</p>
+                                    <p className="user-info">{this.state.user.email}</p>
                                 </div>
                                 <div className="email-normal">
-                                    <input ref="email" className="email-text-box" defaultValue={user.email}></input>
+                                    <input ref="email" className="email-text-box" defaultValue={this.state.user.email}></input>
                                 </div>
                             </div>
                             <div className="gender-info">
@@ -175,7 +181,7 @@ class EditProfile extends Component {
                                     </select>
                                 </div>
                                 <div className="gender-fb hide">
-                                    <p className="user-info">{user.gender}</p>
+                                    <p className="user-info">{this.state.user.gender}</p>
                                 </div>
                             </div>
                             <div className="birthday-info">
@@ -183,29 +189,29 @@ class EditProfile extends Component {
                                 <div className="birthday-normal">
                                     <div className="birthday-inputs">
                                         <select  ref="month" required=""  className="combo-box month">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                            <option value="6">06</option>
+                                            <option value="7">07</option>
+                                            <option value="8">08</option>
+                                            <option value="9">09</option>
                                             <option value="10">10</option>
                                             <option value="11">11</option>
                                             <option value="12">12</option>
                                         </select>
                                         <select  ref="day" required="" className="combo-box day">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
                                             <option value="10">10</option>
                                             <option value="11">11</option>
                                             <option value="12">12</option>
@@ -314,7 +320,7 @@ class EditProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="birthday-fb hide"> 
-                                    <p className="user-info">{user.dateOfBirth}</p>    
+                                    <p className="user-info">{this.state.user.dateOfBirth}</p>    
                                 </div>
                             </div>
                             <div className="buttons">
@@ -328,11 +334,6 @@ class EditProfile extends Component {
         </div>
         </div>
                 )
-            }}
-            </ConfigContext.Consumer>
-            )}</ProfileContext.Consumer>
-        );
-        
     }
     
 }
