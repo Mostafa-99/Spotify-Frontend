@@ -62,6 +62,7 @@ export class AlbumWebPlayer extends Component {
 
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
+        this.state.myId=this.props.greeting;
         console.log("this album id is : ",this.state.myId);//this to how to get current album id to request data from back end (this.state.myId)
 
         this.getAlbumDetails();
