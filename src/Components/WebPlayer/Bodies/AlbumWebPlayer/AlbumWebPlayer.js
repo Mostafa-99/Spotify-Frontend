@@ -6,7 +6,8 @@ import TracksList from './TracksList.js'
 import Album_Image from './../../../../Images/albumImage.jpg'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
-
+import ArtistPageBtn from '../../../Artist/Albums/AlbumPageBtn'
+import AlbumPageBtn from '../../../Artist/Albums/AlbumPageBtn'
 /**
  * Album web player class
  * @extends Component
@@ -207,6 +208,7 @@ export class AlbumWebPlayer extends Component {
                                     <div className="album-play-button-div">
                                         <button type="button" className="btn btn-success"></button>
                                     </div>
+                                    <AlbumPageBtn/>
                                     <div className="row album-options-div">
                                         <div className="album-heart-div">
                                             <i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}></i>

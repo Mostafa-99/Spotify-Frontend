@@ -62,6 +62,10 @@ class HomeNavBar extends Component {
       render()
       {
         const logInOrNot = localStorage.getItem("isLoggedIn");
+        const logInOrNot = this.state.status;
+        return (
+            <ProfileContext.Consumer>{(profile) => (
+                <ConfigContext.Consumer>{(config) => {
     return(
         
         <div id='root-navbar' className='root-navbar'>
@@ -97,8 +101,8 @@ class HomeNavBar extends Component {
                 <div className="col-2 " id="navbar-profile-section" >
                     <div className="dropdown">
                         <a className="btn dropdown-toggle" href="#" role="button"  onClick={()=> this.toggleNavbarProfile()} id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                            <span ><img src={this.state.user.image} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
-                            <span className='navbar-profile-button-name'><h2>{this.state.user.name}</h2></span>
+                            <span ><img src={user.images} id="navbar-profile-pic" className="rounded-circle" alt="Profile" ></img></span>
+                            <span className='navbar-profile-button-name'><h2>{user.name}</h2></span>
                         </a>
                         <div id="navbar-profile-button-list"className="dropdown-menu p-0" aria-labelledby="dropdownMenuLink">
                             <Link to="/account-overview"id="navbar-profile-button-list-item"className="dropdown-item"  target="_blank" >Account</Link>
@@ -118,7 +122,12 @@ class HomeNavBar extends Component {
             </div> 
             
         </div>
-    );	
+    );
+    
+    }}
+    </ConfigContext.Consumer>
+    )}</ProfileContext.Consumer>
+    );
 }
 }
 export default HomeNavBar;
