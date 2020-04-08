@@ -220,6 +220,10 @@ background: #fff;
         width: 300px;
     }
 
+    #my-sign-up #invalid-message{
+        width: 300px;
+    }
+
     #my-sign-up .center-box-2 {
         width: 320px;
     }
