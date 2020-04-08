@@ -60,14 +60,14 @@ class ChangePassword extends Component {
         }
         )   
         .then(res => {
-            if(res.data.status === 204 || res.data.status === 200)
+            if(res.status === 204 || res.status === 200)
             {
                 this.setState({
                     successMessage: true,
                     failMessage: false
                 })
             }
-            else if(res.data.status === 401)
+            else if(res.status === 401)
             {
                 localStorage.removeItem("loginType");
                 localStorage.removeItem("isLoggedIn");

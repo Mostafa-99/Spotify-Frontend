@@ -19,7 +19,7 @@ class PasswordReset extends Component {
         event.preventDefault();
         if(this.validateEmail(this.state.email))
         {
-            console.log(this.state.email);
+            //console.log(this.state.email);
             axios.post(this.context.baseURL+'/resetPassword',
             {
             "email":this.state.email
