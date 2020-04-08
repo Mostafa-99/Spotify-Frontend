@@ -110,7 +110,6 @@ function App() {
 
        
         <Route path="/" component={NotFound}/>
-        <Route path="*" exact component={()=>"404 NOT FOUND"} />
       </Switch>
       
       <Footer/>

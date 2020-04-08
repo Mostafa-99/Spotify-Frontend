@@ -208,7 +208,7 @@ export class AlbumWebPlayer extends Component {
                                     <div className="album-play-button-div">
                                         <button type="button" className="btn btn-success"></button>
                                     </div>
-                                    <AlbumPageBtn/>
+                                   <p><AlbumPageBtn id={this.state.myId}/></p> 
                                     <div className="row album-options-div">
                                         <div className="album-heart-div">
                                             <i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}></i>

@@ -11,8 +11,9 @@ import { theme, animation } from 'react-contexify';
 import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
-
+import { ConfigContext } from '../../../../Context/ConfigContext'
 class Home extends Component {
+    static contextType=ConfigContext;
     constructor(){
         super()
         this.state = {
@@ -29,18 +30,7 @@ class Home extends Component {
             artists:[],
             nowPlaying:{
                 id:-1
-            },
-            seeAll:[],
-            seeAllHeader:"",
-            test:[{
-                "id":"",
-                "name":"test",    
-            },
-            {
-                "id":"",
-                "name":"test2",
-            }
-        ]          
+            },       
         }
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
@@ -52,7 +42,7 @@ class Home extends Component {
             event.preventDefault() })
 
         //browse catagories
-        axios.get("http://138.91.114.14/api/browse/categories", {
+        axios.get(this.context.baseURL+"/browse/categories", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
@@ -71,7 +61,7 @@ class Home extends Component {
                         })
                         )
                     })
-                    axios.get("http://138.91.114.14/api/browse/categories/"+this.state.catagories[0].id+"/playlists", {
+                    axios.get(this.context.baseURL+"/browse/categories/"+this.state.catagories[0].id+"/playlists", {
                         headers: {
                             'authorization': "Bearer "+localStorage.getItem("token"),
                             //category id as path??
@@ -102,7 +92,7 @@ class Home extends Component {
                             localStorage.removeItem("userID");
                         }
                     }) 
-                    axios.get("http://138.91.114.14/api/browse/categories/"+this.state.catagories[1].id+"/playlists", {
+                    axios.get(this.context.baseURL+"/browse/categories/"+this.state.catagories[1].id+"/playlists", {
                         headers: {
                             'authorization': "Bearer "+localStorage.getItem("token"),
                             //category id as path??
@@ -143,7 +133,7 @@ class Home extends Component {
             })
 
          //artists   
-         axios.get("http://138.91.114.14/api/artists", {
+         axios.get(this.context.baseURL+"/artists", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             }
@@ -173,7 +163,7 @@ class Home extends Component {
             })
 
         //recently played
-        axios.get("http://138.91.114.14/api/me/player/recentlyPlayed", {
+        axios.get(this.context.baseURL+"/me/player/recentlyPlayed", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
@@ -204,7 +194,7 @@ class Home extends Component {
             })
 
         //popular albums
-        axios.get("http://138.91.114.14/api/albums/top",{
+        axios.get(this.context.baseURL+"/albums/top",{
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
@@ -236,7 +226,7 @@ class Home extends Component {
             }) 
 
         //most recent albums
-        axios.get("http://138.91.114.14/api/albums/top",{
+        axios.get(this.context.baseURL+"/albums/top",{
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
@@ -268,7 +258,7 @@ class Home extends Component {
             }) 
 
         //popular playlists
-        axios.get("http://138.91.114.14/api/playlists/top", {
+        axios.get(this.context.baseURL+"/playlists/top", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
@@ -302,7 +292,7 @@ class Home extends Component {
             })
 
         //most recent playlists
-        axios.get("http://138.91.114.14/api/playlists/top", {
+        axios.get(this.context.baseURL+"/playlists/top", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },

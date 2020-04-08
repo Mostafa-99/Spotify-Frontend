@@ -5,8 +5,9 @@ import AccountOverview from './AccountOverview';
 import AccountHeading from './AccountHeading';
 import axios from 'axios'
 import './Profile.css';
-
+import { ConfigContext } from '../../Context/ConfigContext'
 class AccountSettings extends Component {
+    static contextType=ConfigContext;
     constructor(){
         super()
         this.state = {
@@ -19,7 +20,7 @@ class AccountSettings extends Component {
     }
 
     componentDidMount(){
-        axios.get("http://138.91.114.14/api/me", {
+        axios.get(this.context.baseURL+"/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
