@@ -460,7 +460,7 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :album.id
+                                    myId :playlist.id
                                     }
                                 }}>
                                 <div className="card" id={playList.id}>
@@ -495,7 +495,7 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :album.id
+                                    myId :playlist.id
                                     }
                                 }}>
                             <div className="card" id={playList.id}>
@@ -597,7 +597,7 @@ class Home extends Component {
                     {this.state.firstCategory.map( playlist => (
                         <div>
                             <Link to={{
-                                    pathname:"/webplayer/playlist",
+                                    pathname:"/playlist-webplayer",
                                     state:{
                                     myId :playlist.id
                                     }
