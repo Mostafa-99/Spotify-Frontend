@@ -110,7 +110,7 @@ class LogIn extends Component {
 
         if(is_email_valid && is_psw_valid)
         {
-            console.log(this.context.baseURL+'/signIn');
+            //console.log(this.context.baseURL+'/signIn');
             axios.post(this.context.baseURL+'/signIn',
             {
             "email":memail,
@@ -139,8 +139,8 @@ class LogIn extends Component {
 
                  }
                 }).catch(err =>{
-console.log(err)
-console.log(err.response)
+//console.log(err)
+//console.log(err.response)
                     if(err.response.status===401 || err.response.status===400) // Unsuccessful
                 {
                    if(this.state.status!=="invalid")
