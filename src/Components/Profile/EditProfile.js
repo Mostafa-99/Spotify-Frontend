@@ -31,7 +31,7 @@ class EditProfile extends Component {
     
     componentDidMount(){
         this.setState(()=> ({ messShow: false}))
-        axios.get("http://localhost:3000/users/1/", {
+        axios.get("http://138.91.114.14/api/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
