@@ -70,7 +70,7 @@ class Albums extends Component {
               {this.state.artistAlbums.map((album) => (
                 <Link
                   to={{
-                    pathname: "/artist/album-page",
+                    pathname: "/webplayer/album",
                     state: { myId: this.state.artistAlbums.id },
                   }}
                 >
