@@ -71,7 +71,7 @@ class Albums extends Component {
                 <Link
                   to={{
                     pathname: "/webplayer/album",
-                    state: { myId: this.state.artistAlbums.id },
+                    state: { myId: this.state.artistAlbums._id },
                   }}
                 >
                   <div className="card">
