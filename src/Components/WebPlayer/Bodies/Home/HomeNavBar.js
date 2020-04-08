@@ -62,7 +62,6 @@ class HomeNavBar extends Component {
       render()
       {
         const logInOrNot = localStorage.getItem("isLoggedIn");
-        const logInOrNot = this.state.status;
         return (
             <ProfileContext.Consumer>{(profile) => (
                 <ConfigContext.Consumer>{(config) => {
