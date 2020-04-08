@@ -14,7 +14,13 @@ class EditProfile extends Component {
     constructor() {
         super()
         this.state = {
-          user:{},
+          user:{
+              name:"",
+              dateOfBirth:"",
+              email:"",
+              gender:"",
+              image:"",
+          },
           successMessage: false,
           failMessgae: false,
           token: localStorage.getItem("token"),
@@ -25,7 +31,7 @@ class EditProfile extends Component {
     
     componentDidMount(){
         this.setState(()=> ({ messShow: false}))
-        axios.get("http://138.91.114.14/api/me", {
+        axios.get("http://localhost:3000/users/1/", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             },
