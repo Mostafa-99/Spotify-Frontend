@@ -113,7 +113,8 @@ class EditProfile extends Component {
             console.log(res)
             if(res.status === 200)
             {
-                this.setState({
+                this.setState(prevState => (
+                    {
                     user: {                   
                         ...prevState.user,    
                         dateOfBirth: userYear+'-'+userMonth+'-'+userDay,
@@ -122,7 +123,7 @@ class EditProfile extends Component {
                     },
                    successMessage: true,
                    failMessage: false
-                })
+                }))
             }
             else if(res.status === 401)
             {
