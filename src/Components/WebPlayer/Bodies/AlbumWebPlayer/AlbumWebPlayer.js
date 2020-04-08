@@ -73,10 +73,11 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumDetails(){
        //http://localhost:3000/albums/1
-        axios.get(this.context.baseURL+"/albums/5e8cd05a9d28027e3d165a5f",{
+        axios.get(this.context.baseURL+"/albums/"+this.state.myId,{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
+                "id": this.state.myId
             }
         })
         .then(res => {
@@ -114,10 +115,11 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumTracks(){
         //'http://localhost:3000/album_tracks/1'
-        axios.get(this.context.baseURL+"/albums/5e8cd05a9d28027e3d165a5f/tracks",{
+        axios.get(this.context.baseURL+"/albums/"+this.state.myId+"/tracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
+                "id": this.state.myId
             }
         })
         .then(res => {
