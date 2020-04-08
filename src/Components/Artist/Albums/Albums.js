@@ -55,7 +55,7 @@ class Albums extends Component {
   render() {
     return (
       <div className="artist-body" id="webplayer-home">
-        <div className="full-page container albums-page" style="height:auto">
+        <div className="full-page container albums-page artist-albums-page">
           <ArtistSidebar />
           <div className="albums-section">
             <div className="header-button-container">

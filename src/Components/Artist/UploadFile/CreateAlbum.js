@@ -57,9 +57,8 @@ const CreateAlbum = () => {
     formData.append("image", img);
 
     try {
-      console.log(this.context.baseURL);
-      const res = await axios.post(
-        url.baseURL+"/me/albums",
+      //console.log(this.context.baseURL);
+      const res = await axios.post("http://138.91.114.14/api/me/albums",
         formData,
         {
           headers: {
@@ -70,7 +69,8 @@ const CreateAlbum = () => {
 
       setMessage("Album created");
     } catch (err) {
-      if (err.response.status === 500) {
+      console.log(err);
+     /* if (err.response.status === 500) {
         setMessage("There was a problem with the server");
       } else if (err.response.status === 401) {
         localStorage.removeItem("loginType");
@@ -80,7 +80,7 @@ const CreateAlbum = () => {
         alert("Your session has ended");
       } else {
         setMessage(err.response.message);
-      }
+      }*/
     }
   };
   return (

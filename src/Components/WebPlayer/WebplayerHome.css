@@ -81,3 +81,6 @@
 #webplayer-home .play-btn:hover, #webplayer-home .pause-btn:hover {
     transform: scale(1.1);
 }
+#webplayer-home .artist-albums-page{
+    height: auto;
+}

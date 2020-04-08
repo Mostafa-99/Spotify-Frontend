@@ -12,7 +12,7 @@ class UpgradeArtist extends Component {
 
   sendMail = () => {
     axios
-      .post(this.context.baseURL+"/me/meArtist",{} ,{
+      .post(this.context.baseURL+"/me/Artist",{} ,{
         headers: {
           "authorization":"Bearer "+localStorage.getItem("token"),
         },
@@ -32,6 +32,7 @@ class UpgradeArtist extends Component {
           localStorage.removeItem("userID");
         }
         else{
+          console.log(res);
           alert(res.message);
         }
       });
@@ -42,7 +43,7 @@ class UpgradeArtist extends Component {
       let code = this.state.code;
       axios
         .post(
-          this.context.baseURL+"/me/upgrade/"+{code},{},
+          this.context.baseURL+"/me/upgrade/"+code,{},
           {
             headers: {
               "authorization":"Bearer "+localStorage.getItem("token"),
