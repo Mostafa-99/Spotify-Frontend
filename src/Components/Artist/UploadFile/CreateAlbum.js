@@ -70,7 +70,8 @@ const CreateAlbum = () => {
 
       setMessage("Album created");
     } catch (err) {
-      if (err.response.status === 500) {
+      console.log(err);
+     /* if (err.response.status === 500) {
         setMessage("There was a problem with the server");
       } else if (err.response.status === 401) {
         localStorage.removeItem("loginType");
@@ -80,7 +81,7 @@ const CreateAlbum = () => {
         alert("Your session has ended");
       } else {
         setMessage(err.response.message);
-      }
+      }*/
     }
   };
   return (
