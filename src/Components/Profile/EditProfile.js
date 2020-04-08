@@ -22,7 +22,7 @@ class EditProfile extends Component {
               image:"",
           },
           successMessage: false,
-          failMessgae: false,
+          failMessage: false,
           token: localStorage.getItem("token"),
           loginType: localStorage.getItem("loginType")
         }

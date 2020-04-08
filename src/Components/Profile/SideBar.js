@@ -23,7 +23,7 @@ class SideBar extends Component {
                             <Link to="/account-overview"><li className="list first"><span className="fa fa-home icon"></span> Account overview </li></Link>
                             <Link to="/edit-profile" ><li className="list"><i className="fa fa-pencil icon"></i>  Edit profile</li></Link>
                             <div className="change-password"><Link to="/change-password" ><li className="list"><i className="fa fa-lock icon"></i>Change password</li></Link></div>
-                            <Link to="/notification-settings" ><li className="list"><i className="fa fa-bell-o icon"></i>Notifications settings</li></Link>
+                            <div className="disabled"><li className="list"><i className="fa fa-bell-o icon"></i>Notifications settings</li></div>
                         </ul>
                     </div>
             </div>        

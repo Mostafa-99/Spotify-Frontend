@@ -14,7 +14,7 @@ class ChangePassword extends Component {
               image:"",
           },
           successMessage: false,
-          failMessgae: false
+          failMessagee: false
         }
     }
 
