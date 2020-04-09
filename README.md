@@ -21,7 +21,7 @@ npm install react-bootstrap
 npm install -g json-server
 npm install axios
 npm i react-contexify
-npm  install --save mdbreact
+npm install --save mdbreact
 ```
 ## To run the website locally
 ```
@@ -43,16 +43,16 @@ npm install --save-dev jest
 ```
 
 ## Credits 
-This project is done by Team 4 Front-End SWR Cairo University, Faculty of Engineering 
+This project is done by Team 4 Front-End SWE course Cairo University, Faculty of Engineering 
 ### Under the supervision of:
--Prof.Ahmed Kaseb
--Eng.Yousef Ghatas
+*Prof.Ahmed Kaseb
+*Eng.Yousef Ghatas
 ### Project Leader
--Abdulrahman AL-Asfar
+*Abdulrahman AL-Asfar
 ### Team members
--Mostafa Assem (Subteam leader)
--Ahmed Mohamed Yehia
--Amr Afifi
--Ibrahim Wael
--Youmna Khaled
--Mahmoud Maghrabi
+*Mostafa Assem (Subteam leader)
+*Ahmed Mohamed Yehia
+*Amr Afifi
+*Ibrahim Wael
+*Youmna Khaled
+*Mahmoud Maghrabi
