@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: WebPlayer/Bodies/AlbumWebPlayer/TracksList.js</title>
+    <title>JSDoc: Source: userIndex/topCover.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: WebPlayer/Bodies/AlbumWebPlayer/TracksList.js</h1>
+    <h1 class="page-title">Source: userIndex/topCover.js</h1>
 
     
 
@@ -26,27 +26,47 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
-import Track from './Track.js'
-import PropTypes from 'prop-types';
-
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import './userIndex.css';
+import { Link } from 'react-router-dom';
+ 
 /**
- * List of tracks in an album or playlist
- * @extends Component
- */
-export class TracksList extends Component {
-    render() {
-        return this.props.tracks.map((track) => (
-            &lt;Track track={track} playing_song_id={this.props.playing_song_id} setPlayingSondId={this.props.setPlayingSondId}/>
-        ));
-    }
+ *  Upper Part of the main index after login  and contains  button that directs to premuim page 
+*/
+
+
+function TopCover() {
+    return (
+        &lt;section id="user-index-section">
+            &lt;div className="hero-main">
+                &lt;div className="hero-home-gradient">
+                    &lt;div id="user-index-cover-cont"className="container hero-background">
+                    &lt;div id="user-index-cover-row" className="row hero-home-content">
+                    &lt;div className="whitepart" id="hero-text">
+                        &lt;div className="col-xs-12 col-md-10 col-md-offset-1">
+                             &lt;h1 className="display-2" id="d2-overrides">Go Premium. Be happy.&lt;/h1>
+                        &lt;div className="row" id="user-index-row-2">
+                          
+                           &lt;Link to="/premium"> &lt;button id="index-cover-btn"> Start Premium Now &lt;/button>&lt;/Link>
+                            
+                        &lt;/div>
+                        &lt;/div>
+                        &lt;/div>
+                      &lt;/div>                      
+                    &lt;/div>
+                &lt;/div>                
+            &lt;/div>
+         &lt;/section>
+            
+ );
 }
 
-TracksList.propTypes = {
-    tracks: PropTypes.array.isRequired
-}
+export default TopCover;
 
-export default TracksList
+
+
+
+
 </code></pre>
         </article>
     </section>

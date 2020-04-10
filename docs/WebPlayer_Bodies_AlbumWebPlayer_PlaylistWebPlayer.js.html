@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer.js</title>
+    <title>JSDoc: Source: WebPlayer/Bodies/AlbumWebPlayer/PlaylistWebPlayer.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer.js</h1>
+    <h1 class="page-title">Source: WebPlayer/Bodies/AlbumWebPlayer/PlaylistWebPlayer.js</h1>
 
     
 
@@ -34,8 +34,7 @@ import TracksList from './TracksList.js'
 import Album_Image from './../../../../Images/albumImage.jpg'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
-import ArtistPageBtn from '../../../Artist/Albums/AlbumPageBtn'
-import AlbumPageBtn from '../../../Artist/Albums/AlbumPageBtn'
+
 /**
  * Album web player class
  * @extends Component
@@ -102,7 +101,7 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumDetails(){
        //http://localhost:3000/albums/1
-        axios.get(this.context.baseURL+"/albums/"+this.state.myId,{
+        axios.get(this.context.baseURL+"/playlists/"+this.state.myId,{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -111,18 +110,13 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
-                console.log("Album details")
+                console.log("Album details here")
                 console.log(res)
                 this.setState({
-                    album_image_url:res.data.data.album.image,
-                    album_name:res.data.data.album.name,
+                    album_image_url:res.data.data.playlist.images[0],
+                    album_name:res.data.data.playlist.name,
                     is_liked:false //get from backend
                 })
-                res.data.data.album.artists.map((artist)=>(
-                    this.setState({
-                        artists:artist.name
-                    })
-                ))
             }
             else if(res.status===401){
                 localStorage.removeItem("loginType");
@@ -134,9 +128,10 @@ export class AlbumWebPlayer extends Component {
                 alert("error");
             }
         })
+        /*
         .catch(error => {
             alert(error.response.data.message);
-        })
+        })*/
     }
 
     /**
@@ -144,7 +139,7 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumTracks(){
         //'http://localhost:3000/album_tracks/1'
-        axios.get(this.context.baseURL+"/albums/"+this.state.myId+"/tracks",{
+        axios.get(this.context.baseURL+"/playlists/"+this.state.myId+"/tracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -167,9 +162,10 @@ export class AlbumWebPlayer extends Component {
                 alert("error");
             }
         })
+        /*
         .catch(error => {
            alert(error.response.data.message);
-        })
+        })*/
     }
 
     /**
@@ -230,7 +226,6 @@ export class AlbumWebPlayer extends Component {
                             &lt;div className="album-below-image-div">
                                 &lt;div className="album-title-div">
                                     &lt;h1 className="album-title">{this.state.album_name}&lt;/h1>
-                                    &lt;p className="album-artist">{this.state.artists}&lt;/p>
                                 &lt;/div>
                                 &lt;div className="row album-buttons-div">
                                     &lt;div className="album-play-button-div">
