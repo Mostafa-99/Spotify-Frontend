@@ -159,9 +159,16 @@ margin-bottom:20px;
     border:none;
 }
 
-#my-sign-up select
+#my-sign-up form select
 {
     border:none;
+    color: grey;
+    background-color: white;
+}
+
+#my-sign-up h6
+{
+    color: black;
 }
 
 #my-sign-up form

@@ -4,6 +4,10 @@ import axios from 'axios'
 
 export const ProfileContext= createContext();
 
+/**
+ * Profile Context Provider
+ * @extends Component
+ */
 class ProfileContextProvider extends Component {
     static contextType=ConfigContext;
     state={
@@ -12,6 +16,10 @@ class ProfileContextProvider extends Component {
         status:"not connected"
     }
 
+    /**
+     * Profile Context Provider Mount state Intialization
+     * 
+     */
     componentDidMount =()=>{
         
         
@@ -53,6 +61,10 @@ class ProfileContextProvider extends Component {
           } 
     }
 
+    /**
+     * Profile Context Provider onchange update state.
+     * 
+     */
     componentDidUpdate=()=>{
 
           let show=localStorage.getItem("isLoggedIn");

@@ -2,14 +2,20 @@ import React,{Component} from 'react';
 import './SideBar.css';
 import './createplaylist.css'
 
-
+/**
+ * Create Playlist modal : opens to shows a modal to write in the name of the new playlist to send to back end 
+ * @extends Component
+ */
 class CreatePlaylist extends Component {
 
     constructor() {
             
          super()
         this.state = {
-            
+            /**
+         *playlist created name
+         * @type {string}
+         */
             playlistname:""
            
         }

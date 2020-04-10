@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import Main from './Main'
 import MainIndex from '../userIndex/MainIndex'
 
+/**
+ * Main Selector choosing which index to load depending on user is logged in or not
+ * @extends Component
+ */
 class MainSelector extends Component {
     render() {
         return (

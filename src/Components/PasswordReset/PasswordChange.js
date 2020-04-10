@@ -6,6 +6,10 @@ import {Link} from 'react-router-dom'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 
+/**
+ * New password after reset Component
+ * @extends Component
+ */
 export default class PasswordChange extends Component {
     static contextType=ConfigContext;
     constructor() {
@@ -20,16 +24,28 @@ export default class PasswordChange extends Component {
         }
     }
 
+    /**
+     * New password after reset Component Mount state Intialization
+     * 
+     */
     componentDidMount =()=>{
        
         this.setState(()=> ({}))
     }
 
+    /**
+     * Function to check the Password textbox has valid password criteria
+     * @param {string} Password - input password.
+     */
     validatePassword(psw) {
 
         return psw && psw.length >= 6
     }
 
+    /**
+     * Function handling change in password textbox to the page's state
+     * 
+     */
     handlePswChange = event=> {
         event.preventDefault();
         this.setState({emptypass: false});
@@ -37,6 +53,10 @@ export default class PasswordChange extends Component {
         this.setState({password: event.target.value});
     }
 
+    /**
+     * Function handling change in password confirm textbox to the page's state
+     * 
+     */
     handlePswConfirmChange = event=> {
         event.preventDefault();
         this.setState({emptyconfirm: false});
@@ -44,6 +64,10 @@ export default class PasswordChange extends Component {
         this.setState({confirmpassword: event.target.value});
     }
 
+     /**
+     * Function sending new password request if all validation passed.
+     * 
+     */
     changePassowrd = event=> {
         event.preventDefault();
         if(this.state.password==="" || !this.validatePassword(this.state.password))

@@ -4,11 +4,18 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import {ConfigContext} from '../../Context/ConfigContext'
 
+/**
+ * Login index page Cards components class
+ * @extends Component
+ */
 class CardComponent extends Component {
     static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
+            /**
+             *  @type {Array<Object>}
+             */
             playlists:[],
 
         }
@@ -52,10 +59,31 @@ class CardComponent extends Component {
                       console.log(res);
                          this.setState({
                             playlists: res.data.data.playlist.map( playlist => ({
+                            
+                                /**
+                                * ID of the playlist
+                                * @type {String}
+                                */
                             id:playlist.id,
+                              /**
+                                * name  of the playlist
+                                * @type {String}
+                                */
                             title:playlist.name,
+                              /**
+                                * Name of the singer/owner
+                                * @type {String}
+                                */
                             artist:playlist.owner[0].name,
+                              /**
+                                * Picture of the playlist cover
+                                @type {link}
+                                */
                             imageUrl:playlist.images,
+                              /**
+                                * Link to tracks of my playlist
+                                * 
+                                */
                             href:playlist.tracks.href
                         }))
                     }) }          

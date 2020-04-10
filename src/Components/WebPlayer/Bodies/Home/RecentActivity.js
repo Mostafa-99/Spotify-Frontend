@@ -2,10 +2,19 @@ import React,{ Component} from "react"
 import './RecentActivity.css'
 import axios from 'axios'
 
+/**
+ * Recent Activity : shows the recent activity of the user and its time 
+ * @extends Component
+ */
+
 class RecentActivity extends Component{
 constructor(){
     super()
     this.state = {
+         /**
+         * Recent Activity Items 
+         * @type {Object}
+         */
         recents:[],
 
     }
@@ -15,8 +24,17 @@ componentDidMount(){
             .then(res => {
                 this.setState({
                     recents: res.data.map( recents => ({
+                        /**
+                         * @type {string}
+                         */
                         id:recents.id,
+                        /**
+                         * Time of the activity 
+                         */
                         time:recents.time,
+                        /**
+                         * recent activity description 
+                         */
                         description: recents.description
                     }))
                 })

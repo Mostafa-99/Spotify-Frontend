@@ -16,6 +16,10 @@ const exclusionArray = [
 
 ]
 
+/**
+ * Footer Component
+ * @extends Component
+ */
 class Footer extends Component {
     constructor(props) {
         super(props);
@@ -27,6 +31,11 @@ class Footer extends Component {
         this.updatePredicate = this.updatePredicate.bind(this);
         this.updateVisibility = this.updateVisibility.bind(this);
       }
+
+      /**
+     * Footer Component Mount state Adding Event Listeners 
+     * 
+     */
       componentDidMount() {
         this.updatePredicate();
         window.addEventListener("resize", this.updatePredicate);
@@ -39,6 +48,10 @@ class Footer extends Component {
         window.addEventListener("popstate",this.updateVisibility);
       }
     
+      /**
+     * Footer Component UnMount state Removing Event Listeners 
+     * 
+     */
       componentWillUnmount() {
         window.removeEventListener("resize", this.updatePredicate);
         window.removeEventListener("mouseover",this.updateVisibility);
@@ -48,10 +61,18 @@ class Footer extends Component {
         window.removeEventListener("popstate",this.updateVisibility);
       }
     
+      /**
+     * Function choosing between desktop and mobile version footer
+     * 
+     */
       updatePredicate() {
         this.setState({ isDesktop: window.outerWidth > 950 });
       }
 
+      /**
+     * Function removing footer from specific paths
+     * 
+     */
       updateVisibility() {
 
         this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0});

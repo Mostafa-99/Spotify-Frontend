@@ -1,6 +1,11 @@
 import React from 'react';
 import './userIndex.css';
 import { Link } from 'react-router-dom';
+ 
+/**
+ *  Upper Part of the main index after login  and contains  button that directs to premuim page 
+*/
+
 
 function TopCover() {
     return (
