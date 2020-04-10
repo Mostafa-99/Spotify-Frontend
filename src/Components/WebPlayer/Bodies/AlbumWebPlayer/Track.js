@@ -2,16 +2,54 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import './Track.css'
 
+/**
+ * Track class
+ * @extends Component
+ */
 export class Track extends Component {
     state={
+        /**
+         * Artist of the track
+         * @memberof Track
+         * @type {Array<Object>}
+         */
         "artists":[],
+        /**
+         * Audio url of the track
+         * @memberof Track
+         * @type {String}
+         */
         "preview_url":"",
+        /**
+         * ID of the track
+         * @memberof Track
+         * @type {String}
+         */
         "id":"",
+        /**
+         * Name of the track
+         * @memberof Track
+         * @type {String}
+         */
         "name":"",
+        /**
+         * Duration of the track in milliseconds
+         * @memberof Track
+         * @type {Number}
+         */
         "duration_ms":Number,
+        /**
+         * Number of complete minutes of the track
+         * @memberof Track
+         * @type {Number}
+         */
         "minutes":0,
+        /**
+         * Number of remaining seconds of the track
+         * @memberof Track
+         * @type {Number}
+         */
         "seconds":0,
-        //is_playing":Boolean
     }
 
     componentDidMount(){
@@ -27,6 +65,12 @@ export class Track extends Component {
         this.millisToMinutesAndSeconds(this.props.track.durationMs);
     }
 
+    /**
+     * Converts duration of the song from milliseconds to minutes and seconds
+     * @memberof Track
+     * @param {Number} millis 
+     * @returns {void}
+     */
     millisToMinutesAndSeconds(millis) {
         var minutes = Math.floor(millis / 60000);
         var seconds = ((millis % 60000) / 1000).toFixed(0);
