@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ConfigContextProvider</title>
+    <title>JSDoc: Class: AccountSettings</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ConfigContextProvider</h1>
+    <h1 class="page-title">Class: AccountSettings</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ConfigContextProvider<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>AccountSettings<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Class of Configrations to the base URL to switch between backend and mocking service.</p></div>
+            <div class="class-description"><p>Class of AccountSettings.</p></div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="ConfigContextProvider"><span class="type-signature"></span>new ConfigContextProvider<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="AccountSettings"><span class="type-signature"></span>new AccountSettings<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -93,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Context_ConfigContext.js.html">Context/ConfigContext.js</a>, <a href="Context_ConfigContext.js.html#line7">line 7</a>
+        <a href="Components_Profile_AccountSettings.js.html">Components/Profile/AccountSettings.js</a>, <a href="Components_Profile_AccountSettings.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -154,13 +154,13 @@
 
         
             
-<h4 class="name" id=".baseURL"><span class="type-signature">(static) </span>baseURL<span class="type-signature"></span></h4>
+<h4 class="name" id=".contextType"><span class="type-signature">(static) </span>contextType<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    <p>baseURL of requests</p>
+    <p>Gets the baseURL from configrations context of the user</p>
 </div>
 
 
@@ -198,7 +198,79 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Context_ConfigContext.js.html">Context/ConfigContext.js</a>, <a href="Context_ConfigContext.js.html#line12">line 12</a>
+        <a href="Components_Profile_AccountSettings.js.html">Components/Profile/AccountSettings.js</a>, <a href="Components_Profile_AccountSettings.js.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".user"><span class="type-signature">(static) </span>user<span class="type-signature"> :Object</span></h4>
+
+
+
+
+<div class="description">
+    <p>User object that have the user Date of birth and email and image</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Components_Profile_AccountSettings.js.html">Components/Profile/AccountSettings.js</a>, <a href="Components_Profile_AccountSettings.js.html#line25">line 25</a>
     </li></ul></dd>
     
 
@@ -217,6 +289,146 @@
         
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentDidMount"><span class="type-signature"></span>componentDidMount<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>componentDidMount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Fetch the data of the user and put it in the state</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Components_Profile_AccountSettings.js.html">Components/Profile/AccountSettings.js</a>, <a href="Components_Profile_AccountSettings.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     

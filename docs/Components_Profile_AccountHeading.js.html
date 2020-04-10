@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Components/WebPlayer/Bodies/AlbumWebPlayer/TracksList.js</title>
+    <title>JSDoc: Source: Components/Profile/AccountHeading.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Components/WebPlayer/Bodies/AlbumWebPlayer/TracksList.js</h1>
+    <h1 class="page-title">Source: Components/Profile/AccountHeading.js</h1>
 
     
 
@@ -26,28 +26,28 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
-import Track from './Track.js'
-import PropTypes from 'prop-types';
-
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from "react-router-dom";
 /**
- * List of tracks in an album or playlist
- * @extends Component
+ * Function to make the cover photo in the top of account overview page
  */
-export class TracksList extends Component {
-    render() {
-        return this.props.tracks.map((track) => (
-            &lt;Track track={track} playing_song_id={this.props.playing_song_id} setPlayingSondId={this.props.setPlayingSondId}/>
-        ));
-    }
-}
+function AccountHeading() {
+    return(
+        &lt;div id="profile-account-heading"className="container jumbotron">
+			&lt;div className="row">
+			    &lt;div className="col-lg-6 head">
+					&lt;h1 className="display-3 font-weight-bold">Music without limits&lt;/h1>
+					&lt;p className="header-para">Premium lets you play any song, anytime. You can even listen when you’re offline. No restrictions. No ads.&lt;/p>
+				&lt;Link to="/premium-code">&lt;button className="btn btn-success bt-lg premium-button">GET PREMIUM&lt;/button>&lt;/Link>
+			    &lt;/div>
+			  &lt;img src="https://www.scdn.co/i/account/overview/iphone-ddd9e69.png" alt="iphone" className="rounded float-right col-lg-4 col-md-12 col-sm-12">&lt;/img>
 
-TracksList.propTypes = {
-    tracks: PropTypes.array.isRequired
+		   &lt;/div>
+        &lt;/div>
+    )
 }
-
-export default TracksList
-</code></pre>
+export default AccountHeading;</code></pre>
         </article>
     </section>
 

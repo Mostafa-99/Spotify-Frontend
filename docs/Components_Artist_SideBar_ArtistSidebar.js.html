@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Components/WebPlayer/Bodies/AlbumWebPlayer/TracksList.js</title>
+    <title>JSDoc: Source: Components/Artist/SideBar/ArtistSidebar.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Components/WebPlayer/Bodies/AlbumWebPlayer/TracksList.js</h1>
+    <h1 class="page-title">Source: Components/Artist/SideBar/ArtistSidebar.js</h1>
 
     
 
@@ -26,28 +26,32 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
-import Track from './Track.js'
-import PropTypes from 'prop-types';
-
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom';
+import '../../Profile/Profile.css'
 /**
- * List of tracks in an album or playlist
- * @extends Component
+ * Artist Sidebar page
+ * @param {string} props image of the artist
  */
-export class TracksList extends Component {
-    render() {
-        return this.props.tracks.map((track) => (
-            &lt;Track track={track} playing_song_id={this.props.playing_song_id} setPlayingSondId={this.props.setPlayingSondId}/>
-        ));
-    }
+function ArtistSidebar(props) {
+    return(
+        &lt;div id="profile-sidebar" className="col-lg-3 sidebar">
+            &lt;head>	&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">&lt;/link>
+            &lt;/head>
+            &lt;div>
+                    &lt;img  src={props.img} className="rounded-circle" alt="Profile" >&lt;/img>
+					&lt;ul className="sidelist">
+                        &lt;div className="disabled">&lt;li className="list first">&lt;span className="fa fa-home icon">&lt;/span> Overview &lt;/li>&lt;/div>
+						&lt;div className="disabled">&lt;li className="list">&lt;i className="fa fa-pencil icon">&lt;/i> Manage Profile &lt;/li>&lt;/div>
+                        &lt;div className="disabled">&lt;li className="list">&lt;i className="fa fa-users icon">&lt;/i> Audience &lt;/li>&lt;/div>
+                        &lt;Link to="/artist">&lt;li className="list">&lt;i className="fa fa-music icon">&lt;/i> My Music &lt;/li>&lt;/Link>
+					&lt;/ul>
+			    &lt;/div>
+        &lt;/div>        
+    )
 }
-
-TracksList.propTypes = {
-    tracks: PropTypes.array.isRequired
-}
-
-export default TracksList
-</code></pre>
+export default ArtistSidebar;</code></pre>
         </article>
     </section>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Components/WebPlayer/Bodies/AlbumWebPlayer/TracksList.js</title>
+    <title>JSDoc: Source: Components/Profile/AccountOverview.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Components/WebPlayer/Bodies/AlbumWebPlayer/TracksList.js</h1>
+    <h1 class="page-title">Source: Components/Profile/AccountOverview.js</h1>
 
     
 
@@ -26,28 +26,52 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
-import Track from './Track.js'
-import PropTypes from 'prop-types';
-
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
+import './Profile.css';
 /**
- * List of tracks in an album or playlist
- * @extends Component
+ * Function that make the account overview page that view email and date of birth
+ * @param {JSON} props object that contains logged in person info
  */
-export class TracksList extends Component {
-    render() {
-        return this.props.tracks.map((track) => (
-            &lt;Track track={track} playing_song_id={this.props.playing_song_id} setPlayingSondId={this.props.setPlayingSondId}/>
-        ));
-    }
-}
+function AccountOverview(props) {
 
-TracksList.propTypes = {
-    tracks: PropTypes.array.isRequired
-}
+    return(
+        &lt;div id="account-overview" className="col-lg-9 content-accountoverview">
+			    	&lt;h1 className="overview">Account overview&lt;/h1>
+			    	&lt;div className="profile">
+			    		&lt;h3>Profile&lt;/h3>
+			    		&lt;br>&lt;/br>
+			    		&lt;table className="col-lg-11 col-md-11 col-sm-11">
+						  &lt;tr>
+							&lt;th>Email&lt;/th> 
+							&lt;td>{props.info.email}&lt;/td>
+						  &lt;/tr>
+						  &lt;tr>
+						    &lt;th>Date of birth&lt;/th>
+							&lt;td>{props.info.dateOfBirth}&lt;/td>
 
-export default TracksList
-</code></pre>
+						  &lt;/tr>
+					    &lt;/table>
+			    	&lt;/div>
+                    &lt;Link to="/edit-profile">&lt;button className="btn btn-outline-secondary account-overview-buttons">EDIT PROFILE&lt;/button>&lt;/Link>
+					&lt;div className="plan">
+						&lt;h3 className="yourplan">Your plan&lt;/h3>
+						&lt;br>&lt;/br>
+						&lt;div className="free">
+							&lt;h3 className="spotifyfree">Spotify Free&lt;/h3>
+						&lt;/div>
+						&lt;div className="card">
+							&lt;p className="playp p">Play music in shuffle mode only, with ads.&lt;/p>
+							&lt;p className="playp f">Free&lt;/p>
+						&lt;/div>
+					&lt;/div>
+				&lt;Link to="/premium-code">&lt;button className="btn btn-outline-secondary account-overview-buttons">JOIN PREMIUM&lt;/button>&lt;/Link>
+		&lt;/div>
+    
+    )
+}
+export default AccountOverview;</code></pre>
         </article>
     </section>
 
