@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+/** Functional component to make a progress bar by percentage.
+ * @class
+ */
 const Progress = ({ percentage }) => {
   return (
     <div className="progress">
@@ -16,7 +18,7 @@ const Progress = ({ percentage }) => {
 };
 
 Progress.propTypes = {
-  percentage: PropTypes.number.isRequired
+  percentage: PropTypes.number.isRequired,
 };
 
 export default Progress;

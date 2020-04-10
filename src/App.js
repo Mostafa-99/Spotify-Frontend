@@ -1,7 +1,4 @@
 import React from 'react';
-
-import MainIndex from './Components/userIndex/MainIndex.js'
-
 import SignUp from './Components/Authentication/SignUp.js';
 import LogIn from './Components/Authentication/LogIn.js';
 import Navbar from './Components/Navigation/Navbar.js';
@@ -9,48 +6,34 @@ import Footer from './Components/Footer/Footer.js';
 import PasswordReset from './Components/PasswordReset/PasswordReset.js'
 import PasswordChange from './Components/PasswordReset/PasswordChange.js'
 import NotFound from './Components/NotFound/NotFound.js'
-
 import HelpPage from './Components/HelpPage/HelpPage.js'
 import AccountSettings from './Components/Profile/AccountSettings.js'
 import EditProfile from './Components/Profile/EditProfile.js'
 import NotificationsSettings from './Components/Profile/NotificationSettings.js';
 import ChangePasswrod from './Components/Profile/ChangePassword';
-
 import PremiumCode from './Components/Premium/premiumCode.js';
 import Premium from './Components/Premium/premium.js';
-
 import AccountHelp from './Components/HelpComponents/AccountHelp/AccountHelp'
 import SpotifyAndFacebook from './Components/HelpComponents/AccountHelp/Articles/SpotifyAndFacebook'
 import HowToLogOut from './Components/HelpComponents/AccountHelp/Articles/HowToLogOut'
 import CanNotActivatePremiumTrial from './Components/HelpComponents/AccountHelp/Articles/CanNotActivatePremiumTrial'
 import ChangeEmailAddress from './Components/HelpComponents/AccountHelp/Articles/ChangeEmailAddress'
 import ProfilePicture from './Components/HelpComponents/AccountHelp/Articles/ProfilePicture'
-
 import FeaturesMain from './Components/HelpComponents/Features/FeaturesMain'
 import SearchFeature from './Components/HelpComponents/Features/SearchFeature.js';
 import YourLibraryFeature from './Components/HelpComponents/Features/YourLibraryFeature.js';
 import ShufflePlayFeature from './Components/HelpComponents/Features/ShufflePlayFeature.js';
 import ArtistProfilesFeature from './Components/HelpComponents/Features/ArtistProfilesFeature.js';
 import VideosFeature from './Components/HelpComponents/Features/VideosFeature.js';
-
 import MainSelector from './Components/Main/MainSelector' 
-
-import Albums from './Components/Artist/Albums/Albums'
 import CreateAlbum from './Components/Artist/UploadFile/CreateAlbum'
 import TrackUpload from './Components/Artist/UploadFile/TrackUpload'
 import AlbumPage from './Components/Artist/Albums/AlbumPage'
-
 import Home from './Components/WebPlayer/Bodies/Home/Home'
 import ArtistWebPlayer from './Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayer'
-import Search from './Components/WebPlayer/Bodies/Search/Search'
-
 import AlbumWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer.js'
 import PlaylistWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/PlaylistWebPlayer.js'
-
-//import {withRouter} from 'react-router';
 import {Route,BrowserRouter as Router,Switch} from 'react-router-dom';
-
-import UpgradeArtist from './Components/Artist/UpgradeArtist/UpgradeArtist'
 import ArtistSelector from './Components/Artist/ArtistSelector'
 import ProfileContextProvider from './Context/ProfileContext';
 import ConfigContextProvider from './Context/ConfigContext'
@@ -63,9 +46,7 @@ function App() {
     <Router>
       <ConfigContextProvider>
       <ProfileContextProvider>
-      <Navbar/>
-
-    
+      <Navbar/>    
       <Switch>
         {/*Public pages */}
         <Route path="/help" exact component={HelpPage}/>
@@ -107,16 +88,12 @@ function App() {
         <ProtectedRoute path="/artist/create-album" exact component={CreateAlbum}/>
         <ProtectedRoute path="/artist/album-page" exact component={AlbumPage}/>
 
-
-       
         <Route path="/" component={NotFound}/>
       </Switch>
-      
       <Footer/>
       </ProfileContextProvider>
       </ConfigContextProvider>
     </Router>   
-    
   );
 }
 

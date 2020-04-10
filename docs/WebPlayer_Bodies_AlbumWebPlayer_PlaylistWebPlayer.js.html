@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: WebPlayer/Bodies/AlbumWebPlayer/PlaylistWebPlayer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: WebPlayer/Bodies/AlbumWebPlayer/PlaylistWebPlayer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
+import axios from 'axios'
+import HomeNavBar from './../Home/HomeNavBar.js'
+import SideBar from './../../SideBar.js'
+import TracksList from './TracksList.js'
+import Album_Image from './../../../../Images/albumImage.jpg'
+import {ConfigContext} from '../../../../Context/ConfigContext'
+import './AlbumWebPlayer.css'
+
+/**
+ * Album web player class
+ * @extends Component
+ */
+export class AlbumWebPlayer extends Component {
+    static contextType=ConfigContext;
+
+    audio=new Audio();
+    state={
+        /**
+         * ID of the album
+         * @type {Object}
+         */
+        myId:{},//id of current album
+        /**
+         * Name of the album
+         * @type {String}
+         */
+        "album_name":"",
+        /**
+         * ID of the album
+         * @type {String}
+         */
+        "album_id":"",
+        /**
+         * Array of artists' names
+         * @type {Array&lt;String>}
+         */
+        "artists":"",
+        /**
+         * Image url of the album
+         * @type {String}
+         */
+        "album_image_url":"",
+        /**
+         * Array of tracks objects 
+         * @type {Array&lt;Object>}
+         */
+        "tracks":[],
+        /**
+         * States if the user liked the album or not
+         * @type {Boolean}
+         */
+        "is_liked":Boolean,
+        /**
+         * ID of the playing song
+         * @type {String}
+         */
+        "playing_song_id":""
+    }
+
+    componentDidMount(){
+
+        const{myId}=this.props.location.state;//getting id from parent component
+        this.state.myId=myId;
+        console.log("this album id is : ",this.state.myId);//this to how to get current album id to request data from back end (this.state.myId)
+
+        this.getAlbumDetails();
+        this.getAlbumTracks();
+    }
+
+    /**
+    * Gets album's name,image url and get if the user likes the album
+    */
+    getAlbumDetails(){
+       //http://localhost:3000/albums/1
+        axios.get(this.context.baseURL+"/playlists/"+this.state.myId,{
+            headers:{
+                'Content-Type':'application/json',
+                'authorization': "Bearer "+ localStorage.getItem("token"),
+                "id": this.state.myId
+            }
+        })
+        .then(res => {
+            if(res.status===200){
+                console.log("Album details here")
+                console.log(res)
+                this.setState({
+                    album_image_url:res.data.data.playlist.images[0],
+                    album_name:res.data.data.playlist.name,
+                    is_liked:false //get from backend
+                })
+            }
+            else if(res.status===401){
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
+            }
+            else{
+                alert("error");
+            }
+        })
+        /*
+        .catch(error => {
+            alert(error.response.data.message);
+        })*/
+    }
+
+    /**
+    * Get album's tracks with their details in an array of objects
+    */
+    getAlbumTracks(){
+        //'http://localhost:3000/album_tracks/1'
+        axios.get(this.context.baseURL+"/playlists/"+this.state.myId+"/tracks",{
+            headers:{
+                'Content-Type':'application/json',
+                'authorization': "Bearer "+ localStorage.getItem("token"),
+                "id": this.state.myId
+            }
+        })
+        .then(res => {
+            if(res.status===200){
+                console.log("Album details")
+                console.log(res)
+                this.setState({tracks:res.data.data.tracksArray})
+            }
+            else if(res.status===401){
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
+            }
+            else{
+                alert("error");
+            }
+        })
+        /*
+        .catch(error => {
+           alert(error.response.data.message);
+        })*/
+    }
+
+    /**
+     * toggles is_liked and sends request to backend to update
+     */
+    likeButtonPressed=()=>{
+        //send request to like
+        this.setState(prevState =>({
+            is_liked:!prevState.is_liked
+        }))
+    }
+
+    /**
+     * Plays or stop song
+     * @param {string} id -id of the song pressed
+     * @return {void}
+     */
+    setPlayingSondId=(id,url)=>{
+        if(this.state.playing_song_id===""){
+            this.setState({
+                playing_song_id:id
+            })
+            this.audio.src=url;
+            this.audio.play();
+        }
+        else{
+            if(this.state.playing_song_id===id){
+                this.setState({
+                    playing_song_id:""
+                })
+                this.audio.pause();
+            }
+            else{
+                this.setState({
+                    playing_song_id:id
+                })
+                this.audio.src=url;
+                this.audio.play();
+            }
+        }
+    }
+
+    render() {
+        return (
+            &lt;div id="album-bar-webplayer-main-div" className="container-fluid">
+            &lt;div id="album-main-row" className="row">
+            &lt;div className="col-lg-2">
+                &lt;SideBar/>
+            &lt;/div>
+            &lt;div className="col-lg-10">
+                &lt;HomeNavBar/>
+                &lt;div id="album-webplayer-main-div">
+                    &lt;div className="row">
+                        &lt;div className="row album-details-div">
+                            &lt;div className="album-image-div">
+                                &lt;img className="album-image" src={this.state.album_image_url} alt="album pic"/>
+                            &lt;/div>
+                            &lt;div className="album-below-image-div">
+                                &lt;div className="album-title-div">
+                                    &lt;h1 className="album-title">{this.state.album_name}&lt;/h1>
+                                &lt;/div>
+                                &lt;div className="row album-buttons-div">
+                                    &lt;div className="album-play-button-div">
+                                        &lt;button type="button" className="btn btn-success">&lt;/button>
+                                    &lt;/div>
+                                    &lt;div className="row album-options-div">
+                                        &lt;div className="album-heart-div">
+                                            &lt;i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}>&lt;/i>
+                                        &lt;/div>
+                                        &lt;div className="album-dots-div dropdown show" >
+                                            &lt;p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...&lt;/p>
+                                            &lt;div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
+                                                &lt;a className="dropdown-item disabled" href="#">Start Radio&lt;/a>
+                                                &lt;a className="dropdown-item disabled" href="#">Save to Your Library&lt;/a>
+                                                &lt;a className="dropdown-item disabled" href="#">Add to PLaylist&lt;/a>
+                                                &lt;a className="dropdown-item disabled" href="#">Copy Album Link&lt;/a>
+                                                &lt;a className="dropdown-item disabled" href="#">Open in Desktop app&lt;/a>
+                                            &lt;/div>
+                                        &lt;/div>
+                                    &lt;/div>
+                                &lt;/div>
+                            &lt;/div>
+                        &lt;/div>
+                        &lt;div className="tracks-list-div">
+                            &lt;hr className="appear-on-small-screens"/>
+                            &lt;TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+            &lt;/div>
+            &lt;/div>
+        )
+    }
+}
+
+export default AlbumWebPlayer
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="premium.html">premium</a></li><li><a href="premiumCode.html">premiumCode</a></li><li><a href="Progress.html">Progress</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#album_id">album_id</a></li><li><a href="global.html#album_image_url">album_image_url</a></li><li><a href="global.html#album_name">album_name</a></li><li><a href="global.html#artists">artists</a></li><li><a href="global.html#is_liked">is_liked</a></li><li><a href="global.html#myId">myId</a></li><li><a href="global.html#playing_song_id">playing_song_id</a></li><li><a href="global.html#tracks">tracks</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Apr 10 2020 19:40:05 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
