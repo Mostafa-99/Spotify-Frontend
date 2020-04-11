@@ -3,11 +3,11 @@ import axios from 'axios'
 import HomeNavBar from './../Home/HomeNavBar.js'
 import SideBar from './../../SideBar.js'
 import TracksList from './TracksList.js'
-import Album_Image from './../../../../Images/albumImage.jpg'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
 import ArtistPageBtn from '../../../Artist/Albums/AlbumPageBtn'
 import AlbumPageBtn from '../../../Artist/Albums/AlbumPageBtn'
+
 /**
  * Album web player class
  * @extends Component
@@ -19,41 +19,43 @@ export class AlbumWebPlayer extends Component {
     state={
         /**
          * ID of the album
+         * @memberof AlbumWebPlayer
          * @type {Object}
          */
         myId:{},//id of current album
         /**
          * Name of the album
+         * @memberof AlbumWebPlayer
          * @type {String}
          */
         "album_name":"",
         /**
-         * ID of the album
-         * @type {String}
-         */
-        "album_id":"",
-        /**
          * Array of artists' names
+         * @memberof AlbumWebPlayer
          * @type {Array<String>}
          */
         "artists":"",
         /**
-         * Image url of the album
+         * Image of the album
+         * @memberof AlbumWebPlayer
          * @type {String}
          */
-        "album_image_url":"",
+        "album_image":"",
         /**
-         * Array of tracks objects 
+         * Array of tracks objects
+         * @memberof AlbumWebPlayer 
          * @type {Array<Object>}
          */
         "tracks":[],
         /**
          * States if the user liked the album or not
+         * @memberof AlbumWebPlayer
          * @type {Boolean}
          */
         "is_liked":Boolean,
         /**
          * ID of the playing song
+         * @memberof AlbumWebPlayer
          * @type {String}
          */
         "playing_song_id":""
@@ -63,17 +65,16 @@ export class AlbumWebPlayer extends Component {
 
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
-        console.log("this album id is : ",this.state.myId);//this to how to get current album id to request data from back end (this.state.myId)
 
         this.getAlbumDetails();
         this.getAlbumTracks();
     }
 
     /**
-    * Gets album's name,image url and get if the user likes the album
+    * Gets album's name,image and get if the user likes the album
+    * @memberof AlbumWebPlayer
     */
     getAlbumDetails(){
-       //http://localhost:3000/albums/1
         axios.get(this.context.baseURL+"/albums/"+this.state.myId,{
             headers:{
                 'Content-Type':'application/json',
@@ -86,7 +87,7 @@ export class AlbumWebPlayer extends Component {
                 console.log("Album details")
                 console.log(res)
                 this.setState({
-                    album_image_url:res.data.data.album.image,
+                    album_image:res.data.data.album.image,
                     album_name:res.data.data.album.name,
                     is_liked:false //get from backend
                 })
@@ -113,9 +114,9 @@ export class AlbumWebPlayer extends Component {
 
     /**
     * Get album's tracks with their details in an array of objects
+    * @memberof AlbumWebPlayer
     */
     getAlbumTracks(){
-        //'http://localhost:3000/album_tracks/1'
         axios.get(this.context.baseURL+"/albums/"+this.state.myId+"/tracks",{
             headers:{
                 'Content-Type':'application/json',
@@ -146,9 +147,10 @@ export class AlbumWebPlayer extends Component {
 
     /**
      * toggles is_liked and sends request to backend to update
+     * @memberof AlbumWebPlayer
      */
     likeButtonPressed=()=>{
-        //send request to like
+        //send request to like or unlike
         this.setState(prevState =>({
             is_liked:!prevState.is_liked
         }))
@@ -156,6 +158,7 @@ export class AlbumWebPlayer extends Component {
 
     /**
      * Plays or stop song
+     * @memberof AlbumWebPlayer
      * @param {string} id -id of the song pressed
      * @return {void}
      */
@@ -197,7 +200,7 @@ export class AlbumWebPlayer extends Component {
                     <div className="row">
                         <div className="row album-details-div">
                             <div className="album-image-div">
-                                <img className="album-image" src={this.state.album_image_url} alt="album pic"/>
+                                <img className="album-image" src={this.state.album_image} alt="album pic"/>
                             </div>
                             <div className="album-below-image-div">
                                 <div className="album-title-div">
