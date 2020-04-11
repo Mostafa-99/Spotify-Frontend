@@ -27,6 +27,16 @@ npm install --save mdbreact
 ```
 npm start
 ```
+## For mocking server
+change ConfigContext baseURL to:
+```
+http://spotify.mocklab.io
+```
+## For Backend server
+change ConfigContext baseURL to:
+```
+http://138.91.114.14/api
+```
 
 ## Functional Documentation 
 To install JSDoc , for documentation , use command:
