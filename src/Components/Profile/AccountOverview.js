@@ -2,7 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import './Profile.css';
-
+/**
+ * Function that make the account overview page that view email and date of birth
+ * @class
+ * @param {JSON} props object that contains logged in person info
+ */
 function AccountOverview(props) {
 
     return(

@@ -2,6 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import '../../Profile/Profile.css'
+/**
+ * Artist Sidebar page
+ * @class
+ * @param {string} props image of the artist
+ */
 function ArtistSidebar(props) {
     return(
         <div id="profile-sidebar" className="col-lg-3 sidebar">
