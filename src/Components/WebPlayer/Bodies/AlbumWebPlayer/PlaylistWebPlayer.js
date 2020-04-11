@@ -3,56 +3,57 @@ import axios from 'axios'
 import HomeNavBar from './../Home/HomeNavBar.js'
 import SideBar from './../../SideBar.js'
 import TracksList from './TracksList.js'
-import Album_Image from './../../../../Images/albumImage.jpg'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
 
 /**
- * Album web player class
+ * Playlist web player class
  * @extends Component
  */
-export class AlbumWebPlayer extends Component {
+export class PlaylistWebPlayer extends Component {
     static contextType=ConfigContext;
 
     audio=new Audio();
     state={
         /**
-         * ID of the album
+         * ID of the playlist
+         * @memberof PlaylistWebPlayer
          * @type {Object}
          */
-        myId:{},//id of current album
+        myId:{},//id of current playlist
         /**
-         * Name of the album
+         * Name of the playlist
+         * @memberof PlaylistWebPlayer
          * @type {String}
          */
-        "album_name":"",
-        /**
-         * ID of the album
-         * @type {String}
-         */
-        "album_id":"",
+        "playlist_name":"",
         /**
          * Array of artists' names
+         * @memberof PlaylistWebPlayer
          * @type {Array<String>}
          */
         "artists":"",
         /**
-         * Image url of the album
+         * Image url of the playlist
+         * @memberof PlaylistWebPlayer
          * @type {String}
          */
-        "album_image_url":"",
+        "playlist_image":"",
         /**
          * Array of tracks objects 
+         * @memberof PlaylistWebPlayer
          * @type {Array<Object>}
          */
         "tracks":[],
         /**
-         * States if the user liked the album or not
+         * States if the user liked the playlist or not
+         * @memberof PlaylistWebPlayer
          * @type {Boolean}
          */
         "is_liked":Boolean,
         /**
          * ID of the playing song
+         * @memberof PlaylistWebPlayer
          * @type {String}
          */
         "playing_song_id":""
@@ -62,17 +63,16 @@ export class AlbumWebPlayer extends Component {
 
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
-        console.log("this album id is : ",this.state.myId);//this to how to get current album id to request data from back end (this.state.myId)
 
-        this.getAlbumDetails();
-        this.getAlbumTracks();
+        this.getPlaylistDetails();
+        this.getPlaylistTracks();
     }
 
     /**
-    * Gets album's name,image url and get if the user likes the album
+    * Gets playlist's name,image and get if the user likes the playlist
+    * @memberof PlaylistWebPlayer
     */
-    getAlbumDetails(){
-       //http://localhost:3000/albums/1
+    getPlaylistDetails(){
         axios.get(this.context.baseURL+"/playlists/"+this.state.myId,{
             headers:{
                 'Content-Type':'application/json',
@@ -82,11 +82,11 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
-                console.log("Album details here")
+                console.log("Playlist details here")
                 console.log(res)
                 this.setState({
-                    album_image_url:res.data.data.playlist.images[0],
-                    album_name:res.data.data.playlist.name,
+                    playlist_image:res.data.data.playlist.images[0],
+                    playlist_name:res.data.data.playlist.name,
                     is_liked:false //get from backend
                 })
             }
@@ -107,10 +107,10 @@ export class AlbumWebPlayer extends Component {
     }
 
     /**
-    * Get album's tracks with their details in an array of objects
+    * Get playlist's tracks with their details in an array of objects
+    * @memberof PlaylistWebPlayer
     */
-    getAlbumTracks(){
-        //'http://localhost:3000/album_tracks/1'
+    getPlaylistTracks(){
         axios.get(this.context.baseURL+"/playlists/"+this.state.myId+"/tracks",{
             headers:{
                 'Content-Type':'application/json',
@@ -120,7 +120,7 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
-                console.log("Album details")
+                console.log("Playlist details")
                 console.log(res)
                 this.setState({tracks:res.data.data.tracksArray})
             }
@@ -142,6 +142,7 @@ export class AlbumWebPlayer extends Component {
 
     /**
      * toggles is_liked and sends request to backend to update
+     * @memberof PlaylistWebPlayer
      */
     likeButtonPressed=()=>{
         //send request to like
@@ -152,6 +153,7 @@ export class AlbumWebPlayer extends Component {
 
     /**
      * Plays or stop song
+     * @memberof PlaylistWebPlayer
      * @param {string} id -id of the song pressed
      * @return {void}
      */
@@ -193,11 +195,11 @@ export class AlbumWebPlayer extends Component {
                     <div className="row">
                         <div className="row album-details-div">
                             <div className="album-image-div">
-                                <img className="album-image" src={this.state.album_image_url} alt="album pic"/>
+                                <img className="album-image" src={this.state.playlist_image} alt="playlist pic"/>
                             </div>
                             <div className="album-below-image-div">
                                 <div className="album-title-div">
-                                    <h1 className="album-title">{this.state.album_name}</h1>
+                                    <h1 className="album-title">{this.state.playlist_name}</h1>
                                 </div>
                                 <div className="row album-buttons-div">
                                     <div className="album-play-button-div">
@@ -213,7 +215,7 @@ export class AlbumWebPlayer extends Component {
                                                 <a className="dropdown-item disabled" href="#">Start Radio</a>
                                                 <a className="dropdown-item disabled" href="#">Save to Your Library</a>
                                                 <a className="dropdown-item disabled" href="#">Add to PLaylist</a>
-                                                <a className="dropdown-item disabled" href="#">Copy Album Link</a>
+                                                <a className="dropdown-item disabled" href="#">Copy Playlist Link</a>
                                                 <a className="dropdown-item disabled" href="#">Open in Desktop app</a>
                                             </div>
                                         </div>
@@ -234,4 +236,4 @@ export class AlbumWebPlayer extends Component {
     }
 }
 
-export default AlbumWebPlayer
+export default PlaylistWebPlayer

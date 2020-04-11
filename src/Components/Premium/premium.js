@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
-import './premium.css';
+import './Premium.css';
 import benefit1 from '../../Images/benefit-1.png';
 import benefit2 from '../../Images/benefit-2.png';
 import benefit3 from '../../Images/benefit-3.png';
@@ -10,7 +10,7 @@ import benefit4 from '../../Images/benefit-4.png';
  * Show advantages of being premium user
  * @extends Component
  */
-export class premium extends Component {
+export class Premium extends Component {
     render() {
         
         {document.title ="Spotify"}
@@ -93,4 +93,4 @@ export class premium extends Component {
     }
 }
 
-export default premium
+export default Premium

@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './premiumCode.css';
+import './PremiumCode.css';
 import {ConfigContext} from '../../Context/ConfigContext'
 
 /**
  * Checks subscription code to become a premium user
  * @extends Component
  */
-export class premiumCode extends Component {
+export class PremiumCode extends Component {
     static contextType=ConfigContext;
 
     state={
+        /**
+         * String written in Subscription code input text
+         * @memberof PremiumCode
+         * @type {String}
+         */
         code: ''
     }
 
@@ -116,4 +121,4 @@ export class premiumCode extends Component {
     }
 }
 
-export default premiumCode
+export default PremiumCode

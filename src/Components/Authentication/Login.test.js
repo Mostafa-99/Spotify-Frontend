@@ -1,22 +1,61 @@
-/*import React from 'react';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { configure, shallow } from 'enzyme';
+import 'jest-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Login from './LogIn';
+import '@testing-library/jest-dom/extend-expect';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 
 configure({adapter: new Adapter()});
 
-describe('<Login/>', () => {
+describe('<Login />',() => {
 
-  let wrapper;
-
+let wrapper;
   beforeEach(() => {
-      wrapper = shallow(<Login />);
+    wrapper = shallow(<Login />);
   });
 
-  it('Login component renders', () => {
-    expect(wrapper.
+  it('renders without crashing', () => {
+
+    const div =document.createElement('div');
+    ReactDOM.render(<Router><Login/></Router>,div);
+   });
+
+  it('matches snapshot', () => {
+
+   const tree =document.createElement('button')
+   expect(tree).toMatchSnapshot();
   });
 
-  
+  it('renders correct items', () => {
 
-});*/
+    const welcome = "To continue, log in to Spotify.";
+    expect(wrapper.contains(welcome)).toEqual(true);
+   });
+
+   it('test functions', () => {
+    // let component = renderer.create(<Router><Login/></Router>);
+    // component.getInstance();
+    // let data="123";
+    // let v=component.validatePassword(data);
+
+    // expect(v).toEqual(false);
+    // data="1233456789";
+    // v=component.validatePassword(data);
+    // expect(v).toEqual(true);
+    
+   });
+
+
+   it('State Intialization', () => {
+    expect(wrapper.state().status).toEqual("not connected");
+    expect(wrapper.state().user.email).toEqual("");
+    expect(wrapper.state().user.password).toEqual("");
+
+  })
+   
+
+})

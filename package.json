@@ -2,6 +2,9 @@
   "name": "yarab",
   "version": "0.1.0",
   "private": true,
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
+  },
   "dependencies": {
     "@babel/compat-data": "7.8.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",

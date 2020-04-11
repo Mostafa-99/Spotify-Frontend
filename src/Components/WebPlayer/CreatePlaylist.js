@@ -1,7 +1,12 @@
 import React,{Component} from 'react';
 import './SideBar.css';
-import './createplaylist.css'
+import './CreatePlaylist.css'
 
+/**
+ * Create Playlist modal : opens to shows a modal to write in the name of the new playlist to send to back end 
+ * Not done yet 
+ * @extends Component
+ */
 
 class CreatePlaylist extends Component {
 
@@ -9,16 +14,29 @@ class CreatePlaylist extends Component {
             
          super()
         this.state = {
-            
+            /**
+         *playlist created name
+          @type {string}
+         @memberof CreatePlaylist
+         */
             playlistname:""
            
         }
+     
         this.onChange = this.onChange.bind(this)
         // this.handleclick= this.handleclick.bind(this)
     }
 
+   
+
+       /**
+          * Controls that when user clicks create playlist button the Modal shows 
+   * @type {Handler}
+   * @memberof CreatePlaylist
+   */
     onChange = (e) => this.setState({ playlistname: e.target.value });
     //To be uncommented Next Phase 
+
    /*  handleclick = () => {
         axios.post('',this.state.playlistname)
             .then(res => {

@@ -5,37 +5,84 @@ import '../Bodies.css';
 import '../../WebplayerHome.css'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
-
 import  './PlaylistContextMenu.css';
 import { theme, animation } from 'react-contexify';
 import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
+/** Class of home in webplayer.
+ * @extends Component
+ */
 class Home extends Component {
-    static contextType=ConfigContext;
-    constructor(){
-        super()
-        this.state = {
-            recentlyPlayed:[],
-            popularPlayLists:[],
-            mostRecentPlayLists:[],
-            popularAlbums:[],
-            mostRecentAlbums:[],
-            catagories:[],
-            firstCategory:[],
-            secondCategory:[],
-            workOut:[],
-            madeForYou:[],
-            artists:[],
-            nowPlaying:{
-                id:-1
-            },       
-        }
-        this.togglePlayPause=this.togglePlayPause.bind(this)
-
-    }
-
+    /**Gets the baseURL from configrations context of the user
+    * @memberof Home
+    */
+     static contextType=ConfigContext;
+     constructor(){
+         super()
+         this.state = {
+             /** Array of recently played playlists
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             recentlyPlayed:[],
+             /** Array of popular playlists
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             popularPlayLists:[],
+             /** Array of most recent playlists
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             mostRecentPlayLists:[],
+             /** Array of popular albums
+              * @memberof Home
+              * @type {Array<albums>}
+              */
+             popularAlbums:[],
+             /** Array of most recent albums
+              * @memberof Home
+              * @type {Array<albums>}
+              */
+             mostRecentAlbums:[],
+             /** Array of catagories that will show on home page
+              * @memberof Home
+              * @type {Array<categories>}
+              */
+             catagories:[],
+             /** Array of playlists of first category
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             firstCategory:[],
+              /** Array of playlists of second category
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             secondCategory:[],
+             workOut:[],
+             madeForYou:[],
+              /** Array of artists
+              * @memberof Home
+              * @type {Array<artists>}
+              */
+             artists:[],
+              /** object that stores the id of the selected playlist, album or artist
+              * @memberof Home
+              * @type {{id: string}}
+              */
+             nowPlaying:{
+                 id:-1
+             },       
+         }
+         this.togglePlayPause=this.togglePlayPause.bind(this)
+ 
+     }
+     /**
+      * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
+      */
     componentDidMount() {
 
         window.addEventListener('contextmenu',(event) =>{
@@ -53,7 +100,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("categories",res)
                     this.setState({
                         catagories: res.data.data.categories.map( category => ({
                             id: category._id,
@@ -73,7 +119,6 @@ class Home extends Component {
                     .then(res => {
                         if(res.status === 200)
                         {
-                            console.log("category1",res)
                             this.setState({
                                 firstCategory: res.data.data.playlists.map( playList => ({
                                     id:playList._id,
@@ -104,7 +149,6 @@ class Home extends Component {
                     .then(res => {
                         if(res.status === 200)
                         {
-                            console.log("category2",res)
                             this.setState({
                                 secondCategory: res.data.data.playlists.map( playList => ({
                                     id:playList._id,
@@ -144,7 +188,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("artists",res)
                     this.setState({
                         artists: res.data.data.map( artist => ({
                             id:artist._id,
@@ -174,7 +217,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("recently played",res)
                     this.setState({
                         recentlyPlayed: res.data.data.items.map( playList => ({
                             id:playList._id,
@@ -206,7 +248,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("popular albums",res)
                     this.setState({
                         popularAlbums: res.data.data.albums.map( album => ({
                             id:album._id,
@@ -238,7 +279,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("most recent albums",res);
                     this.setState({
                         mostRecentAlbums: res.data.data.albums.map( album => ({
                             id:album._id,
@@ -268,7 +308,6 @@ class Home extends Component {
             }
         })
             .then(res => {
-                console.log("popular pl",res)
                 if(res.status === 200)
                 {
                     this.setState({
@@ -286,7 +325,6 @@ class Home extends Component {
                     localStorage.removeItem("isLoggedIn");
                     localStorage.removeItem("token");
                     localStorage.removeItem("userID");
-                    console.log("fail")
 
                 }
             })
@@ -304,7 +342,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("most recent pl",res);
                     this.setState({
                         mostRecentPlayLists: res.data.data.playlist.map( playList => ({
                             id:playList._id,
@@ -391,7 +428,10 @@ class Home extends Component {
                 })
             }) */                             
     }
-    
+        /**
+         * @property {Function} togglePlayPause Function that handle the play and pause buttons in home page cards
+         * @param {string} sid the card id
+         */
         togglePlayPause(sid) {
             if(this.state.nowPlaying.id===-1)
             {
@@ -652,8 +692,82 @@ class Home extends Component {
                     )}
                 </div>
             </div>
-            <div className="popular-albums-section">
-                <h2 className="section-title popular-albums">Popular Artists</h2>
+            <div className="first-category-section">
+                            {this.state.catagories.slice(0,1).map( category => (
+                                <h2 className="section-title first-category">
+                                    {category.name}
+                                </h2>  
+                            ))}
+                <div className="card-group">
+                    {this.state.firstCategory.map( playlist => (
+                        <div>
+                            <Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                <div className="card" id={playlist.id}>
+                             {/**    <MenuProvider id={playlist.id} component="span" >
+                                    <Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    <Item>Save To Library</Item>
+                                    <Item>Copy Playlist Link</Item>
+                                    <Item>Open in App</Item>
+                                    </Menu> */}                                        <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{playlist.title}</h5>
+                                        <p className="card-text">{playlist.description}</p>
+                                        <div id={playlist.id}>
+                                            <button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
+                                    </div> 
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                    )}
+                </div>
+            </div>
+            <div className="second-category-section">
+            {this.state.catagories.slice(1,2).map( category => (
+                                <h2 className="section-title second-category">
+                                    {category.name}
+                                </h2>  
+                            ))}
+                <div className="card-group">
+                    {this.state.secondCategory.map( playlist => (
+                        <div>
+                            <Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                <div className="card" id={playlist.id}>
+                            {/**    <MenuProvider id={playlist.id} component="span" >
+                                    <Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    <Item>Save To Library</Item>
+                                    <Item>Copy Playlist Link</Item>
+                                    <Item>Open in App</Item>
+                                    </Menu>*/}                                          <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{playlist.title}</h5>
+                                        <p className="card-text">{playlist.description}</p>
+                                        <div id={playlist.id}>
+                                            <button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
+                                    </div> 
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                    )}
+                </div>
+            </div>
+            <div className="popular-artists-section">
+                <h2 className="section-title popular-artists">Popular Artists</h2>
                 <div className="card-group">
                     {this.state.artists.map( artist => (
                         <div>
