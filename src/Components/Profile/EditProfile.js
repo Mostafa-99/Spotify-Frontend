@@ -5,15 +5,38 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
 import { ConfigContext } from '../../Context/ConfigContext'
+/** Variable that contains the birthday date of the user
+ * @type {Date}
+ */
 var today;
+/** Variable that contains the birthday day of the user
+ * @type {string}
+ */
 var day;
+/** Variable that contains the birthday month of the user
+ * @type {string}
+ */
 var month;
+/** Variable that contains the birthday year of the user
+ * @type {string}
+ */
 var year;
+/** Class of EditProfile page in account settings.
+ * @extends Component
+ */
 class EditProfile extends Component {
+   /**Gets the baseURL from configrations context of the user
+   * @memberof EditProfile
+   */
     static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
+            /**
+             * User object that have the user Date of birth and email and image and name and gender
+             * @memberof EditProfile
+             * @type {{dateOfBirth: string, email: string, image: string, name:string, gender:string}}
+             */
           user:{
               name:"",
               dateOfBirth:"",
@@ -21,14 +44,30 @@ class EditProfile extends Component {
               gender:"",
               image:"",
           },
+            /**
+             * success message show bollean
+             * @memberof EditProfile
+             * @type {boolean}
+             */ 
           successMessage: false,
+            /**
+             * fail message show bollean
+             * @memberof EditProfile
+             * @type {boolean}
+             */
           failMessage: false,
-          token: localStorage.getItem("token"),
+            /**
+             * Login type of the user (Facebook or normal)
+             * @memberof EditProfile
+             * @type {string}
+             */
           loginType: localStorage.getItem("loginType")
         }
         this.editProfileHandle=this.editProfileHandle.bind(this)
     }
-    
+    /**
+     * @property {Function} componentDidMount Fetch the data of the user and put it in the state and checks the user login type to show and hide the information that can be edited
+     */
     componentDidMount(){
         axios.get(this.context.baseURL+"/me", {
             headers: {
@@ -36,7 +75,6 @@ class EditProfile extends Component {
             },
         })
             .then(res => {
-                console.log(res)
                 if(res.status===200)
                 {
                     this.setState(prevState => (
@@ -56,9 +94,6 @@ class EditProfile extends Component {
                     day = today.getDate();
                     month = today.getMonth()+1; 
                     year = today.getFullYear();
-                    console.log(day);
-                    console.log(month);
-                    console.log(year);
                     document.querySelector('.year').value=year;
                     document.querySelector('.month').value=month;
                     document.querySelector('.day').value=day;
@@ -70,7 +105,6 @@ class EditProfile extends Component {
                     localStorage.removeItem("isLoggedIn");
                     localStorage.removeItem("token");
                     localStorage.removeItem("userID");
-                    console.log("fail")
                 }
             })
         if(this.state.loginType==="fb")
@@ -91,9 +125,15 @@ class EditProfile extends Component {
             buttons.classList.toggle('hide');
         }
     }
-
+    /**
+     * @property {Function} editProfileHandle Function that take the edited info of the user and change it
+     * @param {number} userYear year of birth of the user
+     * @param {number} userMonth month of birth of the user
+     * @param {number} userDay day of birth of the user
+     * @param {string} userGender gender of the user
+     * @param {string} userEmail email of the user
+     */
     editProfileHandle(userYear,userMonth,userDay,userGender,userEmail){
-        console.log(userYear,userMonth,userDay,userGender,userEmail)
         axios.put(this.context.baseURL+'/me', 
         {
             "email": userEmail,
@@ -109,7 +149,6 @@ class EditProfile extends Component {
         }
         )   
         .then(res => {
-            console.log(res)
             if(res.status === 200)
             {
                 this.setState(prevState => (
@@ -144,7 +183,6 @@ class EditProfile extends Component {
 
     return(                                                  
         <div className="bg-dark-clr">
-         {console.log(this.state.user)}   
         <div id="edit-profile"className="container editProfile">
             <div className="row">
                 <SideBar img={this.state.user.image}/>

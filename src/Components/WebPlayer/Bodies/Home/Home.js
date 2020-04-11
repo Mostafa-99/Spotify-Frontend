@@ -11,36 +11,78 @@ import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
+/** Class of home in webplayer.
+ * @extends Component
+ */
 class Home extends Component {
-    static contextType=ConfigContext;
-    constructor(){
-        super()
-        this.state = {
-            recentlyPlayed:[],
-            popularPlayLists:[],
-            mostRecentPlayLists:[],
-            popularAlbums:[],
-            mostRecentAlbums:[],
-            catagories:[],
-            firstCategory:[],
-            secondCategory:[],
-            workOut:[],
-            madeForYou:[],
-            artists:[],
-             /** object that stores the id of the selected playlist, album or artist
-             * @memberof Home
-             * @type {{id: string}}
-             */
-            nowPlaying:{
-                id:-1
-            },       
-        }
-        this.togglePlayPause=this.togglePlayPause.bind(this)
-
-    }
-    /**
-     * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
-     */
+    /**Gets the baseURL from configrations context of the user
+    * @memberof Home
+    */
+     static contextType=ConfigContext;
+     constructor(){
+         super()
+         this.state = {
+             /** Array of recently played playlists
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             recentlyPlayed:[],
+             /** Array of popular playlists
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             popularPlayLists:[],
+             /** Array of most recent playlists
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             mostRecentPlayLists:[],
+             /** Array of popular albums
+              * @memberof Home
+              * @type {Array<albums>}
+              */
+             popularAlbums:[],
+             /** Array of most recent albums
+              * @memberof Home
+              * @type {Array<albums>}
+              */
+             mostRecentAlbums:[],
+             /** Array of catagories that will show on home page
+              * @memberof Home
+              * @type {Array<categories>}
+              */
+             catagories:[],
+             /** Array of playlists of first category
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             firstCategory:[],
+              /** Array of playlists of second category
+              * @memberof Home
+              * @type {Array<playlists>}
+              */
+             secondCategory:[],
+             workOut:[],
+             madeForYou:[],
+              /** Array of artists
+              * @memberof Home
+              * @type {Array<artists>}
+              */
+             artists:[],
+              /** object that stores the id of the selected playlist, album or artist
+              * @memberof Home
+              * @type {{id: string}}
+              */
+             nowPlaying:{
+                 id:-1
+             },       
+         }
+         this.togglePlayPause=this.togglePlayPause.bind(this)
+ 
+     }
+     /**
+      * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
+      */
     componentDidMount() {
 
         window.addEventListener('contextmenu',(event) =>{
@@ -58,7 +100,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("categories",res)
                     this.setState({
                         catagories: res.data.data.categories.map( category => ({
                             id: category._id,
@@ -78,7 +119,6 @@ class Home extends Component {
                     .then(res => {
                         if(res.status === 200)
                         {
-                            console.log("category1",res)
                             this.setState({
                                 firstCategory: res.data.data.playlists.map( playList => ({
                                     id:playList._id,
@@ -109,7 +149,6 @@ class Home extends Component {
                     .then(res => {
                         if(res.status === 200)
                         {
-                            console.log("category2",res)
                             this.setState({
                                 secondCategory: res.data.data.playlists.map( playList => ({
                                     id:playList._id,
@@ -149,7 +188,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("artists",res)
                     this.setState({
                         artists: res.data.data.map( artist => ({
                             id:artist._id,
@@ -179,7 +217,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("recently played",res)
                     this.setState({
                         recentlyPlayed: res.data.data.items.map( playList => ({
                             id:playList._id,
@@ -211,7 +248,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("popular albums",res)
                     this.setState({
                         popularAlbums: res.data.data.albums.map( album => ({
                             id:album._id,
@@ -243,7 +279,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("most recent albums",res);
                     this.setState({
                         mostRecentAlbums: res.data.data.albums.map( album => ({
                             id:album._id,
@@ -273,7 +308,6 @@ class Home extends Component {
             }
         })
             .then(res => {
-                console.log("popular pl",res)
                 if(res.status === 200)
                 {
                     this.setState({
@@ -291,7 +325,6 @@ class Home extends Component {
                     localStorage.removeItem("isLoggedIn");
                     localStorage.removeItem("token");
                     localStorage.removeItem("userID");
-                    console.log("fail")
 
                 }
             })
@@ -309,7 +342,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("most recent pl",res);
                     this.setState({
                         mostRecentPlayLists: res.data.data.playlist.map( playList => ({
                             id:playList._id,

@@ -11,8 +11,8 @@ import AccountSettings from './Components/Profile/AccountSettings.js'
 import EditProfile from './Components/Profile/EditProfile.js'
 import NotificationsSettings from './Components/Profile/NotificationSettings.js';
 import ChangePasswrod from './Components/Profile/ChangePassword';
-import PremiumCode from './Components/Premium/premiumCode.js';
-import Premium from './Components/Premium/premium.js';
+import PremiumCode from './Components/Premium/PremiumCode.js';
+import Premium from './Components/Premium/Premium.js';
 import AccountHelp from './Components/HelpComponents/AccountHelp/AccountHelp'
 import SpotifyAndFacebook from './Components/HelpComponents/AccountHelp/Articles/SpotifyAndFacebook'
 import HowToLogOut from './Components/HelpComponents/AccountHelp/Articles/HowToLogOut'
