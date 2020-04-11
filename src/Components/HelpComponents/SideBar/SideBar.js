@@ -2,7 +2,13 @@ import React from "react";
 import './SideBar.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-function SideBar(){
+import  { Component } from "react";
+
+/** Class of SideBar in account help page and articles
+ * @extends Component
+ */
+class SideBar extends Component {
+    render() {
     {document.title ="Account Help - Spotify"}
     return(       
                 <div className='sidebar-body' id='sidebar-body'>
@@ -22,5 +28,5 @@ function SideBar(){
                     </div>
                 </div>
                 )
-    }
+    }}
 export default SideBar

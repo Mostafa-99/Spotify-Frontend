@@ -36,16 +36,17 @@ let wrapper;
     expect(wrapper.contains(welcome)).toEqual(true);
    });
 
-   it('test functions', () => {
-    // let component = renderer.create(<Router><PasswordChange/></Router>);
-    // component.getInstance();
-    // let data="123";
-    // let v=component.validatePassword(data);
+   it('test validate password function', () => {
 
-    // expect(v).toEqual(false);
-    // data="1233456789";
-    // v=component.validatePassword(data);
-    // expect(v).toEqual(true);
+    let component = wrapper.instance();
+
+    let data="123";
+    let v=component.validatePassword(data);
+
+    expect(v).toEqual(false);
+    data="1233456789";
+    v=component.validatePassword(data);
+    expect(v).toEqual(true);
     
    });
 
