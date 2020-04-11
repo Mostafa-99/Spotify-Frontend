@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/Authentication/LogIn.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/Authentication/LogIn.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import '../Authentication/SignUp.css';
+import spotify_black_logo from '../../Images/spotify_logo_black.png';
+import '../Button/SpotifyButton.css';
+import {ConfigContext} from '../../Context/ConfigContext'
+import axios from 'axios'
+import {Link,Redirect} from 'react-router-dom'
+//import { buildQueries } from '@testing-library/react';
+
+
+/**
+ * Login Page Component
+ * @extends Component
+ */
+class LogIn extends Component {
+    static contextType=ConfigContext;
+
+    constructor() {
+        super()
+        
+    this.state ={
+        user:{
+            email:'',
+            password:''
+               },
+        rememberme:false,
+        emptypass:false,
+        emptyemail:false,
+        status: 'not connected',
+        invalid:false
+    }
+
+    }
+
+      /**
+     * Function handling login request with Facebook
+     * 
+     */
+    fbLogin = event=> {
+        event.preventDefault();
+        
+        window.FB.login(function(response) {
+            if (response.status === 'connected') {
+                let fbtoken=response.authResponse.accessToken;
+                let fbuserID=response.authResponse.userID;
+                    axios.post(this.context.baseURL+'/loginWithFacebook',
+                {
+                "access_token":fbtoken,
+                "facebook id":fbuserID
+                }
+                )   
+                .then(res => {
+                    if(res.status===200) // Successful
+                    {
+                        if(res.data.success===true || res.data.success==="true")
+                        {
+                            localStorage.setItem("isLoggedIn",'true');
+                            localStorage.setItem("token",res.data.token);
+                            localStorage.setItem("loginType", "fb");
+                            localStorage.setItem("userID", response.authResponse.userID);
+                            this.setState({status: 'connected'});
+                            //window.location.reload(false);
+                        }
+                    }
+                    else // Unsuccessful
+                    {
+                        
+                            alert(res.data.message)
+                    }   
+                    }).catch(err =>{
+
+                        alert(err)
+                    })
+                    //window.location.reload(false); 
+              }
+          }.bind(this), {scope: 'public_profile,email'});
+    } 
+
+    /**
+     * Component Mount state Intialization
+     * 
+     */
+    componentDidMount =()=>{
+
+        this.setState(()=> ({}))
+        
+          let show=localStorage.getItem("isLoggedIn");
+          
+          if(show==="true")
+          this.setState({status:"connected"})
+            else  
+          this.setState({status:"not connected"})
+       
+    }
+
+    /**
+     * Function to check the Email textbox has valid email format
+     * @param {string} Email - user email.
+     */
+    validateEmail(email) {
+        if(this.state.emptyemail===true)
+            this.setState({emptyemail: false});
+        if(email &amp;&amp; email.match(/^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+        return true;
+        else
+        return false;
+       // return email &amp;&amp; email.match(/^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+    }
+
+    /**
+     * Function to check the Password textbox has valid password criteria
+     * @param {string} Password - user password.
+     */
+    validatePassword(psw) {
+        if(this.state.emptypass===true)
+         this.setState({emptypass: false});
+         if(psw.length>=8)
+         return true;
+         else
+         return false;
+        //return psw &amp;&amp; psw.length >= 6
+    }
+
+     /**
+     * Function handling login request with Email and Password
+     * 
+     */
+    handleLogin = event=> {   
+        event.preventDefault();
+        const user={email:this.state.email,password:this.state.password}
+        const memail = user.email;
+        const mpsw = user.password;
+        const is_email_valid = this.validateEmail(memail);
+        const is_psw_valid = this.validatePassword(mpsw);
+
+        if((this.state.user.email==="" &amp;&amp; this.state.emptyemail===false) || !is_email_valid)
+            this.setState({emptyemail: true});
+        if((this.state.user.password==="" &amp;&amp; this.state.emptypass===false) || !is_psw_valid)
+            this.setState({emptypass: true});
+
+        if(is_email_valid &amp;&amp; is_psw_valid)
+        {
+            //console.log(this.context.baseURL+'/signIn');
+            axios.post(this.context.baseURL+'/signIn',
+            {
+            "email":memail,
+            "password":mpsw
+            }
+            )   
+            .then(res => {
+                if(res.status===200) // Successful
+                {
+                    if(res.data.success===true)
+                    {
+                        localStorage.setItem("isLoggedIn",'true');
+                        localStorage.setItem("token",res.data.token);
+                        localStorage.setItem("loginType", "email");
+                        this.setState({status: 'connected'});
+                       // window.location.reload(false);
+                    }
+                }
+                else
+                {
+                //if(res.status===401) // Unsuccessful
+               // {
+                    this.setState({invalid: true});
+                //}else
+                    alert(res.data.message)
+
+                 }
+                }).catch(err =>{
+//console.log(err)
+//console.log(err.response)
+                    if(err.response.status===401 || err.response.status===400) // Unsuccessful
+                {
+                   if(this.state.status!=="invalid")
+                    this.setState({status: 'invalid'});
+
+                    this.setState({invalid: true});
+                }else
+                alert(err)
+                })
+        } 
+    }
+
+    /**
+     * Function handling change in password textbox to the page's state
+     * 
+     */
+    handlePasswordChange = event=> {
+        event.preventDefault();
+        if(this.state.emptypass===true)
+        this.setState({emptypass: false});
+        var newpass=event.target.value;
+        this.setState({password: event.target.value});
+        let userCopy = JSON.parse(JSON.stringify(this.state.user))
+        userCopy['password'] = newpass;
+        this.setState({
+             user:userCopy 
+            })
+    }
+
+
+    /**
+     * Function handling change in email textbox to the page's state
+     * 
+     */
+    handleEmailChange = event=> {
+        event.preventDefault();
+        if(this.state.emptyemail===true)
+        this.setState({emptyemail: false});
+        var newemail=event.target.value;
+        this.setState({email: event.target.value});
+        let userCopy = JSON.parse(JSON.stringify(this.state.user))
+        userCopy['email'] = newemail;
+        this.setState({
+             user:userCopy 
+            }) 
+    }
+
+    render(){  
+        const logInOrNot = this.state.status;  
+    return (
+        
+        &lt;div id="my-sign-up">
+            {logInOrNot==="connected" ? (
+            &lt;div>
+            &lt;Redirect to="/"/>
+            &lt;/div>
+            )
+            :
+            (
+                &lt;div>
+                &lt;img id="logo" src={spotify_black_logo} alt=""/>
+                    &lt;hr/>
+            &lt;div className="center-box-2">
+            
+            &lt;h6 className="my-font">To continue, log in to Spotify.&lt;/h6>
+
+            {this.state.invalid===true ?
+            (
+            &lt;div id="invalid-message">
+            Invalid email or password.
+            &lt;/div>
+            )
+            :
+            (
+            &lt;div>
+            &lt;/div>
+            )
+            }
+             
+            &lt;form className="text-center p-2" action="">
+            
+            &lt;button id="fb-sign-up-2" type="button" className="my-spotify-button" onClick={this.fbLogin}>&lt;i className="fab fa-facebook fa-lg white-text mr-md-2 mr-3 fa-1x"> &lt;/i>CONTINUE WITH FACEBOOK&lt;/button>
+            {/* &lt;button id="applesignup" type="button" className="myspotifybutton">&lt;i className="fab fa-apple fa-lg white-text mr-md-2 mr-3 fa-1x"> &lt;/i>CONTINUE WITH APPLE&lt;/button> */}
+                &lt;div className="col-xs-12">
+                    &lt;div className="divider">
+                    &lt;strong className="divider-title ng-binding">or&lt;/strong>
+                    &lt;/div>
+                &lt;/div>
+           
+
+            &lt;input required type="email" id="form-email" onChange={this.handleEmailChange} className="form-control" placeholder="Email address"/>
+
+            {this.state.emptyemail===true?
+            &lt;div id="empty-email" className="error-message">
+            Please enter a valid Spotify email address.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            &lt;input required type="password" id="form-password" maxLength="30" minLength="8" onChange={this.handlePasswordChange} className="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" />
+
+            {this.state.emptypass===true?
+            &lt;div id="empty-pass" className="error-message">
+            Please enter a valid password. (Minimum Length=8)
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            &lt;br/>
+            &lt;div className="custom-control custom-checkbox" id="remember-me">
+                &lt;input type="checkbox" className="custom-control-input" id="defaultUnchecked"/>
+                &lt;label className="custom-control-label" htmlFor="defaultUnchecked">Remember me&lt;/label>
+            &lt;/div>
+
+            &lt;button id="login" type="button" className="my-spotify-button" onClick={this.handleLogin}>LOG IN&lt;/button>
+            &lt;br/>
+            &lt;Link to="/password-reset">Forgot your password?&lt;/Link>
+            &lt;hr/>&lt;br/>
+            &lt;h6>Don't have an account?&lt;/h6>
+            &lt;Link to="/signup">&lt;button type="button" className="my-spotify-button" id="sign-up-now">SIGN UP FOR SPOTIFY&lt;/button>&lt;/Link>
+            &lt;hr/>
+            &lt;p> If you click "Log in with Facebook" and are not a Spotify user, you will be registered and you agree to Spotify's
+            &lt;a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions&lt;/a> and
+            &lt;a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy&lt;/a>.&lt;/p>
+            &lt;/form>      
+        
+            &lt;/div>
+            &lt;/div>
+            )
+            }   
+        &lt;/div>
+    );
+}
+
+}
+
+export default LogIn;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
