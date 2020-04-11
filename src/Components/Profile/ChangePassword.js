@@ -5,42 +5,20 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
 import { ConfigContext } from '../../Context/ConfigContext'
-/** Class of ChangePassword page in account settings.
- * @extends Component
- */
+
 class ChangePassword extends Component {
-    /**Gets the baseURL from configrations context of the user
-   * @memberof ChangePassword
-   */
     static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
-            /**
-             * User object that have the user image
-             * @memberof ChangePassword
-             * @type {{image: string}}
-             */  
           user:{
               image:"",
           },
-            /**
-             * success message show bollean
-             * @memberof ChangePassword
-             * @type {boolean}
-             */            
           successMessage: false,
-          /**
-          * fail message show bollean
-          * @memberof ChangePassword
-          * @type {boolean}
-          */  
           failMessagee: false
         }
     }
-    /**
-     * @property {Function} componentDidMount Fetch the data of the user and put it in the state
-     */
+
     componentDidMount(){
         axios.get(this.context.baseURL+"/me", {
             headers: {
@@ -69,12 +47,6 @@ class ChangePassword extends Component {
                 }
             })
     }
-    /**
-     * @property {Function} changePasswordHandle Function that take the old password and the new password and it's repeat to check on them and change it
-     * @param {string} currentPassword User current password
-     * @param {string} newPassword new password
-     * @param {string} repeatPassword repeat of new password
-     */
     changePasswordHandle(currentPassword,newPassword,repeatPassword){
         if(newPassword===repeatPassword)
         {

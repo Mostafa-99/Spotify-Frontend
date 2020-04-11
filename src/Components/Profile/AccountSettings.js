@@ -6,22 +6,11 @@ import AccountHeading from './AccountHeading';
 import axios from 'axios'
 import './Profile.css';
 import { ConfigContext } from '../../Context/ConfigContext'
-/** Class of AccountSettings.
- * @extends Component
- */
 class AccountSettings extends Component {
-   /**Gets the baseURL from configrations context of the user
-   * @memberof AccountSettings
-   */
     static contextType=ConfigContext;
     constructor(){
         super()
         this.state = {
-            /**
-             * User object that have the user Date of birth and email and image
-             * @memberof AccountSettings
-             * @type {{dateOfBirth: string, email: string, image: string}}
-             */
             user:{
                 dateOfBirth:"",
                 email:"",
@@ -29,9 +18,7 @@ class AccountSettings extends Component {
             },
         }
     }
-    /**
-     * @property {Function} componentDidMount Fetch the data of the user and put it in the state
-     */
+
     componentDidMount(){
         axios.get(this.context.baseURL+"/me", {
             headers: {

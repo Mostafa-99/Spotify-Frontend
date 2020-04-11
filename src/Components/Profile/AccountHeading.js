@@ -1,9 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from "react-router-dom";
-/**
- * Function to make the cover photo in the top of account overview page
- */
+
 function AccountHeading() {
     return(
         <div id="profile-account-heading"className="container jumbotron">

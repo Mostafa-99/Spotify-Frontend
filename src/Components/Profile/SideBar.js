@@ -1,13 +1,8 @@
 import React,{ Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+//import './SideBar.css'
 import {Link} from 'react-router-dom';
-/** Class of Sidebar account settings.
- * @extends Component
- */
 class SideBar extends Component {
-    /**
-     * @property {Function} componentDidMount checks the user login type is facebook or not to show or hide the change password icon
-     */
     componentDidMount()
     {
         if(localStorage.getItem("loginType")=="fb")

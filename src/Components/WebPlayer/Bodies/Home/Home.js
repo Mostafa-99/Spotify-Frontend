@@ -5,74 +5,29 @@ import '../Bodies.css';
 import '../../WebplayerHome.css'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
+
 import  './PlaylistContextMenu.css';
 import { theme, animation } from 'react-contexify';
 import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
-/** Class of home in webplayer.
- * @extends Component
- */
 class Home extends Component {
-   /**Gets the baseURL from configrations context of the user
-   * @memberof Home
-   */
     static contextType=ConfigContext;
     constructor(){
         super()
         this.state = {
-            /** Array of recently played playlists
-             * @memberof Home
-             * @type {Array<playlists>}
-             */
             recentlyPlayed:[],
-            /** Array of popular playlists
-             * @memberof Home
-             * @type {Array<playlists>}
-             */
             popularPlayLists:[],
-            /** Array of most recent playlists
-             * @memberof Home
-             * @type {Array<playlists>}
-             */
             mostRecentPlayLists:[],
-            /** Array of popular albums
-             * @memberof Home
-             * @type {Array<albums>}
-             */
             popularAlbums:[],
-            /** Array of most recent albums
-             * @memberof Home
-             * @type {Array<albums>}
-             */
             mostRecentAlbums:[],
-            /** Array of catagories that will show on home page
-             * @memberof Home
-             * @type {Array<categories>}
-             */
             catagories:[],
-            /** Array of playlists of first category
-             * @memberof Home
-             * @type {Array<playlists>}
-             */
             firstCategory:[],
-             /** Array of playlists of second category
-             * @memberof Home
-             * @type {Array<playlists>}
-             */
             secondCategory:[],
             workOut:[],
             madeForYou:[],
-             /** Array of artists
-             * @memberof Home
-             * @type {Array<artists>}
-             */
             artists:[],
-             /** object that stores the id of the selected playlist, album or artist
-             * @memberof Home
-             * @type {{id: string}}
-             */
             nowPlaying:{
                 id:-1
             },       
@@ -80,9 +35,7 @@ class Home extends Component {
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
     }
-    /**
-     * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
-     */
+
     componentDidMount() {
 
         window.addEventListener('contextmenu',(event) =>{
@@ -184,6 +137,9 @@ class Home extends Component {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
             }
+            /*params: {
+                limit: 9 //3wzen n3rf btrg3 kam artist
+            }*/
         })
             .then(res => {
                 if(res.status === 200)
@@ -435,10 +391,7 @@ class Home extends Component {
                 })
             }) */                             
     }
-        /**
-         * @property {Function} togglePlayPause Function that handle the play and pause buttons in home page cards
-         * @param {string} sid the card id
-         */
+    
         togglePlayPause(sid) {
             if(this.state.nowPlaying.id===-1)
             {
@@ -489,8 +442,8 @@ class Home extends Component {
             <div className="col-lg-10 webplayer-body-and-navbar colums-no-padding">
                 <HomeNavBar/>
                 <div id="webplayer-home">
-            <div className="most-recent-playlists-section">
-                <h2 className="section-title most-recent-playlists">Most Recent Playlists</h2>
+            <div className="made-for-you-section">
+                <h2 className="section-title made-for-you">Most Recent Playlists</h2>
                 <div className="card-group">
                     {this.state.mostRecentPlayLists.map( playList => (
                         <div>
@@ -558,8 +511,8 @@ class Home extends Component {
                     )}
                 </div>
             </div>
-            <div className="most-recent-albums-section">
-                <h2 className="section-title most-recent-albums">Most recent Albums</h2>
+            <div className="workout-playlists-section">
+                <h2 className="section-title workout-playlists">Most recent Albums</h2>
                 <div className="card-group">
                     {this.state.mostRecentAlbums.map( album => (
                         <div>
@@ -625,9 +578,9 @@ class Home extends Component {
                     )}
                 </div>
             </div>
-            <div className="first-category-section">
+            <div className="popular-albums-section">
                             {this.state.catagories.slice(0,1).map( category => (
-                                <h2 className="section-title first-category">
+                                <h2 className="section-title popular-albums">
                                     {category.name}
                                 </h2>  
                             ))}
@@ -662,9 +615,9 @@ class Home extends Component {
                     )}
                 </div>
             </div>
-            <div className="second-category-section">
+            <div className="popular-albums-section">
             {this.state.catagories.slice(1,2).map( category => (
-                                <h2 className="section-title second-category">
+                                <h2 className="section-title popular-albums">
                                     {category.name}
                                 </h2>  
                             ))}
@@ -699,8 +652,8 @@ class Home extends Component {
                     )}
                 </div>
             </div>
-            <div className="popular-artists-section">
-                <h2 className="section-title popular-artists">Popular Artists</h2>
+            <div className="popular-albums-section">
+                <h2 className="section-title popular-albums">Popular Artists</h2>
                 <div className="card-group">
                     {this.state.artists.map( artist => (
                         <div>
