@@ -89,6 +89,10 @@ z-index:1;
 }
 
 `
+/**
+ * Desktop Navbar Component
+ * @extends Component
+ */
 class DesktopNavbar extends Component {
 
     constructor() {
@@ -101,6 +105,10 @@ class DesktopNavbar extends Component {
 
     }
 
+    /**
+     * Desktop Navbar Component Mount state Intialization
+     * 
+     */
     componentDidMount = () => {
 
         this.setState(() => ({}))
@@ -115,6 +123,10 @@ class DesktopNavbar extends Component {
         }
     }
 
+    /**
+     * Desktop Navbar function onchange to update state
+     * 
+     */
     componentDidUpdate = () => {
 
         let show = localStorage.getItem("isLoggedIn");
@@ -127,6 +139,10 @@ class DesktopNavbar extends Component {
 
     }
 
+    /**
+     * Function handeling log out whether with facebook or email
+     * 
+     */
     logOut = () => {
 
         if (this.state.loginType === "fb") {

@@ -5,7 +5,10 @@ import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
 
-
+/**
+ * Sign up Page Component
+ * @extends Component
+ */
 class SignUp extends Component {
     static contextType=ConfigContext;
     constructor() {
@@ -36,6 +39,10 @@ class SignUp extends Component {
 
     }
 
+     /**
+     * Function handling sign up request with Facebook
+     * 
+     */
     fbSignUpHandler = event=> {
         event.preventDefault();
         
@@ -77,6 +84,10 @@ class SignUp extends Component {
        
     }
 
+    /**
+     * Function to check the Email textbox has valid email format
+     * @param {string} Email - input email.
+     */
     validateEmail(email) {
         if(this.state.emptyemail===true)
             this.setState({emptyemail: false});
@@ -90,6 +101,10 @@ class SignUp extends Component {
         return false;
     }
 
+    /**
+     * Function to check the Password textbox has valid password criteria
+     * @param {string} Password - input password.
+     */
     validatePassword(psw) {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
@@ -101,6 +116,10 @@ class SignUp extends Component {
         //return psw && psw.length >= 8
     }
 
+    /**
+     * Function to check the gender checkbox is checked and valid
+     * @param {boolean} Gender - user gender.
+     */
     validateGender(gender) {
         if(this.state.gendererror===true)
          this.setState({gendererror: false});
@@ -120,6 +139,10 @@ class SignUp extends Component {
         
     }
 
+     /**
+     * Function to check the Name textbox has valid name format
+     * @param {string} Name - user name.
+     */
     validateUsername(name) {
         if(this.state.emptyname===true)
          this.setState({emptyname: false});
@@ -128,6 +151,10 @@ class SignUp extends Component {
            
     }
 
+    /**
+     * Function to check the Confrim Email textbox has valid email format and matches Email.
+     * @param {string} Email - user confirm email.
+     */
     validateEmailAgain(email_again) {
         if(this.state.emptyconfirmemail===true)
             this.setState({emptyconfirmemail: false});
@@ -137,6 +164,10 @@ class SignUp extends Component {
         return email_again && email_again.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
+    /**
+     * Function handling Sign up request with Email and Password
+     * 
+     */
     signUpHandler = event=> {
     
         event.preventDefault();
@@ -211,6 +242,10 @@ class SignUp extends Component {
         }
     }
 
+    /**
+     * Function handling input changes in inputs each with it's valid input type handler to page's state
+     * @param {event} Event - input onchange event.
+     */
     inputChangeHandler(evt) {
         if (!evt || !evt.target) return;
 
@@ -282,6 +317,11 @@ class SignUp extends Component {
 
     }
 
+    /**
+     * Function to choose specific validating function depending on input type.
+     * @param {string} Value - input value.
+     * @param {string} Type - input type.
+     */
     validateValue(val, type) {
         switch (type) {
             case "email":
@@ -299,6 +339,10 @@ class SignUp extends Component {
         }
     }
 
+     /**
+     * SignUp Component Mount state Intialization
+     * 
+     */
     componentDidMount =()=>{
         
         this.setState(()=> ({}))

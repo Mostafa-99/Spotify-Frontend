@@ -5,6 +5,10 @@ import '../Authentication/SignUp.css'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 
+/**
+ * Forgot password Component
+ * @extends Component
+ */
 class PasswordReset extends Component {
     static contextType=ConfigContext;
     constructor() {
@@ -15,6 +19,10 @@ class PasswordReset extends Component {
         }
     }
 
+    /**
+     * Function sending new password request to email address.
+     * 
+     */
     resetPassowrd = event=> {
         event.preventDefault();
         if(this.validateEmail(this.state.email))
@@ -53,11 +61,19 @@ class PasswordReset extends Component {
          }
     }
 
+    /**
+     * Forgot password Component Mount state Intialization
+     * 
+     */
     componentDidMount =()=>{
        
         this.setState(()=> ({}))
     }
 
+    /**
+     * Function to check the Email textbox has valid email format
+     * @param {string} Email - input email.
+     */
     validateEmail(email) {
         if(email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
         return true;
@@ -66,6 +82,10 @@ class PasswordReset extends Component {
         //return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
+    /**
+     * Function handling change in email textbox to the page's state
+     * 
+     */
     handleEmailChange = event=> {
         event.preventDefault();
             this.setState({status: 'not done'}); 

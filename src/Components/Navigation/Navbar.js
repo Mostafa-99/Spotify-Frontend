@@ -12,6 +12,10 @@ const exclusionArray = [
   '/playlist-webplayer'
 ]
 
+/**
+ * Navbar Component
+ * @extends Component
+ */
 class Navbar extends Component {
   
     constructor(props) {
@@ -25,6 +29,10 @@ class Navbar extends Component {
         this.updateVisibility = this.updateVisibility.bind(this);
 
       }
+      /**
+     * Navbar Component Mount state Adding Event Listeners 
+     * 
+     */
       componentDidMount() {
         this.setState(()=> ({}))
         this.updatePredicate();
@@ -39,6 +47,10 @@ class Navbar extends Component {
 
       }
     
+      /**
+     * Navbar Component UnMount state Removing Event Listeners 
+     * 
+     */
       componentWillUnmount() {
         window.removeEventListener("resize", this.updatePredicate);
         window.removeEventListener("mouseover",this.updateVisibility);
@@ -50,10 +62,18 @@ class Navbar extends Component {
 
       }
     
+       /**
+     * Function choosing between desktop and mobile version navbar
+     * 
+     */
       updatePredicate() {
         this.setState({ isDesktop: window.outerWidth > 900 });
       }
 
+       /**
+     * Function removing navbar from specific paths
+     * 
+     */
       updateVisibility() {
 
         this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0})

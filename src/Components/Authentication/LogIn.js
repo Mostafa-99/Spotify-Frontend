@@ -8,7 +8,10 @@ import {Link,Redirect} from 'react-router-dom'
 //import { buildQueries } from '@testing-library/react';
 
 
-
+/**
+ * Login Page Component
+ * @extends Component
+ */
 class LogIn extends Component {
     static contextType=ConfigContext;
 
@@ -29,6 +32,10 @@ class LogIn extends Component {
 
     }
 
+      /**
+     * Function handling login request with Facebook
+     * 
+     */
     fbLogin = event=> {
         event.preventDefault();
         
@@ -69,6 +76,10 @@ class LogIn extends Component {
           }.bind(this), {scope: 'public_profile,email'});
     } 
 
+    /**
+     * Component Mount state Intialization
+     * 
+     */
     componentDidMount =()=>{
 
         this.setState(()=> ({}))
@@ -82,6 +93,10 @@ class LogIn extends Component {
        
     }
 
+    /**
+     * Function to check the Email textbox has valid email format
+     * @param {string} Email - user email.
+     */
     validateEmail(email) {
         if(this.state.emptyemail===true)
             this.setState({emptyemail: false});
@@ -92,6 +107,10 @@ class LogIn extends Component {
        // return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
+    /**
+     * Function to check the Password textbox has valid password criteria
+     * @param {string} Password - user password.
+     */
     validatePassword(psw) {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
@@ -102,6 +121,10 @@ class LogIn extends Component {
         //return psw && psw.length >= 6
     }
 
+     /**
+     * Function handling login request with Email and Password
+     * 
+     */
     handleLogin = event=> {   
         event.preventDefault();
         const user={email:this.state.email,password:this.state.password}
@@ -160,6 +183,10 @@ class LogIn extends Component {
         } 
     }
 
+    /**
+     * Function handling change in password textbox to the page's state
+     * 
+     */
     handlePasswordChange = event=> {
         event.preventDefault();
         if(this.state.emptypass===true)
@@ -174,6 +201,10 @@ class LogIn extends Component {
     }
 
 
+    /**
+     * Function handling change in email textbox to the page's state
+     * 
+     */
     handleEmailChange = event=> {
         event.preventDefault();
         if(this.state.emptyemail===true)

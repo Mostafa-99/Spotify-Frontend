@@ -143,7 +143,10 @@ height:60px;
 
 `
 
-//var on_off=false;
+/**
+ * Mobile Navbar Component
+ * @extends Component
+ */
 class MobileNavbar  extends Component {
     
     constructor() {
@@ -156,6 +159,10 @@ class MobileNavbar  extends Component {
     }
     }
 
+    /**
+     * Mobile Navbar Component Mount state Intialization
+     * 
+     */
     componentDidMount = () => {
 
         this.setState(() => ({}))
@@ -170,6 +177,10 @@ class MobileNavbar  extends Component {
         }
     }
 
+    /**
+     * Mobile Navbar function onchange to update state
+     * 
+     */
     componentDidUpdate = () => {
 
         let show = localStorage.getItem("isLoggedIn");
@@ -182,6 +193,10 @@ class MobileNavbar  extends Component {
 
     }
 
+    /**
+     * Function handeling log out whether with facebook or email
+     * 
+     */
     logOut= () => {
         
         if(this.state.loginType==="fb")
@@ -205,6 +220,10 @@ class MobileNavbar  extends Component {
             this.togglesidebar();
     }
 
+    /**
+     * Function handeling opening and closing of sidebar and it's effects' on document
+     * 
+     */
     togglesidebar = () => {
         document.querySelector(".sidebar").classList.toggle("active");
         // on_off=!on_off;
