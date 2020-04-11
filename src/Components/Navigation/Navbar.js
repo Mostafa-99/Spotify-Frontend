@@ -57,13 +57,6 @@ class Navbar extends Component {
       updateVisibility() {
 
         this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0})
-        // if(window.location.pathname.match());
-        // {
-        //   //console.log(window.location.pathname);
-        //   if(document.querySelector("#my-desk-navbar")!==null)
-        //     document.querySelector("#my-desk-navbar").classList.add("index-fixed");
-        // }
-          
         
       }
     

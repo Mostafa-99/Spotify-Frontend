@@ -83,14 +83,22 @@ class SignUp extends Component {
         if(this.state.emailnotequal===true)
             this.setState({emailnotequal: false});
         this.setState({email: ""});    
-        return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+        //return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+        if(email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+        return true;
+        else
+        return false;
     }
 
     validatePassword(psw) {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
          this.setState({password: ""});    
-        return psw && psw.length >= 8
+         if(psw.length>=8)
+         return true;
+         else
+         return false;
+        //return psw && psw.length >= 8
     }
 
     validateGender(gender) {
@@ -100,11 +108,16 @@ class SignUp extends Component {
         // 0 = male
         // 1 = female
         // null/undefined = otherwise
-        return gender === 0
-            || gender === 1
-            || gender === null
-            || gender === undefined
-            || gender === "";
+        //  return gender === 0
+        //      || gender === 1
+        //     || gender === null
+        //     || gender === undefined
+        //     || gender === "";
+        if(gender===0 || gender===1)
+        return true;
+        else
+        return false;
+        
     }
 
     validateUsername(name) {

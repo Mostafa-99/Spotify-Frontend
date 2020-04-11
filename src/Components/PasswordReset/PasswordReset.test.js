@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { configure, shallow } from 'enzyme';
 import 'jest-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import PasswordReset from './PasswordChange';
+import PasswordReset from './PasswordReset';
 import '@testing-library/jest-dom/extend-expect';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -36,16 +36,18 @@ let wrapper;
     expect(wrapper.contains(welcome)).toEqual(false);
    });
 
-   it('test functions', () => {
-    // let component = renderer.create(<Router><PasswordReset/></Router>);
-    // component.getInstance();
-    // let data="yhgyug";
-    // let v=component.validateEmail(data);
+   it('test validate email function', () => {
 
-    // expect(v).toEqual(false);
-    // data="amr7afifi@gmail.com";
-    // v=component.validatePassword(data);
-    // expect(v).toEqual(true);
+    let component = wrapper.instance();
+
+    let data="123juyfuy6767";
+    let v;
+    v=component.validateEmail(data);
+    expect(v).toEqual(false);
+
+    data="amr7afifi@gmail.com";
+    v=component.validateEmail(data);
+    expect(v).toEqual(true);
     
    });
 
