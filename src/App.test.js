@@ -1,16 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './App'
-import { expect } from 'chai';
+import App from './App';
+import { MemoryRouter } from "react-router-dom";
 
-/* to be transfered to #src/setupTests.js */
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 
-configure({ adapter: new Adapter() });
-
-describe('<App/>', () => {
-  it('App renders without crashing', () => {
-    shallow(<App/>);
+it('renders without crashing', () => {
+  shallow(<App />);
 });
+
+
+it("Snapshot testing", () => {
+  const AppTest = shallow(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+  expect(AppTest).toMatchInlineSnapshot(`ShallowWrapper {}`);
 });
