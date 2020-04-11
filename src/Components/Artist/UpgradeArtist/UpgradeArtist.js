@@ -1,22 +1,38 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./UpgradeArtist.css";
-import { ConfigContext } from '../../../Context/ConfigContext'
-
+import { ConfigContext } from "../../../Context/ConfigContext";
+/** Class of Upgrade to artist page. It sends a request to upgrade to artist then confirms it.
+ * @extends Component
+ */
 class UpgradeArtist extends Component {
-  static contextType=ConfigContext;
+  /**Gets the baseURL from configrations context of the user
+   * @memberof UpgradeArtist
+   */
+  static contextType = ConfigContext;
 
   state = {
+    /**Code entered by the user to upgrade to artist
+     * @memberof UpgradeArtist
+     * @type {number | string}
+     */
     code: "",
   };
-
+  /**Sends request to the backend to send email with the code.
+   * @type {Function}
+   * @memberof UpgradeArtist
+   */
   sendMail = () => {
     axios
-      .post(this.context.baseURL+"/me/Artist",{} ,{
-        headers: {
-          "authorization":"Bearer "+localStorage.getItem("token"),
-        },
-      })
+      .post(
+        this.context.baseURL + "/me/Artist",
+        {},
+        {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         if (res.status === 204) {
           alert("An email has been sent");
@@ -30,38 +46,39 @@ class UpgradeArtist extends Component {
           localStorage.removeItem("isLoggedIn");
           localStorage.removeItem("token");
           localStorage.removeItem("userID");
-        }
-        else{
+        } else {
           console.log(res);
           alert(res.message);
         }
       });
   };
-
+  /**Sends a request to the backend with the code the user entered to check it.
+   * @type {Function}
+   * @memberof UpgradeArtist
+   */
   checkCode = () => {
     if (this.state.code !== "") {
       let code = this.state.code;
       axios
         .post(
-          this.context.baseURL+"/me/upgrade/"+code,{},
+          this.context.baseURL + "/me/upgrade/" + code,
+          {},
           {
             headers: {
-              "authorization":"Bearer "+localStorage.getItem("token"),
+              authorization: "Bearer " + localStorage.getItem("token"),
             },
           }
         )
         .then((res) => {
           if (res.status === 204) {
             alert("Congratulations! You are Artist now.");
-          }
-          else if (res.status === 401){
-            localStorage.removeItem("loginType");  
-            localStorage.removeItem("isLoggedIn");  
-            localStorage.removeItem("token");  
-            localStorage.removeItem("userID");  
+          } else if (res.status === 401) {
+            localStorage.removeItem("loginType");
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("token");
+            localStorage.removeItem("userID");
             alert("Your session has ended");
-          } 
-          else {
+          } else {
             alert("The subscription code is invalid.");
           }
         })
@@ -72,7 +89,10 @@ class UpgradeArtist extends Component {
       alert("please enter code!");
     }
   };
-
+  /**Change the state of the code.
+   * @type {Function}
+   * @memberof UpgradeArtist
+   */
   onChange = (e) => this.setState({ code: e.target.value });
 
   render() {

@@ -57,6 +57,6 @@
     ]
   },
   "devDependencies": {
-    "jsdoc": "^3.6.3"
+    "jsdoc": "^3.6.4"
   }
 }

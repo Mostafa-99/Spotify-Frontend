@@ -1,6 +1,6 @@
 import React, { Fragment, useState, Component } from "react";
 import "../SideBar/ArtistSidebar";
-import "../UploadFile/uploadfile.css";
+import "../UploadFile/UploadFile.css";
 import "../../WebPlayer/WebplayerHome.css";
 import { ProfileContext } from '../../../Context/ProfileContext'
 import { Link } from "react-router-dom";

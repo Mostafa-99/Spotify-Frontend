@@ -5,7 +5,6 @@ import '../Bodies.css';
 import '../../WebplayerHome.css'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
-
 import  './PlaylistContextMenu.css';
 import { theme, animation } from 'react-contexify';
 import { Menu, Item} from 'react-contexify';
@@ -28,6 +27,10 @@ class Home extends Component {
             workOut:[],
             madeForYou:[],
             artists:[],
+             /** object that stores the id of the selected playlist, album or artist
+             * @memberof Home
+             * @type {{id: string}}
+             */
             nowPlaying:{
                 id:-1
             },       
@@ -35,7 +38,9 @@ class Home extends Component {
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
     }
-
+    /**
+     * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
+     */
     componentDidMount() {
 
         window.addEventListener('contextmenu',(event) =>{
@@ -391,7 +396,10 @@ class Home extends Component {
                 })
             }) */                             
     }
-    
+        /**
+         * @property {Function} togglePlayPause Function that handle the play and pause buttons in home page cards
+         * @param {string} sid the card id
+         */
         togglePlayPause(sid) {
             if(this.state.nowPlaying.id===-1)
             {
@@ -652,8 +660,82 @@ class Home extends Component {
                     )}
                 </div>
             </div>
-            <div className="popular-albums-section">
-                <h2 className="section-title popular-albums">Popular Artists</h2>
+            <div className="first-category-section">
+                            {this.state.catagories.slice(0,1).map( category => (
+                                <h2 className="section-title first-category">
+                                    {category.name}
+                                </h2>  
+                            ))}
+                <div className="card-group">
+                    {this.state.firstCategory.map( playlist => (
+                        <div>
+                            <Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                <div className="card" id={playlist.id}>
+                             {/**    <MenuProvider id={playlist.id} component="span" >
+                                    <Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    <Item>Save To Library</Item>
+                                    <Item>Copy Playlist Link</Item>
+                                    <Item>Open in App</Item>
+                                    </Menu> */}                                        <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{playlist.title}</h5>
+                                        <p className="card-text">{playlist.description}</p>
+                                        <div id={playlist.id}>
+                                            <button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
+                                    </div> 
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                    )}
+                </div>
+            </div>
+            <div className="second-category-section">
+            {this.state.catagories.slice(1,2).map( category => (
+                                <h2 className="section-title second-category">
+                                    {category.name}
+                                </h2>  
+                            ))}
+                <div className="card-group">
+                    {this.state.secondCategory.map( playlist => (
+                        <div>
+                            <Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                <div className="card" id={playlist.id}>
+                            {/**    <MenuProvider id={playlist.id} component="span" >
+                                    <Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    <Item>Save To Library</Item>
+                                    <Item>Copy Playlist Link</Item>
+                                    <Item>Open in App</Item>
+                                    </Menu>*/}                                          <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{playlist.title}</h5>
+                                        <p className="card-text">{playlist.description}</p>
+                                        <div id={playlist.id}>
+                                            <button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-play"></i></button>
+                                            <button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}><i className="fa fa-pause"></i></button>
+                                        </div>    
+                                    </div> 
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                    )}
+                </div>
+            </div>
+            <div className="popular-artists-section">
+                <h2 className="section-title popular-artists">Popular Artists</h2>
                 <div className="card-group">
                     {this.state.artists.map( artist => (
                         <div>

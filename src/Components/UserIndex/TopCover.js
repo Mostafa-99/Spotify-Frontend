@@ -1,9 +1,13 @@
 import React from 'react';
-import './userIndex.css';
+import './UserIndex.css';
 import { Link } from 'react-router-dom';
 
+        /**Gets the baseURL from configrations context of the user
+   * @memberof MainIndex
+   */
 function TopCover() {
     return (
+  
         <section id="user-index-section">
             <div className="hero-main">
                 <div className="hero-home-gradient">
