@@ -20,15 +20,15 @@ let wrapper;
 
   it('renders without crashing', () => {
 
-    const div =document.createElement('div');
-    ReactDOM.render(<Router><MobileNavbar/></Router>,div);
+    //const div =document.createElement('div');
+    //ReactDOM.render(<Router><MobileNavbar/></Router>,div);
    });
 
 
   it('renders correct items', () => {
 
-    // const welcome = "Help";
-    // expect(wrapper.contains(welcome)).toEqual(true);
+     const welcome = "for artists";
+     expect(wrapper.contains(welcome)).toEqual(false);
    });
 
    

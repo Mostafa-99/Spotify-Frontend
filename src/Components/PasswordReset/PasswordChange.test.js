@@ -32,7 +32,7 @@ let wrapper;
 
   it('renders correct items', () => {
 
-    const welcome = "New Password";
+    const welcome = "Reset Password";
     expect(wrapper.contains(welcome)).toEqual(true);
    });
 
@@ -52,7 +52,7 @@ let wrapper;
 
    it('State Intialization', () => {
     expect(wrapper.state().status).toEqual("not done");
-    expect(wrapper.state().email).toEqual("");
+    expect(wrapper.state().password).toEqual("");
     expect(wrapper.state().confirmpassword).toEqual("");
 
   })

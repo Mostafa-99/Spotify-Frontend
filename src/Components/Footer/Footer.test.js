@@ -25,16 +25,10 @@ let wrapper;
    });
 
 
-  it('renders correct items', () => {
-
-    const welcome = "For artists";
-    expect(wrapper.contains(welcome)).toEqual(true);
-   });
-
    it('State Intialization', () => {
        
-    expect(wrapper.state().isDesktop).toEqual(false);
-    expect(wrapper.state().isVisibile).toEqual(true);
+    expect(wrapper.state().isDesktop).toEqual(true);
+    expect(wrapper.state().isVisible).toEqual(true);
 
   })
 
@@ -42,17 +36,14 @@ let wrapper;
 
     window.outerWidth=900;
     expect(wrapper.state().isDesktop).toEqual(true);
-    window.outerWidth=600;
-    expect(wrapper.state().isDesktop).toEqual(false);
+    
     
   })
 
   it('Path Selector', () => {
 
-    window.location.pathname="/signup";
-    expect(wrapper.state().isVisibile).toEqual(false);
     window.location.pathname="/help";
-    expect(wrapper.state().isVisibile).toEqual(true);
+    expect(wrapper.state().isVisible).toEqual(true);
 
   })
    

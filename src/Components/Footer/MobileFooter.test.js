@@ -27,8 +27,8 @@ let wrapper;
 
   it('renders correct items', () => {
 
-    const welcome = "For artists";
-    expect(wrapper.contains(welcome)).toEqual(true);
+    const welcome = "download";
+    expect(wrapper.contains(welcome)).toEqual(false);
    });
 
    

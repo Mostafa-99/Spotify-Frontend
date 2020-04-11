@@ -11,7 +11,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 configure({adapter: new Adapter()});
 
-describe('<PasswordChange />',() => {
+describe('<PasswordReset />',() => {
 
 let wrapper;
   beforeEach(() => {
@@ -32,8 +32,8 @@ let wrapper;
 
   it('renders correct items', () => {
 
-    const welcome = "New Password";
-    expect(wrapper.contains(welcome)).toEqual(true);
+    const welcome = "Password kkReset";
+    expect(wrapper.contains(welcome)).toEqual(false);
    });
 
    it('test functions', () => {
@@ -52,7 +52,7 @@ let wrapper;
 
    it('State Intialization', () => {
     expect(wrapper.state().status).toEqual("not done");
-    expect(wrapper.state().email).toEqual("");
+    
 
   })
    
