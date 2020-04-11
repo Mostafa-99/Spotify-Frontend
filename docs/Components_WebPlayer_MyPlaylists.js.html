@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Components/Artist/UploadFile/Progress.js</title>
+    <title>JSDoc: Source: Components/WebPlayer/MyPlaylists.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Components/Artist/UploadFile/Progress.js</h1>
+    <h1 class="page-title">Source: Components/WebPlayer/MyPlaylists.js</h1>
 
     
 
@@ -26,31 +26,69 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
-/** Functional component to make a progress bar by percentage.
- * @class
+            <pre class="prettyprint source linenums"><code>import React, {Component} from "react"
+import './MyPlaylists.css'
+
+/** Class of My playlists components seen in the side bars 
+ * @extends Component
  */
-const Progress = ({ percentage }) => {
-  return (
-    &lt;div className="progress">
-      &lt;div
-        className="progress-bar progress-bar-striped bg-success"
-        role="progressbar"
-        style={{ width: `${percentage}%` }}
-      >
-        {percentage}%
-      &lt;/div>
-    &lt;/div>
-  );
-};
 
-Progress.propTypes = {
-  percentage: PropTypes.number.isRequired,
-};
 
-export default Progress;
-</code></pre>
+class MyPlaylists extends Component {
+
+    constructor() {
+        super()
+        this.state = {
+            /** Array of my PLatlists 
+            * @extends MyPlaylists
+            * @type {Array&lt;playLists>}
+            */
+            playLists:[],
+
+        }
+    }
+ /**Sends request to the backend to  get users Playlists 
+   * @type {Function}
+   * @memberof MyPlaylists
+   */
+    componentDidMount() {
+        fetch("https://my-json-server.typicode.com/youmnakhaled/FakeData/MyPlaylists")
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    playLists: data.map( playList => ({
+                        /**
+                         @type {string}
+                         @memberof MyPlaylists
+                         */
+                        id:playList.id,
+                         /**
+                         @type {string} 
+                         @memberof MyPlaylists
+                         */
+                        title:playList.name
+                    }))
+             
+             
+                })
+            })        
+            
+    }
+
+    render() {
+        return (&lt;div id="playlist-list-item">
+           
+ {this.state.playLists.map(playList => (
+ &lt;li className='sidebar-list-item'>{playList.title} &lt;/li>
+ 
+))}
+
+    
+        &lt;/div>
+        )
+    }
+}
+export default MyPlaylists;</code></pre>
         </article>
     </section>
 

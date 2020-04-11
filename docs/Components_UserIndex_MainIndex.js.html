@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Components/Artist/UploadFile/Progress.js</title>
+    <title>JSDoc: Source: Components/UserIndex/MainIndex.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Components/Artist/UploadFile/Progress.js</h1>
+    <h1 class="page-title">Source: Components/UserIndex/MainIndex.js</h1>
 
     
 
@@ -26,30 +26,27 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
-/** Functional component to make a progress bar by percentage.
- * @class
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
+import CardComponent from './CardComponent';
+import TopCover from './TopCover';
+
+/** Class of Albums of artist. It gets the albums of the artist in the artist mode
+ * @extends Component
  */
-const Progress = ({ percentage }) => {
-  return (
-    &lt;div className="progress">
-      &lt;div
-        className="progress-bar progress-bar-striped bg-success"
-        role="progressbar"
-        style={{ width: `${percentage}%` }}
-      >
-        {percentage}%
-      &lt;/div>
-    &lt;/div>
-  );
-};
+export class MainIndex extends Component {
+    render() {
+        document.title ="Music for everyone - Spotify"
 
-Progress.propTypes = {
-  percentage: PropTypes.number.isRequired,
-};
+        return (
+                &lt;div>
+                    &lt;TopCover />
+                    &lt;CardComponent />
+                &lt;/div>
+        )
+    }
+}
 
-export default Progress;
+export default MainIndex
 </code></pre>
         </article>
     </section>

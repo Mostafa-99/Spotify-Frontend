@@ -1,14 +1,26 @@
 import React, {Component} from "react"
-import "./userIndex.css"
+import "./UserIndex.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import {ConfigContext} from '../../Context/ConfigContext'
 
+
+/**
+ * Login index page Cards components class
+ * @extends Component
+ */
 class CardComponent extends Component {
+    /**Gets the baseURL from configrations context of the user
+   * @memberof CardComponent
+   */
     static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
+       /**Array of Albums of the artist
+        @memberof Playlists
+       * 
+       */
             playlists:[],
 
         }
@@ -32,7 +44,12 @@ class CardComponent extends Component {
                     }))
                 })
             }) */
-        
+ 
+            /**
+             * Sends request to the backend to  get users Most popular PLaylists 
+             * @type {Function}
+             * @memberof CardComponent
+              */
           componentDidMount() {
                 const AuthStr=localStorage.getItem('token');
                 console.log(this.context.baseURL+"/playlists/top");
@@ -52,10 +69,39 @@ class CardComponent extends Component {
                       console.log(res);
                          this.setState({
                             playlists: res.data.data.playlist.map( playlist => ({
+                            
+                                /**
+                                * ID of the playlist
+                                 @memberof CardComponent
+                                 @type {String}
+                                *
+                                */
                             id:playlist.id,
+                              /**
+                                * name  of the playlist
+                                 @memberof CardComponent
+                                * 
+                                 @type {String}
+                                */
                             title:playlist.name,
+                              /**
+                                * Name of the singer/owner
+                                 @memberof CardComponent
+                                 @type {String}
+                                */
                             artist:playlist.owner[0].name,
+                              /**
+                                * Picture of the playlist cover
+                                 @memberof CardComponent
+                                @type {link}
+                                */
                             imageUrl:playlist.images,
+                              /**
+                                * Link to tracks of my playlist
+                                 @memberof CardComponent
+                                 @type {Route}
+                                * 
+                                */
                             href:playlist.tracks.href
                         }))
                     }) }          

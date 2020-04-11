@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Albums</title>
+    <title>JSDoc: Class: CreatePlaylist</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Albums</h1>
+    <h1 class="page-title">Class: CreatePlaylist</h1>
 
     
 
@@ -28,9 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Albums<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>CreatePlaylist<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Class of Albums of artist. It gets the albums of the artist in the artist mode</p></div>
+            <div class="class-description"><p>Create Playlist modal : opens to shows a modal to write in the name of the new playlist to send to back end
+Not done yet</p></div>
         
     
 </header>
@@ -45,7 +46,7 @@
     
 
     
-    <h4 class="name" id="Albums"><span class="type-signature"></span>new Albums<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="CreatePlaylist"><span class="type-signature"></span>new CreatePlaylist<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -93,7 +94,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_Artist_Albums_Albums.js.html">Components/Artist/Albums/Albums.js</a>, <a href="Components_Artist_Albums_Albums.js.html#line18">line 18</a>
+        <a href="Components_WebPlayer_CreatePlaylist.js.html">Components/WebPlayer/CreatePlaylist.js</a>, <a href="Components_WebPlayer_CreatePlaylist.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -154,13 +155,13 @@
 
         
             
-<h4 class="name" id=".artistAlbums"><span class="type-signature">(static) </span>artistAlbums<span class="type-signature"> :Array.&lt;<a href="Albums.html">Albums</a>></span></h4>
+<h4 class="name" id=".onChange"><span class="type-signature">(static) </span>onChange<span class="type-signature"> :Handler</span></h4>
 
 
 
 
 <div class="description">
-    <p>Array of Albums of the artist</p>
+    <p>Controls that when user clicks create playlist button the Modal shows</p>
 </div>
 
 
@@ -169,7 +170,7 @@
     <ul>
         <li>
             
-<span class="param-type">Array.&lt;<a href="Albums.html">Albums</a>></span>
+<span class="param-type">Handler</span>
 
 
         </li>
@@ -208,7 +209,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_Artist_Albums_Albums.js.html">Components/Artist/Albums/Albums.js</a>, <a href="Components_Artist_Albums_Albums.js.html#line25">line 25</a>
+        <a href="Components_WebPlayer_CreatePlaylist.js.html">Components/WebPlayer/CreatePlaylist.js</a>, <a href="Components_WebPlayer_CreatePlaylist.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -226,16 +227,26 @@
 
         
             
-<h4 class="name" id=".contextType"><span class="type-signature">(static) </span>contextType<span class="type-signature"></span></h4>
+<h4 class="name" id=".playlistname"><span class="type-signature">(static) </span>playlistname<span class="type-signature"> :string</span></h4>
 
 
 
 
 <div class="description">
-    <p>Gets the baseURL from configrations context of the user</p>
+    <p>playlist created name</p>
 </div>
 
 
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
 
 
 
@@ -270,7 +281,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_Artist_Albums_Albums.js.html">Components/Artist/Albums/Albums.js</a>, <a href="Components_Artist_Albums_Albums.js.html#line16">line 16</a>
+        <a href="Components_WebPlayer_CreatePlaylist.js.html">Components/WebPlayer/CreatePlaylist.js</a>, <a href="Components_WebPlayer_CreatePlaylist.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -289,98 +300,6 @@
         
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentDidMount"><span class="type-signature"></span>componentDidMount<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>When the component mounts it sends a request to the backend to load the albums</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Components_Artist_Albums_Albums.js.html">Components/Artist/Albums/Albums.js</a>, <a href="Components_Artist_Albums_Albums.js.html#line31">line 31</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     
 
     

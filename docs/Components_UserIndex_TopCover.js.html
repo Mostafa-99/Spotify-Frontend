@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Components/Artist/UploadFile/Progress.js</title>
+    <title>JSDoc: Source: Components/UserIndex/TopCover.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Components/Artist/UploadFile/Progress.js</h1>
+    <h1 class="page-title">Source: Components/UserIndex/TopCover.js</h1>
 
     
 
@@ -26,30 +26,46 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
-/** Functional component to make a progress bar by percentage.
- * @class
- */
-const Progress = ({ percentage }) => {
-  return (
-    &lt;div className="progress">
-      &lt;div
-        className="progress-bar progress-bar-striped bg-success"
-        role="progressbar"
-        style={{ width: `${percentage}%` }}
-      >
-        {percentage}%
-      &lt;/div>
-    &lt;/div>
-  );
-};
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import './UserIndex.css';
+import { Link } from 'react-router-dom';
 
-Progress.propTypes = {
-  percentage: PropTypes.number.isRequired,
-};
+        /**Gets the baseURL from configrations context of the user
+   * @memberof MainIndex
+   */
+function TopCover() {
+    return (
+  
+        &lt;section id="user-index-section">
+            &lt;div className="hero-main">
+                &lt;div className="hero-home-gradient">
+                    &lt;div id="user-index-cover-cont"className="container hero-background">
+                    &lt;div id="user-index-cover-row" className="row hero-home-content">
+                    &lt;div className="whitepart" id="hero-text">
+                        &lt;div className="col-xs-12 col-md-10 col-md-offset-1">
+                             &lt;h1 className="display-2" id="d2-overrides">Go Premium. Be happy.&lt;/h1>
+                        &lt;div className="row" id="user-index-row-2">
+                          
+                           &lt;Link to="/premium"> &lt;button id="index-cover-btn"> Start Premium Now &lt;/button>&lt;/Link>
+                            
+                        &lt;/div>
+                        &lt;/div>
+                        &lt;/div>
+                      &lt;/div>                      
+                    &lt;/div>
+                &lt;/div>                
+            &lt;/div>
+         &lt;/section>
+            
+ );
+}
 
-export default Progress;
+export default TopCover;
+
+
+
+
+
 </code></pre>
         </article>
     </section>
