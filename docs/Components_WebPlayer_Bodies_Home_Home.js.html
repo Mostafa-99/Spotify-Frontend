@@ -39,36 +39,78 @@ import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
+/** Class of home in webplayer.
+ * @extends Component
+ */
 class Home extends Component {
-    static contextType=ConfigContext;
-    constructor(){
-        super()
-        this.state = {
-            recentlyPlayed:[],
-            popularPlayLists:[],
-            mostRecentPlayLists:[],
-            popularAlbums:[],
-            mostRecentAlbums:[],
-            catagories:[],
-            firstCategory:[],
-            secondCategory:[],
-            workOut:[],
-            madeForYou:[],
-            artists:[],
-             /** object that stores the id of the selected playlist, album or artist
-             * @memberof Home
-             * @type {{id: string}}
-             */
-            nowPlaying:{
-                id:-1
-            },       
-        }
-        this.togglePlayPause=this.togglePlayPause.bind(this)
-
-    }
-    /**
-     * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
-     */
+    /**Gets the baseURL from configrations context of the user
+    * @memberof Home
+    */
+     static contextType=ConfigContext;
+     constructor(){
+         super()
+         this.state = {
+             /** Array of recently played playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             recentlyPlayed:[],
+             /** Array of popular playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             popularPlayLists:[],
+             /** Array of most recent playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             mostRecentPlayLists:[],
+             /** Array of popular albums
+              * @memberof Home
+              * @type {Array&lt;albums>}
+              */
+             popularAlbums:[],
+             /** Array of most recent albums
+              * @memberof Home
+              * @type {Array&lt;albums>}
+              */
+             mostRecentAlbums:[],
+             /** Array of catagories that will show on home page
+              * @memberof Home
+              * @type {Array&lt;categories>}
+              */
+             catagories:[],
+             /** Array of playlists of first category
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             firstCategory:[],
+              /** Array of playlists of second category
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             secondCategory:[],
+             workOut:[],
+             madeForYou:[],
+              /** Array of artists
+              * @memberof Home
+              * @type {Array&lt;artists>}
+              */
+             artists:[],
+              /** object that stores the id of the selected playlist, album or artist
+              * @memberof Home
+              * @type {{id: string}}
+              */
+             nowPlaying:{
+                 id:-1
+             },       
+         }
+         this.togglePlayPause=this.togglePlayPause.bind(this)
+ 
+     }
+     /**
+      * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
+      */
     componentDidMount() {
 
         window.addEventListener('contextmenu',(event) =>{
@@ -819,13 +861,13 @@ export default Home;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="premium.html">premium</a></li><li><a href="premiumCode.html">premiumCode</a></li><li><a href="Progress.html">Progress</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#album_id">album_id</a></li><li><a href="global.html#album_image_url">album_image_url</a></li><li><a href="global.html#album_name">album_name</a></li><li><a href="global.html#artists">artists</a></li><li><a href="global.html#is_liked">is_liked</a></li><li><a href="global.html#myId">myId</a></li><li><a href="global.html#playing_song_id">playing_song_id</a></li><li><a href="global.html#tracks">tracks</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="premium.html">premium</a></li><li><a href="premiumCode.html">premiumCode</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#album_id">album_id</a></li><li><a href="global.html#album_image_url">album_image_url</a></li><li><a href="global.html#album_name">album_name</a></li><li><a href="global.html#artists">artists</a></li><li><a href="global.html#day">day</a></li><li><a href="global.html#is_liked">is_liked</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#myId">myId</a></li><li><a href="global.html#playing_song_id">playing_song_id</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#tracks">tracks</a></li><li><a href="global.html#year">year</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 02:07:42 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 16:33:52 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
