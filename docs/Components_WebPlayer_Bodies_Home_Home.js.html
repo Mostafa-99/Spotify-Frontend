@@ -39,36 +39,78 @@ import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
+/** Class of home in webplayer.
+ * @extends Component
+ */
 class Home extends Component {
-    static contextType=ConfigContext;
-    constructor(){
-        super()
-        this.state = {
-            recentlyPlayed:[],
-            popularPlayLists:[],
-            mostRecentPlayLists:[],
-            popularAlbums:[],
-            mostRecentAlbums:[],
-            catagories:[],
-            firstCategory:[],
-            secondCategory:[],
-            workOut:[],
-            madeForYou:[],
-            artists:[],
-             /** object that stores the id of the selected playlist, album or artist
-             * @memberof Home
-             * @type {{id: string}}
-             */
-            nowPlaying:{
-                id:-1
-            },       
-        }
-        this.togglePlayPause=this.togglePlayPause.bind(this)
-
-    }
-    /**
-     * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
-     */
+    /**Gets the baseURL from configrations context of the user
+    * @memberof Home
+    */
+     static contextType=ConfigContext;
+     constructor(){
+         super()
+         this.state = {
+             /** Array of recently played playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             recentlyPlayed:[],
+             /** Array of popular playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             popularPlayLists:[],
+             /** Array of most recent playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             mostRecentPlayLists:[],
+             /** Array of popular albums
+              * @memberof Home
+              * @type {Array&lt;albums>}
+              */
+             popularAlbums:[],
+             /** Array of most recent albums
+              * @memberof Home
+              * @type {Array&lt;albums>}
+              */
+             mostRecentAlbums:[],
+             /** Array of catagories that will show on home page
+              * @memberof Home
+              * @type {Array&lt;categories>}
+              */
+             catagories:[],
+             /** Array of playlists of first category
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             firstCategory:[],
+              /** Array of playlists of second category
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             secondCategory:[],
+             workOut:[],
+             madeForYou:[],
+              /** Array of artists
+              * @memberof Home
+              * @type {Array&lt;artists>}
+              */
+             artists:[],
+              /** object that stores the id of the selected playlist, album or artist
+              * @memberof Home
+              * @type {{id: string}}
+              */
+             nowPlaying:{
+                 id:-1
+             },       
+         }
+         this.togglePlayPause=this.togglePlayPause.bind(this)
+ 
+     }
+     /**
+      * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
+      */
     componentDidMount() {
 
         window.addEventListener('contextmenu',(event) =>{
@@ -86,7 +128,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("categories",res)
                     this.setState({
                         catagories: res.data.data.categories.map( category => ({
                             id: category._id,
@@ -106,7 +147,6 @@ class Home extends Component {
                     .then(res => {
                         if(res.status === 200)
                         {
-                            console.log("category1",res)
                             this.setState({
                                 firstCategory: res.data.data.playlists.map( playList => ({
                                     id:playList._id,
@@ -137,7 +177,6 @@ class Home extends Component {
                     .then(res => {
                         if(res.status === 200)
                         {
-                            console.log("category2",res)
                             this.setState({
                                 secondCategory: res.data.data.playlists.map( playList => ({
                                     id:playList._id,
@@ -177,7 +216,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("artists",res)
                     this.setState({
                         artists: res.data.data.map( artist => ({
                             id:artist._id,
@@ -207,7 +245,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("recently played",res)
                     this.setState({
                         recentlyPlayed: res.data.data.items.map( playList => ({
                             id:playList._id,
@@ -239,7 +276,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("popular albums",res)
                     this.setState({
                         popularAlbums: res.data.data.albums.map( album => ({
                             id:album._id,
@@ -271,7 +307,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("most recent albums",res);
                     this.setState({
                         mostRecentAlbums: res.data.data.albums.map( album => ({
                             id:album._id,
@@ -301,7 +336,6 @@ class Home extends Component {
             }
         })
             .then(res => {
-                console.log("popular pl",res)
                 if(res.status === 200)
                 {
                     this.setState({
@@ -319,7 +353,6 @@ class Home extends Component {
                     localStorage.removeItem("isLoggedIn");
                     localStorage.removeItem("token");
                     localStorage.removeItem("userID");
-                    console.log("fail")
 
                 }
             })
@@ -337,7 +370,6 @@ class Home extends Component {
             .then(res => {
                 if(res.status === 200)
                 {
-                    console.log("most recent pl",res);
                     this.setState({
                         mostRecentPlayLists: res.data.data.playlist.map( playList => ({
                             id:playList._id,
@@ -819,13 +851,13 @@ export default Home;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="Progress.html">Progress</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#year">year</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 20:15:07 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 20:18:29 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
