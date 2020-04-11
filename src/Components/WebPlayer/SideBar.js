@@ -4,8 +4,17 @@ import './SideBar.css'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import CreatePlaylist from './CreatePlaylist'
 import MyPlaylists from './MyPlaylists'
+import  { Component } from "react";
 
-function SideBar() {
+/** Class of SideBar in WebPlayer componenets
+ * @extends Component
+ */
+class SideBar extends Component {
+    render()  {
+    /**Logged in or not
+     * @memberof SideBar
+     * @type {boolean}
+     */
     const logInOrNot = localStorage.getItem("isLoggedIn");
     return(
     <div>
@@ -64,5 +73,5 @@ function SideBar() {
         </nav>    
     </div>     
     )
-}
+}}
 export default SideBar;

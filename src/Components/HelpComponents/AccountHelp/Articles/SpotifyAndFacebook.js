@@ -3,7 +3,13 @@ import './Articles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import SideBar from '../../SideBar/SideBar'
-function SpotifyAndFacebook(){
+import  { Component } from "react";
+
+/** Class of Spotify And Facebook. It is one of the articles in account help
+ * @extends Component
+ */
+class SpotifyAndFacebook extends Component {
+    render() {
     {document.title ="Spotify and Facebook - Spotify"}
     return(
     <div id="body-overrides">
@@ -107,5 +113,5 @@ function SpotifyAndFacebook(){
         </div>
      
     )
-}
+}}
 export default SpotifyAndFacebook
