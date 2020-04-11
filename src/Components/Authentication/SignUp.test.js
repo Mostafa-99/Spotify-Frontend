@@ -3,24 +3,25 @@ import ReactDOM from 'react-dom';
 import { configure, shallow } from 'enzyme';
 import 'jest-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Login from './LogIn';
+import Signup from './SignUp';
 import '@testing-library/jest-dom/extend-expect';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
+
 configure({adapter: new Adapter()});
 
-describe('<Login />',() => {
+describe('<Signup />',() => {
 
 let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<Login />);
+    wrapper = shallow(<Signup />);
   });
 
   it('renders without crashing', () => {
 
     const div =document.createElement('div');
-    ReactDOM.render(<Router><Login/></Router>,div);
+    ReactDOM.render(<Router><Signup/></Router>,div);
    });
 
   it('matches snapshot', () => {
@@ -31,7 +32,7 @@ let wrapper;
 
   it('renders correct items', () => {
 
-    const welcome = "To continue, log in to Spotify.";
+    const welcome = "Sign up with your email address";
     expect(wrapper.contains(welcome)).toEqual(true);
    });
 
@@ -51,8 +52,8 @@ let wrapper;
 
    it('State Intialization', () => {
     expect(wrapper.state().status).toEqual("not connected");
-    expect(wrapper.state().user.email).toEqual("");
-    expect(wrapper.state().user.password).toEqual("");
+    expect(wrapper.state().email).toEqual("");
+    expect(wrapper.state().password).toEqual("");
 
   })
    

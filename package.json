@@ -2,6 +2,9 @@
   "name": "yarab",
   "version": "0.1.0",
   "private": true,
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
+  },
   "dependencies": {
     "@babel/compat-data": "7.8.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
@@ -13,6 +16,9 @@
     "axios": "^0.19.2",
     "better-docs": "^1.4.7",
     "bootstrap": "^4.4.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest-enzyme": "^7.1.2",
     "jquery": "^3.4.1",
     "mdbreact": "^4.25.5",
     "mocha": "^7.1.1",
@@ -25,6 +31,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
     "react-sticky": "^6.0.3",
+    "react-test-renderer": "^16.13.1",
     "styled-components": "^5.0.1"
   },
   "scripts": {

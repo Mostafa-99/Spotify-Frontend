@@ -3,24 +3,25 @@ import ReactDOM from 'react-dom';
 import { configure, shallow } from 'enzyme';
 import 'jest-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Login from './LogIn';
+import PasswordChange from './PasswordChange';
 import '@testing-library/jest-dom/extend-expect';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
+
 configure({adapter: new Adapter()});
 
-describe('<Login />',() => {
+describe('<PasswordChange />',() => {
 
 let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<Login />);
+    wrapper = shallow(<PasswordChange />);
   });
 
   it('renders without crashing', () => {
 
     const div =document.createElement('div');
-    ReactDOM.render(<Router><Login/></Router>,div);
+    ReactDOM.render(<Router><PasswordChange/></Router>,div);
    });
 
   it('matches snapshot', () => {
@@ -31,12 +32,12 @@ let wrapper;
 
   it('renders correct items', () => {
 
-    const welcome = "To continue, log in to Spotify.";
+    const welcome = "New Password";
     expect(wrapper.contains(welcome)).toEqual(true);
    });
 
    it('test functions', () => {
-    // let component = renderer.create(<Router><Login/></Router>);
+    // let component = renderer.create(<Router><PasswordChange/></Router>);
     // component.getInstance();
     // let data="123";
     // let v=component.validatePassword(data);
@@ -50,9 +51,9 @@ let wrapper;
 
 
    it('State Intialization', () => {
-    expect(wrapper.state().status).toEqual("not connected");
-    expect(wrapper.state().user.email).toEqual("");
-    expect(wrapper.state().user.password).toEqual("");
+    expect(wrapper.state().status).toEqual("not done");
+    expect(wrapper.state().email).toEqual("");
+    expect(wrapper.state().confirmpassword).toEqual("");
 
   })
    
