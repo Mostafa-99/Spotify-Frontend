@@ -7,15 +7,34 @@ import axios from 'axios'
 import { ConfigContext } from '../../../../Context/ConfigContext'
 import { ProfileContext } from '../../../../Context/ProfileContext'
 
+
+/** Class of artist webplayer navbar.
+ * @extends Component
+ */
 class ArtistWebPlayerNavBar extends Component {
     constructor(){
         super()
         this.state={
+            /**
+             * current user
+             * @type {Object}
+             */
             user:{},
+            /**
+             * type of user
+             * @type {string}
+             */
             loginType:'',
+            /**
+             * statues of the user
+             * @type {string}
+             */
             status:''
         }
     }
+    /**When the component mounts it sends a request to the backend to load the albums
+     * @memberof ArtistWebPlayerNavBar
+     */
     componentDidMount(){
         this.setState(()=> ({}))
         
@@ -31,6 +50,10 @@ class ArtistWebPlayerNavBar extends Component {
             })
     }
 
+    /**log out from spotify 
+     * @type {Function}
+     * @memberof ArtistWebPlayerNavBar
+     */
     logOut= () => {
         
         if(this.state.loginType==="fb")
@@ -52,6 +75,10 @@ class ArtistWebPlayerNavBar extends Component {
             localStorage.setItem("loginType", "");
     }
 
+    /**toggle background color of profile
+     * @type {Function}
+     * @memberof ArtistWebPlayerNavBar
+     */
     toggleNavbarProfile=()=> {
         const element = document.getElementById("dropdownMenuLink");
         element.classList.toggle("toggle-background-color");
