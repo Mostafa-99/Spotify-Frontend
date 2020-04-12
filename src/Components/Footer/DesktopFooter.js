@@ -2,9 +2,6 @@ import React from 'react';
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
-import fb_logo from '../../Images/facebook-icon.png'
-import tw_logo from '../../Images/twitter-icon.png'
-import in_logo from '../../Images/instagram-icon.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";

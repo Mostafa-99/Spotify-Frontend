@@ -65,7 +65,7 @@ class SignUp extends Component {
                                     localStorage.setItem("loginType", "fb");
                                     localStorage.setItem("userID", response.authResponse.userID);
                                     this.setState({status: 'connected'});
-                                   // window.location.reload(false);
+                                   
                                 }
                             }
                             else // Unsuccessful
@@ -76,7 +76,7 @@ class SignUp extends Component {
 
                                 alert(err)
                             })
-                //window.location.reload(false);
+                
                 
               } 
           }.bind(this), {scope: 'public_profile,email'});
@@ -198,7 +198,7 @@ class SignUp extends Component {
                         localStorage.setItem("loginType", "email");
 
                         this.setState({status: 'connected'});
-                        //window.location.reload(false);
+                        
                     }
                 }
                 else // Unsuccessful
@@ -412,8 +412,8 @@ class SignUp extends Component {
             <h5>Date of Birth </h5>
             <div className="row">
                 <input type="number" id="sign-up-form-day" name="signup_form[dob_day]" onChange={this.inputChangeHandler}  required="required" max="31" maxLength="2" min="1" pattern="[0-9]*" placeholder="Day" className="dob " data-err="Please enter a valid day of the month"></input>
-                <select id="sign-up-form-month"  name="signup_form[dob_month]"  onChange={this.inputChangeHandler} required data-err="Please enter your birth month.">
-                    <option value="" >Month</option>
+                <select id="sign-up-form-month" placeholder="Month" name="signup_form[dob_month]"  onChange={this.inputChangeHandler} required data-err="Please enter your birth month.">
+                    
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>

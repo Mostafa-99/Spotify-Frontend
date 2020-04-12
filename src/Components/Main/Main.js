@@ -1,6 +1,6 @@
 import React from 'react';
-import './main.css'
-
+import './Main.css'
+import IndexDesktopNavbar from '../Navigation/IndexDesktopNavbar'
 import '../Button/SpotifyButton.css'
 import { Link } from 'react-router-dom';
 
@@ -9,20 +9,20 @@ function Main() {
 
 
   return (
-    <div>
+    
       
-    <section id="main-section">
-        <div className="bg-img">
-            <div className="container">
-                <h1>Music for everyone.</h1>
-                <h4>Millions of songs. No credit card needed.</h4>
+    <section id="main-section" >
+      <IndexDesktopNavbar/>
+        <section id="bg-img">
+            <div id="container">
+              <div className="h-1">Music for everyone.</div>
+              <div className="h-4">Millions of songs. No credit card needed.</div>
                <Link to="/signup"> <button id="ob"className="my-spotify-button" >Get Spotify Free</button></Link>
-
+               
             </div>
-        </div> 
-        
-    </section>
-    </div>
+         </section>     
+    </section> 
+    
    
   );
 }

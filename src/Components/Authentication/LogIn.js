@@ -59,7 +59,7 @@ class LogIn extends Component {
                             localStorage.setItem("loginType", "fb");
                             localStorage.setItem("userID", response.authResponse.userID);
                             this.setState({status: 'connected'});
-                            //window.location.reload(false);
+                            
                         }
                     }
                     else // Unsuccessful
@@ -71,7 +71,7 @@ class LogIn extends Component {
 
                         alert(err)
                     })
-                    //window.location.reload(false); 
+                    
               }
           }.bind(this), {scope: 'public_profile,email'});
     } 
@@ -131,7 +131,7 @@ class LogIn extends Component {
 
         if(is_email_valid && is_psw_valid)
         {
-            //console.log(this.context.baseURL+'/signIn');
+            
             axios.post(this.context.baseURL+'/signIn',
             {
             "email":memail,
@@ -147,7 +147,7 @@ class LogIn extends Component {
                         localStorage.setItem("token",res.data.token);
                         localStorage.setItem("loginType", "email");
                         this.setState({status: 'connected'});
-                       // window.location.reload(false);
+                       
                     }
                 }
                 else

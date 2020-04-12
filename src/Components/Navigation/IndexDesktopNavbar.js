@@ -9,11 +9,11 @@ import { ProfileContext } from '../../Context/ProfileContext'
 //navbar not fixed anymore
 const MyDesktopNavbar = styled.nav`
 display:flex;
-
+position:fixed;
 flex-flow: row nowrap;
 justify-content:space-evenly;
 align-items:center;
-background-color:rgba(0,0,0);
+background-color:rgba(0,0,0,0.7);
 height:80px;
 width:100%;
 z-index:1;

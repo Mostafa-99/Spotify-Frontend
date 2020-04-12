@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import DesktopNavbar from './DesktopNavbar'
 import MobileNavbar from './MobileNavbar'
 
+
 const exclusionArray = [
   '/login',
+  '/',
   '/signup',
   '/home',
   '/artist-webplayer',
@@ -77,14 +79,7 @@ class Navbar extends Component {
      */
       updateVisibility() {
 
-        this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0})
-        // if(window.location.pathname.match());
-        // {
-        //   //console.log(window.location.pathname);
-        //   if(document.querySelector("#my-desk-navbar")!==null)
-        //     document.querySelector("#my-desk-navbar").classList.add("index-fixed");
-        // }
-          
+        this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0})  
         
       }
     
@@ -99,6 +94,9 @@ class Navbar extends Component {
             <div>
                 
                 {isDesktop?(
+                 
+                  
+                
                   <DesktopNavbar/>
                     ) : (
                   <MobileNavbar/>
