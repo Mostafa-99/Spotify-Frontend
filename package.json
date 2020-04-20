@@ -50,5 +50,8 @@
   },
   "devDependencies": {
     "jsdoc": "^3.6.4"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
   }
 }
