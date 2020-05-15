@@ -3,7 +3,13 @@ import './Articles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import SideBar from '../../SideBar/SideBar'
-function HowToLogOut(){
+import  { Component } from "react";
+
+/** Class of How To Log Out. It is one of the articles in account help
+ * @extends Component
+ */
+class HowToLogOut extends Component {
+    render() {
     {document.title ="How to log out - Spotify"}
     return(
         <div id="body-overrides">
@@ -98,5 +104,5 @@ function HowToLogOut(){
         </div>
        
     )
-}
+}}
 export default HowToLogOut

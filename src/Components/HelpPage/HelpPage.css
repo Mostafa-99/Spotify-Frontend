@@ -1,0 +1,364 @@
+/*Styles*/
+*{
+    font-family:spotify-circular, Helvetica, Arial, sans-serif;
+    
+}
+
+ul{
+    list-style: none;
+}
+body{
+    padding-right: 0 !important;
+}
+#videoModal{
+    overflow: hidden !important;
+}
+/*Navigation section*/
+
+#navigation-section{
+    background: #EFEFEF  ;
+    height: 500px;
+    color: black !important; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#navigation-section .nav-section-container{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-evenly;
+}
+#navigation-section .nav-section-container ul{
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 2px;
+    font-size: 18px;
+}
+#navigation-section .nav-section-container h3{
+    font-family:spotify-circular, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+#navigation-section .nav-section-container .a{
+    color: #2D46B9;
+    font-weight: 700;
+    text-decoration: none;
+}
+#navigation-section .nav-section-container  .a:hover{
+    color: #000;
+}
+
+/*Videos section*/
+#videos-section{
+    height: 500px;
+    color: black;
+    display: flex;
+    background: white;
+    flex-direction: row;
+    margin-bottom: 20px;
+    justify-content: flex-end;
+    width: 100%;
+}
+#videos-slides-imgs,.carousel-inner,.carousel-item, .carousel-caption{height: 100%;}
+#videos-section div p{
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-shadow:none;
+    width: 80%;
+    
+}
+#videos-section div h1{
+    font-size: 2.7rem; 
+    color: black;
+    text-shadow:none;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+}
+#videos-section .carousel-indicators .active{
+    background-color: #000;
+    border: 2px solid transparent;
+    box-shadow: 0 0 0 2px #000;
+    margin-left: 7px;
+    transition:.6s ease;
+}
+#videos-section .carousel-indicators li{ background-color: #DAD9DC; }
+#videos-section .carousel-caption{
+    text-align: left;
+    padding-top: 4rem;
+}
+#videos-slides-imgs .carousel-indicators{
+    justify-content: flex-start;
+}
+#videos-slides-imgs li{
+    border: 2px solid transparent;
+    margin-left: 7px;
+    height: 12px;
+    width: 12px;
+    border-radius: 12px;
+z-index: 1;
+}
+#videos-slides-imgs #carouselExampleIndicators .control-arrow {
+   display: none;
+
+}
+
+
+#videos-section #carouselExampleIndicators{
+    width: 50%;
+    height: 100%;  
+}
+
+#videos-slides-imgs .carousel-item .btn{
+    border: #000 3px solid;
+    color: #000;
+    background-color: #FFF !important;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: spotify-circular, Helvetica, Arial, sans-serif;
+    margin-top: 20px;
+    width: 200px;
+    padding: 6px 12px;
+}
+#videos-slides-imgs .carousel-item .btn:hover {
+    color: #FFF; 
+    background-color: #000 !important;
+
+}
+#videos-slides-imgs .carousel-item .btn:hover i{color: #FFF;}
+#videos-slides-imgs .carousel-item i{
+   font-size: 22px;
+   color:#000;
+   padding-right: 5px;
+}
+#videos-slides-imgs .carousel-item .btn:active,#notspotify-section .btn:active{
+    box-shadow: none;
+    outline: none;
+}
+
+#videos-slides-imgs #videos-slides .carousel-item{
+    transition:(5s ease-in-out left);
+    transition-duration: 0.6s;
+}
+
+#videos-slides-imgs{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;  
+    width: 100%;
+}
+#videos-img{
+    display: block;
+    text-align: right;
+    position: relative;
+    height: 100%;
+    width: 360px;
+    background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid' width='360' height='730' viewBox='0 0 360 730' fill='%23D9DADC'%3E%3Cpath d='M359.872 152.935h-1.69c-.056 0-.105-.024-.159-.032v520.726c0 31.634-25.795 57.371-57.501 57.371H60.407c-31.705 0-57.499-25.737-57.499-57.371V285.538a.918.918 0 0 1-.558.203H.94a.94.94 0 0 1-.94-.938v-59.105a.94.94 0 0 1 .94-.938h1.41c.213 0 .4.083.558.203v-14.479a.918.918 0 0 1-.558.203H.94a.94.94 0 0 1-.94-.938v-59.105a.94.94 0 0 1 .94-.938h1.41c.213 0 .4.083.558.203v-41.032c-.031.003-.057.018-.088.018H1.41a.94.94 0 0 1-.94-.938V78.874c0-.519.421-.938.94-.938h1.41c.031 0 .057.014.088.017V57.371c0-31.635 25.794-57.372 57.499-57.372h240.115c31.706 0 57.501 25.737 57.501 57.372V99.87c.054-.008.103-.033.159-.033h1.69c.622 0 1.126.504 1.126 1.125v50.849c0 .621-.504 1.124-1.126 1.124zm-9.859-95.564c0-27.226-22.201-49.376-49.491-49.376H60.407c-27.288 0-49.49 22.15-49.49 49.376v616.258c0 27.225 22.202 49.375 49.49 49.375h240.115c27.29 0 49.491-22.15 49.491-49.375V57.371zM181.578 708.402c-15.242 0-27.644-12.38-27.644-27.598 0-15.217 12.402-27.598 27.644-27.598 15.244 0 27.646 12.381 27.646 27.598 0 15.218-12.402 27.598-27.646 27.598zm0-51.198c-13.035 0-23.639 10.587-23.639 23.6 0 13.013 10.604 23.6 23.639 23.6 13.036 0 23.641-10.587 23.641-23.6 0-13.013-10.605-23.6-23.641-23.6zm20.39-602.206h-41.8c-3.726 0-6.758-3.495-6.758-7.215 0-3.721 3.032-6.778 6.758-6.778h41.8c3.726 0 6.758 3.057 6.758 6.778 0 3.72-3.032 7.215-6.758 7.215zm0-9.964h-41.8a2.754 2.754 0 0 0-2.753 2.749c0 1.515 1.235 3.217 2.753 3.217h41.8c1.519 0 2.754-1.702 2.754-3.217a2.754 2.754 0 0 0-2.754-2.749zm-20.747-13.422a4.252 4.252 0 0 1-4.256-4.248 4.252 4.252 0 0 1 4.256-4.248 4.252 4.252 0 0 1 4.255 4.248 4.252 4.252 0 0 1-4.255 4.248zm-48.134 17.969a1.8 1.8 0 1 1 0-3.597 1.8 1.8 0 0 1 1.802 1.799 1.8 1.8 0 0 1-1.802 1.798z'/%3E%3C/svg%3E"),url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='xMidYMid' width='348' height='724' viewBox='0 0 348 724' fill='%23FFF'%3E%3Cpath d='M293.52-.001H53.479C23.944-.001 0 23.895 0 53.372v616.255C0 699.104 23.944 723 53.479 723H293.52c29.535 0 53.479-23.896 53.479-53.373V53.372c0-29.477-23.944-53.373-53.479-53.373z'/%3E%3C/svg%3E")
+    no-repeat center center/cover;
+    margin-top: 20px;
+}   
+#videos-section .carousel-img{ height: 100%;}
+#videos-section .slide img {
+    position: relative;
+    height:80%;
+    width: 100%;
+}
+#videos-img .carousel-item{
+    position: relative;
+    top:100px;
+    left: 26px;
+    width: 85%;
+    height: 100%;
+    transform: none;
+    transition: none;
+    transition:.6s visibaility ease;
+}
+#videos-section .control-btn{
+    display: none;
+}
+
+    
+
+/*Not on spotify section*/
+#notspotify-section{
+    height: 500px;
+    background: #EFEFEF;
+    text-align: center;
+    
+}
+#notspotify-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+#notspotify-section .notspotify-container h1{
+    font-size: 4rem;
+    color: #222326;
+    margin: 16px 0px 30px;
+}
+#notspotify-section .notspotify-container p{
+    color: #222326;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    text-align: center;
+}
+#notspotify-section .notspotify-container .btn{
+    color: #FFF;
+    border-radius: 500px;
+    background-color: #2D46B9 !important;
+    font-size: 1rem;
+    font-family: Helvetica,Arial,sans-serif;
+    margin-top: 40px;
+    padding: 16px 48px 18px;
+   /* padding-right: 100px;
+    padding-left: 20px;*/
+    text-align: left;
+    
+}
+#notspotify-section .notspotify-container .btn:hover{
+    background-color:rgb(5, 34, 163) !important;
+}
+#notspotify-section .notspotify-container .a{
+    color: #FFF;
+    text-decoration: none;
+}
+#notspotify-section .notspotify-container{
+    text-align: center;
+}
+
+/*Scroll buttons*/
+.scroll-button {
+    text-align: center;
+    background: white;
+    width: 52px;
+    height: 52px;
+    border-radius: 52px;
+    box-shadow: 0 0 7px 0 rgba(0,0,0,.13);
+    margin-bottom: -26px;
+    margin-top: -26px;
+    padding: 5px;
+    position: absolute;
+    display: block;
+    transition: all .3s ease-in-out;
+}
+.scroll-button i{
+    font-size:40px;
+    color:#2D46B9;
+    z-index: -1;
+}
+.scroll-button:hover{
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    padding-top: 10px;
+    
+}
+.scroll-button:hover i{
+    color: #000;
+}
+
+
+
+@media(max-width:990px) {
+    .scroll-button{
+        display: none;
+    }
+    #videos-img{
+        display: none;
+    }
+    #videos-slides-imgs{
+        justify-content: space-around;
+       padding-bottom: 20px;
+    }
+    #videos-section .carousel-caption{
+        display:block !important;
+        text-align: center;
+        position: static;
+        width: 100%;
+        padding-top: 20px;
+    }
+    #navigation-section{
+        height: 400px;
+    }
+    #videos-section ,#notspotify-section,#navigation-section,#videos-slides,#carouselExampleIndicators{
+        width: 100%;
+    }
+    #carouselExampleIndicators{
+        width: 90% !important;
+    }
+    #videos-slides-imgs .carousel-item p{
+        width: 100%;
+    }
+    #videos-section .carousel-inner{
+       
+        text-align: center;
+    }
+    #videos-slides-imgs .carousel-indicators{
+        justify-content: center;
+    width: 100%;
+    margin: 0;
+    z-index: 1;
+    }
+    #navigation-section .nav-section-container{
+        flex-direction: column;
+    }
+    #navigation-section .nav-section-container ul{
+        text-align: center;
+        margin-bottom: 50px;
+        border-bottom: #444 dashed 0.5px;
+    }
+    #videos-section div h1{
+        margin-top: 2rem;
+    }
+   #help-page .btn-container{
+       display: none;
+   }
+   #help-page .control-btn{
+    display: block;
+    color: #000;
+   }
+    #videos-slides-imgs #carouselExampleIndicators .control-arrow {
+        font-size: 42px;
+        color: black;
+       display: inline;
+      
+    }
+    #videos-slides-imgs #carouselExampleIndicators .control-arrows{
+       display: flex;
+       justify-content: space-between;
+       height: 60px;
+       position: relative;
+       top:-2.5rem;
+       padding: 0px 2rem;
+    }
+    #notspotify-section .notspotify-container .btn{
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+        
+    }
+
+}
+@media(min-width:768px){
+    #videos-slides-imgs #carouselExampleIndicators .control-arrows{
+       
+        padding: 0px 11rem;
+     }
+}
+@media (max-width:334px){
+    #notspotify-section .notspotify-container h1{
+        font-size: 4rem;
+    }
+    #notspotify-section .notspotify-container .btn{
+        margin-bottom: 2rem;
+    }
+}    
+
+
+

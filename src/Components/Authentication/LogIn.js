@@ -99,7 +99,11 @@ class LogIn extends Component {
     validateEmail(email) {
         if(this.state.emptyemail===true)
             this.setState({emptyemail: false});
-        return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+        if(email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+        return true;
+        else
+        return false;
+       // return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
     /**
@@ -109,8 +113,11 @@ class LogIn extends Component {
     validatePassword(psw) {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
-
-        return psw && psw.length >= 6
+         if(psw.length>=8)
+         return true;
+         else
+         return false;
+        //return psw && psw.length >= 6
     }
       /**
      * Function handling login request with Email and Password

@@ -31,7 +31,6 @@ class Navbar extends Component {
         this.updateVisibility = this.updateVisibility.bind(this);
 
       }
-
       /**
      * Navbar Component Mount state Adding Event Listeners 
      * 

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayerNavBar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayerNavBar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React,{Component} from 'react';
+import { Link,Redirect } from 'react-router-dom';
+import { Route } from 'react-router';
+import '../NavBars.css';
+import axios from 'axios'
+
+import { ConfigContext } from '../../../../Context/ConfigContext'
+import { ProfileContext } from '../../../../Context/ProfileContext'
+
+
+/** Class of artist webplayer navbar.
+ * @extends Component
+ */
+class ArtistWebPlayerNavBar extends Component {
+    constructor(){
+        super()
+        this.state={
+            /**
+             * current user
+             * @type {Object}
+             */
+            user:{},
+            /**
+             * type of user
+             * @type {string}
+             */
+            loginType:'',
+            /**
+             * statues of the user
+             * @type {string}
+             */
+            status:''
+        }
+    }
+    /**When the component mounts it sends a request to the backend to load the albums
+     * @memberof ArtistWebPlayerNavBar
+     */
+    componentDidMount(){
+        this.setState(()=> ({}))
+        
+        let show=localStorage.getItem("isLoggedIn");
+        if(show==="true")
+        this.setState({status:"connected"})
+          else  
+        this.setState({status:"not connected"})
+        
+        axios.get('http://localhost:3000/users/1/')
+            .then(res => {
+              this.setState({user: res.data})
+            })
+    }
+
+    /**log out from spotify 
+     * @type {Function}
+     * @memberof ArtistWebPlayerNavBar
+     */
+    logOut= () => {
+        
+        if(this.state.loginType==="fb")
+        {
+            window.FB.logout(function(response) {
+          });
+          
+        }
+        if(this.state.loginType==="email")
+        {
+          
+        }
+            
+            this.setState({status:"not connected"})
+            this.setState({loginType: ''})
+            localStorage.setItem("userID", '');
+            localStorage.setItem("isLoggedIn", "false");
+            localStorage.setItem("token", '');
+            localStorage.setItem("loginType", "");
+    }
+
+    /**toggle background color of profile
+     * @type {Function}
+     * @memberof ArtistWebPlayerNavBar
+     */
+    toggleNavbarProfile=()=> {
+        const element = document.getElementById("dropdownMenuLink");
+        element.classList.toggle("toggle-background-color");
+      }
+      
+
+      render()
+      {
+        const logInOrNot = localStorage.getItem("isLoggedIn");
+        return (
+            &lt;ProfileContext.Consumer>{(profile) => (
+                &lt;ConfigContext.Consumer>{(config) => {
+                    const {user}= profile
+                        return(
+                            
+                            &lt;div id='root-navbar' className='root-navbar'>
+                                &lt;head>
+                                    &lt;title>Google Icons&lt;/title>
+                                    &lt;meta name="viewport" content="width=device-width, initial-scale=1">&lt;/meta>
+                                    &lt;link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">&lt;/link>
+                                &lt;/head>
+                                &lt;div id="root-navbar-container" className="container m-0 ">
+                                    &lt;div className="row">
+                                        &lt;div id="navbar-arrows"className="col-8 navbar-arrows">
+                                            &lt;i id="root-navbar-arrows"className="material-icons btn " >keyboard_arrow_left&lt;/i>
+                                            &lt;i id="root-navbar-arrows"className="material-icons btn" >keyboard_arrow_right&lt;/i>
+                                        &lt;/div>
+                                    {logInOrNot==="true" ? (
+                                        &lt;div id="navbar-upgrade-button-col" className="col-2">
+                                        &lt;Link to="/premium">&lt;button id="navbar-upgrade-button">Upgrade&lt;/button>&lt;/Link>
+                                        &lt;/div>)
+                                        :
+                                        (
+                                        &lt;div className="col-2">
+                                        &lt;Link to="/signup">&lt;button id="navbar-signup-button">Sign up&lt;/button>&lt;/Link>
+
+                                        &lt;/div>
+                                        )
+                                    }
+                                        
+                                {logInOrNot==="true" ? (
+                                
+                                    &lt;div className="col-2 " id="navbar-profile-section" >
+                                        &lt;div className="dropdown">
+                                            &lt;a className="btn dropdown-toggle" href="#" role="button"  onClick={()=> this.toggleNavbarProfile()} id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                                &lt;span >&lt;img src={user.images} id="navbar-profile-pic" className="rounded-circle" alt="Profile" >&lt;/img>&lt;/span>
+                                                &lt;span className='navbar-profile-button-name'>&lt;h2>{user.name}&lt;/h2>&lt;/span>
+                                            &lt;/a>
+                                            &lt;div id="navbar-profile-button-list"className="dropdown-menu p-0" aria-labelledby="dropdownMenuLink">
+                                                &lt;Link to="/account-overview"id="navbar-profile-button-list-item"className="dropdown-item"  target="_blank" >Account&lt;/Link>
+                                                &lt;a id="navbar-profile-button-list-item-hr" className="dropdown-item m-0 p-0" href="#">&lt;/a>
+                                                &lt;span onClick={()=> this.logOut()}> &lt;a id="navbar-profile-button-list-item"className="dropdown-item" href="#">Log out&lt;/a>&lt;/span>
+                                            &lt;/div>
+                                        &lt;/div>
+                                    &lt;/div>
+                                    )
+                                :(
+                                    &lt;div>
+                                    &lt;Link to="/login">&lt;button id="navbar-login-button">Log in&lt;/button>&lt;/Link> 
+                                    &lt;/div>  
+                                )}
+                                    &lt;/div>
+                                    
+                                &lt;/div> 
+                                
+                            &lt;/div>
+                            
+                        );	
+                        }}
+            &lt;/ConfigContext.Consumer>
+            )}&lt;/ProfileContext.Consumer>
+        );
+}
+}
+export default ArtistWebPlayerNavBar;
+
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

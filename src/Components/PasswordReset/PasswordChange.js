@@ -38,8 +38,11 @@ export default class PasswordChange extends Component {
      * @param {string} Password - input password.
      */
     validatePassword(psw) {
-
-        return psw && psw.length >= 6
+        if(psw.length>=8)
+        return true;
+        else
+        return false;
+       // return psw && psw.length >= 6
     }
 
     /**
@@ -64,7 +67,7 @@ export default class PasswordChange extends Component {
         this.setState({confirmpassword: event.target.value});
     }
 
-     /**
+    /**
      * Function sending new password request if all validation passed.
      * 
      */

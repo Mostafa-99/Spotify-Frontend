@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import ArtistWebPlayerNavBar from './ArtistWebPlayerNavBar'
+import SideBar from '../../SideBar'
+import '../Bodies.css';
+import './ArtistWebPlayer.css'
+import axios from 'axios'
+import TracksList from '../AlbumWebPlayer/TracksList';
+
+import {ConfigContext} from '../../../../Context/ConfigContext'
+import { Link } from 'react-router-dom';
+
+/** Class of artist webplayer page.
+ * @extends Component
+ */
+class ArtistWebPlayer extends Component {
+    static contextType=ConfigContext;
+    constructor(){
+        super()
+        this.state = {
+            /**
+             * ID of the current artist
+             * @type {Object}
+             */
+            myId:{},
+            /**the current artist
+             * @memberof ArtistWebPlayer
+             * @type {object}
+             */
+            artist:{},
+            /**Array of Albums of the artist
+             * @memberof ArtistWebPlayer
+             * @type {Array}
+             */
+            albums:[],
+            /**Array of playlists of the artist
+             * @memberof ArtistWebPlayer
+             * @type {Array}
+             */
+            playLists:[],
+            /**Array of relted artists
+             * @memberof ArtistWebPlayer
+             * @type {Array}
+             */
+            relatedArtists:[],
+            /**bio of the artist
+             * @memberof ArtistWebPlayer
+             * @type {string}
+             */
+            bio:{},
+            /**Array of Albums of the artist
+             * @memberof ArtistWebPlayer
+             * @type {Array}
+             */
+            tracks:[],
+            /**
+            * ID of the playing song
+            * @type {String}
+            */
+            nowPlaying:{
+                id:-1
+            },
+            /**
+            * Name of the album
+            * @type {String}
+            */
+           "album_name":"",
+           /**
+            * ID of the album
+            * @type {String}
+            */
+           "album_id":"",
+           /**
+            * Array of artists' names
+            * @type {Array&lt;String>}
+            */
+           "artists":"",
+           /**
+            * Image url of the album
+            * @type {String}
+            */
+           "album_image_url":"",
+           /**
+            * Array of tracks objects 
+            * @type {Array&lt;Object>}
+            */
+           "tracks":[],
+           /**
+            * States if the user liked the album or not
+            * @type {Boolean}
+            */
+           "is_liked":Boolean,
+           /**
+            * ID of the playing song
+            * @type {String}
+            */
+           "playing_song_id":""
+
+        }
+        this.togglePlayPause=this.togglePlayPause.bind(this)
+
+    }
+    
+    /**When the component mounts it sends a request to the backend to load the albums
+     * @memberof ArtistWebPlayer
+     */
+    componentDidMount() {
+
+        const{myId}=this.props.location.state;//getting id from parent component
+        this.state.myId=myId;
+
+        /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
+        /*' http://we871.mocklab.io/artists/200 */
+        axios.get(this.context.baseURL+"/artists/" + this.state.myId,{  /*artist*/
+            headers:{
+                'authorization': "Bearer "+localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+                )
+            .then(res => {
+                if(res.status===200)
+                {   
+                    this.setState(prevState => ({
+                    artist: {                   
+                        ...prevState.artist,    
+                        id:res.data.data._id,
+                        name:res.data.data.name,
+                        bio:res.data.data.artistInfo.biography      
+                    }
+                }))
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
+                
+        })
+
+            /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
+            /* /artists/"+this.state.myId+"/albums */
+        axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/albums",{/* albums */
+            headers:{
+                'authorization': "Bearer "+localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+            )
+            .then(res => {
+                if(res.status===200)
+                {   
+                    this.setState({
+                        albums: res.data.data.map( album => ({
+                            name:album.name,
+                            id:album._id,
+                            imageUrl:album.image
+                        }))
+                    })
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
+                
+            })
+
+            /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
+        axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/created-playlists",{/* playlists*/
+            headers:{
+                'authorization': "Bearer "+localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+            )
+            .then(res => {
+                if(res.status===200)
+                {   
+                    this.setState({
+                        playLists: res.data.data.map( playList => ({
+                            id:playList._id,
+                            name:playList.name,
+                            imageUrl:playList.images[0]
+                        }))
+                    })
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
+            })
+
+                /* http://www.mocky.io/v2/5e87635f3100002a003f44d4*/
+                /* */
+                /**http://we871.mocklab.io/artists/200/relatedArtists */
+        axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/related-artists",{/* related artists*/
+            headers:{
+                'authorization': "Bearer "+localStorage.getItem("token"),
+                "id": this.state.myId
+            }}
+            )
+            .then(res => {
+                if(res.status===200)
+                {   
+                    this.setState({
+                        relatedArtists: res.data.data.map( relatedArtist => ({
+                            id:relatedArtist._id,
+                            name:relatedArtist.name,
+                            imageUrl:relatedArtist.images[0],
+                            type:relatedArtist.role
+                        }))
+                    })
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
+            })     
+            this.getAlbumTracks();                                         
+    }
+        /**get all tracks of the album 
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        getAlbumTracks(){
+            /* http://localhost:3000/album_tracks/1*/
+            axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/top-tracks",{/* top tracks*/
+                headers:{
+                    'authorization': "Bearer "+localStorage.getItem("token"),
+                    "id": this.state.myId
+                }}
+                )
+                .then(res => {
+                    if(res.status===200)
+                {   
+                    this.setState({tracks:res.data.data})
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
+                }    
+                )
+                .catch(error => {
+                    alert(error.response.data.message);
+                })
+            }
+        /**set currently playing song to an id 
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        setPlayingSondId=(id)=>{
+            if(this.state.playing_song_id===id){
+                this.setState({
+                    playing_song_id:""
+                })
+            }
+            else{
+                this.setState({
+                    playing_song_id:id
+                })
+            }
+        }
+
+        /**to determine which section we are in and choose it and makes its backgroung color changes
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        sectionTypeHandle(type){
+            if(type===1)//overview
+            {
+                document.getElementById("artist-overview-section").classList.remove("hide");
+                document.getElementById("about-section").classList.add("hide");
+                document.getElementById("related-artists-section").classList.add("hide");
+
+                document.getElementById("artist-overview-button").classList.add("background-grey");
+                document.getElementById("about-button").classList.remove("background-grey");
+                document.getElementById("related-artists-button").classList.remove("background-grey");
+            }
+            else if(type===2)//related artists
+            {
+                document.getElementById("artist-overview-section").classList.add("hide");
+                document.getElementById("about-section").classList.add("hide");
+                document.getElementById("related-artists-section").classList.remove("hide");
+
+                document.getElementById("artist-overview-button").classList.remove("background-grey");
+                document.getElementById("about-button").classList.add("background-grey");
+                document.getElementById("related-artists-button").classList.remove("background-grey");
+            }
+            else if(type===3)//about
+            {
+                document.getElementById("artist-overview-section").classList.add("hide");
+                document.getElementById("about-section").classList.remove("hide");
+                document.getElementById("related-artists-section").classList.add("hide");
+
+                document.getElementById("artist-overview-button").classList.remove("background-grey");
+                document.getElementById("about-button").classList.remove("background-grey");
+                document.getElementById("related-artists-button").classList.add("background-grey");
+            }
+        }
+        
+        /**toggle cards play pause buttons
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        togglePlayPause(sid) {
+            if(this.state.nowPlaying.id==-1)
+            {
+                const cardButtons=document.getElementById(sid);
+                const playButton = cardButtons.querySelector('.play-btn');
+                const pauseButton = cardButtons.querySelector('.pause-btn');
+                playButton.classList.toggle('active-play');
+                pauseButton.classList.toggle('active-pause');
+                this.setState({nowPlaying: {id: sid}})
+            }
+            else if(this.state.nowPlaying.id==sid)
+            {
+                const cardButtons=document.getElementById(sid);
+                const playButton = cardButtons.querySelector('.play-btn');
+                const pauseButton = cardButtons.querySelector('.pause-btn');
+                playButton.classList.toggle('active-play');
+                pauseButton.classList.toggle('active-pause');
+                this.setState({nowPlaying: {id: -1}})
+            }
+            else
+            {
+                const nowPlayingSong=document.getElementById(this.state.nowPlaying.id);
+                const playButtonPrev = nowPlayingSong.querySelector('.play-btn');
+                const pauseButtonPrev = nowPlayingSong.querySelector('.pause-btn');
+                playButtonPrev.classList.toggle('active-play');
+                pauseButtonPrev.classList.toggle('active-pause');
+                const cardButtons=document.getElementById(sid);
+                const playButton = cardButtons.querySelector('.play-btn');
+                const pauseButton = cardButtons.querySelector('.pause-btn');
+                playButton.classList.toggle('active-play');
+                pauseButton.classList.toggle('active-pause');
+                this.setState({nowPlaying: {id: sid}})
+            }
+    }
+    render()
+    {
+        /*console.log("amr diab id is : ",this.state.myId);*/
+        {document.title ="Spotify - "+this.state.artist.name }
+    return(
+        
+        &lt;div id='webplayer-layout'className="container webplayer col-12">
+            &lt;head>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>&lt;/head>
+            &lt;div className="row webplayer-body m-0">
+                &lt;nav className="col-lg-2 webplayer-sidebar-body colums-no-padding">
+                    &lt;SideBar/>
+                &lt;/nav>
+                &lt;div className="col-lg-10 col-sm-12 webplayer-body-and-navbar colums-no-padding">
+                    &lt;ArtistWebPlayerNavBar/>
+                    &lt;div id="artist-webplayer">
+                        &lt;div id="artist-heading">
+                            &lt;h1 id="artist-heading-name">&lt;strong>{this.state.artist.name}&lt;/strong>&lt;/h1>
+                            &lt;div id="artist-buttons" className="col-4">
+                                &lt;span >&lt;button id="artist-play-button">PLAY&lt;/button>&lt;/span>
+                                &lt;span >&lt;button id="artist-follow-button">Follow&lt;/button>&lt;/span>
+                            &lt;/div>
+                            &lt;div id="artist-sections-nav">
+                                &lt;a id="artist-overview-button" onClick={() => this.sectionTypeHandle(1)} href="#" className="btn-outline btn-lg background-grey" role="button" aria-pressed="true">Overview&lt;/a>
+                                &lt;a id="about-button" onClick={() => this.sectionTypeHandle(2)} href="#" className="btn-outline btn-lg no-background" role="button" aria-pressed="true">Related artists&lt;/a>
+                                &lt;a id="related-artists-button" onClick={() => this.sectionTypeHandle(3)} href="#" className="btn-outline btn-lg no-background" role="button" aria-pressed="true">About&lt;/a>
+                            &lt;/div>
+                        &lt;/div>
+                        &lt;div id="artist-overview-section"className="artist-overview-section">
+                            &lt;div className="popular-sub-section">
+                                &lt;h2 className="section-title albums">Popular&lt;/h2>
+                                &lt;TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                            &lt;/div>
+                            &lt;div className="albums-sub-section">
+                                &lt;h2 className="section-title albums">Albums&lt;/h2>
+                                &lt;div className="card-group">
+                                    {this.state.albums.map( album => (
+                                        &lt;div>
+                                            &lt;Link to={{
+                                                    pathname:"/webplayer/album",
+                                                    state:{
+                                                    myId :album.id
+                                                    }
+                                                }}>
+                                                &lt;div className="card" id={album.id}>
+                                                    &lt;img src={album.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                                        &lt;div className="card-body">
+                                                            &lt;h5 className="card-title">{album.name}&lt;/h5>
+                                                            &lt;div id={album.id}>
+                                                                &lt;button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                                                &lt;button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                                            &lt;/div>
+                                                        &lt;/div> 
+                                                &lt;/div>
+                                            &lt;/Link>
+                                        &lt;/div>
+                                    ))}
+                                &lt;/div>    
+                            &lt;/div>
+                            &lt;div className="playlists-sub-section">
+                                &lt;h2 className="section-title playlists">Playlists&lt;/h2>
+                                &lt;div className="card-group">
+                                    {this.state.playLists.map( playList => (
+                                        &lt;div>
+                                             &lt;Link to={{
+                                                    pathname:"/playlist-webplayer",
+                                                    state:{
+                                                    myId :playList.id
+                                                    }
+                                                }}>
+                                            &lt;div className="card" id={playList.id}>
+                                                &lt;img src={playList.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                                    &lt;div className="card-body">
+                                                        &lt;h5 className="card-title">{playList.name}&lt;/h5>
+                                                        &lt;div id={playList .id}>
+                                                            &lt;button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                                            &lt;button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                                        &lt;/div>
+                                                    &lt;/div> 
+                                                &lt;/div>
+                                                &lt;/Link>
+                                        &lt;/div>
+                                    ))}
+                                &lt;/div>   
+                            &lt;/div>
+                        &lt;/div>
+                        &lt;div id="about-section" className="about-section hide">
+                            &lt;h2 className="bio-title">Biography&lt;/h2>
+                            &lt;p className="section-body">  {this.state.artist.bio} &lt;/p>
+                        &lt;/div>
+                        &lt;div id="related-artists-section"className="related-artists-section hide">
+                            &lt;div className="card-group">
+                                {this.state.relatedArtists.map( artist => (
+                                    &lt;div>
+                                        &lt;div className="card">
+                                            &lt;img src={artist.imageUrl} className="card-img-top rounded-circle" alt="...">&lt;/img>
+                                            &lt;div className="card-body">
+                                                &lt;h5 className="card-title">{artist.name}&lt;/h5>
+                                                &lt;p className="card-text">{artist.type}&lt;/p>
+                                                &lt;div id={artist.id}>
+                                                    &lt;button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                                    &lt;button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                                &lt;/div>
+                                            &lt;/div>
+                                        &lt;/div>
+                                    &lt;/div>
+                                )
+                                )}
+                            &lt;/div>     
+                            
+                        &lt;/div>                                                                         
+                     &lt;/div>
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="row">
+                &lt;div className="col-12 colums-no-padding">
+                    {/*&lt;ProgressBar/>*/}
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    )
+    }
+}
+export default ArtistWebPlayer;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

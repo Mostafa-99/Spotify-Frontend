@@ -1,7 +1,19 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { shallow } from 'enzyme';
+import App from './App';
+import { MemoryRouter } from "react-router-dom";
 
 
-test('renders learn react link', () => {
+it('renders without crashing', () => {
+  shallow(<App />);
+});
 
+
+it("Snapshot testing", () => {
+  const AppTest = shallow(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+  expect(AppTest).toMatchInlineSnapshot(`ShallowWrapper {}`);
 });

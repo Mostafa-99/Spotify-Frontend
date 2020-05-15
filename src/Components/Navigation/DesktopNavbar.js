@@ -84,7 +84,6 @@ z-index:1;
 }
 
 `
-
 /**
  * Desktop Navbar Component
  * @extends Component

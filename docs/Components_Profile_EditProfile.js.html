@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/Profile/EditProfile.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/Profile/EditProfile.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React ,{ Component }from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import SideBar from './SideBar';
+import axios from 'axios'
+import {Link} from 'react-router-dom';
+import './Profile.css';
+import { ConfigContext } from '../../Context/ConfigContext'
+/** Variable that contains the birthday date of the user
+ * @type {Date}
+ */
+var today;
+/** Variable that contains the birthday day of the user
+ * @type {string}
+ */
+var day;
+/** Variable that contains the birthday month of the user
+ * @type {string}
+ */
+var month;
+/** Variable that contains the birthday year of the user
+ * @type {string}
+ */
+var year;
+/** Class of EditProfile page in account settings.
+ * @extends Component
+ */
+class EditProfile extends Component {
+   /**Gets the baseURL from configrations context of the user
+   * @memberof EditProfile
+   */
+    static contextType=ConfigContext;
+    constructor() {
+        super()
+        this.state = {
+            /**
+             * User object that have the user Date of birth and email and image and name and gender
+             * @memberof EditProfile
+             * @type {{dateOfBirth: string, email: string, image: string, name:string, gender:string}}
+             */
+          user:{
+              name:"",
+              dateOfBirth:"",
+              email:"",
+              gender:"",
+              image:"",
+          },
+            /**
+             * success message show bollean
+             * @memberof EditProfile
+             * @type {boolean}
+             */ 
+          successMessage: false,
+            /**
+             * fail message show bollean
+             * @memberof EditProfile
+             * @type {boolean}
+             */
+          failMessage: false,
+            /**
+             * Login type of the user (Facebook or normal)
+             * @memberof EditProfile
+             * @type {string}
+             */
+          loginType: localStorage.getItem("loginType")
+        }
+        this.editProfileHandle=this.editProfileHandle.bind(this)
+    }
+    /**
+     * @property {Function} componentDidMount Fetch the data of the user and put it in the state and checks the user login type to show and hide the information that can be edited
+     */
+    componentDidMount(){
+        axios.get(this.context.baseURL+"/me", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+        })
+            .then(res => {
+                if(res.status===200)
+                {
+                    this.setState(prevState => (
+                        {
+                        user: {                   
+                            ...prevState.user,    
+                            name: res.data.name,
+                            dateOfBirth: res.data.dateOfBirth,
+                            email: res.data.email,
+                            gender: res.data.gender,
+                            image: res.data.images    
+                        }
+                    }))
+                       
+
+                    today = new Date(this.state.user.dateOfBirth);
+                    day = today.getDate();
+                    month = today.getMonth()+1; 
+                    year = today.getFullYear();
+                    document.querySelector('.year').value=year;
+                    document.querySelector('.month').value=month;
+                    document.querySelector('.day').value=day;
+                    document.querySelector('.gender-combo').value=this.state.user.gender;
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            })
+        if(this.state.loginType==="fb")
+        {
+            const genderFB = document.querySelector('.gender-fb');
+            const genderNormal = document.querySelector('.gender-normal');
+            genderFB.classList.toggle('hide');
+            genderNormal.classList.toggle('hide');
+            const birthdayFB = document.querySelector('.birthday-fb');
+            const birthdayNormal = document.querySelector('.birthday-normal');
+            birthdayFB.classList.toggle('hide');
+            birthdayNormal.classList.toggle('hide');
+            const emailFB = document.querySelector('.email-fb');
+            const emailNormal = document.querySelector('.email-normal');
+            emailFB.classList.toggle('hide');
+            emailNormal.classList.toggle('hide');
+            const buttons = document.querySelector('.buttons')
+            buttons.classList.toggle('hide');
+        }
+    }
+    /**
+     * @property {Function} editProfileHandle Function that take the edited info of the user and change it
+     * @param {number} userYear year of birth of the user
+     * @param {number} userMonth month of birth of the user
+     * @param {number} userDay day of birth of the user
+     * @param {string} userGender gender of the user
+     * @param {string} userEmail email of the user
+     */
+    editProfileHandle(userYear,userMonth,userDay,userGender,userEmail){
+        axios.put(this.context.baseURL+'/me', 
+        {
+            "email": userEmail,
+            "name": this.state.user.name,
+            "gender": userGender,
+            "dateOfBirth": userYear+'-'+userMonth+'-'+userDay
+        },
+        {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+                "contentType": "application/json"
+            }
+        }
+        )   
+        .then(res => {
+            if(res.status === 200)
+            {
+                this.setState(prevState => (
+                    {
+                    user: {                   
+                        ...prevState.user,    
+                        dateOfBirth: userYear+'-'+userMonth+'-'+userDay,
+                        gender: userGender,
+                        email: userEmail
+                    },
+                   successMessage: true,
+                   failMessage: false
+                }))
+            }
+            else if(res.status === 401)
+            {
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
+            }
+        })
+        .catch(res => {this.setState({
+            failMessage: true,
+            successMessage: false
+        })})
+    };
+
+    render()
+    {
+        {document.title ="Edit profile - Spotify"}
+
+    return(                                                  
+        &lt;div className="bg-dark-clr">
+        &lt;div id="edit-profile"className="container editProfile">
+            &lt;div className="row">
+                &lt;SideBar img={this.state.user.image}/>
+                &lt;div className="col-lg-9 edit-section">
+                    &lt;div className="edit-div">
+                        { this.state.successMessage &amp;&amp; &lt;div class="alert alert-success">
+                        &lt;p>Profile changed&lt;/p>
+                        &lt;/div> }
+                        { this.state.failMessage &amp;&amp; &lt;div class="alert alert-danger">
+                        &lt;p>Error&lt;/p>
+                        &lt;/div> }
+                        &lt;h1 className="page-header">Edit profile&lt;/h1>
+                        &lt;div className="edit-info">
+                            &lt;div className="email-info">
+                                &lt;label className="labels">Email&lt;/label>
+                                &lt;div className="email-fb hide">
+                                    &lt;p className="user-info">{this.state.user.email}&lt;/p>
+                                &lt;/div>
+                                &lt;div className="email-normal">
+                                    &lt;input ref="email" className="email-text-box" defaultValue={this.state.user.email}>&lt;/input>
+                                &lt;/div>
+                            &lt;/div>
+                            &lt;div className="gender-info">
+                            &lt;label className="labels">Gender&lt;/label>
+                                &lt;div className="gender-normal">
+                                    &lt;select  ref="gender" required="" className="combo-box gender-combo">
+                                        &lt;option value="Male">Male&lt;/option>
+                                        &lt;option value="Female">Female&lt;/option>
+                                    &lt;/select>
+                                &lt;/div>
+                                &lt;div className="gender-fb hide">
+                                    &lt;p className="user-info">{this.state.user.gender}&lt;/p>
+                                &lt;/div>
+                            &lt;/div>
+                            &lt;div className="birthday-info">
+                                &lt;label className="labels">Date of birth&lt;/label>
+                                &lt;div className="birthday-normal">
+                                    &lt;div className="birthday-inputs">
+                                        &lt;select  ref="month" required=""  className="combo-box month">
+                                            &lt;option value="1">01&lt;/option>
+                                            &lt;option value="2">02&lt;/option>
+                                            &lt;option value="3">03&lt;/option>
+                                            &lt;option value="4">04&lt;/option>
+                                            &lt;option value="5">05&lt;/option>
+                                            &lt;option value="6">06&lt;/option>
+                                            &lt;option value="7">07&lt;/option>
+                                            &lt;option value="8">08&lt;/option>
+                                            &lt;option value="9">09&lt;/option>
+                                            &lt;option value="10">10&lt;/option>
+                                            &lt;option value="11">11&lt;/option>
+                                            &lt;option value="12">12&lt;/option>
+                                        &lt;/select>
+                                        &lt;select  ref="day" required="" className="combo-box day">
+                                            &lt;option value="1">1&lt;/option>
+                                            &lt;option value="2">2&lt;/option>
+                                            &lt;option value="3">3&lt;/option>
+                                            &lt;option value="4">4&lt;/option>
+                                            &lt;option value="5">5&lt;/option>
+                                            &lt;option value="6">6&lt;/option>
+                                            &lt;option value="7">7&lt;/option>
+                                            &lt;option value="8">8&lt;/option>
+                                            &lt;option value="9">9&lt;/option>
+                                            &lt;option value="10">10&lt;/option>
+                                            &lt;option value="11">11&lt;/option>
+                                            &lt;option value="12">12&lt;/option>
+                                            &lt;option value="13">13&lt;/option>
+                                            &lt;option value="14">14&lt;/option>
+                                            &lt;option value="15">15&lt;/option>
+                                            &lt;option value="16">16&lt;/option>
+                                            &lt;option value="17">17&lt;/option>
+                                            &lt;option value="18">18&lt;/option>
+                                            &lt;option value="19">19&lt;/option>
+                                            &lt;option value="20">20&lt;/option>
+                                            &lt;option value="21">21&lt;/option>
+                                            &lt;option value="22">22&lt;/option>
+                                            &lt;option value="23">23&lt;/option>
+                                            &lt;option value="24">24&lt;/option>
+                                            &lt;option value="25">25&lt;/option>
+                                            &lt;option value="26">26&lt;/option>
+                                            &lt;option value="27">27&lt;/option>
+                                            &lt;option value="28">28&lt;/option>
+                                            &lt;option value="29">29&lt;/option>
+                                            &lt;option value="30">31&lt;/option>
+                                            &lt;option value="31">31&lt;/option>
+                                        &lt;/select>
+                                        &lt;select  ref="year" required="" className="combo-box year">
+                                            &lt;option value="2019">2019&lt;/option>
+                                            &lt;option value="2018">2018&lt;/option>
+                                            &lt;option value="2017">2017&lt;/option>
+                                            &lt;option value="2016">2016&lt;/option>
+                                            &lt;option value="2015">2015&lt;/option>
+                                            &lt;option value="2014">2014&lt;/option>
+                                            &lt;option value="2013">2013&lt;/option>
+                                            &lt;option value="2012">2012&lt;/option>
+                                            &lt;option value="2011">2011&lt;/option>
+                                            &lt;option value="2010">2010&lt;/option>
+                                            &lt;option value="2009">2009&lt;/option>
+                                            &lt;option value="2008">2008&lt;/option>
+                                            &lt;option value="2007">2007&lt;/option>
+                                            &lt;option value="2006">2006&lt;/option>
+                                            &lt;option value="2005">2005&lt;/option>
+                                            &lt;option value="2004">2004&lt;/option>
+                                            &lt;option value="2003">2003&lt;/option>
+                                            &lt;option value="2002">2002&lt;/option>
+                                            &lt;option value="2001">2001&lt;/option>
+                                            &lt;option value="2000">2000&lt;/option>
+                                            &lt;option value="1999">1999&lt;/option>
+                                            &lt;option value="1998">1998&lt;/option>
+                                            &lt;option value="1997">1997&lt;/option>
+                                            &lt;option value="1996">1996&lt;/option>
+                                            &lt;option value="1995">1995&lt;/option>
+                                            &lt;option value="1994">1994&lt;/option>
+                                            &lt;option value="1993">1993&lt;/option>
+                                            &lt;option value="1992">1992&lt;/option>
+                                            &lt;option value="1991">1991&lt;/option>
+                                            &lt;option value="1990">1990&lt;/option>
+                                            &lt;option value="1989">1989&lt;/option>
+                                            &lt;option value="1988">1988&lt;/option>
+                                            &lt;option value="1987">1987&lt;/option>
+                                            &lt;option value="1986">1986&lt;/option>
+                                            &lt;option value="1985">1985&lt;/option>
+                                            &lt;option value="1984">1984&lt;/option>
+                                            &lt;option value="1983">1983&lt;/option>
+                                            &lt;option value="1982">1982&lt;/option>
+                                            &lt;option value="1981">1981&lt;/option>
+                                            &lt;option value="1980">1980&lt;/option>
+                                            &lt;option value="1979">1979&lt;/option>
+                                            &lt;option value="1978">1978&lt;/option>
+                                            &lt;option value="1977">1977&lt;/option>
+                                            &lt;option value="1976">1976&lt;/option>
+                                            &lt;option value="1975">1975&lt;/option>
+                                            &lt;option value="1974">1974&lt;/option>
+                                            &lt;option value="1973">1973&lt;/option>
+                                            &lt;option value="1972">1972&lt;/option>
+                                            &lt;option value="1971">1971&lt;/option>
+                                            &lt;option value="1970">1970&lt;/option>
+                                            &lt;option value="1969">1969&lt;/option>
+                                            &lt;option value="1968">1968&lt;/option>
+                                            &lt;option value="1967">1967&lt;/option>
+                                            &lt;option value="1966">1966&lt;/option>
+                                            &lt;option value="1965">1965&lt;/option>
+                                            &lt;option value="1964">1964&lt;/option>
+                                            &lt;option value="1963">1963&lt;/option>
+                                            &lt;option value="1962">1962&lt;/option>
+                                            &lt;option value="1961">1961&lt;/option>
+                                            &lt;option value="1960">1960&lt;/option>
+                                            &lt;option value="1959">1959&lt;/option>
+                                            &lt;option value="1958">1958&lt;/option>
+                                            &lt;option value="1957">1957&lt;/option>
+                                            &lt;option value="1956">1956&lt;/option>
+                                            &lt;option value="1955">1955&lt;/option>
+                                            &lt;option value="1954">1954&lt;/option>
+                                            &lt;option value="1953">1953&lt;/option>
+                                            &lt;option value="1952">1952&lt;/option>
+                                            &lt;option value="1951">1951&lt;/option>
+                                            &lt;option value="1950">1950&lt;/option>
+                                            &lt;option value="1949">1949&lt;/option>
+                                            &lt;option value="1948">1948&lt;/option>
+                                            &lt;option value="1947">1947&lt;/option>
+                                            &lt;option value="1946">1946&lt;/option>
+                                            &lt;option value="1945">1945&lt;/option>
+                                            &lt;option value="1944">1944&lt;/option>
+                                            &lt;option value="1943">1943&lt;/option>
+                                            &lt;option value="1942">1942&lt;/option>
+                                            &lt;option value="1941">1941&lt;/option>
+                                            &lt;option value="1940">1940&lt;/option>
+                                        &lt;/select>
+                                    &lt;/div>
+                                &lt;/div>
+                                &lt;div className="birthday-fb hide"> 
+                                    &lt;p className="user-info">{this.state.user.dateOfBirth}&lt;/p>    
+                                &lt;/div>
+                            &lt;/div>
+                            &lt;div className="buttons">
+                                &lt;Link to="/account-overview" className="cancel-button">CANCEL&lt;/Link>
+                                &lt;button onClick={()=>{this.editProfileHandle(this.refs.year.value,this.refs.month.value,this.refs.day.value,this.refs.gender.value,this.refs.email.value)}}className="btn-sm btn btn-success save-profile-button">SAVE PROFILE&lt;/button>
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+        &lt;/div>
+                )
+    }
+    
+}
+
+export default EditProfile;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

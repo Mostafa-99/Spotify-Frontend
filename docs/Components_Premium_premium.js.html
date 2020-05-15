@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/Premium/Premium.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/Premium/Premium.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
+import {Link} from 'react-router-dom';
+import './Premium.css';
+import benefit1 from '../../Images/benefit-1.png';
+import benefit2 from '../../Images/benefit-2.png';
+import benefit3 from '../../Images/benefit-3.png';
+import benefit4 from '../../Images/benefit-4.png';
+
+/**
+ * Show advantages of being premium user
+ * @extends Component
+ */
+export class Premium extends Component {
+    render() {
+        
+        {document.title ="Spotify"}
+        return (
+                &lt;div id="pp-main-div">
+
+                    &lt;div className="blue-part">
+                        &lt;div className="blue-container">
+                            &lt;h1 className="bigger-h1">Get Premium free for 1 month&lt;/h1>
+                            &lt;h2 className="bigger-h2">Just EGP 49.99/month after. Cancel anytime.&lt;/h2>
+                            &lt;Link to="/premium-code">
+                                &lt;button id="pp-first-button" className="first-button">GET PREMIUM&lt;/button>
+                            &lt;/Link>
+                            &lt;p>
+                            Terms and conditions apply.1 month free not available for users who have already tried Premium.
+                            &lt;/p>
+                        &lt;/div>
+                    &lt;/div>
+
+                    &lt;div className="second-part">
+                        &lt;h1 className="smaller-h1">Why go Premium?&lt;/h1>
+                        &lt;div className="images-div">
+                            &lt;div className="image-div">
+                                &lt;img className="benefit-image" src={benefit1} alt="Download music"/>
+                                &lt;h2 className="image-h2">Download music.&lt;/h2>
+                                Listen anywhere.
+                            &lt;/div>
+                            &lt;div className="image-div">
+                                &lt;img className="benefit-image" src={benefit2} alt="No ad interruptions"/>
+                                &lt;h2 className="image-h2">No ad interruptions.&lt;/h2>
+                                Enjoy nonstop music.
+                            &lt;/div>
+                            &lt;div className="image-div">
+                                &lt;img className="benefit-image" src={benefit3} alt="Play any song"/>
+                                &lt;h2 className="image-h2">Play any song.&lt;/h2>
+                                Even on mobile.
+                            &lt;/div>
+                            &lt;div className="image-div">
+                                &lt;img className="benefit-image" src={benefit4} alt="Unlimited skips"/>
+                                &lt;h2 className="image-h2">Unlimited skips.&lt;/h2>
+                                Just hit next.
+                            &lt;/div>
+                        &lt;/div>
+
+                    &lt;/div>
+
+                    &lt;div className="third-part">
+                        &lt;div className="box-div">
+                            &lt;div>
+                                &lt;h3>Spotify Premium&lt;/h3>
+                                &lt;h4>EGP 49.99 &lt;/h4>
+                                &lt;p> / month&lt;/p>
+                                &lt;p className="grey-p">1 month free&lt;/p>
+                                &lt;hr/>
+                                &lt;br/>
+                                &lt;ul>
+                                    &lt;li>Play any song&lt;/li>
+                                    &lt;li>Listen offline&lt;/li>
+                                    &lt;li>No ad interruptions&lt;/li>
+                                    &lt;li>Unlimited skips&lt;/li>
+                                    &lt;li>High audio quality&lt;/li>
+                                &lt;/ul>
+                                &lt;br/>
+                                &lt;hr/>
+                                &lt;Link to="/premium-code">
+                                    &lt;button id="pp-second-button" className="offer-button">GET PREMIUM&lt;/button>
+                                &lt;/Link>
+                            &lt;/div>
+                        &lt;/div>
+                        &lt;br/>
+                        &lt;br/>
+                        &lt;br/>
+                        &lt;p className="grey-p">Terms and conditions apply.&lt;/p>
+                    &lt;/div>
+
+                   
+
+                    &lt;/div>
+        )
+    }
+}
+
+export default Premium
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

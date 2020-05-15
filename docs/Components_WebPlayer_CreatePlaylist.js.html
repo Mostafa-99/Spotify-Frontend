@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/WebPlayer/CreatePlaylist.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/WebPlayer/CreatePlaylist.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React,{Component} from 'react';
+import './SideBar.css';
+import './CreatePlaylist.css'
+
+/**
+ * Create Playlist modal : opens to shows a modal to write in the name of the new playlist to send to back end 
+ * Not done yet 
+ * @extends Component
+ */
+
+class CreatePlaylist extends Component {
+
+    constructor() {
+            
+         super()
+        this.state = {
+            /**
+         *playlist created name
+          @type {string}
+         @memberof CreatePlaylist
+         */
+            playlistname:""
+           
+        }
+     
+        this.onChange = this.onChange.bind(this)
+        // this.handleclick= this.handleclick.bind(this)
+    }
+
+   
+
+       /**
+          * Controls that when user clicks create playlist button the Modal shows 
+   * @type {Handler}
+   * @memberof CreatePlaylist
+   */
+    onChange = (e) => this.setState({ playlistname: e.target.value });
+    //To be uncommented Next Phase 
+
+   /*  handleclick = () => {
+        axios.post('',this.state.playlistname)
+            .then(res => {
+                if(res.status===204){
+                    alert("An email has been sent");
+                }
+                else{
+                    alert("Please try again");
+                }
+            })
+            .catch(error => {
+                alert(error.response.data.message);
+            })
+    } */
+
+     
+    render() {
+        return ( &lt;div>
+
+     &lt;div className="modal" id="static-back-drop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    &lt;div className="modal-dialog mw-100 w-100" id="playlist-modal" role="document">
+    &lt;div className="modal-content" id="modal-content-create" >
+
+    &lt;div className="dialog" id="text-abv-modal">
+         &lt;button type="button"  data-dismiss="modal" id="modal-close-btn" aria-label="Close">
+          &lt;span aria-hidden="true">X &lt;/span>
+        &lt;/button>
+
+        &lt;div className="modal-header" id="playlist-modal-header">
+        &lt;h5 className="modal-title" id="modal-title">Create new playlist&lt;/h5>
+   
+     &lt;/div> 
+
+      &lt;/div>
+       
+      &lt;div className="modal-body" id="modal-body-create">
+           &lt;div id="modal-body-container">     
+          &lt;div id="modal-body-text">Playlist Name&lt;/div>
+                &lt;input type="text"  size="40" name="playlistname" id="playlist-name-input" placeholder="New Playlist" onChange={this.onChange} />
+        &lt;/div>
+      &lt;/div>
+
+      &lt;div className="modal-footer" id="playlist-modal-footer">
+
+           &lt;button  type="button" data-dismiss="modal" id="cancel-create-btn">cancel&lt;/button>
+           {/* &lt;button id="create-playlist-btn" onClick={this.handleclick} >Create &lt;/button> */}
+           &lt;button id="create-playlist-btn" disabled>Create &lt;/button>
+      &lt;/div>
+
+      
+  &lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+              )
+    }
+}
+export default CreatePlaylist</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

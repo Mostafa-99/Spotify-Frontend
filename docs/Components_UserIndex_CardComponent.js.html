@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/UserIndex/CardComponent.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/UserIndex/CardComponent.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {Component} from "react"
+import "./UserIndex.css"
+import axios from 'axios'
+import { Link } from 'react-router-dom';
+import {ConfigContext} from '../../Context/ConfigContext'
+
+
+/**
+ * Login index page Cards components class
+ * @extends Component
+ */
+class CardComponent extends Component {
+    /**Gets the baseURL from configrations context of the user
+   * @memberof CardComponent
+   */
+    static contextType=ConfigContext;
+    constructor() {
+        super()
+        this.state = {
+       /**Array of Albums of the artist
+        @memberof Playlists
+       * 
+       */
+            playlists:[],
+
+        }
+    }
+ //Good luck yaall   
+// limit get six Playlists 
+// request used here is get/playlist/top
+// URL?_limit=6,-popularity
+// to get 6  most popular descendingly  
+// Remove Comments when integrating 
+  /*componentDidMount() {
+            axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/track?_limit=6 " )
+            .then(res => {
+                     this.setState({
+                    playlists: res.data.map( playlist => ({
+                        id:playlist.id,
+                        title:playlist.name,
+                        artist:playlist.owner[0].name,
+                        imageUrl:playlist.images,
+                        href:playlist.tracks.href
+                    }))
+                })
+            }) */
+ 
+            /**
+             * Sends request to the backend to  get users Most popular PLaylists 
+             * @type {Function}
+             * @memberof CardComponent
+              */
+          componentDidMount() {
+                const AuthStr=localStorage.getItem('token');
+                axios.get(this.context.baseURL+"/playlists/top",
+                {
+                    headers:{'authorization':"Bearer "+AuthStr},
+                    query:{
+                        limit:6,
+                        sort:'-popularity&amp;-createdAt'
+                    }
+                    }
+                 )
+                .then(res => {
+                  if(res.status===200)
+                  { 
+                         this.setState({
+                            playlists: res.data.data.playlist.map( playlist => ({
+                            
+                                /**
+                                * ID of the playlist
+                                 @memberof CardComponent
+                                 @type {String}
+                                *
+                                */
+                            id:playlist.id,
+                              /**
+                                * name  of the playlist
+                                 @memberof CardComponent
+                                * 
+                                 @type {String}
+                                */
+                            title:playlist.name,
+                              /**
+                                * Name of the singer/owner
+                                 @memberof CardComponent
+                                 @type {String}
+                                */
+                            artist:playlist.owner[0].name,
+                              /**
+                                * Picture of the playlist cover
+                                 @memberof CardComponent
+                                @type {link}
+                                */
+                            imageUrl:playlist.images,
+                              /**
+                                * Link to tracks of my playlist
+                                 @memberof CardComponent
+                                 @type {Route}
+                                * 
+                                */
+                            href:playlist.tracks.href
+                        }))
+                    }) }          
+                    else if (res.status===401)
+                    {
+                        localStorage.removeItem("loginType");
+                        localStorage.removeItem("isLoggedIn");
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("userId");   
+                    }
+                    else{
+                        alert("Error.");
+                    }
+                }).catch(res=>{
+                    console.log(res);
+                } )
+              
+    }
+
+    render() {
+        return (
+            &lt;div id="lower-section">
+             &lt;section>
+                 &lt;div className="container" id="low-sec-container">
+                     &lt;div className="row" id="row-lower">
+                     &lt;h2 className="h1-spotify" id="row-lower-font ">Looking for music?&lt;/h2>
+                     &lt;p className="lead" id="user-index-lead-1">Start listening to the best new releases.&lt;/p>
+                        &lt;Link to="/home">
+                       &lt;button id="launch-button">Launch Web Player&lt;/button>
+                         &lt;/Link>
+                     &lt;/div>
+
+                     &lt;div className="row" id="userindexrow3">
+                     &lt;div className="items-wrapper">
+
+            {this.state.playlists.map(playlist => (
+  
+                                        &lt;div className="item-wrapper" id={playlist.id}>
+                                            &lt;div className="index-img-background" id={playlist.id} >
+                                                &lt;img src={playlist.imageUrl} alt="Playlist cover pictutre here">&lt;/img>
+                                                &lt;div className="img-text-wrapper" id={playlist.id}>               
+                                                    &lt;div className="subtitle" id={playlist.id} >
+                                                        &lt;div className="playlist-info">
+                                                            &lt;div id="title"> {playlist.title}&lt;/div>
+                                                            &lt;div id="artist"> {playlist.artist}&lt;/div>
+                                                            &lt;/div>
+                                                            
+                                                           {/* This should be a link Link here to {playlist.href
+                                                            &lt;link to="/">
+                                                            &lt;button id="button-outline">Play  Now&lt;/button> 
+                                                            &lt;/link>    
+                                                                     */}
+                                                                     &lt;a href="google.com">
+                                                            &lt;button id="button-outline">Play  Now&lt;/button>&lt;/a> 
+                                                    &lt;/div>
+                                                &lt;/div> 
+                                            &lt;/div>
+                                        &lt;/div>      ))}
+
+                
+                &lt;/div>
+                 &lt;/div>
+                 &lt;/div>
+                &lt;/section>
+              &lt;/div>
+              )
+    }
+}
+
+export default CardComponent
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -2,8 +2,14 @@ import React from "react"
 import './Articles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-import SideBar from '../../SideBar/SideBar'
-function CanNotActivatePremiumTrial(){
+import SideBar from '../../SideBar/SideBar';
+import  { Component } from "react";
+
+/** Class of Can Not Activate Premium Trial. It is one of the articles in account help
+ * @extends Component
+ */
+class CanNotActivatePremiumTrial extends Component {
+    render() {
     {document.title ="Can't activate Premium trial - Spotify"}
     return(
     <div id="body-overrides">
@@ -27,5 +33,5 @@ function CanNotActivatePremiumTrial(){
                 </div>
         </div>  
     )
-}
+}}
 export default CanNotActivatePremiumTrial

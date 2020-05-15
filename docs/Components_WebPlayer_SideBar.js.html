@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/WebPlayer/SideBar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/WebPlayer/SideBar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import {Link} from 'react-router-dom';
+import './SideBar.css'
+import spotify_white_logo from '../../Images/spotify_logo_white.png'
+import CreatePlaylist from './CreatePlaylist'
+import MyPlaylists from './MyPlaylists'
+import  { Component } from "react";
+
+/** Class of SideBar in WebPlayer componenets
+ * @extends Component
+ */
+class SideBar extends Component {
+    render()  {
+    /**Logged in or not
+     * @memberof SideBar
+     * @type {boolean}
+     */
+    const logInOrNot = localStorage.getItem("isLoggedIn");
+    return(
+    &lt;div>
+        &lt;head>
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1">&lt;/meta>
+            &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">&lt;/link>
+            &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
+            &lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">&lt;/script>
+            &lt;script src='https://kit.fontawesome.com/a076d05399.js'>&lt;/script>
+            &lt;meta name="viewport" content="width=900, initial-scale=1, shrink-to-fit=no">&lt;/meta>
+        &lt;/head>
+
+        &lt;CreatePlaylist/>
+        &lt;nav id='webplayer-sidebar' className='webplayer-sidebar'>
+            &lt;div className="container webplayer-sidebar-container">
+                &lt;div className="row-6">
+                    &lt;div className="col-2 sidebar-section">
+                        &lt;Link to="/home">&lt;img id='sidebar-logo' className="sidebar-logo" src={spotify_white_logo} alt="Spotify Logo White"/>&lt;/Link>
+                        &lt;ul className='sidebar-list'>
+                            &lt;Link to="/home" className='text-decoration-none'>&lt;li className='sidebar-list-item sidebar-list-item-home'>&lt;span className="glyphicon glyphicon-home">&lt;/span>&lt;span className='list-item-text'>Home&lt;/span>&lt;/li>&lt;/Link>
+                            &lt;div to="/search"className='text-decoration-none'>&lt;li className='sidebar-list-item sidebar-list-item-search'>&lt;span className="glyphicon glyphicon-search">&lt;/span>&lt;span className='list-item-text'>Search&lt;/span>&lt;/li>&lt;/div>
+                            &lt;div to=""className='text-decoration-none'>&lt;li className='sidebar-list-item sidebar-list-item-library'>&lt;svg viewBox="0 0 512 512" width="20" height="20" xmlns="http://www.w3.org/2000/svg">&lt;path d="M291.301 81.778l166.349 373.587-19.301 8.635-166.349-373.587zM64 463.746v-384h21.334v384h-21.334zM192 463.746v-384h21.334v384h-21.334z" fill="currentColor" >&lt;/path>&lt;/svg>&lt;span className='list-item-text mt-auto ml-0 pl-3'>Your Library&lt;/span>&lt;/li>&lt;/div>
+                        &lt;/ul>
+                    &lt;/div>
+                &lt;/div>
+                {logInOrNot==="true" ? (
+                    &lt;div>
+                &lt;div className="row-3 ">
+                    &lt;div className="col-2 sidebar-section">
+                        &lt;div id='sidebar-list-header' className='sidebar-list-item-header'>PLAYLISTS&lt;/div>
+                        &lt;ul className='sidebar-list'>
+                            &lt;div id="create-modal">
+                  &lt;button type="button" id="create-playlist" data-toggle="modal" data-target="#static-back-drop">
+                   &lt;li className='sidebar-list-item '>
+                   &lt;i className='fas fa-plus-square' >&lt;/i>
+                   &lt;span className='list-item-text'>Create Playlist&lt;/span>&lt;/li>
+                &lt;/button> 
+                            &lt;/div>
+                            &lt;div to="/search"className='text-decoration-none'>&lt;li className='sidebar-list-item '>&lt;span className="glyphicon glyphicon-heart-empty">&lt;/span >&lt;span className='list-item-text'>Liked Songs&lt;/span>&lt;/li>&lt;/div>
+                        &lt;/ul>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div className="row-3 ">
+                    &lt;div className="col-2 sidebar-section sidebar-list-item ">
+                        &lt;ul className='sidebar-list'>
+                        &lt;hr class="Rootlist__divider" id="horizontal-divider"/>
+                             &lt;MyPlaylists/> 
+                           
+                        &lt;/ul>
+                    &lt;/div>
+                &lt;/div>
+                &lt;/div>
+                ):(&lt;div> &lt;/div>)}
+                
+            &lt;/div>
+        &lt;/nav>    
+    &lt;/div>     
+    )
+}}
+export default SideBar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

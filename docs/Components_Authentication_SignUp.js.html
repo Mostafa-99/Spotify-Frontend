@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/Authentication/SignUp.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/Authentication/SignUp.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import './SignUp.css'
+import spotify_black_logo from '../../Images/spotify_logo_black.png'
+import {ConfigContext} from '../../Context/ConfigContext'
+import axios from 'axios'
+import {Link,Redirect} from 'react-router-dom'
+
+/**
+ * Sign up Page Component
+ * @extends Component
+ */
+class SignUp extends Component {
+    static contextType=ConfigContext;
+    constructor() {
+        super()
+        
+    this.state ={
+        email:'',
+        password:'',
+        username:'',
+        gender:'',
+        day:'',
+        month:'',
+        year:'',
+        emailrecheck:'',
+        emptypass:false,
+        emptyemail:false,
+        emptyname:false,
+        dayerror:false,
+        montherror:false,
+        yearerror:false,
+        gendererror:false,
+        emptyconfirmemail:false,
+        emailnotequal:false,
+        status: 'not connected',
+        invalid:false
+    }
+        this.inputChangeHandler = this.inputChangeHandler.bind(this);
+
+    }
+
+     /**
+     * Function handling sign up request with Facebook
+     * 
+     */
+    fbSignUpHandler = event=> {
+        event.preventDefault();
+        
+        window.FB.login(function(response) {
+            if (response.status === 'connected') {
+                        let fbtoken=response.authResponse.accessToken;
+                        let fbuserID=response.authResponse.userID;
+                            axios.post(this.context.baseURL+'/loginWithFacebook',
+                        {
+                        "access_token":fbtoken,
+                        "facebook id":fbuserID
+                        }
+                        )   
+                        .then(res => {
+                            if(res.status===200) // Successful
+                            {
+                                if(res.data.success===true || res.data.success==="true")
+                                {
+                                    localStorage.setItem("isLoggedIn",'true');
+                                    localStorage.setItem("token",res.data.token);
+                                    localStorage.setItem("loginType", "fb");
+                                    localStorage.setItem("userID", response.authResponse.userID);
+                                    this.setState({status: 'connected'});
+                                   // window.location.reload(false);
+                                }
+                            }
+                            else // Unsuccessful
+                            {  
+                                alert(res.data.message)
+                            }   
+                            }).catch(err =>{
+
+                                alert(err)
+                            })
+                //window.location.reload(false);
+                
+              } 
+          }.bind(this), {scope: 'public_profile,email'});
+       
+    }
+
+    /**
+     * Function to check the Email textbox has valid email format
+     * @param {string} Email - input email.
+     */
+    validateEmail(email) {
+        if(this.state.emptyemail===true)
+            this.setState({emptyemail: false});
+        if(this.state.emailnotequal===true)
+            this.setState({emailnotequal: false});
+        this.setState({email: ""});    
+        //return email &amp;&amp; email.match(/^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+        if(email &amp;&amp; email.match(/^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+        return true;
+        else
+        return false;
+    }
+
+    /**
+     * Function to check the Password textbox has valid password criteria
+     * @param {string} Password - input password.
+     */
+    validatePassword(psw) {
+        if(this.state.emptypass===true)
+         this.setState({emptypass: false});
+         this.setState({password: ""});    
+         if(psw.length>=8)
+         return true;
+         else
+         return false;
+        //return psw &amp;&amp; psw.length >= 8
+    }
+
+    /**
+     * Function to check the gender checkbox is checked and valid
+     * @param {boolean} Gender - user gender.
+     */
+    validateGender(gender) {
+        if(this.state.gendererror===true)
+         this.setState({gendererror: false});
+        this.setState({gender: ""});    
+        // 0 = male
+        // 1 = female
+        // null/undefined = otherwise
+        //  return gender === 0
+        //      || gender === 1
+        //     || gender === null
+        //     || gender === undefined
+        //     || gender === "";
+        if(gender===0 || gender===1)
+        return true;
+        else
+        return false;
+        
+    }
+
+     /**
+     * Function to check the Name textbox has valid name format
+     * @param {string} Name - user name.
+     */
+    validateUsername(name) {
+        if(this.state.emptyname===true)
+         this.setState({emptyname: false});
+         this.setState({username: ""}); 
+        return name &amp;&amp; name.match(/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/);
+           
+    }
+
+    /**
+     * Function to check the Confrim Email textbox has valid email format and matches Email.
+     * @param {string} Email - user confirm email.
+     */
+    validateEmailAgain(email_again) {
+        if(this.state.emptyconfirmemail===true)
+            this.setState({emptyconfirmemail: false});
+        if(this.state.emailnotequal===true)
+            this.setState({emailnotequal: false});
+        this.setState({emailrecheck: ""});    
+        return email_again &amp;&amp; email_again.match(/^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+    }
+
+    /**
+     * Function handling Sign up request with Email and Password
+     * 
+     */
+    signUpHandler = event=> {
+    
+        event.preventDefault();
+        let sendDate=this.state.year+"-"+this.state.month+"-"+this.state.day;
+        if(this.state.email==="" &amp;&amp; this.state.emptyemail===false)
+            this.setState({emptyemail: true});
+        if(this.state.password==="" &amp;&amp; this.state.emptypass===false)
+            this.setState({emptypass: true});
+        if(this.state.emailrecheck==="" &amp;&amp; this.state.emptyconfirmemail===false)
+            this.setState({emptyconfirmemail: true});
+        if(this.state.email!==this.state.emailrecheck &amp;&amp; this.state.emailnotequal===false)
+            this.setState({emailnotequal: true});
+        if(this.state.username==="" &amp;&amp; this.state.emptyname===false)
+            this.setState({emptyname: true});
+       
+        if((this.state.day==="" || parseInt(this.state.day, 10)&lt;=0 || parseInt(this.state.day, 10)>31) &amp;&amp; this.state.dayerror===false)
+            this.setState({dayerror: true});
+        if((this.state.month==="" || parseInt(this.state.month, 10)&lt;=0 || parseInt(this.state.month, 10)>12) &amp;&amp; this.state.montherror===false)
+            this.setState({montherror: true});
+        if((this.state.year==="" || parseInt(this.state.year, 10)&lt;=1949 || parseInt(this.state.year, 10)>2010) &amp;&amp; this.state.yearerror===false)
+            this.setState({yearerror: true});
+        if(this.state.gender==="" &amp;&amp; this.state.gendererror===false)
+            this.setState({gendererror: true});
+
+        if(this.state.email!=='' &amp;&amp; this.state.password!=='' &amp;&amp; this.state.gender!=='' &amp;&amp; this.state.username!=='' &amp;&amp; this.state.day!=='' &amp;&amp; this.state.month!=='' &amp;&amp; this.state.year!=='')
+        {
+
+            axios.post(this.context.baseURL+'/signUp',
+            {   
+                "email":this.state.email,
+                "password":this.state.password,
+                "name":this.state.username,
+                "gender":this.state.gender,
+                "dateOfBirth":sendDate,   
+            })   
+            .then(res => {
+                if(res.status===200) // Successful
+                {
+                    if(res.data.success===true || res.data.success==="true")
+                    {
+                        localStorage.setItem("isLoggedIn",'true');
+                        localStorage.setItem("token",res.data.token);
+                        localStorage.setItem("loginType", "email");
+
+                        this.setState({status: 'connected'});
+                        //window.location.reload(false);
+                    }
+                }
+                else // Unsuccessful
+                {
+                    this.setState({invalid: true});
+                    if(res.status===400)
+                    {
+                    if(this.state.status!=="invalid")
+                        this.setState({status: 'invalid'});
+                    }
+                    else
+                    alert(res.data.message)
+                    
+                }
+               }).catch(err => {
+                if(err.response.status===400 || err.response.status===401)
+                {
+                    if(this.state.status!=="invalid")
+                        this.setState({status: 'invalid'});
+                    this.setState({invalid: true});
+                }
+                else
+                alert(err)
+
+               })
+        }
+    }
+
+    /**
+     * Function handling input changes in inputs each with it's valid input type handler to page's state
+     * @param {event} Event - input onchange event.
+     */
+    inputChangeHandler(evt) {
+        if (!evt || !evt.target) return;
+
+        const elem = evt.target;
+        if (!elem.id) return;
+        const type = elem.getAttribute("data-type");
+        let value = elem.value;
+
+        if (type === "gender") {
+            if (value === "male") value = 0;
+            if (value === "female") value = 1;
+        }
+        const is_valid = this.validateValue(value, type);
+        if(!is_valid) return;
+
+        
+        if(type==="psw")
+        {
+            this.setState({password: value});
+        }
+
+        if(elem.id==="sign-up-form-username")
+        {
+            this.setState({username: value});
+        }
+
+        if(type==="email")
+        {
+            this.setState({email: value});
+        }
+
+        if(type==="email_again")
+        {
+            this.setState({emailrecheck: value});
+        }
+
+        if(elem.name==="gender")
+        {
+            if (value===1)
+            {
+                this.setState({gender:'Female'});
+            }
+            else
+            {
+                this.setState({gender:'Male'});
+            }
+        }
+
+        if(elem.id==="sign-up-form-day")
+        {
+            this.setState({day:value});
+            if(this.state.dayerror===true)
+                this.setState({dayerror: false});
+        }
+
+        if(elem.id==="sign-up-form-month")
+        {
+            this.setState({month:value});
+            if(this.state.montherror===true)
+                this.setState({montherror: false});
+        }
+
+        if(elem.id==="sign-up-form-year")
+        {
+            this.setState({year:value});
+            if(this.state.yearerror===true)
+                this.setState({yearerror: false});
+        }
+
+    }
+
+    /**
+     * Function to choose specific validating function depending on input type.
+     * @param {string} Value - input value.
+     * @param {string} Type - input type.
+     */
+    validateValue(val, type) {
+        switch (type) {
+            case "email":
+                return this.validateEmail(val);
+            case "email_again":
+                return this.validateEmailAgain(val);
+            case "psw":
+                return this.validatePassword(val);
+            case "gender":
+                return this.validateGender(val);
+            case "username":
+                return this.validateUsername(val);
+            default:
+                return true;
+        }
+    }
+
+     /**
+     * SignUp Component Mount state Intialization
+     * 
+     */
+    componentDidMount =()=>{
+        
+        this.setState(()=> ({}))
+        
+          let show=localStorage.getItem("isLoggedIn");
+          if(show==="true")
+          this.setState({status:"connected"})
+            else
+          this.setState({status:"not connected"})
+    }
+
+    render(){
+    return (
+        &lt;div id="my-sign-up">
+            {this.state.status==="connected" ?
+            &lt;div>
+                &lt;Redirect to="/"/>
+            &lt;/div>
+            :
+            &lt;div>
+                &lt;img id="logo" src={spotify_black_logo} alt=""/>
+                &lt;hr>&lt;/hr>
+         &lt;div className="center-box">
+           &lt;form className="text-center" action="">
+                &lt;button type="button" id="fb-sign-up" className="my-spotify-button" onClick={this.fbSignUpHandler}>SIGN UP WITH FACEBOOK&lt;/button>
+                &lt;div className="col-xs-12">
+                    &lt;div className="divider">
+                    &lt;strong className="divider-title ng-binding">or&lt;/strong>
+                    &lt;/div>
+                &lt;/div>
+            {this.state.invalid===true?
+            &lt;div id="invalid-message">
+            Email already taken.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            &lt;h6>Sign up with your email address&lt;/h6>
+            &lt;input type="email" data-type="email" onChange={this.inputChangeHandler} id="sign-up-form-email" className="form-control mb-3" placeholder="Email" data-err="Enter Correct Email" required>&lt;/input>
+            {this.state.emptyemail===true?
+            &lt;div id="empty-email" className="error-message">
+            Please enter your email address.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            &lt;input type="email" data-type="email_again" onChange={this.inputChangeHandler} id="sign-up-form-email-confirm" className="form-control mb-3" placeholder="Confirm email" data-err="Enter Correct Confirm Email" required>&lt;/input>
+            {this.state.emptyconfirmemail===true?
+            &lt;div id="empty-confirm-email" className="error-message">
+            Please enter your email address.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            {this.state.emailnotequal===true?
+            &lt;div id="match-confirm-email" className="error-message">
+            Please confirm matching your email addresses.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            &lt;input type="password" data-type="psw" onChange={this.inputChangeHandler} id="sign-up-form-password" className="form-control mb-3" placeholder="Password" maxLength="30" minLength="8" data-err="Enter Correct Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>&lt;/input>
+            {this.state.emptypass===true?
+            &lt;div id="empty-pass" className="error-message">
+            Please enter a valid password (Minimum Length 8).
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            &lt;input  type="text" data-type="username" onChange={this.inputChangeHandler} id="sign-up-form-username" className="form-control mb-3" placeholder="What should we call you?" data-err="Enter Correct Username" required/>
+            {this.state.emptyname===true?
+            &lt;div id="empty-name" className="error-message">
+                What should we call you?
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            
+            &lt;h5>Date of Birth &lt;/h5>
+            &lt;div className="row">
+                &lt;input type="number" id="sign-up-form-day" name="signup_form[dob_day]" onChange={this.inputChangeHandler}  required="required" max="31" maxLength="2" min="1" pattern="[0-9]*" placeholder="Day" className="dob " data-err="Please enter a valid day of the month">&lt;/input>
+                &lt;select id="sign-up-form-month"  name="signup_form[dob_month]"  onChange={this.inputChangeHandler} required data-err="Please enter your birth month.">
+                    &lt;option value="" >Month&lt;/option>
+                    &lt;option value="01">January&lt;/option>
+                    &lt;option value="02">February&lt;/option>
+                    &lt;option value="03">March&lt;/option>
+                    &lt;option value="04">April&lt;/option>
+                    &lt;option value="05">May&lt;/option>
+                    &lt;option value="06">June&lt;/option>
+                    &lt;option value="07">July&lt;/option>
+                    &lt;option value="08">August&lt;/option>
+                    &lt;option value="09">September&lt;/option>
+                    &lt;option value="10">October&lt;/option>
+                    &lt;option value="11">November&lt;/option>
+                    &lt;option value="12">December&lt;/option>
+                &lt;/select>
+                &lt;input type="number" id="sign-up-form-year" name="signup_form[dob_year]" onChange={this.inputChangeHandler} required max="2010" maxLength="4" min="1950" pattern="[0-9]*" placeholder="Year" className="dob" data-err="Please enter a valid year." data-msg-number="Please enter a valid year" data-msg-min="Please enter a valid year." data-msg-max="Please enter a valid year. " data-msg-maxlength="Please enter a valid year. "/>
+            &lt;/div>
+
+            &lt;br>&lt;/br>
+            {this.state.dayerror===true?
+            &lt;div id="day-error" className="error-message">
+                Please enter a valid day of the month.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            {this.state.montherror===true?
+            &lt;div id="month-error" className="error-message">
+                Please enter your birth month.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            {this.state.yearerror===true?
+            &lt;div id="year-error" className="error-message">
+                Please enter a valid year.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+  
+            &lt;label className="radio-inline">
+            &lt;input type="radio" name="gender" data-type="gender" onChange={this.inputChangeHandler} id="gender-male" value="male" required/>Male&lt;/label>  
+            &lt;label className="radio-inline">
+            &lt;input type="radio" name="gender" data-type="gender" onChange={this.inputChangeHandler} id="gender-female" value="female" required />Female&lt;/label>
+
+            {this.state.gendererror===true?
+            &lt;div id="gender-error" className="error-message">
+                Please indicate your gender.
+            &lt;/div>
+            :
+            &lt;div>
+            &lt;/div>
+            }
+
+            &lt;div className="custom-control custom-checkbox">
+                &lt;input type="checkbox" className="custom-control-input" id="sign-up-form-news"/>
+                &lt;label className="custom-control-label" htmlFor="sign-up-form-news">&lt;p>Share my registration data with Spotify for marketing purposes.&lt;/p>&lt;/label>
+            &lt;/div>
+            &lt;br>&lt;/br>
+
+            &lt;p> By clicking on Sign up, you agree to Spotify's &lt;a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank ">Terms and Conditions&lt;/a>.&lt;/p>
+            &lt;p> To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's
+                &lt;a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank "> Privacy Policy&lt;/a>.&lt;/p>
+            &lt;button className="my-spotify-button" id="sign-up" type="button" onClick={this.signUpHandler}>SIGN UP&lt;/button>
+           
+            &lt;h6>Already have an account? &lt;Link to="/login">Log in&lt;/Link>.&lt;/h6>
+            &lt;br>&lt;/br>
+            &lt;/form>   
+            &lt;/div>
+            &lt;/div>
+            } 
+        &lt;/div>
+        
+        
+        );
+    }
+    
+    }
+    
+    export default SignUp;
+        
+  </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

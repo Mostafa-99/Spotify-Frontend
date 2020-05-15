@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/WebPlayer/Bodies/Home/Home.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/WebPlayer/Bodies/Home/Home.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import HomeNavBar from './HomeNavBar'
+import SideBar from '../../SideBar'
+import '../Bodies.css';
+import '../../WebplayerHome.css'
+import axios from 'axios'
+import {Link} from 'react-router-dom';
+import  './PlaylistContextMenu.css';
+import { theme, animation } from 'react-contexify';
+import { Menu, Item} from 'react-contexify';
+import { MenuProvider } from 'react-contexify';
+import 'react-contexify/dist/ReactContexify.min.css';
+import { ConfigContext } from '../../../../Context/ConfigContext'
+/** Class of home in webplayer.
+ * @extends Component
+ */
+class Home extends Component {
+    /**Gets the baseURL from configrations context of the user
+    * @memberof Home
+    */
+     static contextType=ConfigContext;
+     constructor(){
+         super()
+         this.state = {
+             /** Array of recently played playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             recentlyPlayed:[],
+             /** Array of popular playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             popularPlayLists:[],
+             /** Array of most recent playlists
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             mostRecentPlayLists:[],
+             /** Array of popular albums
+              * @memberof Home
+              * @type {Array&lt;albums>}
+              */
+             popularAlbums:[],
+             /** Array of most recent albums
+              * @memberof Home
+              * @type {Array&lt;albums>}
+              */
+             mostRecentAlbums:[],
+             /** Array of catagories that will show on home page
+              * @memberof Home
+              * @type {Array&lt;categories>}
+              */
+             catagories:[],
+             /** Array of playlists of first category
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             firstCategory:[],
+              /** Array of playlists of second category
+              * @memberof Home
+              * @type {Array&lt;playlists>}
+              */
+             secondCategory:[],
+             workOut:[],
+             madeForYou:[],
+              /** Array of artists
+              * @memberof Home
+              * @type {Array&lt;artists>}
+              */
+             artists:[],
+              /** object that stores the id of the selected playlist, album or artist
+              * @memberof Home
+              * @type {{id: string}}
+              */
+             nowPlaying:{
+                 id:-1
+             },       
+         }
+         this.togglePlayPause=this.togglePlayPause.bind(this)
+ 
+     }
+     /**
+      * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
+      */
+    componentDidMount() {
+
+        window.addEventListener('contextmenu',(event) =>{
+            event.preventDefault() })
+
+        //browse catagories
+        axios.get(this.context.baseURL+"/browse/categories", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 2
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    this.setState({
+                        catagories: res.data.data.categories.map( category => ({
+                            id: category._id,
+                            name:category.name,
+                        })
+                        )
+                    })
+                    axios.get(this.context.baseURL+"/browse/categories/"+this.state.catagories[0].id+"/playlists", {
+                        headers: {
+                            'authorization': "Bearer "+localStorage.getItem("token"),
+                            //category id as path??
+                        },
+                        params: {
+                            limit: 9
+                        }
+                    })
+                    .then(res => {
+                        if(res.status === 200)
+                        {
+                            this.setState({
+                                firstCategory: res.data.data.playlists.map( playList => ({
+                                    id:playList._id,
+                                    title:playList.name,
+                                    description: playList.description,
+                                    imageUrl:playList.images[0]
+                                })),
+                            })
+
+                        }
+                        else if(res.status === 401)
+                        {
+                            localStorage.removeItem("loginType");
+                            localStorage.removeItem("isLoggedIn");
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userID");
+                        }
+                    }) 
+                    axios.get(this.context.baseURL+"/browse/categories/"+this.state.catagories[1].id+"/playlists", {
+                        headers: {
+                            'authorization': "Bearer "+localStorage.getItem("token"),
+                            //category id as path??
+                        },
+                        params: {
+                            limit: 9
+                        }
+                    })
+                    .then(res => {
+                        if(res.status === 200)
+                        {
+                            this.setState({
+                                secondCategory: res.data.data.playlists.map( playList => ({
+                                    id:playList._id,
+                                    title:playList.name,
+                                    description: playList.description,
+                                    imageUrl:playList.images[0]
+                                }))
+                            })
+                        }
+                        else if(res.status === 401)
+                        {
+                            localStorage.removeItem("loginType");
+                            localStorage.removeItem("isLoggedIn");
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userID");
+                        }
+                    }) 
+                }
+                else if(res.data.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            })
+
+         //artists   
+         axios.get(this.context.baseURL+"/artists", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            }
+            /*params: {
+                limit: 9 //3wzen n3rf btrg3 kam artist
+            }*/
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    this.setState({
+                        artists: res.data.data.map( artist => ({
+                            id:artist._id,
+                            name:artist.name,
+                            imageUrl:artist.images[0],
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            })
+
+        //recently played
+        axios.get(this.context.baseURL+"/me/player/recentlyPlayed", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    this.setState({
+                        recentlyPlayed: res.data.data.items.map( playList => ({
+                            id:playList._id,
+                            title:playList.context.name,
+                            imageUrl:playList.context.image,
+                        })
+                        )
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            })
+
+        //popular albums
+        axios.get(this.context.baseURL+"/albums/top",{
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9,
+                sort: "-popularity"
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    this.setState({
+                        popularAlbums: res.data.data.albums.map( album => ({
+                            id:album._id,
+                            title:album.name,
+                            imageUrl:album.image,
+                            artist:album.artists[0].name
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            }) 
+
+        //most recent albums
+        axios.get(this.context.baseURL+"/albums/top",{
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9,
+                sort: "-releaseDate"
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    this.setState({
+                        mostRecentAlbums: res.data.data.albums.map( album => ({
+                            id:album._id,
+                            title:album.name,
+                            imageUrl:album.image,
+                            artist:album.artists[0].name
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            }) 
+
+        //popular playlists
+        axios.get(this.context.baseURL+"/playlists/top", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9,
+                sort: "-popularity"
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    this.setState({
+                        popularPlayLists: res.data.data.playlist.map( playList => ({
+                            id:playList._id,
+                            title:playList.name,
+                            imageUrl:playList.images[0],
+                            description: playList.description
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+
+                }
+            })
+
+        //most recent playlists
+        axios.get(this.context.baseURL+"/playlists/top", {
+            headers: {
+                'authorization': "Bearer "+localStorage.getItem("token"),
+            },
+            params: {
+                limit: 9,
+                sort: "-releaseDate"
+            }
+        })
+            .then(res => {
+                if(res.status === 200)
+                {
+                    this.setState({
+                        mostRecentPlayLists: res.data.data.playlist.map( playList => ({
+                            id:playList._id,
+                            title:playList.name,
+                            imageUrl:playList.images[0],
+                            description: playList.description
+                        }))
+                    })
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+            }) 
+
+        /*axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")
+            .then(res => {
+                this.setState({
+                    madeForYou: res.data.map( playList => ({
+                        id: playList.id,
+                        imageUrl:playList.images,
+                        title:playList.name,
+                        imageUrl:playList.images,
+                        description: playList.description
+                    }))
+                })
+            })        
+
+        axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")
+            .then(res => {
+                this.setState({
+                    madeForYou: res.data.map( playList => ({
+                        id: playList.id,
+                        imageUrl:playList.images,
+                        title:playList.name,
+                        description: playList.description
+                    }))
+                })
+            })            
+        axios.get("http://www.mocky.io/v2/5e749724300000d431a5f4c6")
+            .then(res => {
+                this.setState({
+                    popularPlayLists: res.data.map( playList => ({
+                        id:playList.id,
+                        title:playList.name,
+                        imageUrl:playList.images,
+                        description: playList.description
+                    }))
+                })
+            })
+            axios.get("http://www.mocky.io/v2/5e749c66300000d431a5f4f4")
+            .then(res => {
+                this.setState({
+                    workOut: res.data.map( playList => ({
+                        id:playList.id,
+                        title:playList.name,
+                        imageUrl:playList.images,
+                        description: playList.description
+                    }))
+                })
+            })
+            axios.get("http://www.mocky.io/v2/5e74bc56300000d331a5f62f")
+            .then(res => {
+                this.setState({
+                    popularAlbums: res.data.map( album => ({
+                        id:album.id,
+                        title:album.name,
+                        imageUrl:album.images
+                    }))
+                })
+            })
+            axios.get("http://www.mocky.io/v2/5e7f9ddb2f00005a4cbac4bb")
+            .then(res => {
+                this.setState({
+                    artists: res.data.map( artist => ({
+                        id:artist.id,
+                        name:artist.name,
+                        imageUrl:artist.images,
+                        type:artist.type
+                    }))
+                })
+            }) */                             
+    }
+        /**
+         * @property {Function} togglePlayPause Function that handle the play and pause buttons in home page cards
+         * @param {string} sid the card id
+         */
+        togglePlayPause(sid) {
+            if(this.state.nowPlaying.id===-1)
+            {
+                const cardButtons=document.getElementById(sid);
+                const playButton = cardButtons.querySelector('.play-btn');
+                const pauseButton = cardButtons.querySelector('.pause-btn');
+                playButton.classList.toggle('active-play');
+                pauseButton.classList.toggle('active-pause');
+                this.setState({nowPlaying: {id: sid}})
+            }
+            else if(this.state.nowPlaying.id===sid)
+            {
+                const cardButtons=document.getElementById(sid);
+                const playButton = cardButtons.querySelector('.play-btn');
+                const pauseButton = cardButtons.querySelector('.pause-btn');
+                playButton.classList.toggle('active-play');
+                pauseButton.classList.toggle('active-pause');
+                this.setState({nowPlaying: {id: -1}})
+            }
+            else
+            {
+                const nowPlayingSong=document.getElementById(this.state.nowPlaying.id);
+                const playButtonPrev = nowPlayingSong.querySelector('.play-btn');
+                const pauseButtonPrev = nowPlayingSong.querySelector('.pause-btn');
+                playButtonPrev.classList.toggle('active-play');
+                pauseButtonPrev.classList.toggle('active-pause');
+                const cardButtons=document.getElementById(sid);
+                const playButton = cardButtons.querySelector('.play-btn');
+                const pauseButton = cardButtons.querySelector('.pause-btn');
+                playButton.classList.toggle('active-play');
+                pauseButton.classList.toggle('active-pause');
+                this.setState({nowPlaying: {id: sid}})
+            }
+    }
+    render()
+    {
+        {document.title ="Spotify - Home"}
+    return(
+        
+        &lt;div id='webplayer-layout'className="container webplayer col-12">
+        &lt;head>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>&lt;/head>
+        &lt;div className="row webplayer-body m-0">
+        
+
+            &lt;nav className="col-lg-2 webplayer-sidebar-body colums-no-padding">
+                &lt;SideBar/>
+            &lt;/nav>
+            &lt;div className="col-lg-10 webplayer-body-and-navbar colums-no-padding">
+                &lt;HomeNavBar/>
+                &lt;div id="webplayer-home">
+            &lt;div className="made-for-you-section">
+                &lt;h2 className="section-title made-for-you">Most Recent Playlists&lt;/h2>
+                &lt;div className="card-group">
+                    {this.state.mostRecentPlayLists.map( playList => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playList.id
+                                    }
+                                }}>
+                                &lt;div className="card" id={playList.id}>
+                             {/*   &lt;MenuProvider id={playList.id} component="span" >
+                            &lt;Menu id={playList.id} theme={theme.dark} animation={animation.fade}>
+                            &lt;Item>Save To Library&lt;/Item>
+                            &lt;Item>Copy Playlist Link&lt;/Item>
+                            &lt;Item>Open in App&lt;/Item>
+                            &lt;/Menu>*/}
+
+                                    &lt;img src={playList.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;div className="card-body">
+                                        &lt;h5 className="card-title">{playList.title}&lt;/h5>
+                                        &lt;p className="card-text">{playList.description}&lt;/p>
+                                        &lt;div id={playList.id}>
+                                            &lt;button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                            &lt;button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                        &lt;/div>
+                                    &lt;/div>{/**&lt;/MenuProvider>  */} 
+                                &lt;/div>
+                                &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="popular-playlists-section">
+                &lt;h2 className="section-title popular-playlists">Popular Playlists&lt;/h2>
+                &lt;div className="card-group">
+                    {this.state.popularPlayLists.map( playList => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playList.id
+                                    }
+                                }}>
+                            &lt;div className="card" id={playList.id}>
+                               
+                               {/* &lt;MenuProvider id={playList.id} >
+                            &lt;Menu id={playList.id} theme={theme.dark} animation={animation.fade}>
+                            &lt;Item>Save To Library&lt;/Item>
+                            &lt;Item>Copy Playlist Link&lt;/Item>
+                            &lt;Item>Open in App&lt;/Item>
+                            &lt;/Menu>       */}                                 &lt;img src={playList.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;div className="card-body">
+                                        &lt;h5 className="card-title">{playList.title}&lt;/h5>
+                                        &lt;p className="card-text">{playList.description}&lt;/p>
+                                        &lt;div id={playList.id}>
+                                            &lt;button id={playList.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playList.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                            &lt;button id={playList.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playList.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                        &lt;/div>
+                                    &lt;/div> 
+                                &lt;/div>
+                                &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="workout-playlists-section">
+                &lt;h2 className="section-title workout-playlists">Most recent Albums&lt;/h2>
+                &lt;div className="card-group">
+                    {this.state.mostRecentAlbums.map( album => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/webplayer/album",
+                                    state:{
+                                    myId :album.id
+                                    }
+                                }}>
+                            &lt;div className="card" id={album.id}>
+                               {/**  &lt;MenuProvider id={album.id} component="span" >
+                            &lt;Menu id={album.id} theme={theme.dark} animation={animation.fade}>
+                            &lt;Item>Save To Library&lt;/Item>
+                            &lt;Item>Copy album Link&lt;/Item>
+                            &lt;Item>Open in App&lt;/Item>
+                            &lt;/Menu>  */}
+                                    &lt;img src={album.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;div className="card-body">
+                                        &lt;h5 className="card-title">{album.title}&lt;/h5>
+                                        &lt;p className="card-text">{album.artist}&lt;/p>
+                                        &lt;div id={album.id}>
+                                            &lt;button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                            &lt;button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                        &lt;/div>    
+                                    &lt;/div> 
+                                &lt;/div>
+                                &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}  
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="popular-albums-section">
+                &lt;h2 className="section-title popular-albums">Popular Albums&lt;/h2>
+                &lt;div className="card-group">
+                    {this.state.popularAlbums.map( album => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/webplayer/album",
+                                    state:{
+                                    myId :album.id
+                                    }
+                                }}>
+                                &lt;div className="card" id={album.id}>
+                                {/*&lt;MenuProvider id={album.id} component="span" >
+                                    &lt;Menu id={album.id} theme={theme.dark} animation={animation.fade}>
+                                    &lt;Item>Save To Library&lt;/Item>
+                                    &lt;Item>Copy Playlist Link&lt;/Item>
+                                    &lt;Item>Open in App&lt;/Item>
+                                    &lt;/Menu>   */}                                      &lt;img src={album.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;div className="card-body">
+                                        &lt;h5 className="card-title">{album.title}&lt;/h5>
+                                        &lt;p className="card-text">{album.artist}&lt;/p>
+                                        &lt;div id={album.id}>
+                                            &lt;button id={album.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(album.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                            &lt;button id={album.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(album.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                        &lt;/div>    
+                                    &lt;/div>  
+                                &lt;/div>
+                            &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="popular-albums-section">
+                            {this.state.catagories.slice(0,1).map( category => (
+                                &lt;h2 className="section-title popular-albums">
+                                    {category.name}
+                                &lt;/h2>  
+                            ))}
+                &lt;div className="card-group">
+                    {this.state.firstCategory.map( playlist => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                &lt;div className="card" id={playlist.id}>
+                             {/**    &lt;MenuProvider id={playlist.id} component="span" >
+                                    &lt;Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    &lt;Item>Save To Library&lt;/Item>
+                                    &lt;Item>Copy Playlist Link&lt;/Item>
+                                    &lt;Item>Open in App&lt;/Item>
+                                    &lt;/Menu> */}                                        &lt;img src={playlist.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;div className="card-body">
+                                        &lt;h5 className="card-title">{playlist.title}&lt;/h5>
+                                        &lt;p className="card-text">{playlist.description}&lt;/p>
+                                        &lt;div id={playlist.id}>
+                                            &lt;button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                            &lt;button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                        &lt;/div>    
+                                    &lt;/div> 
+                                &lt;/div>
+                            &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="popular-albums-section">
+            {this.state.catagories.slice(1,2).map( category => (
+                                &lt;h2 className="section-title popular-albums">
+                                    {category.name}
+                                &lt;/h2>  
+                            ))}
+                &lt;div className="card-group">
+                    {this.state.secondCategory.map( playlist => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                &lt;div className="card" id={playlist.id}>
+                            {/**    &lt;MenuProvider id={playlist.id} component="span" >
+                                    &lt;Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    &lt;Item>Save To Library&lt;/Item>
+                                    &lt;Item>Copy Playlist Link&lt;/Item>
+                                    &lt;Item>Open in App&lt;/Item>
+                                    &lt;/Menu>*/}                                          &lt;img src={playlist.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;div className="card-body">
+                                        &lt;h5 className="card-title">{playlist.title}&lt;/h5>
+                                        &lt;p className="card-text">{playlist.description}&lt;/p>
+                                        &lt;div id={playlist.id}>
+                                            &lt;button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                            &lt;button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                        &lt;/div>    
+                                    &lt;/div> 
+                                &lt;/div>
+                            &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="first-category-section">
+                            {this.state.catagories.slice(0,1).map( category => (
+                                &lt;h2 className="section-title first-category">
+                                    {category.name}
+                                &lt;/h2>  
+                            ))}
+                &lt;div className="card-group">
+                    {this.state.firstCategory.map( playlist => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                &lt;div className="card" id={playlist.id}>
+                             {/**    &lt;MenuProvider id={playlist.id} component="span" >
+                                    &lt;Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    &lt;Item>Save To Library&lt;/Item>
+                                    &lt;Item>Copy Playlist Link&lt;/Item>
+                                    &lt;Item>Open in App&lt;/Item>
+                                    &lt;/Menu> */}                                        &lt;img src={playlist.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;div className="card-body">
+                                        &lt;h5 className="card-title">{playlist.title}&lt;/h5>
+                                        &lt;p className="card-text">{playlist.description}&lt;/p>
+                                        &lt;div id={playlist.id}>
+                                            &lt;button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                            &lt;button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                        &lt;/div>    
+                                    &lt;/div> 
+                                &lt;/div>
+                            &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="second-category-section">
+            {this.state.catagories.slice(1,2).map( category => (
+                                &lt;h2 className="section-title second-category">
+                                    {category.name}
+                                &lt;/h2>  
+                            ))}
+                &lt;div className="card-group">
+                    {this.state.secondCategory.map( playlist => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/playlist-webplayer",
+                                    state:{
+                                    myId :playlist.id
+                                    }
+                                }}>
+                                &lt;div className="card" id={playlist.id}>
+                            {/**    &lt;MenuProvider id={playlist.id} component="span" >
+                                    &lt;Menu id={playlist.id} theme={theme.dark} animation={animation.fade}>
+                                    &lt;Item>Save To Library&lt;/Item>
+                                    &lt;Item>Copy Playlist Link&lt;/Item>
+                                    &lt;Item>Open in App&lt;/Item>
+                                    &lt;/Menu>*/}                                          &lt;img src={playlist.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;div className="card-body">
+                                        &lt;h5 className="card-title">{playlist.title}&lt;/h5>
+                                        &lt;p className="card-text">{playlist.description}&lt;/p>
+                                        &lt;div id={playlist.id}>
+                                            &lt;button id={playlist.id} className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(playlist.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                            &lt;button id={playlist.id} className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(playlist.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                        &lt;/div>    
+                                    &lt;/div> 
+                                &lt;/div>
+                            &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}
+                &lt;/div>
+            &lt;/div>
+            &lt;div className="popular-artists-section">
+                &lt;h2 className="section-title popular-artists">Popular Artists&lt;/h2>
+                &lt;div className="card-group">
+                    {this.state.artists.map( artist => (
+                        &lt;div>
+                            &lt;Link to={{
+                                    pathname:"/artist-webplayer",
+                                    state:{
+                                       myId :artist.id
+                                    }
+                                }}>
+                                &lt;div className="card" id={artist.id}>
+                            {/**       &lt;MenuProvider id={artist.id} component="span" >
+                                &lt;Menu id={artist.id} theme={theme.dark} animation={animation.fade}>
+                                &lt;Item>Save To Library&lt;/Item>
+                                &lt;Item>Copy Playlist Link&lt;/Item>
+                                &lt;Item>Open in App&lt;/Item>
+                                &lt;/Menu>  */}                                          
+                                &lt;img src={artist.imageUrl} className="card-img-top rounded-circle" alt="...">&lt;/img>
+                                        &lt;div className="card-body">
+                                            &lt;h5 className="card-title">{artist.name}&lt;/h5>
+                                            &lt;p className="card-text">artist&lt;/p>
+                                            &lt;div id={artist.id}>
+                                                &lt;button className="btn btn-primary play-btn active-play" onClick={()=> this.togglePlayPause(artist.id)}>&lt;i className="fa fa-play">&lt;/i>&lt;/button>
+                                                &lt;button className="btn btn-primary pause-btn" onClick={()=> this.togglePlayPause(artist.id)}>&lt;i className="fa fa-pause">&lt;/i>&lt;/button>
+                                            &lt;/div>
+                                        &lt;/div>
+                                &lt;/div>
+                            &lt;/Link>
+                        &lt;/div>
+                    )
+                    )}
+                &lt;/div>
+            &lt;/div>                                                                         
+        &lt;/div>
+            &lt;/div>
+        &lt;/div>
+        &lt;div className="row">
+            &lt;div className="col-12 colums-no-padding">
+                {/*&lt;ProgressBar/>*/}
+            &lt;/div>
+        &lt;/div>
+        
+    &lt;/div>
+)
+                    }
+}
+export default Home;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

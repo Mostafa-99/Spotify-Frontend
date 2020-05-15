@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/HelpComponents/AccountHelp/Articles/ProfilePicture.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/HelpComponents/AccountHelp/Articles/ProfilePicture.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react"
+import './Articles.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom';
+import SideBar from '../../SideBar/SideBar'
+import  { Component } from "react";
+
+/** Class of Profile Picture. It is one of the articles in account help
+ * @extends Component
+ */
+class ProfilePicture extends Component {
+    render() {
+    {document.title ="Profile picture - Spotify"}
+    return(
+         &lt;div id="body-overrides">
+                &lt;div className="container body" id="dev-items"> 
+                    &lt;SideBar/>
+                    &lt;div className="account-help item sections">
+                        &lt;nav aria-label="breadcrumb">
+                        &lt;ol className="breadcrumb" id="article-breadcrumb">
+                            &lt;li className="breadcrumb-item">&lt;Link to="/help">Home&lt;/Link> &lt;/li>
+                            &lt;li className="breadcrumb-item">    &lt;Link to="/account-help" > Account Help    &lt;/Link> &lt;/li>
+                        &lt;/ol>
+                        &lt;/nav>
+                        &lt;div className="instructions">
+                            &lt;h1 id="first-header-art">Profile picture&lt;/h1>
+                            &lt;ul className="help-art" id="article-header-text">
+                                &lt;li >&lt;p>Set the scene for your &lt;Link to="/account-overview">profile&lt;/Link> in the app.&lt;/p>&lt;/li>
+                                &lt;li >&lt;strong>Note:&lt;/strong> Make sure your picture doesn’t violate any copyright, trademark, or personal image rights.&lt;/li>
+                                &lt;li>Check out our playlist image guidelines.&lt;/li>
+                            &lt;/ul>
+                            &lt;div className="row container">
+                                &lt;div className="item sections">
+                                    &lt;hr>&lt;/hr>
+                                    &lt;div className="collapse-btn item-header" type="button" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                                        &lt;h3 className="item-header">Mobile and tablet&lt;/h3>
+                                        &lt;i className="material-icons arrow-down">keyboard_arrow_down&lt;/i>
+                                    &lt;/div>
+                                    &lt;div className="col">
+                                        &lt;div className="collapse multi-collapse" id="multiCollapseExample1">
+                                            &lt;div className="card-body">
+                                                &lt;ol>
+                                                    &lt;li>Tap &lt;strong>Home&lt;/strong>, then &lt;strong>Settings&lt;/strong>.&lt;/li>
+                                                    &lt;li>Tap View profile.&lt;/li>
+                                                    &lt;li>Tap &lt;strong>EDIT&lt;/strong> PROFILE.&lt;/li>
+                                                    &lt;li>Tap &lt;strong>CHANGE PHOTO&lt;/strong>.&lt;/li>
+                                                    &lt;li>Select the picture you want to use.&lt;/li>
+                                                &lt;/ol> 
+                                                &lt;h5>&lt;strong>Remove profile picture&lt;/strong>&lt;/h5>
+                                                &lt;ol>
+                                                    &lt;li>Follow the steps above to &lt;strong>CHANGE PHOTO&lt;/strong>.&lt;/li>
+                                                    &lt;li>Tap &lt;strong>Remove current photo&lt;/strong>.&lt;/li>
+                                                &lt;/ol> 
+                                            &lt;/div>
+                                        &lt;/div>
+                                    &lt;/div>
+                                &lt;/div>
+                                &lt;div className="item sections">
+                                    &lt;hr>&lt;/hr>
+                                    &lt;div className="collapse-btn item-header" type="button"  data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
+                                        &lt;h3 className="item-header">Desktop&lt;/h3>   
+                                        &lt;i className="material-icons rotate-arrow">keyboard_arrow_down&lt;/i>
+                                    &lt;/div>
+                                        &lt;div className="col">
+                                            &lt;div className="collapse multi-collapse" id="multiCollapseExample2">
+                                                &lt;div className="card-body">
+                                                    &lt;ol>
+                                                        &lt;li>Click your username in the top-right corner of the desktop app.&lt;/li>
+                                                        &lt;li>Hover over your profile picture and click Change.&lt;/li>
+                                                        &lt;li>Select the picture you want to use.&lt;/li>
+                                                    &lt;/ol>  
+                                                    &lt;h5>&lt;strong>Remove profile picture&lt;/strong>&lt;/h5>
+                                                    &lt;ol>
+                                                        &lt;li>Follow the steps above to click &lt;strong>Change&lt;/strong> on your profile picture.&lt;/li>
+                                                        &lt;li>Click &lt;strong>Remove&lt;/strong>.&lt;/li>
+                                                    &lt;/ol> 
+                                                &lt;/div>
+                                            &lt;/div>
+                                        &lt;/div>
+                                    &lt;hr>&lt;/hr>
+                                &lt;/div>
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+        &lt;/div>  
+    )
+}}
+export default ProfilePicture</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

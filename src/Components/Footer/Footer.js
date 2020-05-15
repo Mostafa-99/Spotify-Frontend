@@ -31,7 +31,6 @@ class Footer extends Component {
         this.updatePredicate = this.updatePredicate.bind(this);
         this.updateVisibility = this.updateVisibility.bind(this);
       }
-
       /**
      * Footer Component Mount state Adding Event Listeners 
      * 

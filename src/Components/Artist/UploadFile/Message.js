@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+/** Functional component to print a message passed in a div.
+ * @class
+ */
 const Message = ({ msg }) => {
   return (
     <div className="alert alert-info alert-dismissible fade show" role="alert">
@@ -18,7 +20,7 @@ const Message = ({ msg }) => {
 };
 
 Message.propTypes = {
-  msg: PropTypes.string.isRequired
+  msg: PropTypes.string.isRequired,
 };
 
 export default Message;

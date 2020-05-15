@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: HelpPage/HelpPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: HelpPage/HelpPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./HelpPage.css";
+import $ from "jquery";
+/** Class of help page.
+ * @extends Component
+ */
+class HelpPage extends Component {
+  /**Smooth scroll button function that scrolls the page with animations
+   * @type {Function}
+   */
+  scrollBtn = () => {
+    $(".scroll-button").on("click", function (event) {
+      if (this.hash !== "") {
+        event.preventDefault();
+
+        const hash = this.hash;
+
+        $("html, body").animate(
+          {
+            scrollTop: $(hash).offset().top,
+          },
+          800
+        );
+      }
+    });
+  };
+  /**Carousel Event listeners to attach the carousel dots with images
+   * @type {Function}
+   */
+  carouselEvents = () => {
+    /**Get div of images
+     * @property {div} - Container of images
+     * @memberof HelpPage
+     * @type {object&lt;images>}
+     */
+    const track = document.querySelector(".carousel-img");
+    /**Get array of images
+     * @property {Array} - Array of images
+     * @memberof HelpPage
+     * @type {Array&lt;images>}
+     */
+    const imgs = Array.from(track.children);
+
+    const slides = document.querySelector(".carousel-inner");
+    /**Get div of dots
+     * @property {div} - Container of dots
+     * @memberof HelpPage
+     * @type {object&lt;dots>}
+     */
+    const dotNav = document.querySelector(".carousel-indicators");
+    /**Get array of dots
+     * @property {Array} - Array of dots
+     * @memberof HelpPage
+     * @type {Array&lt;dots>}
+     */
+    const dots = Array.from(dotNav.children);
+    /**Move from current slide on track to the target slide
+   * @memberof HelpPage
+   * @type {Function}
+   * @param track - Track will move on
+   * @param currentSlide - The current slide
+   * @param targetSlide - The slide will move to
+   */
+    const moveToslide = (track, currentSlide, targetSlide) => {
+      currentSlide.classList.remove("active");
+      targetSlide.classList.add("active");
+    };
+    /**Change image function which gets the params of moveToslide function and pass it
+   * @memberof HelpPage
+   * @type {Function}
+   * @param e - Event happend
+   */
+    const changeImg = (e) => {
+      /**Get nearest dot and check it
+     * @property {li} - Dot object
+     * @memberof HelpPage
+     */
+      const targetDot = e.target.closest("li");
+      if (!targetDot) return;
+      const currentSlide = track.querySelector(".active");
+      const targetIndex = dots.findIndex((dot) => dot === targetDot);
+      const targetSlide = imgs[targetIndex];
+      moveToslide(track, currentSlide, targetSlide);
+    };
+    dotNav.addEventListener("onchange", changeImg);
+    dotNav.addEventListener("click", changeImg);
+  };
+  /**Modal videos events. It finds the button caused the event and extract video url from it then play the video
+   * @type {Function}
+   */
+  modalVideos = () => {
+    $(document).ready(function () {
+      // Set iframe attributes when the show instance method is called
+      $("#videoModal").on("show.bs.modal", function (event) {
+        let button = $(event.relatedTarget); // Button that triggered the modal
+        let url = button.data("video"); // Extract url from data-video attribute
+
+        $(this).find("iframe").attr({
+          src: url,
+          allow:
+            "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+        });
+      });
+
+      // Remove iframe attributes when the modal has finished being hidden from the user
+      $("#videoModal").on("hidden.bs.modal", function () {
+        $("#videoModal iframe").removeAttr("src allow");
+      });
+    });
+  };
+  componentDidMount() {
+    window.onload = function () {
+      if (!window.location.hash) {
+        window.location = window.location + "#loaded";
+        window.location.reload();
+      }
+    };
+  }
+  LoadOnce = () => {
+    window.location.reload();
+  };
+  render() {
+    {
+      document.title = "Support - Spotify";
+    }
+
+    return (
+      &lt;div>
+        &lt;div id="body help-page">
+          &lt;section id="navigation-section">
+            &lt;div className="nav-section-container ">
+              &lt;div>
+                &lt;h3>Account &amp; Payment&lt;/h3>
+                &lt;ul>
+                  &lt;Link to="/account-help">
+                    &lt;li className="a">Account Help&lt;/li>
+                  &lt;/Link>
+                &lt;/ul>
+              &lt;/div>
+              &lt;div>
+                &lt;h3>Using Spotify&lt;/h3>
+                &lt;ul>
+                  &lt;Link to="/features-main">
+                    &lt;li className="a">Features&lt;/li>
+                  &lt;/Link>
+                &lt;/ul>
+              &lt;/div>
+            &lt;/div>
+          &lt;/section>
+
+          &lt;div
+            className="container btn-container"
+            onClick={() => this.scrollBtn()}
+          >
+            &lt;a className="scroll-button " href="#videos-section">
+              &lt;i className="fas fa-angle-double-down">&lt;/i>
+            &lt;/a>
+          &lt;/div>
+
+          &lt;section id="videos-section">
+            &lt;div
+              id="videos-slides-imgs"
+              className="carousel slide"
+              data-ride="carousel"
+            >
+              &lt;div id="videos-img">
+                &lt;div className="carousel-img">
+                  &lt;div className="carousel-item active">
+                    &lt;img
+                      src="https://support.scdn.co/static/img/videos/video-offline.jpg"
+                      alt=""
+                    />
+                  &lt;/div>
+                  &lt;div className="carousel-item">
+                    &lt;img
+                      src="https://support.scdn.co/static/img/videos/video-connect.jpg"
+                      alt=""
+                    />
+                  &lt;/div>
+                  &lt;div className="carousel-item">
+                    &lt;img
+                      src="https://support.scdn.co/static/img/videos/video-chromecast.jpg"
+                      alt=""
+                    />
+                  &lt;/div>
+                  &lt;div className="carousel-item">
+                    &lt;img
+                      src="https://support.scdn.co/static/img/videos/video-playlist.jpg"
+                      alt=""
+                    />
+                  &lt;/div>
+                  &lt;div className="carousel-item">
+                    &lt;img
+                      src="https://support.scdn.co/static/img/videos/video-search.jpg"
+                      alt=""
+                    />
+                  &lt;/div>
+                &lt;/div>
+              &lt;/div>
+
+              &lt;div
+                id="carouselExampleIndicators"
+                className="carousel slide"
+                data-ride="carousel"
+              >
+                &lt;ol
+                  className="carousel-indicators"
+                  onClick={() => this.carouselEvents()}
+                  onChange={() => this.carouselEvents()}
+                >
+                  &lt;li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="0"
+                    className="active"
+                  >&lt;/li>
+                  &lt;li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="1"
+                  >&lt;/li>
+                  &lt;li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="2"
+                  >&lt;/li>
+                  &lt;li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="3"
+                  >&lt;/li>
+                  &lt;li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="4"
+                  >&lt;/li>
+                &lt;/ol>
+                &lt;div className="carousel-inner container">
+                  &lt;div className="carousel-item active">
+                    &lt;div className="carousel-caption d-none d-md-block">
+                      &lt;h1>Listen Offline&lt;/h1>
+                      &lt;p>
+                        How to take your music with you in the car, on the
+                        plane, or wherever you may not be able to access the
+                        internet
+                      &lt;/p>
+                      &lt;button
+                        type="button"
+                        onClick={() => this.modalVideos()}
+                        className="btn btn-primary-outline"
+                        data-toggle="modal"
+                        data-target="#videoModal"
+                        data-video="https://player.vimeo.com/video/122512075"
+                      >
+                        &lt;i className="fas fa-caret-right">&lt;/i>
+                        WATCH VIDEO
+                      &lt;/button>
+                    &lt;/div>
+                  &lt;/div>
+                  &lt;div className="carousel-item">
+                    &lt;div className="carousel-caption d-none d-md-block">
+                      &lt;h1>Spotify Connect&lt;/h1>
+                      &lt;p>
+                        Play Spotify on your speaker, sound system, or TV with
+                        Spotify Connect. Here's how!
+                      &lt;/p>
+                      &lt;button
+                        type="button"
+                        onClick={() => this.modalVideos()}
+                        className="btn btn-primary-outline"
+                        data-toggle="modal"
+                        data-target="#videoModal"
+                        data-video="https://player.vimeo.com/video/126925524"
+                      >
+                        &lt;i className="fas fa-caret-right">&lt;/i>
+                        WATCH VIDEO
+                      &lt;/button>
+                    &lt;/div>
+                  &lt;/div>
+                  &lt;div className="carousel-item">
+                    &lt;div className="carousel-caption d-none d-md-block">
+                      &lt;h1>Spotify on Chromecast&lt;/h1>
+                      &lt;p>
+                        Spotify on your Chromecast? You heard us right! Here's
+                        how to team them up!
+                      &lt;/p>
+                      &lt;button
+                        type="button"
+                        onClick={() => this.modalVideos()}
+                        className="btn btn-primary-outline"
+                        data-toggle="modal"
+                        data-target="#videoModal"
+                        data-video="https://player.vimeo.com/video/143256102"
+                      >
+                        &lt;i className="fas fa-caret-right">&lt;/i>
+                        WATCH VIDEO
+                      &lt;/button>
+                    &lt;/div>
+                  &lt;/div>
+                  &lt;div className="carousel-item">
+                    &lt;div className="carousel-caption d-none d-md-block">
+                      &lt;h1>Make a Playlist&lt;/h1>
+                      &lt;p>
+                        Playlists are your personal mixtapes that you can share
+                        or collaborate on with friends. Here's how to get
+                        started.
+                      &lt;/p>
+                      &lt;button
+                        type="button"
+                        onClick={() => this.modalVideos()}
+                        className="btn btn-primary-outline"
+                        data-toggle="modal"
+                        data-target="#videoModal"
+                        data-video="https://player.vimeo.com/video/122512074"
+                      >
+                        &lt;i className="fas fa-caret-right">&lt;/i>
+                        WATCH VIDEO
+                      &lt;/button>
+                    &lt;/div>
+                  &lt;/div>
+                  &lt;div className="carousel-item">
+                    &lt;div className="carousel-caption d-none d-md-block">
+                      &lt;h1>Search&lt;/h1>
+                      &lt;p>
+                        Search is the key to Spotify's vast library of music,
+                        whether you're looking for a particular artist, album,
+                        or song; or if you want Spotify to find music to match a
+                        mood, activity, or time of day.
+                      &lt;/p>
+                      &lt;button
+                        type="button"
+                        onClick={() => this.modalVideos()}
+                        className="btn btn-primary-outline"
+                        data-toggle="modal"
+                        data-target="#videoModal"
+                        data-video="https://player.vimeo.com/video/122512076"
+                      >
+                        &lt;i className="fas fa-caret-right">&lt;/i>
+                        WATCH VIDEO
+                      &lt;/button>
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/div>
+                &lt;div className="control-arrows">
+                  &lt;a
+                    className="control-arrow left-arrow"
+                    href="#carouselExampleIndicators"
+                    role="button"
+                    data-slide="prev"
+                  >
+                    &lt;i className="fas fa-angle-left">&lt;/i>
+                    &lt;span className="sr-only">Previous&lt;/span>
+                  &lt;/a>
+                  &lt;a
+                    className="control-arrow right-arrow"
+                    href="#carouselExampleIndicators"
+                    role="button"
+                    data-slide="next"
+                  >
+                    &lt;i className="fas fa-angle-right">&lt;/i>
+                    &lt;span className="sr-only">Next&lt;/span>
+                  &lt;/a>
+                &lt;/div>
+              &lt;/div>
+            &lt;/div>
+          &lt;/section>
+
+          &lt;div
+            className="container btn-container"
+            onClick={() => this.scrollBtn()}
+          >
+            &lt;a className="scroll-button " href="#notspotify-section">
+              &lt;i className="fas fa-angle-double-down">&lt;/i>
+            &lt;/a>
+          &lt;/div>
+
+          &lt;section id="notspotify-section">
+            &lt;div className="notspotify-container">
+              &lt;h1>Still not on Spotify?&lt;/h1>
+              &lt;div className="col-xs-10  col-sm-12 col-lg-6 col-md-6 col-sm-offset-3 container">
+                &lt;p>
+                  Over 30 million tracks; thousands of curated playlists;
+                  Discover Weekly; Spotify Running; Radio; Chromecast, sound
+                  system, car, TV, and PlayStation integration; sharing and
+                  creating playlists with your friends... All of this is ready
+                  for you.
+                &lt;/p>
+
+                &lt;Link to="/" className="a btn btn-primary" role="button">
+                  Get Spotify
+                &lt;/Link>
+              &lt;/div>
+            &lt;/div>
+          &lt;/section>
+
+          &lt;div
+            className="modal fade"
+            id="videoModal"
+            tabIndex="-1"
+            role="dialog"
+          >
+            &lt;div className="modal-dialog modal-dialog-centered" role="document">
+              &lt;div className="modal-content">
+                &lt;div className="modal-header bg-dark border-dark">
+                  &lt;button
+                    type="button"
+                    className="close text-white"
+                    data-dismiss="modal"
+                  >
+                    &amp;times;
+                  &lt;/button>
+                &lt;/div>
+                &lt;div className="modal-body bg-dark p-0">
+                  &lt;div className="embed-responsive embed-responsive-16by9">
+                    &lt;iframe className="embed-responsive-item">&lt;/iframe>
+                  &lt;/div>
+                &lt;/div>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    );
+  }
+}
+
+export default HelpPage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="premium.html">premium</a></li><li><a href="premiumCode.html">premiumCode</a></li><li><a href="Progress.html">Progress</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#album_id">album_id</a></li><li><a href="global.html#album_image_url">album_image_url</a></li><li><a href="global.html#album_name">album_name</a></li><li><a href="global.html#artists">artists</a></li><li><a href="global.html#is_liked">is_liked</a></li><li><a href="global.html#myId">myId</a></li><li><a href="global.html#playing_song_id">playing_song_id</a></li><li><a href="global.html#tracks">tracks</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri Apr 10 2020 19:40:05 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

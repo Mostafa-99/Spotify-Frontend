@@ -3,7 +3,13 @@ import './Articles.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import SideBar from '../../SideBar/SideBar'
-function ChangeEmailAddress(){
+import  { Component } from "react";
+
+/** Class of Change Email Address. It is one of the articles in account help
+ * @extends Component
+ */
+class ChangeEmailAddress extends Component {
+    render() {
     {document.title ="Change email address - Spotify"}
     return(
         <div id="body-overrides">
@@ -70,5 +76,5 @@ function ChangeEmailAddress(){
         </div>
        
     )
-}
+}}
 export default ChangeEmailAddress

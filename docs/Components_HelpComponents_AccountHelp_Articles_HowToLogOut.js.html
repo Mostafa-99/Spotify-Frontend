@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/HelpComponents/AccountHelp/Articles/HowToLogOut.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/HelpComponents/AccountHelp/Articles/HowToLogOut.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react"
+import './Articles.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom';
+import SideBar from '../../SideBar/SideBar'
+import  { Component } from "react";
+
+/** Class of How To Log Out. It is one of the articles in account help
+ * @extends Component
+ */
+class HowToLogOut extends Component {
+    render() {
+    {document.title ="How to log out - Spotify"}
+    return(
+        &lt;div id="body-overrides">
+
+                &lt;div className="container body" id="dev-items"> 
+                    &lt;SideBar/>
+                    &lt;div className="account-help item">
+                        &lt;nav aria-label="breadcrumb">
+                        &lt;ol className="breadcrumb" id="article-breadcrumb">
+                            &lt;li className="breadcrumb-item">&lt;Link to="/help">Home&lt;/Link> &lt;/li>
+                            &lt;li className="breadcrumb-item">    &lt;Link to="/account-help" > Account Help   &lt;/Link> &lt;/li>
+                        &lt;/ol>
+                        &lt;/nav>
+                        &lt;div className="instructions">
+                            &lt;h1 id="first-header-art">How to log out&lt;/h1>
+                            &lt;ul className="help-art" id="article-header-text">
+                                &lt;li >Looking for the exit? Pick your device below for how to log out of the app.&lt;/li>
+                                &lt;li >&lt;strong>Note:&lt;/strong> You can also be logged in on spotify.com. To log out here, click &lt;strong>Profile&lt;/strong> in the top right of this page, then &lt;strong>Log out&lt;/strong>.&lt;/li>
+                            &lt;/ul>
+                            &lt;div className="row container">
+                                &lt;div className="item">
+                                    &lt;hr>&lt;/hr>
+                                    &lt;div className="collapse-btn item-header" type="button" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                                        &lt;h3 className="item-header">Desktop&lt;/h3>
+                                        &lt;i className="material-icons arrow-down">keyboard_arrow_down&lt;/i>
+                                    &lt;/div>
+                                    &lt;div className="col">
+                                        &lt;div className="collapse multi-collapse" id="multiCollapseExample1">
+                                            &lt;div className="card-body">
+                                                &lt;ol>
+                                                    &lt;li>Click in the top-right corner of the app.&lt;/li>
+                                                    &lt;li>Select &lt;strong>Log Out&lt;/strong>.&lt;/li>
+                                                &lt;/ol> 
+                                            &lt;/div>
+                                        &lt;/div>
+                                    &lt;/div>
+                                &lt;/div>
+                                &lt;div className="item">
+                                    &lt;hr>&lt;/hr>
+                                    &lt;div className="collapse-btn item-header" type="button"  data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
+                                        &lt;h3 className="item-header">Web player&lt;/h3>   
+                                        &lt;i className="material-icons rotate-arrow">keyboard_arrow_down&lt;/i>
+                                    &lt;/div>
+                                        &lt;div className="col">
+                                            &lt;div className="collapse multi-collapse" id="multiCollapseExample2">
+                                                &lt;div className="card-body">
+                                                    &lt;ol>
+                                                        &lt;li>Click your profile at the bottom of the menu on the left.&lt;/li>
+                                                        &lt;li>Select &lt;strong>LOG OUT&lt;/strong>.&lt;/li>
+                                                    &lt;/ol>  
+                                                &lt;/div>
+                                            &lt;/div>
+                                        &lt;/div>
+                                &lt;/div>
+                                &lt;div className="item">
+                                    &lt;hr>&lt;/hr>
+                                    &lt;div className="collapse-btn item-header" type="button"  data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample2">
+                                        &lt;h3 className="item-header">Mobile and tablet&lt;/h3>   
+                                        &lt;i className="material-icons rotate-arrow">keyboard_arrow_down&lt;/i>
+                                    &lt;/div>
+                                        &lt;div className="col">
+                                            &lt;div className="collapse multi-collapse" id="multiCollapseExample3">
+                                                &lt;div className="card-body">
+                                                    &lt;ol>
+                                                        &lt;li>Tap Home.&lt;/li>
+                                                        &lt;li>Tap Settings.&lt;/li>
+                                                        &lt;li>Scroll to the bottom.&lt;/li>
+                                                        &lt;li>Tap &lt;strong>Log out&lt;/strong>.&lt;/li>
+                                                    &lt;/ol>  
+                                                &lt;/div>
+                                            &lt;/div>
+                                        &lt;/div>
+                                    &lt;hr>&lt;/hr>
+                                &lt;/div>
+                                &lt;br>&lt;/br>
+                                &lt;h5 id="headers-inside-articles">&lt;strong>Log out everywhere&lt;/strong>&lt;/h5>
+                                &lt;ul className="help-art" id="article-header-text">
+                                    &lt;li >Here’s how to log out of all web browsers, computers, tablets, and mobile devices at once:&lt;/li>
+                                &lt;/ul>
+                                &lt;ol id="after-articles">
+                                    &lt;li>Log in to your&lt;Link to="/account-overview"> account page&lt;/Link>.&lt;/li>
+                                    &lt;li>Click &lt;strong>SIGN OUT EVERYWHERE&lt;/strong>.&lt;/li>
+                                &lt;/ol> 
+                                &lt;ul className="help-art" id="article-header-text">
+                                    &lt;li >&lt;strong>Note:&lt;/strong> This doesn’t include partner devices, such as Sonos and PlayStation. To log out of (or unlink) Spotify from a partner device, check the device’s manufacturer guide.&lt;/li>
+                                &lt;/ul>
+
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+        &lt;/div>
+       
+    )
+}}
+export default HowToLogOut</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

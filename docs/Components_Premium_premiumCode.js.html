@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/Premium/PremiumCode.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/Premium/PremiumCode.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import axios from 'axios';
+import './PremiumCode.css';
+import {ConfigContext} from '../../Context/ConfigContext'
+
+/**
+ * Checks subscription code to become a premium user
+ * @extends Component
+ */
+export class PremiumCode extends Component {
+    static contextType=ConfigContext;
+
+    state={
+        /**
+         * String written in Subscription code input text
+         * @memberof PremiumCode
+         * @type {String}
+         */
+        code: ''
+    }
+
+    /**
+     * sends subscription code to the user's email
+     */
+    sendMail=()=>{
+        console.log(localStorage);
+        axios.post(this.context.baseURL+"/me/premium",{},{
+            headers:{
+                'authorization': "Bearer "+ localStorage.getItem("token"),
+            }
+        })
+            .then(res => {
+                if(res.status===204){
+                    alert("An email has been sent");
+                }
+                else if(res.status===401){
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert("Please try again");
+                }
+            })
+            .catch(res => {
+                console.log(res);
+                
+            })
+    }
+
+    /**
+     * checks if the code written by user is valid
+     */
+    checkCode = () => {
+        if(this.state.code !== ""){
+            let code=this.state.code;
+            console.log(localStorage);
+
+            //'http://localhost:3000/subscriptionCodes/',{code}
+            axios.post(this.context.baseURL+"/me/upgrade/"+code,{},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    alert("Congratulations! You are PREMIUM now.");
+                }
+                else if(res.status===401){
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert("The subscription code is invalid.");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+        else{
+            alert("please enter code!")
+        }
+    }
+
+    /**
+     * any change is done in input textbox is assigned to code in state
+     */
+    onChange = (e) => this.setState({ code: e.target.value });
+    
+    render() {
+        {document.title ="Spotify"}
+
+        return (
+            &lt;div id="pcp-main-div" className="container-fluid">
+                
+                &lt;div className="blue">
+                    &lt;h1 className="bold-header">Get Premium&lt;/h1>
+                    &lt;ul className="">
+                        &lt;li  className="checklist">Listen without the distraction of ads&lt;/li>
+                        &lt;li  className="checklist">Play music with no phone service&lt;/li>
+                        &lt;li  className="checklist">Skip as many songs as you want&lt;/li>
+                    &lt;/ul>
+                &lt;/div>
+
+                &lt;div className="second-part">
+                    &lt;div className="box-div">
+                        &lt;div className="form-group">
+                        &lt;button id="pcp-send-mail-button" onClick={this.sendMail} type="button" className="btn btn-success btn-block">GET CODE&lt;/button>
+                            &lt;label htmlFor="formGroupExampleInput">Subscription code&lt;/label>
+                            &lt;input value={this.state.code} onChange={this.onChange} type="text" name="code" className="form-control" id="formGroupExampleInput" placeholder="XXXX"/>
+                        &lt;/div>
+                        &lt;button id="pcp-check-code-button" onClick={this.checkCode} type="button" className="btn btn-success btn-block">START MY SPOTIFY PREMIUM&lt;/button>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        )
+    }
+}
+
+export default PremiumCode
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

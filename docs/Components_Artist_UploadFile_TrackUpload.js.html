@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/Artist/UploadFile/TrackUpload.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/Artist/UploadFile/TrackUpload.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Fragment, useState, useContext } from "react";
+import axios from "axios";
+import Message from "./Message";
+import "../UploadFile/UploadFile.css";
+import Progress from "./Progress";
+import ArtistSidebar from "../SideBar/ArtistSidebar";
+import { ConfigContext } from "../../../Context/ConfigContext";
+/** Functional component for track upload.
+ * @class
+ * @param props
+ */
+const TrackUpload = (props) => {
+  /**Gets the baseURL from configrations context of the user
+   * @memberof TrackUpload
+   */
+  const url = useContext(ConfigContext);
+  /**File object (for track)
+   * @memberof TrackUpload
+   * @constant file
+   */
+  /**Set file object function
+   * @memberof TrackUpload
+   * @constant setFile
+   */
+  const [file, setFile] = useState("");
+  /**File name
+   * @memberof TrackUpload
+   * @constant fileName
+   */
+  /**Set file name function
+   * @memberof TrackUpload
+   * @constant setFilename
+   */
+  const [fileName, setFilename] = useState("Choose Track");
+  /**Track name
+   * @memberof TrackUpload
+   * @constant trackName
+   */
+  /**Set track name function
+   * @memberof TrackUpload
+   * @constant setTrackName
+   */
+  const [trackName, setTrackName] = useState("Track Name");
+  /**Uploaded file indecator
+   * @memberof TrackUpload
+   * @constant uploadedFile
+   */
+  /**Set uploaded file indecator function
+   * @memberof TrackUpload
+   * @constant setAlbumName
+   */
+  const [uploadedFile, setUploadedFile] = useState({});
+  /**Message name
+   * @memberof TrackUpload
+   * @constant message
+   */
+  /**Set message name function
+   * @memberof TrackUpload
+   * @constant setMessage
+   */
+  const [message, setMessage] = useState("");
+  /**Upload percentage
+   * @memberof TrackUpload
+   * @constant uploadPercentage
+   */
+  /**Set upload percentage function
+   * @memberof TrackUpload
+   * @constant setUploadPercentage
+   */
+  const [uploadPercentage, setUploadPercentage] = useState(0);
+  /**File name event listener
+   * @memberof TrackUpload
+   * @type {Function}
+   * @param e - Event
+   */
+  const onChange = (e) => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
+  /**Track name event listener
+   * @memberof TrackUpload
+   * @type {Function}
+   * @param e - Event
+   */
+  const onChangeTrackName = (e) => {
+    setTrackName(e.target.value);
+    console.log(e.target.value);
+  };
+  /**Submit track Function sends the track to the backend and indecates the percentage
+   * @memberof TrackUpload
+   * @type {Function}
+   * @param e - Event
+   */
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", trackName);
+    formData.append("trackAudio", file);
+    try {
+      const res = await axios.post(
+        url.baseURL + "/me/albums/" + props.id + "/tracks",
+        formData,
+        {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          onUploadProgress: (progressEvent) => {
+            setUploadPercentage(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          },
+        }
+      );
+
+      const { fileName, filePath } = res.data;
+
+      setUploadedFile({ fileName, filePath });
+      setMessage("File uploaded");
+    } catch (err) {
+      if (err.response.status === 500) {
+        setMessage("There was a problem with the server");
+      } else if (err.response.status === 401) {
+        localStorage.removeItem("loginType");
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userID");
+        alert("Your session has ended");
+      } else {
+        setMessage(err.response.data.msg);
+      }
+    }
+  };
+  return (
+    &lt;div className="artist-body">
+      &lt;div className="full-page container upload-page">
+        &lt;Fragment>
+          &lt;ArtistSidebar />
+          &lt;form className="container" onSubmit={onSubmit}>
+            {message ? &lt;Message msg={message} /> : null}
+            &lt;div class="form-group">
+              &lt;input
+                type="text"
+                class="form-control"
+                id="label"
+                placeholder="Track Name"
+                onChange={onChangeTrackName}
+              />
+            &lt;/div>
+            &lt;div className="custom-file mb-4 ">
+              &lt;input
+                type="file"
+                className="custom-file-input"
+                id="customFile"
+                onChange={onChange}
+              />
+              &lt;label className="custom-file-label" htmlFor="customFile">
+                {fileName}
+              &lt;/label>
+            &lt;/div>
+            &lt;Progress percentage={uploadPercentage} />
+            &lt;input
+              type="submit"
+              value="Upload"
+              className="btn btn-primary-outline btn-block mt-4"
+            >&lt;/input>
+          &lt;/form>
+        &lt;/Fragment>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default TrackUpload;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

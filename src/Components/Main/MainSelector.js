@@ -7,6 +7,7 @@ import MainIndex from '../userIndex/MainIndex'
  * @extends Component
  */
 class MainSelector extends Component {
+ 
     render() {
         return (
             <div>

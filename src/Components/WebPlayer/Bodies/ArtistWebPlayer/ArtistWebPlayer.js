@@ -4,37 +4,105 @@ import SideBar from '../../SideBar'
 import '../Bodies.css';
 import './ArtistWebPlayer.css'
 import axios from 'axios'
-import TracksList from './TracksList.js'
+import TracksList from '../AlbumWebPlayer/TracksList';
 
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import { Link } from 'react-router-dom';
+
+/** Class of artist webplayer page.
+ * @extends Component
+ */
 class ArtistWebPlayer extends Component {
     static contextType=ConfigContext;
     constructor(){
         super()
         this.state = {
+            /**
+             * ID of the current artist
+             * @type {Object}
+             */
             myId:{},
+            /**the current artist
+             * @memberof ArtistWebPlayer
+             * @type {object}
+             */
             artist:{},
+            /**Array of Albums of the artist
+             * @memberof ArtistWebPlayer
+             * @type {Array}
+             */
             albums:[],
+            /**Array of playlists of the artist
+             * @memberof ArtistWebPlayer
+             * @type {Array}
+             */
             playLists:[],
+            /**Array of relted artists
+             * @memberof ArtistWebPlayer
+             * @type {Array}
+             */
             relatedArtists:[],
+            /**bio of the artist
+             * @memberof ArtistWebPlayer
+             * @type {string}
+             */
             bio:{},
+            /**Array of Albums of the artist
+             * @memberof ArtistWebPlayer
+             * @type {Array}
+             */
             tracks:[],
+            /**
+            * ID of the playing song
+            * @type {String}
+            */
             nowPlaying:{
                 id:-1
             },
-            "name":"",
-            "id":"",
-            "artists":[],
-            "image":"",
-            "tracks":[],
-            "playing_song_id":""
+            /**
+            * Name of the album
+            * @type {String}
+            */
+           "album_name":"",
+           /**
+            * ID of the album
+            * @type {String}
+            */
+           "album_id":"",
+           /**
+            * Array of artists' names
+            * @type {Array<String>}
+            */
+           "artists":"",
+           /**
+            * Image url of the album
+            * @type {String}
+            */
+           "album_image_url":"",
+           /**
+            * Array of tracks objects 
+            * @type {Array<Object>}
+            */
+           "tracks":[],
+           /**
+            * States if the user liked the album or not
+            * @type {Boolean}
+            */
+           "is_liked":Boolean,
+           /**
+            * ID of the playing song
+            * @type {String}
+            */
+           "playing_song_id":""
 
         }
         this.togglePlayPause=this.togglePlayPause.bind(this)
 
     }
-
+    
+    /**When the component mounts it sends a request to the backend to load the albums
+     * @memberof ArtistWebPlayer
+     */
     componentDidMount() {
 
         const{myId}=this.props.location.state;//getting id from parent component
@@ -169,7 +237,10 @@ class ArtistWebPlayer extends Component {
             })     
             this.getAlbumTracks();                                         
     }
-        
+        /**get all tracks of the album 
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
         getAlbumTracks(){
             /* http://localhost:3000/album_tracks/1*/
             axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/top-tracks",{/* top tracks*/
@@ -199,7 +270,10 @@ class ArtistWebPlayer extends Component {
                     alert(error.response.data.message);
                 })
             }
-        
+        /**set currently playing song to an id 
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
         setPlayingSondId=(id)=>{
             if(this.state.playing_song_id===id){
                 this.setState({
@@ -213,6 +287,10 @@ class ArtistWebPlayer extends Component {
             }
         }
 
+        /**to determine which section we are in and choose it and makes its backgroung color changes
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
         sectionTypeHandle(type){
             if(type===1)//overview
             {
@@ -245,7 +323,11 @@ class ArtistWebPlayer extends Component {
                 document.getElementById("related-artists-button").classList.add("background-grey");
             }
         }
-    
+        
+        /**toggle cards play pause buttons
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
         togglePlayPause(sid) {
             if(this.state.nowPlaying.id==-1)
             {
