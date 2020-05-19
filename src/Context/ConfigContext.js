@@ -8,10 +8,13 @@ class ConfigContextProvider extends Component {
   state = {
     /**baseURL of requests
      * @memberof ConfigContextProvider
-     */
+     *
+     /*http://spotify.mocklab.io*/
     baseURL: "http://spotify.mocklab.io",
   };
-
+  componentDidMount(){
+    localStorage.setItem("isLoggedIn",'true');
+  }
   render() {
     return (
       <ConfigContext.Provider value={{ ...this.state }}>

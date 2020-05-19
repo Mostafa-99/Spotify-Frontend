@@ -1,7 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
-import '../../Profile/Profile.css'
+//import '../../Profile/Profile.css'
+import './ArtistSidebar.css'
 /**
  * Artist Sidebar page
  * @class
@@ -14,11 +15,12 @@ function ArtistSidebar(props) {
             </head>
             <div>
                     <img  src={props.img} className="rounded-circle" alt="Profile" ></img>
+                    
 					<ul className="sidelist">
-                        <li className="list first"><span className="fa fa-home icon"></span> Overview </li>
-						<li className="list"><i className="fa fa-pencil icon"></i> Manage Profile </li>
-                        <li className="list"><i className="fa fa-users icon"></i> Audience </li>
+                    <Link to="/artist/overview">  <li className="list first"><span className="fa fa-home icon"></span> Overview </li></Link>
                         <Link to="/artist"><li className="list"><i className="fa fa-music icon"></i> My Music </li></Link>
+                        <Link to="/artist/manage-profile"><li className="list"><i className="fa fa-pencil icon"></i> Manage Profile </li></Link>
+
 					</ul>
 			    </div>
         </div>        

@@ -39,6 +39,9 @@ import ProfileContextProvider from './Context/ProfileContext';
 import ConfigContextProvider from './Context/ConfigContext'
 import {ProtectedRoute} from './ProtectedRoute/ProtectedRoute'
 
+
+import Overview from './Components/Artist/OverviewPage/Overview'
+import ManageProfile from './Components/Artist/ManageProfile/ManageProfile'
 function App() {
 
   return (
@@ -87,7 +90,13 @@ function App() {
         <ProtectedRoute path="/artist/track-upload" exact component={TrackUpload}/>
         <ProtectedRoute path="/artist/create-album" exact component={CreateAlbum}/>
         <ProtectedRoute path="/artist/album-page" exact component={AlbumPage}/>
+        
+        <ProtectedRoute path="/artist/manage-profile" exact component={ManageProfile}/>
+        <ProtectedRoute path="/artist/overview" exact component={Overview}/>
 
+
+       
+       
         <Route path="/" component={NotFound}/>
       </Switch>
       <Footer/>

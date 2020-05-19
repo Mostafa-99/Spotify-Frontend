@@ -1,17 +1,20 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext,useEffect } from "react";
 import axios from "axios";
 import Message from "./Message";
 import "../UploadFile/UploadFile.css";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { ConfigContext } from "../../../Context/ConfigContext";
+import {ProfileContext} from "../../../Context/ProfileContext";
 /** Functional component to Create albums using react hooks.
  * @class
  */
 const CreateAlbum = () => {
+  
   /**Gets the baseURL from configrations context of the user
    * @memberof CreateAlbum
    */
   const url = useContext(ConfigContext);
+  const user = useContext(ProfileContext);
   /**Album name
    * @memberof CreateAlbum
    * @constant albumName
@@ -102,11 +105,29 @@ const CreateAlbum = () => {
     setImgName(e.target.files[0].name);
     // console.log(e.target.files[0]);
   };
+  const [userImg, setUserImg] = useState("");
+
+  useEffect(() => {
+    axios.get(url.baseURL+"/me", {
+      headers: {
+          'authorization': "Bearer "+localStorage.getItem("token"),
+      },
+     })
+      .then(res => {
+          if(res.status===200)
+          {  
+           setUserImg( res.data.images)    
+          }
+      })
+  });
+  
   /**Submit Album info to the backend in a request
    * @memberof CreateAlbum
    * @type {Function}
    */
   const onSubmit = async (e) => {
+    console.log(user);
+    console.log(url);
     e.preventDefault();
     const formData = new FormData();
     const genre = [];
@@ -126,24 +147,13 @@ const CreateAlbum = () => {
       setMessage("Album created");
     } catch (err) {
       console.log(err);
-      /* if (err.response.status === 500) {
-        setMessage("There was a problem with the server");
-      } else if (err.response.status === 401) {
-        localStorage.removeItem("loginType");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userID");
-        alert("Your session has ended");
-      } else {
-        setMessage(err.response.message);
-      }*/
     }
   };
   return (
     <div className="artist-body">
       <div className="full-page container upload-page">
         <Fragment>
-          <ArtistSidebar />
+          <ArtistSidebar img={userImg}/>
           <form className="container" onSubmit={onSubmit}>
             {message ? <Message msg={message} /> : null}
             <div class="form-group">

@@ -66,6 +66,7 @@
     background-color:rgb(29, 185, 84)!important;
     border-color: rgb(29, 185, 84) !important;
 }
+
 #webplayer-home .card:hover .active-play{
     display: block;
 }
