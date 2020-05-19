@@ -1,0 +1,37 @@
+
+/*#root-navbar .your-library-profile #navbar-profile-pic {
+    display: inline-block;
+	vertical-align: middle;
+	background-size: cover;
+    background-position: 50%;
+    overflow: hidden;
+	position: relative;
+	margin: 0;
+    padding: 0;
+    border: 0;
+	width: 28px;
+    height: 28px;
+  }*/
+#webplayer-layout{
+    background-color: #121212;
+}
+#artist-sections-nav{
+    padding-left: 30px;
+    margin:16px 0 30px;
+}
+#about-section,#related-artists-section,#artist-overview-section{
+    
+    height: auto;
+    min-height: 110vh;
+}
+#your-library-webplayer .background-grey {
+    background-color: #333333;
+    color: #fff;
+}
+#your-library-webplayer a{
+    color: #fff;
+    text-decoration: none;
+}
+#your-library-webplayer.hide{
+    display: none;
+}

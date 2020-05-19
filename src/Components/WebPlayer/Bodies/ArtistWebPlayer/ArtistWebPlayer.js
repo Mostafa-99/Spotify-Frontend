@@ -235,6 +235,7 @@ class ArtistWebPlayer extends Component {
                     alert(res.message);
                 }
             })     
+            
             this.getAlbumTracks();                                         
     }
         /**get all tracks of the album 

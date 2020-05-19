@@ -39,6 +39,8 @@ import ProfileContextProvider from './Context/ProfileContext';
 import ConfigContextProvider from './Context/ConfigContext'
 import {ProtectedRoute} from './ProtectedRoute/ProtectedRoute'
 
+import YourLibrary from './Components/WebPlayer/Bodies/YourLibrary/YourLibrary'
+
 function App() {
 
   return (
@@ -77,6 +79,8 @@ function App() {
         <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
         <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
         <Route path="/playlist-webplayer" exact component={PlaylistWebPlayer} />
+
+        <Route path="/collection"exact component={YourLibrary}/>
 
         {/*Protected pages */}
         <ProtectedRoute path="/edit-profile" component={EditProfile}/>
