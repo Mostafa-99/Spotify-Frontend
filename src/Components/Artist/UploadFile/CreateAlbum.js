@@ -8,13 +8,15 @@ import {ProfileContext} from "../../../Context/ProfileContext";
 /** Functional component to Create albums using react hooks.
  * @class
  */
-const CreateAlbum = () => {
+const CreateAlbum = (props) => {
   
   /**Gets the baseURL from configrations context of the user
    * @memberof CreateAlbum
    */
   const url = useContext(ConfigContext);
   const user = useContext(ProfileContext);
+  console.log(props);
+
   /**Album name
    * @memberof CreateAlbum
    * @constant albumName
@@ -136,19 +138,51 @@ const CreateAlbum = () => {
     formData.append("albumType", albumType);
     formData.append("genre", genre);
     formData.append("image", img);
+    if(props.location.state.myAlbum){
+      console.log("edit album:",props.location.state.myId)
+      try {
+        const res = await axios.put(url.baseURL + "/meArtist/albums/"+props.location.state.myId, formData, {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+       if(res.status===200){
+         setMessage("Album edited");
+       }
+      } catch (err) {
+        console.log(err);
+      }
+    }else{
+      console.log("Create album:")
 
+      try {
+        const res = await axios.post(url.baseURL + "/me/albums", formData, {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+        if(res.status===200){
+        setMessage("Album created");
+      }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+  const deleteAlbum = async (e) => {
     try {
-      const res = await axios.post(url.baseURL + "/me/albums", formData, {
+      const res = await axios.delete(url.baseURL + "/meArtist/albums/"+props.location.state.myId, {}, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
-
-      setMessage("Album created");
+      if(res.status===200){
+      setMessage("Album deleted");
+      }
     } catch (err) {
       console.log(err);
     }
-  };
+  }
   return (
     <div className="artist-body">
       <div className="full-page container upload-page">
@@ -192,12 +226,26 @@ const CreateAlbum = () => {
                 {imgName}
               </label>
             </div>
-
+           {props.location.state.myAlbum ? 
+            <input
+              type="submit"
+              value="Edit"
+              className="btn btn-primary-outline btn-block mt-4"
+            ></input> :
             <input
               type="submit"
               value="Create"
               className="btn btn-primary-outline btn-block mt-4"
-            ></input>
+            ></input>}
+
+            {props.location.state.myAlbum ? 
+             <button
+            className="btn btn-danger rounded-pill w-100"
+            type="button"
+           onClick={deleteAlbum}
+            >
+            Delete Album
+           </button> :null }
           </form>
         </Fragment>
       </div>

@@ -144,17 +144,17 @@ class ManageProfile extends Component {
               </div>
 
               <div className="name-container d-none">
-                <div class="input-group  d-flex flex-column mb-5  mt-5 w-50 container ">
+                <div className="input-group  d-flex flex-column mb-5  mt-5 w-50 container ">
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     placeholder="Name"
                     aria-label="Name"
                     aria-describedby="basic-addon2"
                     name="fullName"
                     onChange={this.changeNameText}
                   />
-                  <div class="">
+                  <div className="">
                     <button
                       className="btn btn-primary-outline w-100"
                       type="button"
@@ -195,10 +195,10 @@ class ManageProfile extends Component {
                 </div>
               </div>
               <div className="d-none bio-container">
-                <div class="input-group  d-flex flex-column w-50 container mb-5 ">
-                  <div class="input-group-prepend">
+                <div className="input-group  d-flex flex-column w-50 container mb-5 ">
+                  <div className="input-group-prepend">
                     <textarea
-                      class="form-control"
+                      className="form-control"
                       rows="7"
                       aria-label="With textarea"
                       onChange={this.changeBioText}

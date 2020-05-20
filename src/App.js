@@ -42,6 +42,7 @@ import {ProtectedRoute} from './ProtectedRoute/ProtectedRoute'
 
 import Overview from './Components/Artist/OverviewPage/Overview'
 import ManageProfile from './Components/Artist/ManageProfile/ManageProfile'
+import EditTrack from './Components/Artist/EditTrackAndAlbum/EditTrack'
 function App() {
 
   return (
@@ -93,6 +94,7 @@ function App() {
         
         <ProtectedRoute path="/artist/manage-profile" exact component={ManageProfile}/>
         <ProtectedRoute path="/artist/overview" exact component={Overview}/>
+        <ProtectedRoute path="/artist/edit-track" exact component={EditTrack}/>
 
 
        

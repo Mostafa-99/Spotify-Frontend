@@ -243,7 +243,7 @@ export class AlbumWebPlayer extends Component {
                         </div>
                         <div className="tracks-list-div">
                             <hr className="appear-on-small-screens"/>
-                            <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                            <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId} albumId={this.props.location.state.myId} myAlbumArtist={this.props.location.state.myAlbum} />
                         </div>
                     </div>
                 </div>

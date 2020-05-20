@@ -33,24 +33,6 @@ class Albums extends Component {
        */
       artistAlbums: [],
     };
-    this.removeAlbum=this.removeAlbum.bind(this)
-
-  }
-  removeAlbum(event){
-    event.preventDefault();
-    const albumCardId=event.target.id;
-    axios.delete(this.context.baseURL+"/meArtist/albums/"+albumCardId, {
-      headers: {
-          'authorization': "Bearer "+localStorage.getItem("token"),
-      },
-  })
-      .then(res => {
-          if(res.status===200)
-          {
-              console.log("removed succesfully")
-            }
-
-      })
   }
   /**When the component mounts it sends a request to the backend to load the albums
    * @memberof Albums
@@ -124,7 +106,9 @@ class Albums extends Component {
           <div className="col-lg-9 albums-section">
             <div className="header-button-container">
               <h2 className="section-title albums">Albums</h2>
-              <Link to="/artist/create-album">
+              <Link to={{
+                  pathname: "/artist/create-album",
+                  state: {myAlbum:false}}}>
                 <button className="btn-primary-outline add-album">
                   Add Album
                 </button>
@@ -153,7 +137,11 @@ class Albums extends Component {
                     </div>
                       <div>
 
-                  <button type="button" id={album.id} className="btn btn-danger cancel-btn" onClick={this.removeAlbum}>X</button>
+                  <Link to={{
+                  pathname: "/artist/create-album",
+                  state: { myId: album.id ,myAlbum:true},
+                }}><button type="button" id={album.id} className="btn btn-danger cancel-btn" 
+                  ><i className="fa fa-edit text-light"></i></button></Link>
                       </div>
                   </div>
                 </Link>
