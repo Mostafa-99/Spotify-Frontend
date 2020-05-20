@@ -251,6 +251,8 @@ class ArtistWebPlayer extends Component {
                 }}
                 )
                 .then(res => {
+                    
+                console.log(res);
                     if(res.status===200)
                 {   
                     this.setState({tracks:res.data.data})
@@ -270,6 +272,7 @@ class ArtistWebPlayer extends Component {
                 .catch(error => {
                     alert(error.response.data.message);
                 })
+                
             }
         /**set currently playing song to an id 
          * @type {Function}

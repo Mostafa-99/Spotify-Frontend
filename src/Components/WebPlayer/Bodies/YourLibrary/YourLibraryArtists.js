@@ -125,6 +125,12 @@ class YourLibraryArtists extends Component {
                 <div className="card-group">
                     {this.state.relatedArtists.map( artist => (
                         <div>
+                        <Link to={{
+                               pathname:"/artist-webplayer",
+                               state:{
+                               myId :artist.id
+                               }
+                           }}>
                             <div className="card">
                                 <img src={artist.imageUrl} className="card-img-top rounded-circle" alt="..."></img>
                                 <div className="card-body">
@@ -136,6 +142,7 @@ class YourLibraryArtists extends Component {
                                     </div>
                                 </div>
                             </div>
+                            </Link>
                         </div>
                             )
                     )}

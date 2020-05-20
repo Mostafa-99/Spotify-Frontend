@@ -35,8 +35,8 @@ class SideBar extends Component {
                         <Link to="/home"><img id='sidebar-logo' className="sidebar-logo" src={spotify_white_logo} alt="Spotify Logo White"/></Link>
                         <ul className='sidebar-list'>
                             <Link to="/home" className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-home'><span className="glyphicon glyphicon-home"></span><span className='list-item-text'>Home</span></li></Link>
-                            <div to="/search"className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-search'><span className="glyphicon glyphicon-search"></span><span className='list-item-text'>Search</span></li></div>
-                            <div to=""className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-library'><svg viewBox="0 0 512 512" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M291.301 81.778l166.349 373.587-19.301 8.635-166.349-373.587zM64 463.746v-384h21.334v384h-21.334zM192 463.746v-384h21.334v384h-21.334z" fill="currentColor" ></path></svg><span className='list-item-text mt-auto ml-0 pl-3'>Your Library</span></li></div>
+                            <Link to="/search"className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-search'><span className="glyphicon glyphicon-search"></span><span className='list-item-text'>Search</span></li></Link>
+                            <Link to="/your-library"className='text-decoration-none'><li className='sidebar-list-item sidebar-list-item-library'><svg viewBox="0 0 512 512" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M291.301 81.778l166.349 373.587-19.301 8.635-166.349-373.587zM64 463.746v-384h21.334v384h-21.334zM192 463.746v-384h21.334v384h-21.334z" fill="currentColor" ></path></svg><span className='list-item-text mt-auto ml-0 pl-3'>Your Library</span></li></Link>
                         </ul>
                     </div>
                 </div>
