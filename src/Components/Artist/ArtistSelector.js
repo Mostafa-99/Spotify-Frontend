@@ -17,7 +17,6 @@ class ArtistSelector extends Component {
     return (
       <div>
         {this.context.user.role === "artist" ? <Albums /> : <UpgradeArtist />}
-     
       </div>
     );
   }

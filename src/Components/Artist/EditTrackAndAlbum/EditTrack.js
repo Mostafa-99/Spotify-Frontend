@@ -18,40 +18,16 @@ class EditTrack extends Component {
   constructor() {
     super();
     this.state = {
-      user: {
-        image: ""
-      },
       albumId:"",
       trackId:"",
       trackNewName:"",
     };
   }
   componentDidMount() {
-    
       this.state.albumId=this.props.location.state.albumId;
       this.state.trackId=this.props.location.state.trackId;
       console.log(this.state.albumId);
       console.log(this.state.trackId);
-    /*/me/albums */
-
-    /*http://localhost:3000/me*/
-    axios
-      .get(this.context.baseURL+"/me", {
-        headers: {
-          authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          this.setState((prevState) => ({
-            user: {
-              ...prevState.user,
-              image: res.data.images,
-            },
-          }));
-        }
-      });
   }
   onChangeTrackName = (e) => {
     this.setState({
@@ -93,12 +69,13 @@ class EditTrack extends Component {
   }
   
   render() {
+    
     return (
       <div className="artist-body pt-0" id="artist-manage-profile">
         <ArtistHeading />
         <div className="full-page container albums-page artist-albums-page">
           <div className="row container">
-            <ArtistSidebar img={this.state.user.image} />
+            <ArtistSidebar/>
             <div className="col-lg-9 container top-section">
               <div className="name-container">
                   <h1 className="display-5 text-light mt-5 text-center">Edit Track</h1>
@@ -134,7 +111,6 @@ class EditTrack extends Component {
               </div>
               </div>
               </div>
-
     );
   }
 }

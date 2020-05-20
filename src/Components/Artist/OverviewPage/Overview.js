@@ -4,6 +4,7 @@ import "../SideBar/ArtistSidebar";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { Link } from "react-router-dom";
 import { ConfigContext } from "../../../Context/ConfigContext";
+import { ProfileContext } from "../../../Context/ProfileContext";
 import ArtistHeading from "../ManageProfile/ArtistHeading";
 import "../ArtistBody.css";
 import { Doughnut, Line, defaults,Chart } from "react-chartjs-2";
@@ -34,9 +35,6 @@ class Overview extends Component {
   constructor() {
     super();
     this.state = {
-      user: {
-        image: "",
-      },
       numberOfLikesAndFollowersLineDataYears: {
         labels: [],
         datasets: [
@@ -209,37 +207,14 @@ class Overview extends Component {
           this.state.numberOfLikesAndFollowersLineDataDays.datasets[1].data=res.data.days.followers.data;         
         }
       });
-
-    axios
-      .get(this.context.baseURL+"/me", {
-        headers: {
-          authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        if (res.status === 200) {
-         // console.log(res);
-          this.setState((prevState) => ({
-            user: {
-              ...prevState.user,
-              image: res.data.images,
-            },
-          }));
-        }
-      });
   }
   render() {
-    const options = {
-      maintainAspectRatio: false,
-    };
-    
-    return (
+    return(
       <div className="artist-body">
         <ArtistHeading />
-
         <div id="artist-audience" className="container page-container">
           <div className="row">
-            <ArtistSidebar img={this.state.user.image}/>
+            <ArtistSidebar/>
             <div className="col-lg-9 col-sm-12 statistics-section">
               <div className="statistics-div">
                 <div className="statistics-info">

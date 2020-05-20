@@ -107,21 +107,6 @@ const CreateAlbum = (props) => {
     setImgName(e.target.files[0].name);
     // console.log(e.target.files[0]);
   };
-  const [userImg, setUserImg] = useState("");
-
-  useEffect(() => {
-    axios.get(url.baseURL+"/me", {
-      headers: {
-          'authorization': "Bearer "+localStorage.getItem("token"),
-      },
-     })
-      .then(res => {
-          if(res.status===200)
-          {  
-           setUserImg( res.data.images)    
-          }
-      })
-  });
   
   /**Submit Album info to the backend in a request
    * @memberof CreateAlbum
@@ -187,7 +172,7 @@ const CreateAlbum = (props) => {
     <div className="artist-body">
       <div className="full-page container upload-page">
         <Fragment>
-          <ArtistSidebar img={userImg}/>
+          <ArtistSidebar/>
           <form className="container" onSubmit={onSubmit}>
             {message ? <Message msg={message} /> : null}
             <div class="form-group">

@@ -12,7 +12,7 @@ function Main() {
     
       
     <section id="main-section" >
-      <IndexDesktopNavbar/>
+      {/*<IndexDesktopNavbar/>*/}
         <section id="bg-img">
             <div id="container">
               <div className="h-1">Music for everyone.</div>

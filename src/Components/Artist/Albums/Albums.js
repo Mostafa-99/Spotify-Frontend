@@ -6,6 +6,7 @@ import "../../WebPlayer/WebplayerHome.css";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { Link } from "react-router-dom";
 import { ConfigContext } from "../../../Context/ConfigContext";
+import { ProfileContext } from "../../../Context/ProfileContext";
 import ArtistHeading from '../ManageProfile/ArtistHeading'
 import AccountHeading from "../../Profile/AccountHeading";
 import Message from '../UploadFile/Message'
@@ -24,9 +25,6 @@ class Albums extends Component {
   constructor() {
     super();
     this.state = {
-      user:{
-        image:"",
-    },
       /**Array of Albums of the artist
        * @memberof Albums
        * @type {Array<Albums>}
@@ -38,33 +36,6 @@ class Albums extends Component {
    * @memberof Albums
    */
   componentDidMount() {
-    {
-      /*/me/albums */
-    }
-    /*http://localhost:3000/me*/
-      axios.get(this.context.baseURL+"/me", {
-          headers: {
-              'authorization': "Bearer "+localStorage.getItem("token"),
-          },
-      })
-          .then(res => {
-              console.log(res)
-              if(res.status===200)
-              {
-                  this.setState(prevState => (
-                      {
-                        
-                      user: {                   
-                          ...prevState.user,    
-                          image: res.data.images    
-                      }
-                      
-                  }))
-                  console.log(this.state.user.image)
-
-              }
-
-          })
     axios
       .get(this.context.baseURL + "/me/albums", {
         headers: {
@@ -102,7 +73,7 @@ class Albums extends Component {
         <ArtistHeading/>
         <div className="full-page container albums-page artist-albums-page">
         <div className="row container">
-          <ArtistSidebar img={this.state.user.image} />
+          <ArtistSidebar/>
           <div className="col-lg-9 albums-section">
             <div className="header-button-container">
               <h2 className="section-title albums">Albums</h2>

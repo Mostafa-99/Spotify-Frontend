@@ -4,7 +4,9 @@ import Message from "./Message";
 import "../UploadFile/UploadFile.css";
 import Progress from "./Progress";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
-import { ConfigContext } from "../../../Context/ConfigContext";
+import { ConfigContext } from '../../../Context/ConfigContext'
+import { ProfileContext } from '../../../Context/ProfileContext'
+
 /** Functional component for track upload.
  * @class
  * @param props
@@ -137,7 +139,7 @@ const TrackUpload = (props) => {
     <div className="artist-body">
       <div className="full-page container upload-page">
         <Fragment>
-          <ArtistSidebar />
+          <ArtistSidebar/>
           <form className="container" onSubmit={onSubmit}>
             {message ? <Message msg={message} /> : null}
             <div class="form-group">
