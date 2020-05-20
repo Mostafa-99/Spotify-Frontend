@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import './Track.css'
+import { Link } from 'react-router-dom';
 
 /**
  * Track class
@@ -53,6 +54,7 @@ export class Track extends Component {
     }
 
     componentDidMount(){
+        console.log(this.props);
         this.props.track.artists.map((artist)=>(
             this.setState({artists:artist.name})
         ));
@@ -81,6 +83,7 @@ export class Track extends Component {
     }
 
     render() {
+        {}
         return (
             <div id="track-row-div" className="container-fluid">
                 <div className={(this.props.playing_song_id===this.props.track._id?"row playing-song":"row not-playing-song")}>
@@ -92,6 +95,14 @@ export class Track extends Component {
                         <p className="track-name">{this.state.name}</p>
                         <p className="track-artist">{this.state.artists}</p>
                     </div>
+              
+               {this.props.myAlbumArtist ? <Link 
+                to={{
+                  pathname: "/artist/edit-track",
+                  state: { trackId: this.state.id, albumId:this.props.albumId},
+                }}
+                className="mt-2 mr-2"><i className="fa fa-edit text-danger"></i></Link> : null}
+
                     <div className="track-options-div dropdown show">
                         <strong className="track-options" id="trackdropdownMenuButton" data-toggle="dropdown"></strong>
                         <div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">

@@ -7,6 +7,7 @@ import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
 import ArtistPageBtn from '../../../Artist/Albums/AlbumPageBtn'
 import AlbumPageBtn from '../../../Artist/Albums/AlbumPageBtn'
+import { Link } from "react-router-dom";
 
 /**
  * Album web player class
@@ -65,7 +66,7 @@ export class AlbumWebPlayer extends Component {
 
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
-
+        console.log(myId);
         this.getAlbumDetails();
         this.getAlbumTracks();
     }
@@ -207,9 +208,20 @@ export class AlbumWebPlayer extends Component {
                                     <h1 className="album-title">{this.state.album_name}</h1>
                                     <p className="album-artist">{this.state.artists}</p>
                                 </div>
+
+                                {this.props.location.state.myAlbum ? <Link
+                                    to={{
+                                        pathname: "/artist/track-upload",
+                                        state: { myId: this.state.myId},
+                                    }}
+                                    > 
+                                    <button type="button" class="btn btn-success">Upload song</button>
+
+                                </Link> : <div/> }
+               
                                 <div className="row album-buttons-div">
                                     <div className="album-play-button-div">
-                                        <button type="button" className="btn btn-success"></button>
+                                        <button type="button" className="btn btn-success">PLAY</button>
                                     </div>
                                     <div className="row album-options-div">
                                         <div className="album-heart-div">
@@ -231,7 +243,7 @@ export class AlbumWebPlayer extends Component {
                         </div>
                         <div className="tracks-list-div">
                             <hr className="appear-on-small-screens"/>
-                            <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                            <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId} albumId={this.props.location.state.myId} myAlbumArtist={this.props.location.state.myAlbum} />
                         </div>
                     </div>
                 </div>

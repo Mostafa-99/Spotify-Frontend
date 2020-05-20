@@ -203,7 +203,7 @@ export class PlaylistWebPlayer extends Component {
                                 </div>
                                 <div className="row album-buttons-div">
                                     <div className="album-play-button-div">
-                                        <button type="button" className="btn btn-success"></button>
+                                        <button type="button" className="btn btn-success">PLAY</button>
                                     </div>
                                     <div className="row album-options-div">
                                         <div className="album-heart-div">
