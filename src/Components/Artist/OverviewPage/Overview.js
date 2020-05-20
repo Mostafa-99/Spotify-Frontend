@@ -4,7 +4,6 @@ import "../SideBar/ArtistSidebar";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { Link } from "react-router-dom";
 import { ConfigContext } from "../../../Context/ConfigContext";
-import { ProfileContext } from "../../../Context/ProfileContext";
 import ArtistHeading from "../ManageProfile/ArtistHeading";
 import "../ArtistBody.css";
 import { Doughnut, Line, defaults,Chart } from "react-chartjs-2";
@@ -35,6 +34,9 @@ class Overview extends Component {
   constructor() {
     super();
     this.state = {
+      user: {
+        image: "",
+      },
       numberOfLikesAndFollowersLineDataYears: {
         labels: [],
         datasets: [
@@ -206,12 +208,22 @@ class Overview extends Component {
           this.state.numberOfLikesAndFollowersLineDataDays.datasets[0].data=res.data.days.likes.data;
           this.state.numberOfLikesAndFollowersLineDataDays.datasets[1].data=res.data.days.followers.data;         
         }
+        this.setState((prevState) => ({
+          user: {
+            ...prevState.user,
+          },
+        }));
       });
+
+ 
+      console.log(this.state);
   }
   render() {
-    return(
+   
+    return (
       <div className="artist-body">
         <ArtistHeading />
+
         <div id="artist-audience" className="container page-container">
           <div className="row">
             <ArtistSidebar/>
