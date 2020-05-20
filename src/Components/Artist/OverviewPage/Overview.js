@@ -42,9 +42,9 @@ class Overview extends Component {
         datasets: [
           {
             label: "Likes",
-            fill: false,
+            fill: true,
             lineTension: 0.3,
-            backgroundColor: "rgba(75,192,192,0.4)",
+            backgroundColor: "rgba(40,255,50,0.1)",
             borderColor: "rgb(40, 255, 50)",
             borderCapStyle: "butt",
             borderDash: [],
@@ -62,9 +62,9 @@ class Overview extends Component {
             data: [],
           }, {
             label: "Followers",
-            fill: false,
+            fill: true,
             lineTension: 0.3,
-            backgroundColor: "rgba(75,192,192,0.4)",
+            backgroundColor: "rgba(255,205,40,0.1)",
             borderColor: "rgb(255, 205, 40)",
             borderCapStyle: "butt",
             borderDash: [],
@@ -134,9 +134,9 @@ class Overview extends Component {
         datasets: [
           {
             label: "Likes",
-            fill: false,
+            fill: true,
             lineTension: 0.3,
-            backgroundColor: "rgba(75,192,192,0.4)",
+            backgroundColor: "rgba(22,69,224,0.1)",
             borderColor: "rgb(22, 69, 224)",
             borderCapStyle: "butt",
             borderDash: [],
@@ -154,9 +154,9 @@ class Overview extends Component {
             data: [],
           }, {
             label: "Followers",
-            fill: false,
+            fill: true,
             lineTension: 0.3,
-            backgroundColor: "rgba(75,192,192,0.4)",
+            backgroundColor: "rgba(224,22,207,0.1)",
             borderColor: "rgb(224, 22, 207)",
             borderCapStyle: "butt",
             borderDash: [],

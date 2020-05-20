@@ -6,9 +6,7 @@ import "../../WebPlayer/WebplayerHome.css";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { Link } from "react-router-dom";
 import { ConfigContext } from "../../../Context/ConfigContext";
-import { ProfileContext } from "../../../Context/ProfileContext";
 import ArtistHeading from '../ManageProfile/ArtistHeading'
-import AccountHeading from "../../Profile/AccountHeading";
 import Message from '../UploadFile/Message'
 
 import  './AlbumPage.css'
