@@ -74,7 +74,7 @@ class YourLibraryPlaylists extends Component {
             })
 
              /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
-    /*axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/created-playlists",{/* playlists*/
+    /*axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/created-playlists",{/* liked songs*/
     axios.get(this.context.baseURL+"/your-library",{
         headers:{
             'authorization': "Bearer "+localStorage.getItem("token"),
@@ -161,7 +161,7 @@ class YourLibraryPlaylists extends Component {
                 <div className="playlists-sub-section">
                                 <div className="container card-group">
                                     <div id='liked-songs-container'className="col-4 webplayer-body ">
-                                        <Link to=''>
+                                        <div to=''>{/* change div to Link for likes to work*/}
                                             <div id='likes-card' className="card bg-primary text-white text-left">
                                             {this.state.likedSongs.map( likedSong => (
                                                 <div class="blockquote mb-0">
@@ -183,7 +183,7 @@ class YourLibraryPlaylists extends Component {
                                                 </div>
                                             ))}
                                             </div>
-                                        </Link>
+                                        </div>
                                     </div>
                                     {this.state.playLists.map( playList => (
                                         <div>

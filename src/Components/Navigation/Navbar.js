@@ -12,7 +12,8 @@ const exclusionArray = [
   '/webplayer/album',
   '/artist/album-page',
   '/playlist-webplayer',
-  '/collection'
+  '/your-library',
+  '/search'
 ]
 
 /**
