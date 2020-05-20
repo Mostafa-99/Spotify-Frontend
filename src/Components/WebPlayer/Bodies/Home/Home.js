@@ -124,7 +124,8 @@ class Home extends Component {
                                     id:playList._id,
                                     title:playList.name,
                                     description: playList.description,
-                                    imageUrl:playList.images[0]
+                                    imageUrl:playList.images[0],
+                                    href:playList.href
                                 })),
                             })
 
@@ -154,7 +155,8 @@ class Home extends Component {
                                     id:playList._id,
                                     title:playList.name,
                                     description: playList.description,
-                                    imageUrl:playList.images[0]
+                                    imageUrl:playList.images[0],
+                                    href:playList.href
                                 }))
                             })
                         }
@@ -222,6 +224,7 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.context.name,
                             imageUrl:playList.context.image,
+                            href:playList.href
                         })
                         )
                     })
@@ -315,7 +318,8 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.name,
                             imageUrl:playList.images[0],
-                            description: playList.description
+                            description: playList.description,
+                            href:playList.href
                         }))
                     })
                 }
@@ -347,7 +351,8 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.name,
                             imageUrl:playList.images[0],
-                            description: playList.description
+                            description: playList.description,
+                            href:playList.href
                         }))
                     })
                 }
@@ -490,7 +495,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playList.id
+                                    myId :playList.id,
+                                    myhref:playList.href,
                                     }
                                 }}>
                                 <div className="card" id={playList.id}>
@@ -525,7 +531,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playList.id
+                                    myId :playList.id,
+                                    myhref:playList.href,
                                     }
                                 }}>
                             <div className="card" id={playList.id}>
@@ -559,7 +566,7 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/webplayer/album",
                                     state:{
-                                    myId :album.id
+                                    myId :album.id,
                                     }
                                 }}>
                             <div className="card" id={album.id}>
@@ -593,7 +600,7 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/webplayer/album",
                                     state:{
-                                    myId :album.id
+                                    myId :album.id,
                                     }
                                 }}>
                                 <div className="card" id={album.id}>
@@ -630,7 +637,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
@@ -667,7 +675,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
@@ -704,7 +713,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
@@ -741,7 +751,9 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
+                                
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
