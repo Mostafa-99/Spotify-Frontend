@@ -57,7 +57,8 @@ class YourLibraryPlaylists extends Component {
                         playLists: res.data.data.map( playList => ({
                             id:playList._id,
                             name:playList.name,
-                            imageUrl:playList.images[0]
+                            imageUrl:playList.images[0],
+                            href:playList.href
                         }))
                     })
                 }
@@ -190,7 +191,8 @@ class YourLibraryPlaylists extends Component {
                                              <Link to={{
                                                     pathname:"/playlist-webplayer",
                                                     state:{
-                                                    myId :playList.id
+                                                    myId :playList.id,
+                                                    myhref:playList.href,
                                                     }
                                                 }}>
                                             <div className="card" id={playList.id}>

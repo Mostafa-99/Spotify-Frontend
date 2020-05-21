@@ -2,40 +2,19 @@ import React from 'react';
 import {
     EmailIcon,
     FacebookIcon,
-    InstapaperIcon,
-    LineIcon,
-    LinkedinIcon,
-    LivejournalIcon,
-    MailruIcon,
-    OKIcon,
-    PinterestIcon,
-    PocketIcon,
     RedditIcon,
     TelegramIcon,
     TumblrIcon,
     TwitterIcon,
-    ViberIcon,
-    VKIcon,
-    WeiboIcon,
     WhatsappIcon,
-    WorkplaceIcon,
   } from "react-share";
 import {
     FacebookShareButton,
-    GooglePlusShareButton,
-    LinkedinShareButton,
     TwitterShareButton,
     TelegramShareButton,
     WhatsappShareButton,
-    PinterestShareButton,
-    VKShareButton,
-    OKShareButton,
     RedditShareButton,
     TumblrShareButton,
-    LivejournalShareButton,
-    MailruShareButton,
-    ViberShareButton,
-    WorkplaceShareButton,
     EmailShareButton,
   } from 'react-share';
 
@@ -63,38 +42,38 @@ function Share(props) {
                <br/>
                <br/>
             
-            <TwitterShareButton url={props} >
+            <TwitterShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!" >
               <TwitterIcon size={40} round={false} borderRadius={10} />
              </TwitterShareButton>  
               <span > </span>  
              
-             <FacebookShareButton url={props} >
+             <FacebookShareButton url={props.url} quote="Checkout this song on TotallyNotSpotify!!" hashtag="TotallyNotSpotify">
                <FacebookIcon size={40} round={false} borderRadius={10} />
              </FacebookShareButton>
              <span > </span> 
 
-             <WhatsappShareButton url={props}  >
+             <WhatsappShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!"   >
             < WhatsappIcon size={40} round={false} borderRadius={10} />
              </WhatsappShareButton>
              <span > </span> 
 
-             <EmailShareButton url={props}  >
+             <EmailShareButton url={props.url} subject="Checkout this song on TotallyNotSpotify!!" >
             < EmailIcon size={40} round={false} borderRadius={10} />
              </EmailShareButton>
              <span > </span> 
 
-             <RedditShareButton url={props} >
+             <RedditShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!">
                <RedditIcon size={40} round={false} borderRadius={10}/>
              </RedditShareButton>
              <span > </span> 
 
 
-             <TelegramShareButton url={props} >
+             <TelegramShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!" >
                <TelegramIcon size={40} round={false} borderRadius={10} />
              </TelegramShareButton>
              <span > </span> 
 
-             <TumblrShareButton url={props} >
+             <TumblrShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!">
                <TumblrIcon size={40} round={false} borderRadius={10} />
              </TumblrShareButton>
              <span > </span> 

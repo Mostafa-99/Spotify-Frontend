@@ -1,15 +1,20 @@
 import React,{Component} from 'react';
+import {ConfigContext} from '../../Context/ConfigContext'
+import axios from 'axios'
+import $ from "jquery";
 import './SideBar.css';
 import './CreatePlaylist.css'
 
+
 /**
- * Create Playlist modal : opens to shows a modal to write in the name of the new playlist to send to back end 
- * Not done yet 
+ * Create Playlist modal : opens to shows a modal to write in the name of the new playlist 
+ * Default Name for a playlist is New Playlist controlled bby Backend
+ * Maximum characters of a playlist name is 25 letters
  * @extends Component
  */
 
 class CreatePlaylist extends Component {
-
+    static contextType=ConfigContext;
     constructor() {
             
          super()
@@ -24,7 +29,7 @@ class CreatePlaylist extends Component {
         }
      
         this.onChange = this.onChange.bind(this)
-        // this.handleclick= this.handleclick.bind(this)
+         this.handleclick= this.handleclick.bind(this)
     }
 
    
@@ -36,27 +41,39 @@ class CreatePlaylist extends Component {
    */
     onChange = (e) => this.setState({ playlistname: e.target.value });
     //To be uncommented Next Phase 
-
-   /*  handleclick = () => {
-        axios.post('',this.state.playlistname)
+     
+     handleclick = () => {
+         //
+        axios.post(this.context.baseURL +'/users/playlists/',
+            {
+            "name":this.state.playlistname
+            },
+        {
+            headers: {
+            'authorization': "Bearer " + localStorage.getItem("token"),
+          }})
             .then(res => {
-                if(res.status===204){
-                    alert("An email has been sent");
+                if(res.status===201 || res.status===200){
+                    alert("Succesfully Created");
+                    console.log("sucessfully created")
+                    $(document).ready(function(){
+                        $("#static-back-drop").modal("hide");
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();  
+                    })
                 }
-                else{
-                    alert("Please try again");
-                }
+              
             })
             .catch(error => {
-                alert(error.response.data.message);
+                console.log(error);
             })
-    } */
+    } 
 
      
     render() {
         return ( <div>
 
-     <div className="modal" id="static-back-drop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div className="modal " id="static-back-drop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div className="modal-dialog mw-100 w-100" id="playlist-modal" role="document">
     <div className="modal-content" id="modal-content-create" >
 
@@ -75,15 +92,16 @@ class CreatePlaylist extends Component {
       <div className="modal-body" id="modal-body-create">
            <div id="modal-body-container">     
           <div id="modal-body-text">Playlist Name</div>
-                <input type="text"  size="40" name="playlistname" id="playlist-name-input" placeholder="New Playlist" onChange={this.onChange} />
+          <form>
+                <input type="text"  size="25" name="playlistname" id="playlist-name-input" placeholder="New Playlist" onChange={this.onChange} maxLength="30" minLength="2" data-err="Enter Name less than 25 letters "required />
+        </form>
         </div>
       </div>
 
       <div className="modal-footer" id="playlist-modal-footer">
 
            <button  type="button" data-dismiss="modal" id="cancel-create-btn">cancel</button>
-           {/* <button id="create-playlist-btn" onClick={this.handleclick} >Create </button> */}
-           <button id="create-playlist-btn" disabled>Create </button>
+           <button id="create-playlist-btn" onClick={this.handleclick}  >Create </button>
       </div>
 
       

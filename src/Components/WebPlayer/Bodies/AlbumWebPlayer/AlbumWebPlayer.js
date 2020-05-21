@@ -24,6 +24,7 @@ export class AlbumWebPlayer extends Component {
          * @type {Object}
          */
         myId:{},//id of current album
+
         /**
          * Name of the album
          * @memberof AlbumWebPlayer
