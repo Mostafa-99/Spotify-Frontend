@@ -19,6 +19,8 @@ import {
   } from 'react-share';
 
 function Share(props) {
+  let URL=(props.url).replace('/api','');
+  console.log(URL);
     return(<div>
              <div className="modal" id="share-static-back-drop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div className="modal-dialog modal-dialog-centered mw-30 w-30" id="create-playlist-modal" role="document">
@@ -42,38 +44,38 @@ function Share(props) {
                <br/>
                <br/>
             
-            <TwitterShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!" >
+            <TwitterShareButton url={URL} title="Checkout this song on TotallyNotSpotify!!" >
               <TwitterIcon size={40} round={false} borderRadius={10} />
              </TwitterShareButton>  
               <span > </span>  
              
-             <FacebookShareButton url={props.url} quote="Checkout this song on TotallyNotSpotify!!" hashtag="TotallyNotSpotify">
+             <FacebookShareButton url={URL} quote="Checkout this song on TotallyNotSpotify!!" hashtag="TotallyNotSpotify">
                <FacebookIcon size={40} round={false} borderRadius={10} />
              </FacebookShareButton>
              <span > </span> 
 
-             <WhatsappShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!"   >
+             <WhatsappShareButton url={URL} title="Checkout this song on TotallyNotSpotify!!"   >
             < WhatsappIcon size={40} round={false} borderRadius={10} />
              </WhatsappShareButton>
              <span > </span> 
 
-             <EmailShareButton url={props.url} subject="Checkout this song on TotallyNotSpotify!!" >
+             <EmailShareButton url={URL} subject="Checkout this song on TotallyNotSpotify!!" >
             < EmailIcon size={40} round={false} borderRadius={10} />
              </EmailShareButton>
              <span > </span> 
 
-             <RedditShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!">
+             <RedditShareButton url={URL} title="Checkout this song on TotallyNotSpotify!!">
                <RedditIcon size={40} round={false} borderRadius={10}/>
              </RedditShareButton>
              <span > </span> 
 
 
-             <TelegramShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!" >
+             <TelegramShareButton url={URL} title="Checkout this song on TotallyNotSpotify!!" >
                <TelegramIcon size={40} round={false} borderRadius={10} />
              </TelegramShareButton>
              <span > </span> 
 
-             <TumblrShareButton url={props.url} title="Checkout this song on TotallyNotSpotify!!">
+             <TumblrShareButton url={URL} title="Checkout this song on TotallyNotSpotify!!">
                <TumblrIcon size={40} round={false} borderRadius={10} />
              </TumblrShareButton>
              <span > </span> 
