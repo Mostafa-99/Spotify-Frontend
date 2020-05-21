@@ -103,6 +103,7 @@
 #search-body{
     background-color: #121212;
     height: auto;
+    padding-top: 40px;
 }
 
 @media only screen and (max-width: 992px) {
