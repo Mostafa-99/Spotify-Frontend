@@ -227,10 +227,59 @@
     text-transform: none;
     padding-left: 30px;
 }
-
+#artist-follow-button.hide{
+display: none;
+}
 
 @media only screen and (max-width: 992px) {
     #artist-buttons{
         display: none;
     }
 }
+
+#artist-following-button{
+	line-height: 18px;
+	width: 16px;
+	font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 40%;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease 0s;
+    border: 3px solid #fff;
+    color: white;
+    margin: 10px 0 10px 0;
+    border-radius: 500px;
+    padding: 8px 34px;
+    font-weight: 700;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+	font-weight: 700;
+	border: 1px solid transparent;
+	transition-duration: .3s;
+	border-width: 0;
+	text-transform: uppercase;
+	white-space: normal;
+	color: #fff;
+	box-shadow: 0 0 0 2px #fff inset;
+	background-color: transparent;
+	transition: all 33ms cubic-bezier(.3,0,0,1);
+	letter-spacing: 1.76px;
+	will-change: transform;
+  }
+  
+#artist-following-button:hover {  
+	transform: scale(1.06);
+	color: #FFF;
+	text-decoration: none;
+  }
+
+#artist-following-button:focus {
+    outline: none;
+}
+
+#artist-following-button.hide{
+    display: none;
+    }

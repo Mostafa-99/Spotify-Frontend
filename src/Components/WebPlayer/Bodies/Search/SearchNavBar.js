@@ -7,8 +7,7 @@ import axios from 'axios'
 
 import { ConfigContext } from '../../../../Context/ConfigContext'
 import { ProfileContext } from '../../../../Context/ProfileContext'
-import ArtistWebPlayer from '../ArtistWebPlayer/ArtistWebPlayer.css'
-
+import TracksList from '../AlbumWebPlayer/TracksList';
 /** Class of Search navbar and display categories.
  * @extends Component
  */
@@ -55,7 +54,27 @@ class SearchNavBar extends Component {
              * @memberof ArtistWebPlayer
              * @type {Array}
              */
-            playLists:[]
+            playLists:[],
+            /**
+             * Array of tracks objects 
+             * @type {Array<Object>}
+             */
+            "tracks":[],
+            /**
+             * States if the user liked the album or not
+             * @type {Boolean}
+             */
+            "is_liked":Boolean,
+            /**
+             * ID of the playing song
+             * @type {String}
+             */
+            "playing_song_id":"",
+            /**
+             * if not found
+             * @type {String}
+             */
+            "notFound":"0"
         }
         this.searchHandler = this.searchHandler.bind(this);
     }
@@ -157,6 +176,7 @@ class SearchNavBar extends Component {
                     alert(res.message);
                 }
             })
+            this.getTracks();    
     }
 
     /**log out from spotify 
@@ -205,23 +225,72 @@ class SearchNavBar extends Component {
             document.getElementById("search-not-found-searching").classList.add("hide");
             
         }
-        else if(event==' '){
-            this.state.searchingstate=false;
-            document.getElementById("search-searching").classList.add("hide");
-            document.getElementById("search-not-searching").classList.add("hide");
-            document.getElementById("search-not-found-searching").classList.remove("hide");
-        }
-        else{
-            this.state.searchingstate=true;
-            document.getElementById("search-not-searching").classList.add("hide");
-            document.getElementById("search-searching").classList.remove("hide");
-            document.getElementById("search-not-found-searching").classList.add("hide");
+        else{    
             this.componentDidMount();  /** if he is searching for something that is in DB then perform all requests , called each time the input string changed to fetch new data (perform new requests)*/
+            if(this.state.notFound!=0){
+                this.state.searchingstate=true;
+                document.getElementById("search-not-searching").classList.add("hide");
+                document.getElementById("search-searching").classList.remove("hide");
+                document.getElementById("search-not-found-searching").classList.add("hide");
+               /* this.componentDidMount();  /** if he is searching for something that is in DB then perform all requests , called each time the input string changed to fetch new data (perform new requests)*/
+            }
+            else if(this.state.notFound==0){
+                this.state.searchingstate=false;
+                document.getElementById("search-not-searching").classList.add("hide");
+                document.getElementById("search-searching").classList.add("hide");
+                document.getElementById("search-not-found-searching").classList.remove("hide");
+            }
         }
-
       }
-    
-        
+    /**get all tracks of the album 
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        getTracks(){
+            /* http://localhost:3000/album_tracks/1*/
+            axios.get(this.context.baseURL+"search?q="+this.state.text+"&limit=5")
+                .then(res => {
+                    if(res.status===200)
+                {   
+                    this.setState({tracks:res.data.data.items})
+                    this.setState({notFound:res.data.data.total})
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert(res.message);
+                }
+                }    
+                )
+                .catch(error => {
+                    alert(error.response.data.message);
+                })
+                
+            
+     
+            }
+            
+        /**set currently playing song to an id 
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        setPlayingSondId=(id)=>{
+            if(this.state.playing_song_id===id){
+                this.setState({
+                    playing_song_id:""
+                })
+            }
+            else{
+                this.setState({
+                    playing_song_id:id
+                })
+            }
+        }  
       render()
       {
         const logInOrNot = localStorage.getItem("isLoggedIn");
@@ -276,6 +345,8 @@ class SearchNavBar extends Component {
                                                 <h1>Searching for something?</h1>
                                             </div>
                                             <div id='search-searching' className="hide">
+                                                <h3 id="search-sections-header"className=" text-white pb-2"><strong>Songs</strong></h3>
+                                                <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
                                                 <h3 id="search-sections-header"className=" text-white "><strong>Artists</strong></h3>
                                                 <div className="card-group">
                                                     {this.state.artists.map( artist => (
