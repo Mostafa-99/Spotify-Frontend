@@ -7,8 +7,9 @@ import './CreatePlaylist.css'
 
 
 /**
- * Create Playlist modal : opens to shows a modal to write in the name of the new playlist to send to back end 
- * Not done yet 
+ * Create Playlist modal : opens to shows a modal to write in the name of the new playlist 
+ * Default Name for a playlist is New Playlist controlled bby Backend
+ * Maximum characters of a playlist name is 25 letters
  * @extends Component
  */
 

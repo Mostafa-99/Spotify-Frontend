@@ -192,8 +192,8 @@ export class PlaylistWebPlayer extends Component {
     }
 
     render() {
-        console.log("My href")
-        console.log(this.props.location.state.myhref);
+      //  console.log("My href")
+        console.log(this.props.location.state);
 
         return (<div>
             <Share url={this.props.location.state.myhref}/>

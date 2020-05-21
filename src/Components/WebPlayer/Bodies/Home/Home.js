@@ -287,7 +287,8 @@ class Home extends Component {
                             id:album._id,
                             title:album.name,
                             imageUrl:album.image,
-                            artist:album.artists[0].name
+                            artist:album.artists[0].name,
+
                         }))
                     })
                 }
@@ -473,6 +474,7 @@ class Home extends Component {
     }
     render()
     {
+        console.log(this.state)
         {document.title ="Spotify - Home"}
     return(
         
@@ -542,7 +544,8 @@ class Home extends Component {
                             <Item>Save To Library</Item>
                             <Item>Copy Playlist Link</Item>
                             <Item>Open in App</Item>
-                            </Menu>       */}                                 <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                            </Menu>       */}               
+                             <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{playList.title}</h5>
                                         <p className="card-text">{playList.description}</p>
@@ -762,7 +765,8 @@ class Home extends Component {
                                     <Item>Save To Library</Item>
                                     <Item>Copy Playlist Link</Item>
                                     <Item>Open in App</Item>
-                                    </Menu>*/}                                          <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    </Menu>*/}                                         
+                                     <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{playlist.title}</h5>
                                         <p className="card-text">{playlist.description}</p>
