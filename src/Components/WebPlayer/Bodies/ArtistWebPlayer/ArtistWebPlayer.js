@@ -398,11 +398,11 @@ class ArtistWebPlayer extends Component {
             }
             else{
                 this.setState({isFollowed: '0'});
-                this.follow();
+                this.unfollow();
                 this.setFollowing(0);
             }
         }
-        /**sending requests for follow/unfollow
+        /**sending requests for follow
          * @type {Function}
          * @memberof ArtistWebPlayer
          */
@@ -410,6 +410,27 @@ class ArtistWebPlayer extends Component {
             console.log("before click ( followed? ):",this.state.isFollowed);
             axios
             .put(this.context.baseURL+"/me/following",{
+              "id":this.state.myId
+            } ,{
+              headers: {
+                authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+               console.log("edited : ",this.state.isFollowed);
+              }
+            });
+          }
+          /**sending requests for unfollow
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        unfollow(){
+            console.log("before click ( followed? ):",this.state.isFollowed);
+            axios
+            .delete(this.context.baseURL+"/me/following",{
               "id":this.state.myId
             } ,{
               headers: {
