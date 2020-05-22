@@ -6,45 +6,7 @@ import Share from './Share'
 import TracksList from './TracksList.js'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
-import {
-    EmailIcon,
-    FacebookIcon,
-    InstapaperIcon,
-    LineIcon,
-    LinkedinIcon,
-    LivejournalIcon,
-    MailruIcon,
-    OKIcon,
-    PinterestIcon,
-    PocketIcon,
-    RedditIcon,
-    TelegramIcon,
-    TumblrIcon,
-    TwitterIcon,
-    ViberIcon,
-    VKIcon,
-    WeiboIcon,
-    WhatsappIcon,
-    WorkplaceIcon,
-  } from "react-share";
-import {
-    FacebookShareButton,
-    GooglePlusShareButton,
-    LinkedinShareButton,
-    TwitterShareButton,
-    TelegramShareButton,
-    WhatsappShareButton,
-    PinterestShareButton,
-    VKShareButton,
-    OKShareButton,
-    RedditShareButton,
-    TumblrShareButton,
-    LivejournalShareButton,
-    MailruShareButton,
-    ViberShareButton,
-    WorkplaceShareButton,
-    EmailShareButton,
-  } from 'react-share';
+
   /**
  * Playlist web player class
  * @extends Component
@@ -230,8 +192,8 @@ export class PlaylistWebPlayer extends Component {
     }
 
     render() {
-        console.log("My href")
-        console.log(this.props.location.state.myhref);
+      //  console.log("My href")
+        console.log(this.props.location.state);
 
         return (<div>
             <Share url={this.props.location.state.myhref}/>
@@ -269,10 +231,11 @@ export class PlaylistWebPlayer extends Component {
                                                 <a className="dropdown-item " href="#">Add to PLaylist</a>
                                                 <a className="dropdown-item " href="#">Copy Playlist Link</a>
                                                 <a className="dropdown-item  " href="#">Open in Desktop app</a>
-                                                <button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
-                                                <li className='dropdown-item '>
-                                                <span className='list-item-text'>Share </span></li>
+                                               <li className='dropdown-item '>
+                                                   <button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
+                                                <span className='list-item-text'>Share </span>
                                                 </button>
+                                                </li>
 
                                             </div>
                                         </div>

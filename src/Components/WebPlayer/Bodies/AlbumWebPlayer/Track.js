@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import './Track.css'
+import Share from './Share'
 import { Link } from 'react-router-dom';
 
 /**
@@ -27,6 +28,12 @@ export class Track extends Component {
          * @type {String}
          */
         "id":"",
+         /**
+         * link of the track
+         * @memberof Track
+         * @type {Link}
+         */
+        "href":"",
         /**
          * Name of the track
          * @memberof Track
@@ -62,6 +69,7 @@ export class Track extends Component {
             duration_ms:this.props.track.durationMs,
             preview_url:this.props.track.preview_url,
             id:this.props.track._id,
+            href:this.props.track.href,
             name:this.props.track.name
         });
         this.millisToMinutesAndSeconds(this.props.track.durationMs);
@@ -83,9 +91,10 @@ export class Track extends Component {
     }
 
     render() {
-        {}
+        
         return (
             <div id="track-row-div" className="container-fluid">
+                <Share url={this.state.href}/>
                 <div className={(this.props.playing_song_id===this.props.track._id?"row playing-song":"row not-playing-song")}>
                     <div className="track-symbol-div">
                         <i className={(this.props.playing_song_id===this.props.track._id?"track-icon-playing":"track-icon")} 
@@ -112,6 +121,11 @@ export class Track extends Component {
                             <a className="dropdown-item disabled" href="#">Add to Playlist</a>
                             <a className="dropdown-item disabled" href="#">Copy Song Link</a>
                             <a className="dropdown-item disabled" href="#">Open in Desktop app</a>
+                            <li className='dropdown-item '>
+                               <button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
+                               <span className='list-item-text'>Share Track</span>
+                                 </button>
+                               </li>
                         </div>
                     </div>
                     <div className="track-duration-div">

@@ -1,6 +1,8 @@
 import React,{ Component} from "react"
 import './RecentActivity.css'
 import axios from 'axios'
+import { ConfigContext } from '../../../../Context/ConfigContext'
+import Pagination from "./Pagination";
 
 /**
  * Recent Activity : shows the recent activity of the user and its time 
@@ -8,6 +10,7 @@ import axios from 'axios'
  */
 
 class RecentActivity extends Component{
+ static contextType=ConfigContext;
 constructor(){
     super()
     this.state = {
@@ -16,14 +19,31 @@ constructor(){
          * @type {Object}
          */
         recents:[],
+        /**
+         * Total Number of results that I get from Request
+         * @type {Number}
+         */
+        totalResults:0,
+                /**
+         * Current Paging Number that I am in now 
+         * @type {Number}
+         */
+        currentpage:1,
 
     }
 }
 componentDidMount(){
-    axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/Recents")
-            .then(res => {
+    
+    axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/Recents",
+    {
+       headers:{'authorization':"Bearer "+localStorage.getItem('token')},
+       query:{
+           limit:6,
+       }
+       }
+    )            .then(res => {
                 this.setState({
-                    recents: res.data.map( recents => ({
+                    recents: res.data.data.map( recents => ({
                         /**
                          * @type {string}
                          */
@@ -36,7 +56,8 @@ componentDidMount(){
                          * recent activity description 
                          */
                         description: recents.description
-                    }))
+                    })),
+                    totalResults: res.total
                 })
             })  
 
@@ -46,15 +67,54 @@ const element=document.getElementById("dropdown-wrap")
 element.classList.toggle("show");
 }
 
+nextpage=(pagenumber)=>{ 
+     axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/Recents",
+     {
+        headers:{'authorization':"Bearer "+localStorage.getItem('token')},
+        query:{
+            limit:6,
+            page:this.state.pagenumber,
+        }
+        }
+     )
+.then(res => {
+    this.setState({
+        recents: res.data.data.map( recents => ({
+            /**
+             * @type {string}
+             */
+            id:recents.id,
+            /**
+             * Time of the activity 
+             */
+            time:recents.time,
+            /**
+             * recent activity description 
+             */
+            description: recents.description
+        })),
+        currentpage:pagenumber,
+        totalResults: res.total
+    })
+})  
+
+}
 
 
 
 render(){
+    {/*
+    * 
+    * @type {Number}
+    * To count the total number of Pages needed  passed to the Pagination Componen
+     */}
+    let numberPages = Math.floor(this.state.totalResults /6 );
+
     return(
     <div class="wrapper" id="recent-activity-wrap">
 	<div class="notification-wrap">
 
-		<div class="notification-icon" onClick={()=> this.toggledropdown()}>
+		<div class="notification-icon " onClick={()=> this.toggledropdown()}>
                     <i class="fa fa-history" aria-hidden="true"></i>
 		</div>
 
@@ -70,7 +130,7 @@ render(){
 				</div>
 			</div>
         ))}
-
+        {this.state.totalResults>6? <Pagination pages={numberPages} nextpage={this.nextpage} currentpage={this.state.currentpage}/> : ''}
             </div>
             </div>
 </div>
