@@ -218,6 +218,8 @@ class SearchNavBar extends Component {
      * @memberof SearchNavBar
      */
       searchHandler=(event)=>{
+        this.setState({text:event});
+        console.log("text inside search handler : ",this.state.text);
         if(event==''){
             this.state.searchingstate=false;
             document.getElementById("search-searching").classList.add("hide");
@@ -248,7 +250,7 @@ class SearchNavBar extends Component {
          */
         getTracks(){
             
-            console.log("text before sending to search:",this.state.text);
+            console.log("text before sending to search(in get tracks):",this.state.text);
             /* http://localhost:3000/album_tracks/1*/
             axios.get(this.context.baseURL+"/search?q="+this.state.text+"&limit=5")
                 .then(res => {
