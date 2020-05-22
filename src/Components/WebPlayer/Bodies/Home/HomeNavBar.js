@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import { Link,Redirect } from 'react-router-dom';
  import RecentActivity from './RecentActivity';
-import { Route } from 'react-router';
-import '../NavBars.css';
+ import Pagination from './Pagination'
+ import '../NavBars.css';
 import axios from 'axios'
 
 import { ConfigContext } from '../../../../Context/ConfigContext'

@@ -20,6 +20,7 @@ import {
 
 function Share(props) {
   let URL=(props.url).replace('/api','');
+  console.log(window.location.href);
   console.log(URL);
     return(<div>
              <div className="modal" id="share-static-back-drop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
