@@ -43,7 +43,7 @@ componentDidMount(){
        }
     )            .then(res => {
                 this.setState({
-                    recents: res.data.map( recents => ({
+                    recents: res.data.data.map( recents => ({
                         /**
                          * @type {string}
                          */
@@ -114,7 +114,7 @@ render(){
     <div class="wrapper" id="recent-activity-wrap">
 	<div class="notification-wrap">
 
-		<div class="notification-icon" onClick={()=> this.toggledropdown()}>
+		<div class="notification-icon " onClick={()=> this.toggledropdown()}>
                     <i class="fa fa-history" aria-hidden="true"></i>
 		</div>
 
