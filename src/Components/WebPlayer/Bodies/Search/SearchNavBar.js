@@ -247,12 +247,17 @@ class SearchNavBar extends Component {
          * @memberof ArtistWebPlayer
          */
         getTracks(){
+            
+            console.log("text before sending to search:",this.state.text);
             /* http://localhost:3000/album_tracks/1*/
-            axios.get(this.context.baseURL+"search?q="+this.state.text+"&limit=5")
+            axios.get(this.context.baseURL+"/search?q="+this.state.text+"&limit=5")
                 .then(res => {
-                    if(res.status===200)
+                console.log("response of search:",res);
+                if(res.status===200)
                 {   
+                    console.log("response of search (items):",res.data.data.items);
                     this.setState({tracks:res.data.data.items})
+                    console.log("response of search (total):",res.data.data.total);
                     this.setState({notFound:res.data.data.total})
                 }
                 else if(res.status===401)
