@@ -40,7 +40,6 @@ class CreatePlaylist extends Component {
    * @memberof CreatePlaylist
    */
     onChange = (e) => this.setState({ playlistname: e.target.value });
-    //To be uncommented Next Phase 
      
      handleclick = () => {
          //
@@ -54,8 +53,6 @@ class CreatePlaylist extends Component {
           }})
             .then(res => {
                 if(res.status===201 || res.status===200){
-                    alert("Succesfully Created");
-                    console.log("sucessfully created")
                     $(document).ready(function(){
                         $("#static-back-drop").modal("hide");
                         $('body').removeClass('modal-open');
@@ -66,6 +63,7 @@ class CreatePlaylist extends Component {
             })
             .catch(error => {
                 console.log(error);
+                alert(error);
             })
     } 
 
@@ -93,7 +91,7 @@ class CreatePlaylist extends Component {
            <div id="modal-body-container">     
           <div id="modal-body-text">Playlist Name</div>
           <form>
-                <input type="text"  size="25" name="playlistname" id="playlist-name-input" placeholder="New Playlist" onChange={this.onChange} maxLength="30" minLength="2" data-err="Enter Name less than 25 letters "required />
+                <input type="text"  size="25" name="playlistname" id="playlist-name-input" placeholder="New Playlist" onChange={this.onChange} maxLength="30" minLength="1" data-err="Enter Name less than 25 letters " />
         </form>
         </div>
       </div>
