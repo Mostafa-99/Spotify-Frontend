@@ -6,8 +6,6 @@ import {BrowserRouter} from 'react-router-dom';
 //Firebase 
 import * as firebase from 'firebase';
 
-
-
   var config = {
   apiKey: "AIzaSyDstl21Iann4t-odVPIMFTXpI5ToD1jIC0",
   authDomain: "totally-not-spotify.firebaseapp.com",
@@ -35,6 +33,10 @@ messaging.requestPermission()
 .catch(function(err){
   console.log("error occured")
 })
+messaging.onMessage((payload) => {
+  console.log('Message received. ', payload);
+  // ...
+});
 
 ReactDOM.render(<BrowserRouter><App/></BrowserRouter>, document.getElementById('mybody'));
 
