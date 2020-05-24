@@ -25,7 +25,8 @@ class Navbar extends Component {
         super(props);
         this.state = {
           isDesktop: true ,
-          isVisible:true
+          isVisible:true,
+          count:false,
         };
     
         this.updatePredicate = this.updatePredicate.bind(this);
@@ -46,9 +47,16 @@ class Navbar extends Component {
         window.addEventListener("mouseout",this.updateVisibility);
         window.addEventListener("click",this.updateVisibility);
         window.addEventListener("popstate",this.updateVisibility);
-        
 
       }
+      componentWillUpdate()
+      {
+        if(this.state.count===false)
+        { this.updateVisibility();
+          this.setState({count: true});
+        }
+      }
+
     
       /**
      * Navbar Component UnMount state Removing Event Listeners 
@@ -61,8 +69,12 @@ class Navbar extends Component {
         window.removeEventListener("mouseout",this.updateVisibility);
         window.removeEventListener("click",this.updateVisibility);
         window.removeEventListener("popstate",this.updateVisibility);
+      }
 
-
+      componentDidUpdate() {
+        window.onhashchange = function() { 
+          this.updateVisibility();
+     } 
       }
     
       /**

@@ -11,7 +11,6 @@ export const ProfileContext= createContext();
 class ProfileContextProvider extends Component {
     static contextType=ConfigContext;
     state={
-        userType:'artist',
         user: {},
         status:"not connected"
     }
@@ -36,6 +35,8 @@ class ProfileContextProvider extends Component {
                 if(res.status===200)
                 {
                     this.setState({user: res.data})
+                    localStorage.setItem("userType",res.data.role);
+                      
                     
                 }else
             alert(res.status)
@@ -63,6 +64,7 @@ class ProfileContextProvider extends Component {
                     if(res.status===200)
                     {
                         this.setState({user: res.data})
+                        localStorage.setItem("userType",res.data.role);
                        
                     }else
                 alert(res.status)

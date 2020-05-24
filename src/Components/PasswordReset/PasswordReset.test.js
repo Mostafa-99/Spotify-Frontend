@@ -36,21 +36,6 @@ let wrapper;
     expect(wrapper.contains(welcome)).toEqual(false);
    });
 
-   it('test validate email function', () => {
-
-    let component = wrapper.instance();
-
-    let data="123juyfuy6767";
-    let v;
-    v=component.validateEmail(data);
-    expect(v).toEqual(false);
-
-    data="amr7afifi@gmail.com";
-    v=component.validateEmail(data);
-    expect(v).toEqual(true);
-    
-   });
-
 
    it('State Intialization', () => {
     expect(wrapper.state().status).toEqual("not done");

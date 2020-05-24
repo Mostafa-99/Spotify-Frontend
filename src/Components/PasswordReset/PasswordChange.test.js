@@ -36,20 +36,6 @@ let wrapper;
     expect(wrapper.contains(welcome)).toEqual(true);
    });
 
-   it('test validate password function', () => {
-
-    let component = wrapper.instance();
-
-    let data="123";
-    let v=component.validatePassword(data);
-
-    expect(v).toEqual(false);
-    data="1233456789";
-    v=component.validatePassword(data);
-    expect(v).toEqual(true);
-    
-   });
-
 
    it('State Intialization', () => {
     expect(wrapper.state().status).toEqual("not done");

@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import { ConfigContext } from '../../../../Context/ConfigContext';
 import { Link } from 'react-router-dom';
+import { responseHandler } from '../../../../ReduxStore/Shared';
 
 /** Class of Your library - Albums webplayer page.
  * @extends Component
@@ -56,16 +57,7 @@ class YourLibraryAlbums extends Component {
                             }))
                         })
                     }
-                    else if(res.status===401)
-                    {
-                        localStorage.removeItem("loginType");
-                        localStorage.removeItem("isLoggedIn");
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("userID");
-                    }
-                    else{
-                        alert(res.message);
-                    }
+                    else responseHandler(res);
                     
                 })
     }

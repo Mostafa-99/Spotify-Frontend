@@ -11,6 +11,7 @@ import { theme, animation } from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
+import { responseHandler } from '../../../../ReduxStore/Shared';
 /** Class of home in webplayer.
  * @extends Component
  */
@@ -130,13 +131,7 @@ class Home extends Component {
                             })
 
                         }
-                        else if(res.status === 401)
-                        {
-                            localStorage.removeItem("loginType");
-                            localStorage.removeItem("isLoggedIn");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userID");
-                        }
+                        else responseHandler(res);
                     }) 
                     axios.get(this.context.baseURL+"/browse/categories/"+this.state.catagories[1].id+"/playlists", {
                         headers: {
@@ -160,22 +155,10 @@ class Home extends Component {
                                 }))
                             })
                         }
-                        else if(res.status === 401)
-                        {
-                            localStorage.removeItem("loginType");
-                            localStorage.removeItem("isLoggedIn");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userID");
-                        }
+                        else responseHandler(res);
                     }) 
                 }
-                else if(res.data.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
          //artists   
@@ -198,13 +181,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
         //recently played
@@ -229,13 +206,7 @@ class Home extends Component {
                         )
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
         //popular albums
@@ -260,13 +231,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         //most recent albums
@@ -292,13 +257,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         //popular playlists
@@ -324,14 +283,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-
-                }
+                else responseHandler(res);
             })
 
         //most recent playlists
@@ -357,13 +309,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         /*axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")

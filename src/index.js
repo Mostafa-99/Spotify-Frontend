@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
+
+import {Provider} from 'react-redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import authReducer from './ReduxStore/Reducers/Auth';
+import thunk from 'redux-thunk';
+
 //Firebase 
 import * as firebase from 'firebase';
 
@@ -17,6 +23,7 @@ import * as firebase from 'firebase';
   measurementId: "G-YDVW3R60NT"
 };
 firebase.initializeApp(config);
+
 
 const messaging = firebase.messaging();
 // Add the public key generated from the console here.
@@ -38,7 +45,21 @@ messaging.onMessage((payload) => {
   // ...
 });
 
-ReactDOM.render(<BrowserRouter><App/></BrowserRouter>, document.getElementById('mybody'));
+const rootReducer = combineReducers({
+  auth: authReducer
+});
+
+const store = createStore(rootReducer, compose(
+  applyMiddleware(thunk)
+));
+
+ReactDOM.render(
+<Provider store={store}>
+<BrowserRouter>
+<App/>
+</BrowserRouter>
+</Provider>
+, document.getElementById('mybody'));
 
 
 

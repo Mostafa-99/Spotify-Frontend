@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-export const ProtectedRoute = ({
+export const PremiumProtectedRoute = ({
   component: Component,
   ...rest
 }) => {
@@ -9,13 +9,13 @@ export const ProtectedRoute = ({
     <Route
       {...rest}
       render={props => {
-        if (localStorage.getItem("isLoggedIn")==="true") {
+        if (localStorage.getItem("isLoggedIn")==="true" && localStorage.getItem("userType")==="premium") {
           return <Component {...props} />;
         } else {
           return (
             <Redirect
               to={{
-                pathname: "/login",
+                pathname: "/home",
                 state: {
                   from: props.location
                 }

@@ -8,6 +8,7 @@ import './AlbumWebPlayer.css'
 import ArtistPageBtn from '../../../Artist/Albums/AlbumPageBtn'
 import AlbumPageBtn from '../../../Artist/Albums/AlbumPageBtn'
 import { Link } from "react-router-dom";
+import { responseHandler } from '../../../../ReduxStore/Shared.js'
 
 /**
  * Album web player class
@@ -99,15 +100,7 @@ export class AlbumWebPlayer extends Component {
                     })
                 ))
             }
-            else if(res.status===401){
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert("error");
-            }
+            else responseHandler(res);
         })
         .catch(error => {
             alert(error.response.data.message);
@@ -132,15 +125,7 @@ export class AlbumWebPlayer extends Component {
                 console.log(res)
                 this.setState({tracks:res.data.data.tracksArray})
             }
-            else if(res.status===401){
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert("error");
-            }
+            else responseHandler(res);
         })
         .catch(error => {
            alert(error.response.data.message);

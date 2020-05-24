@@ -8,6 +8,7 @@ import TracksList from '../AlbumWebPlayer/TracksList';
 
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import { Link } from 'react-router-dom';
+import { responseHandler } from '../../../../ReduxStore/Shared';
 
 /** Class of artist webplayer page.
  * @extends Component
@@ -135,16 +136,7 @@ class ArtistWebPlayer extends Component {
                     }
                 }))
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
                 
         })
 
@@ -167,16 +159,7 @@ class ArtistWebPlayer extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
                 
             })
 
@@ -198,16 +181,7 @@ class ArtistWebPlayer extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
             })
 
                 /* http://www.mocky.io/v2/5e87635f3100002a003f44d4*/
@@ -231,16 +205,7 @@ class ArtistWebPlayer extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
             })     
             this.getAlbumTracks();    
                                                 
@@ -262,16 +227,7 @@ class ArtistWebPlayer extends Component {
                 {   
                     this.setState({tracks:res.data.data})
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
                 }    
                 )
                 .catch(error => {

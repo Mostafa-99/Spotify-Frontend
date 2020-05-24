@@ -5,6 +5,7 @@ import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import '../WebPlayer/Bodies/NavBars.css';
 import { ConfigContext } from '../../Context/ConfigContext'
 import { ProfileContext } from '../../Context/ProfileContext'
+import { logout } from '../../ReduxStore/Shared';
 
 //navbar not fixed anymore
 const MyDesktopNavbar = styled.nav`
@@ -107,6 +108,7 @@ class DesktopNavbar extends Component {
 
         this.setState(() => ({}))
         let show = localStorage.getItem("isLoggedIn");
+        
         if (show === "true") {
             let type = localStorage.getItem("loginType");
             this.setState({ status: "connected" })
@@ -138,23 +140,8 @@ class DesktopNavbar extends Component {
      * 
      */
     logOut = () => {
-
-        if (this.state.loginType === "fb") {
-            window.FB.logout(function (response) {
-                //console.log(response);
-            });
-
-        }
-        if (this.state.loginType === "email") {
-
-        }
-
         this.setState({ status: "not connected" })
-        this.setState({ loginType: '' })
-        localStorage.removeItem("userID");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("loginType");
+        logout();
     }
 
     render() {

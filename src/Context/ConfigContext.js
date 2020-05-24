@@ -13,7 +13,7 @@ class ConfigContextProvider extends Component {
     baseURL: "http://spotify.mocklab.io",
   };
   componentDidMount(){
-    localStorage.setItem("isLoggedIn",'true');
+    //localStorage.setItem("isLoggedIn",'true');
   }
   render() {
     return (

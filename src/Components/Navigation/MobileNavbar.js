@@ -7,6 +7,7 @@ import { ProfileContext } from '../../Context/ProfileContext'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
+import { logout } from "../../ReduxStore/Shared";
 
 
 const MyMobileNavbar = styled.nav`
@@ -198,26 +199,10 @@ class MobileNavbar  extends Component {
      * 
      */
     logOut= () => {
-        
-        if(this.state.loginType==="fb")
-        {
-            window.FB.logout(function(response) {
-            //console.log(response);
-          });
 
-        }
-        if(this.state.loginType==="email")
-        {
-          
-        }
-
-            this.setState({ status: "not connected" })
-            this.setState({ loginType: '' })
-            localStorage.removeItem("userID");
-            localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("token");
-            localStorage.removeItem("loginType");
-            this.togglesidebar();
+        this.setState({ status: "not connected" })
+        logout();
+        this.togglesidebar();
     }
 
     /**
