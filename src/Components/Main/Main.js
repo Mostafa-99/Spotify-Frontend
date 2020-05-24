@@ -1,5 +1,5 @@
 import React from 'react';
-import './Main.css'
+import './main.css'
 import IndexDesktopNavbar from '../Navigation/IndexDesktopNavbar'
 import '../Button/SpotifyButton.css'
 import { Link } from 'react-router-dom';
