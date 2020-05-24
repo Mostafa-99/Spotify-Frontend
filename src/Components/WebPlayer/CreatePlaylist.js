@@ -40,7 +40,6 @@ class CreatePlaylist extends Component {
    * @memberof CreatePlaylist
    */
     onChange = (e) => this.setState({ playlistname: e.target.value });
-    //To be uncommented Next Phase 
      
      handleclick = () => {
          //
@@ -64,6 +63,7 @@ class CreatePlaylist extends Component {
             })
             .catch(error => {
                 console.log(error);
+                alert(error);
             })
     } 
 

@@ -34,7 +34,7 @@ constructor(){
 }
 componentDidMount(){
     
-    axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/Recents",
+    axios.get(this.context.baseURL +'/me/notifications',
     {
        headers:{'authorization':"Bearer "+localStorage.getItem('token')},
        query:{
@@ -42,23 +42,39 @@ componentDidMount(){
        }
        }
     )            .then(res => {
+        if (res.status===200)
                 this.setState({
-                    recents: res.data.data.map( recents => ({
+                    recents: res.data.items.map( recents => ({
                         /**
                          * @type {string}
                          */
-                        id:recents.id,
+                        id:recents.data.id,
                         /**
                          * Time of the activity 
+                         * @type {timw}
                          */
                         time:recents.time,
                         /**
                          * recent activity description 
                          */
-                        description: recents.description
+                        description: recents.notification.body,
+                        /**
+                         * link to image of the notification item
+                         * @type {link}
+                         */
+                        image:recents.images[0]
                     })),
                     totalResults: res.total
                 })
+                else if(res.status===401){
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
+                else{
+                    alert("error");
+                } 
             })  
 
 }
@@ -68,8 +84,8 @@ element.classList.toggle("show");
 }
 
 nextpage=(pagenumber)=>{ 
-     axios.get("http://my-json-server.typicode.com/youmnakhaled/Fakedata/Recents",
-     {
+    axios.get(this.context.baseURL +'/me/notifications',
+        {
         headers:{'authorization':"Bearer "+localStorage.getItem('token')},
         query:{
             limit:6,
@@ -78,25 +94,44 @@ nextpage=(pagenumber)=>{
         }
      )
 .then(res => {
+    if (res.status===200)
+    {
     this.setState({
-        recents: res.data.data.map( recents => ({
+        recents: res.data.items.map( recents => ({
             /**
              * @type {string}
              */
-            id:recents.id,
+            id:recents.data.id,
             /**
              * Time of the activity 
+             * @type {timw}
              */
             time:recents.time,
             /**
              * recent activity description 
              */
-            description: recents.description
+            description: recents.notification.body,
+            /**
+             * link to image of the notification item
+             * @type {link}
+             */
+            image:recents.images[0]
         })),
+        totalResults: res.total,
         currentpage:pagenumber,
-        totalResults: res.total
     })
-})  
+}
+  else if(res.status===401){
+    localStorage.removeItem("loginType");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userID");
+}
+else{
+    alert("error");
+}
+}) 
+ 
 
 }
 
@@ -108,7 +143,7 @@ render(){
     * @type {Number}
     * To count the total number of Pages needed  passed to the Pagination Componen
      */}
-    let numberPages = Math.floor(this.state.totalResults /6 );
+    let numberPages = Math.ceil(this.state.totalResults /6 );
 
     return(
     <div class="wrapper" id="recent-activity-wrap">
@@ -122,7 +157,7 @@ render(){
         {this.state.recents.map( recents => (
 			<div class="notify-item">
 				<div class="notify-img">
-					<img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" alt="profile-pic"></img>
+					<img src={recents.image} alt="profile-pic"></img>
 				</div>
 				<div class="notify-info">
 					<p>{recents.description}</p>
@@ -130,7 +165,7 @@ render(){
 				</div>
 			</div>
         ))}
-        {this.state.totalResults>6? <Pagination pages={numberPages} nextpage={this.nextpage} currentpage={this.state.currentpage}/> : ''}
+        {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currentpage={this.state.currentpage}/> : ''}
             </div>
             </div>
 </div>

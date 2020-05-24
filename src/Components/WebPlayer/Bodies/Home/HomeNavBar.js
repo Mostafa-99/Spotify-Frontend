@@ -103,7 +103,7 @@ class HomeNavBar extends Component {
                                 </div>
                                 )
                             }
-                             {/* {logInOrNot==="true"?(
+                              {/* {logInOrNot==="true"?(
                                 <div className="col-2"><RecentActivity/>
                                 </div> 
 
