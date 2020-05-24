@@ -8,6 +8,7 @@ import axios from 'axios'
 import { ConfigContext } from '../../../../Context/ConfigContext'
 import { ProfileContext } from '../../../../Context/ProfileContext'
 import TracksList from '../AlbumWebPlayer/TracksList';
+import { responseHandler, logout } from '../../../../ReduxStore/Shared';
 /** Class of Search navbar and display categories.
  * @extends Component
  */
@@ -102,16 +103,7 @@ class SearchNavBar extends Component {
                     }))
                 })
             }
-            else if(res.status===401)
-            {
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert(res.message);
-            }
+            else responseHandler(res);
         })     
         
 
@@ -134,16 +126,7 @@ class SearchNavBar extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
                 
             })
 
@@ -165,16 +148,7 @@ class SearchNavBar extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
             })
             this.getTracks();    
     }
@@ -197,11 +171,7 @@ class SearchNavBar extends Component {
         }
             
             this.setState({status:"not connected"})
-            this.setState({loginType: ''})
-            localStorage.setItem("userID", '');
-            localStorage.setItem("isLoggedIn", "false");
-            localStorage.setItem("token", '');
-            localStorage.setItem("loginType", "");
+            logout();
     }
 
     /**toggle background color of profile
@@ -262,16 +232,7 @@ class SearchNavBar extends Component {
                     console.log("response of search (total):",res.data.data.total);
                     this.setState({notFound:res.data.data.total})
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
                 }    
                 )
                 .catch(error => {

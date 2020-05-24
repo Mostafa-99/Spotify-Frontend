@@ -6,6 +6,7 @@ import Share from './Share'
 import TracksList from './TracksList.js'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
+import { responseHandler } from '../../../../ReduxStore/Shared.js'
 
   /**
  * Playlist web player class
@@ -99,15 +100,7 @@ export class PlaylistWebPlayer extends Component {
                 
                 })
             }
-            else if(res.status===401){
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert("error");
-            }
+            else responseHandler(res);
         })
         /*
         .catch(error => {
@@ -133,15 +126,7 @@ export class PlaylistWebPlayer extends Component {
                 console.log(res)
                 this.setState({tracks:res.data.data.tracksArray})
             }
-            else if(res.status===401){
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert("error");
-            }
+            else responseHandler(res);
         })
         /*
         .catch(error => {

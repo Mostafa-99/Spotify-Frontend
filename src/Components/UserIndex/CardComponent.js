@@ -3,6 +3,7 @@ import "./UserIndex.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import {ConfigContext} from '../../Context/ConfigContext'
+import { responseHandler } from "../../ReduxStore/Shared";
 
 /**
  * Login index page Cards components class
@@ -100,17 +101,8 @@ class CardComponent extends Component {
                             href:playlist.href,
                           
                         }))
-                    }) }          
-                    else if (res.status===401)
-                    {
-                        localStorage.removeItem("loginType");
-                        localStorage.removeItem("isLoggedIn");
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("userId");   
-                    }
-                    else{
-                        alert("Error.");
-                    }
+                    }) } else 
+                    responseHandler(res);
                 }).catch(res=>{
                     console.log(res);
                 } )

@@ -5,6 +5,7 @@ import '../Authentication/SignUp.css'
 import {Link} from 'react-router-dom'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
+import { checkValidity } from '../../ReduxStore/Shared'
 
 /**
  * New password after reset Component
@@ -31,18 +32,6 @@ export default class PasswordChange extends Component {
     componentDidMount =()=>{
        
         this.setState(()=> ({}))
-    }
-
-    /**
-     * Function to check the Password textbox has valid password criteria
-     * @param {string} Password - input password.
-     */
-    validatePassword(psw) {
-        if(psw.length>=8)
-        return true;
-        else
-        return false;
-       // return psw && psw.length >= 6
     }
 
     /**
@@ -73,10 +62,10 @@ export default class PasswordChange extends Component {
      */
     changePassowrd = event=> {
         event.preventDefault();
-        if(this.state.password==="" || !this.validatePassword(this.state.password))
+        if(this.state.password==="" || !checkValidity(this.state.password,"pass"))
         this.setState({emptypass: true});  
 
-        if(this.state.confirmpassword==="" || !this.validatePassword(this.state.confirmpassword))
+        if(this.state.confirmpassword==="" || !checkValidity(this.state.confirmpassword,"pass"))
         this.setState({emptyconfirm: true});
 
         if(!this.state.emptyconfirm && !this.state.emptypass)

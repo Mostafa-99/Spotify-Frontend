@@ -6,6 +6,7 @@ import Progress from "./Progress";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { ConfigContext } from '../../../Context/ConfigContext'
 import { ProfileContext } from '../../../Context/ProfileContext'
+import { responseHandler } from "../../../ReduxStore/Shared";
 
 /** Functional component for track upload.
  * @class
@@ -124,15 +125,10 @@ const TrackUpload = (props) => {
     } catch (err) {
       if (err.response.status === 500) {
         setMessage("There was a problem with the server");
-      } else if (err.response.status === 401) {
-        localStorage.removeItem("loginType");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userID");
-        alert("Your session has ended");
       } else {
         setMessage(err.response.data.msg);
       }
+      responseHandler(err.response)
     }
   };
   return (

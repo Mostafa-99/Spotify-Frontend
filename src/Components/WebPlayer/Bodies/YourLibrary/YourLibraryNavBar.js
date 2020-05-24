@@ -10,6 +10,7 @@ import axios from 'axios'
 import { ConfigContext } from '../../../../Context/ConfigContext'
 import { ProfileContext } from '../../../../Context/ProfileContext'
 import YourLibraryAlbums from './YourLibraryAlbums';
+import { logout } from '../../../../ReduxStore/Shared';
 
 
 /** Class of Your Library navbar and chosen body.
@@ -73,10 +74,7 @@ class YourLibraryNavBar extends Component {
             
             this.setState({status:"not connected"})
             this.setState({loginType: ''})
-            localStorage.setItem("userID", '');
-            localStorage.setItem("isLoggedIn", "false");
-            localStorage.setItem("token", '');
-            localStorage.setItem("loginType", "");
+            logout();
     }
 
     /**toggle background color of profile

@@ -58,6 +58,7 @@ export class Track extends Component {
          * @type {Number}
          */
         "seconds":0,
+        "track_number":Number,
     }
 
     componentDidMount(){
@@ -69,8 +70,9 @@ export class Track extends Component {
             duration_ms:this.props.track.durationMs,
             preview_url:this.props.track.preview_url,
             id:this.props.track._id,
-            href:this.props.track.href,
-            name:this.props.track.name
+            name:this.props.track.name,
+            track_number:this.props.track.trackNumber,
+            href:this.props.track.href
         });
         this.millisToMinutesAndSeconds(this.props.track.durationMs);
     }
@@ -97,8 +99,8 @@ export class Track extends Component {
                 <Share url={this.state.href}/>
                 <div className={(this.props.playing_song_id===this.props.track._id?"row playing-song":"row not-playing-song")}>
                     <div className="track-symbol-div">
-                        <i className={(this.props.playing_song_id===this.props.track._id?"track-icon-playing":"track-icon")} 
-                        onClick={this.props.setPlayingSondId.bind(this, this.state.id,this.state.preview_url)}></i>
+                        <i className={((this.props.playing_song_id===this.props.track._id) && this.props.is_playing?"track-icon-playing":"track-icon")} 
+                        onClick={this.props.setPlayingSondId.bind(this, this.state.id,this.state.preview_url,this.state.name,this.state.artists,this.state.minutes,this.state.seconds,this.state.track_number)}></i>
                     </div>
                     <div className="track-name-div">
                         <p className="track-name">{this.state.name}</p>

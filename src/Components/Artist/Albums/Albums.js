@@ -10,6 +10,7 @@ import ArtistHeading from '../ManageProfile/ArtistHeading'
 import Message from '../UploadFile/Message'
 
 import  './AlbumPage.css'
+import { responseHandler } from "../../../ReduxStore/Shared";
 /** Class of Albums of artist. It gets the albums of the artist in the artist mode
  * @extends Component
  */
@@ -54,14 +55,7 @@ class Albums extends Component {
         }
       })
       .catch((res) => {
-        if (res.status === 401) {
-          localStorage.removeItem("loginType");
-          localStorage.removeItem("isLoggedIn");
-          localStorage.removeItem("token");
-          localStorage.removeItem("userID");
-        } else {
-          alert(res.message);
-        }
+        responseHandler(res);
       });
   }
  

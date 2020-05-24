@@ -8,6 +8,7 @@ import TracksList from '../AlbumWebPlayer/TracksList';
 
 import { ConfigContext } from '../../../../Context/ConfigContext';
 import { Link } from 'react-router-dom';
+import { responseHandler } from '../../../../ReduxStore/Shared';
 
 /** Class of Your library - playlists webplayer page.
  * @extends Component
@@ -62,16 +63,7 @@ class YourLibraryPlaylists extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
             })
 
              /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
@@ -93,16 +85,7 @@ class YourLibraryPlaylists extends Component {
                     }))
                 })
             }
-            else if(res.status===401)
-            {
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert(res.message);
-            }
+            else responseHandler(res);
         })
     }
 

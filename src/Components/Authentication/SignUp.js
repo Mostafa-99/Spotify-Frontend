@@ -4,6 +4,7 @@ import spotify_black_logo from '../../Images/spotify_logo_black.png'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
+import { checkValidity, login } from '../../ReduxStore/Shared';
 
 /**
  * Sign up Page Component
@@ -60,12 +61,9 @@ class SignUp extends Component {
                             {
                                 if(res.data.success===true || res.data.success==="true")
                                 {
-                                    localStorage.setItem("isLoggedIn",'true');
-                                    localStorage.setItem("token",res.data.token);
-                                    localStorage.setItem("loginType", "fb");
+                                    login("fb",res.data.token);
                                     localStorage.setItem("userID", response.authResponse.userID);
                                     this.setState({status: 'connected'});
-                                   
                                 }
                             }
                             else // Unsuccessful
@@ -93,11 +91,7 @@ class SignUp extends Component {
         if(this.state.emailnotequal===true)
             this.setState({emailnotequal: false});
         this.setState({email: ""});    
-        //return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
-        if(email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
-        return true;
-        else
-        return false;
+        return checkValidity(email,"email");
     }
 
 /**
@@ -108,11 +102,7 @@ class SignUp extends Component {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
          this.setState({password: ""});    
-         if(psw.length>=8)
-         return true;
-         else
-         return false;
-        //return psw && psw.length >= 8
+         return checkValidity(psw,"pass");
     }
 
  /**
@@ -123,19 +113,7 @@ class SignUp extends Component {
         if(this.state.gendererror===true)
          this.setState({gendererror: false});
         this.setState({gender: ""});    
-        // 0 = male
-        // 1 = female
-        // null/undefined = otherwise
-        //  return gender === 0
-        //      || gender === 1
-        //     || gender === null
-        //     || gender === undefined
-        //     || gender === "";
-        if(gender===0 || gender===1)
-        return true;
-        else
-        return false;
-        
+        return checkValidity(gender,"gender")
     }
 
      /**
@@ -146,7 +124,7 @@ class SignUp extends Component {
         if(this.state.emptyname===true)
          this.setState({emptyname: false});
          this.setState({username: ""}); 
-        return name && name.match(/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/);
+        return checkValidity(name,"username");
            
     }
      /**
@@ -159,7 +137,7 @@ class SignUp extends Component {
         if(this.state.emailnotequal===true)
             this.setState({emailnotequal: false});
         this.setState({emailrecheck: ""});    
-        return email_again && email_again.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+        return checkValidity(email_again,"email");
     }
 
  /**
@@ -206,10 +184,7 @@ class SignUp extends Component {
                 {
                     if(res.data.success===true || res.data.success==="true")
                     {
-                        localStorage.setItem("isLoggedIn",'true');
-                        localStorage.setItem("token",res.data.token);
-                        localStorage.setItem("loginType", "email");
-
+                        login("email",res.data.token);
                         this.setState({status: 'connected'});
                         
                     }
