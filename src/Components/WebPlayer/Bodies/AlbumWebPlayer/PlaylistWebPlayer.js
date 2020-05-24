@@ -180,64 +180,63 @@ export class PlaylistWebPlayer extends Component {
       //  console.log("My href")
         console.log(this.props.location.state);
 
-        return (<div>
+        return (
+        <div>
             <Share url={this.props.location.state.myhref}/>
-            
             <div id="album-bar-webplayer-main-div" className="container-fluid">
-            <div id="album-main-row" className="row">
-            <div className="col-lg-2">
-                <SideBar/>
-            </div>
-            <div className="col-lg-10">
-                <HomeNavBar/>
-                <div id="album-webplayer-main-div">
-                    <div className="row">
-                        <div className="row album-details-div">
-                            <div className="album-image-div">
-                                <img className="album-image" src={this.state.playlist_image} alt="playlist pic"/>
-                            </div>
-                            <div className="album-below-image-div">
-                                <div className="album-title-div">
-                                    <h1 className="album-title">{this.state.playlist_name}</h1>
-                                </div>
-                                <div className="row album-buttons-div">
-                                    <div className="album-play-button-div">
-                                        <button type="button" className="btn btn-success">PLAY</button>
+                <div id="album-main-row" className="row">
+                    <div className="col-lg-2">
+                        <SideBar/>
+                    </div>
+                    <div className="col-lg-10">
+                        <HomeNavBar/>
+                        <div id="album-webplayer-main-div">
+                            <div className="row">
+                                <div className="row album-details-div">
+                                    <div className="album-image-div">
+                                        <img className="album-image" src={this.state.playlist_image} alt="playlist pic"/>
                                     </div>
-                                    <div className="row album-options-div">
-                                        <div className="album-heart-div">
-                                            <i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}></i>
+                                    <div className="album-below-image-div">
+                                        <div className="album-title-div">
+                                            <h1 className="album-title">{this.state.playlist_name}</h1>
                                         </div>
-                                        <div className="album-dots-div dropdown show" >
-                                            <p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...</p>
-                                            <div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                                                <a className="dropdown-item " href="#">Start Radio</a>
-                                                <a className="dropdown-item " href="#">Save to Your Library</a>
-                                                <a className="dropdown-item " href="#">Add to PLaylist</a>
-                                                <a className="dropdown-item " href="#">Copy Playlist Link</a>
-                                                <a className="dropdown-item  " href="#">Open in Desktop app</a>
-                                               <li className='dropdown-item '>
-                                                   <button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
-                                                <span className='list-item-text'>Share </span>
-                                                </button>
-                                                </li>
-
+                                        <div className="row album-buttons-div">
+                                            <div className="album-play-button-div">
+                                                <button type="button" className="btn btn-success">PLAY</button>
+                                            </div>
+                                            <div className="row album-options-div">
+                                                <div className="album-heart-div">
+                                                    <i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}></i>
+                                                </div>
+                                                <div className="album-dots-div dropdown show" >
+                                                    <p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...</p>
+                                                    <div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
+                                                        <a className="dropdown-item " href="#">Start Radio</a>
+                                                        <a className="dropdown-item " href="#">Save to Your Library</a>
+                                                        <a className="dropdown-item " href="#">Add to PLaylist</a>
+                                                        <a className="dropdown-item " href="#">Copy Playlist Link</a>
+                                                        <a className="dropdown-item  " href="#">Open in Desktop app</a>
+                                                        <li className='dropdown-item '>
+                                                            <button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
+                                                            <span className='list-item-text'>Share </span>
+                                                            </button>
+                                                        </li>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div className="tracks-list-div">
+                                    <hr className="appear-on-small-screens"/>
+                                    <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                                </div>
                             </div>
-                        </div>
-                        <div className="tracks-list-div">
-                            <hr className="appear-on-small-screens"/>
-                            <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-            </div>
-            </div>
+        </div>
         )
     }
 }

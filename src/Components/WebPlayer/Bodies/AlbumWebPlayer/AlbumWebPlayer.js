@@ -353,7 +353,7 @@ export class AlbumWebPlayer extends Component {
                     <div className="col-lg-10">
                         <HomeNavBar/>
                         <div id="album-webplayer-main-div">
-                            <div className="row">
+                           <div className="row">
                                 <div className="row album-details-div">
                                     <div className="album-image-div">
                                         <img className="album-image" src={TrackImage} alt="album pic"/>   {/*this.state.album_image*/}
@@ -378,48 +378,37 @@ export class AlbumWebPlayer extends Component {
                                             <div className="album-play-button-div">
                                                 <button type="button" className="btn btn-success">PLAY</button>
                                             </div>
-                                            <div className="album-below-image-div">
-                                                <div className="album-title-div">
-                                                    <h1 className="album-title">{this.state.album_name}</h1>
-                                                    <p className="album-artist">{this.state.artists}</p>
+                                            <div className="row album-options-div">
+                                                <div className="album-heart-div">
+                                                    <i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}></i>
                                                 </div>
-                                                <div className="row album-buttons-div">
-                                                    <div className="album-play-button-div">
-                                                        <button type="button" className={(this.state.is_playing?"btn btn-success pause-btn":"btn btn-success play-btn")} onClick={this.PlayPauseButtonPressed}></button>
-                                                    </div>
-                                                    <div className="row album-options-div">
-                                                        <div className="album-heart-div">
-                                                            <i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}></i>
-                                                        </div>
-                                                        <div className="album-dots-div dropdown show" >
-                                                            <p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...</p>
-                                                            <div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                                                                <a className="dropdown-item disabled" href="#">Start Radio</a>
-                                                                <a className="dropdown-item disabled" href="#">Save to Your Library</a>
-                                                                <a className="dropdown-item disabled" href="#">Add to PLaylist</a>
-                                                                <a className="dropdown-item disabled" href="#">Copy Album Link</a>
-                                                                <a className="dropdown-item disabled" href="#">Open in Desktop app</a>
-                                                            </div>
-                                                        </div>
+                                                <div className="album-dots-div dropdown show" >
+                                                    <p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...</p>
+                                                    <div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
+                                                        <a className="dropdown-item disabled" href="#">Start Radio</a>
+                                                        <a className="dropdown-item disabled" href="#">Save to Your Library</a>
+                                                        <a className="dropdown-item disabled" href="#">Add to PLaylist</a>
+                                                        <a className="dropdown-item disabled" href="#">Copy Album Link</a>
+                                                        <a className="dropdown-item disabled" href="#">Open in Desktop app</a>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div className="tracks-list-div">
-                                            <hr className="appear-on-small-screens"/>
-                                            <TracksList tracks={this.state.tracks} is_playing={this.state.is_playing} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId} albumId={this.props.location.state.myId} myAlbumArtist={this.props.location.state.myAlbum} />
+                                            </div>                                                
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <PlayingBar name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
-                            seconds={this.state.playing_song_seconds} is_playing={this.state.is_playing} current_minutes={this.state.playing_song_current_minutes} current_seconds={this.state.playing_song_current_seconds}
-                            setPlayerVolume={this.setPlayerVolume} seekSong={this.seekSong} PlayPauseButtonPressed={this.PlayPauseButtonPressed} nextSong={this.nextSong} previousSong={this.previousSong} 
-                            is_repeating={this.state.is_repeating} repeatButtonPressed={this.repeatButtonPressed} is_shuffling={this.state.is_shuffling} shuffleButtonPressed={this.shuffleButtonPressed} />
+                                <div className="tracks-list-div">
+                                    <hr className="appear-on-small-screens"/>
+                                    <TracksList tracks={this.state.tracks} is_playing={this.state.is_playing} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId} albumId={this.props.location.state.myId} myAlbumArtist={this.props.location.state.myAlbum} />
+                                </div>
+                            </div> 
                         </div>
                     </div>
+                </div>
+                <div className="row">
+                        <PlayingBar name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
+                        seconds={this.state.playing_song_seconds} is_playing={this.state.is_playing} current_minutes={this.state.playing_song_current_minutes} current_seconds={this.state.playing_song_current_seconds}
+                        setPlayerVolume={this.setPlayerVolume} seekSong={this.seekSong} PlayPauseButtonPressed={this.PlayPauseButtonPressed} nextSong={this.nextSong} previousSong={this.previousSong} 
+                        is_repeating={this.state.is_repeating} repeatButtonPressed={this.repeatButtonPressed} is_shuffling={this.state.is_shuffling} shuffleButtonPressed={this.shuffleButtonPressed} />
                 </div>
             </div>
         )
