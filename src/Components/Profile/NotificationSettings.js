@@ -3,6 +3,7 @@ import SideBar from './SideBar'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
+import { responseHandler } from '../../ReduxStore/Shared';
 
 
 class NotificationsSettings extends Component {
@@ -37,15 +38,8 @@ class NotificationsSettings extends Component {
                             image: res.data.images    
                         }
                     }))
-                }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                    console.log("fail")
-                }
+                }else
+                responseHandler(res);
             })
         axios.get("http://138.91.114.14/api/me/notifications", {
             headers: {
@@ -58,14 +52,7 @@ class NotificationsSettings extends Component {
                 {
                     this.setState({Notifications:res.data})
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                    console.log("fail")
-                }
+                else responseHandler(res);
             })
     }
 
@@ -127,10 +114,7 @@ class NotificationsSettings extends Component {
             }
             else if(res.status === 401)
             {
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
+                responseHandler(res);
             }
             else 
             {

@@ -7,10 +7,11 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import  './PlaylistContextMenu.css';
 import { theme, animation } from 'react-contexify';
-import { Menu, Item} from 'react-contexify';
+//import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
+import { responseHandler } from '../../../../ReduxStore/Shared';
 /** Class of home in webplayer.
  * @extends Component
  */
@@ -124,18 +125,13 @@ class Home extends Component {
                                     id:playList._id,
                                     title:playList.name,
                                     description: playList.description,
-                                    imageUrl:playList.images[0]
+                                    imageUrl:playList.images[0],
+                                    href:playList.href
                                 })),
                             })
 
                         }
-                        else if(res.status === 401)
-                        {
-                            localStorage.removeItem("loginType");
-                            localStorage.removeItem("isLoggedIn");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userID");
-                        }
+                        else responseHandler(res);
                     }) 
                     axios.get(this.context.baseURL+"/browse/categories/"+this.state.catagories[1].id+"/playlists", {
                         headers: {
@@ -154,26 +150,15 @@ class Home extends Component {
                                     id:playList._id,
                                     title:playList.name,
                                     description: playList.description,
-                                    imageUrl:playList.images[0]
+                                    imageUrl:playList.images[0],
+                                    href:playList.href
                                 }))
                             })
                         }
-                        else if(res.status === 401)
-                        {
-                            localStorage.removeItem("loginType");
-                            localStorage.removeItem("isLoggedIn");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userID");
-                        }
+                        else responseHandler(res);
                     }) 
                 }
-                else if(res.data.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
          //artists   
@@ -196,13 +181,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
         //recently played
@@ -222,17 +201,12 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.context.name,
                             imageUrl:playList.context.image,
+                            href:playList.href
                         })
                         )
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
         //popular albums
@@ -257,13 +231,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         //most recent albums
@@ -284,17 +252,12 @@ class Home extends Component {
                             id:album._id,
                             title:album.name,
                             imageUrl:album.image,
-                            artist:album.artists[0].name
+                            artist:album.artists[0].name,
+
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         //popular playlists
@@ -315,18 +278,12 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.name,
                             imageUrl:playList.images[0],
-                            description: playList.description
+                            description: playList.description,
+                            href:playList.href
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-
-                }
+                else responseHandler(res);
             })
 
         //most recent playlists
@@ -347,17 +304,12 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.name,
                             imageUrl:playList.images[0],
-                            description: playList.description
+                            description: playList.description,
+                            href:playList.href
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         /*axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")
@@ -468,6 +420,7 @@ class Home extends Component {
     }
     render()
     {
+        console.log(this.state)
         {document.title ="Spotify - Home"}
     return(
         
@@ -490,7 +443,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playList.id
+                                    myId :playList.id,
+                                    myhref:playList.href,
                                     }
                                 }}>
                                 <div className="card" id={playList.id}>
@@ -525,7 +479,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playList.id
+                                    myId :playList.id,
+                                    myhref:playList.href,
                                     }
                                 }}>
                             <div className="card" id={playList.id}>
@@ -535,7 +490,8 @@ class Home extends Component {
                             <Item>Save To Library</Item>
                             <Item>Copy Playlist Link</Item>
                             <Item>Open in App</Item>
-                            </Menu>       */}                                 <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
+                            </Menu>       */}               
+                             <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{playList.title}</h5>
                                         <p className="card-text">{playList.description}</p>
@@ -559,7 +515,7 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/webplayer/album",
                                     state:{
-                                    myId :album.id
+                                    myId :album.id,
                                     }
                                 }}>
                             <div className="card" id={album.id}>
@@ -593,7 +549,7 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/webplayer/album",
                                     state:{
-                                    myId :album.id
+                                    myId :album.id,
                                     }
                                 }}>
                                 <div className="card" id={album.id}>
@@ -630,7 +586,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
@@ -667,7 +624,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
@@ -704,7 +662,8 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
@@ -741,7 +700,9 @@ class Home extends Component {
                             <Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
+                                
                                     }
                                 }}>
                                 <div className="card" id={playlist.id}>
@@ -750,7 +711,8 @@ class Home extends Component {
                                     <Item>Save To Library</Item>
                                     <Item>Copy Playlist Link</Item>
                                     <Item>Open in App</Item>
-                                    </Menu>*/}                                          <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
+                                    </Menu>*/}                                         
+                                     <img src={playlist.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">
                                         <h5 className="card-title">{playlist.title}</h5>
                                         <p className="card-text">{playlist.description}</p>

@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import HomeNavBar from './../Home/HomeNavBar.js'
 import SideBar from './../../SideBar.js'
+import Share from './Share'
 import TracksList from './TracksList.js'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
+import { responseHandler } from '../../../../ReduxStore/Shared.js'
 
-/**
+  /**
  * Playlist web player class
  * @extends Component
  */
@@ -15,6 +17,12 @@ export class PlaylistWebPlayer extends Component {
 
     audio=new Audio();
     state={
+        /**
+         * Href of the playlist
+         * @memberof PlaylistWebPlayer
+         * @type {link}
+         */
+        myhref:{},
         /**
          * ID of the playlist
          * @memberof PlaylistWebPlayer
@@ -61,9 +69,10 @@ export class PlaylistWebPlayer extends Component {
 
     componentDidMount(){
 
-        const{myId}=this.props.location.state;//getting id from parent component
+        const{myId}=this.props.location.state.myId;//getting id from parent component
+       const{myhref}=this.props.location.state.myhref;
         this.state.myId=myId;
-
+        this.state.myhref=myhref;
         this.getPlaylistDetails();
         this.getPlaylistTracks();
     }
@@ -88,17 +97,10 @@ export class PlaylistWebPlayer extends Component {
                     playlist_image:res.data.data.playlist.images[0],
                     playlist_name:res.data.data.playlist.name,
                     is_liked:false //get from backend
+                
                 })
             }
-            else if(res.status===401){
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert("error");
-            }
+            else responseHandler(res);
         })
         /*
         .catch(error => {
@@ -124,15 +126,7 @@ export class PlaylistWebPlayer extends Component {
                 console.log(res)
                 this.setState({tracks:res.data.data.tracksArray})
             }
-            else if(res.status===401){
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert("error");
-            }
+            else responseHandler(res);
         })
         /*
         .catch(error => {
@@ -183,7 +177,12 @@ export class PlaylistWebPlayer extends Component {
     }
 
     render() {
-        return (
+      //  console.log("My href")
+        console.log(this.props.location.state);
+
+        return (<div>
+            <Share url={this.props.location.state.myhref}/>
+            
             <div id="album-bar-webplayer-main-div" className="container-fluid">
             <div id="album-main-row" className="row">
             <div className="col-lg-2">
@@ -203,7 +202,7 @@ export class PlaylistWebPlayer extends Component {
                                 </div>
                                 <div className="row album-buttons-div">
                                     <div className="album-play-button-div">
-                                        <button type="button" className="btn btn-success"></button>
+                                        <button type="button" className="btn btn-success">PLAY</button>
                                     </div>
                                     <div className="row album-options-div">
                                         <div className="album-heart-div">
@@ -212,11 +211,17 @@ export class PlaylistWebPlayer extends Component {
                                         <div className="album-dots-div dropdown show" >
                                             <p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...</p>
                                             <div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                                                <a className="dropdown-item disabled" href="#">Start Radio</a>
-                                                <a className="dropdown-item disabled" href="#">Save to Your Library</a>
-                                                <a className="dropdown-item disabled" href="#">Add to PLaylist</a>
-                                                <a className="dropdown-item disabled" href="#">Copy Playlist Link</a>
-                                                <a className="dropdown-item disabled" href="#">Open in Desktop app</a>
+                                                <a className="dropdown-item " href="#">Start Radio</a>
+                                                <a className="dropdown-item " href="#">Save to Your Library</a>
+                                                <a className="dropdown-item " href="#">Add to PLaylist</a>
+                                                <a className="dropdown-item " href="#">Copy Playlist Link</a>
+                                                <a className="dropdown-item  " href="#">Open in Desktop app</a>
+                                               <li className='dropdown-item '>
+                                                   <button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
+                                                <span className='list-item-text'>Share </span>
+                                                </button>
+                                                </li>
+
                                             </div>
                                         </div>
                                     </div>
@@ -232,8 +237,10 @@ export class PlaylistWebPlayer extends Component {
             </div>
             </div>
             </div>
+            </div>
         )
     }
 }
 
 export default PlaylistWebPlayer
+

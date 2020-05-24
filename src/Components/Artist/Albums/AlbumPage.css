@@ -1,0 +1,12 @@
+#webplayer-home .cancel-btn{
+    position: absolute;
+    top:1rem;
+    left: 7rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 100%;
+    display: none;
+}
+#webplayer-home .card:hover  .cancel-btn{
+    display: inline-block;
+
+}

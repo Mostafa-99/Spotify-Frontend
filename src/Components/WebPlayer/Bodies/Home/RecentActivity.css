@@ -24,7 +24,7 @@
 
 .notification-wrap .dropdown{
 	width: 350px;
-	height: auto;
+	height: 300px;
 	background: #282828;
 	border-radius: 5px;
 	box-shadow: 2px 2px 3px rgba(0,0,0,0.125);
@@ -38,13 +38,13 @@
 .notify-item:hover .notify-info,.notify-time{
 	transition: all 0.2s ease 0s;
 	color: white;
-	font-weight: 700;
+	font-weight: 500;
 }
 .notification-wrap .dropdown .notify-item{
 	display: flex;
 	color: #9b9b9b;
 	align-items: center;
-	padding: 10px 0;
+	padding: 2px 0;
 	border-bottom: 1px solid #3f3f3f;
 }
 
@@ -57,26 +57,27 @@
 }
 
 .notification-wrap .dropdown .notify-item .notify-info p{
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 }
 
 
 .notification-wrap .dropdown .notify-item .notify-info .notify-time{
 	color: #c5c5e6;
-	font-size: 12px;
+	font-size: 10px;
 }
 
  .notification-wrap .dropdown:before{
 	content: "";
 	position: absolute;
-	top: -30px;
+	top: -30px !important;
 	left: 95%;
+	z-index: 10;
 	transform: translateX(-50%);
-	border: 15px solid;
-	border-color: transparent transparent #fff transparent;
+	border: 15px solid !important;
+	border-color: transparent transparent #fff transparent !important;
 } 
 .notify-img img{
-	width: 50px;
+	width: 60px;
 }
 .notification-wrap .dropdown.active{
 	display: block;

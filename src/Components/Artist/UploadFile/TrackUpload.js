@@ -4,7 +4,10 @@ import Message from "./Message";
 import "../UploadFile/UploadFile.css";
 import Progress from "./Progress";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
-import { ConfigContext } from "../../../Context/ConfigContext";
+import { ConfigContext } from '../../../Context/ConfigContext'
+import { ProfileContext } from '../../../Context/ProfileContext'
+import { responseHandler } from "../../../ReduxStore/Shared";
+
 /** Functional component for track upload.
  * @class
  * @param props
@@ -97,8 +100,9 @@ const TrackUpload = (props) => {
     formData.append("name", trackName);
     formData.append("trackAudio", file);
     try {
+      console.log(props.location.state.myId);
       const res = await axios.post(
-        url.baseURL + "/me/albums/" + props.id + "/tracks",
+        url.baseURL + "/me/albums/" + props.location.state.myId + "/tracks",
         formData,
         {
           headers: {
@@ -121,22 +125,17 @@ const TrackUpload = (props) => {
     } catch (err) {
       if (err.response.status === 500) {
         setMessage("There was a problem with the server");
-      } else if (err.response.status === 401) {
-        localStorage.removeItem("loginType");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userID");
-        alert("Your session has ended");
       } else {
         setMessage(err.response.data.msg);
       }
+      responseHandler(err.response)
     }
   };
   return (
     <div className="artist-body">
       <div className="full-page container upload-page">
         <Fragment>
-          <ArtistSidebar />
+          <ArtistSidebar/>
           <form className="container" onSubmit={onSubmit}>
             {message ? <Message msg={message} /> : null}
             <div class="form-group">

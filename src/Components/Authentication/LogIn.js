@@ -5,6 +5,7 @@ import '../Button/SpotifyButton.css';
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
+import { checkValidity, login } from '../../ReduxStore/Shared';
 //import { buildQueries } from '@testing-library/react';
 
 
@@ -54,9 +55,7 @@ class LogIn extends Component {
                     {
                         if(res.data.success===true || res.data.success==="true")
                         {
-                            localStorage.setItem("isLoggedIn",'true');
-                            localStorage.setItem("token",res.data.token);
-                            localStorage.setItem("loginType", "fb");
+                            login("fb",res.data.token);
                             localStorage.setItem("userID", response.authResponse.userID);
                             this.setState({status: 'connected'});
                             
@@ -64,11 +63,10 @@ class LogIn extends Component {
                     }
                     else // Unsuccessful
                     {
-                        
-                            alert(res.data.message)
+                        alert(res.data.message)
                     }   
-                    }).catch(err =>{
-
+                    }).catch(err =>
+                    {
                         alert(err)
                     })
                     
@@ -99,11 +97,7 @@ class LogIn extends Component {
     validateEmail(email) {
         if(this.state.emptyemail===true)
             this.setState({emptyemail: false});
-        if(email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
-        return true;
-        else
-        return false;
-       // return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+        return checkValidity(email,"email");
     }
 
     /**
@@ -113,11 +107,7 @@ class LogIn extends Component {
     validatePassword(psw) {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
-         if(psw.length>=8)
-         return true;
-         else
-         return false;
-        //return psw && psw.length >= 6
+         return checkValidity(psw,"pass");
     }
       /**
      * Function handling login request with Email and Password
@@ -150,19 +140,14 @@ class LogIn extends Component {
                 {
                     if(res.data.success===true)
                     {
-                        localStorage.setItem("isLoggedIn",'true');
-                        localStorage.setItem("token",res.data.token);
-                        localStorage.setItem("loginType", "email");
+                        login("email",res.data.token);
                         this.setState({status: 'connected'});
                        
                     }
                 }
                 else
-                {
-                //if(res.status===401) // Unsuccessful
-               // {
+                {            
                     this.setState({invalid: true});
-                //}else
                     alert(res.data.message)
 
                  }

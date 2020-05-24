@@ -1,0 +1,44 @@
+#artist-manage-profile{
+    height: auto;
+}
+#artist-manage-profile .top-section .manage-profile-background{
+    width: 105.7%;
+    height: 15rem;
+    size: 60%;
+    
+}
+
+#artist-manage-profile .top-section .artist-name{
+    position: absolute;
+    top:12rem;
+    left: 2rem;
+    font-size: 2rem;
+}
+#artist-manage-profile .top-section .bg-layer{
+    width: 102%;
+    opacity: 0.3;
+    display: block;
+    height: 15rem;
+    position: absolute;
+    top: 0;
+    left: 5;
+    background-color: #000000;
+}
+@media (max-width:700px){
+    #artist-manage-profile .top-section .bg-layer{
+        width: 92%;
+
+    }
+    #artist-manage-profile .top-section .manage-profile-background{
+        width: 100%;
+    }
+    #artist-manage-profile .top-section img{
+        width: 90%;
+    }
+    #artist-manage-profile .input-group{
+        width: 80% !important;
+    }
+    #artist-manage-profile .container{
+        justify-content: center;
+    }
+}

@@ -1,0 +1,32 @@
+#main-section{
+    background: linear-gradient(#F037A5 -60%, #FAE62D 140%);
+    width: 100%;
+    height:calc( 600px + 10vw);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-align: center;
+    color: white; 
+}
+
+#main-section .h-1{
+    margin-top: calc( 170px + 2vw);
+    padding:10;
+    font-size: calc( 28px + 4vw);
+}
+
+#main-section .h-4{
+    font-size: calc( 16px + 0.35vw);
+}
+
+#main-section button{
+    text-align:center;
+    margin-top: 30px;
+}
+
+#main-section #bg-img{
+margin-top: -60px;
+background-image: url("./../../Images/hero-burst.svg");
+background-repeat: repeat-x;
+height:calc( 550px + 10vw);
+}
+

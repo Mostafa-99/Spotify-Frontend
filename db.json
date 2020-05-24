@@ -1,4 +1,16 @@
 {
+  "meArtist":{
+    "id": "1",
+    "name": "Amr Diab",
+    "email": "mostafa@gmail.com",
+    "dateOfBirth": "1999-9-1",
+    "gender": "male",
+    "images": "https://static.arageek.com/wp-content/uploads/2017/09/Amr-Diab-2.jpg",
+    "background":"https://i.scdn.co/image/5ac491f3bf789a7a1491b20de5e83006e0ef2ba0",
+    "bio":"Amr Diab is a pop singer and songwriter from Egypt. He has won a record seven World Music Awards to date, and is considered the all-time best-selling musical artist from the Middle East. He is the creator of his own genre; he calls his meld of Arabic harmony and Western rhythms"
+
+    
+  },
   "users": [
     {
       "id": "1",
@@ -7,7 +19,7 @@
       "email": "ibrahimwael99@gmail.com",
       "dateOfBirth": "1999-5-14",
       "gender": "male",
-      "image": "https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/67395602_2399311110115141_4496818810312982528_o.jpg?_nc_cat=109&_nc_sid=0c64ff&_nc_ohc=Ep8QLCJLjAUAX_G4U1Y&_nc_ht=scontent.xx&_nc_tp=6&oh=3df46d801c92c51720b03dc338a0cba2&oe=5E944BCA",
+      "images": "https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/67395602_2399311110115141_4496818810312982528_o.jpg?_nc_cat=109&_nc_sid=0c64ff&_nc_ohc=Ep8QLCJLjAUAX_G4U1Y&_nc_ht=scontent.xx&_nc_tp=6&oh=3df46d801c92c51720b03dc338a0cba2&oe=5E944BCA",
       "notifications": {
         "newMusic": true,
         "artistUpdates": false,
@@ -20,7 +32,7 @@
       "email": "mostafa@gmail.com",
       "dateOfBirth": "1999-9-1",
       "gender": "male",
-      "image": "https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/67395602_2399311110115141_4496818810312982528_o.jpg?_nc_cat=109&_nc_sid=0c64ff&_nc_ohc=Ep8QLCJLjAUAX_G4U1Y&_nc_ht=scontent.xx&_nc_tp=6&oh=3df46d801c92c51720b03dc338a0cba2&oe=5E944BCA",
+      "images": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2806529116093705&height=300&width=300&ext=1592252564&hash=AeS_kIoGT8ETHMrg",
       "notifications": {
         "newMusic": true,
         "artistUpdates": true,

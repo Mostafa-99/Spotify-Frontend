@@ -1,17 +1,22 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext,useEffect } from "react";
 import axios from "axios";
 import Message from "./Message";
 import "../UploadFile/UploadFile.css";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { ConfigContext } from "../../../Context/ConfigContext";
+import {ProfileContext} from "../../../Context/ProfileContext";
 /** Functional component to Create albums using react hooks.
  * @class
  */
-const CreateAlbum = () => {
+const CreateAlbum = (props) => {
+  
   /**Gets the baseURL from configrations context of the user
    * @memberof CreateAlbum
    */
   const url = useContext(ConfigContext);
+  const user = useContext(ProfileContext);
+  console.log(props);
+
   /**Album name
    * @memberof CreateAlbum
    * @constant albumName
@@ -102,11 +107,14 @@ const CreateAlbum = () => {
     setImgName(e.target.files[0].name);
     // console.log(e.target.files[0]);
   };
+  
   /**Submit Album info to the backend in a request
    * @memberof CreateAlbum
    * @type {Function}
    */
   const onSubmit = async (e) => {
+    console.log(user);
+    console.log(url);
     e.preventDefault();
     const formData = new FormData();
     const genre = [];
@@ -115,35 +123,56 @@ const CreateAlbum = () => {
     formData.append("albumType", albumType);
     formData.append("genre", genre);
     formData.append("image", img);
+    if(props.location.state.myAlbum){
+      console.log("edit album:",props.location.state.myId)
+      try {
+        const res = await axios.put(url.baseURL + "/meArtist/albums/"+props.location.state.myId, formData, {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+       if(res.status===200){
+         setMessage("Album edited");
+       }
+      } catch (err) {
+        console.log(err);
+      }
+    }else{
+      console.log("Create album:")
 
+      try {
+        const res = await axios.post(url.baseURL + "/me/albums", formData, {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+        if(res.status===200){
+        setMessage("Album created");
+      }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+  const deleteAlbum = async (e) => {
     try {
-      const res = await axios.post(url.baseURL + "/me/albums", formData, {
+      const res = await axios.delete(url.baseURL + "/meArtist/albums/"+props.location.state.myId, {}, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
-
-      setMessage("Album created");
+      if(res.status===200){
+      setMessage("Album deleted");
+      }
     } catch (err) {
       console.log(err);
-      /* if (err.response.status === 500) {
-        setMessage("There was a problem with the server");
-      } else if (err.response.status === 401) {
-        localStorage.removeItem("loginType");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userID");
-        alert("Your session has ended");
-      } else {
-        setMessage(err.response.message);
-      }*/
     }
-  };
+  }
   return (
     <div className="artist-body">
       <div className="full-page container upload-page">
         <Fragment>
-          <ArtistSidebar />
+          <ArtistSidebar/>
           <form className="container" onSubmit={onSubmit}>
             {message ? <Message msg={message} /> : null}
             <div class="form-group">
@@ -182,12 +211,26 @@ const CreateAlbum = () => {
                 {imgName}
               </label>
             </div>
-
+           {props.location.state.myAlbum ? 
+            <input
+              type="submit"
+              value="Edit"
+              className="btn btn-primary-outline btn-block mt-4"
+            ></input> :
             <input
               type="submit"
               value="Create"
               className="btn btn-primary-outline btn-block mt-4"
-            ></input>
+            ></input>}
+
+            {props.location.state.myAlbum ? 
+             <button
+            className="btn btn-danger rounded-pill w-100"
+            type="button"
+           onClick={deleteAlbum}
+            >
+            Delete Album
+           </button> :null }
           </form>
         </Fragment>
       </div>
