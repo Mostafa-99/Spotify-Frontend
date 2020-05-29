@@ -36,9 +36,9 @@ const Pagination = (props) => {
                 <div className="row">
                     <ul className="pagination">
                         { props.currentPage > 1 ? <li className="waves-effect" onClick={() => props.nextPage(props.currentPage - 1)}><span class="notify-time">Prev</span></li> : ''}
-                        {console.log(props.currentPage)}
+                        {/* {console.log(props.currentPage)} */}
                         { props.currentPage < props.pages + 1 ? <li className="waves-effect" onClick={() => props.nextPage(props.currentPage + 1)}><span class="notify-time">Next</span></li> : ''} 
-                        {console.log(props.pages)}
+                        {/* {console.log(props.pages)} */}
                     </ul>
                 </div>        
             </div>
