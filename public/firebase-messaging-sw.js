@@ -18,10 +18,23 @@ messaging.onTokenRefresh(() => {
     messaging.getToken().then((refreshedToken) => {
       console.log('Token refreshed.');
       // Indicate that the new Instance ID token has not yet been sent to the
-      // app server.
-      setTokenSentToServer(false);
-      // Send Instance ID token to app server.
-      sendTokenToServer(refreshedToken);
+      try {
+        const res = axios.put(this.context.baseURL + "me/notifications/token",
+        {
+          "token":token
+          },
+           {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+       if(res.status===204){
+          console.log("Request Succesful and token is ", token)
+      }
+      } 
+      catch (err) {
+        console.log(err);
+      }
       // ...
     }).catch((err) => {
       console.log('Unable to retrieve refreshed token ', err);
