@@ -36,8 +36,7 @@ messaging.requestPermission()
   .then(function(token){
   console.log("token is "); 
   console.log(token);
-  try {
-          const res = axios.put(this.context.baseURL + "me/notifications/token",
+         axios.put(this.context.baseURL + "me/notifications/token",
           {
             "token":token
             },
@@ -45,14 +44,16 @@ messaging.requestPermission()
             headers: {
               authorization: "Bearer " + localStorage.getItem("token"),
             },
-          });
+          })
+          .then(res => {
+            console.log(res)
          if(res.status===204){
             console.log("Request Succesful and token is ", token)
         }
-        } 
-        catch (err) {
-          console.log(err);
-        }
+      })
+      .catch(res => {
+        console.log(res)
+      })
   })
 .catch(function(err){
   console.log("error occured")
