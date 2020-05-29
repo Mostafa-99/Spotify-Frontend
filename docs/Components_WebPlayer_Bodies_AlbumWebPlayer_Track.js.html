@@ -29,6 +29,8 @@
             <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import './Track.css'
+import Share from './Share'
+import { Link } from 'react-router-dom';
 
 /**
  * Track class
@@ -54,6 +56,12 @@ export class Track extends Component {
          * @type {String}
          */
         "id":"",
+         /**
+         * link of the track
+         * @memberof Track
+         * @type {Link}
+         */
+        "href":"",
         /**
          * Name of the track
          * @memberof Track
@@ -78,9 +86,11 @@ export class Track extends Component {
          * @type {Number}
          */
         "seconds":0,
+        "track_number":Number,
     }
 
     componentDidMount(){
+        console.log(this.props);
         this.props.track.artists.map((artist)=>(
             this.setState({artists:artist.name})
         ));
@@ -88,7 +98,9 @@ export class Track extends Component {
             duration_ms:this.props.track.durationMs,
             preview_url:this.props.track.preview_url,
             id:this.props.track._id,
-            name:this.props.track.name
+            name:this.props.track.name,
+            track_number:this.props.track.trackNumber,
+            href:this.props.track.href
         });
         this.millisToMinutesAndSeconds(this.props.track.durationMs);
     }
@@ -109,17 +121,27 @@ export class Track extends Component {
     }
 
     render() {
+        
         return (
             &lt;div id="track-row-div" className="container-fluid">
+                &lt;Share url={this.state.href}/>
                 &lt;div className={(this.props.playing_song_id===this.props.track._id?"row playing-song":"row not-playing-song")}>
                     &lt;div className="track-symbol-div">
-                        &lt;i className={(this.props.playing_song_id===this.props.track._id?"track-icon-playing":"track-icon")} 
-                        onClick={this.props.setPlayingSondId.bind(this, this.state.id,this.state.preview_url)}>&lt;/i>
+                        &lt;i className={((this.props.playing_song_id===this.props.track._id) &amp;&amp; this.props.is_playing?"track-icon-playing":"track-icon")} 
+                        onClick={this.props.setPlayingSondId.bind(this, this.state.id,this.state.preview_url,this.state.name,this.state.artists,this.state.minutes,this.state.seconds,this.state.track_number)}>&lt;/i>
                     &lt;/div>
                     &lt;div className="track-name-div">
                         &lt;p className="track-name">{this.state.name}&lt;/p>
                         &lt;p className="track-artist">{this.state.artists}&lt;/p>
                     &lt;/div>
+              
+               {this.props.myAlbumArtist ? &lt;Link 
+                to={{
+                  pathname: "/artist/edit-track",
+                  state: { trackId: this.state.id, albumId:this.props.albumId},
+                }}
+                className="mt-2 mr-2">&lt;i className="fa fa-edit text-danger">&lt;/i>&lt;/Link> : null}
+
                     &lt;div className="track-options-div dropdown show">
                         &lt;strong className="track-options" id="trackdropdownMenuButton" data-toggle="dropdown">&lt;/strong>
                         &lt;div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
@@ -129,6 +151,11 @@ export class Track extends Component {
                             &lt;a className="dropdown-item disabled" href="#">Add to Playlist&lt;/a>
                             &lt;a className="dropdown-item disabled" href="#">Copy Song Link&lt;/a>
                             &lt;a className="dropdown-item disabled" href="#">Open in Desktop app&lt;/a>
+                            &lt;li className='dropdown-item '>
+                               &lt;button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
+                               &lt;span className='list-item-text'>Share Track&lt;/span>
+                                 &lt;/button>
+                               &lt;/li>
                         &lt;/div>
                     &lt;/div>
                     &lt;div className="track-duration-div">
@@ -155,13 +182,13 @@ export default Track
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistHeading.html">ArtistHeading</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="EditTrack.html">EditTrack</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="ManageProfile.html">ManageProfile</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Overview.html">Overview</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlayingBar.html">PlayingBar</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="RecentActivity.html">RecentActivity</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchNavBar.html">SearchNavBar</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li><li><a href="YourLibrary.html">YourLibrary</a></li><li><a href="YourLibraryAlbums.html">YourLibraryAlbums</a></li><li><a href="YourLibraryArtists.html">YourLibraryArtists</a></li><li><a href="YourLibraryNavBar.html">YourLibraryNavBar</a></li><li><a href="YourLibraryPlaylists.html">YourLibraryPlaylists</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkValidity">checkValidity</a></li><li><a href="global.html#day">day</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#image">image</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#Pagination">Pagination</a></li><li><a href="global.html#time">time</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#year">year</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri May 29 2020 21:45:10 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

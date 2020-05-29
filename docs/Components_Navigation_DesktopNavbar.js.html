@@ -33,6 +33,7 @@ import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import '../WebPlayer/Bodies/NavBars.css';
 import { ConfigContext } from '../../Context/ConfigContext'
 import { ProfileContext } from '../../Context/ProfileContext'
+import { logout } from '../../ReduxStore/Shared';
 
 //navbar not fixed anymore
 const MyDesktopNavbar = styled.nav`
@@ -42,13 +43,13 @@ flex-flow: row nowrap;
 justify-content:space-evenly;
 align-items:center;
 background-color:rgba(0,0,0);
-height:70px;
+height:80px;
 width:100%;
 z-index:1;
 
 #my-desk-navbar .links,.links-0{
     
-    font-size: calc(7px + .8vw);
+    font-size: 17px;
     text-decoration:none;
     color:white;
     padding:10px;
@@ -111,11 +112,6 @@ z-index:1;
     
 }
 
-#my-desk-navbar .index-fixed{
-    background-color:rgba(0,0,0.0.7);
-    position:fixed;
-}
-
 `
 /**
  * Desktop Navbar Component
@@ -132,7 +128,6 @@ class DesktopNavbar extends Component {
         }
 
     }
-
     /**
      * Desktop Navbar Component Mount state Intialization
      * 
@@ -141,6 +136,7 @@ class DesktopNavbar extends Component {
 
         this.setState(() => ({}))
         let show = localStorage.getItem("isLoggedIn");
+        
         if (show === "true") {
             let type = localStorage.getItem("loginType");
             this.setState({ status: "connected" })
@@ -150,7 +146,7 @@ class DesktopNavbar extends Component {
             this.setState({ status: "not connected" })
         }
     }
-
+    
     /**
      * Desktop Navbar function onchange to update state
      * 
@@ -167,28 +163,13 @@ class DesktopNavbar extends Component {
 
     }
 
-    /**
+/**
      * Function handeling log out whether with facebook or email
      * 
      */
     logOut = () => {
-
-        if (this.state.loginType === "fb") {
-            window.FB.logout(function (response) {
-                //console.log(response);
-            });
-
-        }
-        if (this.state.loginType === "email") {
-
-        }
-
         this.setState({ status: "not connected" })
-        this.setState({ loginType: '' })
-        localStorage.removeItem("userID");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("loginType");
+        logout();
     }
 
     render() {
@@ -273,13 +254,13 @@ export default DesktopNavbar;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistHeading.html">ArtistHeading</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="EditTrack.html">EditTrack</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="ManageProfile.html">ManageProfile</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Overview.html">Overview</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlayingBar.html">PlayingBar</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="RecentActivity.html">RecentActivity</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchNavBar.html">SearchNavBar</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li><li><a href="YourLibrary.html">YourLibrary</a></li><li><a href="YourLibraryAlbums.html">YourLibraryAlbums</a></li><li><a href="YourLibraryArtists.html">YourLibraryArtists</a></li><li><a href="YourLibraryNavBar.html">YourLibraryNavBar</a></li><li><a href="YourLibraryPlaylists.html">YourLibraryPlaylists</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkValidity">checkValidity</a></li><li><a href="global.html#day">day</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#image">image</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#Pagination">Pagination</a></li><li><a href="global.html#time">time</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#year">year</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri May 29 2020 21:45:10 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

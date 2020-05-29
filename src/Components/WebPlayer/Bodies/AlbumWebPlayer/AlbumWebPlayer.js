@@ -8,7 +8,6 @@ import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
 import ArtistPageBtn from '../../../Artist/Albums/AlbumPageBtn'
 import AlbumPageBtn from '../../../Artist/Albums/AlbumPageBtn'
-import songfile from './1.mp3'
 import TrackImage from './../../../../Images/albumImage.jpg'
 import { Link } from "react-router-dom";
 import { responseHandler } from '../../../../ReduxStore/Shared.js'
@@ -59,23 +58,84 @@ export class AlbumWebPlayer extends Component {
          * @type {Boolean}
          */
         "is_liked":Boolean,
+        ///////////////////////////////////////////////////
+        /**
+         * Total number of tracks in the album
+         * @memberof AlbumWebPlayer
+         * @type {Number}
+         */
+        "album_total_tracks":0,
         /**
          * ID of the playing song
          * @memberof AlbumWebPlayer
          * @type {String}
          */
-        "album_total_tracks":0,
         "playing_song_id":"",
-        "playing_song_number":"",
+        /**
+         * Order of the playing song in the album
+         * @memberof AlbumWebPlayer
+         * @type {Number}
+         */
+        "playing_song_number":Number,
+        /**
+         * Name of the playing song
+         * @memberof AlbumWebPlayer
+         * @type {String}
+         */
         "playing_song_name":"",
+        /**
+         * Artist of the playing song
+         * @memberof AlbumWebPlayer
+         * @type {String}
+         */
         "playing_song_artist":"",
+        /**
+         * Total number of minutes of the playing song
+         * @memberof AlbumWebPlayer
+         * @type {Number}
+         */
         "playing_song_minutes":0,
+        /**
+         * Total number of seconds of the playing song
+         * @memberof AlbumWebPlayer
+         * @type {Number}
+         */
         "playing_song_seconds":0,
+        /**
+         * Current minute of the playing song
+         * @memberof AlbumWebPlayer
+         * @type {Number}
+         */
         "playing_song_current_minutes":0,
+        /**
+         * Current second of the playing song
+         * @memberof AlbumWebPlayer
+         * @type {Number}
+         */
         "playing_song_current_seconds":0,
+        /**
+         * Time when the playing song was paused in seconds
+         * @memberof AlbumWebPlayer
+         * @type {Number}
+         */
         "pausedtime":0,
+        /**
+         * State of repeat button
+         * @memberof AlbumWebPlayer
+         * @type {Boolean}
+         */
         "is_repeating":false,
+        /**
+         * State of shuffle button
+         * @memberof AlbumWebPlayer
+         * @type {Boolean}
+         */
         "is_shuffling":false,
+        /**
+         * State of play/pause button
+         * @memberof AlbumWebPlayer
+         * @type {Boolean}
+         */
         "is_playing":false
     }
 
@@ -154,6 +214,7 @@ export class AlbumWebPlayer extends Component {
     /**
      * toggles is_liked and sends request to backend to update
      * @memberof AlbumWebPlayer
+     * @return {void}
      */
     likeButtonPressed=()=>{
         //send request to like or unlike
@@ -166,6 +227,12 @@ export class AlbumWebPlayer extends Component {
      * Plays or stop song
      * @memberof AlbumWebPlayer
      * @param {string} id -id of the song pressed
+     * @param {string} url -source of the song pressed
+     * @param {string} name -name of the song pressed
+     * @param {string} artist -artist of the song pressed
+     * @param {Number} minutes -total minutes of the song pressed
+     * @param {Number} seconds -total seconds of the song pressed
+     * @param {Number} number -order of the song pressed
      * @return {void}
      */
 
@@ -201,8 +268,13 @@ export class AlbumWebPlayer extends Component {
         }
     }
 
+    /**
+     * Gets next song to play
+     * @memberof AlbumWebPlayer
+     * @return {void}
+     */
     nextSong=()=>{
-        //to be edited
+
         if(this.state.playing_song_number === this.state.album_total_tracks && !this.state.is_shuffling){
             this.setState({
                 is_playing:false,
@@ -210,7 +282,7 @@ export class AlbumWebPlayer extends Component {
                 playing_song_number:0,
             })
             this.audio.pause();
-            //this.audio.src="";
+            this.audio.src="";
         }
         else{
             var currentNum = this.state.playing_song_number;
@@ -242,6 +314,11 @@ export class AlbumWebPlayer extends Component {
         }
     }
 
+    /**
+     * Gets previous song to play
+     * @memberof AlbumWebPlayer
+     * @return {void}
+     */
     previousSong=()=>{
         if(this.state.playing_song_number === 1 && !this.state.is_shuffling){
             this.setState({
@@ -250,7 +327,7 @@ export class AlbumWebPlayer extends Component {
                 playing_song_number:this.state.album_total_tracks+1
             })
             this.audio.pause();
-            //this.audio.src="";
+            this.audio.src="";
         }
         else{
             var currentNum = this.state.playing_song_number;
@@ -282,18 +359,35 @@ export class AlbumWebPlayer extends Component {
         }
     }
 
+    /**
+     * Seeks time when slider position is changed by user
+     * @memberof AlbumWebPlayer
+     * @param time -percentage of the time chosen
+     * @return {void}
+     */
     seekSong=(time)=>{
         if(this.state.is_playing === true){
             this.audio.currentTime=this.audio.duration * (time/100);
         }
     }
 
+    /**
+     * Changes volume when volume slider position is changed by user
+     * @memberof AlbumWebPlayer
+     * @param volume -percentage of the volume chosen
+     * @return {void}
+     */
     setPlayerVolume=(volume)=>{
         this.audio.volume=volume/100;
     }
 
+    /**
+     * Play/Pause song when button on playing bar pressed
+     * @memberof AlbumWebPlayer
+     * @return {void}
+     */
     PlayPauseButtonPressed=()=>{
-        if(this.audio.currentSrc !== ""){
+        if(this.audio.src !== ""){
             if(this.state.is_playing){
                 this.setState({
                     pausedtime:this.audio.currentTime,
@@ -311,6 +405,11 @@ export class AlbumWebPlayer extends Component {
         }
     }
 
+    /**
+     * Keeps the track slider moving dynamically according to the current time of playing song
+     * @memberof AlbumWebPlayer
+     * @return {void}
+     */
     playingBarTimer = setInterval(() => {
         if(this.state.is_playing){
             var sec= Math.floor(this.audio.currentTime);
@@ -329,14 +428,24 @@ export class AlbumWebPlayer extends Component {
                 })
             }
         }
-    }, 500);
+    }, 200);
 
+    /**
+     * toggles the state of is_repeating when repeat button on playing bar is pressed
+     * @memberof AlbumWebPlayer
+     * @return {void}
+     */
     repeatButtonPressed=()=>{
         this.setState(prevState =>({
             is_repeating:!prevState.is_repeating,
         }))
     }
 
+    /**
+     * toggles the state of is_shuffling when shuffle button on playing bar is pressed
+     * @memberof AlbumWebPlayer
+     * @return {void}
+     */
     shuffleButtonPressed=()=>{
         this.setState(prevState =>({
             is_shuffling:!prevState.is_shuffling
@@ -363,7 +472,7 @@ export class AlbumWebPlayer extends Component {
                                             <h1 className="album-title">{this.state.album_name}</h1>
                                             <p className="album-artist">{this.state.artists}</p>
                                         </div>
-
+                                        
                                         {this.props.location.state.myAlbum ? <Link
                                             to={{
                                                 pathname: "/artist/track-upload",
@@ -373,10 +482,10 @@ export class AlbumWebPlayer extends Component {
                                             <button type="button" class="btn btn-success">Upload song</button>
 
                                         </Link> : <div/> }
-                    
+                                        
                                         <div className="row album-buttons-div">
                                             <div className="album-play-button-div">
-                                                <button type="button" className="btn btn-success">PLAY</button>
+                                                <button type="button" className={(this.state.is_playing?"pause-btn":"play-btn") + " btn btn-success"} onClick={this.PlayPauseButtonPressed}></button>
                                             </div>
                                             <div className="row album-options-div">
                                                 <div className="album-heart-div">

@@ -35,10 +35,11 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import  './PlaylistContextMenu.css';
 import { theme, animation } from 'react-contexify';
-import { Menu, Item} from 'react-contexify';
+//import { Menu, Item} from 'react-contexify';
 import { MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
+import { responseHandler } from '../../../../ReduxStore/Shared';
 /** Class of home in webplayer.
  * @extends Component
  */
@@ -152,18 +153,13 @@ class Home extends Component {
                                     id:playList._id,
                                     title:playList.name,
                                     description: playList.description,
-                                    imageUrl:playList.images[0]
+                                    imageUrl:playList.images[0],
+                                    href:playList.href
                                 })),
                             })
 
                         }
-                        else if(res.status === 401)
-                        {
-                            localStorage.removeItem("loginType");
-                            localStorage.removeItem("isLoggedIn");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userID");
-                        }
+                        else responseHandler(res);
                     }) 
                     axios.get(this.context.baseURL+"/browse/categories/"+this.state.catagories[1].id+"/playlists", {
                         headers: {
@@ -182,26 +178,15 @@ class Home extends Component {
                                     id:playList._id,
                                     title:playList.name,
                                     description: playList.description,
-                                    imageUrl:playList.images[0]
+                                    imageUrl:playList.images[0],
+                                    href:playList.href
                                 }))
                             })
                         }
-                        else if(res.status === 401)
-                        {
-                            localStorage.removeItem("loginType");
-                            localStorage.removeItem("isLoggedIn");
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("userID");
-                        }
+                        else responseHandler(res);
                     }) 
                 }
-                else if(res.data.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
          //artists   
@@ -224,13 +209,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
         //recently played
@@ -250,17 +229,12 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.context.name,
                             imageUrl:playList.context.image,
+                            href:playList.href
                         })
                         )
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             })
 
         //popular albums
@@ -285,13 +259,7 @@ class Home extends Component {
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         //most recent albums
@@ -312,17 +280,12 @@ class Home extends Component {
                             id:album._id,
                             title:album.name,
                             imageUrl:album.image,
-                            artist:album.artists[0].name
+                            artist:album.artists[0].name,
+
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         //popular playlists
@@ -343,18 +306,12 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.name,
                             imageUrl:playList.images[0],
-                            description: playList.description
+                            description: playList.description,
+                            href:playList.href
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-
-                }
+                else responseHandler(res);
             })
 
         //most recent playlists
@@ -375,17 +332,12 @@ class Home extends Component {
                             id:playList._id,
                             title:playList.name,
                             imageUrl:playList.images[0],
-                            description: playList.description
+                            description: playList.description,
+                            href:playList.href
                         }))
                     })
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                else responseHandler(res);
             }) 
 
         /*axios.get("http://www.mocky.io/v2/5e749227300000e613a5f49b")
@@ -496,6 +448,7 @@ class Home extends Component {
     }
     render()
     {
+        console.log(this.state)
         {document.title ="Spotify - Home"}
     return(
         
@@ -518,7 +471,8 @@ class Home extends Component {
                             &lt;Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playList.id
+                                    myId :playList.id,
+                                    myhref:playList.href,
                                     }
                                 }}>
                                 &lt;div className="card" id={playList.id}>
@@ -553,7 +507,8 @@ class Home extends Component {
                             &lt;Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playList.id
+                                    myId :playList.id,
+                                    myhref:playList.href,
                                     }
                                 }}>
                             &lt;div className="card" id={playList.id}>
@@ -563,7 +518,8 @@ class Home extends Component {
                             &lt;Item>Save To Library&lt;/Item>
                             &lt;Item>Copy Playlist Link&lt;/Item>
                             &lt;Item>Open in App&lt;/Item>
-                            &lt;/Menu>       */}                                 &lt;img src={playList.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                            &lt;/Menu>       */}               
+                             &lt;img src={playList.imageUrl} className="card-img-top" alt="...">&lt;/img>
                                     &lt;div className="card-body">
                                         &lt;h5 className="card-title">{playList.title}&lt;/h5>
                                         &lt;p className="card-text">{playList.description}&lt;/p>
@@ -587,7 +543,7 @@ class Home extends Component {
                             &lt;Link to={{
                                     pathname:"/webplayer/album",
                                     state:{
-                                    myId :album.id
+                                    myId :album.id,
                                     }
                                 }}>
                             &lt;div className="card" id={album.id}>
@@ -621,7 +577,7 @@ class Home extends Component {
                             &lt;Link to={{
                                     pathname:"/webplayer/album",
                                     state:{
-                                    myId :album.id
+                                    myId :album.id,
                                     }
                                 }}>
                                 &lt;div className="card" id={album.id}>
@@ -658,7 +614,8 @@ class Home extends Component {
                             &lt;Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 &lt;div className="card" id={playlist.id}>
@@ -695,7 +652,8 @@ class Home extends Component {
                             &lt;Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 &lt;div className="card" id={playlist.id}>
@@ -732,7 +690,8 @@ class Home extends Component {
                             &lt;Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
                                     }
                                 }}>
                                 &lt;div className="card" id={playlist.id}>
@@ -769,7 +728,9 @@ class Home extends Component {
                             &lt;Link to={{
                                     pathname:"/playlist-webplayer",
                                     state:{
-                                    myId :playlist.id
+                                    myId :playlist.id,
+                                    myhref:playlist.href,
+                                
                                     }
                                 }}>
                                 &lt;div className="card" id={playlist.id}>
@@ -778,7 +739,8 @@ class Home extends Component {
                                     &lt;Item>Save To Library&lt;/Item>
                                     &lt;Item>Copy Playlist Link&lt;/Item>
                                     &lt;Item>Open in App&lt;/Item>
-                                    &lt;/Menu>*/}                                          &lt;img src={playlist.imageUrl} className="card-img-top" alt="...">&lt;/img>
+                                    &lt;/Menu>*/}                                         
+                                     &lt;img src={playlist.imageUrl} className="card-img-top" alt="...">&lt;/img>
                                     &lt;div className="card-body">
                                         &lt;h5 className="card-title">{playlist.title}&lt;/h5>
                                         &lt;p className="card-text">{playlist.description}&lt;/p>
@@ -851,13 +813,13 @@ export default Home;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistHeading.html">ArtistHeading</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="EditTrack.html">EditTrack</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="ManageProfile.html">ManageProfile</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Overview.html">Overview</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlayingBar.html">PlayingBar</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="RecentActivity.html">RecentActivity</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchNavBar.html">SearchNavBar</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li><li><a href="YourLibrary.html">YourLibrary</a></li><li><a href="YourLibraryAlbums.html">YourLibraryAlbums</a></li><li><a href="YourLibraryArtists.html">YourLibraryArtists</a></li><li><a href="YourLibraryNavBar.html">YourLibraryNavBar</a></li><li><a href="YourLibraryPlaylists.html">YourLibraryPlaylists</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkValidity">checkValidity</a></li><li><a href="global.html#day">day</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#image">image</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#Pagination">Pagination</a></li><li><a href="global.html#time">time</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#year">year</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri May 29 2020 21:45:10 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
