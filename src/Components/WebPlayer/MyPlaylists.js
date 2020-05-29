@@ -37,6 +37,7 @@ class MyPlaylists extends Component {
         .then(res => {
             if(res.status===200)
             { 
+                console.log(res)
                    this.setState({
                       playLists: res.data.data.playlist.map( playlist => ({
                       
@@ -74,6 +75,7 @@ class MyPlaylists extends Component {
     }
 
     render() {
+        
         return (
         <div id="playlist-list-item">
            

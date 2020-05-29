@@ -25,7 +25,7 @@ constructor(){
          * Total Number of results that I get from Request
          * @type {Number}
          */
-        totalResults:0,
+        totalResults:20,
          /**
          * Current Paging Number that I am in now 
          * @type {Number}
@@ -98,6 +98,7 @@ nextpage=(pagenumber)=>{
 .then(res => {
     if (res.status===200)
     {
+        console.log(res)
     this.setState({
         recents: res.data.items.map( recents => ({
             /**
@@ -106,10 +107,11 @@ nextpage=(pagenumber)=>{
             id:recents.data.id,
             /**
              * Time of the activity 
-             * @type {timw}
+             * @type {time}
              */
             time:recents.time,
             /**
+             * @type {string}
              * recent activity description 
              */
             description: recents.notification.body,
@@ -142,7 +144,9 @@ render(){
     * @type {Number}
     * To count the total number of Pages needed  passed to the Pagination Componen
      */
-    let numberPages = Math.ceil(this.state.totalResults /6 );
+    let numberPages = Math.ceil(this.state.totalResults / 5);
+
+
 
     return(
     <div class="wrapper" id="recent-activity-wrap">
@@ -164,11 +168,14 @@ render(){
 				</div>
 			</div>
         ))}
-        {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currenPage={this.state.currentpage}/> : ''}
+        {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currentPage={this.state.currentpage}/> : ''}
+           {console.log(this.state.currentpage)}
+           {console.log(numberPages)}
             </div>
             </div>
 </div>
 )
+
 }
 }
 export default RecentActivity;
