@@ -1,8 +1,10 @@
 import React,{ Component} from "react"
-import './RecentActivity.css'
 import axios from 'axios'
-import { ConfigContext } from '../../../../Context/ConfigContext'
-import Pagination from "./Pagination";
+import { ConfigContext } from '../../../../../Context/ConfigContext'
+import { responseHandler } from "../../../../../ReduxStore/Shared"
+import Pagination from "./Pagination"
+import Notification from './Notification'
+import './RecentActivity.css'
 
 /**
  * Recent Activity : shows the recent activity of the user and its time 
@@ -16,15 +18,15 @@ constructor(){
     this.state = {
          /**
          * Recent Activity Items 
-         * @type {Object}
+         * @type {Array}
          */
         recents:[],
         /**
          * Total Number of results that I get from Request
          * @type {Number}
          */
-        totalResults:0,
-                /**
+        totalResults:20,
+         /**
          * Current Paging Number that I am in now 
          * @type {Number}
          */
@@ -41,41 +43,41 @@ componentDidMount(){
            limit:6,
        }
        }
-    )            .then(res => {
+    ) 
+      .then(res => {
         if (res.status===200)
+        {
                 this.setState({
-                    recents: res.data.items.map( recents => ({
+                    recents: res.data.results.items.map( recents => ({
                         /**
                          * @type {string}
                          */
-                        id:recents.data.id,
+                      id:recents.data.id,
                         /**
                          * Time of the activity 
-                         * @type {timw}
+                         * @type {time}
                          */
-                        time:recents.time,
+                       time:recents.time,
                         /**
                          * recent activity description 
                          */
-                        description: recents.notification.body,
+                      description: recents.notification.body,
                         /**
                          * link to image of the notification item
                          * @type {link}
                          */
-                        image:recents.images[0]
+                     image:recents.images[0]
                     })),
-                    totalResults: res.total
+                   totalResults: res.data.results.total
                 })
+            }
                 else if(res.status===401){
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
+                    responseHandler(res);
                 }
-                else{
-                    alert("error");
-                } 
             })  
+            .catch(res=>{
+                console.log(res);
+            } )
 
 }
 toggledropdown=()=> {
@@ -96,6 +98,7 @@ nextpage=(pagenumber)=>{
 .then(res => {
     if (res.status===200)
     {
+        console.log(res)
     this.setState({
         recents: res.data.items.map( recents => ({
             /**
@@ -104,10 +107,11 @@ nextpage=(pagenumber)=>{
             id:recents.data.id,
             /**
              * Time of the activity 
-             * @type {timw}
+             * @type {time}
              */
             time:recents.time,
             /**
+             * @type {string}
              * recent activity description 
              */
             description: recents.notification.body,
@@ -122,10 +126,7 @@ nextpage=(pagenumber)=>{
     })
 }
   else if(res.status===401){
-    localStorage.removeItem("loginType");
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("token");
-    localStorage.removeItem("userID");
+    responseHandler(res);
 }
 else{
     alert("error");
@@ -138,12 +139,14 @@ else{
 
 
 render(){
-    {/*
+    /*
     * 
     * @type {Number}
     * To count the total number of Pages needed  passed to the Pagination Componen
-     */}
-    let numberPages = Math.ceil(this.state.totalResults /6 );
+     */
+    let numberPages = Math.ceil(this.state.totalResults / 5);
+
+
 
     return(
     <div class="wrapper" id="recent-activity-wrap">
@@ -165,11 +168,14 @@ render(){
 				</div>
 			</div>
         ))}
-        {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currentpage={this.state.currentpage}/> : ''}
+        {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currentPage={this.state.currentpage}/> : ''}
+           {console.log(this.state.currentpage)}
+           {console.log(numberPages)}
             </div>
             </div>
 </div>
 )
+
 }
 }
 export default RecentActivity;

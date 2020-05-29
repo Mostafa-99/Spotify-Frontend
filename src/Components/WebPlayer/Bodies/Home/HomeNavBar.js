@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import { Link,Redirect } from 'react-router-dom';
- import RecentActivity from './RecentActivity';
- import Pagination from './Pagination'
+ import RecentActivity from './RecentActivity/RecentActivity';
  import '../NavBars.css';
 import axios from 'axios'
 
@@ -103,7 +102,7 @@ class HomeNavBar extends Component {
                                 </div>
                                 )
                             }
-                              {logInOrNot==="true"?(
+                               {logInOrNot==="true"?(
                                 <div className="col-2"><RecentActivity/>
                                 </div> 
 

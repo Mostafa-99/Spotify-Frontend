@@ -1,8 +1,7 @@
 import React,{Component} from 'react';
-import {ConfigContext} from '../../Context/ConfigContext'
+import {ConfigContext} from '../../../../../Context/ConfigContext'
 import axios from 'axios'
 import $ from "jquery";
-import './SideBar.css';
 import './CreatePlaylist.css'
 
 
@@ -43,7 +42,7 @@ class CreatePlaylist extends Component {
      
      handleclick = () => {
          //
-        axios.post(this.context.baseURL +'/users/playlists/',
+        axios.post(this.context.baseURL +'/users/playlists',
             {
             "name":this.state.playlistname
             },

@@ -24,7 +24,7 @@ class CardComponent extends Component {
 
         }
     }
- //Good luck yaall   
+  
 // limit get six Playlists 
 // request used here is get/playlist/top
 // URL?_limit=6,-popularity
@@ -61,6 +61,7 @@ class CardComponent extends Component {
                     }
                  )
                 .then(res => {
+                    console.log(res);
                   if(res.status===200)
                   { 
                          this.setState({
@@ -103,7 +104,8 @@ class CardComponent extends Component {
                         }))
                     }) } else 
                     responseHandler(res);
-                }).catch(res=>{
+                })
+                .catch(res=>{
                     console.log(res);
                 } )
               

@@ -1,5 +1,9 @@
 import React, {Component} from "react"
-//import './MyPlaylists.css'
+import {ConfigContext} from "../../../src/Context/ConfigContext"
+import axios from 'axios'
+import { responseHandler } from "../../ReduxStore/Shared"
+import { Link } from 'react-router-dom';
+import './MyPlaylists.css'
 
 /** Class of My playlists components seen in the side bars 
  * @extends Component
@@ -7,7 +11,7 @@ import React, {Component} from "react"
 
 
 class MyPlaylists extends Component {
-
+    static contextType=ConfigContext;
     constructor() {
         super()
         this.state = {
@@ -23,35 +27,71 @@ class MyPlaylists extends Component {
    * @type {Function}
    * @memberof MyPlaylists
    */
+
     componentDidMount() {
-        fetch("https://my-json-server.typicode.com/youmnakhaled/FakeData/MyPlaylists")
-            .then(response => response.json())
-            .then(data => {
-                this.setState({
-                    playLists: data.map( playList => ({
+        axios.get(this.context.baseURL +'/users/playlists',
+        {
+           headers:{'authorization':"Bearer "+localStorage.getItem('token')}
+           }
+        ) 
+        .then(res => {
+            if(res.status===200)
+            { 
+                console.log(res)
+                   this.setState({
+                      playLists: res.data.data.playlist.map( playlist => ({
+                      
+                          /**
+                          * ID of the playlist
+                           @memberof MyPlaylists
+                           @type {String}
+                          *
+                          */
+                         id:playlist._id,
                         /**
-                         @type {string}
-                         @memberof MyPlaylists
-                         */
-                        id:playList.id,
-                         /**
-                         @type {string} 
-                         @memberof MyPlaylists
-                         */
-                        title:playList.name
-                    }))
-             
-             
-                })
-            })        
+                          * name  of the playlist
+                           @memberof MyPlaylists
+                          * 
+                           @type {String}
+                          */
+                      title:playlist.name,
+                        /**
+                          * Link to tracks of my playlist
+                           @memberof MyPlaylists
+                           @type {Route}
+                          * 
+                          */
+                      href:playlist.href,
+                    
+                  }))
+              }) } else 
+              responseHandler(res);
+          }).catch(res=>{
+              console.log(res);
+          } )
+        
+           
             
     }
 
     render() {
-        return (<div id="playlist-list-item">
+        
+        return (
+        <div id="playlist-list-item">
            
- {this.state.playLists.map(playList => (
- <li className='sidebar-list-item'>{playList.title} </li>
+ {this.state.playLists.map(playlist => (
+
+<Link to={{
+    pathname:"/playlist-webplayer",
+    state:{
+    myId :playlist.id,
+    myhref:playlist.href,
+    }
+}}>
+     <li className='sidebar-list-item' id={playlist.id} >{playlist.title} </li>
+  
+</Link>  
+
  
 ))}
 

@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
-
+import axios from 'axios'
 import {Provider} from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import authReducer from './ReduxStore/Reducers/Auth';
 import thunk from 'redux-thunk';
-
 //Firebase 
 import * as firebase from 'firebase';
 
@@ -36,6 +35,23 @@ messaging.requestPermission()
   .then(function(token){
   console.log("token is "); 
   console.log(token);
+  try {
+          const res = axios.put(this.context.baseURL + "me/notifications/token",
+          {
+            "token":token
+            },
+             {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          });
+         if(res.status===204){
+            console.log("Request Succesful and token is ", token)
+        }
+        } 
+        catch (err) {
+          console.log(err);
+        }
   })
 .catch(function(err){
   console.log("error occured")
