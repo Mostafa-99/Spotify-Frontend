@@ -153,7 +153,7 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumDetails(){
         //this.context.baseURL+"/albums/"+this.state.myId
-        axios.get("http://j412y.mocklab.io/albums/12345",{
+        axios.get("http://spotify.mocklab.io/albums/12345",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -189,7 +189,7 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumTracks(){
         //this.context.baseURL+"/albums/"+this.state.myId+"/tracks"
-        axios.get("http://j412y.mocklab.io/albums/12345/tracks",{
+        axios.get("http://spotify.mocklab.io/albums/12345/tracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
