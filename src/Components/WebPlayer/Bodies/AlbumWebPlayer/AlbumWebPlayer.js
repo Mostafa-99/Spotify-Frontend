@@ -217,10 +217,42 @@ export class AlbumWebPlayer extends Component {
      * @return {void}
      */
     likeButtonPressed=()=>{
-        //send request to like or unlike
-        this.setState(prevState =>({
-            is_liked:!prevState.is_liked
-        }))
+        if(this.state.is_liked){
+            axios.put("http://spotify.mocklab.io/me/likeAlbum",{body:{"id":this.state.myId}},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        is_liked:!prevState.is_liked
+                    }))
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
+            })
+        }
+        else{
+            axios.delete("http://spotify.mocklab.io/me/unlikeAlbum",{body:{"id":this.state.myId}},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        is_liked:!prevState.is_liked
+                    }))
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
+            })
+        }
     }
 
     /**
@@ -514,7 +546,7 @@ export class AlbumWebPlayer extends Component {
                     </div>
                 </div>
                 <div className="row">
-                        <PlayingBar name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
+                        <PlayingBar id={this.state.playing_song_id} name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
                         seconds={this.state.playing_song_seconds} is_playing={this.state.is_playing} current_minutes={this.state.playing_song_current_minutes} current_seconds={this.state.playing_song_current_seconds}
                         setPlayerVolume={this.setPlayerVolume} seekSong={this.seekSong} PlayPauseButtonPressed={this.PlayPauseButtonPressed} nextSong={this.nextSong} previousSong={this.previousSong} 
                         is_repeating={this.state.is_repeating} repeatButtonPressed={this.repeatButtonPressed} is_shuffling={this.state.is_shuffling} shuffleButtonPressed={this.shuffleButtonPressed} />

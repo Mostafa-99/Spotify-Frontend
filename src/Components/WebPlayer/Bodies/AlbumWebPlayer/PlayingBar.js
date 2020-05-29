@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { responseHandler } from '../../../../ReduxStore/Shared.js'
 import './PlayingBar.css'
 import TrackImage from './../../../../Images/albumImage.jpg'
 
@@ -35,10 +37,42 @@ export class PlayingBar extends Component {
      * @memberof PlayingBar
      */
     likeButtonPressed=()=>{
-        //send request to like or unlike
-        this.setState(prevState =>({
-            is_liked:!prevState.is_liked
-        }))
+        if(this.state.is_liked && this.props.id !== ""){
+            axios.put("http://spotify.mocklab.io/me/likeTrack",{body:{"id":this.props.id}},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        is_liked:!prevState.is_liked
+                    }))
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
+            })
+        }
+        else if(this.props.id !== ""){
+            axios.delete("http://spotify.mocklab.io/me/unlikeTrack",{body:{"id":this.state.myId}},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        is_liked:!prevState.is_liked
+                    }))
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
+            })
+        }
     }
 
     /**
