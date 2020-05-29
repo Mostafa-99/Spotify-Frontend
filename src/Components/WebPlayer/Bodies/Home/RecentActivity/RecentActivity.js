@@ -3,7 +3,6 @@ import axios from 'axios'
 import { ConfigContext } from '../../../../../Context/ConfigContext'
 import { responseHandler } from "../../../../../ReduxStore/Shared"
 import Pagination from "./Pagination"
-import Notification from './Notification'
 import './RecentActivity.css'
 
 /**
@@ -25,7 +24,7 @@ constructor(){
          * Total Number of results that I get from Request
          * @type {Number}
          */
-        totalResults:20,
+        totalResults:0,
          /**
          * Current Paging Number that I am in now 
          * @type {Number}

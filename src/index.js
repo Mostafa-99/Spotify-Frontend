@@ -4,6 +4,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import axios from 'axios'
+import {ConfigContext} from './Context/ConfigContext'
 import {Provider} from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import authReducer from './ReduxStore/Reducers/Auth';

@@ -39,7 +39,7 @@ class MyPlaylists extends Component {
             { 
                 console.log(res)
                    this.setState({
-                      playLists: res.data.data.playlist.map( playlist => ({
+                      playLists: res.data.playlists.map( playlists => ({
                       
                           /**
                           * ID of the playlist
@@ -47,21 +47,21 @@ class MyPlaylists extends Component {
                            @type {String}
                           *
                           */
-                         id:playlist._id,
+                         id:playlists._id,
                         /**
                           * name  of the playlist
                            @memberof MyPlaylists
                           * 
                            @type {String}
                           */
-                      title:playlist.name,
+                      title:playlists.name,
                         /**
                           * Link to tracks of my playlist
                            @memberof MyPlaylists
                            @type {Route}
                           * 
                           */
-                      href:playlist.href,
+                      href:playlists.href,
                     
                   }))
               }) } else 
