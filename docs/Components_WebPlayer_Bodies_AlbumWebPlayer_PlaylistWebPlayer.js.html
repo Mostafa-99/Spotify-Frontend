@@ -30,11 +30,13 @@
 import axios from 'axios'
 import HomeNavBar from './../Home/HomeNavBar.js'
 import SideBar from './../../SideBar.js'
+import Share from './Share'
 import TracksList from './TracksList.js'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
+import { responseHandler } from '../../../../ReduxStore/Shared.js'
 
-/**
+  /**
  * Playlist web player class
  * @extends Component
  */
@@ -43,6 +45,12 @@ export class PlaylistWebPlayer extends Component {
 
     audio=new Audio();
     state={
+        /**
+         * Href of the playlist
+         * @memberof PlaylistWebPlayer
+         * @type {link}
+         */
+        myhref:{},
         /**
          * ID of the playlist
          * @memberof PlaylistWebPlayer
@@ -89,9 +97,10 @@ export class PlaylistWebPlayer extends Component {
 
     componentDidMount(){
 
-        const{myId}=this.props.location.state;//getting id from parent component
+        const{myId}=this.props.location.state.myId;//getting id from parent component
+       const{myhref}=this.props.location.state.myhref;
         this.state.myId=myId;
-
+        this.state.myhref=myhref;
         this.getPlaylistDetails();
         this.getPlaylistTracks();
     }
@@ -116,17 +125,10 @@ export class PlaylistWebPlayer extends Component {
                     playlist_image:res.data.data.playlist.images[0],
                     playlist_name:res.data.data.playlist.name,
                     is_liked:false //get from backend
+                
                 })
             }
-            else if(res.status===401){
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert("error");
-            }
+            else responseHandler(res);
         })
         /*
         .catch(error => {
@@ -152,15 +154,7 @@ export class PlaylistWebPlayer extends Component {
                 console.log(res)
                 this.setState({tracks:res.data.data.tracksArray})
             }
-            else if(res.status===401){
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
-            else{
-                alert("error");
-            }
+            else responseHandler(res);
         })
         /*
         .catch(error => {
@@ -211,60 +205,72 @@ export class PlaylistWebPlayer extends Component {
     }
 
     render() {
+      //  console.log("My href")
+        console.log(this.props.location.state);
+
         return (
+        &lt;div>
+            &lt;Share url={this.props.location.state.myhref}/>
             &lt;div id="album-bar-webplayer-main-div" className="container-fluid">
-            &lt;div id="album-main-row" className="row">
-            &lt;div className="col-lg-2">
-                &lt;SideBar/>
-            &lt;/div>
-            &lt;div className="col-lg-10">
-                &lt;HomeNavBar/>
-                &lt;div id="album-webplayer-main-div">
-                    &lt;div className="row">
-                        &lt;div className="row album-details-div">
-                            &lt;div className="album-image-div">
-                                &lt;img className="album-image" src={this.state.playlist_image} alt="playlist pic"/>
-                            &lt;/div>
-                            &lt;div className="album-below-image-div">
-                                &lt;div className="album-title-div">
-                                    &lt;h1 className="album-title">{this.state.playlist_name}&lt;/h1>
-                                &lt;/div>
-                                &lt;div className="row album-buttons-div">
-                                    &lt;div className="album-play-button-div">
-                                        &lt;button type="button" className="btn btn-success">&lt;/button>
+                &lt;div id="album-main-row" className="row">
+                    &lt;div className="col-lg-2">
+                        &lt;SideBar/>
+                    &lt;/div>
+                    &lt;div className="col-lg-10">
+                        &lt;HomeNavBar/>
+                        &lt;div id="album-webplayer-main-div">
+                            &lt;div className="row">
+                                &lt;div className="row album-details-div">
+                                    &lt;div className="album-image-div">
+                                        &lt;img className="album-image" src={this.state.playlist_image} alt="playlist pic"/>
                                     &lt;/div>
-                                    &lt;div className="row album-options-div">
-                                        &lt;div className="album-heart-div">
-                                            &lt;i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}>&lt;/i>
+                                    &lt;div className="album-below-image-div">
+                                        &lt;div className="album-title-div">
+                                            &lt;h1 className="album-title">{this.state.playlist_name}&lt;/h1>
                                         &lt;/div>
-                                        &lt;div className="album-dots-div dropdown show" >
-                                            &lt;p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...&lt;/p>
-                                            &lt;div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                                                &lt;a className="dropdown-item disabled" href="#">Start Radio&lt;/a>
-                                                &lt;a className="dropdown-item disabled" href="#">Save to Your Library&lt;/a>
-                                                &lt;a className="dropdown-item disabled" href="#">Add to PLaylist&lt;/a>
-                                                &lt;a className="dropdown-item disabled" href="#">Copy Playlist Link&lt;/a>
-                                                &lt;a className="dropdown-item disabled" href="#">Open in Desktop app&lt;/a>
+                                        &lt;div className="row album-buttons-div">
+                                            &lt;div className="album-play-button-div">
+                                                &lt;button type="button" className="btn btn-success">PLAY&lt;/button>
+                                            &lt;/div>
+                                            &lt;div className="row album-options-div">
+                                                &lt;div className="album-heart-div">
+                                                    &lt;i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}>&lt;/i>
+                                                &lt;/div>
+                                                &lt;div className="album-dots-div dropdown show" >
+                                                    &lt;p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...&lt;/p>
+                                                    &lt;div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
+                                                        &lt;a className="dropdown-item " href="#">Start Radio&lt;/a>
+                                                        &lt;a className="dropdown-item " href="#">Save to Your Library&lt;/a>
+                                                        &lt;a className="dropdown-item " href="#">Add to PLaylist&lt;/a>
+                                                        &lt;a className="dropdown-item " href="#">Copy Playlist Link&lt;/a>
+                                                        &lt;a className="dropdown-item  " href="#">Open in Desktop app&lt;/a>
+                                                        &lt;li className='dropdown-item '>
+                                                            &lt;button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
+                                                            &lt;span className='list-item-text'>Share &lt;/span>
+                                                            &lt;/button>
+                                                        &lt;/li>
+                                                    &lt;/div>
+                                                &lt;/div>
                                             &lt;/div>
                                         &lt;/div>
                                     &lt;/div>
                                 &lt;/div>
+                                &lt;div className="tracks-list-div">
+                                    &lt;hr className="appear-on-small-screens"/>
+                                    &lt;TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                                &lt;/div>
                             &lt;/div>
-                        &lt;/div>
-                        &lt;div className="tracks-list-div">
-                            &lt;hr className="appear-on-small-screens"/>
-                            &lt;TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
                         &lt;/div>
                     &lt;/div>
                 &lt;/div>
             &lt;/div>
-            &lt;/div>
-            &lt;/div>
+        &lt;/div>
         )
     }
 }
 
 export default PlaylistWebPlayer
+
 </code></pre>
         </article>
     </section>
@@ -275,13 +281,13 @@ export default PlaylistWebPlayer
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li></ul><h3>Global</h3><ul><li><a href="global.html#day">day</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#validatePassword">validatePassword</a></li><li><a href="global.html#year">year</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistHeading.html">ArtistHeading</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="EditTrack.html">EditTrack</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="ManageProfile.html">ManageProfile</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Overview.html">Overview</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlayingBar.html">PlayingBar</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="RecentActivity.html">RecentActivity</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchNavBar.html">SearchNavBar</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li><li><a href="YourLibrary.html">YourLibrary</a></li><li><a href="YourLibraryAlbums.html">YourLibraryAlbums</a></li><li><a href="YourLibraryArtists.html">YourLibraryArtists</a></li><li><a href="YourLibraryNavBar.html">YourLibraryNavBar</a></li><li><a href="YourLibraryPlaylists.html">YourLibraryPlaylists</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkValidity">checkValidity</a></li><li><a href="global.html#day">day</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#image">image</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#Pagination">Pagination</a></li><li><a href="global.html#time">time</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#year">year</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Apr 11 2020 23:14:42 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Fri May 29 2020 21:45:10 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

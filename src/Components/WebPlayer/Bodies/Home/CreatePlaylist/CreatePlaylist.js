@@ -34,7 +34,7 @@ class CreatePlaylist extends Component {
    
 
        /**
-          * Controls that when user clicks create playlist button the Modal shows 
+  * Controls that when user clicks create playlist button the Modal shows 
    * @type {Handler}
    * @memberof CreatePlaylist
    */
@@ -58,7 +58,6 @@ class CreatePlaylist extends Component {
                         $('.modal-backdrop').remove();  
                     })
                 }
-              
             })
             .catch(error => {
                 console.log(error);
@@ -68,8 +67,8 @@ class CreatePlaylist extends Component {
 
      
     render() {
-        return ( <div>
-
+        return ( 
+        <div>
      <div className="modal " id="static-back-drop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div className="modal-dialog mw-100 w-100" id="playlist-modal" role="document">
     <div className="modal-content" id="modal-content-create" >

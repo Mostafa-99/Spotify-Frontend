@@ -1,81 +1,95 @@
 import React, { Component } from 'react'
+import axios from 'axios'
+import { responseHandler } from '../../../../ReduxStore/Shared.js'
 import './PlayingBar.css'
 import TrackImage from './../../../../Images/albumImage.jpg'
-import RangeSlider from 'react-bootstrap-range-slider'
 
+/**
+ * Playing bar class
+ * @extends Component
+ */
 export class PlayingBar extends Component {
 
     audio=new Audio();
     state={
-        "track_id":"",
-        "name":"Alone Again",
-        "artist":"The Weeknd",
+        /**
+         * State if the track is liked
+         * @memberof PlayingBar
+         * @type {Boolean}
+         */
         "is_liked":false,
+        /**
+         * State the current volume of audio in percentage
+         * @memberof PlayingBar
+         * @type {Number}
+         */
         "volume":50,
-        "volume_icon":"fas fa-volume-down",
-        "minutes":0,
-        "seconds":0
-    }
-    
-    millisToMinutesAndSeconds(sec) {
-        var minutes = Math.floor(sec / 60);
-        var seconds = ((sec % 60)).toFixed(0);
-        this.setState({
-            minutes:minutes,
-            seconds:seconds
-        });
+        /**
+         * Used to set the volume icon according to volume value
+         * @memberof PlayingBar
+         * @type {String}
+         */
+        "volume_icon":"fas fa-volume-down"
     }
 
+    /**
+     * toggles is_liked and sends request to backend
+     * @memberof PlayingBar
+     */
     likeButtonPressed=()=>{
-        //send request to like or unlike
-        this.setState(prevState =>({
-            is_liked:!prevState.is_liked
-        }))
+        if(this.state.is_liked && this.props.id !== ""){
+            axios.put("http://spotify.mocklab.io/me/likeTrack",{body:{"id":this.props.id}},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        is_liked:!prevState.is_liked
+                    }))
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
+            })
+        }
+        else if(this.props.id !== ""){
+            axios.delete("http://spotify.mocklab.io/me/unlikeTrack",{body:{"id":this.state.myId}},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        is_liked:!prevState.is_liked
+                    }))
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
+            })
+        }
     }
 
+    /**
+     * Sends the new track slider value to the parent component
+     * @memberof PlayingBar
+     * @return {void}
+     */
     trackSliderChanged=()=>{
         var slider= document.getElementById("song-slider");
         this.props.seekSong(slider.value);
     }
 
-    
-    /*repeat = setInterval(() => {
-        if(this.props.is_playing){
-            /*if(this.state.changed){
-                this.setState({
-                    current_minutes:this.state.changed_minutes,
-                    current_seconds:this.state.changed_seconds,
-                    changed:false
-                })
-            }
-            else { 
-            }
-            console.log(this.props.current_time);
-            if((this.state.current_minutes === this.props.minutes) && (this.state.current_seconds === this.props.seconds)){
-                this.setState({
-                    current_seconds:0,
-                    current_minutes:0
-                })
-                this.props.nextSong();
-            }
-            else if(this.state.current_seconds<59){
-                this.setState(prevState =>({
-                    current_seconds:prevState.current_seconds+1
-                }))
-            }
-            else{
-                this.setState(prevState =>({
-                    current_seconds:0,
-                    current_minutes:prevState.current_minutes+1
-                }))
-            }
-            var slider= document.getElementById("song-slider");
-            var seek= (this.state.current_minutes + this.state.current_seconds/60)*100/(this.props.minutes + this.props.seconds/60);
-            slider.value = seek;
-        }
-    }, 1000);*/
-
-
+    /**
+     * Sends the new volume slider value to the parent component and changes the sound icon
+     * @memberof PlayingBar
+     * @return {void}
+     */
     volumeChanged=()=>{
         var slider= document.getElementById("volume-slider");
         this.props.setPlayerVolume(slider.value);

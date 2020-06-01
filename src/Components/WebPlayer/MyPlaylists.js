@@ -22,7 +22,9 @@ class MyPlaylists extends Component {
 
         }
     }
- /**Sends request to the backend to  get users Playlists 
+
+ /*
+  *Sends request to the backend to  get users Playlists 
    * @type {Function}
    * @memberof MyPlaylists
    */
@@ -68,50 +70,8 @@ class MyPlaylists extends Component {
               responseHandler(res);
           }).catch(res=>{
               console.log(res);
-              axios.get(this.context.baseURL +'/me/createdPlaylists',
-              {
-                 headers:{'authorization':"Bearer "+localStorage.getItem('token')}
-                 }
-              ) 
-              .then(res => {
-                  console.log(res)
-                  if(res.status===200)
-                  { 
-                      console.log("data wa7da  " , res)
-                         this.setState({
-                            playlists: res.data.playlists.map( playlists => ({
-                            
-                                /**
-                                * ID of the playlist
-                                 @memberof MyPlaylists
-                                 @type {String}
-                                *
-                                */
-                               id:playlists._id,
-                              /**
-                                * name  of the playlist
-                                 @memberof MyPlaylists
-                                * 
-                                 @type {String}
-                                */
-                            title:playlists.name,
-                              /**
-                                * Link to tracks of my playlist
-                                 @memberof MyPlaylists
-                                 @type {Route}
-                                * 
-                                */
-                            href:playlists.href,
-                          
-                        }))
-                    }) } else 
-                    responseHandler(res);
-                })
-         
-         
-            } )
-        
-           
+
+          }) 
             
     }
 

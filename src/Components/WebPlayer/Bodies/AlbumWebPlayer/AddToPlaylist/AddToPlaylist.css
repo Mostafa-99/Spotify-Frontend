@@ -1,0 +1,37 @@
+.playlist-items-wrapper {
+    overflow: auto;
+    display: flex;
+    height: 300px;
+    margin: 10px;
+  }
+  .playlist-items-wrapper .playlist-item-wrapper{
+    display: flex;
+    height: fit-content;
+    position: relative;
+    margin: 10px;
+    width: fit-content;
+  }
+  .playlist-img-text-wrapper{
+    display: block;
+    padding: 0.5em;
+    flex-direction: row;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    align-items: center;
+    height: fit-content;
+    text-align: center;
+  }
+  .playlist-img-text-wrapper .my-playlist-playlist-info{
+    font-weight: 900;
+    color : white;
+  }
+
+  .playlist-img-text-wrapper #playlist-title{
+   color:  #919496;
+  }
+  .playlist-index-img-background img{
+    max-width: 200px;
+    max-height: 200px;
+  }

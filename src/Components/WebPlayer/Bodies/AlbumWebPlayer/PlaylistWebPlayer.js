@@ -139,10 +139,42 @@ export class PlaylistWebPlayer extends Component {
      * @memberof PlaylistWebPlayer
      */
     likeButtonPressed=()=>{
-        //send request to like
-        this.setState(prevState =>({
-            is_liked:!prevState.is_liked
-        }))
+        if(this.state.is_liked){
+            axios.put("http://spotify.mocklab.io/me/likeAlbum",{body:{"id":this.state.myId}},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        is_liked:!prevState.is_liked
+                    }))
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
+            })
+        }
+        else{
+            axios.delete("http://spotify.mocklab.io/me/unlikeAlbum",{body:{"id":this.state.myId}},{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        is_liked:!prevState.is_liked
+                    }))
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
+            })
+        }
     }
 
     /**

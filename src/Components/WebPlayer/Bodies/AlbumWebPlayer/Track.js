@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './Track.css'
 import Share from './Share'
 import { Link } from 'react-router-dom';
+import AddToPlaylist from './AddToPlaylist/AddToPlaylist'
 
 /**
  * Track class
@@ -93,10 +94,11 @@ export class Track extends Component {
     }
 
     render() {
-        
+       console.log("id is:" ,this.state.id) 
         return (
             <div id="track-row-div" className="container-fluid">
                 <Share url={this.state.href}/>
+                <AddToPlaylist trackId={this.state.id} />
                 <div className={(this.props.playing_song_id===this.props.track._id?"row playing-song":"row not-playing-song")}>
                     <div className="track-symbol-div">
                         <i className={((this.props.playing_song_id===this.props.track._id) && this.props.is_playing?"track-icon-playing":"track-icon")} 
@@ -120,7 +122,14 @@ export class Track extends Component {
                             <a className="dropdown-item disabled" href="#">Start Radio</a>
                             <a className="dropdown-item disabled" href="#">Save to Your Liked Songs</a>
                             <a className="dropdown-item disabled" href="#">Add to Queue</a>
-                            <a className="dropdown-item disabled" href="#">Add to Playlist</a>
+
+
+                            <li className='dropdown-item '>
+                               <button type="button" id="create-playlist" data-toggle="modal" data-target="#AddSongToPlaylist">
+                               <span className='list-item-text'>Add to Playlist</span>
+                                 </button>
+                               </li>
+
                             <a className="dropdown-item disabled" href="#">Copy Song Link</a>
                             <a className="dropdown-item disabled" href="#">Open in Desktop app</a>
                             <li className='dropdown-item '>
