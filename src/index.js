@@ -36,6 +36,8 @@ messaging.requestPermission()
   .then(function(token){
   console.log("token is "); 
   console.log(token);
+  console.log("request endpoint "); 
+  console.log(this.context.baseURL + "me/notifications/token")
          axios.put(this.context.baseURL + "me/notifications/token",
           {
             "token":token
