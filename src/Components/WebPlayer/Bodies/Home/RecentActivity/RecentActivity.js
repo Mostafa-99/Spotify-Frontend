@@ -6,7 +6,7 @@ import Pagination from "./Pagination"
 import './RecentActivity.css'
 
 /**
- * Recent Activity : shows the recent activity of the user and its time 
+ * Recent Activity : shows the recent activity of the user that  is the history of notifications
  * @extends Component
  */
 
@@ -33,6 +33,12 @@ constructor(){
 
     }
 }
+  /**
+   * life cycle react method that handles fetching of  notifications' history from log
+   * @memberof RecentActivity
+   * @type {Method}
+   * 
+   */
 componentDidMount(){
     
     axios.get(this.context.baseURL +'/me/notifications?limit=4',
@@ -77,11 +83,22 @@ componentDidMount(){
                 console.log(res); }) 
 
 }
+  /**
+   * function that handles that dropdown list of history appears and disappers on click 
+   * @memberof RecentActivity
+   * @type {Function}
+   * 
+   */
 toggledropdown=()=> {
 const element=document.getElementById("dropdown-wrap")
 element.classList.toggle("show");
 }
 
+  /** function that is resonsible of handling the paging object
+   * @memberof RecentActivity
+   * @type {Function}
+   * @param pagenumber- number of page that i will fetch next
+   */
 nextpage=(pagenumber)=>{ 
     
     axios.get(this.context.baseURL +'/me/notifications?limit=4&page='+pagenumber,
