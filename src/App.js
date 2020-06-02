@@ -93,8 +93,9 @@ function App() {
         <LoggedInProtectedRoute path="/account-overview" component={AccountSettings}/>
         <LoggedInProtectedRoute path="/change-password" component={ChangePasswrod}/>
         <LoggedInProtectedRoute path="/your-library"exact component={YourLibrary}/>
-        <LoggedInProtectedRoute path="/webplayer/album" exact component={AlbumWebPlayer} />
+        <LoggedInProtectedRoute path="/webplayer/album" component={AlbumWebPlayer} />
         <LoggedInProtectedRoute path="/playlist-webplayer" exact component={PlaylistWebPlayer} />
+        <LoggedInProtectedRoute path="/artist-webplayer" exact component={ArtistWebPlayer} />
 
         {/*Login Regular User Protected pages */} 
 
@@ -108,7 +109,7 @@ function App() {
         <ArtistProtectedRoute path="/artist/manage-profile" exact component={ManageProfile}/>
         <ArtistProtectedRoute path="/artist/overview" exact component={Overview}/>
         <ArtistProtectedRoute path="/artist/edit-track" exact component={EditTrack}/>
-        <ArtistProtectedRoute path="/artist-webplayer" exact component={ArtistWebPlayer} />
+        
 
 
        
