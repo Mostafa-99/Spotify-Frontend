@@ -9,36 +9,39 @@ import "../ArtistBody.css";
 import { Doughnut, Line, defaults,Chart } from "react-chartjs-2";
 import "./Overview.css";
 
-var  numberOfLikesYears={
-  labels:[],
-  data:[]
-}
-var  numberOfLikesMonths={
-  labels:[],
-  data:[]
-}
-var numberOfLikesDays={
-  labels:[],
-  data:[]
-}
-
-/** Class of Albums of artist. It gets the albums of the artist in the artist mode
+/** Class of Overview of artist. It gets the artist's info
  * @extends Component
  */
 class Overview extends Component {
+   /**Gets the baseURL from configrations context of the user
+   * @memberof Overview
+   */
   static contextType = ConfigContext;
-  static styleOfGraph={
 
-  };
   
   constructor() {
     super();
     this.state = {
       user: {
+      /**Array of Albums of the artist
+       * @memberof Overview
+       * @type {image}
+       */
         image: "",
       },
+      /**Number Of Likes And Followers per Year for an artist
+       * @memberof Overview
+       */
       numberOfLikesAndFollowersLineDataYears: {
+      /**Labels of Number Of Likes And Followers per Year for an artist
+       * @memberof Overview
+       * @type {Array<string>}
+       */
         labels: [],
+       /**Data for Number Of Likes And Followers per Year for an artist
+       * @memberof Overview
+       * @type {Array<settings>}
+       */
         datasets: [
           {
             label: "Likes",
@@ -83,8 +86,19 @@ class Overview extends Component {
           }
         ],
       },
+      /**Number Of Likes And Followers per month for an artist
+       * @memberof Overview
+       */
       numberOfLikesAndFollowersLineDataMonths: {
+      /**Labels of Number Of Likes And Followers per month for an artist
+       * @memberof Overview
+       * @type {Array<string>}
+       */
         labels: [],
+        /**Data for Number Of Likes And Followers per month for an artist
+       * @memberof Overview
+       * @type {Array<settings>}
+       */
         datasets: [
           {
             label: "Likes",
@@ -129,8 +143,19 @@ class Overview extends Component {
           }
         ],
       },
+      /**Number Of Likes And Followers per day for an artist
+       * @memberof Overview
+       */
       numberOfLikesAndFollowersLineDataDays: {
+      /**Labels of Number Of Likes And Followers per day for an artist
+       * @memberof Overview
+       * @type {Array<string>}
+       */
         labels: [],
+       /**Data for Number Of Likes And Followers per day for an artist
+       * @memberof Overview
+       * @type {Array<settings>}
+       */
         datasets: [
           {
             label: "Likes",
@@ -180,11 +205,12 @@ class Overview extends Component {
 
   }
   
- 
+   /**When the component mounts it sends a request to the backend to load number of followers and likes per (day/month/year)
+   * @memberof Overview
+   */
   componentDidMount() {
     console.log(this.state.fileName);
     console.log(this.context.baseURL);
-  
 
     //console.log(this.state.numberOfLikesAndFollowrsLineDataYears);
     axios

@@ -8,39 +8,80 @@ import {ProfileContext} from '../../../Context/ProfileContext'
 import ArtistHeading from "../ManageProfile/ArtistHeading";
 import "./ManageProfile.css";
 import "../ArtistBody.css";
-/** Class of Albums of artist. It gets the albums of the artist in the artist mode
+/** Class of Manage profile of artist. It shows artist's info
  * @extends Component
  */
 class ManageProfile extends Component {
+    /**Gets the baseURL from configrations context of the user
+   * @memberof ManageProfile
+   */
   static contextType = ConfigContext;
  
 
   constructor() {
     super();
     this.state = {
+      /**Artist new name if it is required to be edited
+       * @memberof ManageProfile
+       * @type {string}
+       */
       nameInput: "",
+      /**Artist new bio if it is required to be edited
+       * @memberof ManageProfile
+       * @type {string}
+       */
       bioInput: "",
+      /**Artist new image if it is required to be edited
+       * @memberof ManageProfile
+       * @type {image}
+       */
       file: "",
+      /**Artist new image name if it is required to be edited
+       * @memberof ManageProfile
+       * @type {string}
+       */
       fileName: "Choose Image",
       user: {
+        /**Artist profile image
+       * @memberof ManageProfile
+       * @type {image}
+       */
         image: "",
+      /**Artist background image
+       * @memberof ManageProfile
+       * @type {image}
+       */
         background: "",
+      /**Artist Name
+       * @memberof ManageProfile
+       * @type {string}
+       */
         name: "",
+      /**Artist Bio
+       * @memberof ManageProfile
+       * @type {string}
+       */
         bio: "",
       },
     };
   }
+  /**Toggle the display of a div
+   * @memberof ManageProfile
+   * @type {Function}
+   * @param claasPassed - Class did the action
+   */
   toggleDisplay(claasPassed) {
     const page = document.getElementById("artist-manage-profile");
     const nameContainer = page.querySelector(claasPassed);
     nameContainer.classList.toggle("d-none");
   }
+    /**Gets bio and background of the artist
+   * @memberof ManageProfile
+   */
   componentDidMount() {
     console.log(this.state.fileName);
     console.log(this.context);
-    
     /*/me/albums */
-
     /*http://localhost:3000/me*/
     axios
       .get(this.context.baseURL+"/me", {
@@ -62,31 +103,57 @@ class ManageProfile extends Component {
           }));
           console.log(this.state.user.image);
         }
-      });
+      }).catch();
   }
+  /**Change name function which set the state with the new name
+   * @memberof ManageProfile
+   * @type {Function}
+   * @param e - Event happend
+   */
   changeNameText = (e) => {
     this.setState({
       nameInput: e.target.value,
     });
   };
+    /**Change name function which sends the request of changing the name
+   * @memberof ManageProfile
+   * @type {Function}
+   */
   changeName = () => {
     console.log(this.state.nameInput);
   };
-
+ /**Change Bio function which set the state with the new Bio
+   * @memberof ManageProfile
+   * @type {Function}
+   * @param e - Event happend
+   */
   changeBioText = (e) => {
     this.setState({
       bioInput: e.target.value,
     });
   };
+    /**Change Bio function which sends the request of changing the Bio
+   * @memberof ManageProfile
+   * @type {Function}
+   */
   changeBio = () => {
     console.log(this.state.bioInput);
   };
+   /**Change background function which set the state with the new background
+   * @memberof ManageProfile
+   * @type {Function}
+   * @param e - Event happend
+   */
   changeFile = (e) => {
     this.setState({
       file: e.target.files[0],
       fileName: e.target.files[0].name,
     });
   };
+  /**Change Background function which sends the request of changing the Background
+   * @memberof ManageProfile
+   * @type {Function}
+   */
   changeBackground = () => {
     console.log(this.state.file);
     const formData = new FormData();

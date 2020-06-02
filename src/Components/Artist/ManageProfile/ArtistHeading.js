@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from "react-router-dom";
 /**
- * Function to make the cover photo in the top of account overview page
+ * Function to make the cover photo of the artist
  * @class
  */
 function ArtistHeading() {
