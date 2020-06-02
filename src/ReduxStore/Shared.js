@@ -59,7 +59,7 @@ export const login= (type,token) => {
     localStorage.setItem("isLoggedIn",'true');
     localStorage.setItem("token",token);
     localStorage.setItem("loginType", type);
-    Axios.defaults.header.common['authorization'] = "Bearer "+ token;
+    //Axios.defaults.header.common['authorization'] = "Bearer "+ token;
 }
 
 export const responseHandler= (response) => {

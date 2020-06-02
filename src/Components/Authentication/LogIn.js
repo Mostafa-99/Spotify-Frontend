@@ -136,6 +136,7 @@ class LogIn extends Component {
             }
             )   
             .then(res => {
+                console.log(res);
                 if(res.status===200) // Successful
                 {
                     if(res.data.success===true)
