@@ -140,9 +140,10 @@ export class AlbumWebPlayer extends Component {
     }
 
     componentDidMount(){
-
-        //const{myId}=this.props.location.state;//getting id from parent component
-        //this.state.myId=myId;
+      
+        const{myId}=this.props.location.state;//getting id from parent component
+        this.state.myId=myId;
+        console.log(this.state.myId)
         this.getAlbumDetails();
         this.getAlbumTracks();
     }
@@ -153,7 +154,8 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumDetails(){
         //this.context.baseURL+"/albums/"+this.state.myId
-        axios.get("http://spotify.mocklab.io/albums/12345",{
+        //http://spotify.mocklab.io/albums/12345
+        axios.get(this.context.baseURL+"/albums/"+this.state.myId,{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -179,7 +181,7 @@ export class AlbumWebPlayer extends Component {
             else responseHandler(res);
         })
         .catch(error => {
-            alert(error.response.data.message);
+            console.log(error);
         })
     }
 
@@ -189,7 +191,8 @@ export class AlbumWebPlayer extends Component {
     */
     getAlbumTracks(){
         //this.context.baseURL+"/albums/"+this.state.myId+"/tracks"
-        axios.get("http://spotify.mocklab.io/albums/12345/tracks",{
+        //"http://spotify.mocklab.io/albums/12345/tracks"
+        axios.get(this.context.baseURL+"/albums/"+this.state.myId+"/tracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -207,7 +210,7 @@ export class AlbumWebPlayer extends Component {
             else responseHandler(res);
         })
         .catch(error => {
-           alert(error.response.data.message);
+           console.log(error);
         })
     }
 
@@ -232,7 +235,7 @@ export class AlbumWebPlayer extends Component {
                 else responseHandler(res);
             })
             .catch(error => {
-            alert(error.response.data.message);
+            console.log(error);
             })
         }
         else{
@@ -250,7 +253,7 @@ export class AlbumWebPlayer extends Component {
                 else responseHandler(res);
             })
             .catch(error => {
-            alert(error.response.data.message);
+            console.log(error);
             })
         }
     }

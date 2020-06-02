@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -9,7 +9,6 @@ import {Provider} from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import authReducer from './ReduxStore/Reducers/Auth';
 import thunk from 'redux-thunk';
-//Firebase 
 import * as firebase from 'firebase';
 
   var config = {
@@ -25,6 +24,7 @@ import * as firebase from 'firebase';
 firebase.initializeApp(config);
 
 
+
 const messaging = firebase.messaging();
 // Add the public key generated from the console here.
 messaging.usePublicVapidKey("BKWMGFcg3yIaZ8ONAeIORVydRfg1GFtMnKcCPV-jFyEXWAlbLv8nv9Wtsr4Gu5NsVHZTFl4yD0ZXcZpqsBvrIj8");
@@ -36,11 +36,10 @@ messaging.requestPermission()
   .then(function(token){
   console.log("token is "); 
   console.log(token);
-  console.log("request endpoint "); 
-  console.log(this.context.baseURL + "me/notifications/token")
-         axios.put(this.context.baseURL + "me/notifications/token",
+         axios.put("https://totallynotspotify.codes/api/me/notifications/token",
           {
-            "token":token
+            "token":token,
+            "type":"web"
             },
              {
             headers: {
@@ -64,6 +63,7 @@ messaging.onMessage((payload) => {
   console.log('Message received. ', payload);
   // ...
 });
+
 
 const rootReducer = combineReducers({
   auth: authReducer
