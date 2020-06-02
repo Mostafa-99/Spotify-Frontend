@@ -46,6 +46,7 @@ To install JSDoc , for documentation , use command:
 ```
 npm i jsdoc 
 npm install --save-dev jsdoc
+npm run doc
 ```
 
 ## Unit Testing 

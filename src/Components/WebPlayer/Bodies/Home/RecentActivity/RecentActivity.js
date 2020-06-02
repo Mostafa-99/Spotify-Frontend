@@ -44,10 +44,11 @@ componentDidMount(){
        }
     ) 
       .then(res => {
+          console.log(res)
         if (res.status===200)
         {
                 this.setState({
-                    recents: res.data.results.items.map( recents => ({
+                    recents: res.data.data.results.items.map( recents => ({
                         /**
                          * @type {string}
                          */
@@ -67,16 +68,63 @@ componentDidMount(){
                          */
                      image:recents.images[0]
                     })),
-                   totalResults: res.data.results.total
+                   totalResults: res.data.data.results.total
                 })
+                console.log("one dataa ")
             }
                 else if(res.status===401){
                     responseHandler(res);
                 }
             })  
             .catch(res=>{
-                console.log(res);
-            } )
+                console.log(res); 
+                axios.get(this.context.baseURL +'/me/notifications',
+                {
+                   headers:{'authorization':"Bearer "+localStorage.getItem('token')},
+                   query:{
+                       limit:6,
+                   }
+                   }
+                ) 
+                  .then(res => {
+                      console.log(res)
+                    if (res.status===200)
+                    {
+                        console.log("data wa7da" )
+                            this.setState({
+                                recents: res.data.results.items.map( recents => ({
+                                    /**
+                                     * @type {string}
+                                     */
+                                  id:recents.data.id,
+                                    /**
+                                     * Time of the activity 
+                                     * @type {time}
+                                     */
+                                   time:recents.time,
+                                    /**
+                                     * recent activity description 
+                                     */
+                                  description: recents.notification.body,
+                                    /**
+                                     * link to image of the notification item
+                                     * @type {link}
+                                     */
+                                 image:recents.images[0]
+                                })),
+                               totalResults: res.data.results.total
+                            })
+                            console.log("one dataa ")
+                        }
+                            else if(res.status===401){
+                                responseHandler(res);
+                            }
+                        })  
+                        .catch(res=>{
+                            console.log(res);} 
+                        )
+            
+                        })
 
 }
 toggledropdown=()=> {
@@ -168,8 +216,8 @@ render(){
 			</div>
         ))}
         {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currentPage={this.state.currentpage}/> : ''}
-           {console.log(this.state.currentpage)}
-           {console.log(numberPages)}
+           {/* {console.log(this.state.currentpage)}
+        {console.log(numberPages)} */}
             </div>
             </div>
 </div>

@@ -8,8 +8,8 @@ import {Link} from 'react-router-dom';
 import  './PlaylistContextMenu.css';
 import { theme, animation } from 'react-contexify';
 //import { Menu, Item} from 'react-contexify';
-import { MenuProvider } from 'react-contexify';
-import 'react-contexify/dist/ReactContexify.min.css';
+//import { MenuProvider } from 'react-contexify';
+//import 'react-contexify/dist/ReactContexify.min.css';
 import { ConfigContext } from '../../../../Context/ConfigContext'
 import { responseHandler } from '../../../../ReduxStore/Shared';
 /** Class of home in webplayer.
@@ -448,12 +448,7 @@ class Home extends Component {
                                     }
                                 }}>
                                 <div className="card" id={playList.id}>
-                             {/*   <MenuProvider id={playList.id} component="span" >
-                            <Menu id={playList.id} theme={theme.dark} animation={animation.fade}>
-                            <Item>Save To Library</Item>
-                            <Item>Copy Playlist Link</Item>
-                            <Item>Open in App</Item>
-                            </Menu>*/}
+
 
                                     <img src={playList.imageUrl} className="card-img-top" alt="..."></img>
                                     <div className="card-body">

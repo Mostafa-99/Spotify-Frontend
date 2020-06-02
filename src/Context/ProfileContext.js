@@ -21,7 +21,7 @@ class ProfileContextProvider extends Component {
      */
     componentDidMount =()=>{
         
-        
+        console.log(localStorage);
           let show=localStorage.getItem("isLoggedIn");
           
 
