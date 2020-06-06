@@ -126,7 +126,7 @@ const CreateAlbum = (props) => {
     if(props.location.state.myAlbum){
       console.log("edit album:",props.location.state.myId)
       try {
-        const res = await axios.put(url.baseURL + "/me/albums/"+props.location.state.myId, formData, {
+        const res = await axios.patch(url.baseURL + "/me/albums/"+props.location.state.myId, formData, {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
           },

@@ -116,13 +116,16 @@ const TrackUpload = (props) => {
             );
           },
         }
-      );
+      )
+      console.log(res);
+      console.log(res.status);
 
       const { fileName, filePath } = res.data;
-
+      
       setUploadedFile({ fileName, filePath });
       setMessage("File uploaded");
     } catch (err) {
+      console.log(err);
       if (err.response.status === 500) {
         setMessage("There was a problem with the server");
       } else {

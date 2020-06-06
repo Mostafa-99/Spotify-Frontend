@@ -499,7 +499,7 @@ export class AlbumWebPlayer extends Component {
                            <div className="row">
                                 <div className="row album-details-div">
                                     <div className="album-image-div">
-                                        <img className="album-image" src={TrackImage} alt="album pic"/>   {/*this.state.album_image*/}
+                                        <img className="album-image" src={this.state.album_image} alt="album pic"/>   {/*TrackImage*/}
                                     </div>
                                     <div className="album-below-image-div">
                                         <div className="album-title-div">
