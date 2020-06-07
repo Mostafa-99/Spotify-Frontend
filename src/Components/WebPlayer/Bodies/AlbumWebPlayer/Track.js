@@ -94,7 +94,7 @@ export class Track extends Component {
     }
 
     render() {
-       console.log("id is:" ,this.state.id) 
+       //console.log("id is:" ,this.state.id) 
         return (
             <div id="track-row-div" className="container-fluid">
                 <Share url={this.state.href}/>
