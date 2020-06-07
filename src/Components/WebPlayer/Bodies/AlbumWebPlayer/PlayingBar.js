@@ -13,12 +13,6 @@ export class PlayingBar extends Component {
     audio=new Audio();
     state={
         /**
-         * State if the track is liked
-         * @memberof PlayingBar
-         * @type {Boolean}
-         */
-        "is_liked":false,
-        /**
          * State the current volume of audio in percentage
          * @memberof PlayingBar
          * @type {Number}
@@ -30,49 +24,6 @@ export class PlayingBar extends Component {
          * @type {String}
          */
         "volume_icon":"fas fa-volume-down"
-    }
-
-    /**
-     * toggles is_liked and sends request to backend
-     * @memberof PlayingBar
-     */
-    likeButtonPressed=()=>{
-        if(this.state.is_liked && this.props.id !== ""){
-            axios.put("http://spotify.mocklab.io/me/likeTrack",{body:{"id":this.props.id}},{
-                headers:{
-                    'authorization': "Bearer "+ localStorage.getItem("token"),
-                }
-            })
-            .then(res => {
-                if(res.status===204){
-                    this.setState(prevState =>({
-                        is_liked:!prevState.is_liked
-                    }))
-                }
-                else responseHandler(res);
-            })
-            .catch(error => {
-            alert(error.response.data.message);
-            })
-        }
-        else if(this.props.id !== ""){
-            axios.delete("http://spotify.mocklab.io/me/unlikeTrack",{body:{"id":this.state.myId}},{
-                headers:{
-                    'authorization': "Bearer "+ localStorage.getItem("token"),
-                }
-            })
-            .then(res => {
-                if(res.status===204){
-                    this.setState(prevState =>({
-                        is_liked:!prevState.is_liked
-                    }))
-                }
-                else responseHandler(res);
-            })
-            .catch(error => {
-            alert(error.response.data.message);
-            })
-        }
     }
 
     /**
@@ -128,7 +79,7 @@ export class PlayingBar extends Component {
                                 <p className="track-artist">{this.props.artist}</p>
                             </div>
                             <div className="icon-div">
-                                <i className={(this.state.is_liked ? "fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}></i>
+                                <i className={(this.props.playing_song_is_liked ? "fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.props.trackLikeButtonPressed}></i>
                             </div>
                         </div>
                     </div>

@@ -109,7 +109,7 @@ import './AddToPlaylist.css'
     }
 
 render() {
-    console.log("trackId:" ,this.props.trackId)
+    //console.log("trackId:" ,this.props.trackId)
   //  console.log("Addtoplaylist",this.state.trackid)
     return(
     <div>
