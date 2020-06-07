@@ -6,7 +6,7 @@ import Pagination from "./Pagination"
 import './RecentActivity.css'
 
 /**
- * Recent Activity : shows the recent activity of the user and its time 
+ * Recent Activity : shows the recent activity of the user that  is the history of notifications
  * @extends Component
  */
 
@@ -29,18 +29,22 @@ constructor(){
          * Current Paging Number that I am in now 
          * @type {Number}
          */
-        currentpage:1,
+        currentPage:1,
 
     }
 }
+  /**
+   * life cycle react method that handles fetching of  notifications' history from log
+   * @memberof RecentActivity
+   * @type {Method}
+   * 
+   */
 componentDidMount(){
     
-    axios.get(this.context.baseURL +'/me/notifications',
+    axios.get(this.context.baseURL +'/me/notifications?limit=4',
     {
        headers:{'authorization':"Bearer "+localStorage.getItem('token')},
-       query:{
-           limit:6,
-       }
+
        }
     ) 
       .then(res => {
@@ -66,119 +70,78 @@ componentDidMount(){
                          * link to image of the notification item
                          * @type {link}
                          */
-                     image:recents.images[0]
+                     image:recents.data.images[0]
                     })),
                    totalResults: res.data.data.results.total
                 })
-                console.log("one dataa ")
             }
                 else if(res.status===401){
                     responseHandler(res);
                 }
             })  
             .catch(res=>{
-                console.log(res); 
-                axios.get(this.context.baseURL +'/me/notifications',
-                {
-                   headers:{'authorization':"Bearer "+localStorage.getItem('token')},
-                   query:{
-                       limit:6,
-                   }
-                   }
-                ) 
-                  .then(res => {
-                      console.log(res)
-                    if (res.status===200)
-                    {
-                        console.log("data wa7da" )
-                            this.setState({
-                                recents: res.data.results.items.map( recents => ({
-                                    /**
-                                     * @type {string}
-                                     */
-                                  id:recents.data.id,
-                                    /**
-                                     * Time of the activity 
-                                     * @type {time}
-                                     */
-                                   time:recents.time,
-                                    /**
-                                     * recent activity description 
-                                     */
-                                  description: recents.notification.body,
-                                    /**
-                                     * link to image of the notification item
-                                     * @type {link}
-                                     */
-                                 image:recents.images[0]
-                                })),
-                               totalResults: res.data.results.total
-                            })
-                            console.log("one dataa ")
-                        }
-                            else if(res.status===401){
-                                responseHandler(res);
-                            }
-                        })  
-                        .catch(res=>{
-                            console.log(res);} 
-                        )
-            
-                        })
+                console.log(res); }) 
 
 }
+  /**
+   * function that handles that dropdown list of history appears and disappers on click 
+   * @memberof RecentActivity
+   * @type {Function}
+   * 
+   */
 toggledropdown=()=> {
 const element=document.getElementById("dropdown-wrap")
 element.classList.toggle("show");
 }
 
+  /** function that is resonsible of handling the paging object
+   * @memberof RecentActivity
+   * @type {Function}
+   * @param pagenumber- number of page that i will fetch next
+   */
 nextpage=(pagenumber)=>{ 
-    axios.get(this.context.baseURL +'/me/notifications',
+    
+    axios.get(this.context.baseURL +'/me/notifications?limit=4&page='+pagenumber,
         {
-        headers:{'authorization':"Bearer "+localStorage.getItem('token')},
-        query:{
-            limit:6,
-            page:this.state.pagenumber,
-        }
+        headers:{'authorization':"Bearer "+localStorage.getItem('token')}
         }
      )
-.then(res => {
-    if (res.status===200)
-    {
+     .then(res => {
         console.log(res)
-    this.setState({
-        recents: res.data.items.map( recents => ({
-            /**
-             * @type {string}
-             */
-            id:recents.data.id,
-            /**
-             * Time of the activity 
-             * @type {time}
-             */
-            time:recents.time,
-            /**
-             * @type {string}
-             * recent activity description 
-             */
-            description: recents.notification.body,
-            /**
-             * link to image of the notification item
-             * @type {link}
-             */
-            image:recents.images[0]
-        })),
-        totalResults: res.total,
-        currentpage:pagenumber,
-    })
-}
-  else if(res.status===401){
-    responseHandler(res);
-}
-else{
-    alert("error");
-}
-}) 
+      if (res.status===200)
+      {       
+              this.setState({
+                  recents: res.data.data.results.items.map( recents => ({
+                      /**
+                       * @type {string}
+                       */
+                    id:recents.data.id,
+                      /**
+                       * Time of the activity 
+                       * @type {time}
+                       */
+                     time:recents.time,
+                      /**
+                       * recent activity description 
+                       */
+                    description: recents.notification.body,
+                      /**
+                       * link to image of the notification item
+                       * @type {link}
+                       */
+                   image:recents.data.images[0]
+                  })),
+                  currentPage:pagenumber,
+                 totalResults: res.data.data.results.total
+              })
+          }
+              else if(res.status===401){
+                  responseHandler(res);
+              }
+          })  
+          .catch(res=>{
+              console.log(res); }) 
+
  
 
 }
@@ -191,9 +154,7 @@ render(){
     * @type {Number}
     * To count the total number of Pages needed  passed to the Pagination Componen
      */
-    let numberPages = Math.ceil(this.state.totalResults / 5);
-
-
+    let numberPages = Math.floor(this.state.totalResults /4);
 
     return(
     <div class="wrapper" id="recent-activity-wrap">
@@ -207,7 +168,9 @@ render(){
         {this.state.recents.map( recents => (
 			<div class="notify-item">
 				<div class="notify-img">
-					<img src={recents.image} alt="profile-pic"></img>
+					<img src={recents.image} alt="profile-pic"
+                    onError={e => {e.target.src = 'https://image.shutterstock.com/image-vector/social-member-vector-icon-person-260nw-1139787308.jpg';}}
+                    ></img>
 				</div>
 				<div class="notify-info">
 					<p>{recents.description}</p>
@@ -215,7 +178,7 @@ render(){
 				</div>
 			</div>
         ))}
-        {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currentPage={this.state.currentpage}/> : ''}
+        {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currentPage={this.state.currentPage}/> : ''}
            {/* {console.log(this.state.currentpage)}
         {console.log(numberPages)} */}
             </div>

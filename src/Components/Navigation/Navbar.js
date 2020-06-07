@@ -72,9 +72,8 @@ class Navbar extends Component {
       }
 
       componentDidUpdate() {
-        window.onhashchange = function() { 
-          this.updateVisibility();
-     } 
+        // window.onhashchange = function() 
+        // {  this.updateVisibility(); } 
       }
     
       /**

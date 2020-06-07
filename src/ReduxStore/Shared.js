@@ -59,6 +59,7 @@ export const login= (type,token) => {
     localStorage.setItem("isLoggedIn",'true');
     localStorage.setItem("token",token);
     localStorage.setItem("loginType", type);
+    console.log(localStorage);
     //Axios.defaults.header.common['authorization'] = "Bearer "+ token;
 }
 

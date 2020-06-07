@@ -29,7 +29,7 @@ import './AddToPlaylist.css'
             */
             trackid:""
         }
-        this.sendThis= this.sendThis.bind(this)
+        this.handleClick= this.handleClick.bind(this)
     }
 
     componentDidMount()
@@ -83,10 +83,10 @@ import './AddToPlaylist.css'
      * @param {String} id 
      * @returns {void}
      */
-    sendThis = (id) => {
-        axios.post(this.context.baseURL +'/playlists/:'+this.props.trackId+'/tracks' ,
+    handleClick = (id) => {
+        axios.post(this.context.baseURL +'/playlists/'+id+'/tracks' ,
         {
-        "id":id
+        "id":this.props.trackId
         },
     {
         headers: {
@@ -105,7 +105,6 @@ import './AddToPlaylist.css'
         })
         .catch(error => {
             console.log(error);
-            alert(error);
         })
     }
 
@@ -133,9 +132,13 @@ render() {
       <div className="row" >
                      <div className="playlist-items-wrapper">
                      {this.state.playlists.map(playlist => (
-                                        <div className="playlist-item-wrapper"  id={playlist.id} onClick={this.sendThis(playlist.id)} >
-                                            <div className="playlist-index-img-background"  >
-                                                <img src={playlist.imageUrl} alt="Playlist cover pictutre here"></img>
+                                        <div className="playlist-item-wrapper"  id={playlist.id}  >
+                                            <div className="playlist-index-img-background"  onClick={() => this.handleClick(playlist.id)}>
+                                               
+                                               <img src={playlist.imageUrl} alt="playlist-pic"
+                    onError={e => {e.target.src = 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX38758453.jpg';}}></img>
+                                               
+                                               
                                                 <div className="playlist-img-text-wrapper" >               
                                                     <div className="playlist-subtitle"  >
                                                         <div className="my-playlist-playlist-info">
