@@ -163,6 +163,9 @@
     transform: scale(1.05) perspective(1px);
     background-color: rgb(38, 218, 98);
 }
+#album-webplayer-main-div .btn-success:focus{
+    outline: none;
+}
 #album-webplayer-main-div .play-btn::before{
     content: "PLAY";
 }

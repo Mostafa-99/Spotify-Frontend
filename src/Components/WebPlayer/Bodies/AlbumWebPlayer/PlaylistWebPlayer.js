@@ -665,7 +665,7 @@ export class PlaylistWebPlayer extends Component {
                                         </div>
                                         <div className="row album-buttons-div">
                                             <div className="album-play-button-div">
-                                                <button type="button" className="btn btn-success">PLAY</button>
+                                                <button type="button" className={"btn btn-success " + (this.state.is_playing?"pause-btn":"play-btn")} onClick={this.PlayPauseButtonPressed}></button>
                                             </div>
                                             <div className="row album-options-div">
                                                 <div className="album-heart-div">
