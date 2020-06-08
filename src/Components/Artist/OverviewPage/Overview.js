@@ -239,8 +239,9 @@ class Overview extends Component {
     } catch (error) {
     }
     console.log(endPoint);
+   // this.context.baseURL
     axios
-      .get(this.context.baseURL+"/me/numberOfLikesAndFollowers"+endPoint, {
+      .get("https://spotify.mocklab.io"+"/me/numberOfLikesAndFollowers"+endPoint, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },

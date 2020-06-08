@@ -99,8 +99,9 @@ class ManageProfile extends Component {
               ...prevState.user,
               image: res.data.images,
               name: res.data.name,
-              background: res.data.artistInfo.background,
-              bio: res.data.artistInfo.bio,
+             background:"https://i.ytimg.com/vi/Yo1AZl1S2gc/maxresdefault.jpg",
+              //background: res.data.artistInfo.background,
+              bio: res.data.artistInfo.biography,
             },
           }));
           console.log(this.state.user.image);

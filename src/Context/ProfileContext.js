@@ -36,10 +36,11 @@ class ProfileContextProvider extends Component {
                 {
                     this.setState({user: res.data})
                     localStorage.setItem("userType",res.data.role);
+                    console.log(res);
                       
                     
-                }else
-            alert(res.status)
+                }else{}
+           // alert(res.status)
         
     }).catch(err => {
                 alert(err)
