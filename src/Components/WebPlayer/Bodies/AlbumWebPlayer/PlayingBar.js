@@ -72,7 +72,7 @@ export class PlayingBar extends Component {
                     <div className="first-div the-three-divs">
                         <div className="row">
                             <div className="image-div">
-                                <img className="image" src={TrackImage} alt="pic"/>
+                                <img className="image" src={this.props.album_image} alt={TrackImage}/>
                             </div>
                             <div className="track-details-div">
                                 <p className="track-name">{this.props.name}</p>

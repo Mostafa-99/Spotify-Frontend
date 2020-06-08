@@ -119,10 +119,6 @@ export class Track extends Component {
                     <div className="track-options-div dropdown show">
                         <strong className="track-options" id="trackdropdownMenuButton" data-toggle="dropdown"></strong>
                         <div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                            <a className="dropdown-item disabled" href="#">Start Radio</a>
-                            <a className="dropdown-item disabled" href="#">Save to Your Liked Songs</a>
-                            <a className="dropdown-item disabled" href="#">Add to Queue</a>
-
 
                             <li className='dropdown-item '>
                                <button type="button" id="create-playlist" data-toggle="modal" data-target="#AddSongToPlaylist">
@@ -130,8 +126,6 @@ export class Track extends Component {
                                  </button>
                                </li>
 
-                            <a className="dropdown-item disabled" href="#">Copy Song Link</a>
-                            <a className="dropdown-item disabled" href="#">Open in Desktop app</a>
                             <li className='dropdown-item '>
                                <button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
                                <span className='list-item-text'>Share Track</span>
