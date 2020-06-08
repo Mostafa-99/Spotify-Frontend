@@ -154,8 +154,8 @@ export class PlaylistWebPlayer extends Component {
 
     componentDidMount(){
 
-        const{myId}=this.props.location.state.myId;//getting id from parent component
-        const{myhref}=this.props.location.state.myhref;
+        const{myId}=this.props.location.state;//getting id from parent component
+        const{myhref}=this.props.location.state;
         this.state.myId=myId;
         this.state.myhref=myhref;
         this.getPlaylistDetails();
@@ -183,7 +183,7 @@ export class PlaylistWebPlayer extends Component {
                 console.log("Playlist details here")
                 console.log(res)
                 this.setState({
-                    playlist_image:res.data.data.playlist.image,
+                    playlist_image:res.data.data.playlist.images[0],
                     playlist_name:res.data.data.playlist.name,
                     playlist_total_tracks:res.data.data.playlist.totalTracks
                 })
@@ -692,14 +692,14 @@ export class PlaylistWebPlayer extends Component {
                                 </div>
                                 <div className="tracks-list-div">
                                     <hr className="appear-on-small-screens"/>
-                                    <TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                                    <TracksList tracks={this.state.tracks} is_playing={this.state.is_playing} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="row">
-                        <PlayingBar playlist_image={this.state.playlist_image} id={this.state.playing_song_id} name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
+                        <PlayingBar album_image={this.state.playlist_image} id={this.state.playing_song_id} name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
                         seconds={this.state.playing_song_seconds} is_playing={this.state.is_playing} current_minutes={this.state.playing_song_current_minutes} current_seconds={this.state.playing_song_current_seconds}
                         setPlayerVolume={this.setPlayerVolume} seekSong={this.seekSong} PlayPauseButtonPressed={this.PlayPauseButtonPressed} nextSong={this.nextSong} previousSong={this.previousSong} 
                         is_repeating={this.state.is_repeating} repeatButtonPressed={this.repeatButtonPressed} is_shuffling={this.state.is_shuffling} shuffleButtonPressed={this.shuffleButtonPressed} 
