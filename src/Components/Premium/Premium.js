@@ -11,6 +11,9 @@ import benefit4 from '../../Images/benefit-4.png';
  * @extends Component
  */
 export class Premium extends Component {
+    componentDidMount(){
+        window.scrollTo(0, 0);
+    }
     render() {
         
         {document.title ="Spotify"}

@@ -34,6 +34,7 @@ class AccountSettings extends Component {
      * @property {Function} componentDidMount Fetch the data of the user and put it in the state
      */
     componentDidMount(){
+        window.scrollTo(0, 0);
         axios.get(this.context.baseURL+"/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),

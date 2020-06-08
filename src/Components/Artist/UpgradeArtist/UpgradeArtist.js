@@ -78,6 +78,9 @@ class UpgradeArtist extends Component {
       alert("please enter code!");
     }
   };
+  componentDidMount(){
+    window.scrollTo(0, 0);
+  }
   /**Change the state of the code.
    * @type {Function}
    * @memberof UpgradeArtist

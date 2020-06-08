@@ -85,7 +85,7 @@ class Home extends Component {
       * @property {Function} componentDidMount Fetch the data of the home page and put it in the state
       */
     componentDidMount() {
-
+        window.scrollTo(0, 0);
         window.addEventListener('contextmenu',(event) =>{
             event.preventDefault() })
 

@@ -68,7 +68,7 @@ export class PlaylistWebPlayer extends Component {
     }
 
     componentDidMount(){
-
+        window.scrollTo(0, 0);
         const{myId}=this.props.location.state.myId;//getting id from parent component
        const{myhref}=this.props.location.state.myhref;
         this.state.myId=myId;

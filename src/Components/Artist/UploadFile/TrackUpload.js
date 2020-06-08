@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext,useEffect  } from "react";
 import axios from "axios";
 import Message from "./Message";
 import "../UploadFile/UploadFile.css";
@@ -134,6 +134,9 @@ const TrackUpload = (props) => {
       responseHandler(err.response)
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <div className="artist-body">
       <div className="full-page container upload-page">

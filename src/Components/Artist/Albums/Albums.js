@@ -28,12 +28,15 @@ class Albums extends Component {
        * @type {Array<Albums>}
        */
       artistAlbums: [],
+      pageLoaded: false,
     };
   }
   /**When the component mounts it sends a request to the backend to load the albums
    * @memberof Albums
    */
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     axios
       .get(this.context.baseURL + "/me/albums", {
         headers: {
@@ -50,6 +53,7 @@ class Albums extends Component {
               imageUrl: album.image,
               artist: album.artists[0].name,
             })),
+            pageLoaded:true,
           });
         }
       })
@@ -65,6 +69,7 @@ class Albums extends Component {
         <div className="full-page container albums-page artist-albums-page">
           <div className="row container">
             <ArtistSidebar />
+            {this.state.pageLoaded ? 
             <div className="col-lg-9 albums-section">
               <div className="header-button-container">
                 <h2 className="section-title albums">Albums</h2>
@@ -138,7 +143,13 @@ class Albums extends Component {
                 ))}
               </div>
             </div>
+            : 
+            <div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
+            <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
           </div>
+              </div>}
+         </div>
         </div>
       </div>
     );

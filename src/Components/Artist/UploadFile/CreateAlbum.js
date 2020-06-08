@@ -16,7 +16,9 @@ const CreateAlbum = (props) => {
   const url = useContext(ConfigContext);
   const user = useContext(ProfileContext);
   console.log(props);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   /**Album name
    * @memberof CreateAlbum
    * @constant albumName

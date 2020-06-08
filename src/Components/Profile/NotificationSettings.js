@@ -22,6 +22,7 @@ class NotificationsSettings extends Component {
     }
 
     componentDidMount(){
+        window.scrollTo(0, 0);
         axios.get("http://138.91.114.14/api/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),

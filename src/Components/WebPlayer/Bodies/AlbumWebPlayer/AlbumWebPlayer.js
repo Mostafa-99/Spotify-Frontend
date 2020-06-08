@@ -152,7 +152,7 @@ export class AlbumWebPlayer extends Component {
     }
 
     componentDidMount(){
-      
+        window.scrollTo(0, 0);
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
         console.log(this.state.myId)
@@ -168,7 +168,7 @@ export class AlbumWebPlayer extends Component {
     getAlbumDetails(){
         //this.context.baseURL+"/albums/"+this.state.myId
         //"http://spotify.mocklab.io/albums/12345"
-        var link = this.context.baseURL === "http://spotify.mocklab.io"? "http://spotify.mocklab.io/albums/12345":this.context.baseURL+"/albums/"+this.state.myId;
+        var link = this.context.baseURL === "https://spotify.mocklab.io"? this.context.baseURL+"/albums/12345":this.context.baseURL+"/albums/"+this.state.myId;
         axios.get(link,{
             headers:{
                 'Content-Type':'application/json',
@@ -229,7 +229,7 @@ export class AlbumWebPlayer extends Component {
     getAlbumTracks(){
         //this.context.baseURL+"/albums/"+this.state.myId+"/tracks"
         //"http://spotify.mocklab.io/albums/12345/tracks"
-        var link = this.context.baseURL === "http://spotify.mocklab.io"? "http://spotify.mocklab.io/albums/12345/tracks":this.context.baseURL+"/albums/"+this.state.myId+"/tracks";
+        var link = this.context.baseURL === "https://spotify.mocklab.io"? this.context.baseURL+"/albums/12345/tracks":this.context.baseURL+"/albums/"+this.state.myId+"/tracks";
         axios.get(link,{
             headers:{
                 'Content-Type':'application/json',

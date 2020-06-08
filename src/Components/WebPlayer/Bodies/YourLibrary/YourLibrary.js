@@ -10,7 +10,11 @@ import { Link } from 'react-router-dom';
 /** Class of YourLibrary webplayer page.
  * @extends Component
  */
-class YourLibrary extends Component { render()
+class YourLibrary extends Component {
+    componentDidMount(){
+        window.scrollTo(0, 0);
+    }
+     render()
     {
         /*console.log("amr diab id is : ",this.state.myId);*/
        // {document.title ="Spotify - "+this.state.artist.name }

@@ -79,6 +79,8 @@ class ManageProfile extends Component {
    * @memberof ManageProfile
    */
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     console.log(this.state.fileName);
     console.log(this.context);
     /*/me/albums */

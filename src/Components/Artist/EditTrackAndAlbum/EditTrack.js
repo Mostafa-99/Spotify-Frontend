@@ -41,6 +41,8 @@ class EditTrack extends Component {
    * @memberof Albums
    */
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     this.state.albumId = this.props.location.state.albumId;
     this.state.trackId = this.props.location.state.trackId;
     console.log(this.state.albumId);

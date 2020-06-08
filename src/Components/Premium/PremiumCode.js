@@ -19,6 +19,9 @@ export class PremiumCode extends Component {
          */
         code: ''
     }
+    componentDidMount(){
+        window.scrollTo(0, 0);
+    }
 
     /**
      * sends subscription code to the user's email

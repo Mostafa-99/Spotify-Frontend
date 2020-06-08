@@ -102,8 +102,8 @@ export class Track extends Component {
         <div
           className={
             this.props.playing_song_id === this.props.track._id
-              ? "row playing-song"
-              : "row not-playing-song"
+              ? "row w-100 playing-song"
+              : "row w-100 not-playing-song"
           }
         >
           <div className="track-symbol-div">
