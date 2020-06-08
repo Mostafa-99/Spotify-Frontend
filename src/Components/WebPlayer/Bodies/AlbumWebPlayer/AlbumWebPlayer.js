@@ -18,7 +18,7 @@ import { responseHandler } from '../../../../ReduxStore/Shared.js'
  */
 export class AlbumWebPlayer extends Component {
     static contextType=ConfigContext;
-
+    
     audio=new Audio();
     state={
         /**
@@ -160,6 +160,9 @@ export class AlbumWebPlayer extends Component {
         this.getAlbumTracks();
 
     }
+    componentWillUnmount(){
+        this.audio.pause();
+    }
 
     /**
     * Gets album's name,image and get if the user likes the album
@@ -168,7 +171,7 @@ export class AlbumWebPlayer extends Component {
     getAlbumDetails(){
         //this.context.baseURL+"/albums/"+this.state.myId
         //"http://spotify.mocklab.io/albums/12345"
-        var link = this.context.baseURL === "http://spotify.mocklab.io"? "http://spotify.mocklab.io/albums/12345":this.context.baseURL+"/albums/"+this.state.myId;
+        var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
         axios.get(link,{
             headers:{
                 'Content-Type':'application/json',
@@ -229,7 +232,7 @@ export class AlbumWebPlayer extends Component {
     getAlbumTracks(){
         //this.context.baseURL+"/albums/"+this.state.myId+"/tracks"
         //"http://spotify.mocklab.io/albums/12345/tracks"
-        var link = this.context.baseURL === "http://spotify.mocklab.io"? "http://spotify.mocklab.io/albums/12345/tracks":this.context.baseURL+"/albums/"+this.state.myId+"/tracks";
+        var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
         axios.get(link,{
             headers:{
                 'Content-Type':'application/json',
@@ -437,6 +440,9 @@ export class AlbumWebPlayer extends Component {
             this.setState({
                 is_playing:false,
                 playing_song_id:"",
+                playing_song_name:"",
+                playing_song_artist:"",
+                playing_song_is_liked:false,
                 playing_song_number:0
             })
             this.audio.pause();
@@ -444,7 +450,7 @@ export class AlbumWebPlayer extends Component {
         }
         else{
             var currentNum = this.state.playing_song_number;
-            if(this.state.is_shuffling){
+            if(this.state.is_shuffling && this.state.album_total_tracks !== 1){
                 currentNum = Math.floor(Math.random() * this.state.album_total_tracks);
                 while(currentNum + 1 === this.state.playing_song_number){
                     currentNum = Math.floor(Math.random() * this.state.album_total_tracks);
@@ -498,6 +504,9 @@ export class AlbumWebPlayer extends Component {
             this.setState({
                 is_playing:false,
                 playing_song_id:"",
+                playing_song_name:"",
+                playing_song_artist:"",
+                playing_song_is_liked:false,
                 playing_song_number:this.state.album_total_tracks+1
             })
             this.audio.pause();
@@ -505,7 +514,7 @@ export class AlbumWebPlayer extends Component {
         }
         else{
             var currentNum = this.state.playing_song_number;
-            if(this.state.is_shuffling){
+            if(this.state.is_shuffling && this.state.album_total_tracks !== 1){
                 currentNum = Math.floor(Math.random() * (this.state.album_total_tracks + 2) );
                 while((currentNum - 1 === this.state.playing_song_number) | (currentNum - 1 <= 0)){
                     currentNum = Math.floor(Math.random() * (this.state.album_total_tracks + 2) );
@@ -655,7 +664,7 @@ export class AlbumWebPlayer extends Component {
                            <div className="row">
                                 <div className="row album-details-div">
                                     <div className="album-image-div">
-                                        <img className="album-image" src={this.state.album_image} alt={TrackImage}/>
+                                        <img className="album-image" src={this.state.album_image} alt="album pic"/>
                                     </div>
                                     <div className="album-below-image-div">
                                         <div className="album-title-div">
