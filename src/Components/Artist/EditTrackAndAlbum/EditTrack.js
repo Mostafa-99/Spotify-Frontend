@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "../SideBar/ArtistSidebar";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
-import { Link } from "react-router-dom";
+import { Link ,Redirect} from "react-router-dom";
 import { ConfigContext } from "../../../Context/ConfigContext";
 import { ProfileContext } from "../../../Context/ProfileContext";
 import ArtistHeading from "../ManageProfile/ArtistHeading";
@@ -62,6 +62,7 @@ class EditTrack extends Component {
    * @type {Function}
    */
   onSubmit = () => {
+
     console.log(this.state.trackNewName);
     axios
       .patch(
@@ -83,6 +84,8 @@ class EditTrack extends Component {
         console.log(res);
         if (res.status === 200) {
           console.log("edited");
+          window.location.replace("/artist");
+
         }
       })
       .catch();
@@ -110,6 +113,7 @@ class EditTrack extends Component {
         console.log(res);
         if (res.status === 200) {
           console.log("deleted");
+          window.location.replace("/artist");
         }
       })
       .catch();

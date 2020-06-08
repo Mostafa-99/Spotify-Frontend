@@ -133,6 +133,7 @@ const CreateAlbum = (props) => {
         });
        if(res.status===200){
          setMessage("Album edited");
+         window.location.replace("/artist");
        }
       } catch (err) {
         console.log(err);
@@ -148,6 +149,7 @@ const CreateAlbum = (props) => {
         });
         if(res.status===200){
         setMessage("Album created");
+        window.location.replace("/artist");
       }
       } catch (err) {
         console.log(err);
@@ -163,6 +165,7 @@ const CreateAlbum = (props) => {
       });
       if(res.status===200){
       setMessage("Album deleted");
+      window.location.replace("/artist");
       }
     } catch (err) {
       console.log(err);

@@ -1,12 +1,24 @@
 #webplayer-home .cancel-btn{
     position: absolute;
     top:1rem;
-    left: 7rem;
+    left: 6.5rem;
     padding: 0.3rem 0.5rem;
     border-radius: 100%;
     display: none;
 }
 #webplayer-home .card:hover  .cancel-btn{
+    display: inline-block;
+
+}
+#webplayer-home .stats-btn{
+    position: absolute;
+    top:12rem;
+    left: 6.5rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 100%;
+    display: none;
+}
+#webplayer-home .card:hover  .stats-btn{
     display: inline-block;
 
 }

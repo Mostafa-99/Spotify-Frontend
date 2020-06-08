@@ -10,7 +10,7 @@ class ConfigContextProvider extends Component {
      * @memberof ConfigContextProvider
      *
      /*http://spotify.mocklab.io*/
-    baseURL: "http://spotify.mocklab.io",
+    baseURL: "https://spotify.mocklab.io",
     //baseURL: "https://totallynotspotify.codes/api",
   };
   componentDidMount(){

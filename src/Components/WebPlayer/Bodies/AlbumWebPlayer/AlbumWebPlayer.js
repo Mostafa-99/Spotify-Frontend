@@ -158,6 +158,7 @@ export class AlbumWebPlayer extends Component {
         console.log(this.state.myId)
         this.getAlbumDetails();
         this.getAlbumTracks();
+
     }
 
     /**
@@ -238,8 +239,6 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
-                console.log("Album details")
-                console.log(res)
                 this.setState({tracks:res.data.data.tracksArray})
                 console.log("tracks");
                 console.log(res);
@@ -278,7 +277,7 @@ export class AlbumWebPlayer extends Component {
      */
     likeButtonPressed=()=>{
         if(!this.state.is_liked){
-            axios.put(this.context.baseURL+"/me/likeAlbum",{body:{"id":this.state.myId}},{
+            axios.put(this.context.baseURL+"/me/likeAlbum",{"id":this.state.myId},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -296,9 +295,12 @@ export class AlbumWebPlayer extends Component {
             })
         }
         else{
-            axios.delete(this.context.baseURL+"/me/unlikeAlbum",{body:{"id":this.state.myId}},{
+            axios.delete(this.context.baseURL+"/me/unlikeAlbum",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
+                },
+                data:{
+                    "id": this.state.myId
                 }
             })
             .then(res => {
@@ -321,7 +323,7 @@ export class AlbumWebPlayer extends Component {
      */
     trackLikeButtonPressed=()=>{
         if(!this.state.playing_song_is_liked && this.state.playing_song_id !== ""){
-            axios.put(this.context.baseURL+"/me/likeTrack",{body:{"id":this.state.playing_song_id}},{
+            axios.put(this.context.baseURL+"/me/likeTrack",{"id":this.state.playing_song_id},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -341,9 +343,12 @@ export class AlbumWebPlayer extends Component {
             })
         }
         else if(this.state.playing_song_id !== ""){
-            axios.delete(this.context.baseURL+"/me/unlikeTrack",{body:{"id":this.state.playing_song_id}},{
+            axios.delete(this.context.baseURL+"/me/unlikeTrack",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
+                },
+                data:{
+                    "id": this.state.playing_song_id
                 }
             })
             .then(res => {
@@ -650,7 +655,7 @@ export class AlbumWebPlayer extends Component {
                            <div className="row">
                                 <div className="row album-details-div">
                                     <div className="album-image-div">
-                                        <img className="album-image" src={this.state.album_image} alt="album pic"/>   {/*TrackImage*/}
+                                        <img className="album-image" src={this.state.album_image} alt={TrackImage}/>
                                     </div>
                                     <div className="album-below-image-div">
                                         <div className="album-title-div">
@@ -679,11 +684,11 @@ export class AlbumWebPlayer extends Component {
                                                 <div className="album-dots-div dropdown show" >
                                                     <p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...</p>
                                                     <div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                                                        <a className="dropdown-item disabled" href="#">Start Radio</a>
-                                                        <a className="dropdown-item disabled" href="#">Save to Your Library</a>
-                                                        <a className="dropdown-item disabled" href="#">Add to PLaylist</a>
-                                                        <a className="dropdown-item disabled" href="#">Copy Album Link</a>
-                                                        <a className="dropdown-item disabled" href="#">Open in Desktop app</a>
+                                                        <li className='dropdown-item '>
+                                                            <button type="button" id="create-playlist" onClick={this.likeButtonPressed}>
+                                                                <span className='list-item-text'>{this.state.is_liked? 'Remove from Your Library' : 'Save to Your Library'}</span>
+                                                            </button>
+                                                        </li>
                                                     </div>
                                                 </div>
                                             </div>                                                
@@ -699,7 +704,7 @@ export class AlbumWebPlayer extends Component {
                     </div>
                 </div>
                 <div className="row">
-                        <PlayingBar id={this.state.playing_song_id} name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
+                        <PlayingBar album_image={this.state.album_image} id={this.state.playing_song_id} name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
                         seconds={this.state.playing_song_seconds} is_playing={this.state.is_playing} current_minutes={this.state.playing_song_current_minutes} current_seconds={this.state.playing_song_current_seconds}
                         setPlayerVolume={this.setPlayerVolume} seekSong={this.seekSong} PlayPauseButtonPressed={this.PlayPauseButtonPressed} nextSong={this.nextSong} previousSong={this.previousSong} 
                         is_repeating={this.state.is_repeating} repeatButtonPressed={this.repeatButtonPressed} is_shuffling={this.state.is_shuffling} shuffleButtonPressed={this.shuffleButtonPressed} 

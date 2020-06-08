@@ -28,7 +28,7 @@ import VideosFeature from './Components/HelpComponents/Features/VideosFeature.js
 import MainSelector from './Components/Main/MainSelector' 
 import CreateAlbum from './Components/Artist/UploadFile/CreateAlbum'
 import TrackUpload from './Components/Artist/UploadFile/TrackUpload'
-import AlbumPage from './Components/Artist/Albums/AlbumPage'
+import Albums from './Components/Artist/Albums/Albums'
 import Home from './Components/WebPlayer/Bodies/Home/Home'
 import ArtistWebPlayer from './Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayer'
 import AlbumWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer.js'
@@ -102,12 +102,11 @@ function App() {
         {/*Login Premium User Protected pages */}
 
         {/*Login Artist User Protected pages */}
-        <ArtistProtectedRoute path="/artist" exact component={ArtistSelector}/>
+        <ArtistProtectedRoute path="/artist" exact component={Albums}/>
         <ArtistProtectedRoute path="/artist/track-upload" exact component={TrackUpload}/>
         <ArtistProtectedRoute path="/artist/create-album" exact component={CreateAlbum}/>
-        <ArtistProtectedRoute path="/artist/album-page" exact component={AlbumPage}/>
         <ArtistProtectedRoute path="/artist/manage-profile" exact component={ManageProfile}/>
-        <ArtistProtectedRoute path="/artist/overview" exact component={Overview}/>
+        <ArtistProtectedRoute path="/artist/overview" component={Overview}/>
         <ArtistProtectedRoute path="/artist/edit-track" exact component={EditTrack}/>
         
 

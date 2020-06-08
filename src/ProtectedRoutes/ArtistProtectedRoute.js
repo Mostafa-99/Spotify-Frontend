@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import UpgradeArtist from "../Components/Artist/UpgradeArtist/UpgradeArtist";
 
 export const ArtistProtectedRoute = ({
   component: Component,
@@ -13,14 +14,7 @@ export const ArtistProtectedRoute = ({
           return <Component {...props} />;
         } else {
           return (
-            <Redirect
-              to={{
-                pathname: "/home",
-                state: {
-                  from: props.location
-                }
-              }}
-            />
+            <UpgradeArtist/>
           );
         }
       }}

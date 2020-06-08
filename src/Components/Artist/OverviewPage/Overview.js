@@ -211,10 +211,30 @@ class Overview extends Component {
   componentDidMount() {
     console.log(this.state.fileName);
     console.log(this.context.baseURL);
+    var albumId;
+    var trackId;
+    var endPoint="";
+    var flag=0;
+    try {
+      
+       albumId = this.props.location.state.albumId;
+       flag=1;
+       trackId = this.props.location.state.trackId;
 
-    //console.log(this.state.numberOfLikesAndFollowrsLineDataYears);
+       if(trackId===undefined)
+       {
+         endPoint="/albums/"+albumId;
+         console.log(endPoint);
+       }  
+       else
+       {
+         endPoint="/albums/"+albumId+"/tracks/"+trackId;
+       } 
+    } catch (error) {
+    }
+    console.log(endPoint);
     axios
-      .get(this.context.baseURL+"/meArtist/numberOfLikesAndFollowers", {
+      .get(this.context.baseURL+"/me/numberOfLikesAndFollowers"+endPoint, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
