@@ -11,8 +11,28 @@ configure({ adapter: new Adapter() });
 
 describe('<ArtistWebPlayer /> ', () => {
     let wrapper;
-    it('ArtistWebPlayer renders without crashing (cannot pass id from home so it crashes(commented testing))', () => {
-        //wrapper =shallow(<ArtistWebPlayer />);
+    it('ArtistWebPlayer renders without crashing ', () => {
+        wrapper =shallow(<ArtistWebPlayer />);
+    });
+    it('YourLibrary page request', () => {
+
+        const wrapper = shallow(<Overview/>);
+
+        expect(wrapper.contains(<span class="sr-only">Loading...</span>)).toEqual(true);
+        
+        axios
+        .get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473", {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log(res);  
+            wrapper.state().isFollowed=res.data.data.following;        
+          }
+
+        });
     });
 });
 

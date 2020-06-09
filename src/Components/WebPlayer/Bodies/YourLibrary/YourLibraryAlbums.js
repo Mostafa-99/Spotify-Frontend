@@ -40,7 +40,7 @@ class YourLibraryAlbums extends Component {
             /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
             /* /artists/"+this.state.myId+"/albums */
             /*axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/albums",{/* albums */
-            axios.get(this.context.baseURL+"/artists/5e923dd09df6d9ca9f10a473/albums",{
+            axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/albums",{
                         headers:{
                     'authorization': "Bearer "+localStorage.getItem("token"),
                     "id": this.state.myId

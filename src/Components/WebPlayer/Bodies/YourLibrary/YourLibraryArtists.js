@@ -40,7 +40,7 @@ class YourLibraryArtists extends Component {
     /* */
     /**http://we871.mocklab.io/artists/200/relatedArtists */
     //axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/related-artists",{/* related artists*/
-    axios.get(this.context.baseURL+"/artists/5e923dd09df6d9ca9f10a473/related-artists",{
+    axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/related-artists",{
         headers:{
             'authorization': "Bearer "+localStorage.getItem("token"),
             "id": this.state.myId

@@ -45,7 +45,7 @@ class YourLibraryPlaylists extends Component {
 
     /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
     /*axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/created-playlists",{/* playlists*/
-        axios.get(this.context.baseURL+"/artists/5e923dd09df6d9ca9f10a473/created-playlists",{
+        axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/created-playlists",{
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -67,8 +67,8 @@ class YourLibraryPlaylists extends Component {
             })
 
              /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
-    /*axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/created-playlists",{/* liked songs*/
-    axios.get(this.context.baseURL+"/your-library",{
+    /*axios.get(this.context.baseURL+"/artists/"+this.state.myId+"/created-playlists",{*/
+    axios.get("https://spotify.mocklab.io/your-library",{
         headers:{
             'authorization': "Bearer "+localStorage.getItem("token"),
             "id": this.state.myId
