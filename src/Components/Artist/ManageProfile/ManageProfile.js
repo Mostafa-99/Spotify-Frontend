@@ -63,6 +63,8 @@ class ManageProfile extends Component {
        */
         bio: "",
       },
+      pageLoaded: false,
+
     };
   }
   /**Toggle the display of a div
@@ -99,10 +101,11 @@ class ManageProfile extends Component {
               ...prevState.user,
               image: res.data.images,
               name: res.data.name,
-             background:"https://i.ytimg.com/vi/Yo1AZl1S2gc/maxresdefault.jpg",
+             background:res.data.images,//"https://i.ytimg.com/vi/Yo1AZl1S2gc/maxresdefault.jpg",
               //background: res.data.artistInfo.background,
               bio: res.data.artistInfo.biography,
             },
+            pageLoaded:true,
           }));
           console.log(this.state.user.image);
         }
@@ -169,6 +172,7 @@ class ManageProfile extends Component {
         <div className="full-page container albums-page artist-albums-page">
           <div className="row container">
             <ArtistSidebar img={this.state.user.image} />
+            {this.state.pageLoaded ? 
             <div className="col-lg-9 container top-section">
               <div className="bg-layer"></div>
               <div className="manage-profile-top block">
@@ -284,7 +288,13 @@ class ManageProfile extends Component {
                 </div>
               </div>
             </div>
-          </div>
+            : 
+            <div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
+            <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+              </div>}
+         </div>
         </div>
       </div>
     );
