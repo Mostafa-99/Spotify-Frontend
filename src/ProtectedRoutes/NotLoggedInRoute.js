@@ -1,6 +1,10 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
+/**
+     * Protected route to allow not logged in .
+     * @extends Component
+     */
 export const NotLoggedInRoute = ({
   component: Component,
   ...rest
