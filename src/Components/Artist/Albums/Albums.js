@@ -69,7 +69,6 @@ class Albums extends Component {
         <div className="full-page container albums-page artist-albums-page">
           <div className="row container">
             <ArtistSidebar />
-            {this.state.pageLoaded ? 
             <div className="col-lg-9 albums-section">
               <div className="header-button-container">
                 <h2 className="section-title albums">Albums</h2>
@@ -78,7 +77,7 @@ class Albums extends Component {
                     pathname: "/artist/create-album",
                     state: { myAlbum: false },
                   }}
-                >
+                  >
                   <button className="btn-primary-outline add-album">
                     Add Album
                   </button>
@@ -86,6 +85,7 @@ class Albums extends Component {
               </div>
               {this.state.message ? <Message msg={this.state.message} /> : null}
 
+              {this.state.pageLoaded ? 
               <div className="card-group">
                 {this.state.artistAlbums.map((album) => (
                   <div id={album.id}>
@@ -142,13 +142,14 @@ class Albums extends Component {
                   </div>
                 ))}
               </div>
-            </div>
+           
             : 
             <div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
             <div class="spinner-border text-success" role="status">
             <span class="sr-only">Loading...</span>
           </div>
               </div>}
+            </div>
          </div>
         </div>
       </div>
