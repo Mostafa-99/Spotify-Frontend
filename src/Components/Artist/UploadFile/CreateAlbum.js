@@ -165,6 +165,7 @@ const CreateAlbum = (props) => {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
+      console.log(res);
       if(res.status===200){
       setMessage("Album deleted");
       window.location.replace("/artist");
@@ -176,9 +177,10 @@ const CreateAlbum = (props) => {
   return (
     <div className="artist-body">
       <div className="full-page container upload-page">
-        <Fragment>
+        <Fragment >
+          <div className="row container">
           <ArtistSidebar/>
-          <form className="container" onSubmit={onSubmit}>
+          <form className="container inputs-container" onSubmit={onSubmit}>
             {message ? <Message msg={message} /> : null}
             <div class="form-group">
               <input
@@ -237,6 +239,7 @@ const CreateAlbum = (props) => {
             Delete Album
            </button> :null }
           </form>
+          </div>
         </Fragment>
       </div>
     </div>

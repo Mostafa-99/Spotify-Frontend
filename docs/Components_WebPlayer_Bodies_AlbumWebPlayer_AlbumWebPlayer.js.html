@@ -46,7 +46,7 @@ import { responseHandler } from '../../../../ReduxStore/Shared.js'
  */
 export class AlbumWebPlayer extends Component {
     static contextType=ConfigContext;
-
+    
     audio=new Audio();
     state={
         /**
@@ -180,12 +180,16 @@ export class AlbumWebPlayer extends Component {
     }
 
     componentDidMount(){
-      
+        window.scrollTo(0, 0);
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
         console.log(this.state.myId)
         this.getAlbumDetails();
         this.getAlbumTracks();
+
+    }
+    componentWillUnmount(){
+        this.audio.pause();
     }
 
     /**
@@ -195,7 +199,7 @@ export class AlbumWebPlayer extends Component {
     getAlbumDetails(){
         //this.context.baseURL+"/albums/"+this.state.myId
         //"http://spotify.mocklab.io/albums/12345"
-        var link = this.context.baseURL === "http://spotify.mocklab.io"? "http://spotify.mocklab.io/albums/12345":this.context.baseURL+"/albums/"+this.state.myId;
+        var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
         axios.get(link,{
             headers:{
                 'Content-Type':'application/json',
@@ -256,7 +260,7 @@ export class AlbumWebPlayer extends Component {
     getAlbumTracks(){
         //this.context.baseURL+"/albums/"+this.state.myId+"/tracks"
         //"http://spotify.mocklab.io/albums/12345/tracks"
-        var link = this.context.baseURL === "http://spotify.mocklab.io"? "http://spotify.mocklab.io/albums/12345/tracks":this.context.baseURL+"/albums/"+this.state.myId+"/tracks";
+        var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
         axios.get(link,{
             headers:{
                 'Content-Type':'application/json',
@@ -266,8 +270,6 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
-                console.log("Album details")
-                console.log(res)
                 this.setState({tracks:res.data.data.tracksArray})
                 console.log("tracks");
                 console.log(res);
@@ -306,7 +308,7 @@ export class AlbumWebPlayer extends Component {
      */
     likeButtonPressed=()=>{
         if(!this.state.is_liked){
-            axios.put(this.context.baseURL+"/me/likeAlbum",{body:{"id":this.state.myId}},{
+            axios.put(this.context.baseURL+"/me/likeAlbum",{"id":this.state.myId},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -324,9 +326,12 @@ export class AlbumWebPlayer extends Component {
             })
         }
         else{
-            axios.delete(this.context.baseURL+"/me/unlikeAlbum",{body:{"id":this.state.myId}},{
+            axios.delete(this.context.baseURL+"/me/unlikeAlbum",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
+                },
+                data:{
+                    "id": this.state.myId
                 }
             })
             .then(res => {
@@ -349,7 +354,7 @@ export class AlbumWebPlayer extends Component {
      */
     trackLikeButtonPressed=()=>{
         if(!this.state.playing_song_is_liked &amp;&amp; this.state.playing_song_id !== ""){
-            axios.put(this.context.baseURL+"/me/likeTrack",{body:{"id":this.state.playing_song_id}},{
+            axios.put(this.context.baseURL+"/me/likeTrack",{"id":this.state.playing_song_id},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -369,9 +374,12 @@ export class AlbumWebPlayer extends Component {
             })
         }
         else if(this.state.playing_song_id !== ""){
-            axios.delete(this.context.baseURL+"/me/unlikeTrack",{body:{"id":this.state.playing_song_id}},{
+            axios.delete(this.context.baseURL+"/me/unlikeTrack",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
+                },
+                data:{
+                    "id": this.state.playing_song_id
                 }
             })
             .then(res => {
@@ -460,6 +468,9 @@ export class AlbumWebPlayer extends Component {
             this.setState({
                 is_playing:false,
                 playing_song_id:"",
+                playing_song_name:"",
+                playing_song_artist:"",
+                playing_song_is_liked:false,
                 playing_song_number:0
             })
             this.audio.pause();
@@ -467,7 +478,7 @@ export class AlbumWebPlayer extends Component {
         }
         else{
             var currentNum = this.state.playing_song_number;
-            if(this.state.is_shuffling){
+            if(this.state.is_shuffling &amp;&amp; this.state.album_total_tracks !== 1){
                 currentNum = Math.floor(Math.random() * this.state.album_total_tracks);
                 while(currentNum + 1 === this.state.playing_song_number){
                     currentNum = Math.floor(Math.random() * this.state.album_total_tracks);
@@ -521,6 +532,9 @@ export class AlbumWebPlayer extends Component {
             this.setState({
                 is_playing:false,
                 playing_song_id:"",
+                playing_song_name:"",
+                playing_song_artist:"",
+                playing_song_is_liked:false,
                 playing_song_number:this.state.album_total_tracks+1
             })
             this.audio.pause();
@@ -528,7 +542,7 @@ export class AlbumWebPlayer extends Component {
         }
         else{
             var currentNum = this.state.playing_song_number;
-            if(this.state.is_shuffling){
+            if(this.state.is_shuffling &amp;&amp; this.state.album_total_tracks !== 1){
                 currentNum = Math.floor(Math.random() * (this.state.album_total_tracks + 2) );
                 while((currentNum - 1 === this.state.playing_song_number) | (currentNum - 1 &lt;= 0)){
                     currentNum = Math.floor(Math.random() * (this.state.album_total_tracks + 2) );
@@ -678,7 +692,7 @@ export class AlbumWebPlayer extends Component {
                            &lt;div className="row">
                                 &lt;div className="row album-details-div">
                                     &lt;div className="album-image-div">
-                                        &lt;img className="album-image" src={TrackImage} alt="album pic"/>   {/*this.state.album_image*/}
+                                        &lt;img className="album-image" src={this.state.album_image} alt="album pic"/>
                                     &lt;/div>
                                     &lt;div className="album-below-image-div">
                                         &lt;div className="album-title-div">
@@ -707,11 +721,11 @@ export class AlbumWebPlayer extends Component {
                                                 &lt;div className="album-dots-div dropdown show" >
                                                     &lt;p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...&lt;/p>
                                                     &lt;div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                                                        &lt;a className="dropdown-item disabled" href="#">Start Radio&lt;/a>
-                                                        &lt;a className="dropdown-item disabled" href="#">Save to Your Library&lt;/a>
-                                                        &lt;a className="dropdown-item disabled" href="#">Add to PLaylist&lt;/a>
-                                                        &lt;a className="dropdown-item disabled" href="#">Copy Album Link&lt;/a>
-                                                        &lt;a className="dropdown-item disabled" href="#">Open in Desktop app&lt;/a>
+                                                        &lt;li className='dropdown-item '>
+                                                            &lt;button type="button" id="create-playlist" onClick={this.likeButtonPressed}>
+                                                                &lt;span className='list-item-text'>{this.state.is_liked? 'Remove from Your Library' : 'Save to Your Library'}&lt;/span>
+                                                            &lt;/button>
+                                                        &lt;/li>
                                                     &lt;/div>
                                                 &lt;/div>
                                             &lt;/div>                                                
@@ -727,7 +741,7 @@ export class AlbumWebPlayer extends Component {
                     &lt;/div>
                 &lt;/div>
                 &lt;div className="row">
-                        &lt;PlayingBar id={this.state.playing_song_id} name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
+                        &lt;PlayingBar album_image={this.state.album_image} id={this.state.playing_song_id} name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
                         seconds={this.state.playing_song_seconds} is_playing={this.state.is_playing} current_minutes={this.state.playing_song_current_minutes} current_seconds={this.state.playing_song_current_seconds}
                         setPlayerVolume={this.setPlayerVolume} seekSong={this.seekSong} PlayPauseButtonPressed={this.PlayPauseButtonPressed} nextSong={this.nextSong} previousSong={this.previousSong} 
                         is_repeating={this.state.is_repeating} repeatButtonPressed={this.repeatButtonPressed} is_shuffling={this.state.is_shuffling} shuffleButtonPressed={this.shuffleButtonPressed} 
@@ -755,7 +769,7 @@ export default AlbumWebPlayer
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon Jun 08 2020 00:26:57 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue Jun 09 2020 07:43:30 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

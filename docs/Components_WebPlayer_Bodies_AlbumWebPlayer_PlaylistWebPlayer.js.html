@@ -32,6 +32,7 @@ import HomeNavBar from './../Home/HomeNavBar.js'
 import SideBar from './../../SideBar.js'
 import Share from './Share'
 import TracksList from './TracksList.js'
+import PlayingBar from './PlayingBar.js'
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import './AlbumWebPlayer.css'
 import { responseHandler } from '../../../../ReduxStore/Shared.js'
@@ -88,21 +89,110 @@ export class PlaylistWebPlayer extends Component {
          */
         "is_liked":Boolean,
         /**
+         * Array of liked tracks' ids
+         * @memberof PlaylistWebPlayer 
+         * @type {Array&lt;String>}
+         */
+        "liked_tracks":[],
+        /**
+         * Total number of tracks in the playlist
+         * @memberof PlaylistWebPlayer
+         * @type {Number}
+         */
+        "playlist_total_tracks":0,
+        /**
          * ID of the playing song
          * @memberof PlaylistWebPlayer
          * @type {String}
          */
-        "playing_song_id":""
+        "playing_song_id":"",
+        /**
+         * Order of the playing song in the playlist
+         * @memberof PlaylistWebPlayer
+         * @type {Number}
+         */
+        "playing_song_number":Number,
+        /**
+         * Name of the playing song
+         * @memberof PlaylistWebPlayer
+         * @type {String}
+         */
+        "playing_song_name":"",
+        /**
+         * if playing song is liked or not
+         * @memberof PlaylistWebPlayer
+         * @type {Boolean}
+         */
+        "playing_song_is_liked":false,
+        /**
+         * Artist of the playing song
+         * @memberof PlaylistWebPlayer
+         * @type {String}
+         */
+        "playing_song_artist":"",
+        /**
+         * Total number of minutes of the playing song
+         * @memberof PlaylistWebPlayer
+         * @type {Number}
+         */
+        "playing_song_minutes":0,
+        /**
+         * Total number of seconds of the playing song
+         * @memberof PlaylistWebPlayer
+         * @type {Number}
+         */
+        "playing_song_seconds":0,
+        /**
+         * Current minute of the playing song
+         * @memberof PlaylistWebPlayer
+         * @type {Number}
+         */
+        "playing_song_current_minutes":0,
+        /**
+         * Current second of the playing song
+         * @memberof PlaylistWebPlayer
+         * @type {Number}
+         */
+        "playing_song_current_seconds":0,
+        /**
+         * Time when the playing song was paused in seconds
+         * @memberof PlaylistWebPlayer
+         * @type {Number}
+         */
+        "pausedtime":0,
+        /**
+         * State of repeat button
+         * @memberof PlaylistWebPlayer
+         * @type {Boolean}
+         */
+        "is_repeating":false,
+        /**
+         * State of shuffle button
+         * @memberof PlaylistWebPlayer
+         * @type {Boolean}
+         */
+        "is_shuffling":false,
+        /**
+         * State of play/pause button
+         * @memberof PlaylistWebPlayer
+         * @type {Boolean}
+         */
+        "is_playing":false,
     }
 
     componentDidMount(){
+        window.scrollTo(0, 0);
 
-        const{myId}=this.props.location.state.myId;//getting id from parent component
-       const{myhref}=this.props.location.state.myhref;
+        const{myId}=this.props.location.state;//getting id from parent component
+        const{myhref}=this.props.location.state;
         this.state.myId=myId;
         this.state.myhref=myhref;
         this.getPlaylistDetails();
         this.getPlaylistTracks();
+
+    }
+    componentWillUnmount(){
+        this.audio.pause();
     }
 
     /**
@@ -110,7 +200,8 @@ export class PlaylistWebPlayer extends Component {
     * @memberof PlaylistWebPlayer
     */
     getPlaylistDetails(){
-        axios.get(this.context.baseURL+"/playlists/"+this.state.myId,{
+        var link = this.context.baseURL+"/playlists/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
+        axios.get(link,{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -124,16 +215,38 @@ export class PlaylistWebPlayer extends Component {
                 this.setState({
                     playlist_image:res.data.data.playlist.images[0],
                     playlist_name:res.data.data.playlist.name,
-                    is_liked:false //get from backend
-                
+                    playlist_total_tracks:res.data.data.playlist.totalTracks
                 })
             }
             else responseHandler(res);
         })
-        /*
         .catch(error => {
-            alert(error.response.data.message);
-        })*/
+            console.log(error);
+        })
+
+        //check if playlist is liked
+        axios.get(this.context.baseURL+"/me/likedPlaylists",{
+            headers:{
+                'Content-Type':'application/json',
+                'authorization': "Bearer "+ localStorage.getItem("token")
+            }
+        })
+        .then(res => {
+            if(res.status===200){
+                res.data.data.playlists.map((playlist) => {
+                    if(playlist._id === this.state.myId){
+                        this.setState({
+                            is_liked:true
+                        })
+                        return playlist;
+                    }
+                })
+            }
+            else responseHandler(res);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     /**
@@ -141,7 +254,8 @@ export class PlaylistWebPlayer extends Component {
     * @memberof PlaylistWebPlayer
     */
     getPlaylistTracks(){
-        axios.get(this.context.baseURL+"/playlists/"+this.state.myId+"/tracks",{
+        var link = this.context.baseURL+"/playlists/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
+        axios.get(link,{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -156,10 +270,29 @@ export class PlaylistWebPlayer extends Component {
             }
             else responseHandler(res);
         })
-        /*
         .catch(error => {
-           alert(error.response.data.message);
-        })*/
+            console.log(error);
+        })
+
+        //gets array of liked tracks' ids
+        axios.get(this.context.baseURL+"/me/likedTracks",{
+            headers:{
+                'Content-Type':'application/json',
+                'authorization': "Bearer "+ localStorage.getItem("token")
+            }
+        })
+        .then(res => {
+            if(res.status===200){
+                res.data.data.tracks.map((track) => (
+                    this.state.liked_tracks.push(track._id)
+                ))
+                console.log("liked tracks: "+this.state.liked_tracks);
+            }
+            else responseHandler(res);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     /**
@@ -167,40 +300,93 @@ export class PlaylistWebPlayer extends Component {
      * @memberof PlaylistWebPlayer
      */
     likeButtonPressed=()=>{
-        if(this.state.is_liked){
-            axios.put("http://spotify.mocklab.io/me/likeAlbum",{body:{"id":this.state.myId}},{
+        if(!this.state.is_liked){
+            axios.put(this.context.baseURL+"/me/likePlaylist",{"id":this.state.myId},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
             })
             .then(res => {
                 if(res.status===204){
-                    this.setState(prevState =>({
-                        is_liked:!prevState.is_liked
-                    }))
+                    this.setState({
+                        is_liked:true
+                    })
                 }
                 else responseHandler(res);
             })
             .catch(error => {
-            console.log(error.response.data.message);
+            console.log(error);
             })
         }
         else{
-            axios.delete("http://spotify.mocklab.io/me/unlikeAlbum",{body:{"id":this.state.myId}},{
+            axios.delete(this.context.baseURL+"/me/unlikePlaylist",{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                },
+                data:{
+                    "id": this.state.myId
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState({
+                        is_liked:false
+                    })
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            console.log(error);
+            })
+        }
+    }
+
+    /**
+     * toggles playing_song_is_liked and sends request to backend
+     * @memberof PlaylistWebPlayer
+     */
+    trackLikeButtonPressed=()=>{
+        if(!this.state.playing_song_is_liked &amp;&amp; this.state.playing_song_id !== ""){
+            axios.put(this.context.baseURL+"/me/likeTrack",{"id":this.state.playing_song_id},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
             })
             .then(res => {
                 if(res.status===204){
-                    this.setState(prevState =>({
-                        is_liked:!prevState.is_liked
-                    }))
+                    this.setState({
+                        playing_song_is_liked:true
+                    })
+                    this.state.liked_tracks.push(this.state.playing_song_id);
+                    console.log("new liked tracks: "+this.state.liked_tracks);
                 }
                 else responseHandler(res);
             })
             .catch(error => {
-            console.log(error.response.data.message);
+            alert(error.response.data.message);
+            })
+        }
+        else if(this.state.playing_song_id !== ""){
+            axios.delete(this.context.baseURL+"/me/unlikeTrack",{
+                headers:{
+                    'authorization': "Bearer "+ localStorage.getItem("token"),
+                },
+                data:{
+                    "id": this.state.playing_song_id
+                }
+            })
+            .then(res => {
+                if(res.status===204){
+                    this.setState(prevState =>({
+                        playing_song_is_liked:false,
+                        liked_tracks:prevState.liked_tracks.filter(e => e !== prevState.playing_song_id)
+                    }))
+                    console.log("new liked tracks: "+this.state.liked_tracks);
+                }
+                else responseHandler(res);
+            })
+            .catch(error => {
+            alert(error.response.data.message);
             })
         }
     }
@@ -209,37 +395,284 @@ export class PlaylistWebPlayer extends Component {
      * Plays or stop song
      * @memberof PlaylistWebPlayer
      * @param {string} id -id of the song pressed
+     * @param {string} url -source of the song pressed
+     * @param {string} name -name of the song pressed
+     * @param {string} artist -artist of the song pressed
+     * @param {Number} minutes -total minutes of the song pressed
+     * @param {Number} seconds -total seconds of the song pressed
+     * @param {Number} number -order of the song pressed
      * @return {void}
      */
-    setPlayingSondId=(id,url)=>{
-        if(this.state.playing_song_id===""){
-            this.setState({
-                playing_song_id:id
-            })
-            this.audio.src=url;
-            this.audio.play();
-        }
-        else{
-            if(this.state.playing_song_id===id){
+
+    setPlayingSondId=(id,url,name,artist,minutes,seconds,number)=>{
+        if(this.state.playing_song_id===id){
+            if(this.state.is_playing){
                 this.setState({
-                    playing_song_id:""
+                    is_playing:false,
+                    pausedtime:this.audio.currentTime
                 })
                 this.audio.pause();
             }
             else{
                 this.setState({
-                    playing_song_id:id
+                    is_playing:true
                 })
-                this.audio.src=url;
                 this.audio.play();
+                this.audio.currentTime=this.state.pausedtime;
+            }
+        }
+        else{
+            this.setState({
+                playing_song_id:id,
+                playing_song_number:number,
+                playing_song_name:name,
+                playing_song_artist:artist,
+                playing_song_is_liked:this.state.liked_tracks.includes(id),
+                is_playing:true
+            })
+            ////////////to avoid integeration conflict/////////////
+            if(url === undefined){  
+                this.audio.src = "https://nogomistars.com/Online_Foldern/Amr_Diab/Sahraan/Nogomi.com_Amr_Diab-02.Sahran.mp3";
+                this.setState({
+                    playing_song_minutes:4,
+                    playing_song_seconds:46
+                })
+            }
+            else{
+                this.audio.src = url;
+                this.setState({
+                    playing_song_minutes:minutes,
+                    playing_song_seconds:seconds
+                })
+            }
+            ///////////////////////////////////////////////////////
+            this.audio.play();
+        }
+    }
+
+    /**
+     * Gets next song to play
+     * @memberof PlaylistWebPlayer
+     * @return {void}
+     */
+    nextSong=()=>{
+
+        if(this.state.playing_song_number === this.state.playlist_total_tracks &amp;&amp; !this.state.is_shuffling){
+            this.setState({
+                is_playing:false,
+                playing_song_id:"",
+                playing_song_name:"",
+                playing_song_artist:"",
+                playing_song_is_liked:false,
+                playing_song_number:0
+            })
+            this.audio.pause();
+            this.audio.src="";
+        }
+        else{
+            var currentNum = this.state.playing_song_number;
+            if(this.state.is_shuffling &amp;&amp; this.state.playlist_total_tracks !== 1){
+                currentNum = Math.floor(Math.random() * this.state.playlist_total_tracks);
+                while(currentNum + 1 === this.state.playing_song_number){
+                    currentNum = Math.floor(Math.random() * this.state.playlist_total_tracks);
+                }
+            }
+
+            this.state.tracks.map((track) => {
+                if((track.trackNumber === currentNum + 1)){
+                    track.artists.map((artist)=>(
+                        this.setState({playing_song_artist:artist.name})
+                    ));
+                    this.setState({
+                        playing_song_id: track._id,
+                        playing_song_name: track.name,
+                        playing_song_number: track.trackNumber,
+                        playing_song_is_liked:this.state.liked_tracks.includes(track._id),
+                        is_playing:true
+                    })
+
+                    ////////////to avoid integeration conflict/////////////
+                    if(track.preview_url === undefined){  
+                        this.audio.src = "https://nogomistars.com/Online_Foldern/Amr_Diab/Sahraan/Nogomi.com_Amr_Diab-02.Sahran.mp3";
+                        this.setState({
+                            playing_song_minutes:4,
+                            playing_song_seconds:46
+                        })
+                    }
+                    else{
+                        this.audio.src=track.preview_url;
+                        this.setState({
+                            playing_song_minutes: Math.floor(track.durationMs / 60000),
+                            playing_song_seconds: ((track.durationMs % 60000) / 1000).toFixed(0)
+                        })
+                    }
+                    ///////////////////////////////////////////////////////
+
+                    this.audio.play();
+                    return track;
+                }
+            })
+        }
+    }
+
+    /**
+     * Gets previous song to play
+     * @memberof PlaylistWebPlayer
+     * @return {void}
+     */
+    previousSong=()=>{
+        if(this.state.playing_song_number === 1 &amp;&amp; !this.state.is_shuffling){
+            this.setState({
+                is_playing:false,
+                playing_song_id:"",
+                playing_song_name:"",
+                playing_song_artist:"",
+                playing_song_is_liked:false,
+                playing_song_number:this.state.playlist_total_tracks+1
+            })
+            this.audio.pause();
+            this.audio.src="";
+        }
+        else{
+            var currentNum = this.state.playing_song_number;
+            if(this.state.is_shuffling &amp;&amp; this.state.playlist_total_tracks !== 1){
+                currentNum = Math.floor(Math.random() * (this.state.playlist_total_tracks + 2) );
+                while((currentNum - 1 === this.state.playing_song_number) | (currentNum - 1 &lt;= 0)){
+                    currentNum = Math.floor(Math.random() * (this.state.playlist_total_tracks + 2) );
+                }
+            }
+
+            this.state.tracks.map((track) => {
+                if((track.trackNumber === currentNum - 1)){
+                    track.artists.map((artist)=>(
+                        this.setState({playing_song_artist:artist.name})
+                    ));
+                    this.setState({
+                        playing_song_id: track._id,
+                        playing_song_name: track.name,
+                        playing_song_number: track.trackNumber,
+                        playing_song_is_liked:this.state.liked_tracks.includes(track._id),
+                        is_playing:true
+                    })
+
+                    ////////////to avoid integeration conflict/////////////
+                    if(track.preview_url === undefined){  
+                        this.audio.src = "https://nogomistars.com/Online_Foldern/Amr_Diab/Sahraan/Nogomi.com_Amr_Diab-02.Sahran.mp3";
+                        this.setState({
+                            playing_song_minutes:4,
+                            playing_song_seconds:46
+                        })
+                    }
+                    else{
+                        this.audio.src=track.preview_url;
+                        this.setState({
+                            playing_song_minutes: Math.floor(track.durationMs / 60000),
+                            playing_song_seconds: ((track.durationMs % 60000) / 1000).toFixed(0)
+                        })
+                    }
+                    ///////////////////////////////////////////////////////
+                    
+                    this.audio.play();
+                    return track;
+                }
+            })
+        }
+    }
+
+    /**
+     * Seeks time when slider position is changed by user
+     * @memberof PlaylistWebPlayer
+     * @param time -percentage of the time chosen
+     * @return {void}
+     */
+    seekSong=(time)=>{
+        if(this.state.is_playing === true){
+            this.audio.currentTime=this.audio.duration * (time/100);
+        }
+    }
+
+    /**
+     * Changes volume when volume slider position is changed by user
+     * @memberof PlaylistWebPlayer
+     * @param volume -percentage of the volume chosen
+     * @return {void}
+     */
+    setPlayerVolume=(volume)=>{
+        this.audio.volume=volume/100;
+    }
+
+    /**
+     * Play/Pause song when button on playing bar pressed
+     * @memberof PlaylistWebPlayer
+     * @return {void}
+     */
+    PlayPauseButtonPressed=()=>{
+        if(this.audio.src !== ""){
+            if(this.state.is_playing){
+                this.setState({
+                    pausedtime:this.audio.currentTime,
+                    is_playing:false
+                })
+                this.audio.pause();
+            }
+            else{
+                this.setState({
+                    is_playing:true
+                })
+                this.audio.play();
+                this.audio.currentTime=this.state.pausedtime;
             }
         }
     }
 
-    render() {
-      //  console.log("My href")
-        console.log(this.props.location.state);
+    /**
+     * Keeps the track slider moving dynamically according to the current time of playing song
+     * @memberof PlaylistWebPlayer
+     * @return {void}
+     */
+    playingBarTimer = setInterval(() => {
+        if(this.state.is_playing){
+            var sec= Math.floor(this.audio.currentTime);
+            if(sec > this.audio.duration-1){
+                if(this.state.is_repeating){
+                    this.audio.play();
+                }
+                else{
+                    this.nextSong();
+                }
+            }
+            else{
+                this.setState({
+                    playing_song_current_minutes: Math.floor(sec/60),
+                    playing_song_current_seconds: (sec % 60).toFixed(0)
+                })
+            }
+        }
+    }, 200);
 
+    /**
+     * toggles the state of is_repeating when repeat button on playing bar is pressed
+     * @memberof PlaylistWebPlayer
+     * @return {void}
+     */
+    repeatButtonPressed=()=>{
+        this.setState(prevState =>({
+            is_repeating:!prevState.is_repeating,
+        }))
+    }
+
+    /**
+     * toggles the state of is_shuffling when shuffle button on playing bar is pressed
+     * @memberof PlaylistWebPlayer
+     * @return {void}
+     */
+    shuffleButtonPressed=()=>{
+        this.setState(prevState =>({
+            is_shuffling:!prevState.is_shuffling
+        }))
+    }
+
+    render() {
         return (
         &lt;div>
             &lt;Share url={this.props.location.state.myhref}/>
@@ -262,7 +695,7 @@ export class PlaylistWebPlayer extends Component {
                                         &lt;/div>
                                         &lt;div className="row album-buttons-div">
                                             &lt;div className="album-play-button-div">
-                                                &lt;button type="button" className="btn btn-success">PLAY&lt;/button>
+                                                &lt;button type="button" className={"btn btn-success " + (this.state.is_playing?"pause-btn":"play-btn")} onClick={this.PlayPauseButtonPressed}>&lt;/button>
                                             &lt;/div>
                                             &lt;div className="row album-options-div">
                                                 &lt;div className="album-heart-div">
@@ -271,14 +704,14 @@ export class PlaylistWebPlayer extends Component {
                                                 &lt;div className="album-dots-div dropdown show" >
                                                     &lt;p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...&lt;/p>
                                                     &lt;div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                                                        &lt;a className="dropdown-item " href="#">Start Radio&lt;/a>
-                                                        &lt;a className="dropdown-item " href="#">Save to Your Library&lt;/a>
-                                                        &lt;a className="dropdown-item " href="#">Add to PLaylist&lt;/a>
-                                                        &lt;a className="dropdown-item " href="#">Copy Playlist Link&lt;/a>
-                                                        &lt;a className="dropdown-item  " href="#">Open in Desktop app&lt;/a>
+                                                        &lt;li className='dropdown-item '>
+                                                            &lt;button type="button" id="create-playlist" onClick={this.likeButtonPressed}>
+                                                                &lt;span className='list-item-text'>{this.state.is_liked? 'Remove from Your Library' : 'Save to Your Library'}&lt;/span>
+                                                            &lt;/button>
+                                                        &lt;/li>
                                                         &lt;li className='dropdown-item '>
                                                             &lt;button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
-                                                            &lt;span className='list-item-text'>Share &lt;/span>
+                                                                &lt;span className='list-item-text'>Share &lt;/span>
                                                             &lt;/button>
                                                         &lt;/li>
                                                     &lt;/div>
@@ -289,11 +722,18 @@ export class PlaylistWebPlayer extends Component {
                                 &lt;/div>
                                 &lt;div className="tracks-list-div">
                                     &lt;hr className="appear-on-small-screens"/>
-                                    &lt;TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                                    &lt;TracksList tracks={this.state.tracks} is_playing={this.state.is_playing} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
                                 &lt;/div>
                             &lt;/div>
                         &lt;/div>
                     &lt;/div>
+                &lt;/div>
+                &lt;div className="row">
+                        &lt;PlayingBar album_image={this.state.playlist_image} id={this.state.playing_song_id} name={this.state.playing_song_name} artist={this.state.playing_song_artist} minutes={this.state.playing_song_minutes} 
+                        seconds={this.state.playing_song_seconds} is_playing={this.state.is_playing} current_minutes={this.state.playing_song_current_minutes} current_seconds={this.state.playing_song_current_seconds}
+                        setPlayerVolume={this.setPlayerVolume} seekSong={this.seekSong} PlayPauseButtonPressed={this.PlayPauseButtonPressed} nextSong={this.nextSong} previousSong={this.previousSong} 
+                        is_repeating={this.state.is_repeating} repeatButtonPressed={this.repeatButtonPressed} is_shuffling={this.state.is_shuffling} shuffleButtonPressed={this.shuffleButtonPressed} 
+                        playing_song_is_liked={this.state.playing_song_is_liked} trackLikeButtonPressed={this.trackLikeButtonPressed} />
                 &lt;/div>
             &lt;/div>
         &lt;/div>
@@ -319,7 +759,7 @@ export default PlaylistWebPlayer
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon Jun 08 2020 00:26:57 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue Jun 09 2020 07:43:30 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

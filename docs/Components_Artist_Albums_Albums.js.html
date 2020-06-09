@@ -34,16 +34,15 @@ import "../../WebPlayer/WebplayerHome.css";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
 import { Link } from "react-router-dom";
 import { ConfigContext } from "../../../Context/ConfigContext";
-import ArtistHeading from '../ManageProfile/ArtistHeading'
-import Message from '../UploadFile/Message'
+import ArtistHeading from "../ManageProfile/ArtistHeading";
+import Message from "../UploadFile/Message";
 
-import  './AlbumPage.css'
+import "./AlbumPage.css";
 import { responseHandler } from "../../../ReduxStore/Shared";
 /** Class of Albums of artist. It gets the albums of the artist in the artist mode
  * @extends Component
  */
 class Albums extends Component {
-
   /**Gets the baseURL from configrations context of the user
    * @memberof Albums
    */
@@ -57,12 +56,15 @@ class Albums extends Component {
        * @type {Array&lt;Albums>}
        */
       artistAlbums: [],
+      pageLoaded: false,
     };
   }
   /**When the component mounts it sends a request to the backend to load the albums
    * @memberof Albums
    */
   componentDidMount() {
+    window.scrollTo(0, 0);
+
     axios
       .get(this.context.baseURL + "/me/albums", {
         headers: {
@@ -79,6 +81,7 @@ class Albums extends Component {
               imageUrl: album.image,
               artist: album.artists[0].name,
             })),
+            pageLoaded:true,
           });
         }
       })
@@ -86,62 +89,95 @@ class Albums extends Component {
         responseHandler(res);
       });
   }
- 
+
   render() {
     return (
       &lt;div className="artist-body pt-0" id="webplayer-home">
-        &lt;ArtistHeading/>
+        &lt;ArtistHeading />
         &lt;div className="full-page container albums-page artist-albums-page">
-        &lt;div className="row container">
-          &lt;ArtistSidebar/>
-          &lt;div className="col-lg-9 albums-section">
-            &lt;div className="header-button-container">
-              &lt;h2 className="section-title albums">Albums&lt;/h2>
-              &lt;Link to={{
-                  pathname: "/artist/create-album",
-                  state: {myAlbum:false}}}>
-                &lt;button className="btn-primary-outline add-album">
-                  Add Album
-                &lt;/button>
-              &lt;/Link>
-            &lt;/div>
-            {this.state.message ? &lt;Message msg={this.state.message} /> : null}
-
-            &lt;div className="card-group">
-              {this.state.artistAlbums.map((album) => (
-                &lt;div id={album.id}>
+          &lt;div className="row container">
+            &lt;ArtistSidebar />
+            {this.state.pageLoaded ? 
+            &lt;div className="col-lg-9 albums-section">
+              &lt;div className="header-button-container">
+                &lt;h2 className="section-title albums">Albums&lt;/h2>
                 &lt;Link
-                to={{
-                  pathname: "/webplayer/album",
-                  state: { myId: album.id ,myAlbum:true},
-                }}
+                  to={{
+                    pathname: "/artist/create-album",
+                    state: { myAlbum: false },
+                  }}
                 >
-                  &lt;div className="card">
-                    &lt;img
-                      src={album.imageUrl}
-                      className="card-img-top"
-                      alt="..."
-                      >&lt;/img>
-                    &lt;div className="card-body">
-                      &lt;h5 className="card-title">{album.title}&lt;/h5>
-                      &lt;p className="card-text">{album.artist}&lt;/p>
-                    &lt;/div>
-                      &lt;div>
-
-                  &lt;Link to={{
-                  pathname: "/artist/create-album",
-                  state: { myId: album.id ,myAlbum:true},
-                }}>&lt;button type="button" id={album.id} className="btn btn-danger cancel-btn" 
-                  >&lt;i className="fa fa-edit text-light">&lt;/i>&lt;/button>&lt;/Link>
-                      &lt;/div>
-                  &lt;/div>
+                  &lt;button className="btn-primary-outline add-album">
+                    Add Album
+                  &lt;/button>
                 &lt;/Link>
-                  &lt;/div>
+              &lt;/div>
+              {this.state.message ? &lt;Message msg={this.state.message} /> : null}
 
-              ))}
+              &lt;div className="card-group">
+                {this.state.artistAlbums.map((album) => (
+                  &lt;div id={album.id}>
+                    &lt;Link
+                      to={{
+                        pathname: "/webplayer/album",
+                        state: { myId: album.id, myAlbum: true },
+                      }}
+                    >
+                      &lt;div className="card">
+                        &lt;img
+                          src={album.imageUrl}
+                          className="card-img-top"
+                          alt="..."
+                        >&lt;/img>
+                        &lt;div className="card-body">
+                          &lt;h5 className="card-title">{album.title}&lt;/h5>
+                          &lt;p className="card-text">{album.artist}&lt;/p>
+                        &lt;/div>
+                        &lt;div>
+                          &lt;Link
+                            to={{
+                              pathname: "/artist/create-album",
+                              state: { myId: album.id, myAlbum: true },
+                            }}
+                          >
+                            &lt;button
+                              type="button"
+                              id={album.id}
+                              className="btn btn-danger cancel-btn"
+                            >
+                              &lt;i className="fa fa-edit text-light">&lt;/i>
+                            &lt;/button>
+                          &lt;/Link>
+                        &lt;/div>
+                        &lt;div>
+                          &lt;Link
+                            to={{
+                              pathname: "/artist/overview",
+                              state: { albumId: album.id, myAlbum: true },
+                            }}
+                          >
+                            &lt;button
+                              type="button"
+                              id={album.id}
+                              className="btn btn-primary stats-btn"
+                            >
+                              &lt;i className="fa fa-bar-chart text-light" aria-hidden="true">&lt;/i>
+                            &lt;/button>
+                          &lt;/Link>
+                        &lt;/div>
+                      &lt;/div>
+                    &lt;/Link>
+                  &lt;/div>
+                ))}
+              &lt;/div>
             &lt;/div>
+            : 
+            &lt;div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
+            &lt;div class="spinner-border text-success" role="status">
+            &lt;span class="sr-only">Loading...&lt;/span>
           &lt;/div>
-          &lt;/div>
+              &lt;/div>}
+         &lt;/div>
         &lt;/div>
       &lt;/div>
     );
@@ -165,7 +201,7 @@ export default Albums;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon Jun 08 2020 00:26:57 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue Jun 09 2020 07:43:30 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

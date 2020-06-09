@@ -26,161 +26,216 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-import './Track.css'
-import Share from './Share'
-import { Link } from 'react-router-dom';
-import AddToPlaylist from './AddToPlaylist/AddToPlaylist'
+            <pre class="prettyprint source linenums"><code>import React, { Component } from "react";
+import PropTypes from "prop-types";
+import "./Track.css";
+import Share from "./Share";
+import { Link } from "react-router-dom";
+import AddToPlaylist from "./AddToPlaylist/AddToPlaylist";
 
 /**
  * Track class
  * @extends Component
  */
 export class Track extends Component {
-    state={
-        /**
-         * Artist of the track
-         * @memberof Track
-         * @type {Array&lt;Object>}
-         */
-        "artists":[],
-        /**
-         * Audio url of the track
-         * @memberof Track
-         * @type {String}
-         */
-        "preview_url":"",
-        /**
-         * ID of the track
-         * @memberof Track
-         * @type {String}
-         */
-        "id":"",
-         /**
-         * link of the track
-         * @memberof Track
-         * @type {Link}
-         */
-        "href":"",
-        /**
-         * Name of the track
-         * @memberof Track
-         * @type {String}
-         */
-        "name":"",
-        /**
-         * Duration of the track in milliseconds
-         * @memberof Track
-         * @type {Number}
-         */
-        "duration_ms":Number,
-        /**
-         * Number of complete minutes of the track
-         * @memberof Track
-         * @type {Number}
-         */
-        "minutes":0,
-        /**
-         * Number of remaining seconds of the track
-         * @memberof Track
-         * @type {Number}
-         */
-        "seconds":0,
-        "track_number":Number,
-    }
-
-    componentDidMount(){
-        console.log(this.props);
-        this.props.track.artists.map((artist)=>(
-            this.setState({artists:artist.name})
-        ));
-        this.setState({
-            duration_ms:this.props.track.durationMs,
-            preview_url:this.props.track.preview_url,
-            id:this.props.track._id,
-            name:this.props.track.name,
-            track_number:this.props.track.trackNumber,
-            href:this.props.track.href
-        });
-        this.millisToMinutesAndSeconds(this.props.track.durationMs);
-    }
-
+  state = {
     /**
-     * Converts duration of the song from milliseconds to minutes and seconds
+     * Artist of the track
      * @memberof Track
-     * @param {Number} millis 
-     * @returns {void}
+     * @type {Array&lt;Object>}
      */
-    millisToMinutesAndSeconds(millis) {
-        var minutes = Math.floor(millis / 60000);
-        var seconds = ((millis % 60000) / 1000).toFixed(0);
-        this.setState({
-            minutes:minutes,
-            seconds:seconds
-        });
-    }
+    artists: [],
+    /**
+     * Audio url of the track
+     * @memberof Track
+     * @type {String}
+     */
+    preview_url: "",
+    /**
+     * ID of the track
+     * @memberof Track
+     * @type {String}
+     */
+    id: "",
+    /**
+     * link of the track
+     * @memberof Track
+     * @type {Link}
+     */
+    href: "",
+    /**
+     * Name of the track
+     * @memberof Track
+     * @type {String}
+     */
+    name: "",
+    /**
+     * Duration of the track in milliseconds
+     * @memberof Track
+     * @type {Number}
+     */
+    duration_ms: Number,
+    /**
+     * Number of complete minutes of the track
+     * @memberof Track
+     * @type {Number}
+     */
+    minutes: 0,
+    /**
+     * Number of remaining seconds of the track
+     * @memberof Track
+     * @type {Number}
+     */
+    seconds: 0,
+    track_number: Number,
+  };
 
-    render() {
-       //console.log("id is:" ,this.state.id) 
-        return (
-            &lt;div id="track-row-div" className="container-fluid">
-                &lt;Share url={this.state.href}/>
-                &lt;AddToPlaylist trackId={this.state.id} />
-                &lt;div className={(this.props.playing_song_id===this.props.track._id?"row playing-song":"row not-playing-song")}>
-                    &lt;div className="track-symbol-div">
-                        &lt;i className={((this.props.playing_song_id===this.props.track._id) &amp;&amp; this.props.is_playing?"track-icon-playing":"track-icon")} 
-                        onClick={this.props.setPlayingSondId.bind(this, this.state.id,this.state.preview_url,this.state.name,this.state.artists,this.state.minutes,this.state.seconds,this.state.track_number)}>&lt;/i>
-                    &lt;/div>
-                    &lt;div className="track-name-div">
-                        &lt;p className="track-name">{this.state.name}&lt;/p>
-                        &lt;p className="track-artist">{this.state.artists}&lt;/p>
-                    &lt;/div>
-              
-               {this.props.myAlbumArtist ? &lt;Link 
-                to={{
-                  pathname: "/artist/edit-track",
-                  state: { trackId: this.state.id, albumId:this.props.albumId},
-                }}
-                className="mt-2 mr-2">&lt;i className="fa fa-edit text-danger">&lt;/i>&lt;/Link> : null}
+  componentDidMount() {
+    console.log(this.props);
+    this.props.track.artists.map((artist) =>
+      this.setState({ artists: artist.name })
+    );
+    this.setState({
+      duration_ms: this.props.track.durationMs,
+      preview_url: this.props.track.preview_url,
+      id: this.props.track._id,
+      name: this.props.track.name,
+      track_number: this.props.track.trackNumber,
+      href: this.props.track.href,
+    });
+    this.millisToMinutesAndSeconds(this.props.track.durationMs);
+  }
 
-                    &lt;div className="track-options-div dropdown show">
-                        &lt;strong className="track-options" id="trackdropdownMenuButton" data-toggle="dropdown">&lt;/strong>
-                        &lt;div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
-                            &lt;a className="dropdown-item disabled" href="#">Start Radio&lt;/a>
-                            &lt;a className="dropdown-item disabled" href="#">Save to Your Liked Songs&lt;/a>
-                            &lt;a className="dropdown-item disabled" href="#">Add to Queue&lt;/a>
+  /**
+   * Converts duration of the song from milliseconds to minutes and seconds
+   * @memberof Track
+   * @param {Number} millis
+   * @returns {void}
+   */
+  millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    this.setState({
+      minutes: minutes,
+      seconds: seconds,
+    });
+  }
 
+  render() {
+    //console.log("id is:" ,this.state.id)
+    return (
+      &lt;div id="track-row-div" className="container-fluid">
+        &lt;Share url={this.state.href} />
+        &lt;AddToPlaylist trackId={this.state.id} />
+        &lt;div
+          className={
+            this.props.playing_song_id === this.props.track._id
+              ? "row w-100 playing-song"
+              : "row w-100 not-playing-song"
+          }
+        >
+          &lt;div className="track-symbol-div">
+            &lt;i
+              className={
+                this.props.playing_song_id === this.props.track._id &amp;&amp;
+                this.props.is_playing
+                  ? "track-icon-playing"
+                  : "track-icon"
+              }
+              onClick={this.props.setPlayingSondId.bind(
+                this,
+                this.state.id,
+                this.state.preview_url,
+                this.state.name,
+                this.state.artists,
+                this.state.minutes,
+                this.state.seconds,
+                this.state.track_number
+              )}
+            >&lt;/i>
+          &lt;/div>
+          &lt;div className="track-name-div">
+            &lt;p className="track-name">{this.state.name}&lt;/p>
+            &lt;p className="track-artist">{this.state.artists}&lt;/p>
+          &lt;/div>
 
-                            &lt;li className='dropdown-item '>
-                               &lt;button type="button" id="create-playlist" data-toggle="modal" data-target="#AddSongToPlaylist">
-                               &lt;span className='list-item-text'>Add to Playlist&lt;/span>
-                                 &lt;/button>
-                               &lt;/li>
+          {this.props.myAlbumArtist ? (
+            &lt;Link
+              to={{
+                pathname: "/artist/edit-track",
+                state: { trackId: this.state.id, albumId: this.props.albumId },
+              }}
+              className="mt-2 mr-2"
+            >
+              &lt;i className="fa fa-edit text-danger">&lt;/i>
+            &lt;/Link>
+          ) : null}
 
-                            &lt;a className="dropdown-item disabled" href="#">Copy Song Link&lt;/a>
-                            &lt;a className="dropdown-item disabled" href="#">Open in Desktop app&lt;/a>
-                            &lt;li className='dropdown-item '>
-                               &lt;button type="button" id="create-playlist" data-toggle="modal" data-target="#share-static-back-drop">
-                               &lt;span className='list-item-text'>Share Track&lt;/span>
-                                 &lt;/button>
-                               &lt;/li>
-                        &lt;/div>
-                    &lt;/div>
-                    &lt;div className="track-duration-div">
-                        &lt;p>{this.state.minutes}:{(this.state.seconds &lt; 10 ? '0' : '')}{this.state.seconds}&lt;/p>
-                    &lt;/div>
-                &lt;/div>
+          {this.props.myAlbumArtist ? (
+            &lt;Link
+              className="mt-2 mr-2 ml-2"
+              to={{
+                pathname: "/artist/overview",
+                state: { trackId: this.state.id, albumId: this.props.albumId },
+              }}
+            >
+              &lt;i
+                className="fa fa-bar-chart text-primary"
+                aria-hidden="true"
+              >&lt;/i>
+            &lt;/Link>
+          ) : null}
+
+          &lt;div className="track-options-div dropdown show">
+            &lt;strong
+              className="track-options"
+              id="trackdropdownMenuButton"
+              data-toggle="dropdown"
+            >&lt;/strong>
+            &lt;div
+              className="dropdown-menu"
+              aria-labelledby="albumdropdownMenuLink"
+            >
+              &lt;li className="dropdown-item ">
+                &lt;button
+                  type="button"
+                  id="create-playlist"
+                  data-toggle="modal"
+                  data-target="#AddSongToPlaylist"
+                >
+                  &lt;span className="list-item-text">Add to Playlist&lt;/span>
+                &lt;/button>
+              &lt;/li>
+
+              &lt;li className="dropdown-item ">
+                &lt;button
+                  type="button"
+                  id="create-playlist"
+                  data-toggle="modal"
+                  data-target="#share-static-back-drop"
+                >
+                  &lt;span className="list-item-text">Share Track&lt;/span>
+                &lt;/button>
+              &lt;/li>
             &lt;/div>
-        )
-    }
+          &lt;/div>
+          &lt;div className="track-duration-div">
+            &lt;p>
+              {this.state.minutes}:{this.state.seconds &lt; 10 ? "0" : ""}
+              {this.state.seconds}
+            &lt;/p>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    );
+  }
 }
 
 Track.propTypes = {
-    track: PropTypes.object.isRequired
-}
+  track: PropTypes.object.isRequired,
+};
 
-export default Track
+export default Track;
 </code></pre>
         </article>
     </section>
@@ -197,7 +252,7 @@ export default Track
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon Jun 08 2020 00:26:57 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue Jun 09 2020 07:43:30 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
