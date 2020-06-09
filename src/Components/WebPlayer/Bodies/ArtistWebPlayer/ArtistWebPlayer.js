@@ -117,7 +117,8 @@ class ArtistWebPlayer extends Component {
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
         /*' http://we871.mocklab.io/artists/200 */
-        axios.get(this.context.baseURL+"/artists/" + this.state.myId,{  /*artist*/
+       // axios.get(this.context.baseURL+"/artists/" + this.state.myId,{  /*artist*/
+        axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473",{  /*artist*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -365,7 +366,7 @@ class ArtistWebPlayer extends Component {
         follow(){
             console.log("before click ( followed? ):",this.state.isFollowed);
             axios
-            .put(this.context.baseURL+"/me/following",{
+            .put("http://spotify.mocklab.io/me/following",{
               "id":this.state.myId
             } ,{
               headers: {
@@ -386,7 +387,7 @@ class ArtistWebPlayer extends Component {
         unfollow(){
             console.log("before click ( followed? ):",this.state.isFollowed);
             axios
-            .delete(this.context.baseURL+"/me/following",{
+            .put("http://spotify.mocklab.io/me/following",{
               "id":this.state.myId
             } ,{
               headers: {
