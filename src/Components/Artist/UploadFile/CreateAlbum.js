@@ -107,14 +107,15 @@ const CreateAlbum = (props) => {
   const onChangeImg = (e) => {
     setImg(e.target.files[0]);
     setImgName(e.target.files[0].name);
-    // console.log(e.target.files[0]);
-  };
-  
-  /**Submit Album info to the backend in a request
-   * @memberof CreateAlbum
-   * @type {Function}
-   */
-  const onSubmit = async (e) => {
+     console.log(e.target.files[0]);
+    };
+    
+    /**Submit Album info to the backend in a request
+     * @memberof CreateAlbum
+     * @type {Function}
+     */
+    const onSubmit = async (e) => {
+      console.log(img);
     console.log(user);
     console.log(url);
     e.preventDefault();
@@ -166,7 +167,7 @@ const CreateAlbum = (props) => {
         },
       });
       console.log(res);
-      if(res.status===200){
+      if(res.status===204){
       setMessage("Album deleted");
       window.location.replace("/artist");
       }

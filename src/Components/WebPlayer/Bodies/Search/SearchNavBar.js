@@ -13,6 +13,7 @@ import { responseHandler, logout } from '../../../../ReduxStore/Shared';
  * @extends Component
  */
 class SearchNavBar extends Component {
+    static contextType=ConfigContext;
     constructor(){
         super()
         this.state={
@@ -78,6 +79,7 @@ class SearchNavBar extends Component {
             "notFound":"0"
         }
         this.searchHandler = this.searchHandler.bind(this);
+        this.searchHandlerMocking=this.searchHandlerMocking.bind(this);
     }
     /**When the component mounts it sends a request to the backend to load the albums
      * @memberof SearchNavBar
@@ -182,38 +184,118 @@ class SearchNavBar extends Component {
         const element = document.getElementById("dropdownMenuLink");
         element.classList.toggle("toggle-background-color");
       }
-      
+     
       /**to switch between searching or not to know which page to  view
      * @type {Function}
      * @memberof SearchNavBar
      */
-      searchHandler=(event)=>{
+    searchHandler(event){
         this.setState({text:event});
-        console.log("text inside search handler : ",this.state.text);
+        //this.getTracks(event);
+        console.log("tracks in search handler :",this.state.tracks);
+        console.log("not found in search handler :",this.state.notFound);
+        console.log("text inside search handler : ",event);
         if(event==''){
-            this.state.searchingstate=false;
             document.getElementById("search-searching").classList.add("hide");
             document.getElementById("search-not-searching").classList.remove("hide");
             document.getElementById("search-not-found-searching").classList.add("hide");
             
         }
-        else{    
-            this.componentDidMount();  /** if he is searching for something that is in DB then perform all requests , called each time the input string changed to fetch new data (perform new requests)*/
-            if(this.state.notFound!=0){
-                this.state.searchingstate=true;
-                document.getElementById("search-not-searching").classList.add("hide");
-                document.getElementById("search-searching").classList.remove("hide");
-                document.getElementById("search-not-found-searching").classList.add("hide");
-               /* this.componentDidMount();  /** if he is searching for something that is in DB then perform all requests , called each time the input string changed to fetch new data (perform new requests)*/
-            }
-            else if(this.state.notFound==0){
-                this.state.searchingstate=false;
-                document.getElementById("search-not-searching").classList.add("hide");
-                document.getElementById("search-searching").classList.add("hide");
-                document.getElementById("search-not-found-searching").classList.remove("hide");
-            }
+        else{
+            //this.componentDidMount();    
+            //+"&limit=10"
+              /** if he is searching for something that is in DB then perform all requests , called each time the input string changed to fetch new data (perform new requests)*/
+              console.log("base URL : ",this.context.baseURL);
+              axios.get(this.context.baseURL+"/search?q="+event+"&limit=10")
+              .then(res => {
+                console.log("res status: ",res.status);
+                if(res.status===200)
+                {   
+                    console.log("res: ",res);
+                    console.log("res.data: ",res.data);
+                    console.log("res.data.data: ",res.data.data);
+                    console.log("response.data.data.results:",res.data.data.results);
+                    console.log("response of search (total):",res.data.data.results.total);
+                    console.log("response of search (items):",res.data.data.results.items);;
+                    this.setState({
+                        tracks:res.data.data.results.items,
+                        notFound:res.data.data.results.total
+                    },function(){
+                        console.log("state inside function:",this.state);
+                        
+                        console.log("response of search (notFound)function:",this.state.notFound);
+                        console.log("response of search (items)function:",this.state.tracks);
+                        if(this.state.notFound!=0){
+                            document.getElementById("search-not-searching").classList.add("hide");
+                            document.getElementById("search-searching").classList.remove("hide");
+                            document.getElementById("search-not-found-searching").classList.add("hide");
+                           /* this.componentDidMount();  /** if he is searching for something that is in DB then perform all requests , called each time the input string changed to fetch new data (perform new requests)*/
+                        }
+                        else if(this.state.notFound==0){
+                            document.getElementById("search-not-searching").classList.add("hide");
+                            document.getElementById("search-searching").classList.add("hide");
+                            document.getElementById("search-not-found-searching").classList.remove("hide");
+                        }
+                    })
+                    console.log("response of search (notFound):",this.state.notFound);
+                    console.log("response of search (items):",this.state.tracks);
+                }
+                else responseHandler(res);
+            })
+              
+              
         }
       }
+      /**to switch between searching or not to know which page to  view
+     * @type {Function}
+     * @memberof SearchNavBar
+     */
+    searchHandlerMocking(event){
+        this.setState({text:event});
+        if(event==""){
+            document.getElementById("search-searching").classList.add("hide");
+            document.getElementById("search-not-searching").classList.remove("hide");
+            document.getElementById("search-not-found-searching").classList.add("hide");
+        }
+        else{
+            axios.get("http://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/top-tracks",{/* top tracks*/
+                headers:{
+                    'authorization': "Bearer "+localStorage.getItem("token"),
+                    "id": this.state.myId
+                }}
+                )
+                .then(res => {
+                    console.log("status final:",res.status);
+                    console.log("res final :",res);
+                if(res.status===200)
+                {   
+                    console.log("res.data.data final:",res.data.data);
+                    this.setState({tracks:res.data.data})
+                    document.getElementById("search-not-searching").classList.add("hide");
+                    document.getElementById("search-searching").classList.remove("hide");
+                    document.getElementById("search-not-found-searching").classList.add("hide");
+                }
+                else if(res.status===401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    document.getElementById("search-not-searching").classList.add("hide");
+                    document.getElementById("search-searching").classList.add("hide");
+                    document.getElementById("search-not-found-searching").classList.remove("hide");
+                }
+                else{
+                    alert(res.message);
+                }
+                }    
+                )
+                .catch(error => {
+                    alert(error.response.data.message);
+                })
+        }
+    }
+
     /**get all tracks of the album 
          * @type {Function}
          * @memberof ArtistWebPlayer
@@ -281,7 +363,7 @@ class SearchNavBar extends Component {
                                                     <i id="root-navbar-arrows"className="material-icons btn" >keyboard_arrow_right</i>
                                                 </div>
                                                 <div id='search-input' className="col-8" >
-                                                    <input onChange={event => this.searchHandler(event.target.value)} type="text" id="search-text-input" name="search-text-input" placeholder="Search for Artists, Albums, Or Songs" ></input>
+                                                    <input onChange={event => this.searchHandlerMocking(event.target.value)} type="text" id="search-text-input" name="search-text-input" placeholder="Search for Artists, Albums, Or Songs" ></input>
                                                 </div>
                                                 {logInOrNot==="true" ? (
                                                 
