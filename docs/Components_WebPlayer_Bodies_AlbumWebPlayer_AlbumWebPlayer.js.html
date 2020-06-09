@@ -183,7 +183,6 @@ export class AlbumWebPlayer extends Component {
         window.scrollTo(0, 0);
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
-        console.log(this.state.myId)
         this.getAlbumDetails();
         this.getAlbumTracks();
 
@@ -197,10 +196,9 @@ export class AlbumWebPlayer extends Component {
     * @memberof AlbumWebPlayer
     */
     getAlbumDetails(){
-        //this.context.baseURL+"/albums/"+this.state.myId
-        //"http://spotify.mocklab.io/albums/12345"
-        var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
-        axios.get(link,{
+        
+        //var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
+        axios.get("https://spotify.mocklab.io/albums/12345",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -229,7 +227,8 @@ export class AlbumWebPlayer extends Component {
         })
 
         //check if album is liked
-        axios.get(this.context.baseURL+"/me/likedAlbums",{
+        //this.context.baseURL+"/me/likedAlbums"
+        axios.get("https://spotify.mocklab.io/me/likedAlbums",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token")
@@ -258,10 +257,9 @@ export class AlbumWebPlayer extends Component {
     * @memberof AlbumWebPlayer
     */
     getAlbumTracks(){
-        //this.context.baseURL+"/albums/"+this.state.myId+"/tracks"
-        //"http://spotify.mocklab.io/albums/12345/tracks"
-        var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
-        axios.get(link,{
+        
+        //var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
+        axios.get("https://spotify.mocklab.io/albums/12345/tracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -281,7 +279,8 @@ export class AlbumWebPlayer extends Component {
         })
 
         //gets array of liked tracks' ids
-        axios.get(this.context.baseURL+"/me/likedTracks",{
+        //this.context.baseURL+"/me/likedTracks"
+        axios.get("https://spotify.mocklab.io/me/likedTracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token")
@@ -308,7 +307,7 @@ export class AlbumWebPlayer extends Component {
      */
     likeButtonPressed=()=>{
         if(!this.state.is_liked){
-            axios.put(this.context.baseURL+"/me/likeAlbum",{"id":this.state.myId},{
+            axios.put("https://spotify.mocklab.io/me/likeAlbum",{"id":this.state.myId},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -326,7 +325,7 @@ export class AlbumWebPlayer extends Component {
             })
         }
         else{
-            axios.delete(this.context.baseURL+"/me/unlikeAlbum",{
+            axios.delete("https://spotify.mocklab.io/me/unlikeAlbum",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 },
@@ -354,7 +353,7 @@ export class AlbumWebPlayer extends Component {
      */
     trackLikeButtonPressed=()=>{
         if(!this.state.playing_song_is_liked &amp;&amp; this.state.playing_song_id !== ""){
-            axios.put(this.context.baseURL+"/me/likeTrack",{"id":this.state.playing_song_id},{
+            axios.put("https://spotify.mocklab.io/me/likeTrack",{"id":this.state.playing_song_id},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -374,7 +373,7 @@ export class AlbumWebPlayer extends Component {
             })
         }
         else if(this.state.playing_song_id !== ""){
-            axios.delete(this.context.baseURL+"/me/unlikeTrack",{
+            axios.delete("https://spotify.mocklab.io/me/unlikeTrack",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 },
@@ -763,13 +762,13 @@ export default AlbumWebPlayer
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="AddToPlaylist.html">AddToPlaylist</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistHeading.html">ArtistHeading</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="EditTrack.html">EditTrack</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="ManageProfile.html">ManageProfile</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Overview.html">Overview</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlayingBar.html">PlayingBar</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="RecentActivity.html">RecentActivity</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchNavBar.html">SearchNavBar</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li><li><a href="YourLibrary.html">YourLibrary</a></li><li><a href="YourLibraryAlbums.html">YourLibraryAlbums</a></li><li><a href="YourLibraryArtists.html">YourLibraryArtists</a></li><li><a href="YourLibraryNavBar.html">YourLibraryNavBar</a></li><li><a href="YourLibraryPlaylists.html">YourLibraryPlaylists</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ArtistProtectedRoute">ArtistProtectedRoute</a></li><li><a href="global.html#authFail">authFail</a></li><li><a href="global.html#authSuccess">authSuccess</a></li><li><a href="global.html#checkValidity">checkValidity</a></li><li><a href="global.html#day">day</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#image">image</a></li><li><a href="global.html#LoggedInProtectedRoute">LoggedInProtectedRoute</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#NotLoggedInRoute">NotLoggedInRoute</a></li><li><a href="global.html#PremiumProtectedRoute">PremiumProtectedRoute</a></li><li><a href="global.html#reducer">reducer</a></li><li><a href="global.html#responseHandler">responseHandler</a></li><li><a href="global.html#setAuthRedirectPath">setAuthRedirectPath</a></li><li><a href="global.html#time">time</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#updateObject">updateObject</a></li><li><a href="global.html#UserProtectedRoute">UserProtectedRoute</a></li><li><a href="global.html#year">year</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AccountHeading.html">AccountHeading</a></li><li><a href="AccountHelp.html">AccountHelp</a></li><li><a href="AccountOverview.html">AccountOverview</a></li><li><a href="AccountSettings.html">AccountSettings</a></li><li><a href="AddToPlaylist.html">AddToPlaylist</a></li><li><a href="Albums.html">Albums</a></li><li><a href="AlbumWebPlayer.html">AlbumWebPlayer</a></li><li><a href="ArtistHeading.html">ArtistHeading</a></li><li><a href="ArtistSelector.html">ArtistSelector</a></li><li><a href="ArtistSidebar.html">ArtistSidebar</a></li><li><a href="ArtistWebPlayer.html">ArtistWebPlayer</a></li><li><a href="ArtistWebPlayerNavBar.html">ArtistWebPlayerNavBar</a></li><li><a href="CanNotActivatePremiumTrial.html">CanNotActivatePremiumTrial</a></li><li><a href="CardComponent.html">CardComponent</a></li><li><a href="ChangeEmailAddress.html">ChangeEmailAddress</a></li><li><a href="ChangePassword.html">ChangePassword</a></li><li><a href="ConfigContextProvider.html">ConfigContextProvider</a></li><li><a href="CreateAlbum.html">CreateAlbum</a></li><li><a href="CreatePlaylist.html">CreatePlaylist</a></li><li><a href="DesktopNavbar.html">DesktopNavbar</a></li><li><a href="EditProfile.html">EditProfile</a></li><li><a href="EditTrack.html">EditTrack</a></li><li><a href="Footer.html">Footer</a></li><li><a href="HelpPage.html">HelpPage</a></li><li><a href="Home.html">Home</a></li><li><a href="HomeNavBar.html">HomeNavBar</a></li><li><a href="HowToLogOut.html">HowToLogOut</a></li><li><a href="LogIn.html">LogIn</a></li><li><a href="MainIndex.html">MainIndex</a></li><li><a href="MainSelector.html">MainSelector</a></li><li><a href="ManageProfile.html">ManageProfile</a></li><li><a href="Message.html">Message</a></li><li><a href="MobileNavbar.html">MobileNavbar</a></li><li><a href="module.exports.html">exports</a></li><li><a href="MyPlaylists.html">MyPlaylists</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="Overview.html">Overview</a></li><li><a href="PasswordReset.html">PasswordReset</a></li><li><a href="PlayingBar.html">PlayingBar</a></li><li><a href="PlaylistWebPlayer.html">PlaylistWebPlayer</a></li><li><a href="Premium.html">Premium</a></li><li><a href="PremiumCode.html">PremiumCode</a></li><li><a href="ProfileContextProvider.html">ProfileContextProvider</a></li><li><a href="ProfilePicture.html">ProfilePicture</a></li><li><a href="Progress.html">Progress</a></li><li><a href="RecentActivity.html">RecentActivity</a></li><li><a href="Search.html">Search</a></li><li><a href="SearchNavBar.html">SearchNavBar</a></li><li><a href="SideBar.html">SideBar</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="SpotifyAndFacebook.html">SpotifyAndFacebook</a></li><li><a href="Track.html">Track</a></li><li><a href="TracksList.html">TracksList</a></li><li><a href="TrackUpload.html">TrackUpload</a></li><li><a href="UpgradeArtist.html">UpgradeArtist</a></li><li><a href="YourLibrary.html">YourLibrary</a></li><li><a href="YourLibraryAlbums.html">YourLibraryAlbums</a></li><li><a href="YourLibraryArtists.html">YourLibraryArtists</a></li><li><a href="YourLibraryNavBar.html">YourLibraryNavBar</a></li><li><a href="YourLibraryPlaylists.html">YourLibraryPlaylists</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ArtistProtectedRoute">ArtistProtectedRoute</a></li><li><a href="global.html#authFail">authFail</a></li><li><a href="global.html#authSuccess">authSuccess</a></li><li><a href="global.html#checkValidity">checkValidity</a></li><li><a href="global.html#day">day</a></li><li><a href="global.html#description">description</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#image">image</a></li><li><a href="global.html#LoggedInProtectedRoute">LoggedInProtectedRoute</a></li><li><a href="global.html#logout">logout</a></li><li><a href="global.html#month">month</a></li><li><a href="global.html#NotLoggedInRoute">NotLoggedInRoute</a></li><li><a href="global.html#Pagination">Pagination</a></li><li><a href="global.html#PremiumProtectedRoute">PremiumProtectedRoute</a></li><li><a href="global.html#reducer">reducer</a></li><li><a href="global.html#responseHandler">responseHandler</a></li><li><a href="global.html#setAuthRedirectPath">setAuthRedirectPath</a></li><li><a href="global.html#time">time</a></li><li><a href="global.html#today">today</a></li><li><a href="global.html#updateObject">updateObject</a></li><li><a href="global.html#UserProtectedRoute">UserProtectedRoute</a></li><li><a href="global.html#year">year</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue Jun 09 2020 20:53:34 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed Jun 10 2020 01:34:59 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
