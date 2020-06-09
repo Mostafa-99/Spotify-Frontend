@@ -167,7 +167,7 @@ const CreateAlbum = (props) => {
         },
       });
       console.log(res);
-      if(res.status===200){
+      if(res.status===204){
       setMessage("Album deleted");
       window.location.replace("/artist");
       }
