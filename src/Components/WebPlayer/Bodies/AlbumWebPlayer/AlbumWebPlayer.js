@@ -155,7 +155,6 @@ export class AlbumWebPlayer extends Component {
         window.scrollTo(0, 0);
         const{myId}=this.props.location.state;//getting id from parent component
         this.state.myId=myId;
-        console.log(this.state.myId)
         this.getAlbumDetails();
         this.getAlbumTracks();
 
@@ -169,10 +168,9 @@ export class AlbumWebPlayer extends Component {
     * @memberof AlbumWebPlayer
     */
     getAlbumDetails(){
-        //this.context.baseURL+"/albums/"+this.state.myId
-        //"http://spotify.mocklab.io/albums/12345"
-        var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
-        axios.get(link,{
+        
+        //var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
+        axios.get("https://spotify.mocklab.io/albums/12345",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -201,7 +199,8 @@ export class AlbumWebPlayer extends Component {
         })
 
         //check if album is liked
-        axios.get(this.context.baseURL+"/me/likedAlbums",{
+        //this.context.baseURL+"/me/likedAlbums"
+        axios.get("https://spotify.mocklab.io/me/likedAlbums",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token")
@@ -230,10 +229,9 @@ export class AlbumWebPlayer extends Component {
     * @memberof AlbumWebPlayer
     */
     getAlbumTracks(){
-        //this.context.baseURL+"/albums/"+this.state.myId+"/tracks"
-        //"http://spotify.mocklab.io/albums/12345/tracks"
-        var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
-        axios.get(link,{
+        
+        //var link = this.context.baseURL+"/albums/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
+        axios.get("https://spotify.mocklab.io/albums/12345/tracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -253,7 +251,8 @@ export class AlbumWebPlayer extends Component {
         })
 
         //gets array of liked tracks' ids
-        axios.get(this.context.baseURL+"/me/likedTracks",{
+        //this.context.baseURL+"/me/likedTracks"
+        axios.get("https://spotify.mocklab.io/me/likedTracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token")
@@ -280,7 +279,7 @@ export class AlbumWebPlayer extends Component {
      */
     likeButtonPressed=()=>{
         if(!this.state.is_liked){
-            axios.put(this.context.baseURL+"/me/likeAlbum",{"id":this.state.myId},{
+            axios.put("https://spotify.mocklab.io/me/likeAlbum",{"id":this.state.myId},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -298,7 +297,7 @@ export class AlbumWebPlayer extends Component {
             })
         }
         else{
-            axios.delete(this.context.baseURL+"/me/unlikeAlbum",{
+            axios.delete("https://spotify.mocklab.io/me/unlikeAlbum",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 },
@@ -326,7 +325,7 @@ export class AlbumWebPlayer extends Component {
      */
     trackLikeButtonPressed=()=>{
         if(!this.state.playing_song_is_liked && this.state.playing_song_id !== ""){
-            axios.put(this.context.baseURL+"/me/likeTrack",{"id":this.state.playing_song_id},{
+            axios.put("https://spotify.mocklab.io/me/likeTrack",{"id":this.state.playing_song_id},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -346,7 +345,7 @@ export class AlbumWebPlayer extends Component {
             })
         }
         else if(this.state.playing_song_id !== ""){
-            axios.delete(this.context.baseURL+"/me/unlikeTrack",{
+            axios.delete("https://spotify.mocklab.io/me/unlikeTrack",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 },

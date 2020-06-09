@@ -172,8 +172,8 @@ export class PlaylistWebPlayer extends Component {
     * @memberof PlaylistWebPlayer
     */
     getPlaylistDetails(){
-        var link = this.context.baseURL+"/playlists/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
-        axios.get(link,{
+        //var link = this.context.baseURL+"/playlists/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345");
+        axios.get("https://spotify.mocklab.io/playlists/12345",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -197,7 +197,7 @@ export class PlaylistWebPlayer extends Component {
         })
 
         //check if playlist is liked
-        axios.get(this.context.baseURL+"/me/likedPlaylists",{
+        axios.get("https://spotify.mocklab.io/me/likedPlaylists",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token")
@@ -226,8 +226,8 @@ export class PlaylistWebPlayer extends Component {
     * @memberof PlaylistWebPlayer
     */
     getPlaylistTracks(){
-        var link = this.context.baseURL+"/playlists/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
-        axios.get(link,{
+        //var link = this.context.baseURL+"/playlists/"+(this.context.baseURL === "https://totallynotspotify.codes/api"? this.state.myId:"12345")+"/tracks";
+        axios.get("https://spotify.mocklab.io/playlists/12345/tracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
@@ -247,7 +247,7 @@ export class PlaylistWebPlayer extends Component {
         })
 
         //gets array of liked tracks' ids
-        axios.get(this.context.baseURL+"/me/likedTracks",{
+        axios.get("https://spotify.mocklab.io/me/likedTracks",{
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token")
@@ -273,7 +273,7 @@ export class PlaylistWebPlayer extends Component {
      */
     likeButtonPressed=()=>{
         if(!this.state.is_liked){
-            axios.put(this.context.baseURL+"/me/likePlaylist",{"id":this.state.myId},{
+            axios.put("https://spotify.mocklab.io/me/likePlaylist",{"id":this.state.myId},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -291,7 +291,7 @@ export class PlaylistWebPlayer extends Component {
             })
         }
         else{
-            axios.delete(this.context.baseURL+"/me/unlikePlaylist",{
+            axios.delete("https://spotify.mocklab.io/me/unlikePlaylist",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 },
@@ -319,7 +319,7 @@ export class PlaylistWebPlayer extends Component {
      */
     trackLikeButtonPressed=()=>{
         if(!this.state.playing_song_is_liked && this.state.playing_song_id !== ""){
-            axios.put(this.context.baseURL+"/me/likeTrack",{"id":this.state.playing_song_id},{
+            axios.put("https://spotify.mocklab.io/me/likeTrack",{"id":this.state.playing_song_id},{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 }
@@ -339,7 +339,7 @@ export class PlaylistWebPlayer extends Component {
             })
         }
         else if(this.state.playing_song_id !== ""){
-            axios.delete(this.context.baseURL+"/me/unlikeTrack",{
+            axios.delete("https://spotify.mocklab.io/me/unlikeTrack",{
                 headers:{
                     'authorization': "Bearer "+ localStorage.getItem("token"),
                 },
