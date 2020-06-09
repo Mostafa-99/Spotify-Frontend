@@ -14,10 +14,12 @@ const initialState = {
       },
 };
 
-const authStart = ( state, action ) => {
-    return updateObject( state, { error: null, loading: true } );
-};
-
+/**
+     * Authentication success handler.
+     * @function authSuccess
+     * @param {state} - current state retrieved.
+     * @param {action} - action retrieved.
+     */
 const authSuccess = (state, action) => {
     return updateObject( state, { 
         token: action.idToken,
@@ -32,6 +34,12 @@ const authSuccess = (state, action) => {
      } );
 };
 
+/**
+     * Authentication failure handler.
+     * @function authFail
+     * @param {state} - current state retrieved.
+     * @param {action} - action retrieved.
+     */
 const authFail = (state, action) => {
     return updateObject( state, {
         error: action.error,
@@ -39,14 +47,24 @@ const authFail = (state, action) => {
     });
 };
 
-
+/**
+     * Set the redirection path after authentication process.
+     * @function setAuthRedirectPath
+     * @param {state} - current state retrieved.
+     * @param {action} - action retrieved.
+     */
 const setAuthRedirectPath = (state, action) => {
     return updateObject(state, { authRedirectPath: action.path })
 }
 
+/**
+     * Intialize new reducer to perform certain actions.
+     * @function reducer
+     * @param {state} - current state retrieved.
+     * @param {action} - action retrieved.
+     */
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case actionTypes.AUTH_START: return authStart(state, action);
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state,action);

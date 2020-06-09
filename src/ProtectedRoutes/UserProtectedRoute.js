@@ -1,6 +1,10 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
+/**
+     * Protected route to allow only regular user.
+     * @extends Component
+     */
 export const UserProtectedRoute = ({
   component: Component,
   ...rest
