@@ -599,10 +599,10 @@ export class PlaylistWebPlayer extends Component {
                 this.audio.currentTime=this.state.pausedtime;
             }
         }
+        else if(this.state.playing_song_number === this.state.playlist_total_tracks+1){
+            this.previousSong();
+        }
         else{
-            this.setState({
-                playing_song_number:0
-            })
             this.nextSong();
         }
     }
