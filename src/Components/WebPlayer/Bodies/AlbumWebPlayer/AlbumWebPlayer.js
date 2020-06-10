@@ -82,7 +82,7 @@ export class AlbumWebPlayer extends Component {
          * @memberof AlbumWebPlayer
          * @type {Number}
          */
-        "playing_song_number":Number,
+        "playing_song_number":0,
         /**
          * Name of the playing song
          * @memberof AlbumWebPlayer
@@ -590,7 +590,7 @@ export class AlbumWebPlayer extends Component {
      * @return {void}
      */
     PlayPauseButtonPressed=()=>{
-        if(this.audio.src !== ""){
+        if(this.state.playing_song_name !== ""){
             if(this.state.is_playing){
                 this.setState({
                     pausedtime:this.audio.currentTime,
@@ -605,6 +605,9 @@ export class AlbumWebPlayer extends Component {
                 this.audio.play();
                 this.audio.currentTime=this.state.pausedtime;
             }
+        }
+        else{
+            this.nextSong();
         }
     }
 

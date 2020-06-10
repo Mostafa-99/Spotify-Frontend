@@ -83,7 +83,7 @@ export class PlaylistWebPlayer extends Component {
          * @memberof PlaylistWebPlayer
          * @type {Number}
          */
-        "playing_song_number":Number,
+        "playing_song_number":0,
         /**
          * Name of the playing song
          * @memberof PlaylistWebPlayer
@@ -583,7 +583,7 @@ export class PlaylistWebPlayer extends Component {
      * @return {void}
      */
     PlayPauseButtonPressed=()=>{
-        if(this.audio.src !== ""){
+        if(this.state.playing_song_name !== ""){
             if(this.state.is_playing){
                 this.setState({
                     pausedtime:this.audio.currentTime,
@@ -598,6 +598,9 @@ export class PlaylistWebPlayer extends Component {
                 this.audio.play();
                 this.audio.currentTime=this.state.pausedtime;
             }
+        }
+        else{
+            this.nextSong();
         }
     }
 
