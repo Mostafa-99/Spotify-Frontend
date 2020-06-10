@@ -13,12 +13,16 @@ configure({ adapter: new Adapter() });
 describe('<PlaylistWebPlayer/>', () => {
 
     it('PlaylistWebPlayer renders without crashing', () => {
-        shallow(<PlaylistWebPlayer/>);
+        shallow(<PlaylistWebPlayer
+            location={{state: {myAlbum: true, myId:"1234"}}}
+            />);
     });
 
     it('PlaylistWebPlayer states check', () => {
         
-        const wrapper = shallow(<PlaylistWebPlayer/>);
+        const wrapper = shallow(<PlaylistWebPlayer
+            location={{state: {myAlbum: true, myId:"1234"}}}
+            />);
         
         expect(wrapper.state().playlist_name).toEqual("");
         expect(wrapper.state().artists).toEqual("");
@@ -37,9 +41,9 @@ describe('<PlaylistWebPlayer/>', () => {
 
     it('PlaylistWebPlayer page requests', () => {
 
-        const wrapper = shallow(<PlaylistWebPlayer/>);
-
-        expect(wrapper.contains(<span className='list-item-text'>{this.state.is_liked? 'Remove from Your Library' : 'Save to Your Library'}</span>)).toEqual(true);
+        const wrapper = shallow(<PlaylistWebPlayer
+            location={{state: {myAlbum: true, myId:"1234"}}}
+            />);
         
         axios.get("http://spotify.mocklab.io/playlists/12345",{
             headers:{
@@ -60,6 +64,8 @@ describe('<PlaylistWebPlayer/>', () => {
                         artists:artist.name
                     })
                 ))
+                expect(wrapper.state().playlist_name).toEqual("Global Warming");
+                expect(wrapper.state().artists).toEqual("Pitbull");
             }
             else responseHandler(res);
         })
@@ -67,9 +73,7 @@ describe('<PlaylistWebPlayer/>', () => {
             console.log(error);
         })
 
-        //check states changed
-        expect(wrapper.state().playlist_name).toEqual("Global Warming");
-        expect(wrapper.state().artists).toEqual("Pitbull");
+        
 
         axios.get("http://spotify.mocklab.io/me/likedPlaylists",{
             headers:{
@@ -101,12 +105,13 @@ describe('<PlaylistWebPlayer/>', () => {
             headers:{
                 'Content-Type':'application/json',
                 'authorization': "Bearer "+ localStorage.getItem("token"),
-                "id": this.state.myId
+                "id": ""
             }
         })
         .then(res => {
             if(res.status===200){
                 wrapper.setState({tracks:res.data.data.tracksArray})
+                expect(wrapper.state().tracks.length).toEqual(5);
             }
             else responseHandler(res);
         })
@@ -114,7 +119,6 @@ describe('<PlaylistWebPlayer/>', () => {
            console.log(error);
         })
 
-        expect(wrapper.state().tracks.length).toEqual(5);
     });
 
   

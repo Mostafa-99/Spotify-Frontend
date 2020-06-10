@@ -59,7 +59,7 @@ export class PlaylistWebPlayer extends Component {
          * @memberof PlaylistWebPlayer
          * @type {Boolean}
          */
-        "is_liked":Boolean,
+        "is_liked":false,
         /**
          * Array of liked tracks' ids
          * @memberof PlaylistWebPlayer 
