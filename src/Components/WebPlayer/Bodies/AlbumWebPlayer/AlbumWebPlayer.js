@@ -607,6 +607,9 @@ export class AlbumWebPlayer extends Component {
             }
         }
         else{
+            this.setState({
+                playing_song_number:0
+            })
             this.nextSong();
         }
     }
