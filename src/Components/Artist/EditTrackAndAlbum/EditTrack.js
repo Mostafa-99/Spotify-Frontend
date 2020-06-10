@@ -71,11 +71,12 @@ class EditTrack extends Component {
     console.log(this.state.trackNewName);
     axios
       .patch(
-        this.context.baseURL +
+       /* this.context.baseURL +
           "/me/albums/" +
           this.state.albumId +
           "/tracks/" +
-          this.state.trackId,
+          this.state.trackId,*/
+          "https://spotify.mocklab.io/me/albums/5ec84430fcf468e8807fb645/tracks/tgggvjkiugtycjy",
         {
           "name": this.state.trackNewName,
         },
@@ -103,11 +104,13 @@ class EditTrack extends Component {
     console.log(this.state.trackNewName);
     axios
       .delete(
-        this.context.baseURL +
+        /*this.context.baseURL +
           "/me/albums/" +
           this.state.albumId +
           "/tracks/" +
-          this.state.trackId,
+          this.state.trackId,*/
+          "https://spotify.mocklab.io/me/albums/5ec84430fcf468e8807fb645/tracks/tgggvjkiugtycjy",
+
         {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),

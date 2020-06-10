@@ -3,14 +3,14 @@ importScripts('https://www.gstatic.com/firebasejs/7.8.0/firebase-messaging.js');
 
 
 firebase.initializeApp({
-    apiKey: "AIzaSyDstl21Iann4t-odVPIMFTXpI5ToD1jIC0",
-    authDomain: "totally-not-spotify.firebaseapp.com",
-    databaseURL: "https://totally-not-spotify.firebaseio.com",
-    projectId: "totally-not-spotify",
-    storageBucket: "totally-not-spotify.appspot.com",
-    messagingSenderId: "262598048193",
-    appId: "1:262598048193:web:8eb027331acfe77f625740",
-    measurementId: "G-YDVW3R60NT"
+  apiKey: "AIzaSyDstl21Iann4t-odVPIMFTXpI5ToD1jIC0",
+  authDomain: "totally-not-spotify.firebaseapp.com",
+  databaseURL: "https://totally-not-spotify.firebaseio.com",
+  projectId: "totally-not-spotify",
+  storageBucket: "totally-not-spotify.appspot.com",
+  messagingSenderId: "262598048193",
+  appId: "1:262598048193:web:8eb027331acfe77f625740",
+  measurementId: "G-YDVW3R60NT"
 })
 
 //const initMessaging=firebase.messaging()

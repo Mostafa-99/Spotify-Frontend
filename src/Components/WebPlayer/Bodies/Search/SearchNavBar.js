@@ -87,7 +87,7 @@ class SearchNavBar extends Component {
     componentDidMount(){
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
         /*' http://we871.mocklab.io/artists/200 */
-        axios.get("http://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/related-artists",{  /*artist*/
+        axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/related-artists",{  /*artist*/
         headers:{
             'authorization': "Bearer "+localStorage.getItem("token"),
             "id": this.state.myId
@@ -111,7 +111,7 @@ class SearchNavBar extends Component {
 
             /* http://www.mocky.io/v2/5e74bc56300000d331a5f62f */
             /* /artists/"+this.state.myId+"/albums */
-        axios.get("http://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/albums",{/* albums */
+        axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/albums",{/* albums */
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -133,7 +133,7 @@ class SearchNavBar extends Component {
             })
 
             /*  http://www.mocky.io/v2/5e749724300000d431a5f4c6*/
-        axios.get("http://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/created-playlists",{/* playlists*/
+        axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/created-playlists",{/* playlists*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId

@@ -102,8 +102,10 @@ const TrackUpload = (props) => {
     try {
       console.log(props.location.state.myId);
       const res = await axios.post(
-        url.baseURL + "/me/albums/" + props.location.state.myId + "/tracks",
-        formData,
+       // url.baseURL + "/me/albums/" + props.location.state.myId + "/tracks",
+        "https://spotify.mocklab.io/me/albums/1234/tracks" ,
+ 
+       formData,
         {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
