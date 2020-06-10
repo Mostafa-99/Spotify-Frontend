@@ -150,6 +150,7 @@ export class PlaylistWebPlayer extends Component {
          * @type {Boolean}
          */
         "is_playing":false,
+        "pageLoaded": false
     }
 
     componentDidMount(){
@@ -238,7 +239,10 @@ export class PlaylistWebPlayer extends Component {
             if(res.status===200){
                 console.log("Playlist details")
                 console.log(res)
-                this.setState({tracks:res.data.data.tracksArray})
+                this.setState({
+                    tracks:res.data.data.tracksArray,
+                    pageLoaded:true
+                })
             }
             else responseHandler(res);
         })
@@ -656,6 +660,7 @@ export class PlaylistWebPlayer extends Component {
                     <div className="col-lg-10">
                         <HomeNavBar/>
                         <div id="album-webplayer-main-div">
+                            {this.state.pageLoaded ? 
                             <div className="row">
                                 <div className="row album-details-div">
                                     <div className="album-image-div">
@@ -697,6 +702,12 @@ export class PlaylistWebPlayer extends Component {
                                     <TracksList tracks={this.state.tracks} is_playing={this.state.is_playing} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
                                 </div>
                             </div>
+                            : 
+                            <div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
+                                <div class="spinner-border text-success" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>}
                         </div>
                     </div>
                 </div>

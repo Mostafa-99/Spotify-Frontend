@@ -148,7 +148,8 @@ export class AlbumWebPlayer extends Component {
          * @memberof AlbumWebPlayer
          * @type {Boolean}
          */
-        "is_playing":false
+        "is_playing":false,
+        "pageLoaded": false
     }
 
     componentDidMount(){
@@ -240,9 +241,13 @@ export class AlbumWebPlayer extends Component {
         })
         .then(res => {
             if(res.status===200){
-                this.setState({tracks:res.data.data.tracksArray})
+                this.setState({
+                    tracks:res.data.data.tracksArray,
+                    pageLoaded:true
+                })
                 console.log("tracks");
                 console.log(res);
+
             }
             else responseHandler(res);
         })
@@ -660,7 +665,8 @@ export class AlbumWebPlayer extends Component {
                     <div className="col-lg-10">
                         <HomeNavBar/>
                         <div id="album-webplayer-main-div">
-                           <div className="row">
+                            {this.state.pageLoaded ? 
+                            <div className="row">
                                 <div className="row album-details-div">
                                     <div className="album-image-div">
                                         <img className="album-image" src={this.state.album_image} alt="album pic"/>
@@ -708,6 +714,12 @@ export class AlbumWebPlayer extends Component {
                                     <TracksList tracks={this.state.tracks} is_playing={this.state.is_playing} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId} albumId={this.props.location.state.myId} myAlbumArtist={this.props.location.state.myAlbum} />
                                 </div>
                             </div> 
+                            : 
+                            <div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
+                                <div class="spinner-border text-success" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>}
                         </div>
                     </div>
                 </div>
