@@ -15,13 +15,14 @@ messaging.usePublicVapidKey("BKWMGFcg3yIaZ8ONAeIORVydRfg1GFtMnKcCPV-jFyEXWAlbLv8
 // subsequent calls to getToken will return from cache.
 // Callback fired if Instance ID token is updated.
 messaging.onTokenRefresh(() => {
-    messaging.getToken().then((refreshedToken) => {
+    messaging.getToken().then((token) => {
       console.log('Token refreshed.');
       // Indicate that the new Instance ID token has not yet been sent to the
       try {
         const res = axios.put(this.context.baseURL + "me/notifications/token",
         {
-          "token":token
+          "token":token,
+          "type":'web'
           },
            {
           headers: {
@@ -71,3 +72,23 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
+const showMessage = function(payload){
+  console.log('showMessage', payload);
+  const notificationTitle = payload.data.title;
+  const notificationOptions = {
+      body: payload.data.body,
+      icon: payload.data.icon,
+      image: payload.data.image,
+      click_action: payload.data.click_action,
+      data:payload.data.click_action
+  };  
+
+
+ self.registration.showNotification(notificationTitle,notificationOptions); 
+}   
+messaging.setBackgroundMessageHandler(showMessage);
+messaging.onMessage(showMessage);
+self.addEventListener('message', function (evt) {     
+console.log("self",self);
+showMessage( evt.data );
+})

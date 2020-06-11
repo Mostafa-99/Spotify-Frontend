@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import './SideBar.css'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import CreatePlaylist from './Bodies/Home/CreatePlaylist/CreatePlaylist'
-import MyPlaylists from './MyPlaylists'
+import MyPlaylists from './Bodies/MyPlaylist/MyPlaylists.js'
 import  { Component } from "react";
 
 /** Class of SideBar in WebPlayer componenets

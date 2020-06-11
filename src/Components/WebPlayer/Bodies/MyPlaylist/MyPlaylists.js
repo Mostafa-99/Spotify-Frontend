@@ -1,7 +1,7 @@
 import React, {Component} from "react"
-import {ConfigContext} from "../../../src/Context/ConfigContext"
+import {ConfigContext} from "../../../../Context/ConfigContext"
 import axios from 'axios'
-import { responseHandler } from "../../ReduxStore/Shared"
+import { responseHandler } from "./../../../../ReduxStore/Shared"
 import { Link } from 'react-router-dom';
 import './MyPlaylists.css'
 
@@ -19,6 +19,11 @@ class MyPlaylists extends Component {
             * @type {Array<playlists>}
             */
             playlists:[],
+             /** Loading state of the component
+            * @extends MyPlaylists
+            * @type {bool}
+            */
+           isLoading:true,
 
         }
     }
@@ -64,8 +69,9 @@ class MyPlaylists extends Component {
                           */
                       href:playlists.href,
                     
-                  }))
-              }) } else 
+                  })),
+                  isLoading:false })
+               } else 
               responseHandler(res);
           }).catch(res=>{
               console.log(res);
@@ -78,7 +84,8 @@ class MyPlaylists extends Component {
         
         return (
         <div id="playlist-list-item">
-           
+  {!this.state.isLoading?
+  <div>
  {this.state.playlists.map(playlist => (
 
 <Link to={{
@@ -86,18 +93,16 @@ class MyPlaylists extends Component {
     state:{
     myId :playlist.id,
     myhref:playlist.href,
-    }
-}}>
-     <li className='sidebar-list-item' id={playlist.id} >{playlist.title} </li>
-  
-</Link>  
-
- 
+    }}}>
+     <li className='sidebar-list-item' id={playlist.id} >{playlist.title} </li></Link>  
 ))}
-
-    
-        </div>
-        )
+</div> :  <div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
+                                <div class="spinner-border text-success" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>}   
+     </div>   
+     )
     }
 }
 export default MyPlaylists;

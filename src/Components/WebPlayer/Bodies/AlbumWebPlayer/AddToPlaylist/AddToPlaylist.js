@@ -27,7 +27,12 @@ import './AddToPlaylist.css'
             * @extends MyPlaylists
             * @type {string}
             */
-            trackid:""
+            trackid:"",
+            /** Loading : state of page
+            * @extends MyPlaylists
+            * @type {bool}
+            */
+           isloading:true,
         }
         this.handleClick= this.handleClick.bind(this)
     }
@@ -68,8 +73,10 @@ import './AddToPlaylist.css'
                           * 
                           */
                       imageUrl:playlists.images[0]
-                  }))
-              }) } else 
+                  })),
+                  isloading:false 
+                })}
+               else 
               responseHandler(res);
           }).catch(res=>{
               console.log(res);
@@ -84,7 +91,8 @@ import './AddToPlaylist.css'
      * @returns {void}
      */
     handleClick = (id) => {
-        axios.post(this.context.baseURL +'/playlists/'+id+'/tracks' ,
+        axios.post('https://spotify.mocklab.io/playlists/5ed962b4719a62a954766bb9/tracks',
+      //  axios.post(this.context.baseURL +'/playlists/'+id+'/tracks' ,
         {
         "id":this.props.trackId
         },
@@ -130,13 +138,15 @@ render() {
        
       <div className="modal-body" id="modal-body-share">
       <div className="row" >
-                     <div className="playlist-items-wrapper">
+             {!this.state.isloading?       
+                <div className="playlist-items-wrapper">
                      {this.state.playlists.map(playlist => (
-                                        <div className="playlist-item-wrapper"  id={playlist.id}  >
+                                      
+                                       <div className="playlist-item-wrapper"  id={playlist.id}  >
                                             <div className="playlist-index-img-background"  onClick={() => this.handleClick(playlist.id)}>
                                                
                                                <img src={playlist.imageUrl} alt="playlist-pic"
-                    onError={e => {e.target.src = 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX38758453.jpg';}}></img>
+                                              onError={e => {e.target.src = 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX38758453.jpg';}}></img>
                                                
                                                
                                                 <div className="playlist-img-text-wrapper" >               
@@ -149,7 +159,12 @@ render() {
                                             </div>
                                         </div>   ))}
 
-                 </div>
+                 </div> :
+                                        <div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
+                                        <div class="spinner-border text-success" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>}
                  </div>
 
         

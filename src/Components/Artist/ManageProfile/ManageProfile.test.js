@@ -45,4 +45,5 @@ describe('<ManageProfile/>', () => {
     it('Artist manage profile check', () => {
         const wrapper = shallow(<ManageProfile/>);
     });
+    
 });

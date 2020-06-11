@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./Track.css";
-import Share from "./Share";
+import Share from "./../AlbumWebPlayer/Share/Share.js"
 import { Link } from "react-router-dom";
 import AddToPlaylist from "./AddToPlaylist/AddToPlaylist";
 

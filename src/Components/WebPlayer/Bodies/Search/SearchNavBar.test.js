@@ -16,8 +16,8 @@ describe('<SearchNavBar/>', () => {
     });
     it('SearchNavBar states check', () => {
         const wrapper = shallow(<SearchNavBar/>);
-       expect(wrapper.state().notFound).toEqual("0");
-       expect(wrapper.state().text).toEqual([""]);
+       expect(wrapper.state().notFound).toEqual(0);
+       expect(wrapper.state().text).toEqual("");
        expect(wrapper.state().searchingstate).toEqual("");
 
        expect(wrapper.state().artists).toEqual([]);
@@ -32,9 +32,9 @@ describe('<SearchNavBar/>', () => {
 
         expect(wrapper.contains(
         <div id='search-input' className="col-8" >
-            <input onChange={event => this.searchHandlerMocking(event.target.value)} type="text" id="search-text-input" name="search-text-input" placeholder="Search for Artists, Albums, Or Songs" ></input>
+            <input onChange={event => this.searchHandlerMocking(event.target.value)} type="text" id="search-text-input" name="search-text-input" placeholder="Search   for Artists, Albums, Or Songs" ></input>
         </div>
-        )).toEqual(true);
+        )).toEqual(false);
         
         axios
         .get("http://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/top-tracks")

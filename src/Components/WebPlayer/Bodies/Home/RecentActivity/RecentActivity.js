@@ -30,6 +30,11 @@ constructor(){
          * @type {Number}
          */
         currentPage:1,
+         /**
+         * state of the current page 
+         * @type {bool}
+         */
+        Loaded:false,
 
     }
 }
@@ -72,7 +77,8 @@ componentDidMount(){
                          */
                      image:recents.data.images[0]
                     })),
-                   totalResults: res.data.data.results.total
+                   totalResults: res.data.data.results.total,
+                   Loaded:true,
                 })
             }
                 else if(res.status===401){
@@ -100,7 +106,7 @@ element.classList.toggle("show");
    * @param pagenumber- number of page that i will fetch next
    */
 nextpage=(pagenumber)=>{ 
-    
+    this.setState({Loaded:false})
     axios.get(this.context.baseURL +'/me/notifications?limit=4&page='+pagenumber,
         {
         headers:{'authorization':"Bearer "+localStorage.getItem('token')}
@@ -129,10 +135,11 @@ nextpage=(pagenumber)=>{
                        * link to image of the notification item
                        * @type {link}
                        */
-                   image:recents.data.images[0]
+                   image:recents.data.images
                   })),
                   currentPage:pagenumber,
-                 totalResults: res.data.data.results.total
+                 totalResults: res.data.data.results.total,
+                 Loaded:true
               })
           }
               else if(res.status===401){
@@ -165,7 +172,9 @@ render(){
 		</div>
 
 		<div class="dropdown hide" id="dropdown-wrap">
-        {this.state.recents.map( recents => (
+       {this.state.Loaded?
+       <div> 
+       {this.state.recents.map( recents => (
 			<div class="notify-item">
 				<div class="notify-img">
 					<img src={recents.image} alt="profile-pic"
@@ -177,10 +186,16 @@ render(){
                     <span class="notify-time">{recents.time}</span>
 				</div>
 			</div>
-        ))}
+        ))} 
         {this.state.totalResults>4? <Pagination pages={numberPages} nextpage={this.nextpage} currentPage={this.state.currentPage}/> : ''}
-           {/* {console.log(this.state.currentpage)}
-        {console.log(numberPages)} */}
+        </div>:
+        <div className="container w-50 pb-5 align-middle align-self-center d-flex justify-content-center">
+                                <div class="spinner-border text-success" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                             }
+      
             </div>
             </div>
 </div>
