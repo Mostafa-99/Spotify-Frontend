@@ -30,12 +30,12 @@ npm start
 ## For mocking server
 change ConfigContext baseURL to:
 ```
-http://spotify.mocklab.io
+https://spotify.mocklab.io
 ```
 ## For Backend server
 change ConfigContext baseURL to:
 ```
-http://138.91.114.14/api
+https://totallynotspotify.codes/api
 ```
 
 ## Functional Documentation 
