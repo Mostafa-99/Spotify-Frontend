@@ -11,6 +11,7 @@ export const ProfileContext= createContext();
 class ProfileContextProvider extends Component {
     static contextType=ConfigContext;
     state={
+        userType:'artist',
         user: {},
         status:"not connected"
     }
@@ -21,7 +22,7 @@ class ProfileContextProvider extends Component {
      */
     componentDidMount =()=>{
         
-        console.log(localStorage);
+        
           let show=localStorage.getItem("isLoggedIn");
           
 
@@ -35,16 +36,28 @@ class ProfileContextProvider extends Component {
                 if(res.status===200)
                 {
                     this.setState({user: res.data})
-                    localStorage.setItem("userType",res.data.role);
-                    console.log(res);
-                      
-                    
-                }else{}
-           // alert(res.status)
-        
+                    //console.log(this.state.user)
+                }else
+            alert(res.status)
+        //console.log(res.data)
     }).catch(err => {
-                alert(err)
+                alert(err.response)
             })
+
+            // if(this.state.user!==null)
+            // {   
+            //     let usercopy=JSON.parse(JSON.stringify(this.state.user))
+            //     console.log("User: "+this.state.user);
+                
+            //     console.log("User: "+this.state.user[0]);
+            //     //usercopy['image']=this.state.user.images[0];
+            //     //if(usercopy.image==="")
+            //     //{
+            //         usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
+            //         this.setState({user:usercopy})
+            //         console.log("UserCopy: "+usercopy);
+            //    // }
+            // }
           } 
     }
 
@@ -65,16 +78,29 @@ class ProfileContextProvider extends Component {
                     if(res.status===200)
                     {
                         this.setState({user: res.data})
-                        localStorage.setItem("userType",res.data.role);
-                       
+                       // console.log(this.state.user)
                     }else
                 alert(res.status)
-           
+            //console.log(res.data)
         }).catch(err => {
-                    alert(err)
+                    alert(err.response)
                 })
 
             this.setState({status:'connected'})
+            // if(this.state.user!==null)
+            // {   
+            //     let usercopy=JSON.parse(JSON.stringify(this.state.user))
+            //     console.log("User: "+this.state.user);
+                
+            //     console.log("User: "+this.state.user[0]);
+            //     //usercopy['image']=this.state.user.images[0];
+            //     //if(usercopy.image==="")
+            //     //{
+            //         usercopy['image']='https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png'
+            //         this.setState({user:usercopy})
+            //         console.log("UserCopy: "+usercopy);
+            //    // }
+            // }
         }
 
     }

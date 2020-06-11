@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: AlbumWebPlayer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: AlbumWebPlayer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
+import axios from 'axios'
+import HomeNavBar from './../Home/HomeNavBar.js'
+import SideBar from './../../SideBar.js'
+import TracksList from './TracksList.js'
+import Album_Image from './../../../../Images/albumImage.jpg'
+
+import './AlbumWebPlayer.css'
+
+export class AlbumWebPlayer extends Component {
+
+    state={
+        /**
+         * Name of the album
+         * @type {String}
+         */
+        "name":"",
+        /**
+         * ID of the album
+         * @type {String}
+         */
+        "id":"",
+        /**
+         * Array of artists' names
+         * @type {Array&lt;String>}
+         */
+        "artists":[],
+        /**
+         * Image url of the album
+         * @type {String}
+         */
+        "image":"",
+        /**
+         * Array of tracks objects 
+         * @type {Array&lt;Object>}
+         */
+        "tracks":[],
+        /**
+         * States if the user liked the album or not
+         * @type {Boolean}
+         */
+        "is_liked":Boolean,
+        /**
+         * ID of the playing song
+         * @type {String}
+         */
+        "playing_song_id":""
+    }
+
+    componentDidMount(){
+        this.getAlbumDetails();
+        this.getAlbumTracks();
+   }
+
+   /**
+    * Gets album's name,image url,is_liked
+    */
+   getAlbumDetails(){
+        axios.get('http://localhost:3000/album/1')
+        .then(res => {
+            /*if returns array
+            res.data.map((album)=>(
+                this.setState({image:album.images}),
+                this.setState({name:album.name}),
+                album.artists.map(
+                    (artist)=>(this.setState({artists:artist.name}))
+                )
+            ))
+            */
+
+           //if object
+            this.setState({
+                image:res.data.images,
+                name:res.data.name,
+                is_liked:false //get from backend
+            })
+            res.data.artists.map((artist)=>(this.setState({artists:artist.name})))
+        }
+        )
+        .catch(error => {
+            alert(error.response.data.message);
+        })
+   }
+
+   /**
+    * Get album's tracks with their details in an array of objects
+    */
+   getAlbumTracks(){
+    axios.get('http://localhost:3000/album_tracks/1')
+           .then(res => 
+                /*if returns array
+                res.data.map((album_tracks)=>(
+                    this.setState({tracks:album_tracks.items}))
+                )
+                */
+
+                //if object
+                this.setState({tracks:res.data.items})
+           )
+           .catch(error => {
+               alert(error.response.data.message);
+           })
+    }
+
+    /**
+     * toggles is_liked and sends request to backend to update
+     */
+    likeButtonPressed=()=>{
+        this.setState(prevState =>({
+            is_liked:!prevState.is_liked
+        }))
+    }
+
+    /**
+     * Sets the playing_song_id with the id of the song pressed,if it is the one playing it clears playing_song_id
+     * @param {string} id -id of the song pressed
+     * @return {void}
+     */
+    setPlayingSondId=(id)=>{
+        if(this.state.playing_song_id===id){
+            this.setState({
+                playing_song_id:""
+            })
+        }
+        else{
+            this.setState({
+                playing_song_id:id
+            })
+        }
+    }
+
+    render() {
+        return (
+            &lt;div id="album-bar-webplayer-main-div" className="container-fluid">
+            &lt;div id="album-main-row" className="row">
+            &lt;div className="col-lg-2">
+                &lt;SideBar/>
+            &lt;/div>
+            &lt;div className="col-lg-10">
+                &lt;HomeNavBar/>
+                &lt;div id="album-webplayer-main-div">
+                    &lt;div className="row">
+                        &lt;div className="row album-details-div">
+                            &lt;div className="album-image-div">
+                                &lt;img className="album-image" src={Album_Image} alt="album pic"/>
+                            &lt;/div>
+                            &lt;div className="album-below-image-div">
+                                &lt;div className="album-title-div">
+                                    &lt;h1 className="album-title">{this.state.name}&lt;/h1>
+                                    &lt;p className="album-artist">{this.state.artists}&lt;/p>
+                                &lt;/div>
+                                &lt;div className="row album-buttons-div">
+                                    &lt;div className="album-play-button-div">
+                                        &lt;button type="button" className="btn btn-success">&lt;/button>
+                                    &lt;/div>
+                                    &lt;div className="row album-options-div">
+                                        &lt;div className="album-heart-div">
+                                            &lt;i className={(this.state.is_liked?"fas fa-heart":"far fa-heart")} title="Save to Your Library" onClick={this.likeButtonPressed}>&lt;/i>
+                                        &lt;/div>
+                                        &lt;div className="album-dots-div dropdown show" >
+                                            &lt;p className="album-dots" id="albumdropdownMenuButton" data-toggle="dropdown" title="More">...&lt;/p>
+                                            &lt;div className="dropdown-menu" aria-labelledby="albumdropdownMenuLink">
+                                                &lt;a className="dropdown-item disabled" href="#">Start Radio&lt;/a>
+                                                &lt;a className="dropdown-item disabled" href="#">Save to Your Library&lt;/a>
+                                                &lt;a className="dropdown-item disabled" href="#">Add to PLaylist&lt;/a>
+                                                &lt;a className="dropdown-item disabled" href="#">Copy Album Link&lt;/a>
+                                                &lt;a className="dropdown-item disabled" href="#">Open in Desktop app&lt;/a>
+                                            &lt;/div>
+                                        &lt;/div>
+                                    &lt;/div>
+                                &lt;/div>
+                            &lt;/div>
+                        &lt;/div>
+                        &lt;div className="tracks-list-div">
+                            &lt;hr className="appear-on-small-screens"/>
+                            &lt;TracksList tracks={this.state.tracks} playing_song_id={this.state.playing_song_id} setPlayingSondId={this.setPlayingSondId}/>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+            &lt;/div>
+            &lt;/div>
+        )
+    }
+}
+
+export default AlbumWebPlayer
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#artists">artists</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#image">image</a></li><li><a href="global.html#is_liked">is_liked</a></li><li><a href="global.html#name">name</a></li><li><a href="global.html#playing_song_id">playing_song_id</a></li><li><a href="global.html#tracks">tracks</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sun Apr 05 2020 22:09:47 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

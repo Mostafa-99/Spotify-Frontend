@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import Main from './Main'
 import MainIndex from '../UserIndex/MainIndex'
-
-/**
- * Main Selector choosing which index to load depending on user is logged in or not
+/** Class of Main index page selector. It checks if the user is logged in or not to show the proper page.
  * @extends Component
  */
 class MainSelector extends Component {
- 
     render() {
         return (
             <div>

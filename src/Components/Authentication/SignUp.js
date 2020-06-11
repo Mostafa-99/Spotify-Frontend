@@ -4,7 +4,6 @@ import spotify_black_logo from '../../Images/spotify_logo_black.png'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
-import { checkValidity, login } from '../../ReduxStore/Shared';
 
 /**
  * Sign up Page Component
@@ -39,7 +38,8 @@ class SignUp extends Component {
         this.inputChangeHandler = this.inputChangeHandler.bind(this);
 
     }
-      /**
+
+     /**
      * Function handling sign up request with Facebook
      * 
      */
@@ -61,9 +61,12 @@ class SignUp extends Component {
                             {
                                 if(res.data.success===true || res.data.success==="true")
                                 {
-                                    login("fb",res.data.token);
+                                    localStorage.setItem("isLoggedIn",'true');
+                                    localStorage.setItem("token",res.data.token);
+                                    localStorage.setItem("loginType", "fb");
                                     localStorage.setItem("userID", response.authResponse.userID);
                                     this.setState({status: 'connected'});
+                                   // window.location.reload(false);
                                 }
                             }
                             else // Unsuccessful
@@ -74,14 +77,14 @@ class SignUp extends Component {
 
                                 alert(err)
                             })
-                
+                //window.location.reload(false);
                 
               } 
           }.bind(this), {scope: 'public_profile,email'});
        
     }
 
- /**
+    /**
      * Function to check the Email textbox has valid email format
      * @param {string} Email - input email.
      */
@@ -91,10 +94,14 @@ class SignUp extends Component {
         if(this.state.emailnotequal===true)
             this.setState({emailnotequal: false});
         this.setState({email: ""});    
-        return checkValidity(email,"email");
+        //return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+        if(email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+        return true;
+        else
+        return false;
     }
 
-/**
+    /**
      * Function to check the Password textbox has valid password criteria
      * @param {string} Password - input password.
      */
@@ -102,10 +109,14 @@ class SignUp extends Component {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
          this.setState({password: ""});    
-         return checkValidity(psw,"pass");
+         if(psw.length>=8)
+         return true;
+         else
+         return false;
+        //return psw && psw.length >= 8
     }
 
- /**
+    /**
      * Function to check the gender checkbox is checked and valid
      * @param {boolean} Gender - user gender.
      */
@@ -113,7 +124,19 @@ class SignUp extends Component {
         if(this.state.gendererror===true)
          this.setState({gendererror: false});
         this.setState({gender: ""});    
-        return checkValidity(gender,"gender")
+        // 0 = male
+        // 1 = female
+        // null/undefined = otherwise
+        //  return gender === 0
+        //      || gender === 1
+        //     || gender === null
+        //     || gender === undefined
+        //     || gender === "";
+        if(gender===0 || gender===1)
+        return true;
+        else
+        return false;
+        
     }
 
      /**
@@ -124,10 +147,11 @@ class SignUp extends Component {
         if(this.state.emptyname===true)
          this.setState({emptyname: false});
          this.setState({username: ""}); 
-        return checkValidity(name,"username");
+        return name && name.match(/^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/);
            
     }
-     /**
+
+    /**
      * Function to check the Confrim Email textbox has valid email format and matches Email.
      * @param {string} Email - user confirm email.
      */
@@ -137,10 +161,10 @@ class SignUp extends Component {
         if(this.state.emailnotequal===true)
             this.setState({emailnotequal: false});
         this.setState({emailrecheck: ""});    
-        return checkValidity(email_again,"email");
+        return email_again && email_again.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
- /**
+    /**
      * Function handling Sign up request with Email and Password
      * 
      */
@@ -168,7 +192,7 @@ class SignUp extends Component {
         if(this.state.gender==="" && this.state.gendererror===false)
             this.setState({gendererror: true});
 
-        if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='' && (this.state.email===this.state.emailrecheck))
+        if(this.state.email!=='' && this.state.password!=='' && this.state.gender!=='' && this.state.username!=='' && this.state.day!=='' && this.state.month!=='' && this.state.year!=='')
         {
 
             axios.post(this.context.baseURL+'/signUp',
@@ -184,9 +208,12 @@ class SignUp extends Component {
                 {
                     if(res.data.success===true || res.data.success==="true")
                     {
-                        login("email",res.data.token);
+                        localStorage.setItem("isLoggedIn",'true');
+                        localStorage.setItem("token",res.data.token);
+                        localStorage.setItem("loginType", "email");
+
                         this.setState({status: 'connected'});
-                        
+                        //window.location.reload(false);
                     }
                 }
                 else // Unsuccessful
@@ -202,11 +229,20 @@ class SignUp extends Component {
                     
                 }
                }).catch(err => {
+                if(err.response.status===400 || err.response.status===401)
+                {
+                    if(this.state.status!=="invalid")
+                        this.setState({status: 'invalid'});
+                    this.setState({invalid: true});
+                }
+                else
                 alert(err)
+
                })
         }
     }
-     /**
+
+    /**
      * Function handling input changes in inputs each with it's valid input type handler to page's state
      * @param {event} Event - input onchange event.
      */
@@ -281,7 +317,7 @@ class SignUp extends Component {
 
     }
 
-     /**
+    /**
      * Function to choose specific validating function depending on input type.
      * @param {string} Value - input value.
      * @param {string} Type - input type.
@@ -303,7 +339,7 @@ class SignUp extends Component {
         }
     }
 
-    /**
+     /**
      * SignUp Component Mount state Intialization
      * 
      */
@@ -400,8 +436,8 @@ class SignUp extends Component {
             <h5>Date of Birth </h5>
             <div className="row">
                 <input type="number" id="sign-up-form-day" name="signup_form[dob_day]" onChange={this.inputChangeHandler}  required="required" max="31" maxLength="2" min="1" pattern="[0-9]*" placeholder="Day" className="dob " data-err="Please enter a valid day of the month"></input>
-                <select id="sign-up-form-month" placeholder="Month" name="signup_form[dob_month]"  onChange={this.inputChangeHandler} required data-err="Please enter your birth month.">
-                    
+                <select id="sign-up-form-month"  name="signup_form[dob_month]"  onChange={this.inputChangeHandler} required data-err="Please enter your birth month.">
+                    <option value="" >Month</option>
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>

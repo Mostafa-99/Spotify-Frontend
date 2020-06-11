@@ -110,8 +110,6 @@ class HelpPage extends Component {
     });
   };
   componentDidMount() {
-    window.scrollTo(0, 0);
-
     window.onload = function () {
       if (!window.location.hash) {
         window.location = window.location + "#loaded";

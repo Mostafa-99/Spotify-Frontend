@@ -12,9 +12,7 @@ const exclusionArray = [
   '/webplayer/album',
   '/artist/album-page',
   '/webplayer/album',
-  '/playlist-webplayer',
-  '/your-library',
-  '/search'
+  '/playlist-webplayer'
 
 ]
 
@@ -67,7 +65,7 @@ class Footer extends Component {
      * 
      */
       updatePredicate() {
-        this.setState({ isDesktop: window.outerWidth > 950 });
+        this.setState({ isDesktop: window.outerWidth > 800 });
       }
 
       /**

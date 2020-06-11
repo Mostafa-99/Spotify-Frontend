@@ -28,7 +28,7 @@ import VideosFeature from './Components/HelpComponents/Features/VideosFeature.js
 import MainSelector from './Components/Main/MainSelector' 
 import CreateAlbum from './Components/Artist/UploadFile/CreateAlbum'
 import TrackUpload from './Components/Artist/UploadFile/TrackUpload'
-import Albums from './Components/Artist/Albums/Albums'
+import AlbumPage from './Components/Artist/Albums/AlbumPage'
 import Home from './Components/WebPlayer/Bodies/Home/Home'
 import ArtistWebPlayer from './Components/WebPlayer/Bodies/ArtistWebPlayer/ArtistWebPlayer'
 import AlbumWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/AlbumWebPlayer.js'
@@ -36,20 +36,8 @@ import PlaylistWebPlayer from './Components/WebPlayer/Bodies/AlbumWebPlayer/Play
 import {Route,BrowserRouter as Router,Switch} from 'react-router-dom';
 import ArtistSelector from './Components/Artist/ArtistSelector'
 import ProfileContextProvider from './Context/ProfileContext';
-import ConfigContextProvider from './Context/ConfigContext';
-
-import {UserProtectedRoute} from './ProtectedRoutes/UserProtectedRoute';
-import {LoggedInProtectedRoute} from './ProtectedRoutes/LoggedInProtectedRoute';
-import {PremiumProtectedRoute} from './ProtectedRoutes/PremiumProtectedRoute';
-import {ArtistProtectedRoute} from './ProtectedRoutes/ArtistProtectedRoute';
-import {NotLoggedInRoute} from './ProtectedRoutes/NotLoggedInRoute';
-
-
-import Overview from './Components/Artist/OverviewPage/Overview'
-import ManageProfile from './Components/Artist/ManageProfile/ManageProfile'
-import EditTrack from './Components/Artist/EditTrackAndAlbum/EditTrack'
-import YourLibrary from './Components/WebPlayer/Bodies/YourLibrary/YourLibrary'
-import Search from './Components/WebPlayer/Bodies/Search/Search'
+import ConfigContextProvider from './Context/ConfigContext'
+import {ProtectedRoute} from './ProtectedRoute/ProtectedRoute'
 
 function App() {
 
@@ -60,10 +48,16 @@ function App() {
       <ProfileContextProvider>
       <Navbar/>    
       <Switch>
-
         {/*Public pages */}
         <Route path="/help" exact component={HelpPage}/>
+        <Route path="/account-overview" component={AccountSettings}/>
+        <Route path="/edit-profile" component={EditProfile}/>
+        <Route path="/notification-settings" component={NotificationsSettings}/>
+        <Route path="/change-password" component={ChangePasswrod}/>
+        <Route path="/signup" exact component={SignUp}/>
+        <Route path="/login" exact component={LogIn}/>
         <Route path="/premium" exact component={Premium}/>
+        <Route path="/password-reset" exact component={PasswordReset}/>
         <Route path="/resetPassword" component={PasswordChange}/>
         <Route path="/" exact component={MainSelector}/>
         <Route path="/account-help" exact component={AccountHelp} />
@@ -72,6 +66,7 @@ function App() {
         <Route path="/how-to-log-out" exact component={HowToLogOut} />
         <Route path="/cannot-activate-trial" exact component={CanNotActivatePremiumTrial} />
         <Route path="/change-email-address" exact component={ChangeEmailAddress} />
+       
         <Route path="/features-main" exact component={FeaturesMain}/>
         <Route path="/search-feature" exact component={SearchFeature}/>
         <Route path="/your-library-feature" exact component={YourLibraryFeature}/>
@@ -79,40 +74,20 @@ function App() {
         <Route path="/artist-profiles-feature" exact component={ArtistProfilesFeature}/>
         <Route path="/videos-feature" exact component={VideosFeature}/>
         <Route path="/home" exact component={Home} />
-        <Route path="/search"exact component={Search}/>
+        <Route path="/webplayer/album" exact component={AlbumWebPlayer} />
+        <Route path="/artist-webplayer" exact component={ArtistWebPlayer} />
+        <Route path="/playlist-webplayer" exact component={PlaylistWebPlayer} />
 
-        {/*Pages Require you not to be logged in */}
-        <NotLoggedInRoute path="/signup" exact component={SignUp}/>
-        <NotLoggedInRoute path="/login" exact component={LogIn}/>
-        <NotLoggedInRoute path="/password-reset" exact component={PasswordReset}/>
+        {/*Protected pages */}
+        <ProtectedRoute path="/edit-profile" component={EditProfile}/>
+        <ProtectedRoute path="/notification-settings" component={NotificationsSettings}/>
+        <ProtectedRoute path="/premium-code" exact component={PremiumCode}/>
+        <ProtectedRoute path="/account-overview" component={AccountSettings}/>
+        <ProtectedRoute path="/artist" exact component={ArtistSelector}/>
+        <ProtectedRoute path="/artist/track-upload" exact component={TrackUpload}/>
+        <ProtectedRoute path="/artist/create-album" exact component={CreateAlbum}/>
+        <ProtectedRoute path="/artist/album-page" exact component={AlbumPage}/>
 
-        {/*Login Required Protected pages */}
-        <LoggedInProtectedRoute path="/edit-profile" component={EditProfile}/>
-        <LoggedInProtectedRoute path="/notification-settings" component={NotificationsSettings}/>
-        <LoggedInProtectedRoute path="/premium-code" exact component={PremiumCode}/>
-        <LoggedInProtectedRoute path="/account-overview" component={AccountSettings}/>
-        <LoggedInProtectedRoute path="/change-password" component={ChangePasswrod}/>
-        <LoggedInProtectedRoute path="/your-library"exact component={YourLibrary}/>
-        <LoggedInProtectedRoute path="/webplayer/album" component={AlbumWebPlayer} />
-        <LoggedInProtectedRoute path="/playlist-webplayer" exact component={PlaylistWebPlayer} />
-        <LoggedInProtectedRoute path="/artist-webplayer" exact component={ArtistWebPlayer} />
-
-        {/*Login Regular User Protected pages */} 
-
-        {/*Login Premium User Protected pages */}
-
-        {/*Login Artist User Protected pages */}
-        <ArtistProtectedRoute path="/artist" exact component={Albums}/>
-        <ArtistProtectedRoute path="/artist/track-upload" exact component={TrackUpload}/>
-        <ArtistProtectedRoute path="/artist/create-album" exact component={CreateAlbum}/>
-        <ArtistProtectedRoute path="/artist/manage-profile" exact component={ManageProfile}/>
-        <ArtistProtectedRoute path="/artist/overview" component={Overview}/>
-        <ArtistProtectedRoute path="/artist/edit-track" exact component={EditTrack}/>
-        
-
-
-       
-       
         <Route path="/" component={NotFound}/>
       </Switch>
       <Footer/>

@@ -6,7 +6,6 @@ import axios from 'axios'
 
 import { ConfigContext } from '../../../../Context/ConfigContext'
 import { ProfileContext } from '../../../../Context/ProfileContext'
-import { logout } from '../../../../ReduxStore/Shared';
 
 
 /** Class of artist webplayer navbar.
@@ -56,9 +55,24 @@ class ArtistWebPlayerNavBar extends Component {
      * @memberof ArtistWebPlayerNavBar
      */
     logOut= () => {
-           
-        this.setState({status:"not connected"})
-       logout();
+        
+        if(this.state.loginType==="fb")
+        {
+            window.FB.logout(function(response) {
+          });
+          
+        }
+        if(this.state.loginType==="email")
+        {
+          
+        }
+            
+            this.setState({status:"not connected"})
+            this.setState({loginType: ''})
+            localStorage.setItem("userID", '');
+            localStorage.setItem("isLoggedIn", "false");
+            localStorage.setItem("token", '');
+            localStorage.setItem("loginType", "");
     }
 
     /**toggle background color of profile

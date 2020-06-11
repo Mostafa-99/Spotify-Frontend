@@ -3,7 +3,6 @@ import SideBar from './SideBar'
 import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
-import { responseHandler } from '../../ReduxStore/Shared';
 
 
 class NotificationsSettings extends Component {
@@ -22,7 +21,6 @@ class NotificationsSettings extends Component {
     }
 
     componentDidMount(){
-        window.scrollTo(0, 0);
         axios.get("http://138.91.114.14/api/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
@@ -39,8 +37,15 @@ class NotificationsSettings extends Component {
                             image: res.data.images    
                         }
                     }))
-                }else
-                responseHandler(res);
+                }
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    console.log("fail")
+                }
             })
         axios.get("http://138.91.114.14/api/me/notifications", {
             headers: {
@@ -53,7 +58,14 @@ class NotificationsSettings extends Component {
                 {
                     this.setState({Notifications:res.data})
                 }
-                else responseHandler(res);
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                    console.log("fail")
+                }
             })
     }
 
@@ -115,7 +127,10 @@ class NotificationsSettings extends Component {
             }
             else if(res.status === 401)
             {
-                responseHandler(res);
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
             }
             else 
             {

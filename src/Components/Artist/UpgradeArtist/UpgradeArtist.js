@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./UpgradeArtist.css";
 import { ConfigContext } from "../../../Context/ConfigContext";
-import { responseHandler } from "../../../ReduxStore/Shared";
 /** Class of Upgrade to artist page. It sends a request to upgrade to artist then confirms it.
  * @extends Component
  */
@@ -42,7 +41,15 @@ class UpgradeArtist extends Component {
         }
       })
       .catch((res) => {
-        responseHandler(res);
+        if (res.status === 401) {
+          localStorage.removeItem("loginType");
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("token");
+          localStorage.removeItem("userID");
+        } else {
+          console.log(res);
+          alert(res.message);
+        }
       });
   };
   /**Sends a request to the backend with the code the user entered to check it.
@@ -66,7 +73,11 @@ class UpgradeArtist extends Component {
           if (res.status === 204) {
             alert("Congratulations! You are Artist now.");
           } else if (res.status === 401) {
-            responseHandler(res);
+            localStorage.removeItem("loginType");
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("token");
+            localStorage.removeItem("userID");
+            alert("Your session has ended");
           } else {
             alert("The subscription code is invalid.");
           }
@@ -78,9 +89,6 @@ class UpgradeArtist extends Component {
       alert("please enter code!");
     }
   };
-  componentDidMount(){
-    window.scrollTo(0, 0);
-  }
   /**Change the state of the code.
    * @type {Function}
    * @memberof UpgradeArtist

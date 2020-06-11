@@ -1,12 +1,12 @@
 import React,{Component} from 'react';
 import { Link,Redirect } from 'react-router-dom';
- import RecentActivity from './RecentActivity/RecentActivity';
- import '../NavBars.css';
+ import RecentActivity from './RecentActivity';
+import { Route } from 'react-router';
+import '../NavBars.css';
 import axios from 'axios'
 
 import { ConfigContext } from '../../../../Context/ConfigContext'
 import { ProfileContext } from '../../../../Context/ProfileContext'
-import { logout } from '../../../../ReduxStore/Shared';
 /** Class of home webplayer navbar.
  * @extends Component
  */
@@ -55,8 +55,23 @@ class HomeNavBar extends Component {
      */
     logOut= () => {
         
+        if(this.state.loginType==="fb")
+        {
+            window.FB.logout(function(response) {
+          });
+          
+        }
+        if(this.state.loginType==="email")
+        {
+          
+        }
+            
             this.setState({status:"not connected"})
-        logout();
+            this.setState({loginType: ''})
+            localStorage.setItem("userID", '');
+            localStorage.setItem("isLoggedIn", "false");
+            localStorage.setItem("token", '');
+            localStorage.setItem("loginType", "");
     }
 
     /**toggle background color of profile
@@ -102,11 +117,11 @@ class HomeNavBar extends Component {
                                 </div>
                                 )
                             }
-                               {logInOrNot==="true"?(
+                             {logInOrNot==="true"?(
                                 <div className="col-2"><RecentActivity/>
                                 </div> 
 
-                             ):<div></div>}   
+                             ):<div></div>}  
                             
                         {logInOrNot==="true" ? (
                         

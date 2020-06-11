@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import DesktopNavbar from './DesktopNavbar'
 import MobileNavbar from './MobileNavbar'
 
-
 const exclusionArray = [
   '/login',
   '/signup',
@@ -10,9 +9,7 @@ const exclusionArray = [
   '/artist-webplayer',
   '/webplayer/album',
   '/artist/album-page',
-  '/playlist-webplayer',
-  '/your-library',
-  '/search'
+  '/playlist-webplayer'
 ]
 
 /**
@@ -25,8 +22,7 @@ class Navbar extends Component {
         super(props);
         this.state = {
           isDesktop: true ,
-          isVisible:true,
-          count:false,
+          isVisible:true
         };
     
         this.updatePredicate = this.updatePredicate.bind(this);
@@ -47,16 +43,9 @@ class Navbar extends Component {
         window.addEventListener("mouseout",this.updateVisibility);
         window.addEventListener("click",this.updateVisibility);
         window.addEventListener("popstate",this.updateVisibility);
+        
 
       }
-      componentWillUpdate()
-      {
-        if(this.state.count===false)
-        { this.updateVisibility();
-          this.setState({count: true});
-        }
-      }
-
     
       /**
      * Navbar Component UnMount state Removing Event Listeners 
@@ -69,19 +58,16 @@ class Navbar extends Component {
         window.removeEventListener("mouseout",this.updateVisibility);
         window.removeEventListener("click",this.updateVisibility);
         window.removeEventListener("popstate",this.updateVisibility);
-      }
 
-      componentDidUpdate() {
-        // window.onhashchange = function() 
-        // {  this.updateVisibility(); } 
+
       }
     
-      /**
+       /**
      * Function choosing between desktop and mobile version navbar
      * 
      */
       updatePredicate() {
-        this.setState({ isDesktop: window.outerWidth > 1000 });
+        this.setState({ isDesktop: window.outerWidth > 900 });
       }
 
        /**
@@ -90,7 +76,7 @@ class Navbar extends Component {
      */
       updateVisibility() {
 
-        this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0})  
+        this.setState({ isVisible: exclusionArray.indexOf(window.location.pathname) < 0})
         
       }
     
@@ -105,9 +91,6 @@ class Navbar extends Component {
             <div>
                 
                 {isDesktop?(
-                 
-                  
-                
                   <DesktopNavbar/>
                     ) : (
                   <MobileNavbar/>

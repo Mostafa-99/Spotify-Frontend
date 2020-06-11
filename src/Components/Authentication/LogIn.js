@@ -5,7 +5,6 @@ import '../Button/SpotifyButton.css';
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
 import {Link,Redirect} from 'react-router-dom'
-import { checkValidity, login } from '../../ReduxStore/Shared';
 //import { buildQueries } from '@testing-library/react';
 
 
@@ -15,7 +14,6 @@ import { checkValidity, login } from '../../ReduxStore/Shared';
  */
 class LogIn extends Component {
     static contextType=ConfigContext;
-
 
     constructor() {
         super()
@@ -33,7 +31,8 @@ class LogIn extends Component {
     }
 
     }
-        /**
+
+      /**
      * Function handling login request with Facebook
      * 
      */
@@ -55,26 +54,29 @@ class LogIn extends Component {
                     {
                         if(res.data.success===true || res.data.success==="true")
                         {
-                            login("fb",res.data.token);
+                            localStorage.setItem("isLoggedIn",'true');
+                            localStorage.setItem("token",res.data.token);
+                            localStorage.setItem("loginType", "fb");
                             localStorage.setItem("userID", response.authResponse.userID);
                             this.setState({status: 'connected'});
-                            
+                            //window.location.reload(false);
                         }
                     }
                     else // Unsuccessful
                     {
-                        alert(res.data.message)
+                        
+                            alert(res.data.message)
                     }   
-                    }).catch(err =>
-                    {
+                    }).catch(err =>{
+
                         alert(err)
                     })
-                    
+                    //window.location.reload(false); 
               }
           }.bind(this), {scope: 'public_profile,email'});
     } 
 
-     /**
+    /**
      * Component Mount state Intialization
      * 
      */
@@ -90,14 +92,19 @@ class LogIn extends Component {
           this.setState({status:"not connected"})
        
     }
-     /**
+
+    /**
      * Function to check the Email textbox has valid email format
      * @param {string} Email - user email.
      */
     validateEmail(email) {
         if(this.state.emptyemail===true)
             this.setState({emptyemail: false});
-        return checkValidity(email,"email");
+        if(email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
+        return true;
+        else
+        return false;
+       // return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
     /**
@@ -107,9 +114,14 @@ class LogIn extends Component {
     validatePassword(psw) {
         if(this.state.emptypass===true)
          this.setState({emptypass: false});
-         return checkValidity(psw,"pass");
+         if(psw.length>=8)
+         return true;
+         else
+         return false;
+        //return psw && psw.length >= 6
     }
-      /**
+
+     /**
      * Function handling login request with Email and Password
      * 
      */
@@ -128,7 +140,7 @@ class LogIn extends Component {
 
         if(is_email_valid && is_psw_valid)
         {
-            
+            //console.log(this.context.baseURL+'/signIn');
             axios.post(this.context.baseURL+'/signIn',
             {
             "email":memail,
@@ -136,29 +148,42 @@ class LogIn extends Component {
             }
             )   
             .then(res => {
-                console.log(res);
                 if(res.status===200) // Successful
                 {
                     if(res.data.success===true)
                     {
-                        login("email",res.data.token);
+                        localStorage.setItem("isLoggedIn",'true');
+                        localStorage.setItem("token",res.data.token);
+                        localStorage.setItem("loginType", "email");
                         this.setState({status: 'connected'});
-                       
+                       // window.location.reload(false);
                     }
                 }
                 else
-                {            
+                {
+                //if(res.status===401) // Unsuccessful
+               // {
                     this.setState({invalid: true});
+                //}else
                     alert(res.data.message)
 
                  }
                 }).catch(err =>{
+//console.log(err)
+//console.log(err.response)
+                    if(err.response.status===401 || err.response.status===400) // Unsuccessful
+                {
+                   if(this.state.status!=="invalid")
+                    this.setState({status: 'invalid'});
+
+                    this.setState({invalid: true});
+                }else
                 alert(err)
                 })
         } 
     }
 
-     /**
+    /**
      * Function handling change in password textbox to the page's state
      * 
      */
@@ -174,6 +199,7 @@ class LogIn extends Component {
              user:userCopy 
             })
     }
+
 
     /**
      * Function handling change in email textbox to the page's state

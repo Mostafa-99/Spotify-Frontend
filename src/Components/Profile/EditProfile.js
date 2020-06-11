@@ -5,7 +5,6 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
 import { ConfigContext } from '../../Context/ConfigContext'
-import { responseHandler } from '../../ReduxStore/Shared';
 /** Variable that contains the birthday date of the user
  * @type {Date}
  */
@@ -70,7 +69,6 @@ class EditProfile extends Component {
      * @property {Function} componentDidMount Fetch the data of the user and put it in the state and checks the user login type to show and hide the information that can be edited
      */
     componentDidMount(){
-        window.scrollTo(0, 0);
         axios.get(this.context.baseURL+"/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
@@ -101,7 +99,13 @@ class EditProfile extends Component {
                     document.querySelector('.day').value=day;
                     document.querySelector('.gender-combo').value=this.state.user.gender;
                 }
-                responseHandler(res);
+                else if(res.status === 401)
+                {
+                    localStorage.removeItem("loginType");
+                    localStorage.removeItem("isLoggedIn");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("userID");
+                }
             })
         if(this.state.loginType==="fb")
         {
@@ -158,8 +162,14 @@ class EditProfile extends Component {
                    successMessage: true,
                    failMessage: false
                 }))
-            }else
-            responseHandler(res);
+            }
+            else if(res.status === 401)
+            {
+                localStorage.removeItem("loginType");
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userID");
+            }
         })
         .catch(res => {this.setState({
             failMessage: true,
