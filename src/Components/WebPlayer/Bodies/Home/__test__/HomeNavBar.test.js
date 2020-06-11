@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import HomeNavBar from '../HomeNavBar';
-import RecentActivity from '../RecentActivity';
+import HomeNavBar from '../HomeNavBar'
+import RecentActivity from '../RecentActivity/RecentActivity'
 
 it('renders without crashing', () => {
   shallow(<HomeNavBar />);

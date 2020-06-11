@@ -32,11 +32,10 @@ height:100%;
 #my-desk-footer .my-col-4
 {
 
-    margin-top:7%;
-    margin-left:calc(14vw + 00px);
+    margin: 100px auto;
 }
 #my-desk-footer i{
-    padding:5px 15px ;
+    padding:10px 10px 5px 13px ;
 }
 
 #my-desk-footer h5
@@ -47,8 +46,8 @@ letter-spacing:2px;
 }
 #my-desk-footer #mini-footer
 {
-    margin-top:7%;
-    margin-left:12%;
+     margin-top:7%;
+    margin-left:12%; 
     font-size:12px;
 }
 
@@ -101,6 +100,24 @@ letter-spacing:2px;
 
 }
 
+#my-desk-footer .invert{
+ filter:invert();
+ width:35px;
+ margin-left:10px;
+ margin-top:9px;
+}
+
+
+#my-desk-footer .dot {
+  height: 55px;
+  width: 55px;
+  background-color: #222326;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right:10px;
+  cursor:pointer;
+}
+
 #my-desk-footer .min {
 
   margin-left: calc(15% + 150px);
@@ -147,25 +164,29 @@ const DesktopFooter = () => {
                             </ul>
                             </div>
 
-                            <div className="my-col-4">  
-                                 <a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a>
-                                 <a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a>
-                                 <a href="https://facebook.com/spotify"><i className="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
+                            <div className="my-col-4"> 
+                            <span className="dot"><a href="https://instagram.com/spotify"><i className="fab fa-instagram fa-2x"></i></a></span>
+                            <span className="dot"><a href="https://twitter.com/spotify"><i className="fab fa-twitter fa-2x"></i></a></span>
+                            <span className="dot"><a href="https://facebook.com/spotify"><i className="fab fa-facebook-f fa-2x"></i></a></span>
+
+                            {/* <span className="dot"><a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a></span>
+                            <span className="dot"><a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a></span>
+                            <span className="dot"><a href="https://facebook.com/spotify"><i className="fab fa-2x fa-facebook-f white-text pr-4"> </i></a></span> */}
                             </div>
 
                     </div>
                     
                     
-                    {/* <div id="mini-footer"> 
-                    <ul>
-                            <li className="list-inline-item left"><a href="#!">Legal</a></li>
-                            <li className="list-inline-item left"><a href="#!">Privacy Center</a></li>
-                            <li className="list-inline-item left"><a href="#!">Privacy Policy</a></li>
-                            <li className="list-inline-item left"><a href="#!">Cookies</a></li>
-                            <li className="list-inline-item left"><a href="#!">About Ads</a></li>
-                            <li className="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
-                    </ul>
-                    </div> */}
+                    <div id="mini-footer"> 
+                    
+                            <li className="list-inline-item left  mb-4"><a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank">Legal</a></li>
+                            <li className="list-inline-item left mb-4"><a href="https://www.spotify.com/eg-en/privacy/" target="_blank">Privacy Center</a></li>
+                            <li className="list-inline-item left mb-4"><a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank">Privacy Policy</a></li>
+                            <li className="list-inline-item left mb-4"><a href="https://www.spotify.com/eg-en/legal/cookies-policy/" target="_blank">Cookies</a></li>
+                            <li className="list-inline-item left mb-4"><a href="https://www.spotify.com/eg-en/legal/privacy-policy/#s3" target="_blank">About Ads</a></li>
+                            <li className="list-inline-item right mb-4"><a href="#!" >©2020 Spotify AB</a></li>
+                    
+                    </div>
                   </div>
             </MyDesktopFooter>
         

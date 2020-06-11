@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import spotify_white_logo from '../../Images/spotify_logo_white.png'
+import fb_logo from '../../Images/facebook-icon.png'
+import tw_logo from '../../Images/twitter-icon.png'
+import in_logo from '../../Images/instagram-icon.png'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
@@ -12,11 +15,12 @@ height:100%;
 padding-bottom: 10px;
 margin-bottom: -10px;
 
+
 #my-mob-footer .my-col-1
 {
-    margin-top:8%;
-    margin-left:8.5%;
-    text-align:left;
+    margin-top:12%;
+    margin-left:8.2%;
+    
 }
 #my-mob-footer .my-col-2,.my-col-3,.my-col-4
 {
@@ -26,7 +30,8 @@ margin-bottom: -10px;
 
 #my-mob-footer .logo{
     width:100px;
-    margin-top:2%;
+    margin-top:4%;
+
     position: absolute;
     left: 6%;
 }
@@ -36,6 +41,18 @@ font-size:12px;
 color:#919496;
 letter-spacing:2px;
 }
+
+#my-mob-footer .invert{
+ filter:invert();
+ width:25px;
+ margin-left:8px;
+ margin-top:7.5px;
+}
+
+#my-mob-footer i{
+    padding:10px 10px 5px 13px ;
+}
+
 #my-mob-footer #mini-footer
 {
     margin-top:7%;
@@ -62,6 +79,7 @@ letter-spacing:2px;
     list-style:none;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
     font-weight:lighter;
+    
     text-align:left;
     padding:10px 2px;
 }
@@ -79,6 +97,27 @@ letter-spacing:2px;
 #my-mob-footer .row{
     width:100%;
 }
+
+#my-mob-footer .dot {
+  height: 40px;
+  width: 40px;
+  background-color: #222326;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right:10px;
+  cursor:pointer;
+}
+@media screen and (max-width: 470px)
+{
+    #my-mob-footer .my-col-1
+{
+    margin-top:15%;
+    margin-left:10%;
+    
+}
+
+}
+
 `
 
 const MobileFooter = () => {
@@ -90,7 +129,7 @@ const MobileFooter = () => {
              <div className="row"> 
                             <div className="my-col-1">
                                 
-                                <h5 className="font-weight-bold text-uppercase mt-3 mb-4 ">Company</h5>
+                                <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Company</h5>
                                 <ul>
                                     <li><a href="https://www.spotify.com/eg-en/about-us/contact/">About</a> </li>
                                     {/* <li><a >Jobs</a></li>
@@ -121,25 +160,25 @@ const MobileFooter = () => {
                             </ul>
                             </div>
                             <div className="my-col-4">  
-                                 <a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a>
-                                 <a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a>
-                                 <a href="https://facebook.com/spotify"><i className="fab fa-2x fa-facebook-f white-text pr-4"> </i></a>
+                            <span className="dot"><a href="https://instagram.com/spotify"><i className="fab fa-instagram"></i></a></span>
+                            <span className="dot"><a href="https://twitter.com/spotify"><i className="fab fa-twitter"></i></a></span>
+                            <span className="dot"><a href="https://facebook.com/spotify"><i className="fab fa-facebook-f"></i></a></span>
+                                 {/* <span className="dot"><a href="https://instagram.com/spotify"><i className="fab fa-2x fa-instagram white-text pr-4"> </i></a></span>
+                                 <span className="dot"><a href="https://twitter.com/spotify"><i className="fab fa-2x fa-twitter white-text pr-4"> </i></a></span>
+                                 <span className="dot"><a href="https://facebook.com/spotify"><i className="fab fa-2x fa-facebook-f white-text pr-4"> </i></a></span> */}
                             </div>
                    
                     
                     
-                    {/* <div id="mini-footer">
-                        
-                    <ul>
-                            <li className="list-inline-item left"><a href="#!">Legal</a></li>
-                            <li className="list-inline-item left"><a href="#!">Privacy Center</a></li>
-                            <li className="list-inline-item left"><a href="#!">Privacy Policy</a></li>
-                            <li className="list-inline-item left"><a href="#!">Cookies</a></li>
-                            <li className="list-inline-item left"><a href="#!">About Ads</a></li>
-                            <li className="list-inline-item right"><a href="#!">©2020 Spotify AB</a></li>
-                    </ul>
-                    
-                    </div> */}
+                            <div id="mini-footer"> 
+                            <li className="list-inline-item left  mb-4"><a href="https://www.spotify.com/eg-en/legal/end-user-agreement/" target="_blank">Legal</a></li>
+                            <li className="list-inline-item left mb-4"><a href="https://www.spotify.com/eg-en/privacy/" target="_blank">Privacy Center</a></li>
+                            <li className="list-inline-item left mb-4"><a href="https://www.spotify.com/eg-en/legal/privacy-policy/" target="_blank">Privacy Policy</a></li>
+                            <li className="list-inline-item left mb-4"><a href="https://www.spotify.com/eg-en/legal/cookies-policy/" target="_blank">Cookies</a></li>
+                            <li className="list-inline-item left mb-4"><a href="https://www.spotify.com/eg-en/legal/privacy-policy/#s3" target="_blank">About Ads</a></li>
+                            <li className="list-inline-item right mb-4"><a href="#!" >©2020 Spotify AB</a></li>
+                            </div>
+
                     </div>
         </MyMobileFooter>
     );

@@ -5,6 +5,7 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './Profile.css';
 import { ConfigContext } from '../../Context/ConfigContext'
+import { responseHandler } from '../../ReduxStore/Shared';
 /** Class of ChangePassword page in account settings.
  * @extends Component
  */
@@ -42,6 +43,7 @@ class ChangePassword extends Component {
      * @property {Function} componentDidMount Fetch the data of the user and put it in the state
      */
     componentDidMount(){
+        window.scrollTo(0, 0);
         axios.get(this.context.baseURL+"/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
@@ -58,13 +60,7 @@ class ChangePassword extends Component {
                         }
                     }))
                 }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
+                responseHandler(res);
             })
     }
     /**
@@ -93,14 +89,8 @@ class ChangePassword extends Component {
                     successMessage: true,
                     failMessage: false
                 })
-            }
-            else if(res.status === 401)
-            {
-                localStorage.removeItem("loginType");
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("token");
-                localStorage.removeItem("userID");
-            }
+            }else
+            responseHandler(res);
         }) 
         .catch(res => {this.setState({
             failMessage: true,

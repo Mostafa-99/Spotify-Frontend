@@ -3,7 +3,7 @@ import "./UserIndex.css"
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import {ConfigContext} from '../../Context/ConfigContext'
-
+import { responseHandler } from "../../ReduxStore/Shared";
 
 /**
  * Login index page Cards components class
@@ -17,15 +17,14 @@ class CardComponent extends Component {
     constructor() {
         super()
         this.state = {
-       /**Array of Albums of the artist
-        @memberof Playlists
-       * 
-       */
+            /**
+             *  @type {Array<Object>}
+             */
             playlists:[],
 
         }
     }
- //Good luck yaall   
+  
 // limit get six Playlists 
 // request used here is get/playlist/top
 // URL?_limit=6,-popularity
@@ -52,7 +51,7 @@ class CardComponent extends Component {
               */
           componentDidMount() {
                 const AuthStr=localStorage.getItem('token');
-                axios.get(this.context.baseURL+"/playlists/top",
+                axios.get(this.context.baseURL+"/playlists/top?limit=9",
                 {
                     headers:{'authorization':"Bearer "+AuthStr},
                     query:{
@@ -62,6 +61,7 @@ class CardComponent extends Component {
                     }
                  )
                 .then(res => {
+                    console.log(res);
                   if(res.status===200)
                   { 
                          this.setState({
@@ -73,7 +73,7 @@ class CardComponent extends Component {
                                  @type {String}
                                 *
                                 */
-                            id:playlist.id,
+                               id:playlist._id,
                               /**
                                 * name  of the playlist
                                  @memberof CardComponent
@@ -99,26 +99,20 @@ class CardComponent extends Component {
                                  @type {Route}
                                 * 
                                 */
-                            href:playlist.tracks.href
+                            href:playlist.href,
+                          
                         }))
-                    }) }          
-                    else if (res.status===401)
-                    {
-                        localStorage.removeItem("loginType");
-                        localStorage.removeItem("isLoggedIn");
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("userId");   
-                    }
-                    else{
-                        alert("Error.");
-                    }
-                }).catch(res=>{
+                    }) } else 
+                    responseHandler(res);
+                })
+                .catch(res=>{
                     console.log(res);
                 } )
               
     }
 
     render() {
+console.log(this.state)
         return (
             <div id="lower-section">
              <section>
@@ -134,8 +128,7 @@ class CardComponent extends Component {
                      <div className="row" id="userindexrow3">
                      <div className="items-wrapper">
 
-            {this.state.playlists.map(playlist => (
-  
+            {this.state.playlists.map(playlist => (             
                                         <div className="item-wrapper" id={playlist.id}>
                                             <div className="index-img-background" id={playlist.id} >
                                                 <img src={playlist.imageUrl} alt="Playlist cover pictutre here"></img>
@@ -145,14 +138,17 @@ class CardComponent extends Component {
                                                             <div id="title"> {playlist.title}</div>
                                                             <div id="artist"> {playlist.artist}</div>
                                                             </div>
-                                                            
-                                                           {/* This should be a link Link here to {playlist.href
-                                                            <link to="/">
+                                                            <Link to={{
+                                                                    pathname:"/playlist-webplayer",
+                                                                    state:{
+                                                                    myId :playlist.id,
+                                                                    myhref:playlist.href,
+                                                                    }
+                                                                }}>
                                                             <button id="button-outline">Play  Now</button> 
-                                                            </link>    
-                                                                     */}
-                                                                     <a href="google.com">
-                                                            <button id="button-outline">Play  Now</button></a> 
+                                                            </Link>   
+                                                                     
+                                                                 
                                                     </div>
                                                 </div> 
                                             </div>

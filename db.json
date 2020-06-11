@@ -1,4 +1,16 @@
 {
+  "meArtist":{
+    "id": "1",
+    "name": "Amr Diab",
+    "email": "mostafa@gmail.com",
+    "dateOfBirth": "1999-9-1",
+    "gender": "male",
+    "images": "https://static.arageek.com/wp-content/uploads/2017/09/Amr-Diab-2.jpg",
+    "background":"https://i.scdn.co/image/5ac491f3bf789a7a1491b20de5e83006e0ef2ba0",
+    "bio":"Amr Diab is a pop singer and songwriter from Egypt. He has won a record seven World Music Awards to date, and is considered the all-time best-selling musical artist from the Middle East. He is the creator of his own genre; he calls his meld of Arabic harmony and Western rhythms"
+
+    
+  },
   "users": [
     {
       "id": "1",
@@ -7,7 +19,7 @@
       "email": "ibrahimwael99@gmail.com",
       "dateOfBirth": "1999-5-14",
       "gender": "male",
-      "image": "https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/67395602_2399311110115141_4496818810312982528_o.jpg?_nc_cat=109&_nc_sid=0c64ff&_nc_ohc=Ep8QLCJLjAUAX_G4U1Y&_nc_ht=scontent.xx&_nc_tp=6&oh=3df46d801c92c51720b03dc338a0cba2&oe=5E944BCA",
+      "images": "https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/67395602_2399311110115141_4496818810312982528_o.jpg?_nc_cat=109&_nc_sid=0c64ff&_nc_ohc=Ep8QLCJLjAUAX_G4U1Y&_nc_ht=scontent.xx&_nc_tp=6&oh=3df46d801c92c51720b03dc338a0cba2&oe=5E944BCA",
       "notifications": {
         "newMusic": true,
         "artistUpdates": false,
@@ -20,7 +32,7 @@
       "email": "mostafa@gmail.com",
       "dateOfBirth": "1999-9-1",
       "gender": "male",
-      "image": "https://scontent.xx.fbcdn.net/v/t1.0-1/p320x320/67395602_2399311110115141_4496818810312982528_o.jpg?_nc_cat=109&_nc_sid=0c64ff&_nc_ohc=Ep8QLCJLjAUAX_G4U1Y&_nc_ht=scontent.xx&_nc_tp=6&oh=3df46d801c92c51720b03dc338a0cba2&oe=5E944BCA",
+      "images": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2806529116093705&height=300&width=300&ext=1592252564&hash=AeS_kIoGT8ETHMrg",
       "notifications": {
         "newMusic": true,
         "artistUpdates": true,
@@ -28,83 +40,12 @@
       }
     },
     {
-      "name": "asdfghjkhgfd",
-      "email": "amr7afifi@gmail.com",
-      "dateOfBirth": "1 11 1950",
-      "password": "23456789o",
-      "gender": "Male",
-      "id": "DEFNdv9"
-    },
-    {
       "name": "amr3afifi",
       "email": "amr7afifi@gmail.com",
-      "dateOfBirth": "1 12 2000",
-      "password": "2345676543",
-      "gender": "Female",
-      "id": "gpBqZmO"
-    },
-    {
-      "name": "rfghgfd",
-      "email": "amr7afifi@gmail.com",
-      "dateOfBirth": "1 11 1950",
-      "password": "1234567iu8uy6t5r4e3",
-      "gender": "Female",
-      "id": "xibKv53"
-    },
-    {
-      "name": "dsfghds",
-      "email": "amr7afifi@gmail.com",
-      "dateOfBirth": "1 09 1950",
-      "password": "12345676543",
-      "gender": "Female",
-      "id": "nD5gOAI"
-    },
-    {
-      "name": "dfghngfdsdfgh",
-      "email": "amr7afifi@gmail.com",
-      "dateOfBirth": "1 12 1950",
-      "password": "123456765432",
+      "dateOfBirth": "26 7 1998",
+      "password": "12345678",
       "gender": "Male",
-      "id": "8G464yl"
-    },
-    {
-      "email": "amr7afifi@gmail.com",
-      "password": "12345676543",
-      "id": "cpWcBvK"
-    },
-    {
-      "email": "amr7afifi@gmail.com",
-      "password": "12345676543",
-      "id": "Sx6gOlG"
-    },
-    {
-      "email": "amr7afifi@gmail.com",
-      "password": "123456543",
-      "id": "CiaXnHB"
-    },
-    {
-      "email": "amr7afifi@gmail.com",
-      "password": "sdfghjklhgf",
-      "id": "DHDs_5Y"
-    },
-    {
-      "email": "amr7afifi@gmail.com",
-      "password": "edfgfhgyhb",
-      "id": "hyIDDTn"
-    },
-    {
-      "email": "amr7afifi@gmail.com",
-      "password": "r454675786rfhfch",
-      "id": "sF_jvly"
-    },
-    {
-      "id": "4Ll1OgC"
-    },
-    {
-      "id": "7R_RUoX"
-    },
-    {
-      "id": "2J3QTJz"
+      "id": "gpBqZmO"
     }
   ],
   "subscriptionCodes": [

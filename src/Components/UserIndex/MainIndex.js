@@ -6,6 +6,9 @@ import TopCover from './TopCover';
  * @extends Component
  */
 export class MainIndex extends Component {
+    componentDidMount(){
+        window.scrollTo(0, 0);
+    }
     render() {
        document.title ="Music for everyone - Spotify"
         return (

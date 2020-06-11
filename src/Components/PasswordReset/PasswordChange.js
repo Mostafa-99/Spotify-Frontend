@@ -5,6 +5,7 @@ import '../Authentication/SignUp.css'
 import {Link} from 'react-router-dom'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
+import { checkValidity } from '../../ReduxStore/Shared'
 
 /**
  * New password after reset Component
@@ -29,20 +30,8 @@ export default class PasswordChange extends Component {
      * 
      */
     componentDidMount =()=>{
-       
+        window.scrollTo(0, 0);
         this.setState(()=> ({}))
-    }
-
-    /**
-     * Function to check the Password textbox has valid password criteria
-     * @param {string} Password - input password.
-     */
-    validatePassword(psw) {
-        if(psw.length>=8)
-        return true;
-        else
-        return false;
-       // return psw && psw.length >= 6
     }
 
     /**
@@ -73,10 +62,10 @@ export default class PasswordChange extends Component {
      */
     changePassowrd = event=> {
         event.preventDefault();
-        if(this.state.password==="" || !this.validatePassword(this.state.password))
+        if(this.state.password==="" || !checkValidity(this.state.password,"pass"))
         this.setState({emptypass: true});  
 
-        if(this.state.confirmpassword==="" || !this.validatePassword(this.state.confirmpassword))
+        if(this.state.confirmpassword==="" || !checkValidity(this.state.confirmpassword,"pass"))
         this.setState({emptyconfirm: true});
 
         if(!this.state.emptyconfirm && !this.state.emptypass)
@@ -118,7 +107,7 @@ export default class PasswordChange extends Component {
                 (
                     <div>
                         <h2>Password updated</h2>
-                        <p>Sweet! Your new password has now been set and you are logged in.<Link to="/login" className="hyper-link">Go to account</Link></p>
+                        <p>Sweet! Your new password has now been set and now you can log in.<Link to="/login" className="hyper-link">Go to account</Link></p>
                         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                     </div>
                 ):

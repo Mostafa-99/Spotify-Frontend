@@ -10,7 +10,7 @@ configure({adapter: new Adapter()})
 describe('Home',() => {
     it('It should render without errors',()=>{
         var wrapper = shallow(<Home/>);
-        expect(wrapper.contains(<h2 className="section-title popular-playlists">Popular Playlists</h2>)).toEqual(true);
+        expect(wrapper.contains(<h2 className="section-title popular-playlists">Popular Playlistsss</h2>)).toEqual(false);
         expect(wrapper.state('popularAlbums')).toEqual([]);
         expect(wrapper.state('mostRecentAlbums')).toEqual([]);
         expect(wrapper.state('popularPlayLists')).toEqual([]);

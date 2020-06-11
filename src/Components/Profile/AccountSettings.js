@@ -6,6 +6,7 @@ import AccountHeading from './AccountHeading';
 import axios from 'axios'
 import './Profile.css';
 import { ConfigContext } from '../../Context/ConfigContext'
+import { responseHandler } from '../../ReduxStore/Shared';
 /** Class of AccountSettings.
  * @extends Component
  */
@@ -33,6 +34,7 @@ class AccountSettings extends Component {
      * @property {Function} componentDidMount Fetch the data of the user and put it in the state
      */
     componentDidMount(){
+        window.scrollTo(0, 0);
         axios.get(this.context.baseURL+"/me", {
             headers: {
                 'authorization': "Bearer "+localStorage.getItem("token"),
@@ -51,15 +53,9 @@ class AccountSettings extends Component {
                             image: res.data.images    
                         }
                     }))
-                }
-                else if(res.status === 401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                    console.log("fail")
-                }
+                    console.log(localStorage)
+                }else
+                responseHandler(res);
             })
     }
 

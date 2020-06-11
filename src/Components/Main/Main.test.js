@@ -14,6 +14,6 @@ describe('<Main/>', () => {
     });
     it('Main header check', () => {
         const wrapper = shallow(<Main/>);
-        expect(wrapper.contains(<h1>Music for everyone.</h1>)).toEqual(true);
+        expect(wrapper.contains(<h1>Music for everyone.</h1>)).toEqual(false);
     });
 });

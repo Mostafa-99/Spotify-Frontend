@@ -1,0 +1,130 @@
+#webplayer-layout .your-library {
+    background-color: #121212;
+
+    isolation: isolate;
+    padding-top: 0px;
+    padding-left: 32px;
+}
+
+#webplayer-layout a:hover{
+    text-decoration: none;
+}
+
+
+#webplayer-layout .card {
+    padding: 20px;
+    text-align: center;
+    width: 150px;
+    height: 250px;
+    background-color: rgb(40, 40, 40);
+    border-radius: 10px;
+    margin: 10px;
+}
+#webplayer-layout .card-group{
+    padding: 20px;
+    padding-left: 0;
+    margin-left: 0;
+}
+#webplayer-layout .card-body {
+   padding: 10px 0;
+   text-align: left;
+}
+#webplayer-layout .card-title {
+    color:white;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+}
+#webplayer-layout .card-text {
+    font-size: 12px;
+    line-height: 18px;
+    height: 70px;
+    color: #b3b3b3;
+    padding: 0;
+    margin-top: 4px;
+    overflow: hidden;
+}
+#likes-card.card{
+
+    color:#fff;
+    background-color: linear-gradient(0deg,hsla(0,0%,100%,0.2),hsla(0,0%,100%,0.2)) #1877f2 !important;
+    text-align: center;
+    width: 320px;
+    height: 250px;
+    border-radius: 10px;
+    
+}
+#likes-card .blockquote{
+
+    border-left: none;
+}
+#likes-card .blockquote-footer::before {
+    display: none;
+}
+#likes-card .bottom-card-text{
+    vertical-align: bottom;
+    position: absolute;
+    bottom: 20px;
+    left:20px;
+
+}
+#likes-card .bg-primary {
+    background-color:linear-gradient(0deg,hsla(0,0%,100%,0.2),hsla(0,0%,100%,0.2)) #1877f2!important;
+}
+#webplayer-layout .play-btn, #webplayer-layout .pause-btn {
+    
+    outline: none;
+    display:none;
+    position: absolute;
+    opacity: 0;
+    text-align: center;
+    bottom:40px;
+    right:20px;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background-color:rgb(29, 185, 84)!important;
+    border-color: rgb(29, 185, 84) !important;
+}
+#webplayer-layout .card:hover .active-play{
+    display: block;
+    opacity: 100%;
+}
+#webplayer-layout .active-pause{
+    display: block;
+    
+    opacity: 100%;
+}
+#webplayer-layout .fa-play {
+    color: white;
+}
+#webplayer-layout .play-btn:hover, #webplayer-layout .pause-btn:hover {
+    transform: scale(1.1);
+}
+#liked-songs-container{
+    padding: 0;
+}
+#likes-card{
+    
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 10px;
+    padding-right: 0 !important;
+
+}
+#in-same-line,#liked-songs-names{
+    font-size: 16px;
+    line-height: 24px;
+    display: inline;
+}
+#in-same-line.text-grey{
+   
+    opacity: .7;
+}
+
+@media only screen and (max-width: 992px) {
+    #asearch-input,#search-text-input{
+        display: none;
+    }
+}

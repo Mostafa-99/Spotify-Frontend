@@ -1,10 +1,13 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext,useEffect  } from "react";
 import axios from "axios";
 import Message from "./Message";
 import "../UploadFile/UploadFile.css";
 import Progress from "./Progress";
 import ArtistSidebar from "../SideBar/ArtistSidebar";
-import { ConfigContext } from "../../../Context/ConfigContext";
+import { ConfigContext } from '../../../Context/ConfigContext'
+import { ProfileContext } from '../../../Context/ProfileContext'
+import { responseHandler } from "../../../ReduxStore/Shared";
+
 /** Functional component for track upload.
  * @class
  * @param props
@@ -97,9 +100,12 @@ const TrackUpload = (props) => {
     formData.append("name", trackName);
     formData.append("trackAudio", file);
     try {
+      console.log(props.location.state.myId);
       const res = await axios.post(
-        url.baseURL + "/me/albums/" + props.id + "/tracks",
-        formData,
+       // url.baseURL + "/me/albums/" + props.location.state.myId + "/tracks",
+        "https://spotify.mocklab.io/me/albums/1234/tracks" ,
+ 
+       formData,
         {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),
@@ -112,31 +118,32 @@ const TrackUpload = (props) => {
             );
           },
         }
-      );
+      )
+      console.log(res);
+      console.log(res.status);
 
       const { fileName, filePath } = res.data;
-
+      
       setUploadedFile({ fileName, filePath });
       setMessage("File uploaded");
     } catch (err) {
+      console.log(err);
       if (err.response.status === 500) {
         setMessage("There was a problem with the server");
-      } else if (err.response.status === 401) {
-        localStorage.removeItem("loginType");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userID");
-        alert("Your session has ended");
       } else {
         setMessage(err.response.data.msg);
       }
+      responseHandler(err.response)
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <div className="artist-body">
       <div className="full-page container upload-page">
         <Fragment>
-          <ArtistSidebar />
+          <ArtistSidebar/>
           <form className="container" onSubmit={onSubmit}>
             {message ? <Message msg={message} /> : null}
             <div class="form-group">

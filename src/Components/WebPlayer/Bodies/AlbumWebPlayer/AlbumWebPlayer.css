@@ -30,7 +30,7 @@
 }
 
 #album-webplayer-main-div .album-details-div{
-    width: 25%;
+    width: 25% ;
     padding: 10px 30px;
     justify-content: center;
     display: inline;
@@ -163,8 +163,14 @@
     transform: scale(1.05) perspective(1px);
     background-color: rgb(38, 218, 98);
 }
-#album-webplayer-main-div .btn-success::before{
+#album-webplayer-main-div .btn-success:focus{
+    outline: none;
+}
+#album-webplayer-main-div .play-btn::before{
     content: "PLAY";
+}
+#album-webplayer-main-div .pause-btn::before{
+    content: "PAUSE";
 }
 #album-webplayer-main-div .btn-success:active .btn-success::before{
     content: "PAUSE";

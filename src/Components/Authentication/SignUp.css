@@ -51,7 +51,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    cursor: grabbing;
+    cursor:pointer;
     font-family: 'Open Sans', sans-serif;
     transition: all 0.2s ease 0s;
     border-radius: 50px;
@@ -159,9 +159,16 @@ margin-bottom:20px;
     border:none;
 }
 
-#my-sign-up select
+#my-sign-up form select
 {
     border:none;
+    color: grey;
+    background-color: white;
+}
+
+#my-sign-up h6
+{
+    color: black;
 }
 
 #my-sign-up form

@@ -47,4 +47,9 @@
     flex-direction: row;
     justify-content: space-between;
 }
+@media(max-width:990px) {
 
+.artist-body .inputs-container{
+width: 90% !important;
+}
+}

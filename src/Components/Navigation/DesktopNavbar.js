@@ -5,6 +5,7 @@ import spotify_white_logo from '../../Images/spotify_logo_white.png'
 import '../WebPlayer/Bodies/NavBars.css';
 import { ConfigContext } from '../../Context/ConfigContext'
 import { ProfileContext } from '../../Context/ProfileContext'
+import { logout } from '../../ReduxStore/Shared';
 
 //navbar not fixed anymore
 const MyDesktopNavbar = styled.nav`
@@ -14,13 +15,13 @@ flex-flow: row nowrap;
 justify-content:space-evenly;
 align-items:center;
 background-color:rgba(0,0,0);
-height:70px;
+height:80px;
 width:100%;
 z-index:1;
 
 #my-desk-navbar .links,.links-0{
     
-    font-size: calc(7px + .8vw);
+    font-size: 17px;
     text-decoration:none;
     color:white;
     padding:10px;
@@ -83,11 +84,6 @@ z-index:1;
     
 }
 
-#my-desk-navbar .index-fixed{
-    background-color:rgba(0,0,0.0.7);
-    position:fixed;
-}
-
 `
 /**
  * Desktop Navbar Component
@@ -104,7 +100,6 @@ class DesktopNavbar extends Component {
         }
 
     }
-
     /**
      * Desktop Navbar Component Mount state Intialization
      * 
@@ -113,6 +108,7 @@ class DesktopNavbar extends Component {
 
         this.setState(() => ({}))
         let show = localStorage.getItem("isLoggedIn");
+        
         if (show === "true") {
             let type = localStorage.getItem("loginType");
             this.setState({ status: "connected" })
@@ -122,7 +118,7 @@ class DesktopNavbar extends Component {
             this.setState({ status: "not connected" })
         }
     }
-
+    
     /**
      * Desktop Navbar function onchange to update state
      * 
@@ -139,28 +135,13 @@ class DesktopNavbar extends Component {
 
     }
 
-    /**
+/**
      * Function handeling log out whether with facebook or email
      * 
      */
     logOut = () => {
-
-        if (this.state.loginType === "fb") {
-            window.FB.logout(function (response) {
-                //console.log(response);
-            });
-
-        }
-        if (this.state.loginType === "email") {
-
-        }
-
         this.setState({ status: "not connected" })
-        this.setState({ loginType: '' })
-        localStorage.removeItem("userID");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("token");
-        localStorage.removeItem("loginType");
+        logout();
     }
 
     render() {

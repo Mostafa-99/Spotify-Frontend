@@ -8,6 +8,7 @@ import TracksList from '../AlbumWebPlayer/TracksList';
 
 import {ConfigContext} from '../../../../Context/ConfigContext'
 import { Link } from 'react-router-dom';
+import { responseHandler } from '../../../../ReduxStore/Shared';
 
 /** Class of artist webplayer page.
  * @extends Component
@@ -93,24 +94,36 @@ class ArtistWebPlayer extends Component {
             * ID of the playing song
             * @type {String}
             */
-           "playing_song_id":""
+           "playing_song_id":"",
+           /**
+            * States if the user following the artist or not
+            * @type {string}
+            */
+           "isFollowed":Boolean,
 
         }
-        this.togglePlayPause=this.togglePlayPause.bind(this)
-
+        this.togglePlayPause=this.togglePlayPause.bind(this);
+        this.setFollowing=this.setFollowing.bind(this);
+        this.followHandler=this.followHandler.bind(this);
     }
     
     /**When the component mounts it sends a request to the backend to load the albums
      * @memberof ArtistWebPlayer
      */
     componentDidMount() {
-
-        const{myId}=this.props.location.state;//getting id from parent component
-        this.state.myId=myId;
+        window.scrollTo(0, 0);
+        try {
+            
+            const{myId}=this.props.location.state;//getting id from parent component
+            this.state.myId=myId;
+        } catch (error) {
+            
+        }
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
         /*' http://we871.mocklab.io/artists/200 */
-        axios.get(this.context.baseURL+"/artists/" + this.state.myId,{  /*artist*/
+       // axios.get(this.context.baseURL+"/artists/" + this.state.myId,{  /*artist*/
+        axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473",{  /*artist*/
             headers:{
                 'authorization': "Bearer "+localStorage.getItem("token"),
                 "id": this.state.myId
@@ -119,6 +132,7 @@ class ArtistWebPlayer extends Component {
             .then(res => {
                 if(res.status===200)
                 {   
+                    this.setFollowing(res.data.data.following); 
                     this.setState(prevState => ({
                     artist: {                   
                         ...prevState.artist,    
@@ -128,16 +142,7 @@ class ArtistWebPlayer extends Component {
                     }
                 }))
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
                 
         })
 
@@ -160,16 +165,7 @@ class ArtistWebPlayer extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
                 
             })
 
@@ -191,16 +187,7 @@ class ArtistWebPlayer extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
             })
 
                 /* http://www.mocky.io/v2/5e87635f3100002a003f44d4*/
@@ -224,18 +211,10 @@ class ArtistWebPlayer extends Component {
                         }))
                     })
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
             })     
-            this.getAlbumTracks();                                         
+            this.getAlbumTracks();    
+                                                
     }
         /**get all tracks of the album 
          * @type {Function}
@@ -254,22 +233,15 @@ class ArtistWebPlayer extends Component {
                 {   
                     this.setState({tracks:res.data.data})
                 }
-                else if(res.status===401)
-                {
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
-                }
-                else{
-                    alert(res.message);
-                }
+                else responseHandler(res);
                 }    
                 )
                 .catch(error => {
                     alert(error.response.data.message);
                 })
+                
             }
+
         /**set currently playing song to an id 
          * @type {Function}
          * @memberof ArtistWebPlayer
@@ -361,10 +333,81 @@ class ArtistWebPlayer extends Component {
                 pauseButton.classList.toggle('active-pause');
                 this.setState({nowPlaying: {id: sid}})
             }
-    }
+        }
+        /**toggle between follow and following buttons
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        setFollowing(type) {
+            if(type==1){
+                document.getElementById("artist-follow-button").classList.add("hide");
+                document.getElementById("artist-following-button").classList.remove("hide");
+            }
+            else{
+                document.getElementById("artist-follow-button").classList.remove("hide");
+                document.getElementById("artist-following-button").classList.add("hide");
+            }
+        }
+        /**toggle following statues, calls for follow/unfollow
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        followHandler(type){
+            if(type==0){
+                this.setState({isFollowed: '1'});
+                this.follow();
+                this.setFollowing(1);
+            }
+            else{
+                this.setState({isFollowed: '0'});
+                this.unfollow();
+                this.setFollowing(0);
+            }
+        }
+        /**sending requests for follow
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        follow(){
+            console.log("before click ( followed? ):",this.state.isFollowed);
+            axios
+            .put("http://spotify.mocklab.io/me/following",{
+              "id":this.state.myId
+            } ,{
+              headers: {
+                authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+               console.log("edited : ",this.state.isFollowed);
+              }
+            });
+          }
+          /**sending requests for unfollow
+         * @type {Function}
+         * @memberof ArtistWebPlayer
+         */
+        unfollow(){
+            console.log("before click ( followed? ):",this.state.isFollowed);
+            axios
+            .put("http://spotify.mocklab.io/me/following",{
+              "id":this.state.myId
+            } ,{
+              headers: {
+                authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+               console.log("edited : ",this.state.isFollowed);
+              }
+            });
+          }
     render()
     {
-        /*console.log("amr diab id is : ",this.state.myId);*/
         {document.title ="Spotify - "+this.state.artist.name }
     return(
         
@@ -381,7 +424,8 @@ class ArtistWebPlayer extends Component {
                             <h1 id="artist-heading-name"><strong>{this.state.artist.name}</strong></h1>
                             <div id="artist-buttons" className="col-4">
                                 <span ><button id="artist-play-button">PLAY</button></span>
-                                <span ><button id="artist-follow-button">Follow</button></span>
+                                <span ><button id="artist-follow-button" onClick={event => this.followHandler(0)}>Follow</button></span>
+                                <span ><button id="artist-following-button" className="hide"onClick={event => this.followHandler(1)}>Following</button></span>
                             </div>
                             <div id="artist-sections-nav">
                                 <a id="artist-overview-button" onClick={() => this.sectionTypeHandle(1)} href="#" className="btn-outline btn-lg background-grey" role="button" aria-pressed="true">Overview</a>

@@ -16,6 +16,8 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossOrigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <title>Spotify</title>
   </head>
@@ -44,6 +46,39 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+ <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+ <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+ <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+
+ <!-- Add Firebase products that you want to use -->
+ <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDstl21Iann4t-odVPIMFTXpI5ToD1jIC0",
+      authDomain: "totally-not-spotify.firebaseapp.com",
+      databaseURL: "https://totally-not-spotify.firebaseio.com",
+      projectId: "totally-not-spotify",
+      storageBucket: "totally-not-spotify.appspot.com",
+      messagingSenderId: "262598048193",
+      appId: "1:262598048193:web:8eb027331acfe77f625740",
+      measurementId: "G-YDVW3R60NT"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossOrigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossOrigin="anonymous"></script>
 

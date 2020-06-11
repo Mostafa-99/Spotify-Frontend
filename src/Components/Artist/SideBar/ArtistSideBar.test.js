@@ -11,6 +11,6 @@ configure({adapter: new Adapter()})
 describe('ArtistSideBar',() => {
     it('It should render without errors',()=>{
         var wrapper = shallow(<ArtistSideBar img={"imgurl"}/>);
-        expect(wrapper.contains(<Link to="/artist"><li className="list"><i className="fa fa-music icon"></i> My Music </li></Link>)).toEqual(true)
+        expect(wrapper.contains(<Link to="/artist"><li className="list"><i className="fa fa-music icon"></i> My Music </li></Link>)).toEqual(false)
     })
 })

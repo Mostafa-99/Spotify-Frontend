@@ -4,6 +4,7 @@ import '../Button/SpotifyButton.css'
 import '../Authentication/SignUp.css'
 import {ConfigContext} from '../../Context/ConfigContext'
 import axios from 'axios'
+import { checkValidity } from '../../ReduxStore/Shared';
 
 /**
  * Forgot password Component
@@ -25,7 +26,7 @@ class PasswordReset extends Component {
      */
     resetPassowrd = event=> {
         event.preventDefault();
-        if(this.validateEmail(this.state.email))
+        if(checkValidity(this.state.email,"email"))
         {
             //console.log(this.state.email);
             axios.post(this.context.baseURL+'/resetPassword',
@@ -43,9 +44,7 @@ class PasswordReset extends Component {
                 {
                     this.setState({status: 'not-linked-email'});     
                 }  
-                }).catch(err =>{
-                    if(err.status===400 || err.status===401)
-                        this.setState({status: 'not-linked-email'});   
+                }).catch(err =>{  
                     alert(err)
                 })
         }
@@ -66,20 +65,8 @@ class PasswordReset extends Component {
      * 
      */
     componentDidMount =()=>{
-       
+        window.scrollTo(0, 0);
         this.setState(()=> ({}))
-    }
-
-    /**
-     * Function to check the Email textbox has valid email format
-     * @param {string} Email - input email.
-     */
-    validateEmail(email) {
-        if(email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/))
-        return true;
-        else
-        return false;
-        //return email && email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
     }
 
     /**
@@ -105,7 +92,7 @@ class PasswordReset extends Component {
                 :
                 (
             <div>
-                    <p>Enter your Spotify username, or the email address that you used to register. We'll send you an email with your username and a link to reset your password.</p>
+                    <p>Enter your Spotify email address that you used to register. We'll send you an email with a link to reset your password.</p>
                     <label>Email address</label>
                     <input  type="email" id="form-email" onChange={this.handleEmailChange} className="form-control mb-4"/>
                         {this.state.status==="empty-email"?

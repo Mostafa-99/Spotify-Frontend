@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './PremiumCode.css';
 import {ConfigContext} from '../../Context/ConfigContext'
+import { responseHandler } from '../../ReduxStore/Shared';
 
 /**
  * Checks subscription code to become a premium user
@@ -17,6 +18,9 @@ export class PremiumCode extends Component {
          * @type {String}
          */
         code: ''
+    }
+    componentDidMount(){
+        window.scrollTo(0, 0);
     }
 
     /**
@@ -34,10 +38,7 @@ export class PremiumCode extends Component {
                     alert("An email has been sent");
                 }
                 else if(res.status===401){
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
+                    responseHandler(res);
                 }
                 else{
                     alert("Please try again");
@@ -68,10 +69,7 @@ export class PremiumCode extends Component {
                     alert("Congratulations! You are PREMIUM now.");
                 }
                 else if(res.status===401){
-                    localStorage.removeItem("loginType");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("userID");
+                   responseHandler(res);
                 }
                 else{
                     alert("The subscription code is invalid.");
