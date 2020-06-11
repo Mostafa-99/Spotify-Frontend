@@ -1,0 +1,79 @@
+
+#upgrade-to-artist-body{
+    padding: 0px;
+}
+#upgrade-to-artist-body .dark{
+    background-color: #333;
+    color: white;
+    padding: 100px 20px;
+    width: 100%;
+    text-align: center;
+}
+@media (max-width:700px){
+    #upgrade-to-artist-body .dark{
+        text-align: left;
+        padding: 10px 10px;
+    }
+}
+
+#upgrade-to-artist-body .checklist{
+    list-style-type: none;
+    display: inline;
+    padding: 10px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+#upgrade-to-artist-body .checklist::before {
+    content: "✓  ";
+  }
+@media (max-width:700px){
+    #upgrade-to-artist-body .checklist{
+        display: list-item;
+        padding: 0px;
+        font-size: 12px;
+    }
+}
+
+#upgrade-to-artist-body .bold-header{
+    font-size: 56px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+@media (max-width:700px){
+    #upgrade-to-artist-body .bold-header{
+        font-size: 30px;
+    }
+}
+
+#upgrade-to-artist-body .second-part{
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding: 100px 10px;
+}
+@media (max-width:700px){
+    #upgrade-to-artist-body .second-part{
+        padding: 40px 10px;
+    }
+}
+
+#upgrade-to-artist-body .box-div{
+    text-align: left;
+    padding: 20px 20px;
+    display: inline-block;
+    box-shadow: 0px 0px 5px grey;
+    border-radius: 10px;
+    width: 600px;
+    height: auto;
+}
+@media screen and (max-width: 700px){
+    #upgrade-to-artist-body .box-div{
+        width: 90%;
+    }
+}
+#artist-send-mail-button, #artist-check-code-button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #333 !important;
+}
+

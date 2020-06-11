@@ -1,0 +1,388 @@
+*{
+	margin: 0;
+	padding: 0;
+  border: border-box;
+}
+.bg-dark-clr {
+    background-image: linear-gradient(#212c39, #121e3d 50%, #000); 
+    background-repeat: no-repeat;
+
+}
+
+#profile-account-heading .float-right {
+  padding: 15px 15px 0 25px;
+	height: 25rem;
+  width: 19rem;
+}
+#profile-account-heading {
+  background-color:  #222326;
+  background-image: linear-gradient(to bottom, #121e3d 0%, #000 100%);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+#profile-account-heading .head {
+  padding-left: 40px;
+}
+#profile-account-heading .header-para {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+    letter-spacing: -.01em;
+    margin: 1em 0;
+}
+#profile-account-heading .row {
+	color: #f8f8f8;
+}
+#profile-account-heading .premium-button {
+	padding: 14px 42px;
+  border-radius: 300px;
+}
+#profile-account-heading .premium-button:hover {
+  transform: scale(1.1);
+}
+#profile-sidebar {
+  background-color: #222326;
+  padding:0;
+}
+#profile-sidebar ul {
+  list-style-type: none;
+}
+#profile-sidebar .list {
+  padding: 20px;
+	border-bottom: 1px solid grey;
+  border-left: 7px solid #222326;
+  color: white;
+}
+#profile-sidebar .list:hover {
+  border-left: 7px solid green;
+  cursor: pointer;
+}
+#profile-sidebar .icon {
+	padding: 10px;
+}
+#profile-sidebar .rounded-circle {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 30px auto;
+  border-radius: 50%;
+}
+#profile-sidebar .first {
+  border-top: 1px solid grey;
+}
+#profile-sidebar .disabled{
+  cursor: default;
+}
+#account-overview {
+	background-color: #fff;
+  color: black;
+}
+#account-overview .overview {
+	margin-top: 45px;
+	margin-left: 30px;
+  margin-bottom: 45px;
+  font-family: Circular,Helvetica,Arial,sans-serif;
+  font-weight: 900;
+  line-height: 56px;
+  letter-spacing: -1px;
+  font-size: 42px;
+}
+#account-overview .profile {
+	margin-left: 30px;
+}
+#account-overview table {
+  color:#9e9e9e;
+}
+#account-overview tr {
+  border-bottom: 1px solid #9e9e9e;
+}
+#account-overview td {
+  padding:15px 0 15px 15px;
+  color: black;
+}
+#account-overview th {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding:0;
+}
+
+#account-overview .plan {
+  margin-left: 30px;
+}
+#account-overview .yourplan {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+#account-overview .free {
+    border-width: initial;
+    border-style: none;
+    border-image: initial;
+    background: linear-gradient(-180deg, rgb(182, 43, 190) 0%, rgb(150, 34, 185) 100%);
+    height: 230px;
+}
+#account-overview .spotifyfree {
+  color: rgb(255, 255, 255);
+  font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.5px;
+    font-family: Circular,Helvetica,Arial,sans-serif;
+    font-weight: 900;
+    text-align: left;
+    padding: 100px 100px 100px 20px;
+}
+#account-overview .playp {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    padding: 20px;
+}
+#account-overview .p {
+  border-bottom: 1px solid #f0f0f0;
+}
+#account-overview .f {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+#account-overview .account-overview-buttons {
+  margin:25px;
+  padding: 14px 42px;
+  border-radius: 100px;
+  color: #757575 !important;
+  border-color: #757575 !important;
+}
+#account-overview .account-overview-buttons:hover {
+  transform: scale(1.1);
+  background-color: inherit;
+  border-color: #000 !important;
+  color: #000 !important;
+}
+#edit-profile .edit-section, #notifications-settings .notification-section, #change-password .password-section {
+  background: #F8F8F8;
+  padding:0;
+}
+#edit-profile .edit-div, #notifications-settings .notification-div, #change-password .password-div {
+  padding: 40px;
+}
+#notifications-settings .page-header ,#edit-profile .page-header , #change-password .page-header {
+  font-size: 26px;
+    margin: .5em 0;
+    color: #1DB954;
+    font-weight: 400;
+    padding: 15px;
+    border-bottom: 1px solid#EFEFEF;
+}
+
+#edit-profile .edit-info, #notifications-settings .notification-info, #change-password .password-info {
+  padding:40px;
+  background-color: #FFF;
+}
+#edit-profile .labels,#change-password .labels {
+  color: #919496;
+  margin: 8px 0;
+}
+#edit-profile .user-info {
+  color: #222326;
+  padding: 10px 0 10px 5px;
+}
+#edit-profile .combo-box , #edit-profile .email-text-box ,#change-password .new-password-text-box ,#change-password .repeat-password-text-box , #change-password .current-password-text-box{
+  width:100%;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 15px 5px;
+}
+#edit-profile .buttons , #notifications-settings .buttons, #change-password .buttons{
+  border-top: 1px solid#EFEFEF;
+  display: flex;
+  justify-content: flex-end;
+}
+#edit-profile .save-profile-button , #notifications-settings .save-button, #change-password .set-new-password-button {
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 500px;
+  padding: 10px 32px;
+  margin: 30px;
+}
+
+a {
+  text-decoration: none;
+  color:inherit;
+}
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+#edit-profile .cancel-button , #notifications-settings .cancel-button , #change-password .cancel-button{
+  margin: 32px 45px 0 0;
+  letter-spacing: 2px;
+  font-weight: 700;
+  padding-top: 10px;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 500px;
+  color: black!important;
+}
+#edit-profile .cancel-button:hover, #notifications-settings .cancel-button:hover , #change-password .cancel-button:hover{
+  cursor: pointer;
+}
+
+#edit-profile .alert-success , #notifications-settings .alert-success , #change-password .alert-success {
+  border-width: 0;
+  font-size: 12px;
+  padding: 14px 14px 2px 14px;
+  border-radius: 0;
+  font-weight: 400;
+  background-color: #1ED760;
+  color: #FFF;
+}
+
+#edit-profile .birthday-inputs{
+  display: flex;
+}
+
+#edit-profile .hide, #profile-sidebar .hide{
+  display: none;
+}
+
+#notifications-settings .table td, #notifications-settings .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+#notifications-settings .table-head {
+  width:70%;
+  padding-bottom: 27px !important;
+}
+#notifications-settings .table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid white;
+}
+#notifications-settings .row-head {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+#notifications-settings .row-descreption {
+  font-size: 14px;
+  margin-bottom: 2px;
+  color: #919496;
+}
+#notifications-settings .push-div {
+  display: flex;
+}
+.material-icons {
+  color:#919496;
+}
+#notifications-settings .push-word {
+  color:#919496;
+  font-size: 16px;
+}
+/* The container */
+#notifications-settings .checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-left: 25px;
+  cursor: pointer;
+  font-size: 17px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+#notifications-settings .checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+#notifications-settings .checkmark {
+  background-color: #FFF;
+  border: 1px solid #C1C3C6;
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 4px;
+}
+/* When the checkbox is checked, add a blue background */
+#notifications-settings .checkbox input:checked ~ .checkmark {
+  background-color: #1DB954;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+#notifications-settings .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+#notifications-settings .checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+#notifications-settings .checkbox .checkmark:after {
+  left: 6px;
+  top: 3px;
+  width: 7px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+@media (max-width:767px)
+{
+  #profile-account-heading .head {
+    padding: 0 20px;
+  }
+  #profile-account-heading .header-para {
+    text-align: center;
+  }
+  #profile-account-heading .font-weight-bold{
+    padding: 15px;
+    font-size: 26px;
+    text-align: center;
+  }
+  #profile-account-heading .premium-button
+  {
+  position: absolute;
+  top: 32rem;
+  width: 80%;
+  left: 10%;
+  z-index: 1;
+  font-size: 14px;
+  font-family: Circular,Helvetica,Arial,sans-serif;
+  }
+  #profile-account-heading .float-right {
+    margin-left: 15px;
+    width: 90%;
+  }
+  #edit-profile .cancel-button {
+    display: none;
+  }
+  #notifications-settings .row-descreption {
+    display: none;
+  }
+}
+@media (max-width:320px)
+{
+  #profile-account-heading .premium-button {
+    position: absolute;
+    top: 35rem;
+  }
+}

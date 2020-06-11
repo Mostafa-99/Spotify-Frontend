@@ -1,0 +1,469 @@
+/*Fonts*/
+@font-face {
+  font-family: Circular;
+  src: url("https://sp-bootstrap.global.ssl.fastly.net/8.12.4/fonts/circular-black.woff2") format("woff2"), url("https://sp-bootstrap.global.ssl.fastly.net/8.12.4/fonts/circular-black.woff") format("woff");
+  font-style: normal;
+  font-weight: 900;
+}
+/*Top Cover Css*/
+
+
+/*Index Page After Login*/
+#user-index-section{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.hero-main{
+      background: linear-gradient(to bottom, #c8bb50 0%, #d1bd4f 25%, #d2be4f 50%, #e6c050 75%, #f4bf60 100%);
+      overflow: hidden;
+  }
+
+.hero-home-gradient
+{
+  background: radial-gradient(ellipse at center, #f6cb6c 0%, #f3c65d 0%, #f2ae54 100%);
+  margin-top: 0px;
+  height: 800px;
+}
+.hero-main .hero-home-gradient{
+  height: 100%;
+  width: 100%;
+}
+
+#user-index-cover-cont{
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+ .hero-background{
+    min-height: 640px;
+   background-image: url(https://www.scdn.co/i/premium/premium-hero-dancing-man.png);
+   background-repeat: no-repeat;
+        background-position-x: 0%;
+        background-position-y: 0%;
+    background-position: right 3px top -55px;
+    background-repeat: no-repeat;
+
+}
+
+#user-index-cover-row,#row-lower{
+    display:flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;    
+    box-align: center;
+    align-items: center;
+    -webkit-box-align: center;
+}
+
+.hero-main .hero-home-content
+{
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin-top:0px;
+
+}
+
+#hero-text{
+  color: #FFF;
+  margin-left: 0px;
+  text-align: center;
+  width: 100%;
+  height:100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-left: 100px;
+  margin-left: 20px;
+}
+
+#d2-overrides{
+  font-weight: 900;
+  margin-left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  font-family: Circular, Helvetica, Arial, sans-serif;
+  margin-bottom: 0.25em;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin-right: 0px;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  #hero-text{
+    margin-left:20px;
+  }
+}
+@media only screen and (min-width:768px)
+{
+  #d2-overrides{
+    font-size: 64px;
+  }
+  #hero-text{
+    padding: 0;
+    padding-left: 140px;
+    margin-left: 20px;
+    position: relative;
+    right: 0;
+    left: 0;
+  }
+  #row-lower{
+    margin-right: 70px;
+  }
+  
+  #user-index-cover-row{
+    padding-bottom: 80px;
+    padding-top: 80px;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    top: 100px;
+    right:20px;
+  }
+  
+}
+@media only screen and (min-width:992px)
+{
+  #d2-overrides{
+    font-size:80px;
+  }
+}
+@media only screen and (max-width:500px)
+{
+#hero-text{
+  padding:15px;
+  position: relative;
+  right: 0;
+  top:150px;
+}
+#low-sec-container{
+  margin-left: 0px;
+}
+#d2-overrides{
+  font-size: 42px;
+}
+}
+
+@media only screen and (max-width:768px) and (min-width:500px)
+{
+  #low-sec-container{
+    margin-left: 20px;
+  }
+
+  #d2-overrides{
+    font-size: 40px;
+  }
+#hero-text{
+  position: absolute;
+  top: 300px;
+  left:-40px;
+}
+#low-sec-container {
+  margin-left: 80px;
+}
+} 
+
+#index-cover-btn,#launch-button{
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    cursor: grabbing;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease 0s;
+    border: 3px solid #1DB954;
+    color: white;
+    background-color: #1DB954;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1;
+    border-radius: 500px;
+    padding: 20px 20px 20px;
+    margin-bottom: 0;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: uppercase;
+
+}
+
+#user-index-lead-1{
+  box-sizing: border-box;
+  color: rgb(0, 0, 0);
+  font-family:  Circular ,Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25.2px;
+  margin-bottom: 24px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 9px;
+  text-align: center;
+}
+#index-cover-btn:hover {
+    background: #1ED760;
+    border-color: #1ED760;
+}
+
+#index-cover-btn:active {
+    border-color: #1ED760;
+    background: #1ED760;
+}
+
+#index-cover-btn:focus {
+    outline: none;
+}
+
+/* cardComponent */
+/* General styles used for All screens */
+#button-outline{
+  border: transparent;
+  color: transparent;
+}
+.index-img-background{
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.index-img-background img{
+  max-width: 360px;
+  max-height: 360px;
+  height: auto;
+  width: auto; 
+}
+
+ .subtitle{
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: fit-content;
+  display: block;
+}
+
+#lower-section section{
+position: relative;
+width: 100%;
+overflow: hidden;
+padding-bottom: 80px;
+}
+
+@media only screen and (min-width: 1200px){
+  /* For Default screen size */
+    .items-wrapper{
+    display: flex ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  } 
+  
+  .items-wrapper .item-wrapper{
+    position: relative;
+    margin: 10px;
+  }
+  #title{
+    font-size: 32px;
+  }
+ 
+  .img-text-wrapper:hover .playlist-info{
+    font-weight: 900;
+    color : white;
+    transition: 1s;
+  }
+  .img-text-wrapper:hover #artist{
+    color: rgb(145, 148, 150);
+    transition: 1s;
+  }
+   
+  .index-img-background:hover img{
+    transition:1s;
+    filter: brightness(20%);
+  }
+  
+  #button-outline{
+    display: none;
+  }
+  .img-text-wrapper:hover #button-outline{
+    color: #1db954;
+    font-weight: 900;
+    background-color: transparent;
+    border-color: transparent;
+    display: inline-block;
+    
+  } 
+  #button-outline:active:focus:checked:visited{
+    color: #1db954;
+    font-weight: 900;
+    background-color: transparent;
+    border-color: transparent ;
+    border: none; 
+    outline: none !important ;
+    box-shadow: none ;
+  }
+
+  .img-text-wrapper{
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+  }
+  
+  .img-text-wrapper .subtitle ,.playlist-info a,#button-outline{
+    font-weight:600;
+    color: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    outline: none !important;
+  }
+  }
+  @media only screen and (max-width: 1200px) {
+  /*To Keep text under the picture in smaller windows*/
+  .items-wrapper {
+    overflow-x: auto;
+    display: flex;
+    white-space: nowrap;
+    height: 450px;
+  }
+  .items-wrapper .item-wrapper{
+    display: flex;
+    flex-wrap: nowrap;
+    height: fit-content;
+    position: relative;
+    margin: 10px;
+    width: fit-content;
+  }
+  .img-text-wrapper{
+    display: block;
+    padding: 0.5em;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    align-items: center;
+    height: fit-content;
+    text-align: center;
+  }
+  .img-text-wrapper .playlist-info{
+    font-weight: 900;
+    color : white;
+  }
+  .img-text-wrapper #artist{
+    color: rgb(145, 148, 150);
+  }
+  .img-text-wrapper #title{
+   color:  #919496;
+  }
+  #button-outline{
+    color: #1db954;
+    font-weight: 900;
+    background-color: transparent;
+    border-color: transparent ;
+    border: none; 
+    outline: none !important ;
+    box-shadow: none ;
+    outline-offset: -4px;
+  }
+  .index-img-background img{
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  }
+  
+/*Text*/
+.h1-spotify{
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  position: relative;
+  top:30%;
+  box-sizing: border-box;
+  color: rgb(0, 0, 0);
+  font-family: Circular, Helvetica, Arial, sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: -0.96px;
+  line-height: 57.6px;
+  margin-bottom: 12px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 24px;
+  text-align: center;
+  }
+#row-lower-font {
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+#row-lower,#user-index-row-2{
+  flex-direction: column;
+  margin-top: 50px;
+  align-items: center;
+}
+#launch-button {
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-size: 14px;
+  transition-duration: .3s;
+  border-width: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: normal;
+  color: #616467;
+  box-shadow: 0 0 0 2px #616467 inset;
+  background-color: transparent;
+  margin-bottom: 70px;
+}
+
+#launch-button:hover {  
+    color: #FFF;
+    background-color: #616467;
+    text-decoration: none;
+}
+#title{
+cursor: pointer;
+font-family:  Helvetica, Arial, sans-serif;
+font-weight: 900;
+letter-spacing: -0.48px;
+line-height: 41.6px;
+list-style-type: none;
+margin-bottom: 8px;
+text-align: center;
+}
+
+#artist{
+cursor: pointer;
+font-family: Helvetica, Arial, sans-serif;
+font-size: 18px;
+font-weight: 400;
+line-height: 19.8px;
+list-style-type: none;
+margin-bottom: 18px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 9px;
+text-align: center;
+}

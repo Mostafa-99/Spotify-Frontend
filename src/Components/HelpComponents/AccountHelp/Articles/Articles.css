@@ -1,0 +1,272 @@
+#body-overrides {
+    height: auto;
+
+}
+*{
+    font-family: Helvetica,Arial,sans-serif;
+}
+
+ul{
+    list-style: none;
+}
+
+#body-overrides #body.main {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 25px;
+    padding-right: 0px;
+    padding-left:0px;
+    height: auto;
+    min-height: 600px;
+}
+
+#body-overrides #department.item{
+    grid-row-start: 1;
+    grid-row-end: -1;
+}
+
+#body-overrides .help-topics{
+    padding: 80px 0px 20px 0px;
+
+}
+
+#body-overrides .account-help{
+    border-left: thin solid;
+    border-color: #d9dadc;
+
+    padding: 40px 4px 20px 100px;
+}
+
+#body-overrides ul.account-help-btn a{
+    color: black;   
+    line-height: 20px;
+    font-weight: 700;
+    color: #2d46b9;
+    font-size: 18px;
+    padding-left: 0;
+   
+}
+#body-overrides ul.account-help-btn a:hover{
+    color: #2d46b9;
+}
+#body-overrides ul.account-help-btn a::before{
+    border-left: solid;
+    border-color: #2d46b9;
+}
+#body-overrides ul.account-help-btn{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#body-overrides ul.help-art  a{
+    padding-left: 0;
+    color: #2d46b9;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 17px;
+    font-size: 18px;
+}
+#body-overrides ul.help-art  a:hover{
+    color: #2d46b9;
+}
+
+#body-overrides ul.help-art {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#body-overrides ol.breadcrumb li.breadcrumb-item a{
+    padding: 0;
+    color: #2d46b9;
+    font-weight: 700;
+    font-size: 16px;
+
+}
+#body-overrides ol.breadcrumb li.breadcrumb-item a:hover{
+    color: #14215c;
+}
+#body-overrides ol.breadcrumb li.breadcrumb-item.active  {
+    padding: 0;
+    color: #222326;
+    font-weight: 400;
+    line-height: 2.15;
+    padding-left: 5px;
+    font-size: 16px;
+
+}
+#body-overrides #article-breadcrumb.breadcrumb>li+li:before {
+    content: "/\A0";
+    padding: 0 5px;
+    color: #919496;
+}
+
+#body-overrides .ht-header-large{
+    visibility: visible;
+    font-size: 34px;
+    color: #919496;
+    font-weight: 500;
+    line-height: 1;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    min-width: fit-content;
+}
+#body-overrides .ht-header-small {
+    visibility: hidden;
+}
+
+#body-overrides div.help-topics div.ht-topics h3.ht-topics-ap{
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -.01em;
+    line-height: 1.4;
+    margin-top: 0px;
+    margin-bottom: 13.5px;
+}
+
+#body-overrides .container .row{
+    display: flex;
+    flex-direction: column;
+}
+
+#body-overrides #help-arts-headers h5{
+    font-size: 24px;
+    letter-spacing: -.01em;
+}
+#body-overrides .instructions h1{
+    
+    font-weight: 500;
+    font-size: 45px;
+    line-height: 1.15;
+    letter-spacing: -2px;
+}
+#body-overrides .item-header{
+    color: #2d46b9;
+    padding: 20px 40px 20px 13px;
+    margin: 0;
+    margin-left: 0px;
+    font-size: 16px;
+}
+#body-overrides .instructions h1{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+#body-overrides .collapse-btn{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+#after-articles{
+    font-size: 15px;
+}
+#before-articles{
+    font-size: 15px;
+}
+#body-overrides .rotate-arrow.active{
+    transform: rotate(180deg);
+
+}
+#article-header-text.help-art li{
+    list-style-type: none;
+    padding: 0;
+    font-weight: 400;
+    font-size: 15px;
+    color: #222326;
+    line-height: 1.5;
+}
+
+#body-overrides .card-body{
+    border: none;
+    text-align: left;
+    font-size: 15px;
+}
+#body-overrides #article-breadcrumb.breadcrumb{
+
+    background-color: white;
+    padding:0;
+}
+#body-overrides ul.help-art li{
+    list-style-type: none;
+    margin: 20px 0px 20px 0px;
+    padding: 0;
+    font-weight: 400;
+    font-size: 15px;
+}
+@media  (max-width: 992px) {
+    /* For mobile phones: */
+    #body-overrides #body.main {
+       /* display: grid;*/
+       display: flex;
+       flex-direction: column;
+        grid-gap: 25px;
+        padding-right: 0px;
+        padding-left:20px;
+    }
+    
+    #body-overrides .help-topics{
+        padding-bottom: 20px;
+        padding-top: 0;
+        
+    }
+    
+    #body-overrides .account-help{
+        border-top: solid;
+        border-color: #d9dadc;
+        border-left: none;
+        padding:0;
+    }
+    #body-overrides ul.account-help-btn{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-left: 20px;
+    }
+    #body-overrides #help-arts-headers{
+        text-align: left;
+        margin-left: 20px;
+    }
+    #body-overrides #headers-inside-articles{
+        text-align: left;
+        margin-left: 20px;
+    }
+    #body-overrides #article-breadcrumb.breadcrumb{
+        float: none;
+        clear: both;
+        margin: 40px auto 0 20px;
+        height: 35px;
+        min-width: 280px;
+        width: 100%;
+        max-width: 280px;
+    }
+    #body-overrides div.help-topics div.ht-topics h3.ht-topics-ap{
+        
+        text-align: left;
+        margin-left: 20px;
+    }
+    #body-overrides .ht-header-large{
+        visibility: hidden;
+        margin-top: 0;
+        padding-top: 0;
+        
+    }
+    #body-overrides #first-header-art{
+        text-align: left;
+        margin-left: 20px;
+    }
+    #body-overrides .ht-header-small {
+        text-align: left;
+        margin-left: 20px;
+        visibility: visible;
+        font-size: 34px;
+        color: #222326;
+        font-weight: 500;
+        line-height: 1;
+        margin-top: 0px;
+        margin-bottom: 10px;
+        min-width: fit-content;
+    }
+}
+
+

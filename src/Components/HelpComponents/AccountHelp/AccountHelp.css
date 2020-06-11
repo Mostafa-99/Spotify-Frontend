@@ -1,0 +1,192 @@
+html,#body-overrides {
+    height: auto;
+}
+*{
+    font-family:  Helvetica, Arial, sans-serif;
+}
+ul{
+    list-style: none;
+}
+a:hover{
+    text-decoration: none;
+}
+#body-overrides #dev-items.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 25px;
+    padding-right: 0px;
+    padding-left:0px;
+    
+    height: auto;
+    min-height: 600px;
+}
+#body-overrides #department.item{
+    grid-row-start: 1;
+    grid-row-end: -1;
+}
+
+#body-overrides #account-help.account-help{
+    border-left: thin solid;
+    border-color: #d9dadc;
+    padding: 40px 4px 20px 100px;
+}
+
+
+#body-overrides ul.account-help-btn a{
+    color: black;   
+    line-height: 20px;
+    font-weight: 700;
+    color: #2d46b9;
+    font-size: 18px;
+    padding-left: 0;
+}
+#body-overrides ul.account-help-btn a:hover{
+    color: #2d46b9;
+}
+#body-overrides ul.account-help-btn a::before{
+    border-left: solid;
+    border-color: #2d46b9;
+}
+#body-overrides ul.account-help-btn{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#body-overrides #help-arts-links ul.help-art  a{
+    padding-left: 0;
+    color: #2d46b9;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 17px;
+    font-size: 18px;
+}
+#body-overrides #help-arts-links ul.help-art  a:hover{
+    color: #2d46b9;
+}
+
+#body-overrides #help-arts-links ul.help-art {
+    list-style-type: none;
+    margin: 0px 0px;
+    padding: 0;
+}
+#body-overrides ul.help-art li{
+    list-style-type: none;
+    margin: 20px 0px 20px 0px;
+    padding: 0;
+    font-weight: 700;
+    line-height: 17px;
+    font-size: 18px;
+}
+#body-overrides #help-arts-links  a{
+    padding-inline-start:0;
+    padding-left: 0;
+    color: #2d46b9;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 17px;
+    font-size: 18px;
+}
+#body-overrides #help-arts-links li{
+    padding-left: 0;
+    margin-left: 0;
+    color: #2d46b9;
+    list-style-type: none;
+    margin: 20px 0px 20px 0px;
+    padding: 0;
+    font-weight: 700;
+    line-height: 17px;
+    font-size: 18px;
+}
+#body-overrides #help-breadcrumb.breadcrumb{
+
+    background-color: white;
+    padding:0;
+}
+#body-overrides #help-breadcrumb ol.breadcrumb li.breadcrumb-item a{
+    padding: 0;
+    color: #2d46b9;
+    font-weight: 700;
+    font-size: 16px;
+
+}
+#body-overrides #help-breadcrumb ol.breadcrumb li.breadcrumb-item a:hover{
+    color: #14215c;
+}
+#body-overrides #help-breadcrumb ol.breadcrumb li.breadcrumb-item.active  {
+    padding: 0;
+    color: #222326;
+    font-weight: 400;
+    line-height: 2.15;
+    padding-left: 5px;
+    font-size: 16px;
+
+}
+#body-overrides #help-breadcrumb .breadcrumb>li+li:before {
+    content: "/\A0";
+    padding: 0 5px;
+    color: #919496;
+}
+
+
+#body-overrides .account-help-arts-header {
+    color: #aaa ;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 25px;
+    padding-bottom: 1.25rem;
+    letter-spacing: -.015em;
+    line-height: 1.3;
+    margin:.5em 0 .25em;
+}
+
+@media only screen and (max-width: 992px) {
+    /* For mobile phones: */
+    #body-overrides #dev-items.container {
+       /* display: grid;*/
+       display: flex;
+       flex-direction: column;
+        grid-gap: 25px;
+        padding-right: 0px;
+        padding-left:0px;
+    }
+    
+    #body-overrides ul.help-art li{
+        list-style-type: none;
+        margin: 20px 0px 20px 20px;
+    }
+    #body-overrides .account-help-arts-header {
+        
+        text-align: left;
+        margin-left: 20px;
+    }
+
+    
+    
+    #body-overrides #account-help.account-help{
+        border-top: solid;
+        border-color: #d9dadc;
+        padding:0;
+    }
+    #body-overrides ul.account-help-btn{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-left: 20px;
+    }
+    #body-overrides #help-breadcrumb.breadcrumb{
+        float: none;
+        clear: both;
+        margin: 40px auto 0 20px;
+        height: 35px;
+        min-width: 280px;
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+
+
+
+
+

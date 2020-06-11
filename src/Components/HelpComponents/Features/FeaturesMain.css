@@ -1,0 +1,126 @@
+#features-nav{
+    text-align: left;
+    padding: 10px 100px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    padding-left: 100px;
+    padding-right: 20%;
+    height: 110vh;
+    border-left: thin solid;
+    border-color: #d9dadc;
+    height: auto;
+}
+#features-nav #help-breadcrumb.breadcrumb{
+
+    background-color: white;
+    padding:0;
+}
+#features-nav  ol.breadcrumb li.breadcrumb-item a{
+    padding: 0;
+    color: #2d46b9;
+    font-weight: 700;
+    font-size: 16px;
+
+}
+#features-nav  ol.breadcrumb li.breadcrumb-item a:hover{
+    color: #14215c;
+}
+#features-nav  ol.breadcrumb li.breadcrumb-item.active  {
+    padding: 0;
+    color: #222326;
+    font-weight: 400;
+    line-height: 2.15;
+    padding-left: 5px;
+    font-size: 16px;
+
+}
+#features-nav  .breadcrumb>li+li:before {
+    content: "/\A0";
+    padding: 0 5px;
+    color: #919496;
+}
+#features-nav .features-list li{
+    list-style: disc;
+    margin-left: 50px;
+}
+#features-main #features-nav ul{
+    color: #2d46b9;
+    font-size: 1.5rem;
+}
+
+#features-nav .fp-collapse-button{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media(max-width: 770px){
+    #features-nav{
+        padding: 10px 10px;
+    }
+}
+#features-nav .features-heading{
+    font-size: 45px;
+    font-weight: 700;
+    font-family: inherit;
+    padding: 20px 0px;
+}
+
+
+@media(max-width: 660px){
+    #features-nav #liked-songs-gif{
+        width: 100%;
+        height: auto;
+    }
+}
+
+#features-nav .features-inline-pics{
+    padding: 10px;
+}
+@media(max-width: 660px){
+    #features-nav .features-inline-pics{
+        width: 100%;
+        height: auto;
+    }
+}
+
+#features-nav .fp-collapse-button{
+    font-size: 15px;
+    color: darkblue;
+}
+
+
+#dev-items.container{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 25px;
+    padding-right: 0px;
+    padding-left:0px;
+    height: auto;
+    min-height: 1000px;
+}
+
+@media only screen and (max-width: 992px) {
+    /* For mobile phones: */
+    #dev-items.container{
+       /* display: grid;*/
+       display: flex;
+       flex-direction: column;
+        grid-gap: 25px;
+        padding-right: 0px;
+        padding-left:0px;
+    }
+    #features-nav{
+        margin-left: 10px;
+    }
+}
+
+#features-nav ol,#features-nav ul{
+    padding: 10px 20px;
+}
+
+
+#features-nav .breadcrumb{
+
+    background-color: white;
+    padding:0;
+}
