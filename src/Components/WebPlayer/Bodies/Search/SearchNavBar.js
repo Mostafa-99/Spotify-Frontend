@@ -258,7 +258,7 @@ class SearchNavBar extends Component {
             document.getElementById("search-not-found-searching").classList.add("hide");
         }
         else{
-            axios.get("http://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/top-tracks",{/* top tracks*/
+            axios.get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473/top-tracks",{/* top tracks*/
                 headers:{
                     'authorization': "Bearer "+localStorage.getItem("token"),
                     "id": this.state.myId

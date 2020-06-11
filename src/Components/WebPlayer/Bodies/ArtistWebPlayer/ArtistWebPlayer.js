@@ -112,8 +112,13 @@ class ArtistWebPlayer extends Component {
      */
     componentDidMount() {
         window.scrollTo(0, 0);
-        const{myId}=this.props.location.state;//getting id from parent component
-        this.state.myId=myId;
+        try {
+            
+            const{myId}=this.props.location.state;//getting id from parent component
+            this.state.myId=myId;
+        } catch (error) {
+            
+        }
 
         /*http://www.mocky.io/v2/5e88c77e3100007c00d39aad */
         /*' http://we871.mocklab.io/artists/200 */

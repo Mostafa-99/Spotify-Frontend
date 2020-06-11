@@ -10,6 +10,6 @@ configure({ adapter: new Adapter() });
 describe('<CreateAlbum/>', () => {
 
     it('Albums renders without crashing', () => {
-        shallow(<CreateAlbum/>);
+        shallow(<CreateAlbum  location={{state: {myAlbumId: true}}}/>);
     });  
 });

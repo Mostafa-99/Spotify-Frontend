@@ -7,6 +7,8 @@ import ArtistWebPlayerNavBar from './ArtistWebPlayerNavBar';
 
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import axios from "axios";
+
 configure({ adapter: new Adapter() });
 
 describe('<ArtistWebPlayer /> ', () => {
@@ -16,9 +18,8 @@ describe('<ArtistWebPlayer /> ', () => {
     });
     it('YourLibrary page request', () => {
 
-        const wrapper = shallow(<Overview/>);
+        const wrapper = shallow(<ArtistWebPlayer location={{state: 1234}}/>);
 
-        expect(wrapper.contains(<span class="sr-only">Loading...</span>)).toEqual(true);
         
         axios
         .get("https://spotify.mocklab.io/artists/5e923dd09df6d9ca9f10a473", {

@@ -16,15 +16,14 @@ describe('<SearchNavBar/>', () => {
     });
     it('SearchNavBar states check', () => {
         const wrapper = shallow(<SearchNavBar/>);
-       expect(wrapper.state().notFound).toEqual(0);
+       expect(wrapper.state().notFound).toEqual("0");
        expect(wrapper.state().text).toEqual("");
-       expect(wrapper.state().searchingstate).toEqual("");
+       expect(wrapper.state().searchingstate).toEqual(false);
 
        expect(wrapper.state().artists).toEqual([]);
        expect(wrapper.state().albums).toEqual([]);
        expect(wrapper.state().playLists).toEqual([]);
        expect(wrapper.state().tracks).toEqual([]);
-       tracks
     });
     it('SearchNavBar page request', () => {
 
